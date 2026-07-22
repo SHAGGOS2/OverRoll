@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="OverRoll_Icon.png" alt="Icono de OverRoll" width="180">
+</p>
+
+<h1 align="center">OverRoll</h1>
+
 # OverRoll
 
 Aplicación de ruleta y selector aleatorio para Overwatch.
