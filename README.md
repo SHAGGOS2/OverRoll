@@ -5,84 +5,41 @@
 <h1 align="center">OverRoll</h1>
 
 <p align="center">
-  Aplicación de ruleta y selector aleatorio para Overwatch.
-</p>
+OverRoll is a random hero picker and roulette app for Overwatch.
 
-La hice principalmente para cuando no sabes qué héroe elegir, quieres probar algo diferente o simplemente quieres variar con tus amigos.
+I made it for those moments when you do not know what to play, want to try something different, or just want to mess around with friends.
 
-También nació porque no encontraba una aplicación parecida que fuera tan completa.
+I also made it because I could not find another app like this that was complete enough xd.
 
-> **OverRoll es un proyecto fan no oficial de Overwatch, elaborado en su mayoría con CODEX.**
+> **OverRoll is an unofficial Overwatch fan project, made mostly with CODEX.**
 
-OverRoll todavía está en desarrollo, así que algunas cosas pueden cambiar, romperse o mejorar entre versiones. Como todo proyecto feo.
+It is still in development, so some things may change, improve, or randomly break. Like every ugly project.
 
----
+## Features
 
-## ¿Qué es OverRoll?
+- Randomly pick one or multiple heroes.
+- Filter by Tank, Damage, or Support.
+- Create custom roulettes with the heroes you want.
+- Save different profiles.
+- View selection statistics.
+- Use the app in multiple languages.
 
-OverRoll es una aplicación portátil para Windows que permite seleccionar héroes de Overwatch al azar, crear ruletas personalizadas, guardar perfiles y consultar estadísticas.
+## Privacy
 
-Puedes configurar los héroes, roles y cantidad de resultados según lo que quieras jugar.
+OverRoll works locally and does not need access to your Battle.net or Overwatch account.
 
----
+Your profiles, settings, and statistics stay inside the app.
 
-## Funciones principales
+## About the Project
 
-### Selector aleatorio
+OverRoll is an unofficial fan-made project created for Overwatch players.
 
-Permite seleccionar uno o varios héroes al azar y filtrar los resultados por rol:
+It is not affiliated with, sponsored by, or endorsed by Blizzard Entertainment.
 
-- Tanque
-- Daño
-- Apoyo
+The app was made mostly with **CODEX**, used to program features, fix bugs, improve the interface, and prepare new versions.
 
-### Ruleta Maker
+## Legal Notice
 
-Puedes crear tus propias ruletas eligiendo:
+Overwatch and its characters, names, logos, images, sounds, and related content belong to Blizzard Entertainment and their respective owners.
 
-- Los héroes que aparecerán.
-- Los roles permitidos.
-- La cantidad de resultados.
-- Los personajes que quieres excluir.
-
-No es solamente una ruleta con todos los héroes: tú decides qué puede salir.
-
-### Perfiles y estadísticas
-
-Puedes crear diferentes perfiles para separar configuraciones y estadísticas.
-
-La aplicación registra información como los héroes seleccionados, los roles utilizados y la frecuencia de aparición.
-
-### Varios idiomas
-
-OverRoll incluye soporte para varios idiomas y adapta menús, botones, mensajes, roles y nombres de héroes.
-
-Algunas traducciones todavía pueden necesitar correcciones.
-
----
-
-## Privacidad
-
-OverRoll funciona principalmente de manera local.
-
-No necesita tu contraseña de Battle.net ni acceso a tu cuenta de Overwatch.
-
-Los perfiles, configuraciones y estadísticas permanecen dentro de la aplicación.
-
----
-
-## Sobre el proyecto
-
-**OverRoll es un proyecto fan no oficial de Overwatch, creado por y para fans del juego.**
-
-No está afiliado, patrocinado, autorizado ni aprobado por Blizzard Entertainment.
-
-La aplicación fue elaborada en su mayoría con **CODEX**, utilizado para desarrollar funciones, corregir errores, mejorar la interfaz y preparar nuevas versiones.
-
----
-
-## Aviso legal
-
-Overwatch, sus personajes, nombres, logotipos, imágenes, sonidos y demás contenido relacionado pertenecen a Blizzard Entertainment y a sus respectivos propietarios.
-
-OverRoll no reclama propiedad sobre esos elementos ni pretende hacerse pasar por un producto oficial.
+OverRoll does not claim ownership of any of those elements and is not intended to look like an official product.
