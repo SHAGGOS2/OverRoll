@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="OverRoll_Icon.png" alt="Icono de OverRoll" width="180">
+  <img src="app_icon.png" alt="Icono de OverRoll" width="180">
 </p>
 
 <h1 align="center">OverRoll</h1>
