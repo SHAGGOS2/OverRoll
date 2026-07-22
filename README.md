@@ -147,15 +147,3 @@ OverRoll no reclama propiedad sobre los elementos originales de Overwatch.
 Este proyecto se realiza como una herramienta fan independiente y sin intención de hacerse pasar por un producto oficial.
 
 Ciertos recursos o contenidos pueden ser modificados o retirados en futuras versiones para respetar los derechos de sus respectivos propietarios.
-
----
-
-## Créditos
-
-**Idea, dirección y creación del proyecto:** SHAGGOS2  
-**Desarrollo y programación:** Elaborado con Codex  
-**Pruebas, correcciones y decisiones creativas:** SHAGGOS2
-
-Gracias a quienes prueban la aplicación, encuentran errores y me dicen qué cosas están bien en idea pero mal en ejecución.
-
-O sea, Buma.
