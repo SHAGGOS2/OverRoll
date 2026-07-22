@@ -77,8 +77,6 @@ Los perfiles, configuraciones y estadísticas permanecen dentro de la aplicació
 
 No está afiliado, patrocinado, autorizado ni aprobado por Blizzard Entertainment.
 
-La idea, dirección, diseño, pruebas y decisiones creativas pertenecen a **SHAGGOS2**.
-
 La aplicación fue elaborada en su mayoría con **CODEX**, utilizado para desarrollar funciones, corregir errores, mejorar la interfaz y preparar nuevas versiones.
 
 ---
