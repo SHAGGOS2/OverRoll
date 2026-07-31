@@ -33,15 +33,21 @@ La idea sigue siendo la misma: **abrir la app, poner a tus amigos y dejar que Ov
 
 ### Generador de equipos
 
-![Generador de equipos de OverRoll](./principal.png)
+<p align="center">
+  <img src="./principal.png?raw=true" width="1000" alt="Generador de equipos de OverRoll">
+</p>
 
 ### Perfiles
 
-![Perfiles de jugadores en OverRoll](./perfiles.png)
+<p align="center">
+  <img src="./perfiles.png?raw=true" width="1000" alt="Perfiles de OverRoll">
+</p>
 
 ### Juegos disponibles
 
-![Juegos disponibles en OverRoll](./juegos.png)
+<p align="center">
+  <img src="./juegos.png?raw=true" width="1000" alt="Juegos disponibles en OverRoll">
+</p>
 
 <details>
 <summary><b>Ver más ejemplos de juegos</b></summary>
@@ -50,15 +56,21 @@ La idea sigue siendo la misma: **abrir la app, poner a tus amigos y dejar que Ov
 
 ### Marvel Rivals
 
-![Marvel Rivals en OverRoll](./marvel-rivals.png)
+<p align="center">
+  <img src="./marvel-rivals.png?raw=true" width="1000" alt="Marvel Rivals en OverRoll">
+</p>
 
 ### Valorant
 
-![Valorant en OverRoll](./valorant.png)
+<p align="center">
+  <img src="./valorant.png?raw=true" width="1000" alt="Valorant en OverRoll">
+</p>
 
 ### Deadlock
 
-![Deadlock en OverRoll](./deadlock.png)
+<p align="center">
+  <img src="./deadlock.png?raw=true" width="1000" alt="Deadlock en OverRoll">
+</p>
 
 </details>
 
