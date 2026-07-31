@@ -1,131 +1,95 @@
-# OverRoll: Random Hero Picker
+<p align="center">
+  <img src="app_icon.png" width="150" alt="Logo de OverRoll">
+</p>
 
-Selector aleatorio de personajes y equipos para Windows. Esta edición usa
-PySide6 y Qt Quick para conservar las fichas en memoria, actualizar sólo los
-datos que cambian y mantener una respuesta fluida incluso con equipos grandes.
+<h1 align="center">OverRoll</h1>
 
-## Funciones
+<p align="center">
+  Selector aleatorio de personajes, equipos y ruletas para hero shooters.
+</p>
 
-- Formatos 1-2-2, 2-2-2 y Personalizado de 1 a 24 jugadores.
-- Uno o dos equipos, roles aleatorios y nombres que permanecen en su lugar.
-- Reroll individual, filtros por jugador y bloqueo rápido por rol.
-- Quick Play, Stadium con cuatro poderes y vista de sólo roles.
-- Perfiles importables y exportables con categorías Main, Usado, Jugado y No usado.
-- Modos de perfil con probabilidades distintas para cada categoría.
-- Interfaz en Español Latinoamérica, Español España, inglés, portugués,
-  francés, alemán, japonés y coreano. Los nombres propios de Overwatch usan
-  las localizaciones disponibles en el snapshot.
-- Sonidos de interfaz y voces locales después del reroll.
-- Copia visual del resultado al portapapeles.
-- Juegos independientes para Overwatch, Team Fortress 2, PVZ Garden Warfare 2,
-  Marvel Rivals, Valorant, Last Flag, Deadlock, THE FINALS, Paladins, FragPunk
-  y Apex Legends.
-- TF2 con nueve clases, modo aleatorio o personalizado y hasta seis jugadores.
-- PVZ GW2 con plantas, zombis, variantes, DLC y colección por perfil.
-- Marvel Rivals con 52 héroes locales, roles, perfiles y prioridad para Team-Ups.
-- Overlay para OBS con fichas desde 60 px, orientación, columnas, opacidad,
-  separación y restauración de posición o diseño.
+OverRoll empezó como una aplicación sencilla para elegir héroes al azar en Overwatch cuando nadie sabía qué jugar.
 
-## Abrir la app
+Después fui agregando perfiles, reglas, ruletas y más juegos hasta que el proyecto se salió un poquito de control. La idea sigue siendo la misma: abrir la app, poner a tus amigos y dejar que OverRoll decida.
 
-En el portable, extrae el ZIP completo y abre `OverRoll.exe`. No necesita Python
-ni una instalacion adicional.
+¿Qué puede hacer?
 
-El `OverRoll.exe` de un solo archivo prepara sus recursos en una cache local la
-primera vez que se abre. Esa primera ejecucion puede tardar mas; las siguientes
-reutilizan la cache y abren mucho mas rapido. La pantalla con el logo dorado
-confirma de inmediato que la aplicacion ya esta iniciando.
+Generar personajes para una o varias personas.
 
-La carpeta `Codigo_Fuente` no incluye dependencias ni recursos con copyright.
-Para ejecutarla con Python, instala primero sus requisitos y coloca junto a ella
-las carpetas locales `data` y `assets/fonts`:
+Crear uno o dos equipos.
 
-```powershell
-py -3.12 -m pip install -r requirements.txt
-python main.py
-```
+Usar composiciones equilibradas o dejar los roles completamente libres.
 
-Los perfiles y ajustes se guardan en `%APPDATA%\OWRPRenewed\data` para conservar
-compatibilidad con las versiones anteriores.
+Elegir qué roles puede recibir cada jugador.
 
-## Datos y privacidad
+Hacer reroll individual sin cambiar todo el equipo.
 
-La app funciona con `data/heroes_snapshot.json` y recursos locales. No mantiene
-servicios ni procesos de red en segundo plano. La red se usa al pulsar
-**Actualizar datos desde API** y al solicitar **Estadísticas**. El progreso se
-muestra en Configuración y toda actividad termina al completar, fallar o cerrar
-la aplicación.
+Fijar personajes para que no cambien al volver a generar.
 
-La actualización consulta [OverFast API](https://overfast-api.tekrop.fr/) y guarda
-el nuevo snapshot en la carpeta de datos del usuario. La app continúa funcionando
-con el último snapshot válido si no hay conexión.
+Usar perfiles con mains, personajes jugados, usados y evitados.
 
-Paladins, Apex Legends y FragPunk usan catálogos y retratos locales, por lo que
-no abren conexiones durante una partida. Paladins documenta una API oficial que
-requiere credenciales; Apex y FragPunk se sincronizan desde sus páginas
-oficiales porque no ofrecen una API pública documentada para este catálogo.
-Consulta `docs/DATA_SOURCES.md` para ver las fuentes y limitaciones.
+Randomizar perks, poderes y variantes.
 
-## Crear distribuciones
+Crear ruletas personalizadas con distintas probabilidades.
 
-La portable y el EXE único se construyen con Python 3.12 y Nuitka. La portable
-deja sus librerías visibles; el EXE único prepara sus recursos en una caché
-versionada al abrir.
+Guardar nombres, perfiles y configuraciones.
 
-Con las dependencias instaladas:
+Juegos incluidos
 
-```powershell
-powershell -ExecutionPolicy Bypass -File tools/build_nuitka_portable.ps1
-powershell -ExecutionPolicy Bypass -File tools/build_cached_exe.ps1
-```
+Overwatch
 
-- Portable: `OverRoll_Portable.zip`
-- Un solo archivo: `OverRoll.exe`
+Team Fortress 2
 
-El portable suele abrir más rápido y ser más transparente para los antivirus.
-El EXE único es más cómodo de compartir, pero su empaquetado puede provocar
-falsos positivos heurísticos en algunos motores.
-Para distribucion publica, la forma correcta de ganar reputacion en Windows es
-firmar los ejecutables con un certificado de firma de codigo y enviar cualquier
-deteccion heuristica al proveedor que la marque como falso positivo.
+Plants vs. Zombies: Garden Warfare 2
 
-## Créditos
+Marvel Rivals
 
-Dirección de diseño: SHAGGOS.
+Paladins
 
-Desarrollo e implementación: OpenAI Codex.
+FragPunk
 
-Datos actualizables: OverFast API.
+Apex Legends
 
-Catálogos offline adicionales:
+Valorant
 
-- Team Fortress 2: nueve clases para Ruleta Maker.
-- Plants vs. Zombies: Garden Warfare 2: 121 personajes y variantes, con
-  retratos obtenidos de la [plantilla comunitaria de TierMaker](https://tiermaker.com/create/characters-in-plants-vs-zombies-garden-warfare-2).
-- Paladins: 59 campeones; metadatos compatibles con la API oficial de Hi-Rez y
-  retratos conservados en el snapshot local.
-- FragPunk: 21 Lancers extraídos del sitio oficial.
-- Apex Legends: 28 leyendas y clases extraídas del centro oficial de personajes
-  de Electronic Arts.
+Deadlock
 
-Audio: efectos y voces de Overwatch (Blizzard Entertainment) y sonidos
-adicionales de interfaz de Kenney, `Interface Sounds 1.0` (CC0 1.0).
+THE FINALS
 
-OverRoll es una herramienta fan gratuita y no oficial. No está afiliada,
-respaldada ni publicada por Blizzard Entertainment.
+Last Flag
 
-Overwatch, sus personajes, nombres, imágenes, sonidos e información son marcas y
-materiales de Blizzard Entertainment, Inc. Los datos locales se obtienen mediante
-un snapshot de OverFast API.
+Cada juego tiene sus propios personajes, roles, límites y reglas. No todos funcionan exactamente igual.
 
-Team Fortress 2 y sus materiales pertenecen a Valve Corporation. Plants vs.
-Zombies y Garden Warfare 2 pertenecen a Electronic Arts y PopCap Games. OverRoll
-no está afiliada ni respaldada por estas compañías. Paladins pertenece a
-Hi-Rez Studios. FragPunk pertenece a Bad Guitar Studio y NetEase Games. Apex
-Legends pertenece a Electronic Arts y Respawn Entertainment.
+Descargar
 
-Rajdhani y Open Sans se distribuyen bajo SIL Open Font License 1.1. Sus licencias
-están incluidas en `assets/fonts`.
+La versión lista para usar está en Releases.
 
-La licencia CC0 incluida con los sonidos de Kenney se encuentra en
-`data/sounds/kenney/LICENSE.txt`. Más información en [kenney.nl](https://kenney.nl/).
+Descarga el portable de la versión más reciente.
+
+Extrae el ZIP completo.
+
+Abre OverRoll.exe.
+
+No saques solamente el ejecutable de su carpeta, porque necesita los demás archivos del portable.
+
+Código fuente
+
+El código fuente está disponible en este repositorio para quien quiera revisarlo o proponer cambios.
+
+Algunos retratos, sonidos y recursos no están incluidos porque pertenecen a sus respectivos juegos y propietarios.
+
+Estado del proyecto
+
+OverRoll sigue en desarrollo, así que todavía puede haber errores raros.
+
+Puedes reportarlos desde la sección Issues. Una captura y una explicación de lo que estabas haciendo ayudan bastante.
+
+Créditos
+
+Idea, diseño y pruebas: SHAGGOSDesarrollo e implementación: OpenAI Codex
+
+OverRoll es un proyecto fan gratuito y no oficial.
+
+Los nombres, personajes, imágenes, sonidos y marcas pertenecen a sus respectivos propietarios. Este proyecto no está afiliado ni respaldado por las compañías relacionadas.
+
+Gracias por probar OverRoll xd
