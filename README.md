@@ -34,19 +34,19 @@ La idea sigue siendo la misma: **abrir la app, poner a tus amigos y dejar que Ov
 ### Generador de equipos
 
 <p align="center">
-  <img src="./principal.png?raw=true" width="1000" alt="Generador de equipos de OverRoll">
+  <img src="./screenshots/principal.png?raw=true" width="1000" alt="Generador de equipos de OverRoll">
 </p>
 
 ### Perfiles
 
 <p align="center">
-  <img src="./perfiles.png?raw=true" width="1000" alt="Perfiles de OverRoll">
+  <img src="./screenshots/perfiles.png?raw=true" width="1000" alt="Perfiles de OverRoll">
 </p>
 
 ### Juegos disponibles
 
 <p align="center">
-  <img src="./juegos.png?raw=true" width="1000" alt="Juegos disponibles en OverRoll">
+  <img src="./screenshots/juegos.png?raw=true" width="1000" alt="Juegos disponibles en OverRoll">
 </p>
 
 <details>
@@ -54,22 +54,28 @@ La idea sigue siendo la misma: **abrir la app, poner a tus amigos y dejar que Ov
 
 <br>
 
+### Plants vs. Zombies: Garden Warfare 2
+
+<p align="center">
+  <img src="./screenshots/pvz-gw2.png?raw=true" width="1000" alt="PVZ Garden Warfare 2 en OverRoll">
+</p>
+
 ### Marvel Rivals
 
 <p align="center">
-  <img src="./marvel-rivals.png?raw=true" width="1000" alt="Marvel Rivals en OverRoll">
+  <img src="./screenshots/marvel-rivals.png?raw=true" width="1000" alt="Marvel Rivals en OverRoll">
 </p>
 
 ### Valorant
 
 <p align="center">
-  <img src="./valorant.png?raw=true" width="1000" alt="Valorant en OverRoll">
+  <img src="./screenshots/valorant.png?raw=true" width="1000" alt="Valorant en OverRoll">
 </p>
 
 ### Deadlock
 
 <p align="center">
-  <img src="./deadlock.png?raw=true" width="1000" alt="Deadlock en OverRoll">
+  <img src="./screenshots/deadlock.png?raw=true" width="1000" alt="Deadlock en OverRoll">
 </p>
 
 </details>
