@@ -10,7 +10,9 @@
 
 ---
 
-OverRoll empezó como una aplicación sencilla para elegir héroes al azar en Overwatch cuando nadie sabía qué jugar.
+OverRoll empezó como una aplicación sencilla (que no desarrolle xd) para elegir héroes al azar en Overwatch cuando nadie sabía qué jugar
+o tambien para simplemente salir de la rutina de elegir los mismos personajes de siempre, asi uno y sus amigos logran
+salir de esa monotonia y con demasiada personalizacion, pero obvio aun con ciertos bugs jaja
 
 Después fui agregando perfiles, reglas, ruletas y más juegos hasta que el proyecto se salió un poquito de control.
 
