@@ -29,38 +29,36 @@ La idea sigue siendo la misma: **abrir la app, poner a tus amigos y dejar que Ov
 - Crear ruletas personalizadas con distintas probabilidades.
 - Guardar nombres, perfiles y configuraciones.
 
-- ## Capturas
+## Capturas
 
 ### Generador de equipos
 
-![Generador de equipos de OverRoll](screenshots/principal.png)
+![Generador de equipos de OverRoll](./principal.png)
 
 ### Perfiles
 
-![Perfiles de jugadores en OverRoll](screenshots/perfiles.png)
+![Perfiles de jugadores en OverRoll](./perfiles.png)
 
 ### Juegos disponibles
 
-![Juegos disponibles en OverRoll](screenshots/juegos.png)
+![Juegos disponibles en OverRoll](./juegos.png)
 
 <details>
 <summary><b>Ver más ejemplos de juegos</b></summary>
 
-### Plants vs. Zombies: Garden Warfare 2
-
-![PVZ Garden Warfare 2 en OverRoll](screenshots/pvz-gw2.png)
+<br>
 
 ### Marvel Rivals
 
-![Marvel Rivals en OverRoll](screenshots/marvel-rivals.png)
+![Marvel Rivals en OverRoll](./marvel-rivals.png)
 
 ### Valorant
 
-![Valorant en OverRoll](screenshots/valorant.png)
+![Valorant en OverRoll](./valorant.png)
 
 ### Deadlock
 
-![Deadlock en OverRoll](screenshots/deadlock.png)
+![Deadlock en OverRoll](./deadlock.png)
 
 </details>
 
