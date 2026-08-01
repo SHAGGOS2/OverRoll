@@ -1,0 +1,24 @@
+OVERROLL WEB - PASO 5 COMPLETO
+
+CAMBIOS PRINCIPALES
+- La composición 1-2-2 y 2-2-2 conserva las cantidades, pero ahora reparte los roles en posiciones aleatorias.
+- Respeta los roles permitidos de cada jugador y los héroes fijados.
+- Agrega perks aleatorias de Quick Play: una menor y una mayor.
+- Agrega Modo Stadium con 33 héroes compatibles y cuatro poderes aleatorios por ficha.
+- Incluye 208 perks de Quick Play y 396 poderes Stadium con icono, nombre y descripción.
+- Agrega sonidos para navegación, botones, toggles, generación, reroll, abrir/cerrar y confirmaciones.
+- Agrega control de volumen y apagado de sonidos.
+- Agrega limpiar nombres, revolver jugadores y restablecer roles.
+
+INSTALACIÓN
+1. Detén Vite con Ctrl+C.
+2. Coloca este ZIP dentro de la carpeta web.
+3. Ejecuta en la terminal:
+
+   cd /workspaces/OverRoll/web
+   pkill -f vite || true
+   unzip -o OverRoll-Web-Paso-5-Completo.zip
+   rm -f OverRoll-Web-Paso-5-Completo.zip
+   npm run dev -- --host 0.0.0.0
+
+Después abre el puerto que indique Vite desde la pestaña PUERTOS.

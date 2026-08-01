@@ -1,0 +1,10 @@
+VALIDACIONES REALIZADAS
+- App.tsx: sintaxis TypeScript/TSX validada.
+- Tipos principales: validados con TypeScript en modo estricto.
+- Composición 1-2-2: 30 órdenes distintos observados en 200 generaciones.
+- Composición 2-2-2: 86 órdenes distintos observados en 200 generaciones.
+- Restricciones de rol por jugador: validadas.
+- Retratos y perk icons: 0 rutas faltantes.
+- Catálogo: 52 héroes, 208 perks Quick Play, 396 poderes Stadium.
+- Stadium: 33 héroes compatibles, 12 poderes por héroe.
+- Sonidos: los 9 MP3 abren correctamente.
