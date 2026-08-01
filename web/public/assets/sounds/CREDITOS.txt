@@ -1,0 +1,12 @@
+Archivos aportados por el usuario para OverRoll Web:
+- open.mp3 <- soundshelfstudio-ui-pop-up-open-516939.mp3
+- close.mp3 <- litupsubway-ui-close-sfx-513359.mp3
+- click.mp3 <- juniorsoundays-ui-sound-22-527807.mp3
+- toggle-on.mp3 <- juniorsoundays-ui-sound-24-527861.mp3
+- toggle-off.mp3 <- juniorsoundays-ui-sound-54-527832.mp3
+- reroll.mp3 <- juniorsoundays-ui-sound-63-527878.mp3
+- generate.mp3 <- juniorsoundays-ui-sound-68-527856.mp3
+- nav.mp3 <- juniorsoundays-ui-sound-70-527837.mp3
+- success.mp3 <- okay_2FZURrU.mp3
+
+Conserva las licencias y atribuciones originales de las fuentes donde se obtuvieron.
