@@ -9,3 +9,15 @@ Archivos aportados por el usuario para OverRoll Web:
 - nav.mp3 <- juniorsoundays-ui-sound-70-527837.mp3
 
 Conserva las licencias y atribuciones originales de las fuentes donde se obtuvieron.
+
+Sonidos añadidos en Paso 9 (archivos proporcionados por el usuario):
+- profile-select.mp3 <- juniorsoundays-ui-sound-88-527858.mp3
+- profile-create.mp3 <- juniorsoundays-ui-sound-93-527864.mp3
+- profile-delete.mp3 <- juniorsoundays-ui-sound-42-527816.mp3
+- profile-classify.mp3 <- juniorsoundays-ui-sound-05-527820.mp3
+- profile-assign.mp3 <- juniorsoundays-ui-sound-94-527843.mp3
+- filter.mp3 <- juniorsoundays-ui-sound-15-527866.mp3
+- lock.mp3 <- juniorsoundays-ui-sound-116-532179.mp3
+- perk.mp3 <- juniorsoundays-ui-sound-78-527829.mp3
+- shuffle.mp3 <- juniorsoundays-ui-sound-80-527880.mp3
+- stadium.mp3 <- juniorsoundays-ui-sound-114-532189.mp3
