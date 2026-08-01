@@ -1,10 +1,7 @@
-VALIDACIÓN DEL PASO 7
-
-- App.tsx transpila correctamente como TSX.
-- No hay referencias a okay_2FZURrU.mp3.
-- No hay referencias a success.mp3.
-- success.mp3 no está incluido en el paquete.
-- El panel de volumen fue retirado de Principal.
-- Audio y volumen permanecen en Más.
-- La confirmación se genera con Web Audio API.
-- Se conservan héroes, perks, Stadium, filtros, perfiles y sonidos restantes.
+Validaciones del paquete:
+- Mantiene la estructura de perfiles y las claves de localStorage existentes.
+- Los 18 archivos de audio referenciados por App.tsx existen dentro de public/assets/sounds.
+- Los nuevos efectos fueron normalizados para evitar diferencias bruscas de volumen.
+- No incluye clips de voz heredados.
+- El apartado de audio permanece en Mas.
+- App.tsx paso la validacion de sintaxis TSX.

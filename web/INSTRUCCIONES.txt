@@ -1,26 +1,16 @@
-OVERROLL WEB — PASO 7: PERFILES Y AUDIO
+OVERROLL WEB - PASO 9: SONIDOS INTEGRADOS
 
-1. Detén Vite con Ctrl+C.
-2. Arrastra este ZIP dentro de la carpeta web.
-3. En la terminal ejecuta:
+1. Copia el contenido de este ZIP dentro de la carpeta web del repositorio.
+2. Sustituye los archivos existentes cuando se solicite.
+3. Reinicia Vite y actualiza con Ctrl+F5.
 
-cd /workspaces/OverRoll/web
-pkill -f vite || true
-rm -f public/assets/sounds/success.mp3 public/assets/sounds/okay_2FZURrU.mp3 public/okay_2FZURrU.mp3 okay_2FZURrU.mp3
-unzip -o OverRoll-Web-Paso-7-Perfiles-Audio.zip
-rm -f OverRoll-Web-Paso-7-Perfiles-Audio.zip
-npm run dev -- --host 0.0.0.0
+Nuevos sonidos asignados:
+- Seleccionar, crear, duplicar y eliminar perfiles.
+- Clasificar heroes y asignar perfiles a jugadores.
+- Abrir y modificar filtros.
+- Fijar heroes.
+- Elegir perks.
+- Revolver jugadores.
+- Activar Stadium.
 
-4. Abre el puerto 5173.
-5. Actualiza con Ctrl+F5.
-
-CAMBIOS PRINCIPALES
-- Rediseño completo de Perfiles.
-- Resumen de perfiles, asignaciones y progreso.
-- Modos de perfil como tarjetas visuales.
-- Duplicar perfiles.
-- Clasificación masiva de héroes visibles.
-- Fichas de héroes con categorías directas y clic para recorrerlas.
-- El volumen y los sonidos quedan exclusivamente en Más.
-- Se elimina el archivo success.mp3 y cualquier uso del audio “Okay”.
-- La confirmación ahora es un tono sintetizado por el navegador, sin voz.
+Los diez archivos proporcionados fueron normalizados y renombrados dentro de public/assets/sounds.
