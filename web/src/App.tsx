@@ -1431,15 +1431,6 @@ function App() {
     )
   }
 
-  function cycleHeroBucket(heroKey: string) {
-    if (!currentProfile) return
-    const current = heroBucket(currentProfile, heroKey)
-    const order: Array<ProfileBucket | ''> = ['', 'main', 'played', 'practice', 'avoid']
-    const next = order[(order.indexOf(current ?? '') + 1) % order.length]
-    setHeroBucket(heroKey, next)
-    playSound('profileClassify')
-  }
-
   function renderProfiles() {
     const totalHeroes = data?.heroes.length ?? 0
     const markedHeroes = currentProfile ? profileMarkedCount(currentProfile) : 0
