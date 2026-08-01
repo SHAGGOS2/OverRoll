@@ -1,10 +1,14 @@
-VALIDACIONES REALIZADAS
-- App.tsx: sintaxis TypeScript/TSX validada.
-- Tipos principales: validados con TypeScript en modo estricto.
-- Composición 1-2-2: 30 órdenes distintos observados en 200 generaciones.
-- Composición 2-2-2: 86 órdenes distintos observados en 200 generaciones.
-- Restricciones de rol por jugador: validadas.
-- Retratos y perk icons: 0 rutas faltantes.
-- Catálogo: 52 héroes, 208 perks Quick Play, 396 poderes Stadium.
-- Stadium: 33 héroes compatibles, 12 poderes por héroe.
-- Sonidos: los 9 MP3 abren correctamente.
+VALIDACIÓN REALIZADA
+
+- App.tsx fue analizado por TypeScript en modo strict con un shim local: 0 errores internos.
+- El JSX fue transpilado por TypeScript: 0 errores de sintaxis.
+- 52 héroes presentes en public/data/heroes.json.
+- Retratos WebP presentes para los 52 héroes.
+- Perks Quick Play y poderes Stadium conservados.
+- Perfiles: crear, renombrar, eliminar, clasificar, importar, exportar y asignar.
+- Modos de perfil: Sin perfil, Todos los marcados, Descubrir, Practicar, Excluir no usados, Favoritos y Solo Main.
+- Filtros individuales por jugador y bloqueo por rol.
+- Reroll y generación respetan perfiles, filtros, roles y héroes fijados.
+- Selección manual y aleatoria de perks/poderes.
+- Sonidos, volumen, animaciones, hover y perks compactas.
+- El audio de voz solicitado no está presente ni referenciado.

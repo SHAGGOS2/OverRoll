@@ -7,6 +7,6 @@ Archivos aportados por el usuario para OverRoll Web:
 - reroll.mp3 <- juniorsoundays-ui-sound-63-527878.mp3
 - generate.mp3 <- juniorsoundays-ui-sound-68-527856.mp3
 - nav.mp3 <- juniorsoundays-ui-sound-70-527837.mp3
-- success.mp3 <- okay_2FZURrU.mp3
+- success.mp3 <- universfield-level-up-191997.mp3
 
 Conserva las licencias y atribuciones originales de las fuentes donde se obtuvieron.

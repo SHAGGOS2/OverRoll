@@ -1,15 +1,27 @@
-import { useEffect, useMemo, useRef, useState, type ChangeEvent, type CSSProperties, type MouseEvent, type SyntheticEvent } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type CSSProperties,
+  type MouseEvent,
+  type SyntheticEvent,
+} from 'react'
 import './App.css'
 
 type Role = 'tank' | 'damage' | 'support'
 type View = 'principal' | 'profiles' | 'more'
 type ToastTone = 'success' | 'info' | 'warning'
 type SoundKey = 'click' | 'open' | 'close' | 'toggleOn' | 'toggleOff' | 'generate' | 'reroll' | 'nav' | 'success'
+type ProfileBucket = 'main' | 'played' | 'practice' | 'avoid'
+type ProfileMode = 'classic' | 'allprofile' | 'lowprob' | 'practice' | 'played' | 'prefer' | 'main'
 type IconName =
   | 'refresh'
   | 'lock'
   | 'unlock'
   | 'details'
+  | 'filter'
   | 'users'
   | 'spark'
   | 'check'
@@ -24,6 +36,9 @@ type IconName =
   | 'reset'
   | 'trash'
   | 'stadium'
+  | 'plus'
+  | 'upload'
+  | 'download'
 
 type Perk = {
   name: string
@@ -49,10 +64,18 @@ type HeroData = {
   heroes: Hero[]
 }
 
+type UserProfile = {
+  id: string
+  name: string
+  heroes: Record<ProfileBucket, string[]>
+}
+
 type Player = {
   id: string
   name: string
   roles: Record<Role, boolean>
+  profileId: string
+  blocked: string[]
 }
 
 type Pick = {
@@ -68,6 +91,7 @@ type Toast = {
 }
 
 const roles: Role[] = ['tank', 'damage', 'support']
+const profileBuckets: ProfileBucket[] = ['main', 'played', 'practice', 'avoid']
 
 const roleLabels: Record<Role, string> = {
   tank: 'Tanque',
@@ -88,26 +112,48 @@ const subroleLabels: Record<string, string> = {
   tactician: 'Táctico',
 }
 
-const profileOptions = [
+const bucketLabels: Record<ProfileBucket, string> = {
+  main: 'Main',
+  played: 'Usado',
+  practice: 'Jugado',
+  avoid: 'No usado',
+}
+
+const profileModes: Array<{ id: ProfileMode; name: string; description: string }> = [
   {
+    id: 'classic',
     name: 'Sin perfil',
-    description: 'Configuración manual. No modifica tus reglas.',
-    badge: 'LIBRE',
+    description: 'Ignora los perfiles. Usa cualquier héroe permitido por roles y filtros.',
   },
   {
-    name: 'Casual',
-    description: 'Evita repetidos y deja la composición libre.',
-    badge: 'RÁPIDO',
+    id: 'allprofile',
+    name: 'Todos los marcados',
+    description: 'Elige por igual entre Main, Usado, Jugado y No usado.',
   },
   {
-    name: 'Competitivo',
-    description: 'Usa composición de roles y evita repetidos.',
-    badge: '1-2-2',
+    id: 'lowprob',
+    name: 'Descubrir',
+    description: 'Da más oportunidad a héroes menos familiares para crear variedad.',
   },
   {
-    name: 'Solo rol',
-    description: 'Genera únicamente la composición del equipo.',
-    badge: 'ROLES',
+    id: 'practice',
+    name: 'Practicar',
+    description: 'Usa héroes marcados como Jugado o No usado.',
+  },
+  {
+    id: 'played',
+    name: 'Excluir no usados',
+    description: 'Usa Main, Usado o Jugado y evita los marcados como No usado.',
+  },
+  {
+    id: 'prefer',
+    name: 'Favoritos',
+    description: 'Usa solamente héroes Main y Usado.',
+  },
+  {
+    id: 'main',
+    name: 'Solo Main',
+    description: 'Busca héroes Main y vuelve al catálogo permitido si el rol no tiene ninguno.',
   },
 ]
 
@@ -142,6 +188,8 @@ function Icon({ name, size = 18 }: { name: IconName; size?: number }) {
       return <svg {...common}><rect x="5" y="10" width="14" height="10" rx="2" /><path d="M8 10V7a4 4 0 0 1 7.3-2.2" /></svg>
     case 'details':
       return <svg {...common}><path d="M4 6h16M4 12h16M4 18h10" /></svg>
+    case 'filter':
+      return <svg {...common}><path d="M4 5h16l-6 7v5l-4 2v-7L4 5Z" /></svg>
     case 'users':
       return <svg {...common}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>
     case 'spark':
@@ -170,9 +218,19 @@ function Icon({ name, size = 18 }: { name: IconName; size?: number }) {
       return <svg {...common}><path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v5M14 11v5" /></svg>
     case 'stadium':
       return <svg {...common}><path d="M4 10V6l8-3 8 3v4" /><path d="M3 10h18v10H3z" /><path d="M8 20v-5h8v5M7 10V7M12 10V6M17 10V7" /></svg>
+    case 'plus':
+      return <svg {...common}><path d="M12 5v14M5 12h14" /></svg>
+    case 'upload':
+      return <svg {...common}><path d="M12 16V4M7 9l5-5 5 5" /><path d="M5 20h14" /></svg>
+    case 'download':
+      return <svg {...common}><path d="M12 4v12M7 11l5 5 5-5" /><path d="M5 20h14" /></svg>
     default:
       return null
   }
+}
+
+function emptyProfileHeroes(): Record<ProfileBucket, string[]> {
+  return { main: [], played: [], practice: [], avoid: [] }
 }
 
 function makePlayer(index: number): Player {
@@ -180,7 +238,46 @@ function makePlayer(index: number): Player {
     id: `player-${index + 1}`,
     name: `Jugador ${index + 1}`,
     roles: { tank: true, damage: true, support: true },
+    profileId: '',
+    blocked: [],
   }
+}
+
+function normalizePlayers(raw: unknown): Player[] {
+  if (!Array.isArray(raw) || raw.length === 0) return Array.from({ length: 5 }, (_, index) => makePlayer(index))
+  return raw.slice(0, 6).map((item, index) => {
+    const source = typeof item === 'object' && item ? item as Partial<Player> : {}
+    return {
+      id: typeof source.id === 'string' ? source.id : `player-${index + 1}`,
+      name: typeof source.name === 'string' ? source.name : `Jugador ${index + 1}`,
+      roles: {
+        tank: source.roles?.tank !== false,
+        damage: source.roles?.damage !== false,
+        support: source.roles?.support !== false,
+      },
+      profileId: typeof source.profileId === 'string' ? source.profileId : '',
+      blocked: Array.isArray(source.blocked) ? source.blocked.filter((key): key is string => typeof key === 'string') : [],
+    }
+  })
+}
+
+function normalizeProfiles(raw: unknown): UserProfile[] {
+  if (!Array.isArray(raw)) return []
+  return raw.flatMap((item, index) => {
+    if (!item || typeof item !== 'object') return []
+    const source = item as Partial<UserProfile>
+    const heroes = source.heroes && typeof source.heroes === 'object' ? source.heroes : emptyProfileHeroes()
+    return [{
+      id: typeof source.id === 'string' && source.id ? source.id : `profile-${Date.now()}-${index}`,
+      name: typeof source.name === 'string' && source.name.trim() ? source.name.trim() : `Perfil ${index + 1}`,
+      heroes: {
+        main: Array.isArray(heroes.main) ? heroes.main.filter((key): key is string => typeof key === 'string') : [],
+        played: Array.isArray(heroes.played) ? heroes.played.filter((key): key is string => typeof key === 'string') : [],
+        practice: Array.isArray(heroes.practice) ? heroes.practice.filter((key): key is string => typeof key === 'string') : [],
+        avoid: Array.isArray(heroes.avoid) ? heroes.avoid.filter((key): key is string => typeof key === 'string') : [],
+      },
+    }]
+  })
 }
 
 function shuffleArray<T>(items: readonly T[]): T[] {
@@ -219,8 +316,7 @@ function resolveRoleAssignments(players: Player[], enabled: boolean, previous: P
     })
   }
 
-  const slots = compositionFor(players.length)
-  const remainingSlots = [...slots]
+  const remainingSlots = compositionFor(players.length)
   const remainingPlayers: number[] = []
 
   players.forEach((player, index) => {
@@ -293,6 +389,72 @@ function readStorage<T>(key: string, fallback: T): T {
   }
 }
 
+function bucketsForMode(mode: ProfileMode): ProfileBucket[] | null {
+  switch (mode) {
+    case 'classic': return null
+    case 'allprofile': return ['main', 'played', 'practice', 'avoid']
+    case 'lowprob': return ['main', 'played', 'practice', 'avoid']
+    case 'practice': return ['practice', 'avoid']
+    case 'played': return ['main', 'played', 'practice']
+    case 'prefer': return ['main', 'played']
+    case 'main': return ['main']
+    default: return null
+  }
+}
+
+function heroBucket(profile: UserProfile | undefined, heroKey: string): ProfileBucket | null {
+  if (!profile) return null
+  return profileBuckets.find((bucket) => profile.heroes[bucket].includes(heroKey)) ?? null
+}
+
+function chooseHero(options: {
+  heroes: Hero[]
+  player: Player
+  role: Role
+  used: Set<string>
+  avoidRepeated: boolean
+  previousKey?: string
+  profiles: UserProfile[]
+  profileMode: ProfileMode
+}): Hero | null {
+  const { heroes, player, role, used, avoidRepeated, previousKey, profiles, profileMode } = options
+  const blocked = new Set(player.blocked)
+  let pool = heroes.filter((hero) => hero.role === role && !blocked.has(hero.key))
+
+  if (avoidRepeated) {
+    const unique = pool.filter((hero) => !used.has(hero.key))
+    if (unique.length > 0) pool = unique
+  }
+
+  const profile = profiles.find((item) => item.id === player.profileId)
+  const modeBuckets = bucketsForMode(profileMode)
+  if (profile && modeBuckets) {
+    const allowed = new Set(modeBuckets.flatMap((bucket) => profile.heroes[bucket]))
+    const profiled = pool.filter((hero) => allowed.has(hero.key))
+    if (profiled.length > 0) pool = profiled
+  }
+
+  if (previousKey && pool.length > 1) {
+    const alternatives = pool.filter((hero) => hero.key !== previousKey)
+    if (alternatives.length > 0) pool = alternatives
+  }
+
+  if (pool.length === 0) return null
+
+  if (profileMode === 'lowprob' && profile) {
+    const weights: Record<ProfileBucket, number> = { avoid: 8, practice: 5, played: 3, main: 1 }
+    const weighted = pool.map((hero) => ({ hero, weight: weights[heroBucket(profile, hero.key) ?? 'main'] ?? 1 }))
+    const total = weighted.reduce((sum, item) => sum + item.weight, 0)
+    let cursor = Math.random() * total
+    for (const item of weighted) {
+      cursor -= item.weight
+      if (cursor <= 0) return item.hero
+    }
+  }
+
+  return pool[Math.floor(Math.random() * pool.length)] ?? null
+}
+
 function buildTeam(options: {
   heroes: Hero[]
   players: Player[]
@@ -302,6 +464,8 @@ function buildTeam(options: {
   rolesOnly: boolean
   randomPerks: boolean
   stadium: boolean
+  profiles: UserProfile[]
+  profileMode: ProfileMode
 }): Pick[] {
   const {
     heroes,
@@ -312,6 +476,8 @@ function buildTeam(options: {
     rolesOnly,
     randomPerks,
     stadium,
+    profiles,
+    profileMode,
   } = options
 
   const assignedRoles = resolveRoleAssignments(players, roleComposition, previous)
@@ -326,6 +492,7 @@ function buildTeam(options: {
       && availableKeys.has(pick.hero.key)
       && pick.role
       && players[index].roles[pick.role]
+      && !players[index].blocked.includes(pick.hero.key)
     ) used.add(pick.hero.key)
   })
 
@@ -338,26 +505,24 @@ function buildTeam(options: {
       && selectedRole
       && current.role === selectedRole
       && availableKeys.has(current.hero.key)
-      && player.roles[selectedRole],
+      && player.roles[selectedRole]
+      && !player.blocked.includes(current.hero.key),
     )
 
     if (canKeepLocked && current) return current
     if (rolesOnly) return { hero: null, locked: false, role: selectedRole, perks: [] }
     if (!selectedRole) return { hero: null, locked: false, role: null, perks: [] }
 
-    let candidates = heroes.filter((hero) => hero.role === selectedRole)
-
-    if (avoidRepeated) {
-      const uniqueCandidates = candidates.filter((hero) => !used.has(hero.key))
-      if (uniqueCandidates.length > 0) candidates = uniqueCandidates
-    }
-
-    if (current?.hero && candidates.length > 1) {
-      const alternatives = candidates.filter((hero) => hero.key !== current.hero?.key)
-      if (alternatives.length > 0) candidates = alternatives
-    }
-
-    const hero = candidates[Math.floor(Math.random() * candidates.length)] ?? null
+    const hero = chooseHero({
+      heroes,
+      player,
+      role: selectedRole,
+      used,
+      avoidRepeated,
+      previousKey: current?.hero?.key,
+      profiles,
+      profileMode,
+    })
     if (hero) used.add(hero.key)
     return {
       hero,
@@ -375,16 +540,15 @@ function App() {
   const [activeView, setActiveView] = useState<View>('principal')
   const [data, setData] = useState<HeroData | null>(null)
   const [loadError, setLoadError] = useState('')
-  const [players, setPlayers] = useState<Player[]>(() => {
-    const saved = readStorage<Player[]>('overroll.web.players', [])
-    if (!Array.isArray(saved) || saved.length < 1) {
-      return Array.from({ length: 5 }, (_, index) => makePlayer(index))
-    }
-    return saved.slice(0, 6)
-  })
+  const [players, setPlayers] = useState<Player[]>(() => normalizePlayers(readStorage<unknown>('overroll.web.players', [])))
   const [picks, setPicks] = useState<Pick[]>(() => (
     Array.from({ length: 5 }, () => ({ hero: null, locked: false, role: null, perks: [] }))
   ))
+  const [profiles, setProfiles] = useState<UserProfile[]>(() => normalizeProfiles(readStorage<unknown>('overroll.web.profiles', [])))
+  const [profileMode, setProfileMode] = useState<ProfileMode>(() => readStorage('overroll.web.profileMode', 'classic'))
+  const [currentProfileId, setCurrentProfileId] = useState(() => readStorage('overroll.web.currentProfileId', ''))
+  const [profileSearch, setProfileSearch] = useState('')
+  const [profileRole, setProfileRole] = useState<'all' | Role>('all')
   const [avoidRepeated, setAvoidRepeated] = useState(() => readStorage('overroll.web.avoidRepeated', true))
   const [roleComposition, setRoleComposition] = useState(() => readStorage('overroll.web.roleComposition', true))
   const [rolesOnly, setRolesOnly] = useState(() => readStorage('overroll.web.rolesOnly', false))
@@ -392,9 +556,15 @@ function App() {
   const [stadium, setStadium] = useState(() => readStorage('overroll.web.stadium', false))
   const [soundEnabled, setSoundEnabled] = useState(() => readStorage('overroll.web.soundEnabled', true))
   const [soundVolume, setSoundVolume] = useState(() => readStorage('overroll.web.soundVolume', 0.42))
+  const [hoverSounds, setHoverSounds] = useState(() => readStorage('overroll.web.hoverSounds', false))
+  const [animationsEnabled, setAnimationsEnabled] = useState(() => readStorage('overroll.web.animationsEnabled', true))
+  const [compactPerks, setCompactPerks] = useState(() => readStorage('overroll.web.compactPerks', false))
   const audioRef = useRef<Partial<Record<SoundKey, HTMLAudioElement>>>({})
-  const [profile, setProfile] = useState(() => readStorage('overroll.web.profile', 'Sin perfil'))
+  const importRef = useRef<HTMLInputElement | null>(null)
   const [detailsIndex, setDetailsIndex] = useState<number | null>(null)
+  const [filterIndex, setFilterIndex] = useState<number | null>(null)
+  const [filterSearch, setFilterSearch] = useState('')
+  const [filterRole, setFilterRole] = useState<'all' | Role>('all')
   const [status, setStatus] = useState('Cargando catálogo local…')
   const [toast, setToast] = useState<Toast | null>(null)
   const [generating, setGenerating] = useState(false)
@@ -416,7 +586,7 @@ function App() {
 
     Object.entries(soundPaths).forEach(([key, path]) => {
       const audio = new Audio(asset(path))
-      audio.preload = 'auto'
+      audio.preload = 'metadata'
       audioRef.current[key as SoundKey] = audio
     })
 
@@ -433,10 +603,10 @@ function App() {
         return response.json() as Promise<HeroData>
       })
       .then((loaded) => {
-        const quickplay = loaded.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay'))
+        const pool = loaded.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay'))
         setData(loaded)
         setPicks((current) => buildTeam({
-          heroes: quickplay,
+          heroes: pool,
           players,
           previous: current,
           avoidRepeated,
@@ -444,8 +614,10 @@ function App() {
           rolesOnly,
           randomPerks,
           stadium,
+          profiles,
+          profileMode,
         }))
-        setStatus(`${quickplay.length} héroes listos`)
+        setStatus(`${pool.length} héroes listos`)
         setGenerationRevision((value) => value + 1)
       })
       .catch((error: Error) => {
@@ -455,8 +627,17 @@ function App() {
   }, [baseUrl])
 
   useEffect(() => {
+    if (profiles.length > 0 && !profiles.some((profile) => profile.id === currentProfileId)) {
+      setCurrentProfileId(profiles[0].id)
+    }
+  }, [profiles, currentProfileId])
+
+  useEffect(() => {
     const timeout = window.setTimeout(() => {
       window.localStorage.setItem('overroll.web.players', JSON.stringify(players))
+      window.localStorage.setItem('overroll.web.profiles', JSON.stringify(profiles))
+      window.localStorage.setItem('overroll.web.profileMode', JSON.stringify(profileMode))
+      window.localStorage.setItem('overroll.web.currentProfileId', JSON.stringify(currentProfileId))
       window.localStorage.setItem('overroll.web.avoidRepeated', JSON.stringify(avoidRepeated))
       window.localStorage.setItem('overroll.web.roleComposition', JSON.stringify(roleComposition))
       window.localStorage.setItem('overroll.web.rolesOnly', JSON.stringify(rolesOnly))
@@ -464,11 +645,13 @@ function App() {
       window.localStorage.setItem('overroll.web.stadium', JSON.stringify(stadium))
       window.localStorage.setItem('overroll.web.soundEnabled', JSON.stringify(soundEnabled))
       window.localStorage.setItem('overroll.web.soundVolume', JSON.stringify(soundVolume))
-      window.localStorage.setItem('overroll.web.profile', JSON.stringify(profile))
+      window.localStorage.setItem('overroll.web.hoverSounds', JSON.stringify(hoverSounds))
+      window.localStorage.setItem('overroll.web.animationsEnabled', JSON.stringify(animationsEnabled))
+      window.localStorage.setItem('overroll.web.compactPerks', JSON.stringify(compactPerks))
     }, 180)
 
     return () => window.clearTimeout(timeout)
-  }, [players, avoidRepeated, roleComposition, rolesOnly, randomPerks, stadium, soundEnabled, soundVolume, profile])
+  }, [players, profiles, profileMode, currentProfileId, avoidRepeated, roleComposition, rolesOnly, randomPerks, stadium, soundEnabled, soundVolume, hoverSounds, animationsEnabled, compactPerks])
 
   useEffect(() => {
     if (!toast) return undefined
@@ -477,11 +660,14 @@ function App() {
   }, [toast])
 
   useEffect(() => {
-    const closeDetails = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setDetailsIndex(null)
+    const closeOverlay = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDetailsIndex(null)
+        setFilterIndex(null)
+      }
     }
-    window.addEventListener('keydown', closeDetails)
-    return () => window.removeEventListener('keydown', closeDetails)
+    window.addEventListener('keydown', closeOverlay)
+    return () => window.removeEventListener('keydown', closeOverlay)
   }, [])
 
   const availableHeroes = useMemo(
@@ -495,9 +681,27 @@ function App() {
   const compositionText = roleComposition
     ? roles.map((role) => assignedRoles.filter((item) => item === role).length).join('-')
     : 'Libre'
-
+  const profileModeInfo = profileModes.find((mode) => mode.id === profileMode) ?? profileModes[0]
+  const currentProfile = profiles.find((profile) => profile.id === currentProfileId)
   const selectedDetailPick = detailsIndex === null ? null : picks[detailsIndex] ?? null
   const selectedDetailHero = selectedDetailPick?.hero ?? null
+  const filterPlayer = filterIndex === null ? null : players[filterIndex] ?? null
+
+  const classifiedHeroes = useMemo(() => {
+    const search = profileSearch.trim().toLocaleLowerCase('es-MX')
+    return (data?.heroes ?? []).filter((hero) => (
+      (profileRole === 'all' || hero.role === profileRole)
+      && (!search || hero.name.toLocaleLowerCase('es-MX').includes(search))
+    ))
+  }, [data, profileRole, profileSearch])
+
+  const filterHeroes = useMemo(() => {
+    const search = filterSearch.trim().toLocaleLowerCase('es-MX')
+    return availableHeroes.filter((hero) => (
+      (filterRole === 'all' || hero.role === filterRole)
+      && (!search || hero.name.toLocaleLowerCase('es-MX').includes(search))
+    ))
+  }, [availableHeroes, filterRole, filterSearch])
 
   function playSound(kind: SoundKey) {
     if (!soundEnabled || soundVolume <= 0) return
@@ -507,6 +711,10 @@ function App() {
     audio.currentTime = 0
     audio.volume = Math.max(0, Math.min(1, soundVolume))
     void audio.play().catch(() => undefined)
+  }
+
+  function hoverSound() {
+    if (hoverSounds) playSound('click')
   }
 
   function notify(message: string, tone: ToastTone = 'info') {
@@ -522,7 +730,7 @@ function App() {
 
     setGenerating(true)
     playSound('generate')
-    setStatus(stadium ? 'Barajando héroes y poderes Stadium…' : 'Barajando héroes…')
+    setStatus(stadium ? 'Barajando héroes y poderes Stadium…' : 'Barajando héroes, perfiles y filtros…')
     setPicks((current) => buildTeam({
       heroes: availableHeroes,
       players,
@@ -532,6 +740,8 @@ function App() {
       rolesOnly,
       randomPerks,
       stadium,
+      profiles,
+      profileMode,
     }))
     setGenerationRevision((value) => value + 1)
 
@@ -540,7 +750,7 @@ function App() {
       setStatus(rolesOnly ? 'Composición de roles generada' : 'Equipo generado correctamente')
       playSound('success')
       notify(rolesOnly ? 'Composición generada' : stadium ? 'Equipo Stadium generado' : 'Nuevo equipo generado', 'success')
-    }, 360)
+    }, animationsEnabled ? 360 : 40)
   }
 
   function reroll(index: number) {
@@ -562,22 +772,24 @@ function App() {
         ? current.role
         : allowedRoles[Math.floor(Math.random() * allowedRoles.length)]
 
-      let candidates = availableHeroes.filter((hero) => hero.role === selectedRole)
-      if (avoidRepeated) {
-        const unique = candidates.filter((hero) => !used.has(hero.key))
-        if (unique.length > 0) candidates = unique
-      }
+      const hero = selectedRole ? chooseHero({
+        heroes: availableHeroes,
+        player,
+        role: selectedRole,
+        used,
+        avoidRepeated,
+        previousKey: current.hero?.key,
+        profiles,
+        profileMode,
+      }) : null
 
-      const alternatives = candidates.filter((hero) => hero.key !== current.hero?.key)
-      if (alternatives.length > 0) candidates = alternatives
-
-      const hero = candidates[Math.floor(Math.random() * candidates.length)] ?? null
       setPicks((old) => old.map((pick, pickIndex) => (
-        pickIndex === index ? { hero, locked: false, role: selectedRole, perks: rollPerks(hero, randomPerks, stadium) } : pick
+        pickIndex === index ? { hero, locked: false, role: selectedRole ?? null, perks: rollPerks(hero, randomPerks, stadium) } : pick
       )))
       setRerollingIndex(null)
       setStatus(`Reroll de ${player.name || `Jugador ${index + 1}`}`)
-    }, 280)
+      if (!hero) notify('No hay otro héroe compatible con ese perfil y filtro.', 'warning')
+    }, animationsEnabled ? 280 : 30)
   }
 
   function toggleLock(index: number) {
@@ -601,10 +813,7 @@ function App() {
         notify('Cada jugador debe conservar al menos un rol.', 'warning')
         return player
       }
-      return {
-        ...player,
-        roles: { ...player.roles, [role]: !player.roles[role] },
-      }
+      return { ...player, roles: { ...player.roles, [role]: !player.roles[role] } }
     }))
   }
 
@@ -612,15 +821,13 @@ function App() {
     const nextCount = Math.max(1, Math.min(6, players.length + delta))
     if (nextCount === players.length) return
 
-    setPlayers((old) => Array.from(
-      { length: nextCount },
-      (_, index) => old[index] ?? makePlayer(index),
-    ))
+    setPlayers((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? makePlayer(index)))
     setPicks((old) => Array.from(
       { length: nextCount },
       (_, index) => old[index] ?? { hero: null, locked: false, role: null, perks: [] },
     ))
     setDetailsIndex(null)
+    setFilterIndex(null)
     setStatus(`${nextCount} jugador${nextCount === 1 ? '' : 'es'} en la escuadra`)
   }
 
@@ -630,47 +837,42 @@ function App() {
     )))
   }
 
-  function applyProfile(name: string) {
+  function assignPlayerProfile(index: number, profileId: string) {
+    const assigned = profiles.find((item) => item.id === profileId)
     playSound('open')
-    setProfile(name)
-    setRolesOnly(name === 'Solo rol')
-
-    if (name === 'Casual') {
-      setAvoidRepeated(true)
-      setRoleComposition(false)
-    }
-    if (name === 'Competitivo') {
-      setAvoidRepeated(true)
-      setRoleComposition(true)
-    }
-    if (name === 'Solo rol') {
-      setAvoidRepeated(true)
-      setRoleComposition(true)
-    }
-
-    notify(`Perfil ${name} activado`, 'success')
+    setPlayers((old) => old.map((player, playerIndex) => (
+      playerIndex === index
+        ? { ...player, profileId, name: assigned?.name ?? (player.profileId ? `Jugador ${index + 1}` : player.name) }
+        : player
+    )))
+    notify(assigned ? `${assigned.name} asignado al Jugador ${index + 1}` : `Perfil retirado del Jugador ${index + 1}`)
   }
 
   function clearPlayerNames() {
     playSound('click')
-    setPlayers((old) => old.map((player) => ({ ...player, name: '' })))
-    notify('Nombres limpiados')
+    setPlayers((old) => old.map((player, index) => ({
+      ...player,
+      name: player.profileId ? (profiles.find((item) => item.id === player.profileId)?.name ?? `Jugador ${index + 1}`) : '',
+    })))
+    notify('Nombres libres limpiados')
   }
 
   function shufflePlayers() {
     playSound('nav')
-    const payload = shuffleArray(players.map((player) => ({ name: player.name, roles: player.roles })))
+    const payload = shuffleArray(players.map((player) => ({
+      name: player.name,
+      roles: player.roles,
+      profileId: player.profileId,
+      blocked: player.blocked,
+    })))
     setPlayers((old) => old.map((player, index) => ({ ...player, ...payload[index] })))
     setPicks((old) => old.map((pick) => ({ ...pick, locked: false })))
-    notify('Jugadores y roles revueltos', 'success')
+    notify('Jugadores, perfiles, roles y filtros revueltos', 'success')
   }
 
   function resetPlayerRoles() {
     playSound('click')
-    setPlayers((old) => old.map((player) => ({
-      ...player,
-      roles: { tank: true, damage: true, support: true },
-    })))
+    setPlayers((old) => old.map((player) => ({ ...player, roles: { tank: true, damage: true, support: true } })))
     notify('Roles restablecidos')
   }
 
@@ -678,10 +880,7 @@ function App() {
     const next = !randomPerks
     setRandomPerks(next)
     toggleRuleSound(next)
-    setPicks((old) => old.map((pick) => ({
-      ...pick,
-      perks: rollPerks(pick.hero, next, stadium),
-    })))
+    setPicks((old) => old.map((pick) => ({ ...pick, perks: rollPerks(pick.hero, next, stadium) })))
   }
 
   function toggleStadium() {
@@ -692,9 +891,7 @@ function App() {
     toggleRuleSound(next)
 
     if (data) {
-      const pool = data.heroes.filter((hero) => (
-        next ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay')
-      ))
+      const pool = data.heroes.filter((hero) => next ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay'))
       setPicks((current) => buildTeam({
         heroes: pool,
         players,
@@ -704,6 +901,8 @@ function App() {
         rolesOnly: false,
         randomPerks,
         stadium: next,
+        profiles,
+        profileMode,
       }))
       setGenerationRevision((value) => value + 1)
     }
@@ -726,6 +925,161 @@ function App() {
       playSound('toggleOff')
     }
     setSoundEnabled(next)
+  }
+
+  function createProfile() {
+    const id = `profile-${Date.now()}`
+    const next: UserProfile = { id, name: `Nuevo perfil ${profiles.length + 1}`, heroes: emptyProfileHeroes() }
+    setProfiles((old) => [...old, next])
+    setCurrentProfileId(id)
+    playSound('open')
+    notify('Perfil creado', 'success')
+  }
+
+  function renameCurrentProfile(name: string) {
+    setProfiles((old) => old.map((profile) => profile.id === currentProfileId ? { ...profile, name } : profile))
+    setPlayers((old) => old.map((player) => {
+      if (player.profileId !== currentProfileId) return player
+      return { ...player, name }
+    }))
+  }
+
+  function deleteCurrentProfile() {
+    if (!currentProfile) return
+    const id = currentProfile.id
+    setProfiles((old) => old.filter((profile) => profile.id !== id))
+    setPlayers((old) => old.map((player, index) => (
+      player.profileId === id ? { ...player, profileId: '', name: `Jugador ${index + 1}` } : player
+    )))
+    setCurrentProfileId('')
+    playSound('close')
+    notify(`${currentProfile.name} fue eliminado`)
+  }
+
+  function setHeroBucket(heroKey: string, bucket: ProfileBucket | '') {
+    if (!currentProfile) return
+    setProfiles((old) => old.map((profile) => {
+      if (profile.id !== currentProfile.id) return profile
+      const heroes = Object.fromEntries(profileBuckets.map((item) => [item, profile.heroes[item].filter((key) => key !== heroKey)])) as Record<ProfileBucket, string[]>
+      if (bucket) heroes[bucket] = [...heroes[bucket], heroKey]
+      return { ...profile, heroes }
+    }))
+  }
+
+  function clearCurrentProfile() {
+    if (!currentProfile) return
+    setProfiles((old) => old.map((profile) => profile.id === currentProfile.id ? { ...profile, heroes: emptyProfileHeroes() } : profile))
+    notify('Clasificación del perfil reiniciada')
+  }
+
+  function exportProfiles() {
+    const payload = JSON.stringify({ version: 1, profileMode, profiles, playerAssignments: players.map((player) => player.profileId) }, null, 2)
+    const blob = new Blob([payload], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const anchor = document.createElement('a')
+    anchor.href = url
+    anchor.download = 'overroll-perfiles.json'
+    anchor.click()
+    URL.revokeObjectURL(url)
+    playSound('success')
+    notify('Perfiles exportados', 'success')
+  }
+
+  function importProfiles(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+
+    file.text()
+      .then((text) => {
+        const parsed = JSON.parse(text) as { profiles?: unknown; profileMode?: ProfileMode; playerAssignments?: unknown }
+        const imported = normalizeProfiles(parsed.profiles)
+        if (imported.length === 0) throw new Error('El archivo no contiene perfiles válidos.')
+        setProfiles(imported)
+        if (profileModes.some((mode) => mode.id === parsed.profileMode)) setProfileMode(parsed.profileMode as ProfileMode)
+        if (Array.isArray(parsed.playerAssignments)) {
+          const assignments = parsed.playerAssignments as unknown[]
+          setPlayers((old) => old.map((player, index) => ({
+            ...player,
+            profileId: typeof assignments[index] === 'string' ? assignments[index] as string : '',
+          })))
+        }
+        setCurrentProfileId(imported[0].id)
+        playSound('success')
+        notify(`${imported.length} perfiles importados`, 'success')
+      })
+      .catch((error: Error) => notify(error.message || 'No se pudo importar el archivo.', 'warning'))
+  }
+
+  function openFilter(index: number) {
+    playSound('open')
+    setFilterIndex(index)
+    setFilterSearch('')
+    setFilterRole('all')
+  }
+
+  function closeFilter() {
+    playSound('close')
+    setFilterIndex(null)
+  }
+
+  function toggleBlockedHero(heroKey: string) {
+    if (filterIndex === null) return
+    setPlayers((old) => old.map((player, index) => {
+      if (index !== filterIndex) return player
+      const blocked = new Set(player.blocked)
+      if (blocked.has(heroKey)) blocked.delete(heroKey)
+      else blocked.add(heroKey)
+      return { ...player, blocked: [...blocked] }
+    }))
+    playSound('click')
+  }
+
+  function toggleBlockedRole(role: Role) {
+    if (filterIndex === null) return
+    const keys = availableHeroes.filter((hero) => hero.role === role).map((hero) => hero.key)
+    setPlayers((old) => old.map((player, index) => {
+      if (index !== filterIndex) return player
+      const blocked = new Set(player.blocked)
+      const allBlocked = keys.every((key) => blocked.has(key))
+      keys.forEach((key) => allBlocked ? blocked.delete(key) : blocked.add(key))
+      return { ...player, blocked: [...blocked] }
+    }))
+    playSound('click')
+  }
+
+  function clearPlayerFilter() {
+    if (filterIndex === null) return
+    setPlayers((old) => old.map((player, index) => index === filterIndex ? { ...player, blocked: [] } : player))
+    notify('Filtro reiniciado')
+  }
+
+  function toggleManualPerk(perk: Perk) {
+    if (detailsIndex === null || !selectedDetailHero) return
+    setPicks((old) => old.map((pick, index) => {
+      if (index !== detailsIndex) return pick
+      const selected = pick.perks.some((item) => item.name === perk.name)
+      if (selected) return { ...pick, perks: pick.perks.filter((item) => item.name !== perk.name) }
+
+      if (stadium) {
+        const next = [...pick.perks, perk]
+        return { ...pick, perks: next.length > 4 ? next.slice(next.length - 4) : next }
+      }
+
+      const isMinor = selectedDetailHero.minorPerks.some((item) => item.name === perk.name)
+      const next = pick.perks.filter((item) => {
+        const itemIsMinor = selectedDetailHero.minorPerks.some((candidate) => candidate.name === item.name)
+        return itemIsMinor !== isMinor
+      })
+      return { ...pick, perks: [...next, perk] }
+    }))
+    playSound('click')
+  }
+
+  function rerollSelectedPerks() {
+    if (detailsIndex === null || !selectedDetailHero) return
+    setPicks((old) => old.map((pick, index) => index === detailsIndex ? { ...pick, perks: rollPerks(selectedDetailHero, true, stadium) } : pick))
+    playSound('reroll')
   }
 
   function openDetails(index: number) {
@@ -758,32 +1112,23 @@ function App() {
       <main className="workspace">
         <aside className="sidebar">
           <div className="sidebar-head">
-            <div>
-              <span className="eyebrow">Preparar partida</span>
-              <strong>Configuración</strong>
-            </div>
+            <div><span className="eyebrow">Preparar partida</span><strong>Configuración</strong></div>
             <span className="live-dot"><span /> LOCAL</span>
           </div>
 
           <section className="side-panel profile-panel">
             <div className="panel-title-row">
-              <div>
-                <label>Modo de perfil</label>
-                <small>Reglas rápidas para la escuadra</small>
-              </div>
+              <div><label>Modo de perfiles</label><small>{profileModeInfo.description}</small></div>
               <Icon name="profile" size={17} />
             </div>
-            <select value={profile} onChange={(event: ChangeEvent<HTMLSelectElement>) => applyProfile(event.target.value)}>
-              {profileOptions.map((item) => <option key={item.name}>{item.name}</option>)}
+            <select value={profileMode} onChange={(event: ChangeEvent<HTMLSelectElement>) => { setProfileMode(event.target.value as ProfileMode); playSound('open') }}>
+              {profileModes.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
             </select>
           </section>
 
           <section className="side-panel squad-panel">
             <div className="panel-title-row">
-              <div>
-                <label>Escuadra</label>
-                <small>Nombres y roles permitidos</small>
-              </div>
+              <div><label>Escuadra</label><small>Nombres, perfiles, filtros y roles</small></div>
               <Icon name="users" size={17} />
             </div>
 
@@ -805,10 +1150,22 @@ function App() {
                   <span className="number">{String(index + 1).padStart(2, '0')}</span>
                   <input
                     value={player.name}
+                    disabled={Boolean(player.profileId)}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => updatePlayerName(index, event.target.value)}
                     aria-label={`Nombre del jugador ${index + 1}`}
+                    title={player.profileId ? 'El nombre lo controla el perfil asignado.' : ''}
                     maxLength={22}
                   />
+                  <select
+                    className="player-profile-inline"
+                    value={player.profileId}
+                    onChange={(event: ChangeEvent<HTMLSelectElement>) => assignPlayerProfile(index, event.target.value)}
+                    title={profiles.find((item) => item.id === player.profileId)?.name ?? 'Sin perfil'}
+                    aria-label={`Perfil del jugador ${index + 1}`}
+                  >
+                    <option value="">☆</option>
+                    {profiles.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
+                  </select>
                   {roles.map((role) => (
                     <button
                       type="button"
@@ -828,97 +1185,38 @@ function App() {
 
           <section className="side-panel rules">
             <div className="panel-title-row">
-              <div>
-                <label>Reglas</label>
-                <small>Ajustes de generación</small>
-              </div>
+              <div><label>Reglas</label><small>Ajustes de generación</small></div>
               <Icon name="settings" size={17} />
             </div>
 
-            <button
-              type="button"
-              className={`toggle-row ${avoidRepeated ? 'enabled' : ''}`}
-              onClick={() => { const next = !avoidRepeated; setAvoidRepeated(next); toggleRuleSound(next) }}
-              aria-pressed={avoidRepeated}
-            >
-              <span className="switch"><span /></span>
-              <span><b>Evitar repetidos</b><small>Un héroe por equipo</small></span>
+            <button type="button" className={`toggle-row ${avoidRepeated ? 'enabled' : ''}`} onClick={() => { const next = !avoidRepeated; setAvoidRepeated(next); toggleRuleSound(next) }} aria-pressed={avoidRepeated}>
+              <span className="switch"><span /></span><span><b>Evitar repetidos</b><small>Un héroe por equipo</small></span>
             </button>
-
-            <button
-              type="button"
-              className={`toggle-row ${roleComposition ? 'enabled' : ''}`}
-              onClick={() => { const next = !roleComposition; setRoleComposition(next); toggleRuleSound(next) }}
-              aria-pressed={roleComposition}
-            >
-              <span className="switch"><span /></span>
-              <span><b>Composición de roles</b><small>Distribución automática</small></span>
+            <button type="button" className={`toggle-row ${roleComposition ? 'enabled' : ''}`} onClick={() => { const next = !roleComposition; setRoleComposition(next); toggleRuleSound(next) }} aria-pressed={roleComposition}>
+              <span className="switch"><span /></span><span><b>Composición de roles</b><small>Distribución automática</small></span>
             </button>
-
-            <button
-              type="button"
-              className={`toggle-row perks-toggle ${randomPerks ? 'enabled' : ''}`}
-              onClick={toggleRandomPerks}
-              aria-pressed={randomPerks}
-            >
-              <span className="switch"><span /></span>
-              <span><b>Perks aleatorias</b><small>{stadium ? 'Cuatro poderes Stadium' : 'Una menor y una mayor'}</small></span>
+            <button type="button" className={`toggle-row perks-toggle ${randomPerks ? 'enabled' : ''}`} onClick={toggleRandomPerks} aria-pressed={randomPerks}>
+              <span className="switch"><span /></span><span><b>Perks aleatorias</b><small>{stadium ? 'Cuatro poderes Stadium' : 'Una menor y una mayor'}</small></span>
             </button>
-
-            <button
-              type="button"
-              className={`toggle-row stadium-toggle ${stadium ? 'enabled' : ''}`}
-              onClick={toggleStadium}
-              aria-pressed={stadium}
-            >
-              <span className="switch"><span /></span>
-              <span><b>Modo Stadium</b><small>Solo héroes compatibles</small></span>
+            <button type="button" className={`toggle-row stadium-toggle ${stadium ? 'enabled' : ''}`} onClick={toggleStadium} aria-pressed={stadium}>
+              <span className="switch"><span /></span><span><b>Modo Stadium</b><small>Solo héroes compatibles</small></span>
             </button>
-
-            <button
-              type="button"
-              className={`toggle-row ${rolesOnly ? 'enabled' : ''}`}
-              onClick={() => { const next = !rolesOnly; setRolesOnly(next); toggleRuleSound(next) }}
-              aria-pressed={rolesOnly}
-            >
-              <span className="switch"><span /></span>
-              <span><b>Solo rol</b><small>Oculta los héroes</small></span>
+            <button type="button" className={`toggle-row ${rolesOnly ? 'enabled' : ''}`} onClick={() => { const next = !rolesOnly; setRolesOnly(next); toggleRuleSound(next) }} aria-pressed={rolesOnly}>
+              <span className="switch"><span /></span><span><b>Solo rol</b><small>Oculta los héroes</small></span>
             </button>
           </section>
 
           <section className="audio-strip" aria-label="Sonidos de la interfaz">
             <button type="button" className={soundEnabled ? 'enabled' : ''} onClick={toggleSounds} aria-pressed={soundEnabled}>
-              <Icon name="sound" size={15} />
-              <span>{soundEnabled ? 'Sonidos activos' : 'Sonidos apagados'}</span>
+              <Icon name="sound" size={15} /><span>{soundEnabled ? 'Sonidos activos' : 'Sonidos apagados'}</span>
             </button>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.05"
-              value={soundVolume}
-              disabled={!soundEnabled}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setSoundVolume(Number(event.target.value))}
-              onPointerUp={() => playSound('click')}
-              aria-label="Volumen de sonidos"
-            />
+            <input type="range" min="0" max="1" step="0.05" value={soundVolume} disabled={!soundEnabled} onChange={(event: ChangeEvent<HTMLInputElement>) => setSoundVolume(Number(event.target.value))} onPointerUp={() => playSound('click')} aria-label="Volumen de sonidos" />
           </section>
 
           <div className="sidebar-footer">
-            <div className={`status-line ${loadError ? 'error' : ''}`}>
-              <span className="status-icon"><Icon name={loadError ? 'warning' : 'shield'} size={15} /></span>
-              <span>{status}</span>
-            </div>
-
-            <button
-              type="button"
-              className={`generate ${generating ? 'generating' : ''}`}
-              onClick={generateTeam}
-              disabled={!data || generating || rerollingIndex !== null}
-            >
-              <span className="generate-glow" />
-              <Icon name={generating ? 'refresh' : 'spark'} size={19} />
-              <span>{generating ? 'Generando…' : 'Generar equipo'}</span>
+            <div className={`status-line ${loadError ? 'error' : ''}`}><span className="status-icon"><Icon name={loadError ? 'warning' : 'shield'} size={15} /></span><span>{status}</span></div>
+            <button type="button" className={`generate ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!data || generating || rerollingIndex !== null}>
+              <span className="generate-glow" /><Icon name={generating ? 'refresh' : 'spark'} size={19} /><span>{generating ? 'Generando…' : 'Generar equipo'}</span>
             </button>
           </div>
         </aside>
@@ -927,27 +1225,18 @@ function App() {
           <div className="content-topline">
             <div className="game-identity">
               <span className="game-kicker">Selector principal</span>
-              <div className="game-title-row">
-                <h1>Overwatch 2</h1>
-                <span className="web-badge">WEB ALPHA</span>
-              </div>
-              <p>{availableHeroes.length || '—'} héroes · {players.length} jugadores · {stadium ? 'Stadium' : 'Quick Play'} · datos locales</p>
+              <div className="game-title-row"><h1>Overwatch 2</h1><span className="web-badge">WEB BETA</span></div>
+              <p>{availableHeroes.length || '—'} héroes · {players.length} jugadores · {stadium ? 'Stadium' : 'Quick Play'} · perfiles y filtros locales</p>
             </div>
-
             <div className="match-summary">
               <div><small>Composición</small><strong>{compositionText}</strong></div>
               <div><small>Fijados</small><strong>{picks.filter((pick) => pick.locked).length}</strong></div>
-              <div><small>Modo</small><strong>{stadium ? 'Stadium' : profile}</strong></div>
+              <div><small>Perfil</small><strong>{profileModeInfo.name}</strong></div>
             </div>
           </div>
 
           {loadError ? (
-            <div className="error-state">
-              <Icon name="warning" size={34} />
-              <h2>No se pudo cargar el catálogo</h2>
-              <p>{loadError}</p>
-              <button type="button" onClick={() => window.location.reload()}>Volver a intentar</button>
-            </div>
+            <div className="error-state"><Icon name="warning" size={34} /><h2>No se pudo cargar el catálogo</h2><p>{loadError}</p><button type="button" onClick={() => window.location.reload()}>Volver a intentar</button></div>
           ) : (
             <div className="team-stage">
               <div className="stage-grid" />
@@ -957,113 +1246,61 @@ function App() {
                   const hero = pick?.hero
                   const visibleRole = pick?.role ?? hero?.role ?? assignedRoles[index]
                   const generationClass = generationRevision % 2 === 0 ? 'generation-a' : 'generation-b'
+                  const assignedProfile = profiles.find((item) => item.id === player.profileId)
 
                   return (
-                    <article
-                      className={`hero-card ${visibleRole ?? ''} ${generationClass} ${pick?.locked ? 'is-locked' : ''} ${rerollingIndex === index ? 'is-rerolling' : ''}`}
-                      style={{ '--delay': `${index * 55}ms` } as CSSProperties}
-                      key={player.id}
-                    >
-                      <span className="card-corner top" />
-                      <span className="card-corner bottom" />
-                      <div className="card-shine" />
-
+                    <article className={`hero-card ${visibleRole ?? ''} ${generationClass} ${pick?.locked ? 'is-locked' : ''} ${rerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--delay': `${index * 55}ms` } as CSSProperties} key={player.id}>
+                      <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
                       <div className="card-player">
                         <span className="player-index">{String(index + 1).padStart(2, '0')}</span>
                         <span>{player.name || `Jugador ${index + 1}`}</span>
+                        {assignedProfile && <span className="profile-tag" title={`Perfil: ${assignedProfile.name}`}>{assignedProfile.name.charAt(0).toUpperCase()}</span>}
+                        {player.blocked.length > 0 && <span className="filter-count" title={`${player.blocked.length} héroes bloqueados`}>{player.blocked.length}</span>}
                         {pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}
                       </div>
 
                       <div className="portrait">
-                        <div className="portrait-grid" />
-                        <div className="portrait-fallback"><Icon name="gamepad" size={48} /></div>
-
+                        <div className="portrait-grid" /><div className="portrait-fallback"><Icon name="gamepad" size={48} /></div>
                         {rolesOnly && visibleRole ? (
-                          <img
-                            className="role-only-image"
-                            src={asset(`assets/roles/${visibleRole}.png`)}
-                            alt={roleLabels[visibleRole]}
-                            decoding="async"
-                            draggable={false}
-                            onLoad={handleImageLoad}
-                            onError={handleImageError}
-                          />
+                          <img className="role-only-image" src={asset(`assets/roles/${visibleRole}.png`)} alt={roleLabels[visibleRole]} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} />
                         ) : hero ? (
-                          <img
-                            className="hero-image"
-                            src={asset(hero.portrait)}
-                            alt={hero.name}
-                            decoding="async"
-                            draggable={false}
-                            onLoad={handleImageLoad}
-                            onError={handleImageError}
-                          />
+                          <img className="hero-image" src={asset(hero.portrait)} alt={hero.name} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} />
                         ) : (
                           <div className="portrait-loading"><span /><span /><span /></div>
                         )}
-
-                        <div className="portrait-vignette" />
-                        <div className="role-watermark">{visibleRole ? roleLabels[visibleRole].charAt(0) : '?'}</div>
+                        <div className="portrait-vignette" /><div className="role-watermark">{visibleRole ? roleLabels[visibleRole].charAt(0) : '?'}</div>
                       </div>
 
                       <div className="hero-info">
-                        <div className="hero-name-row">
-                          <h2>{rolesOnly && visibleRole ? roleLabels[visibleRole] : hero?.name ?? 'Sin selección'}</h2>
-                          <span className={`role-dot ${visibleRole ?? ''}`} />
-                        </div>
+                        <div className="hero-name-row"><h2>{rolesOnly && visibleRole ? roleLabels[visibleRole] : hero?.name ?? 'Sin selección'}</h2><span className={`role-dot ${visibleRole ?? ''}`} /></div>
                         <div className={`hero-role ${visibleRole ?? ''}`}>
                           {visibleRole ? roleLabels[visibleRole] : 'Genera un equipo'}
                           {hero?.subrole && <><span>•</span>{subroleLabels[hero.subrole] ?? hero.subrole}</>}
                         </div>
                       </div>
 
-                      <div className="card-actions">
-                        <button
-                          type="button"
-                          onClick={() => reroll(index)}
-                          disabled={!hero || pick?.locked || rolesOnly || rerollingIndex !== null}
-                          data-tooltip="Reroll"
-                          aria-label={`Reroll de ${player.name}`}
-                        >
-                          <Icon name="refresh" size={18} />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => openDetails(index)}
-                          disabled={!hero}
-                          data-tooltip="Detalles"
-                          aria-label={`Detalles de ${hero?.name ?? 'héroe'}`}
-                        >
-                          <Icon name="details" size={18} />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => toggleLock(index)}
-                          disabled={!hero || rolesOnly}
-                          className={pick?.locked ? 'active-lock' : ''}
-                          data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'}
-                          aria-label={pick?.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}
-                        >
-                          <Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} />
-                        </button>
+                      <div className="card-actions four-actions">
+                        <button type="button" onClick={() => reroll(index)} disabled={!hero || pick?.locked || rolesOnly || rerollingIndex !== null} data-tooltip="Reroll" aria-label={`Reroll de ${player.name}`}><Icon name="refresh" size={18} /></button>
+                        <button type="button" onClick={() => openFilter(index)} disabled={rolesOnly} data-tooltip="Filtro" aria-label={`Filtro de ${player.name}`} className={player.blocked.length > 0 ? 'active-filter' : ''}><Icon name="filter" size={18} /></button>
+                        <button type="button" onClick={() => openDetails(index)} disabled={!hero} data-tooltip="Perks y detalles" aria-label={`Detalles de ${hero?.name ?? 'héroe'}`}><Icon name="details" size={18} /></button>
+                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero || rolesOnly} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'} aria-label={pick?.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
                       </div>
 
-                      {!rolesOnly && hero && randomPerks && (
+                      {!rolesOnly && hero && pick.perks.length > 0 && (
                         <div className={`card-perks ${stadium ? 'stadium' : 'quickplay'}`}>
                           {pick.perks.map((perk, perkIndex) => (
                             <article className="card-perk" key={`${perk.name}-${perkIndex}`} title={perk.description}>
                               {perk.icon ? <img src={asset(perk.icon)} alt="" loading="lazy" decoding="async" /> : <Icon name="spark" size={20} />}
-                              <span><small>{stadium ? `PODER ${perkIndex + 1}` : perkIndex === 0 ? 'MENOR' : 'MAYOR'}</small><b>{perk.name}</b></span>
+                              <span><small>{stadium ? `PODER ${perkIndex + 1}` : hero.minorPerks.some((item) => item.name === perk.name) ? 'MENOR' : 'MAYOR'}</small><b>{perk.name}</b></span>
                             </article>
                           ))}
-                          {pick.perks.length === 0 && <div className="no-random-perks">Sin perks disponibles</div>}
                         </div>
                       )}
 
                       <div className="loadout">
                         <div>
-                          <small>{stadium ? 'Modo Stadium' : randomPerks ? 'Perks activas' : 'Selección personal'}</small>
-                          <span>{stadium ? `${pick.perks.length} poderes aleatorios` : randomPerks ? `${pick.perks.length} perks aleatorias` : profile === 'Sin perfil' ? 'Sin configuración' : profile}</span>
+                          <small>{stadium ? 'Modo Stadium' : pick.perks.length > 0 ? 'Perks activas' : 'Selección personal'}</small>
+                          <span>{stadium ? `${pick.perks.length} poderes` : pick.perks.length > 0 ? `${pick.perks.length} perks` : assignedProfile ? assignedProfile.name : 'Sin configuración'}</span>
                         </div>
                         <span className="loadout-status"><Icon name="check" size={13} /></span>
                       </div>
@@ -1080,36 +1317,90 @@ function App() {
 
   function renderProfiles() {
     return (
-      <main className="utility-page">
-        <header className="utility-heading">
-          <span className="eyebrow">Configuración local</span>
-          <h1>Perfiles</h1>
-          <p>Elige una base y después ajusta las reglas desde Principal.</p>
+      <main className="utility-page profile-manager-page">
+        <header className="utility-heading profile-heading">
+          <div><span className="eyebrow">Perfiles locales completos</span><h1>Perfiles</h1><p>Clasifica héroes, elige la lógica y asigna cada perfil a un jugador.</p></div>
+          <div className="profile-header-actions">
+            <input ref={importRef} className="hidden-file-input" type="file" accept="application/json,.json" onChange={importProfiles} />
+            <button type="button" onClick={() => importRef.current?.click()}><Icon name="upload" size={16} /> Importar</button>
+            <button type="button" onClick={exportProfiles} disabled={profiles.length === 0}><Icon name="download" size={16} /> Exportar</button>
+            <button type="button" className="primary" onClick={createProfile}><Icon name="plus" size={16} /> Nuevo perfil</button>
+          </div>
         </header>
 
-        <div className="profile-grid">
-          {profileOptions.map((item, index) => (
-            <button
-              type="button"
-              className={`profile-card ${profile === item.name ? 'selected' : ''}`}
-              onClick={() => applyProfile(item.name)}
-              style={{ '--delay': `${index * 70}ms` } as CSSProperties}
-              key={item.name}
-            >
-              <span className="profile-card-icon"><Icon name={item.name === 'Competitivo' ? 'shield' : 'profile'} size={24} /></span>
-              <span className="profile-card-copy">
-                <small>{item.badge}</small>
-                <strong>{item.name}</strong>
-                <span>{item.description}</span>
-              </span>
-              <span className="profile-select"><Icon name="check" size={18} /></span>
-            </button>
-          ))}
-        </div>
+        <section className="profile-mode-panel">
+          <div><small>MODO GLOBAL</small><strong>{profileModeInfo.name}</strong><p>{profileModeInfo.description}</p></div>
+          <select value={profileMode} onChange={(event: ChangeEvent<HTMLSelectElement>) => { setProfileMode(event.target.value as ProfileMode); playSound('open') }}>
+            {profileModes.map((mode) => <option value={mode.id} key={mode.id}>{mode.name}</option>)}
+          </select>
+        </section>
 
-        <div className="utility-note">
-          <Icon name="shield" size={20} />
-          <div><strong>Guardado automático</strong><span>Los nombres, roles y reglas permanecen en este navegador.</span></div>
+        <div className="profile-manager">
+          <aside className="profile-list-panel">
+            <div className="profile-list-title"><span>PERFILES GUARDADOS</span><b>{profiles.length}</b></div>
+            {profiles.length === 0 ? (
+              <button type="button" className="empty-profile-create" onClick={createProfile}><Icon name="plus" size={22} /><strong>Crear el primer perfil</strong><span>Después podrás clasificar los 52 héroes.</span></button>
+            ) : profiles.map((item) => (
+              <button type="button" className={`saved-profile-row ${item.id === currentProfileId ? 'selected' : ''}`} onClick={() => { setCurrentProfileId(item.id); playSound('nav') }} key={item.id}>
+                <span className="saved-profile-avatar">{item.name.charAt(0).toUpperCase()}</span>
+                <span><strong>{item.name}</strong><small>{profileBuckets.reduce((sum, bucket) => sum + item.heroes[bucket].length, 0)} héroes marcados</small></span>
+                <Icon name="check" size={15} />
+              </button>
+            ))}
+          </aside>
+
+          <section className="profile-editor-panel">
+            {!currentProfile ? (
+              <div className="profile-editor-empty"><Icon name="profile" size={44} /><h2>Selecciona o crea un perfil</h2><p>Los perfiles controlan qué héroes puede recibir cada persona.</p></div>
+            ) : (
+              <>
+                <div className="profile-identity-row">
+                  <div><small>IDENTIDAD DEL PERFIL</small><input value={currentProfile.name} onChange={(event: ChangeEvent<HTMLInputElement>) => renameCurrentProfile(event.target.value)} maxLength={28} /></div>
+                  <button type="button" className="danger" onClick={deleteCurrentProfile}><Icon name="trash" size={16} /> Eliminar</button>
+                </div>
+
+                <div className="profile-assignment-strip">
+                  <span>Asignar a jugador</span>
+                  {players.map((player, index) => (
+                    <label className={player.profileId === currentProfile.id ? 'assigned' : ''} key={player.id}>
+                      <input type="checkbox" checked={player.profileId === currentProfile.id} onChange={(event: ChangeEvent<HTMLInputElement>) => assignPlayerProfile(index, event.target.checked ? currentProfile.id : '')} />
+                      <b>{String(index + 1).padStart(2, '0')}</b><span>{player.name || `Jugador ${index + 1}`}</span>
+                    </label>
+                  ))}
+                </div>
+
+                <div className="profile-classifier-toolbar">
+                  <div className="profile-search"><Icon name="filter" size={16} /><input value={profileSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setProfileSearch(event.target.value)} placeholder="Buscar héroe…" /></div>
+                  <div className="role-filter-tabs">
+                    <button type="button" className={profileRole === 'all' ? 'active' : ''} onClick={() => setProfileRole('all')}>Todos</button>
+                    {roles.map((role) => <button type="button" className={`${role} ${profileRole === role ? 'active' : ''}`} onClick={() => setProfileRole(role)} key={role}>{roleLabels[role]}</button>)}
+                  </div>
+                  <button type="button" className="reset-classification" onClick={clearCurrentProfile}><Icon name="reset" size={15} /> Reiniciar</button>
+                </div>
+
+                <div className="bucket-legend">
+                  {profileBuckets.map((bucket) => <span className={bucket} key={bucket}><i />{bucketLabels[bucket]} <b>{currentProfile.heroes[bucket].length}</b></span>)}
+                  <span className="unmarked"><i />Sin marcar <b>{Math.max(0, (data?.heroes.length ?? 0) - profileBuckets.reduce((sum, bucket) => sum + currentProfile.heroes[bucket].length, 0))}</b></span>
+                </div>
+
+                <div className="hero-classifier-grid">
+                  {classifiedHeroes.map((hero) => {
+                    const bucket = heroBucket(currentProfile, hero.key)
+                    return (
+                      <article className={`classifier-hero ${hero.role} ${bucket ?? 'unmarked'}`} key={hero.key}>
+                        <img src={asset(hero.portrait)} alt={hero.name} loading="lazy" decoding="async" />
+                        <div><strong>{hero.name}</strong><small>{roleLabels[hero.role]}</small></div>
+                        <select value={bucket ?? ''} onChange={(event: ChangeEvent<HTMLSelectElement>) => setHeroBucket(hero.key, event.target.value as ProfileBucket | '')} aria-label={`Clasificación de ${hero.name}`}>
+                          <option value="">Sin marcar</option>
+                          {profileBuckets.map((item) => <option value={item} key={item}>{bucketLabels[item]}</option>)}
+                        </select>
+                      </article>
+                    )
+                  })}
+                </div>
+              </>
+            )}
+          </section>
         </div>
       </main>
     )
@@ -1118,81 +1409,63 @@ function App() {
   function renderMore() {
     return (
       <main className="utility-page">
-        <header className="utility-heading">
-          <span className="eyebrow">Módulos del proyecto</span>
-          <h1>Más juegos</h1>
-          <p>Overwatch 2 ya usa datos reales. Los demás módulos se portarán por etapas.</p>
-        </header>
+        <header className="utility-heading"><span className="eyebrow">Configuración web</span><h1>Más</h1><p>Sonidos, animaciones, presentación y próximos módulos.</p></header>
 
-        <section className="web-settings-panel">
-          <div className="web-setting-copy">
+        <section className="settings-grid-web">
+          <article className="web-setting-card">
             <span className="profile-card-icon"><Icon name="sound" size={24} /></span>
-            <div><small>INTERFAZ</small><strong>Sonidos</strong><p>Usa los efectos que agregaste para navegación, botones, generación y reroll.</p></div>
-          </div>
-          <button type="button" className={`sound-master ${soundEnabled ? 'enabled' : ''}`} onClick={toggleSounds}>{soundEnabled ? 'ACTIVOS' : 'APAGADOS'}</button>
-          <label className="volume-control"><span>Volumen</span><input type="range" min="0" max="1" step="0.05" value={soundVolume} disabled={!soundEnabled} onChange={(event: ChangeEvent<HTMLInputElement>) => setSoundVolume(Number(event.target.value))} onPointerUp={() => playSound('click')} /><b>{Math.round(soundVolume * 100)}%</b></label>
-          <button type="button" className="test-sound" disabled={!soundEnabled} onClick={() => playSound('success')}>Probar sonido</button>
+            <div><small>AUDIO</small><strong>Sonidos de interfaz</strong><p>Botones, navegación, generación, reroll y confirmación sin voz.</p></div>
+            <button type="button" className={`sound-master ${soundEnabled ? 'enabled' : ''}`} onClick={toggleSounds}>{soundEnabled ? 'ACTIVOS' : 'APAGADOS'}</button>
+            <label className="volume-control"><span>Volumen</span><input type="range" min="0" max="1" step="0.05" value={soundVolume} disabled={!soundEnabled} onChange={(event: ChangeEvent<HTMLInputElement>) => setSoundVolume(Number(event.target.value))} onPointerUp={() => playSound('click')} /><b>{Math.round(soundVolume * 100)}%</b></label>
+            <button type="button" className="test-sound" disabled={!soundEnabled} onClick={() => playSound('success')}>Probar confirmación</button>
+          </article>
+
+          <article className="web-setting-card compact-setting">
+            <span className="profile-card-icon"><Icon name="spark" size={24} /></span>
+            <div><small>RENDIMIENTO</small><strong>Animaciones</strong><p>Desactívalas en equipos con GPU limitada o cuando la página se sienta pesada.</p></div>
+            <button type="button" className={`sound-master ${animationsEnabled ? 'enabled' : ''}`} onClick={() => { const next = !animationsEnabled; setAnimationsEnabled(next); toggleRuleSound(next) }}>{animationsEnabled ? 'ACTIVAS' : 'REDUCIDAS'}</button>
+          </article>
+
+          <article className="web-setting-card compact-setting">
+            <span className="profile-card-icon"><Icon name="details" size={24} /></span>
+            <div><small>FICHAS</small><strong>Perks compactas</strong><p>Reduce el espacio usado por perks y poderes cuando hay cinco o seis jugadores.</p></div>
+            <button type="button" className={`sound-master ${compactPerks ? 'enabled' : ''}`} onClick={() => { const next = !compactPerks; setCompactPerks(next); toggleRuleSound(next) }}>{compactPerks ? 'COMPACTAS' : 'COMPLETAS'}</button>
+          </article>
+
+          <article className="web-setting-card compact-setting">
+            <span className="profile-card-icon"><Icon name="sound" size={24} /></span>
+            <div><small>INTERACCIÓN</small><strong>Sonido al pasar el mouse</strong><p>Está apagado por defecto para no volver molesta la interfaz.</p></div>
+            <button type="button" className={`sound-master ${hoverSounds ? 'enabled' : ''}`} onClick={() => { const next = !hoverSounds; setHoverSounds(next); toggleRuleSound(next) }}>{hoverSounds ? 'ACTIVO' : 'APAGADO'}</button>
+          </article>
         </section>
 
         <div className="games-grid">
           {gameModules.map((game, index) => {
             const available = game.status === 'Disponible'
             return (
-              <button
-                type="button"
-                className={`game-module ${available ? 'available' : ''}`}
-                style={{ '--module-accent': game.accent, '--delay': `${index * 55}ms` } as CSSProperties}
-                onClick={() => available ? navigate('principal') : notify(`${game.name}: ${game.status}`, 'info')}
-                key={game.name}
-              >
-                <span className="module-icon"><Icon name="gamepad" size={28} /></span>
-                <span className="module-copy"><strong>{game.name}</strong><small>{game.status}</small></span>
-                <span className="module-status">{available ? 'ABRIR' : 'PRÓX.'}</span>
+              <button type="button" className={`game-module ${available ? 'available' : ''}`} style={{ '--module-accent': game.accent, '--delay': `${index * 55}ms` } as CSSProperties} onMouseEnter={hoverSound} onClick={() => available ? navigate('principal') : notify(`${game.name}: ${game.status}`, 'info')} key={game.name}>
+                <span className="module-icon"><Icon name="gamepad" size={28} /></span><span className="module-copy"><strong>{game.name}</strong><small>{game.status}</small></span><span className="module-status">{available ? 'ABRIR' : 'PRÓX.'}</span>
               </button>
             )
           })}
-        </div>
-
-        <div className="roadmap-strip">
-          <span><b>1</b> Interfaz y Overwatch</span>
-          <i />
-          <span><b>2</b> Juegos adicionales</span>
-          <i />
-          <span><b>3</b> Ruletas, OBS y Twitch</span>
         </div>
       </main>
     )
   }
 
   return (
-    <div className="app">
-      <div className="ambient-grid" />
-      <div className="ambient-orb orb-one" />
-      <div className="ambient-orb orb-two" />
-      <div className="noise-layer" />
+    <div className={`app ${animationsEnabled ? '' : 'reduce-motion'} ${compactPerks ? 'compact-perks' : ''}`}>
+      <div className="ambient-grid" /><div className="ambient-orb orb-one" /><div className="ambient-orb orb-two" /><div className="noise-layer" />
 
       <header className="topbar">
-        <button type="button" className="brand" onClick={() => navigate('principal')} aria-label="Ir a Principal">
-          <span className="brand-mark"><img src={asset('app_icon.png')} alt="" /></span>
-          <span className="brand-copy"><strong>OverRoll</strong><small>Selector aleatorio de héroes</small></span>
+        <button type="button" className="brand" onMouseEnter={hoverSound} onClick={() => navigate('principal')} aria-label="Ir a Principal">
+          <span className="brand-mark"><img src={asset('app_icon.png')} alt="" /></span><span className="brand-copy"><strong>OverRoll</strong><small>Selector aleatorio de héroes</small></span>
         </button>
-
-        <div className="local-data">
-          <span className="pulse-dot" />
-          Datos locales
-          <b>{data?.updatedAt ? new Date(data.updatedAt).toLocaleDateString('es-MX') : 'cargando'}</b>
-        </div>
-
+        <div className="local-data"><span className="pulse-dot" />Datos locales<b>{data?.updatedAt ? new Date(data.updatedAt).toLocaleDateString('es-MX') : 'cargando'}</b></div>
         <nav aria-label="Navegación principal">
-          <button type="button" className={activeView === 'principal' ? 'nav-active' : ''} onClick={() => navigate('principal')}>
-            <Icon name="gamepad" size={16} /><span>Principal</span>
-          </button>
-          <button type="button" className={activeView === 'profiles' ? 'nav-active' : ''} onClick={() => navigate('profiles')}>
-            <Icon name="profile" size={16} /><span>Perfiles</span>
-          </button>
-          <button type="button" className={activeView === 'more' ? 'nav-active' : ''} onClick={() => navigate('more')}>
-            <Icon name="settings" size={16} /><span>Más</span>
-          </button>
+          <button type="button" className={activeView === 'principal' ? 'nav-active' : ''} onMouseEnter={hoverSound} onClick={() => navigate('principal')}><Icon name="gamepad" size={16} /><span>Principal</span></button>
+          <button type="button" className={activeView === 'profiles' ? 'nav-active' : ''} onMouseEnter={hoverSound} onClick={() => navigate('profiles')}><Icon name="profile" size={16} /><span>Perfiles</span></button>
+          <button type="button" className={activeView === 'more' ? 'nav-active' : ''} onMouseEnter={hoverSound} onClick={() => navigate('more')}><Icon name="settings" size={16} /><span>Más</span></button>
         </nav>
       </header>
 
@@ -1201,60 +1474,84 @@ function App() {
       {activeView === 'more' && renderMore()}
 
       {detailsIndex !== null && selectedDetailHero && (
-        <div className="drawer-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => {
-          if (event.currentTarget === event.target) closeDetails()
-        }}>
+        <div className="drawer-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) closeDetails() }}>
           <aside className={`hero-drawer ${selectedDetailHero.role}`} role="dialog" aria-modal="true" aria-label={`Detalles de ${selectedDetailHero.name}`}>
             <button type="button" className="drawer-close" onClick={closeDetails} aria-label="Cerrar detalles"><Icon name="close" size={20} /></button>
-
             <div className="drawer-hero">
-              <img src={asset(selectedDetailHero.portrait)} alt={selectedDetailHero.name} onError={handleImageError} />
-              <div className="drawer-vignette" />
-              <div className="drawer-title">
-                <small>{roleLabels[selectedDetailHero.role]} · {subroleLabels[selectedDetailHero.subrole] ?? selectedDetailHero.subrole}</small>
-                <h2>{selectedDetailHero.name}</h2>
-              </div>
+              <img src={asset(selectedDetailHero.portrait)} alt={selectedDetailHero.name} onError={handleImageError} /><div className="drawer-vignette" />
+              <div className="drawer-title"><small>{roleLabels[selectedDetailHero.role]} · {subroleLabels[selectedDetailHero.subrole] ?? selectedDetailHero.subrole}</small><h2>{selectedDetailHero.name}</h2></div>
             </div>
-
             <div className="drawer-content">
-              <div className="drawer-section-title"><Icon name="spark" size={17} /><span>{stadium ? 'Poderes Stadium elegidos' : 'Perks elegidas'}</span></div>
+              <div className="drawer-section-title with-action"><span><Icon name="spark" size={17} />{stadium ? 'Poderes Stadium elegidos' : 'Perks elegidas'}</span><button type="button" onClick={rerollSelectedPerks}><Icon name="refresh" size={15} /> Aleatorias</button></div>
               <div className="selected-perk-grid">
                 {(selectedDetailPick?.perks ?? []).map((perk, index) => (
                   <article className="selected-perk-card" key={`selected-${perk.name}-${index}`}>
                     {perk.icon ? <img src={asset(perk.icon)} alt="" loading="lazy" /> : <Icon name="spark" size={24} />}
-                    <div><small>{stadium ? `PODER ${index + 1}` : index === 0 ? 'VENTAJA MENOR' : 'VENTAJA MAYOR'}</small><strong>{perk.name}</strong><p>{perk.description}</p></div>
+                    <div><small>{stadium ? `PODER ${index + 1}` : selectedDetailHero.minorPerks.some((item) => item.name === perk.name) ? 'VENTAJA MENOR' : 'VENTAJA MAYOR'}</small><strong>{perk.name}</strong><p>{perk.description}</p></div>
                   </article>
                 ))}
               </div>
+              {(selectedDetailPick?.perks.length ?? 0) === 0 && <p className="empty-perks">Selecciona perks manualmente abajo o usa el botón Aleatorias.</p>}
 
-              {(selectedDetailPick?.perks.length ?? 0) === 0 && (
-                <p className="empty-perks">Activa Perks aleatorias y genera el equipo para obtener una selección.</p>
-              )}
-
-              <div className="drawer-section-title catalog-title"><Icon name={stadium ? 'stadium' : 'details'} size={17} /><span>{stadium ? 'Catálogo Stadium' : 'Todas las perks de Quick Play'}</span></div>
+              <div className="drawer-section-title catalog-title"><Icon name={stadium ? 'stadium' : 'details'} size={17} /><span>{stadium ? 'Catálogo Stadium · elige hasta 4' : 'Catálogo Quick Play · una menor y una mayor'}</span></div>
               <div className="perk-grid">
-                {(stadium ? selectedDetailHero.stadiumPowers : [...selectedDetailHero.minorPerks, ...selectedDetailHero.majorPerks]).map((perk, index) => (
-                  <article className="perk-card detailed" key={`${perk.name}-${index}`}>
-                    {perk.icon ? <img src={asset(perk.icon)} alt="" loading="lazy" /> : <Icon name="spark" size={22} />}
-                    <div><span>{String(index + 1).padStart(2, '0')}</span><strong>{perk.name}</strong><small>{stadium ? 'PODER STADIUM' : index < selectedDetailHero.minorPerks.length ? 'VENTAJA MENOR' : 'VENTAJA MAYOR'}</small><p>{perk.description}</p></div>
-                  </article>
-                ))}
+                {(stadium ? selectedDetailHero.stadiumPowers : [...selectedDetailHero.minorPerks, ...selectedDetailHero.majorPerks]).map((perk, index) => {
+                  const selected = selectedDetailPick?.perks.some((item) => item.name === perk.name)
+                  return (
+                    <button type="button" className={`perk-card detailed selectable ${selected ? 'selected' : ''}`} onClick={() => toggleManualPerk(perk)} key={`${perk.name}-${index}`}>
+                      {perk.icon ? <img src={asset(perk.icon)} alt="" loading="lazy" /> : <Icon name="spark" size={22} />}
+                      <div><span>{selected ? '✓' : String(index + 1).padStart(2, '0')}</span><strong>{perk.name}</strong><small>{stadium ? 'PODER STADIUM' : index < selectedDetailHero.minorPerks.length ? 'VENTAJA MENOR' : 'VENTAJA MAYOR'}</small><p>{perk.description}</p></div>
+                    </button>
+                  )
+                })}
               </div>
-
-              {(stadium ? selectedDetailHero.stadiumPowers : [...selectedDetailHero.minorPerks, ...selectedDetailHero.majorPerks]).length === 0 && (
-                <p className="empty-perks">Este héroe no tiene opciones registradas para este modo.</p>
-              )}
             </div>
           </aside>
         </div>
       )}
 
-      {toast && (
-        <div className={`toast ${toast.tone}`} role="status">
-          <span><Icon name={toast.tone === 'warning' ? 'warning' : toast.tone === 'success' ? 'check' : 'spark'} size={17} /></span>
-          <p>{toast.message}</p>
+      {filterIndex !== null && filterPlayer && (
+        <div className="filter-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) closeFilter() }}>
+          <section className="filter-dialog" role="dialog" aria-modal="true" aria-label={`Filtro de ${filterPlayer.name}`}>
+            <header className="filter-heading">
+              <div><span className="eyebrow">Filtro individual</span><h2>{filterPlayer.name || `Jugador ${filterIndex + 1}`}</h2><p>{availableHeroes.length - filterPlayer.blocked.length} visibles · {filterPlayer.blocked.length} bloqueados</p></div>
+              <button type="button" onClick={closeFilter} aria-label="Cerrar filtro"><Icon name="close" size={20} /></button>
+            </header>
+
+            <div className="filter-toolbar">
+              <div className="profile-search"><Icon name="filter" size={16} /><input value={filterSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setFilterSearch(event.target.value)} placeholder="Buscar héroe…" /></div>
+              <div className="role-filter-tabs">
+                <button type="button" className={filterRole === 'all' ? 'active' : ''} onClick={() => setFilterRole('all')}>Todos</button>
+                {roles.map((role) => <button type="button" className={`${role} ${filterRole === role ? 'active' : ''}`} onClick={() => setFilterRole(role)} key={role}>{roleLabels[role]}</button>)}
+              </div>
+              <button type="button" className="reset-classification" onClick={clearPlayerFilter}><Icon name="reset" size={15} /> Reiniciar</button>
+            </div>
+
+            <div className="filter-role-actions">
+              {roles.map((role) => {
+                const roleHeroes = availableHeroes.filter((hero) => hero.role === role)
+                const allBlocked = roleHeroes.length > 0 && roleHeroes.every((hero) => filterPlayer.blocked.includes(hero.key))
+                return <button type="button" className={`${role} ${allBlocked ? 'blocked' : ''}`} onClick={() => toggleBlockedRole(role)} key={role}>{allBlocked ? `Permitir ${roleLabels[role]}` : `Bloquear ${roleLabels[role]}`}</button>
+              })}
+            </div>
+
+            <div className="filter-hero-grid">
+              {filterHeroes.map((hero) => {
+                const blocked = filterPlayer.blocked.includes(hero.key)
+                return (
+                  <button type="button" className={`filter-hero ${hero.role} ${blocked ? 'blocked' : ''}`} onClick={() => toggleBlockedHero(hero.key)} aria-pressed={blocked} key={hero.key}>
+                    <img src={asset(hero.portrait)} alt={hero.name} loading="lazy" decoding="async" />
+                    <span><strong>{hero.name}</strong><small>{blocked ? 'BLOQUEADO' : 'PERMITIDO'}</small></span>
+                    <i>{blocked ? '×' : '✓'}</i>
+                  </button>
+                )
+              })}
+            </div>
+          </section>
         </div>
       )}
+
+      {toast && <div className={`toast ${toast.tone}`} role="status"><span><Icon name={toast.tone === 'warning' ? 'warning' : toast.tone === 'success' ? 'check' : 'spark'} size={17} /></span><p>{toast.message}</p></div>}
     </div>
   )
 }
