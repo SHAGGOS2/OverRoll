@@ -13,7 +13,7 @@ import './App.css'
 type Role = 'tank' | 'damage' | 'support'
 type View = 'principal' | 'profiles' | 'more'
 type ToastTone = 'success' | 'info' | 'warning'
-type SoundKey = 'click' | 'open' | 'close' | 'toggleOn' | 'toggleOff' | 'generate' | 'reroll' | 'nav' | 'success'
+type SoundKey = 'click' | 'open' | 'close' | 'toggleOn' | 'toggleOff' | 'generate' | 'reroll' | 'nav'
 type ProfileBucket = 'main' | 'played' | 'practice' | 'avoid'
 type ProfileMode = 'classic' | 'allprofile' | 'lowprob' | 'practice' | 'played' | 'prefer' | 'main'
 type IconName =
@@ -560,6 +560,7 @@ function App() {
   const [animationsEnabled, setAnimationsEnabled] = useState(() => readStorage('overroll.web.animationsEnabled', true))
   const [compactPerks, setCompactPerks] = useState(() => readStorage('overroll.web.compactPerks', false))
   const audioRef = useRef<Partial<Record<SoundKey, HTMLAudioElement>>>({})
+  const audioContextRef = useRef<AudioContext | null>(null)
   const importRef = useRef<HTMLInputElement | null>(null)
   const [detailsIndex, setDetailsIndex] = useState<number | null>(null)
   const [filterIndex, setFilterIndex] = useState<number | null>(null)
@@ -581,11 +582,10 @@ function App() {
       generate: 'assets/sounds/generate.mp3',
       reroll: 'assets/sounds/reroll.mp3',
       nav: 'assets/sounds/nav.mp3',
-      success: 'assets/sounds/success.mp3',
     }
 
     Object.entries(soundPaths).forEach(([key, path]) => {
-      const audio = new Audio(asset(path))
+      const audio = new Audio(`${asset(path)}?v=7`)
       audio.preload = 'metadata'
       audioRef.current[key as SoundKey] = audio
     })
@@ -593,6 +593,10 @@ function App() {
     return () => {
       Object.values(audioRef.current).forEach((audio) => audio?.pause())
       audioRef.current = {}
+      if (audioContextRef.current) {
+        void audioContextRef.current.close().catch(() => undefined)
+        audioContextRef.current = null
+      }
     }
   }, [baseUrl])
 
@@ -713,6 +717,43 @@ function App() {
     void audio.play().catch(() => undefined)
   }
 
+  function playConfirmTone() {
+    if (!soundEnabled || soundVolume <= 0) return
+
+    const context = audioContextRef.current ?? new window.AudioContext()
+    audioContextRef.current = context
+
+    if (context.state === 'suspended') {
+      void context.resume().catch(() => undefined)
+    }
+
+    const now = context.currentTime
+    const master = context.createGain()
+    master.gain.setValueAtTime(0.0001, now)
+    master.gain.exponentialRampToValueAtTime(Math.max(0.015, soundVolume * 0.16), now + 0.015)
+    master.gain.exponentialRampToValueAtTime(0.0001, now + 0.34)
+    master.connect(context.destination)
+
+    const notes = [
+      { frequency: 660, start: 0, duration: 0.16 },
+      { frequency: 880, start: 0.11, duration: 0.2 },
+    ]
+
+    notes.forEach((note) => {
+      const oscillator = context.createOscillator()
+      const gain = context.createGain()
+      oscillator.type = 'sine'
+      oscillator.frequency.setValueAtTime(note.frequency, now + note.start)
+      gain.gain.setValueAtTime(0.0001, now + note.start)
+      gain.gain.exponentialRampToValueAtTime(0.8, now + note.start + 0.012)
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + note.start + note.duration)
+      oscillator.connect(gain)
+      gain.connect(master)
+      oscillator.start(now + note.start)
+      oscillator.stop(now + note.start + note.duration + 0.02)
+    })
+  }
+
   function hoverSound() {
     if (hoverSounds) playSound('click')
   }
@@ -748,7 +789,7 @@ function App() {
     window.setTimeout(() => {
       setGenerating(false)
       setStatus(rolesOnly ? 'Composición de roles generada' : 'Equipo generado correctamente')
-      playSound('success')
+      playConfirmTone()
       notify(rolesOnly ? 'Composición generada' : stadium ? 'Equipo Stadium generado' : 'Nuevo equipo generado', 'success')
     }, animationsEnabled ? 360 : 40)
   }
@@ -981,7 +1022,7 @@ function App() {
     anchor.download = 'overroll-perfiles.json'
     anchor.click()
     URL.revokeObjectURL(url)
-    playSound('success')
+    playConfirmTone()
     notify('Perfiles exportados', 'success')
   }
 
@@ -1005,7 +1046,7 @@ function App() {
           })))
         }
         setCurrentProfileId(imported[0].id)
-        playSound('success')
+        playConfirmTone()
         notify(`${imported.length} perfiles importados`, 'success')
       })
       .catch((error: Error) => notify(error.message || 'No se pudo importar el archivo.', 'warning'))
@@ -1206,13 +1247,6 @@ function App() {
             </button>
           </section>
 
-          <section className="audio-strip" aria-label="Sonidos de la interfaz">
-            <button type="button" className={soundEnabled ? 'enabled' : ''} onClick={toggleSounds} aria-pressed={soundEnabled}>
-              <Icon name="sound" size={15} /><span>{soundEnabled ? 'Sonidos activos' : 'Sonidos apagados'}</span>
-            </button>
-            <input type="range" min="0" max="1" step="0.05" value={soundVolume} disabled={!soundEnabled} onChange={(event: ChangeEvent<HTMLInputElement>) => setSoundVolume(Number(event.target.value))} onPointerUp={() => playSound('click')} aria-label="Volumen de sonidos" />
-          </section>
-
           <div className="sidebar-footer">
             <div className={`status-line ${loadError ? 'error' : ''}`}><span className="status-icon"><Icon name={loadError ? 'warning' : 'shield'} size={15} /></span><span>{status}</span></div>
             <button type="button" className={`generate ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!data || generating || rerollingIndex !== null}>
@@ -1315,11 +1349,81 @@ function App() {
     )
   }
 
+
+  function profileMarkedCount(profile: UserProfile) {
+    return profileBuckets.reduce((sum, bucket) => sum + profile.heroes[bucket].length, 0)
+  }
+
+  function profileAssignedCount(profileId: string) {
+    return players.filter((player) => player.profileId === profileId).length
+  }
+
+  function duplicateCurrentProfile() {
+    if (!currentProfile) return
+    const id = `profile-${Date.now()}`
+    const copy: UserProfile = {
+      id,
+      name: `${currentProfile.name} copia`.slice(0, 28),
+      heroes: Object.fromEntries(
+        profileBuckets.map((bucket) => [bucket, [...currentProfile.heroes[bucket]]]),
+      ) as Record<ProfileBucket, string[]>,
+    }
+    setProfiles((old) => [...old, copy])
+    setCurrentProfileId(id)
+    playSound('open')
+    notify('Perfil duplicado', 'success')
+  }
+
+  function setVisibleHeroesBucket(bucket: ProfileBucket | '') {
+    if (!currentProfile || classifiedHeroes.length === 0) return
+    const visibleKeys = new Set(classifiedHeroes.map((hero) => hero.key))
+
+    setProfiles((old) => old.map((profile) => {
+      if (profile.id !== currentProfile.id) return profile
+      const heroes = Object.fromEntries(
+        profileBuckets.map((item) => [
+          item,
+          profile.heroes[item].filter((key) => !visibleKeys.has(key)),
+        ]),
+      ) as Record<ProfileBucket, string[]>
+
+      if (bucket) heroes[bucket] = [...heroes[bucket], ...visibleKeys]
+      return { ...profile, heroes }
+    }))
+
+    playSound('click')
+    notify(
+      bucket
+        ? `${classifiedHeroes.length} héroes visibles marcados como ${bucketLabels[bucket]}`
+        : `${classifiedHeroes.length} héroes visibles quedaron sin marcar`,
+      'success',
+    )
+  }
+
+  function cycleHeroBucket(heroKey: string) {
+    if (!currentProfile) return
+    const current = heroBucket(currentProfile, heroKey)
+    const order: Array<ProfileBucket | ''> = ['', 'main', 'played', 'practice', 'avoid']
+    const next = order[(order.indexOf(current ?? '') + 1) % order.length]
+    setHeroBucket(heroKey, next)
+    playSound('click')
+  }
+
   function renderProfiles() {
+    const totalHeroes = data?.heroes.length ?? 0
+    const markedHeroes = currentProfile ? profileMarkedCount(currentProfile) : 0
+    const assignedPlayers = currentProfile ? profileAssignedCount(currentProfile.id) : 0
+    const unmarkedHeroes = Math.max(0, totalHeroes - markedHeroes)
+    const completion = totalHeroes > 0 ? Math.round((markedHeroes / totalHeroes) * 100) : 0
+
     return (
-      <main className="utility-page profile-manager-page">
+      <main className="utility-page profile-manager-page profile-manager-v2">
         <header className="utility-heading profile-heading">
-          <div><span className="eyebrow">Perfiles locales completos</span><h1>Perfiles</h1><p>Clasifica héroes, elige la lógica y asigna cada perfil a un jugador.</p></div>
+          <div>
+            <span className="eyebrow">Perfiles locales</span>
+            <h1>Centro de perfiles</h1>
+            <p>Crea perfiles por persona, clasifica héroes y decide cómo se comporta el selector.</p>
+          </div>
           <div className="profile-header-actions">
             <input ref={importRef} className="hidden-file-input" type="file" accept="application/json,.json" onChange={importProfiles} />
             <button type="button" onClick={() => importRef.current?.click()}><Icon name="upload" size={16} /> Importar</button>
@@ -1328,72 +1432,221 @@ function App() {
           </div>
         </header>
 
-        <section className="profile-mode-panel">
-          <div><small>MODO GLOBAL</small><strong>{profileModeInfo.name}</strong><p>{profileModeInfo.description}</p></div>
-          <select value={profileMode} onChange={(event: ChangeEvent<HTMLSelectElement>) => { setProfileMode(event.target.value as ProfileMode); playSound('open') }}>
-            {profileModes.map((mode) => <option value={mode.id} key={mode.id}>{mode.name}</option>)}
-          </select>
+        <section className="profile-overview-grid" aria-label="Resumen de perfiles">
+          <article>
+            <span><Icon name="profile" size={19} /></span>
+            <div><small>PERFILES</small><strong>{profiles.length}</strong><p>Guardados en este navegador</p></div>
+          </article>
+          <article>
+            <span><Icon name="check" size={19} /></span>
+            <div><small>PERFIL ACTIVO</small><strong>{currentProfile?.name ?? 'Ninguno'}</strong><p>{currentProfile ? `${completion}% clasificado` : 'Crea o selecciona uno'}</p></div>
+          </article>
+          <article>
+            <span><Icon name="users" size={19} /></span>
+            <div><small>ASIGNACIONES</small><strong>{assignedPlayers}</strong><p>Jugadores usando este perfil</p></div>
+          </article>
+          <article>
+            <span><Icon name="gamepad" size={19} /></span>
+            <div><small>HÉROES MARCADOS</small><strong>{markedHeroes}/{totalHeroes || '—'}</strong><p>{unmarkedHeroes} todavía sin clasificar</p></div>
+          </article>
+        </section>
+
+        <section className="profile-mode-panel profile-mode-v2">
+          <div className="profile-mode-copy">
+            <small>MODO GLOBAL DE SELECCIÓN</small>
+            <strong>{profileModeInfo.name}</strong>
+            <p>{profileModeInfo.description}</p>
+          </div>
+          <div className="profile-mode-cards" role="list" aria-label="Modos de perfil">
+            {profileModes.map((mode) => (
+              <button
+                type="button"
+                className={profileMode === mode.id ? 'active' : ''}
+                onClick={() => { setProfileMode(mode.id); playSound('open') }}
+                aria-pressed={profileMode === mode.id}
+                key={mode.id}
+              >
+                <span>{mode.name}</span>
+                <small>{mode.description}</small>
+              </button>
+            ))}
+          </div>
         </section>
 
         <div className="profile-manager">
           <aside className="profile-list-panel">
-            <div className="profile-list-title"><span>PERFILES GUARDADOS</span><b>{profiles.length}</b></div>
+            <div className="profile-list-title">
+              <span>PERFILES GUARDADOS</span>
+              <b>{profiles.length}</b>
+            </div>
+
             {profiles.length === 0 ? (
-              <button type="button" className="empty-profile-create" onClick={createProfile}><Icon name="plus" size={22} /><strong>Crear el primer perfil</strong><span>Después podrás clasificar los 52 héroes.</span></button>
-            ) : profiles.map((item) => (
-              <button type="button" className={`saved-profile-row ${item.id === currentProfileId ? 'selected' : ''}`} onClick={() => { setCurrentProfileId(item.id); playSound('nav') }} key={item.id}>
-                <span className="saved-profile-avatar">{item.name.charAt(0).toUpperCase()}</span>
-                <span><strong>{item.name}</strong><small>{profileBuckets.reduce((sum, bucket) => sum + item.heroes[bucket].length, 0)} héroes marcados</small></span>
-                <Icon name="check" size={15} />
+              <button type="button" className="empty-profile-create" onClick={createProfile}>
+                <Icon name="plus" size={22} />
+                <strong>Crear el primer perfil</strong>
+                <span>Después podrás clasificar los {totalHeroes || 52} héroes.</span>
               </button>
-            ))}
+            ) : profiles.map((item) => {
+              const marked = profileMarkedCount(item)
+              const assigned = profileAssignedCount(item.id)
+              const denominator = Math.max(1, totalHeroes)
+              return (
+                <button
+                  type="button"
+                  className={`saved-profile-row profile-row-v2 ${item.id === currentProfileId ? 'selected' : ''}`}
+                  onClick={() => { setCurrentProfileId(item.id); playSound('nav') }}
+                  key={item.id}
+                >
+                  <span className="saved-profile-avatar">{item.name.charAt(0).toUpperCase()}</span>
+                  <span className="saved-profile-copy">
+                    <strong>{item.name}</strong>
+                    <small>{marked}/{totalHeroes || '—'} héroes · {assigned} asignado{assigned === 1 ? '' : 's'}</small>
+                    <span className="profile-mini-progress" aria-hidden="true">
+                      {profileBuckets.map((bucket) => (
+                        <i
+                          className={bucket}
+                          style={{ width: `${(item.heroes[bucket].length / denominator) * 100}%` }}
+                          key={bucket}
+                        />
+                      ))}
+                    </span>
+                  </span>
+                  <Icon name="check" size={15} />
+                </button>
+              )
+            })}
           </aside>
 
           <section className="profile-editor-panel">
             {!currentProfile ? (
-              <div className="profile-editor-empty"><Icon name="profile" size={44} /><h2>Selecciona o crea un perfil</h2><p>Los perfiles controlan qué héroes puede recibir cada persona.</p></div>
+              <div className="profile-editor-empty">
+                <Icon name="profile" size={44} />
+                <h2>Selecciona o crea un perfil</h2>
+                <p>Los perfiles controlan qué héroes puede recibir cada persona y con qué prioridad.</p>
+              </div>
             ) : (
               <>
-                <div className="profile-identity-row">
-                  <div><small>IDENTIDAD DEL PERFIL</small><input value={currentProfile.name} onChange={(event: ChangeEvent<HTMLInputElement>) => renameCurrentProfile(event.target.value)} maxLength={28} /></div>
-                  <button type="button" className="danger" onClick={deleteCurrentProfile}><Icon name="trash" size={16} /> Eliminar</button>
+                <div className="profile-identity-row profile-identity-v2">
+                  <div>
+                    <small>NOMBRE DEL PERFIL</small>
+                    <input value={currentProfile.name} onChange={(event: ChangeEvent<HTMLInputElement>) => renameCurrentProfile(event.target.value)} maxLength={28} />
+                  </div>
+                  <div className="profile-identity-actions">
+                    <button type="button" onClick={duplicateCurrentProfile}><Icon name="plus" size={16} /> Duplicar</button>
+                    <button type="button" className="danger" onClick={deleteCurrentProfile}><Icon name="trash" size={16} /> Eliminar</button>
+                  </div>
                 </div>
 
-                <div className="profile-assignment-strip">
-                  <span>Asignar a jugador</span>
-                  {players.map((player, index) => (
-                    <label className={player.profileId === currentProfile.id ? 'assigned' : ''} key={player.id}>
-                      <input type="checkbox" checked={player.profileId === currentProfile.id} onChange={(event: ChangeEvent<HTMLInputElement>) => assignPlayerProfile(index, event.target.checked ? currentProfile.id : '')} />
-                      <b>{String(index + 1).padStart(2, '0')}</b><span>{player.name || `Jugador ${index + 1}`}</span>
-                    </label>
-                  ))}
+                <div className="profile-progress-card">
+                  <div>
+                    <span>Progreso de clasificación</span>
+                    <strong>{completion}%</strong>
+                  </div>
+                  <div className="profile-progress-track">
+                    {profileBuckets.map((bucket) => (
+                      <i
+                        className={bucket}
+                        style={{ width: `${totalHeroes ? (currentProfile.heroes[bucket].length / totalHeroes) * 100 : 0}%` }}
+                        key={bucket}
+                      />
+                    ))}
+                  </div>
+                  <p>{markedHeroes} marcados · {unmarkedHeroes} sin marcar</p>
                 </div>
 
-                <div className="profile-classifier-toolbar">
-                  <div className="profile-search"><Icon name="filter" size={16} /><input value={profileSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setProfileSearch(event.target.value)} placeholder="Buscar héroe…" /></div>
+                <div className="profile-assignment-strip profile-assignment-v2">
+                  <div className="assignment-heading">
+                    <span>Asignar este perfil</span>
+                    <small>Un perfil puede usarse por varios jugadores.</small>
+                  </div>
+                  <div className="assignment-player-grid">
+                    {players.map((player, index) => (
+                      <label className={player.profileId === currentProfile.id ? 'assigned' : ''} key={player.id}>
+                        <input
+                          type="checkbox"
+                          checked={player.profileId === currentProfile.id}
+                          onChange={(event: ChangeEvent<HTMLInputElement>) => assignPlayerProfile(index, event.target.checked ? currentProfile.id : '')}
+                        />
+                        <b>{String(index + 1).padStart(2, '0')}</b>
+                        <span>{player.name || `Jugador ${index + 1}`}</span>
+                        <Icon name={player.profileId === currentProfile.id ? 'check' : 'profile'} size={14} />
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="profile-classifier-toolbar profile-toolbar-v2">
+                  <div className="profile-search">
+                    <Icon name="filter" size={16} />
+                    <input value={profileSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setProfileSearch(event.target.value)} placeholder="Buscar héroe…" />
+                  </div>
                   <div className="role-filter-tabs">
                     <button type="button" className={profileRole === 'all' ? 'active' : ''} onClick={() => setProfileRole('all')}>Todos</button>
-                    {roles.map((role) => <button type="button" className={`${role} ${profileRole === role ? 'active' : ''}`} onClick={() => setProfileRole(role)} key={role}>{roleLabels[role]}</button>)}
+                    {roles.map((role) => (
+                      <button type="button" className={`${role} ${profileRole === role ? 'active' : ''}`} onClick={() => setProfileRole(role)} key={role}>
+                        {roleLabels[role]}
+                      </button>
+                    ))}
                   </div>
-                  <button type="button" className="reset-classification" onClick={clearCurrentProfile}><Icon name="reset" size={15} /> Reiniciar</button>
+                  <button type="button" className="reset-classification" onClick={clearCurrentProfile}><Icon name="reset" size={15} /> Reiniciar todo</button>
                 </div>
 
-                <div className="bucket-legend">
-                  {profileBuckets.map((bucket) => <span className={bucket} key={bucket}><i />{bucketLabels[bucket]} <b>{currentProfile.heroes[bucket].length}</b></span>)}
-                  <span className="unmarked"><i />Sin marcar <b>{Math.max(0, (data?.heroes.length ?? 0) - profileBuckets.reduce((sum, bucket) => sum + currentProfile.heroes[bucket].length, 0))}</b></span>
+                <div className="profile-bulk-panel">
+                  <div>
+                    <strong>Clasificación masiva</strong>
+                    <small>Aplica una categoría a los {classifiedHeroes.length} héroes visibles.</small>
+                  </div>
+                  <div className="profile-bulk-actions">
+                    {profileBuckets.map((bucket) => (
+                      <button type="button" className={bucket} onClick={() => setVisibleHeroesBucket(bucket)} key={bucket}>
+                        <i /> {bucketLabels[bucket]}
+                      </button>
+                    ))}
+                    <button type="button" className="unmarked" onClick={() => setVisibleHeroesBucket('')}><i /> Sin marcar</button>
+                  </div>
                 </div>
 
-                <div className="hero-classifier-grid">
+                <div className="bucket-legend bucket-legend-v2">
+                  {profileBuckets.map((bucket) => (
+                    <span className={bucket} key={bucket}>
+                      <i />{bucketLabels[bucket]} <b>{currentProfile.heroes[bucket].length}</b>
+                    </span>
+                  ))}
+                  <span className="unmarked"><i />Sin marcar <b>{unmarkedHeroes}</b></span>
+                  <small>Haz clic en una ficha para recorrer las categorías.</small>
+                </div>
+
+                <div className="hero-classifier-grid hero-classifier-v2">
                   {classifiedHeroes.map((hero) => {
                     const bucket = heroBucket(currentProfile, hero.key)
                     return (
-                      <article className={`classifier-hero ${hero.role} ${bucket ?? 'unmarked'}`} key={hero.key}>
-                        <img src={asset(hero.portrait)} alt={hero.name} loading="lazy" decoding="async" />
-                        <div><strong>{hero.name}</strong><small>{roleLabels[hero.role]}</small></div>
-                        <select value={bucket ?? ''} onChange={(event: ChangeEvent<HTMLSelectElement>) => setHeroBucket(hero.key, event.target.value as ProfileBucket | '')} aria-label={`Clasificación de ${hero.name}`}>
-                          <option value="">Sin marcar</option>
-                          {profileBuckets.map((item) => <option value={item} key={item}>{bucketLabels[item]}</option>)}
-                        </select>
+                      <article className={`classifier-hero classifier-card-v2 ${hero.role} ${bucket ?? 'unmarked'}`} key={hero.key}>
+                        <button type="button" className="classifier-main-button" onClick={() => cycleHeroBucket(hero.key)} title="Cambiar a la siguiente categoría">
+                          <span className="classifier-portrait">
+                            <img src={asset(hero.portrait)} alt="" loading="lazy" decoding="async" />
+                            <i className={hero.role}>{roleLabels[hero.role].charAt(0)}</i>
+                          </span>
+                          <span className="classifier-copy">
+                            <strong>{hero.name}</strong>
+                            <small>{roleLabels[hero.role]} · {subroleLabels[hero.subrole] ?? hero.subrole}</small>
+                          </span>
+                          <span className={`classifier-current ${bucket ?? 'unmarked'}`}>{bucket ? bucketLabels[bucket] : 'Sin marcar'}</span>
+                        </button>
+
+                        <div className="classifier-category-actions" aria-label={`Clasificación de ${hero.name}`}>
+                          {profileBuckets.map((item) => (
+                            <button
+                              type="button"
+                              className={`${item} ${bucket === item ? 'active' : ''}`}
+                              onClick={() => setHeroBucket(hero.key, bucket === item ? '' : item)}
+                              aria-pressed={bucket === item}
+                              title={bucketLabels[item]}
+                              key={item}
+                            >
+                              {bucketLabels[item].charAt(0)}
+                            </button>
+                          ))}
+                        </div>
                       </article>
                     )
                   })}
@@ -1414,10 +1667,10 @@ function App() {
         <section className="settings-grid-web">
           <article className="web-setting-card">
             <span className="profile-card-icon"><Icon name="sound" size={24} /></span>
-            <div><small>AUDIO</small><strong>Sonidos de interfaz</strong><p>Botones, navegación, generación, reroll y confirmación sin voz.</p></div>
+            <div><small>AUDIO</small><strong>Sonidos de interfaz</strong><p>Todo el audio y el volumen se administran aquí. La confirmación ahora es un tono generado, sin voces ni archivos heredados.</p></div>
             <button type="button" className={`sound-master ${soundEnabled ? 'enabled' : ''}`} onClick={toggleSounds}>{soundEnabled ? 'ACTIVOS' : 'APAGADOS'}</button>
             <label className="volume-control"><span>Volumen</span><input type="range" min="0" max="1" step="0.05" value={soundVolume} disabled={!soundEnabled} onChange={(event: ChangeEvent<HTMLInputElement>) => setSoundVolume(Number(event.target.value))} onPointerUp={() => playSound('click')} /><b>{Math.round(soundVolume * 100)}%</b></label>
-            <button type="button" className="test-sound" disabled={!soundEnabled} onClick={() => playSound('success')}>Probar confirmación</button>
+            <button type="button" className="test-sound" disabled={!soundEnabled} onClick={playConfirmTone}>Probar confirmación</button>
           </article>
 
           <article className="web-setting-card compact-setting">

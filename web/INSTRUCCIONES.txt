@@ -1,20 +1,26 @@
-OverRoll Web - Paso 6: Overwatch completo
+OVERROLL WEB — PASO 7: PERFILES Y AUDIO
 
-1. Coloca este ZIP dentro de la carpeta web del Codespace.
-2. Detén Vite con Ctrl+C.
-3. Ejecuta:
+1. Detén Vite con Ctrl+C.
+2. Arrastra este ZIP dentro de la carpeta web.
+3. En la terminal ejecuta:
 
 cd /workspaces/OverRoll/web
 pkill -f vite || true
-unzip -o OverRoll-Web-Paso-6-Overwatch-Completo.zip
-rm -f OverRoll-Web-Paso-6-Overwatch-Completo.zip
+rm -f public/assets/sounds/success.mp3 public/assets/sounds/okay_2FZURrU.mp3 public/okay_2FZURrU.mp3 okay_2FZURrU.mp3
+unzip -o OverRoll-Web-Paso-7-Perfiles-Audio.zip
+rm -f OverRoll-Web-Paso-7-Perfiles-Audio.zip
 npm run dev -- --host 0.0.0.0
 
-Después de comprobarlo:
+4. Abre el puerto 5173.
+5. Actualiza con Ctrl+F5.
 
-cd /workspaces/OverRoll
-git add web
-git commit -m "Completa perfiles filtros perks Stadium y sonidos de Overwatch Web"
-git push origin web-version
-
-Cloudflare Pages volverá a desplegar la rama web-version automáticamente.
+CAMBIOS PRINCIPALES
+- Rediseño completo de Perfiles.
+- Resumen de perfiles, asignaciones y progreso.
+- Modos de perfil como tarjetas visuales.
+- Duplicar perfiles.
+- Clasificación masiva de héroes visibles.
+- Fichas de héroes con categorías directas y clic para recorrerlas.
+- El volumen y los sonidos quedan exclusivamente en Más.
+- Se elimina el archivo success.mp3 y cualquier uso del audio “Okay”.
+- La confirmación ahora es un tono sintetizado por el navegador, sin voz.

@@ -1,14 +1,10 @@
-VALIDACIÓN REALIZADA
+VALIDACIÓN DEL PASO 7
 
-- App.tsx fue analizado por TypeScript en modo strict con un shim local: 0 errores internos.
-- El JSX fue transpilado por TypeScript: 0 errores de sintaxis.
-- 52 héroes presentes en public/data/heroes.json.
-- Retratos WebP presentes para los 52 héroes.
-- Perks Quick Play y poderes Stadium conservados.
-- Perfiles: crear, renombrar, eliminar, clasificar, importar, exportar y asignar.
-- Modos de perfil: Sin perfil, Todos los marcados, Descubrir, Practicar, Excluir no usados, Favoritos y Solo Main.
-- Filtros individuales por jugador y bloqueo por rol.
-- Reroll y generación respetan perfiles, filtros, roles y héroes fijados.
-- Selección manual y aleatoria de perks/poderes.
-- Sonidos, volumen, animaciones, hover y perks compactas.
-- El audio de voz solicitado no está presente ni referenciado.
+- App.tsx transpila correctamente como TSX.
+- No hay referencias a okay_2FZURrU.mp3.
+- No hay referencias a success.mp3.
+- success.mp3 no está incluido en el paquete.
+- El panel de volumen fue retirado de Principal.
+- Audio y volumen permanecen en Más.
+- La confirmación se genera con Web Audio API.
+- Se conservan héroes, perks, Stadium, filtros, perfiles y sonidos restantes.
