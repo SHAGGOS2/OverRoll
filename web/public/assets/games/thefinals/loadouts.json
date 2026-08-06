@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "source": "https://www.thefinals.wiki/wiki/Builds",
+  "light": {
+    "specializations": ["Cloaking Device", "Evasive Dash", "Grappling Hook"],
+    "weapons": ["93R", "ARN-220", "Dagger", "LH1", "M11", "M26 Matter", "Recurve Bow", "SH1900", "SR-84", "Sword", "Throwing Knives", "V9S", "XP-54"],
+    "gadgets": ["Breach Charge", "Flashbang", "Frag Grenade", "Gas Grenade", "Gateway", "Glitch Grenade", "Goo Grenade", "Gravity Vortex", "H+ Infuser", "Nullifier", "Pyro Grenade", "Smoke Grenade", "Sonar Grenade", "Thermal Bore", "Thermal Vision", "Tracking Dart", "Vanishing Bomb"]
+  },
+  "medium": {
+    "specializations": ["Dematerializer", "Guardian Turret", "Healing Beam", "Recon Senses", "Shockwave"],
+    "weapons": ["AKM", "CB-01 Repeater", "Cerberus 12GA", "Chimera-XB", "CL-40", "Dual Blades", "FAMAS", "FCAR", "Model 1887", "P90", "Pike-556", "R.357", "Riot Shield"],
+    "gadgets": ["APS Turret", "Breach Drill", "Data Reshaper", "Defibrillator", "Explosive Mine", "Flashbang", "Frag Grenade", "Gas Grenade", "Gas Mine", "Glitch Trap", "Goo Grenade", "Hover Pad", "Jump Pad", "Proximity Sensor", "Pyro Grenade", "Smoke Grenade", "Zipline"]
+  },
+  "heavy": {
+    "specializations": ["Charge 'N' Slam", "Goo Gun", "Mesh Shield", "Winch Claw"],
+    "weapons": [".50 Akimbo", "BFR Titan", "Flamethrower", "KS-23", "Lewis Gun", "M134 Minigun", "M60", "MGL32", "SA1216", "ShAK-50", "Sledgehammer", "Spear"],
+    "gadgets": ["Anti-Gravity Cube", "Barricade", "C4", "Dome Shield", "Explosive Mine", "Flashbang", "Frag Grenade", "Gas Grenade", "Goo Grenade", "Healing Emitter", "Lockbolt", "Proximity Sensor", "Pyro Grenade", "Pyro Mine", "RPG-7", "Smoke Grenade"]
+  }
+}

@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "source": "Hi-Rez Paladins API (catalog metadata; credentials required) + Paladins Wiki image cache",
+  "heroes": [
+    {
+      "key": "betty-la-bomba",
+      "name": "Betty La Bomba",
+      "role": "damage",
+      "portrait": "betty-la-bomba.png"
+    },
+    {
+      "key": "bomb-king",
+      "name": "Bomb King",
+      "role": "damage",
+      "portrait": "bomb-king.png"
+    },
+    {
+      "key": "cassie",
+      "name": "Cassie",
+      "role": "damage",
+      "portrait": "cassie.png"
+    },
+    {
+      "key": "dredge",
+      "name": "Dredge",
+      "role": "damage",
+      "portrait": "dredge.png"
+    },
+    {
+      "key": "drogoz",
+      "name": "Drogoz",
+      "role": "damage",
+      "portrait": "drogoz.png"
+    },
+    {
+      "key": "imani",
+      "name": "Imani",
+      "role": "damage",
+      "portrait": "imani.png"
+    },
+    {
+      "key": "kasumi",
+      "name": "Kasumi",
+      "role": "damage",
+      "portrait": "kasumi.png"
+    },
+    {
+      "key": "kinessa",
+      "name": "Kinessa",
+      "role": "damage",
+      "portrait": "kinessa.png"
+    },
+    {
+      "key": "lian",
+      "name": "Lian",
+      "role": "damage",
+      "portrait": "lian.png"
+    },
+    {
+      "key": "octavia",
+      "name": "Octavia",
+      "role": "damage",
+      "portrait": "octavia.png"
+    },
+    {
+      "key": "omen",
+      "name": "Omen",
+      "role": "damage",
+      "portrait": "omen.png"
+    },
+    {
+      "key": "saati",
+      "name": "Saati",
+      "role": "damage",
+      "portrait": "saati.png"
+    },
+    {
+      "key": "sha-lin",
+      "name": "Sha Lin",
+      "role": "damage",
+      "portrait": "sha-lin.png"
+    },
+    {
+      "key": "strix",
+      "name": "Strix",
+      "role": "damage",
+      "portrait": "strix.png"
+    },
+    {
+      "key": "tiberius",
+      "name": "Tiberius",
+      "role": "damage",
+      "portrait": "tiberius.png"
+    },
+    {
+      "key": "tyra",
+      "name": "Tyra",
+      "role": "damage",
+      "portrait": "tyra.png"
+    },
+    {
+      "key": "viktor",
+      "name": "Viktor",
+      "role": "damage",
+      "portrait": "viktor.png"
+    },
+    {
+      "key": "vivian",
+      "name": "Vivian",
+      "role": "damage",
+      "portrait": "vivian.png"
+    },
+    {
+      "key": "willo",
+      "name": "Willo",
+      "role": "damage",
+      "portrait": "willo.png"
+    },
+    {
+      "key": "androxus",
+      "name": "Androxus",
+      "role": "flank",
+      "portrait": "androxus.png"
+    },
+    {
+      "key": "buck",
+      "name": "Buck",
+      "role": "flank",
+      "portrait": "buck.png"
+    },
+    {
+      "key": "caspian",
+      "name": "Caspian",
+      "role": "flank",
+      "portrait": "caspian.png"
+    },
+    {
+      "key": "evie",
+      "name": "Evie",
+      "role": "flank",
+      "portrait": "evie.png"
+    },
+    {
+      "key": "koga",
+      "name": "Koga",
+      "role": "flank",
+      "portrait": "koga.png"
+    },
+    {
+      "key": "lex",
+      "name": "Lex",
+      "role": "flank",
+      "portrait": "lex.png"
+    },
+    {
+      "key": "maeve",
+      "name": "Maeve",
+      "role": "flank",
+      "portrait": "maeve.png"
+    },
+    {
+      "key": "skye",
+      "name": "Skye",
+      "role": "flank",
+      "portrait": "skye.png"
+    },
+    {
+      "key": "talus",
+      "name": "Talus",
+      "role": "flank",
+      "portrait": "talus.png"
+    },
+    {
+      "key": "vii",
+      "name": "VII",
+      "role": "flank",
+      "portrait": "vii.png"
+    },
+    {
+      "key": "vatu",
+      "name": "Vatu",
+      "role": "flank",
+      "portrait": "vatu.png"
+    },
+    {
+      "key": "vora",
+      "name": "Vora",
+      "role": "flank",
+      "portrait": "vora.png"
+    },
+    {
+      "key": "zhin",
+      "name": "Zhin",
+      "role": "flank",
+      "portrait": "zhin.png"
+    },
+    {
+      "key": "ash",
+      "name": "Ash",
+      "role": "frontline",
+      "portrait": "ash.png"
+    },
+    {
+      "key": "atlas",
+      "name": "Atlas",
+      "role": "frontline",
+      "portrait": "atlas.png"
+    },
+    {
+      "key": "azaan",
+      "name": "Azaan",
+      "role": "frontline",
+      "portrait": "azaan.png"
+    },
+    {
+      "key": "barik",
+      "name": "Barik",
+      "role": "frontline",
+      "portrait": "barik.png"
+    },
+    {
+      "key": "fernando",
+      "name": "Fernando",
+      "role": "frontline",
+      "portrait": "fernando.png"
+    },
+    {
+      "key": "inara",
+      "name": "Inara",
+      "role": "frontline",
+      "portrait": "inara.png"
+    },
+    {
+      "key": "khan",
+      "name": "Khan",
+      "role": "frontline",
+      "portrait": "khan.png"
+    },
+    {
+      "key": "makoa",
+      "name": "Makoa",
+      "role": "frontline",
+      "portrait": "makoa.png"
+    },
+    {
+      "key": "nyx",
+      "name": "Nyx",
+      "role": "frontline",
+      "portrait": "nyx.png"
+    },
+    {
+      "key": "raum",
+      "name": "Raum",
+      "role": "frontline",
+      "portrait": "raum.png"
+    },
+    {
+      "key": "ruckus",
+      "name": "Ruckus",
+      "role": "frontline",
+      "portrait": "ruckus.png"
+    },
+    {
+      "key": "terminus",
+      "name": "Terminus",
+      "role": "frontline",
+      "portrait": "terminus.png"
+    },
+    {
+      "key": "torvald",
+      "name": "Torvald",
+      "role": "frontline",
+      "portrait": "torvald.png"
+    },
+    {
+      "key": "yagorath",
+      "name": "Yagorath",
+      "role": "frontline",
+      "portrait": "yagorath.png"
+    },
+    {
+      "key": "corvus",
+      "name": "Corvus",
+      "role": "support",
+      "portrait": "corvus.png"
+    },
+    {
+      "key": "furia",
+      "name": "Furia",
+      "role": "support",
+      "portrait": "furia.png"
+    },
+    {
+      "key": "grohk",
+      "name": "Grohk",
+      "role": "support",
+      "portrait": "grohk.png"
+    },
+    {
+      "key": "grover",
+      "name": "Grover",
+      "role": "support",
+      "portrait": "grover.png"
+    },
+    {
+      "key": "io",
+      "name": "Io",
+      "role": "support",
+      "portrait": "io.png"
+    },
+    {
+      "key": "jenos",
+      "name": "Jenos",
+      "role": "support",
+      "portrait": "jenos.png"
+    },
+    {
+      "key": "lillith",
+      "name": "Lillith",
+      "role": "support",
+      "portrait": "lillith.png"
+    },
+    {
+      "key": "maldamba",
+      "name": "Mal'Damba",
+      "role": "support",
+      "portrait": "maldamba.png"
+    },
+    {
+      "key": "moji",
+      "name": "Moji",
+      "role": "support",
+      "portrait": "moji.png"
+    },
+    {
+      "key": "pip",
+      "name": "Pip",
+      "role": "support",
+      "portrait": "pip.png"
+    },
+    {
+      "key": "rei",
+      "name": "Rei",
+      "role": "support",
+      "portrait": "rei.png"
+    },
+    {
+      "key": "seris",
+      "name": "Seris",
+      "role": "support",
+      "portrait": "seris.png"
+    },
+    {
+      "key": "ying",
+      "name": "Ying",
+      "role": "support",
+      "portrait": "ying.png"
+    }
+  ]
+}

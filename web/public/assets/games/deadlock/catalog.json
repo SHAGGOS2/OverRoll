@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "source": "https://assets.deadlock-api.com/v2/heroes?language=english",
+  "heroes": [
+    {
+      "key": "abrams",
+      "name": "Abrams",
+      "role": "hero",
+      "portrait": "abrams.png"
+    },
+    {
+      "key": "apollo",
+      "name": "Apollo",
+      "role": "hero",
+      "portrait": "apollo.png"
+    },
+    {
+      "key": "bebop",
+      "name": "Bebop",
+      "role": "hero",
+      "portrait": "bebop.png"
+    },
+    {
+      "key": "billy",
+      "name": "Billy",
+      "role": "hero",
+      "portrait": "billy.png"
+    },
+    {
+      "key": "calico",
+      "name": "Calico",
+      "role": "hero",
+      "portrait": "calico.png"
+    },
+    {
+      "key": "celeste",
+      "name": "Celeste",
+      "role": "hero",
+      "portrait": "celeste.png"
+    },
+    {
+      "key": "drifter",
+      "name": "Drifter",
+      "role": "hero",
+      "portrait": "drifter.png"
+    },
+    {
+      "key": "dynamo",
+      "name": "Dynamo",
+      "role": "hero",
+      "portrait": "dynamo.png"
+    },
+    {
+      "key": "graves",
+      "name": "Graves",
+      "role": "hero",
+      "portrait": "graves.png"
+    },
+    {
+      "key": "grey-talon",
+      "name": "Grey Talon",
+      "role": "hero",
+      "portrait": "grey-talon.png"
+    },
+    {
+      "key": "haze",
+      "name": "Haze",
+      "role": "hero",
+      "portrait": "haze.png"
+    },
+    {
+      "key": "holliday",
+      "name": "Holliday",
+      "role": "hero",
+      "portrait": "holliday.png"
+    },
+    {
+      "key": "infernus",
+      "name": "Infernus",
+      "role": "hero",
+      "portrait": "infernus.png"
+    },
+    {
+      "key": "ivy",
+      "name": "Ivy",
+      "role": "hero",
+      "portrait": "ivy.png"
+    },
+    {
+      "key": "kelvin",
+      "name": "Kelvin",
+      "role": "hero",
+      "portrait": "kelvin.png"
+    },
+    {
+      "key": "lady-geist",
+      "name": "Lady Geist",
+      "role": "hero",
+      "portrait": "lady-geist.png"
+    },
+    {
+      "key": "lash",
+      "name": "Lash",
+      "role": "hero",
+      "portrait": "lash.png"
+    },
+    {
+      "key": "mcginnis",
+      "name": "McGinnis",
+      "role": "hero",
+      "portrait": "mcginnis.png"
+    },
+    {
+      "key": "mina",
+      "name": "Mina",
+      "role": "hero",
+      "portrait": "mina.png"
+    },
+    {
+      "key": "mirage",
+      "name": "Mirage",
+      "role": "hero",
+      "portrait": "mirage.png"
+    },
+    {
+      "key": "mo-krill",
+      "name": "Mo & Krill",
+      "role": "hero",
+      "portrait": "mo-krill.png"
+    },
+    {
+      "key": "paige",
+      "name": "Paige",
+      "role": "hero",
+      "portrait": "paige.png"
+    },
+    {
+      "key": "paradox",
+      "name": "Paradox",
+      "role": "hero",
+      "portrait": "paradox.png"
+    },
+    {
+      "key": "pocket",
+      "name": "Pocket",
+      "role": "hero",
+      "portrait": "pocket.png"
+    },
+    {
+      "key": "rem",
+      "name": "Rem",
+      "role": "hero",
+      "portrait": "rem.png"
+    },
+    {
+      "key": "seven",
+      "name": "Seven",
+      "role": "hero",
+      "portrait": "seven.png"
+    },
+    {
+      "key": "shiv",
+      "name": "Shiv",
+      "role": "hero",
+      "portrait": "shiv.png"
+    },
+    {
+      "key": "silver",
+      "name": "Silver",
+      "role": "hero",
+      "portrait": "silver.png"
+    },
+    {
+      "key": "sinclair",
+      "name": "Sinclair",
+      "role": "hero",
+      "portrait": "sinclair.png"
+    },
+    {
+      "key": "the-doorman",
+      "name": "The Doorman",
+      "role": "hero",
+      "portrait": "the-doorman.png"
+    },
+    {
+      "key": "venator",
+      "name": "Venator",
+      "role": "hero",
+      "portrait": "venator.png"
+    },
+    {
+      "key": "victor",
+      "name": "Victor",
+      "role": "hero",
+      "portrait": "victor.png"
+    },
+    {
+      "key": "vindicta",
+      "name": "Vindicta",
+      "role": "hero",
+      "portrait": "vindicta.png"
+    },
+    {
+      "key": "viscous",
+      "name": "Viscous",
+      "role": "hero",
+      "portrait": "viscous.png"
+    },
+    {
+      "key": "vyper",
+      "name": "Vyper",
+      "role": "hero",
+      "portrait": "vyper.png"
+    },
+    {
+      "key": "warden",
+      "name": "Warden",
+      "role": "hero",
+      "portrait": "warden.png"
+    },
+    {
+      "key": "wraith",
+      "name": "Wraith",
+      "role": "hero",
+      "portrait": "wraith.png"
+    },
+    {
+      "key": "yamato",
+      "name": "Yamato",
+      "role": "hero",
+      "portrait": "yamato.png"
+    }
+  ]
+}

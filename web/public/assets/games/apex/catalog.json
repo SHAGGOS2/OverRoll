@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "source": "https://www.ea.com/games/apex-legends/apex-legends/characters-hub",
+  "heroes": [
+    {
+      "key": "ballistic",
+      "name": "Ballistic",
+      "role": "assault",
+      "portrait": "ballistic.jpg"
+    },
+    {
+      "key": "bangalore",
+      "name": "Bangalore",
+      "role": "assault",
+      "portrait": "bangalore.jpg"
+    },
+    {
+      "key": "fuse",
+      "name": "Fuse",
+      "role": "assault",
+      "portrait": "fuse.jpg"
+    },
+    {
+      "key": "mad-maggie",
+      "name": "Mad Maggie",
+      "role": "assault",
+      "portrait": "mad-maggie.jpg"
+    },
+    {
+      "key": "revenant",
+      "name": "Revenant",
+      "role": "assault",
+      "portrait": "revenant.jpg"
+    },
+    {
+      "key": "catalyst",
+      "name": "Catalyst",
+      "role": "controller",
+      "portrait": "catalyst.jpg"
+    },
+    {
+      "key": "caustic",
+      "name": "Caustic",
+      "role": "controller",
+      "portrait": "caustic.jpg"
+    },
+    {
+      "key": "rampart",
+      "name": "Rampart",
+      "role": "controller",
+      "portrait": "rampart.jpg"
+    },
+    {
+      "key": "wattson",
+      "name": "Wattson",
+      "role": "controller",
+      "portrait": "wattson.jpg"
+    },
+    {
+      "key": "bloodhound",
+      "name": "Bloodhound",
+      "role": "recon",
+      "portrait": "bloodhound.jpg"
+    },
+    {
+      "key": "crypto",
+      "name": "Crypto",
+      "role": "recon",
+      "portrait": "crypto.jpg"
+    },
+    {
+      "key": "seer",
+      "name": "Seer",
+      "role": "recon",
+      "portrait": "seer.jpg"
+    },
+    {
+      "key": "sparrow",
+      "name": "Sparrow",
+      "role": "recon",
+      "portrait": "sparrow.jpg"
+    },
+    {
+      "key": "valkyrie",
+      "name": "Valkyrie",
+      "role": "recon",
+      "portrait": "valkyrie.jpg"
+    },
+    {
+      "key": "vantage",
+      "name": "Vantage",
+      "role": "recon",
+      "portrait": "vantage.jpg"
+    },
+    {
+      "key": "alter",
+      "name": "Alter",
+      "role": "skirmisher",
+      "portrait": "alter.jpg"
+    },
+    {
+      "key": "ash",
+      "name": "Ash",
+      "role": "skirmisher",
+      "portrait": "ash.jpg"
+    },
+    {
+      "key": "axle",
+      "name": "Axle",
+      "role": "skirmisher",
+      "portrait": "axle.jpg"
+    },
+    {
+      "key": "horizon",
+      "name": "Horizon",
+      "role": "skirmisher",
+      "portrait": "horizon.jpg"
+    },
+    {
+      "key": "octane",
+      "name": "Octane",
+      "role": "skirmisher",
+      "portrait": "octane.jpg"
+    },
+    {
+      "key": "pathfinder",
+      "name": "Pathfinder",
+      "role": "skirmisher",
+      "portrait": "pathfinder.jpg"
+    },
+    {
+      "key": "wraith",
+      "name": "Wraith",
+      "role": "skirmisher",
+      "portrait": "wraith.jpg"
+    },
+    {
+      "key": "conduit",
+      "name": "Conduit",
+      "role": "support",
+      "portrait": "conduit.jpg"
+    },
+    {
+      "key": "gibraltar",
+      "name": "Gibraltar",
+      "role": "support",
+      "portrait": "gibraltar.jpg"
+    },
+    {
+      "key": "lifeline",
+      "name": "Lifeline",
+      "role": "support",
+      "portrait": "lifeline.jpg"
+    },
+    {
+      "key": "loba",
+      "name": "Loba",
+      "role": "support",
+      "portrait": "loba.jpg"
+    },
+    {
+      "key": "mirage",
+      "name": "Mirage",
+      "role": "support",
+      "portrait": "mirage.jpg"
+    },
+    {
+      "key": "newcastle",
+      "name": "Newcastle",
+      "role": "support",
+      "portrait": "newcastle.jpg"
+    }
+  ]
+}

@@ -1,7 +1,28 @@
-Validaciones del paquete:
-- Mantiene la estructura de perfiles y las claves de localStorage existentes.
-- Los 18 archivos de audio referenciados por App.tsx existen dentro de public/assets/sounds.
-- Los nuevos efectos fueron normalizados para evitar diferencias bruscas de volumen.
-- No incluye clips de voz heredados.
-- El apartado de audio permanece en Mas.
-- App.tsx paso la validacion de sintaxis TSX.
+VALIDACIÓN REALIZADA — CORRECCIÓN DE DEADLOCK, PVZ, TF2, ROLES E IMÁGENES
+
+- App.tsx, RosterModule.tsx, PvzModule.tsx e imageCache.ts pasan la validación sintáctica de TypeScript/TSX.
+- App.css, RosterModule.css y PvzModule.css conservan sus llaves balanceadas.
+- Deadlock fuerza un mínimo real de 3 jugadores, incluso cuando localStorage conserva una configuración vieja de 1 jugador.
+- Deadlock inicia con 3 jugadores y permite ampliar la partida hasta 12.
+- PVZ GW2 conserva un mínimo de 2 jugadores para que exista al menos una Planta y un Zombi.
+- "Generar ambos" reequilibra los puestos entre Plantas y Zombis y genera los dos bandos en la misma operación.
+- TF2 y PVZ GW2 precargan retratos antes de mostrar el resultado generado.
+- Overwatch y los ocho módulos adicionales también calientan la caché local de retratos.
+- Los rerolls esperan a que el retrato nuevo esté disponible antes de sustituir el anterior.
+- Las animaciones conservan movimiento y entrada escalonada, pero ya no parten de opacidad cero; esto evita el parpadeo de fichas y retratos.
+- TF2 y PVZ GW2 recibieron una presentación de fichas más cercana a la base visual de Overwatch.
+- El selector de rol de los juegos nuevos ya no funciona como una lista de filtros múltiples.
+- Cada jugador puede usar "Automático" o fijar un solo rol; la regla Composición de roles completa los puestos restantes.
+- Marvel Rivals usa 2 Vanguardia, 2 Duelista y 2 Estratega cuando la composición automática está activa.
+- THE FINALS acomoda Ligero, Medio y Pesado.
+- Valorant y Paladins usan patrones de composición propios; Apex y Last Flag distribuyen roles distintos cuando es posible.
+- Los catálogos de los ocho juegos contienen 289 personajes en total y no tienen retratos faltantes.
+- Los 121 retratos de PVZ GW2, las 9 clases de TF2 y los 86 iconos de THE FINALS están presentes.
+
+Validación final pendiente en GitHub Codespaces:
+
+npm install
+npm run build
+npm run dev -- --host 0.0.0.0
+
+El registro npm interno usado para preparar este ZIP no permite descargar React/Vite. La compilación final debe ejecutarse en Codespaces.

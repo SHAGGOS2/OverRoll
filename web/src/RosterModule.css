@@ -1,0 +1,1273 @@
+.roster-module,
+.roster-roulette-page {
+  --module-accent: #f5a623;
+  position: relative;
+  z-index: 2;
+  width: min(1540px, calc(100% - 28px));
+  margin: 16px auto 28px;
+  color: #edf7ff;
+}
+
+.roster-module {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.roster-sidebar {
+  display: grid;
+  gap: 12px;
+  position: sticky;
+  top: 82px;
+  max-height: calc(100vh - 98px);
+  overflow: auto;
+  padding-right: 3px;
+}
+
+.roster-panel,
+.roster-workspace,
+.roster-roulette-builder,
+.roster-wheel-stage {
+  border: 1px solid rgba(112, 157, 188, 0.25);
+  background: linear-gradient(150deg, rgba(10, 27, 42, 0.97), rgba(5, 15, 26, 0.97));
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
+}
+
+.roster-panel { padding: 16px; }
+.roster-identity-panel { border-top: 3px solid var(--module-accent); }
+.roster-kicker,
+.roster-workspace-header span,
+.roster-roulette-builder header > span,
+.roster-wheel-copy > span {
+  color: var(--module-accent);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.roster-identity-panel h1,
+.roster-workspace-header h2,
+.roster-roulette-builder h1,
+.roster-wheel-copy h2 {
+  margin: 3px 0 4px;
+  font-family: Rajdhani, sans-serif;
+  font-size: 27px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.roster-identity-panel p,
+.roster-roulette-builder header p,
+.roster-wheel-copy p { margin: 0; color: #8da5b8; font-size: 12px; line-height: 1.45; }
+.roster-catalog-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 6px 10px; border: 1px solid color-mix(in srgb, var(--module-accent) 45%, transparent); color: #dcefff; background: color-mix(in srgb, var(--module-accent) 10%, transparent); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.roster-catalog-pill span { width: 7px; height: 7px; border-radius: 50%; background: var(--module-accent); box-shadow: 0 0 12px var(--module-accent); }
+.roster-panel-title { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; color: #d9eafa; font-family: Rajdhani, sans-serif; font-size: 16px; font-weight: 800; text-transform: uppercase; }
+.roster-panel-title b { color: var(--module-accent); font-size: 11px; }
+.roster-count-control { display: grid; grid-template-columns: 38px 1fr 38px; gap: 6px; margin-bottom: 10px; }
+.roster-count-control button,
+.roster-filter-button,
+.roster-card-actions button,
+.roster-roulette-tools button,
+.roster-weight-control button,
+.roster-filter-modal footer button {
+  border: 1px solid rgba(115, 153, 181, 0.3);
+  color: #e8f5ff;
+  background: #0d2234;
+  cursor: pointer;
+}
+.roster-count-control button { min-height: 34px; font-size: 19px; font-weight: 800; }
+.roster-count-control strong { display: grid; place-items: center; border: 1px solid rgba(115, 153, 181, 0.2); background: rgba(6, 18, 30, 0.8); font-size: 11px; text-transform: uppercase; }
+.roster-count-control button:disabled,
+.roster-card-actions button:disabled,
+.roster-weight-control button:disabled { opacity: 0.38; cursor: not-allowed; }
+.roster-player-list { display: grid; gap: 9px; max-height: 390px; overflow: auto; padding-right: 2px; }
+.roster-player-config { padding: 9px; border: 1px solid rgba(104, 144, 173, 0.2); background: rgba(5, 16, 27, 0.72); }
+.roster-player-heading { display: grid; grid-template-columns: 27px 1fr; gap: 7px; align-items: center; }
+.roster-player-heading > b { display: grid; place-items: center; width: 27px; height: 27px; color: #04111c; background: var(--module-accent); font-family: Rajdhani, sans-serif; font-size: 13px; }
+.roster-player-heading input,
+.roster-player-config select,
+.roster-filter-tools input,
+.roster-filter-tools select,
+.roster-roulette-tools input,
+.roster-roulette-tools select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid rgba(112, 151, 180, 0.28);
+  color: #eaf7ff;
+  background: #081a2a;
+  outline: none;
+}
+.roster-player-heading input { height: 29px; padding: 0 8px; font-weight: 700; }
+.roster-player-config select { height: 28px; margin-top: 6px; padding: 0 7px; font-size: 10px; }
+.roster-role-toggles { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
+.roster-role-toggles button { display: inline-flex; align-items: center; gap: 4px; min-height: 24px; padding: 0 6px; border: 1px solid rgba(100, 139, 168, 0.25); color: #718a9e; background: #071725; cursor: pointer; font-size: 8px; font-weight: 800; text-transform: uppercase; }
+.roster-role-toggles button span { width: 5px; height: 5px; border-radius: 50%; background: #526576; }
+.roster-role-toggles button.enabled { color: #e7f4ff; border-color: color-mix(in srgb, var(--role-color) 55%, transparent); background: color-mix(in srgb, var(--role-color) 13%, #071725); }
+.roster-role-toggles button.enabled span { background: var(--role-color); box-shadow: 0 0 8px var(--role-color); }
+.roster-filter-button { display: flex; justify-content: space-between; width: 100%; margin-top: 7px; padding: 6px 7px; font-size: 9px; text-align: left; }
+.roster-filter-button b { color: var(--module-accent); font-size: 8px; text-transform: uppercase; }
+.roster-rules-panel { display: grid; gap: 7px; }
+.roster-rule { display: grid; grid-template-columns: 30px 1fr; gap: 9px; align-items: center; width: 100%; padding: 9px; border: 1px solid rgba(99, 137, 165, 0.22); color: #e6f4ff; background: #071725; cursor: pointer; text-align: left; }
+.roster-rule > span { width: 28px; height: 16px; padding: 2px; border-radius: 20px; background: #273b4b; }
+.roster-rule > span::after { content: ''; display: block; width: 12px; height: 12px; border-radius: 50%; background: #71889a; transition: transform 0.18s ease; }
+.roster-rule.enabled { border-color: color-mix(in srgb, var(--module-accent) 43%, transparent); }
+.roster-rule.enabled > span { background: color-mix(in srgb, var(--module-accent) 55%, #273b4b); }
+.roster-rule.enabled > span::after { background: #fff; transform: translateX(12px); }
+.roster-rule div { display: grid; gap: 2px; }
+.roster-rule b { font-size: 10px; text-transform: uppercase; }
+.roster-rule small { color: #7890a3; font-size: 9px; line-height: 1.25; }
+.roster-workspace { min-width: 0; min-height: calc(100vh - 104px); padding: 16px; }
+.roster-workspace-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 0 2px 13px; border-bottom: 1px solid rgba(106, 147, 176, 0.2); }
+.roster-workspace-header h2 { font-size: 31px; }
+.roster-workspace-meta { display: grid; justify-items: end; gap: 2px; max-width: 48%; text-align: right; }
+.roster-workspace-meta b { color: #dcedfa; font-size: 11px; }
+.roster-workspace-meta small { overflow: hidden; max-width: 100%; color: #70899d; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.roster-error { margin: 12px 0; padding: 12px; border: 1px solid rgba(255, 101, 101, 0.45); color: #ffb1b1; background: rgba(95, 21, 28, 0.28); }
+.roster-result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 11px; padding: 14px 0 88px; }
+.roster-result-card { min-width: 0; overflow: hidden; border: 1px solid rgba(101, 143, 174, 0.25); border-top: 3px solid var(--role-color); background: #071725; transition: transform 0.18s ease, opacity 0.18s ease, border-color 0.18s ease; }
+.roster-result-card.is-locked { border-color: color-mix(in srgb, var(--role-color) 65%, #506578); }
+.roster-result-card.is-rerolling { transform: scale(0.975); opacity: 0.55; }
+.roster-result-grid.is-generating .roster-result-card { animation: roster-card-pulse 0.42s ease; }
+@keyframes roster-card-pulse { 50% { transform: translateY(-3px); opacity: 0.65; } }
+.roster-card-portrait { position: relative; min-height: 270px; overflow: hidden; background: radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--role-color) 25%, transparent), #07121e 72%); }
+.roster-card-portrait > img { width: 100%; height: 290px; object-fit: cover; object-position: center top; }
+.roster-card-gradient { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(4, 12, 20, 0.35) 58%, #071725 100%); }
+.roster-empty-mark { display: grid; place-items: center; height: 270px; color: color-mix(in srgb, var(--module-accent) 55%, #536b7d); font-family: Rajdhani, sans-serif; font-size: 72px; font-weight: 800; }
+.roster-player-index,
+.roster-lock-badge { position: absolute; top: 9px; z-index: 2; padding: 4px 7px; font-size: 9px; font-weight: 900; }
+.roster-player-index { left: 9px; color: #06121d; background: var(--role-color); }
+.roster-lock-badge { right: 9px; color: var(--role-color); border: 1px solid var(--role-color); background: rgba(5, 15, 24, 0.82); }
+.roster-card-title { position: absolute; z-index: 2; right: 12px; bottom: 10px; left: 12px; }
+.roster-card-title small { color: var(--role-color); font-size: 9px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+.roster-card-title h3 { overflow: hidden; margin: 1px 0 0; font-family: Rajdhani, sans-serif; font-size: 24px; line-height: 1; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.roster-card-title p { margin: 3px 0 0; color: #9bb0bf; font-size: 10px; }
+.roster-card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 8px; }
+.roster-card-actions button { min-height: 31px; font-size: 9px; font-weight: 900; text-transform: uppercase; }
+.roster-card-actions button:first-child { border-color: color-mix(in srgb, var(--module-accent) 52%, transparent); color: #07121d; background: var(--module-accent); }
+.roster-card-actions button.active { border-color: var(--role-color); color: var(--role-color); }
+.roster-teamups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; padding: 7px 8px 0; }
+.roster-teamups span { overflow: hidden; padding: 6px; border: 1px solid rgba(104, 145, 174, 0.22); color: #8fa6b8; background: #091d2d; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.roster-teamups span b { display: block; margin-bottom: 2px; color: #6f8799; font-size: 7px; }
+.roster-teamups span.complete { border-color: rgba(105, 228, 255, 0.55); color: #dffaff; background: rgba(43, 126, 145, 0.2); }
+.roster-teamups span.complete b { color: #6ae4ff; }
+.roster-loadout { display: grid; gap: 4px; padding: 7px 8px 0; }
+.roster-loadout > div { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 7px; align-items: center; min-height: 31px; padding: 3px 6px; border: 1px solid rgba(110, 148, 177, 0.18); background: #091b2a; }
+.roster-loadout img { width: 25px; height: 25px; object-fit: contain; }
+.roster-loadout span { min-width: 0; }
+.roster-loadout small,
+.roster-loadout b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.roster-loadout small { color: #71899c; font-size: 7px; text-transform: uppercase; }
+.roster-loadout b { color: #e7f3fc; font-size: 9px; }
+.roster-generate-bar { position: sticky; z-index: 5; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 0 -16px -16px; padding: 12px 16px; border-top: 1px solid rgba(106, 147, 176, 0.28); background: rgba(5, 16, 27, 0.96); backdrop-filter: blur(16px); }
+.roster-generate-bar div { display: grid; gap: 2px; }
+.roster-generate-bar span { color: var(--module-accent); font-size: 8px; font-weight: 900; letter-spacing: 0.13em; }
+.roster-generate-bar b { color: #9fb3c2; font-size: 9px; }
+.roster-generate-bar > button,
+.roster-spin-button { min-width: 210px; min-height: 44px; border: 0; color: #06111b; background: var(--module-accent); box-shadow: 0 0 24px color-mix(in srgb, var(--module-accent) 25%, transparent); cursor: pointer; font-family: Rajdhani, sans-serif; font-size: 15px; font-weight: 900; letter-spacing: 0.06em; }
+.roster-generate-bar > button:disabled,
+.roster-spin-button:disabled { opacity: 0.45; cursor: not-allowed; }
+.roster-modal-layer { position: fixed; z-index: 80; inset: 0; display: grid; place-items: center; padding: 18px; background: rgba(1, 7, 12, 0.76); backdrop-filter: blur(10px); }
+.roster-filter-modal { display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; width: min(980px, 100%); max-height: min(760px, calc(100vh - 36px)); border: 1px solid rgba(123, 165, 196, 0.35); background: #071725; box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5); }
+.roster-filter-modal > header { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid rgba(112, 151, 180, 0.23); }
+.roster-filter-modal > header span { color: var(--module-accent); font-size: 9px; font-weight: 900; text-transform: uppercase; }
+.roster-filter-modal > header h2 { margin: 2px 0 0; font-family: Rajdhani, sans-serif; font-size: 25px; text-transform: uppercase; }
+.roster-filter-modal > header button { border: 0; color: #b8ccda; background: none; cursor: pointer; font-size: 29px; }
+.roster-filter-tools { display: grid; grid-template-columns: 1fr 210px; gap: 8px; padding: 11px 16px; }
+.roster-filter-tools input,
+.roster-filter-tools select { min-height: 36px; padding: 0 10px; }
+.roster-filter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 7px; overflow: auto; padding: 0 16px 14px; }
+.roster-filter-grid button { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 8px; align-items: center; min-height: 58px; padding: 5px; border: 1px solid rgba(105, 143, 171, 0.22); color: #e7f4fc; background: #091b2a; cursor: pointer; text-align: left; }
+.roster-filter-grid button.blocked { opacity: 0.55; border-color: rgba(255, 95, 95, 0.55); filter: grayscale(0.7); }
+.roster-filter-grid img { width: 48px; height: 48px; object-fit: cover; object-position: top; }
+.roster-filter-grid span { min-width: 0; }
+.roster-filter-grid b,
+.roster-filter-grid small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.roster-filter-grid b { font-size: 10px; }
+.roster-filter-grid small { color: #7891a4; font-size: 8px; }
+.roster-filter-modal > footer { display: flex; justify-content: flex-end; gap: 7px; padding: 11px 16px; border-top: 1px solid rgba(112, 151, 180, 0.23); }
+.roster-filter-modal footer button { min-height: 34px; padding: 0 16px; font-size: 9px; font-weight: 900; text-transform: uppercase; }
+.roster-filter-modal footer button.primary { color: #07121c; border-color: var(--module-accent); background: var(--module-accent); }
+
+.roster-roulette-page { display: grid; grid-template-columns: minmax(430px, 1fr) minmax(350px, 0.75fr); gap: 14px; min-height: calc(100vh - 112px); }
+.roster-roulette-builder { display: grid; grid-template-rows: auto auto minmax(0, 1fr); min-height: 0; padding: 17px; }
+.roster-roulette-builder header { padding-bottom: 12px; border-bottom: 1px solid rgba(112, 151, 180, 0.2); }
+.roster-roulette-tools { display: grid; grid-template-columns: minmax(140px, 1fr) 170px auto auto; gap: 7px; padding: 11px 0; }
+.roster-roulette-tools input,
+.roster-roulette-tools select,
+.roster-roulette-tools button { min-height: 34px; padding: 0 9px; }
+.roster-roulette-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 7px; align-content: start; overflow: auto; padding-right: 3px; }
+.roster-roulette-list article { display: grid; grid-template-columns: minmax(0, 1fr) 78px; border: 1px solid rgba(104, 143, 172, 0.22); background: #071725; }
+.roster-roulette-list article.selected { border-color: color-mix(in srgb, var(--module-accent) 60%, transparent); background: color-mix(in srgb, var(--module-accent) 8%, #071725); }
+.roster-roulette-character { display: grid; grid-template-columns: 44px minmax(0, 1fr) 20px; gap: 7px; align-items: center; min-width: 0; padding: 4px; border: 0; color: #e7f4fc; background: transparent; cursor: pointer; text-align: left; }
+.roster-roulette-character img { width: 44px; height: 44px; object-fit: cover; object-position: top; }
+.roster-roulette-character span { min-width: 0; }
+.roster-roulette-character b,
+.roster-roulette-character small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.roster-roulette-character b { font-size: 10px; }
+.roster-roulette-character small { color: #7891a4; font-size: 8px; }
+.roster-roulette-character i { color: var(--module-accent); font-style: normal; font-weight: 900; }
+.roster-weight-control { display: grid; grid-template-columns: 22px 1fr 22px; gap: 2px; align-items: center; padding: 4px; border-left: 1px solid rgba(104, 143, 172, 0.18); }
+.roster-weight-control button { height: 24px; }
+.roster-weight-control b { text-align: center; font-size: 9px; }
+.roster-wheel-stage { display: grid; place-items: center; align-content: center; gap: 18px; padding: 24px; text-align: center; }
+.roster-wheel-copy h2 { font-size: 29px; }
+.roster-wheel-shell { position: relative; width: min(360px, 72vw); aspect-ratio: 1; display: grid; place-items: center; }
+.roster-wheel { --roster-wheel: conic-gradient(var(--module-accent) 0 100%); --roster-spin: 0deg; position: relative; width: 100%; aspect-ratio: 1; border: 10px solid #dce8f0; border-radius: 50%; background: var(--roster-wheel); box-shadow: 0 0 0 5px #142a3a, 0 28px 60px rgba(0, 0, 0, 0.42); transform: rotate(var(--roster-spin)); transition: transform 1.9s cubic-bezier(.12,.68,.16,1); }
+.roster-wheel::after { content: ''; position: absolute; inset: 11%; border: 2px solid rgba(255, 255, 255, 0.35); border-radius: 50%; }
+.roster-wheel-pointer { position: absolute; z-index: 4; top: -22px; left: 50%; width: 0; height: 0; border-right: 16px solid transparent; border-left: 16px solid transparent; border-top: 34px solid #fff; filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.5)); transform: translateX(-50%); }
+.roster-wheel-center { position: absolute; z-index: 3; top: 50%; left: 50%; display: grid; place-items: center; width: 72px; height: 72px; border: 7px solid #dce8f0; border-radius: 50%; color: #07131d; background: var(--module-accent); box-shadow: 0 0 0 4px #102636; font-family: Rajdhani, sans-serif; font-size: 24px; font-weight: 900; transform: translate(-50%, -50%) rotate(calc(var(--roster-spin) * -1)); transition: transform 1.9s cubic-bezier(.12,.68,.16,1); }
+.roster-winner { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 62px; padding: 7px 14px; border: 1px solid rgba(107, 148, 177, 0.25); background: #071725; }
+.roster-winner.visible { border-color: color-mix(in srgb, var(--module-accent) 60%, transparent); box-shadow: 0 0 24px color-mix(in srgb, var(--module-accent) 15%, transparent); }
+.roster-winner img { width: 52px; height: 52px; object-fit: cover; object-position: top; }
+.roster-winner span { display: grid; justify-items: start; }
+.roster-winner small { color: var(--module-accent); font-size: 8px; font-weight: 900; }
+.roster-winner strong { font-family: Rajdhani, sans-serif; font-size: 20px; line-height: 1; text-transform: uppercase; }
+.roster-winner b { color: #849bad; font-size: 8px; text-transform: uppercase; }
+
+@media (max-width: 1100px) {
+  .roster-module { grid-template-columns: 290px minmax(0, 1fr); }
+  .roster-result-grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  .roster-roulette-page { grid-template-columns: 1fr; }
+  .roster-wheel-stage { min-height: 650px; }
+}
+
+@media (max-width: 780px) {
+  .roster-module,
+  .roster-roulette-page { width: min(100% - 14px, 1540px); margin-top: 8px; }
+  .roster-module { display: block; }
+  .roster-sidebar { position: static; max-height: none; overflow: visible; padding: 0; }
+  .roster-sidebar .roster-panel:not(.roster-identity-panel) { margin-top: 8px; }
+  .roster-workspace { min-height: 0; margin-top: 8px; padding: 10px; }
+  .roster-workspace-header { align-items: flex-start; }
+  .roster-workspace-meta { max-width: 52%; }
+  .roster-result-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-bottom: 76px; }
+  .roster-card-portrait { min-height: 220px; }
+  .roster-card-portrait > img { height: 240px; }
+  .roster-generate-bar { margin: 0 -10px -10px; padding: 9px 10px; }
+  .roster-generate-bar div { display: none; }
+  .roster-generate-bar > button { width: 100%; min-width: 0; }
+  .roster-filter-tools { grid-template-columns: 1fr; }
+  .roster-roulette-tools { grid-template-columns: 1fr 1fr; }
+  .roster-wheel-stage { min-height: 560px; }
+}
+
+@media (max-width: 520px) {
+  .roster-result-grid { grid-template-columns: 1fr; }
+  .roster-mobile-compact .roster-card-portrait { min-height: 190px; }
+  .roster-mobile-compact .roster-card-portrait > img { height: 210px; object-position: center 20%; }
+  .roster-workspace-header { display: block; }
+  .roster-workspace-meta { max-width: none; margin-top: 7px; justify-items: start; text-align: left; }
+  .roster-filter-grid { grid-template-columns: 1fr; }
+  .roster-roulette-list { grid-template-columns: 1fr; }
+  .roster-roulette-tools { grid-template-columns: 1fr; }
+  .roster-wheel { width: min(310px, 78vw); }
+}
+
+/* =========================================================
+   Módulos unificados con la base visual de Overwatch
+   ========================================================= */
+.roster-overwatch-layout {
+  --module-accent: #f5a623;
+}
+
+.roster-overwatch-layout .eyebrow,
+.roster-overwatch-layout .game-title-row h1,
+.roster-overwatch-layout .loadout small {
+  color: var(--module-accent);
+}
+
+.roster-overwatch-layout .side-panel {
+  border-left-color: var(--module-accent);
+}
+
+.roster-overwatch-layout .side-panel::after,
+.roster-overwatch-layout .generate,
+.roster-overwatch-layout .player-row .number {
+  background: var(--module-accent);
+}
+
+.roster-overwatch-layout .generate {
+  color: #07131d;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--module-accent) 18%, transparent);
+}
+
+.roster-live-dot {
+  max-width: 92px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.roster-live-dot span {
+  background: var(--module-accent);
+  box-shadow: 0 0 9px color-mix(in srgb, var(--module-accent) 65%, transparent);
+}
+
+
+.roster-squad-tools {
+  margin-bottom: 7px;
+}
+
+.roster-unified-players {
+  max-height: none;
+  padding-right: 0;
+  overflow: visible;
+  gap: 5px;
+}
+
+.roster-game-player-row {
+  min-height: 34px;
+  grid-template-columns: 34px minmax(0, 1fr) 44px 29px;
+  gap: 3px;
+}
+
+.roster-game-player-row .player-profile-inline {
+  width: 44px;
+  min-width: 44px;
+  padding: 0 3px;
+}
+
+.roster-inline-role-picker,
+.roster-inline-filter,
+.roster-single-role {
+  position: relative;
+  min-width: 29px;
+  min-height: 34px;
+  border: 1px solid #274d64;
+  display: grid;
+  place-items: center;
+  color: #9bb4c3;
+  background: linear-gradient(180deg, #174562, #12344d);
+}
+
+.roster-inline-role-picker,
+.roster-inline-filter {
+  cursor: pointer;
+  transition: transform 110ms ease, border-color 130ms ease, color 130ms ease, background 130ms ease;
+}
+
+.roster-inline-role-picker:hover,
+.roster-inline-filter:hover {
+  transform: translateY(-1px);
+  border-color: var(--module-accent);
+  color: #effaff;
+  background: #1a5072;
+}
+
+.roster-inline-role-picker.active-filter,
+.roster-inline-filter.active-filter {
+  border-color: var(--module-accent);
+  color: var(--module-accent);
+  background: color-mix(in srgb, var(--module-accent) 9%, #12344d);
+}
+
+.roster-inline-role-picker b,
+.roster-inline-filter b {
+  position: absolute;
+  top: -5px;
+  right: -4px;
+  min-width: 14px;
+  height: 14px;
+  padding: 0 3px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #07131d;
+  background: var(--module-accent);
+  font-size: .42rem;
+  font-weight: 950;
+}
+
+.roster-single-role {
+  color: color-mix(in srgb, var(--module-accent) 74%, #d8edf8);
+  cursor: default;
+  opacity: .78;
+}
+
+.roster-fixed-condition {
+  min-height: 48px;
+  padding: 8px 9px;
+  border: 1px solid color-mix(in srgb, var(--module-accent) 38%, #23506a);
+  display: grid;
+  grid-template-columns: 27px 1fr;
+  align-items: center;
+  gap: 8px;
+  color: var(--module-accent);
+  background: color-mix(in srgb, var(--module-accent) 7%, #0a1f2e);
+}
+
+.roster-fixed-condition span {
+  display: grid;
+  gap: 2px;
+}
+
+.roster-fixed-condition b {
+  color: #eaf6fc;
+  font-size: .61rem;
+}
+
+.roster-fixed-condition small {
+  color: #7893a5;
+  font-size: .51rem;
+}
+
+.roster-unified-content {
+  min-width: 0;
+}
+
+.roster-game-badge {
+  border-color: color-mix(in srgb, var(--module-accent) 55%, transparent);
+  color: var(--module-accent);
+  background: color-mix(in srgb, var(--module-accent) 7%, transparent);
+}
+
+.roster-image-button {
+  border-color: color-mix(in srgb, var(--module-accent) 40%, #245d7d);
+}
+
+.roster-team-stage {
+  min-height: calc(100vh - 158px);
+}
+
+.roster-overwatch-layout .team-grid.roster-many-cards {
+  grid-template-columns: repeat(6, minmax(175px, 1fr));
+  min-width: 1110px;
+}
+
+.roster-unified-card {
+  --role-color: var(--module-accent);
+  align-self: start;
+}
+
+.roster-unified-card .portrait {
+  height: clamp(205px, 31vh, 350px);
+}
+
+.roster-unified-card .hero-info {
+  min-height: 57px;
+}
+
+.roster-card-special {
+  margin: 0 0 7px;
+  border: 1px solid rgba(34, 81, 108, .42);
+  background: rgba(4, 17, 26, .72);
+}
+
+.roster-card-teamups {
+  padding: 6px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 5px;
+}
+
+.roster-card-teamups button {
+  position: relative;
+  min-width: 0;
+  min-height: 54px;
+  padding: 4px;
+  border: 1px solid rgba(78, 113, 133, .32);
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  color: #8198a8;
+  background: #0a2232;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 140ms ease, background 140ms ease, transform 120ms ease;
+}
+
+.roster-card-teamups button:hover {
+  border-color: color-mix(in srgb, var(--module-accent) 58%, transparent);
+  background: color-mix(in srgb, var(--module-accent) 7%, #0a2232);
+  transform: translateY(-1px);
+}
+
+.roster-card-teamups button.complete {
+  border-color: color-mix(in srgb, #5ce1a2 66%, transparent);
+  color: #eaf8ff;
+  background: color-mix(in srgb, #5ce1a2 8%, #0a2232);
+}
+
+.roster-card-teamups button.selected {
+  border-color: var(--module-accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--module-accent) 42%, transparent);
+}
+
+.roster-card-teamups img {
+  width: 38px;
+  height: 44px;
+  border: 1px solid rgba(132, 173, 197, .3);
+  object-fit: cover;
+  object-position: center top;
+  background: #071725;
+}
+
+.roster-teamup-portrait-fallback {
+  width: 38px;
+  height: 44px;
+  border: 1px solid color-mix(in srgb, var(--module-accent) 48%, rgba(132, 173, 197, .3));
+  display: grid;
+  place-items: center;
+  color: #edfaff;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--module-accent) 32%, #071725), #071725 72%);
+  font-family: var(--display-font, system-ui, sans-serif);
+  font-size: .63rem;
+  font-weight: 950;
+  letter-spacing: .04em;
+  box-shadow: inset 0 0 18px color-mix(in srgb, var(--module-accent) 10%, transparent);
+}
+
+.roster-card-teamups button > span {
+  min-width: 0;
+  display: grid;
+  gap: 1px;
+}
+
+.roster-card-teamups b {
+  color: var(--module-accent);
+  font-size: .36rem;
+  letter-spacing: .06em;
+}
+
+.roster-card-teamups strong,
+.roster-card-teamups small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.roster-card-teamups strong {
+  color: #eaf5fb;
+  font-size: .47rem;
+}
+
+.roster-card-teamups small {
+  color: #7893a4;
+  font-size: .38rem;
+}
+
+.roster-card-teamups button.complete small {
+  color: #71dfaa;
+}
+
+.roster-card-teamups button > i {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  color: color-mix(in srgb, var(--module-accent) 72%, #b7cad6);
+  font-size: .34rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.roster-card-finals .roster-loadout {
+  max-height: none;
+  padding: 6px;
+  overflow: visible;
+}
+
+.roster-card-finals .roster-loadout > div {
+  min-height: 32px;
+  grid-template-columns: 27px minmax(0, 1fr);
+}
+
+.roster-card-finals .roster-loadout img {
+  width: 25px;
+  height: 25px;
+}
+
+.roster-game-thefinals .roster-team-stage {
+  overflow-x: auto;
+}
+
+.roster-game-thefinals .team-grid.roster-finals-grid {
+  grid-template-columns: repeat(3, minmax(310px, 1fr));
+  min-width: 960px;
+}
+
+.roster-game-thefinals .roster-finals-card {
+  align-self: stretch;
+}
+
+.roster-game-thefinals .roster-finals-card .portrait {
+  height: clamp(220px, 30vh, 335px);
+}
+
+.roster-game-thefinals .roster-finals-card .roster-card-finals {
+  margin-bottom: 8px;
+}
+
+.roster-game-thefinals .roster-finals-card .roster-loadout {
+  display: grid;
+  gap: 4px;
+}
+
+.roster-game-thefinals .roster-finals-card .roster-loadout > div {
+  min-height: 36px;
+  padding: 4px 6px;
+}
+
+.roster-role-modal {
+  width: min(620px, 96vw);
+  max-height: min(720px, calc(100vh - 36px));
+  border: 1px solid rgba(123, 165, 196, .35);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+  color: #edf8fd;
+  background: #071725;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .5);
+}
+
+.roster-role-modal > header {
+  padding: 15px 16px;
+  border-bottom: 1px solid rgba(112, 151, 180, .23);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--module-accent) 9%, transparent), transparent 76%);
+}
+
+.roster-role-modal > header span {
+  color: var(--module-accent);
+  font-size: .5rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.roster-role-modal > header h2 {
+  margin: 3px 0 0;
+  font-family: "Bahnschrift Condensed", "Arial Narrow", sans-serif;
+  font-size: 1.45rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.roster-role-modal > header p {
+  margin: 5px 0 0;
+  color: #7f99aa;
+  font-size: .57rem;
+}
+
+.roster-role-modal > header button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #2b5871;
+  display: grid;
+  place-items: center;
+  color: #c9dce7;
+  background: #0b2a3d;
+  cursor: pointer;
+}
+
+.roster-role-choice-grid {
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 7px;
+  overflow-y: auto;
+}
+
+.roster-role-choice-grid > button {
+  --role-color: var(--module-accent);
+  min-width: 0;
+  min-height: 58px;
+  padding: 8px 10px;
+  border: 1px solid #234b62;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 9px;
+  color: #7290a3;
+  background: #081d2c;
+  cursor: pointer;
+  text-align: left;
+}
+
+.roster-role-choice-grid > button.enabled {
+  border-color: color-mix(in srgb, var(--role-color) 62%, #234b62);
+  color: #edf9ff;
+  background: color-mix(in srgb, var(--role-color) 10%, #081d2c);
+}
+
+.roster-role-choice-mark {
+  width: 30px;
+  height: 30px;
+  border: 1px solid color-mix(in srgb, var(--role-color) 42%, #2a5369);
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--role-color) 6%, #0b2638);
+}
+
+.roster-role-choice-mark i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #526b7c;
+}
+
+.roster-role-choice-grid > button.enabled .roster-role-choice-mark i {
+  background: var(--role-color);
+  box-shadow: 0 0 9px var(--role-color);
+}
+
+.roster-role-choice-grid > button > span:nth-child(2) {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.roster-role-choice-grid b {
+  overflow: hidden;
+  color: inherit;
+  font-size: .63rem;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.roster-role-choice-grid small {
+  color: #6f899a;
+  font-size: .49rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.roster-role-choice-grid > button > svg {
+  color: var(--role-color);
+}
+
+.roster-role-modal > footer {
+  padding: 11px 16px;
+  border-top: 1px solid rgba(112, 151, 180, .23);
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.roster-role-modal > footer button {
+  min-height: 34px;
+  padding: 0 16px;
+  border: 1px solid #28536b;
+  color: #c8dce7;
+  background: #0d2b3e;
+  font-size: .52rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.roster-role-modal > footer button.primary {
+  border-color: var(--module-accent);
+  color: #07131d;
+  background: var(--module-accent);
+}
+
+.roster-details-layer {
+  place-items: center;
+}
+
+.roster-details-modal {
+  --role-color: var(--module-accent);
+  width: min(760px, 96vw);
+  max-height: min(86vh, 780px);
+  border: 1px solid color-mix(in srgb, var(--role-color) 55%, #214b63);
+  overflow-y: auto;
+  color: #edf8fd;
+  background: linear-gradient(150deg, #0a2637, #04121d 75%);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .48);
+}
+
+.roster-details-modal > header {
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(52, 104, 133, .42);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--role-color) 12%, transparent), transparent 74%);
+}
+
+.roster-details-modal > header span {
+  color: var(--role-color);
+  font-size: .5rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.roster-details-modal > header h2 {
+  margin: 3px 0 0;
+  font-family: "Bahnschrift Condensed", "Arial Narrow", sans-serif;
+  font-size: 1.65rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.roster-details-modal > header p {
+  margin: 5px 0 0;
+  color: #8ea5b4;
+  font-size: .58rem;
+}
+
+.roster-details-modal > header button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #2c5870;
+  display: grid;
+  place-items: center;
+  color: #c6dbe6;
+  background: #0b2a3d;
+}
+
+.roster-details-hero {
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+
+.roster-details-hero img {
+  width: 150px;
+  height: 170px;
+  border: 1px solid color-mix(in srgb, var(--role-color) 50%, #214c64);
+  object-fit: cover;
+  object-position: top;
+}
+
+.roster-details-hero small {
+  color: var(--role-color);
+  font-size: .48rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.roster-details-hero h3,
+.roster-details-modal section > h3 {
+  margin: 4px 0 0;
+  font-family: "Bahnschrift Condensed", "Arial Narrow", sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.roster-details-hero p {
+  margin: 7px 0;
+  color: #91a8b7;
+  font-size: .62rem;
+  line-height: 1.55;
+}
+
+.roster-details-hero > div > span {
+  color: #6f8c9e;
+  font-size: .52rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.roster-details-modal > section {
+  padding: 14px 18px;
+  border-top: 1px solid rgba(47, 94, 121, .38);
+}
+
+.roster-details-tags,
+.roster-details-rules {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.roster-details-tags span,
+.roster-details-rules span {
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid #1e4a62;
+  color: #9bb2c0;
+  background: #071d2b;
+  font-size: .53rem;
+}
+
+.roster-details-tags span.complete {
+  border-color: color-mix(in srgb, var(--role-color) 58%, #1e4a62);
+  color: #edf9ff;
+}
+
+.roster-details-tags b,
+.roster-details-rules b {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--role-color);
+  font-size: .43rem;
+}
+
+.roster-details-modal section .roster-loadout {
+  padding: 8px 0 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 1180px) {
+  .roster-overwatch-layout {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+
+  .roster-overwatch-layout .team-grid:not(.roster-many-cards) {
+    min-width: calc(var(--cards) * 170px);
+  }
+}
+
+@media (max-width: 860px) {
+  .roster-overwatch-layout {
+    display: block;
+  }
+
+  .roster-overwatch-layout .roster-unified-sidebar.mobile-config-closed .mobile-config-section {
+    display: none;
+  }
+
+  .roster-overwatch-layout .roster-unified-sidebar.mobile-config-open .mobile-config-section {
+    display: none;
+  }
+
+  .roster-overwatch-layout .roster-unified-sidebar.mobile-config-open .mobile-config-section.mobile-active {
+    display: block;
+  }
+
+  .roster-overwatch-layout .content {
+    padding: 12px;
+  }
+
+  .roster-overwatch-layout .team-grid:not(.roster-many-cards) {
+    min-width: calc(var(--cards) * 170px);
+  }
+}
+
+@media (max-width: 620px) {
+  .roster-details-hero {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+
+  .roster-details-hero img {
+    width: 96px;
+    height: 120px;
+  }
+
+  .roster-details-tags,
+  .roster-details-rules,
+  .roster-details-modal section .roster-loadout {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 860px) {
+  .roster-overwatch-layout .roster-mobile-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .roster-role-choice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* PASO 24 — asignación de rol real y animación estable */
+.roster-inline-role-picker {
+  width: 34px;
+  min-width: 34px;
+  color: #a9c2cf;
+}
+
+.roster-inline-role-picker > span {
+  font-family: "Bahnschrift Condensed", "Arial Narrow", sans-serif;
+  font-size: .58rem;
+  font-weight: 950;
+  letter-spacing: .035em;
+}
+
+.roster-inline-role-picker.assigned-role {
+  border-color: var(--player-role-color, var(--module-accent));
+  color: var(--player-role-color, var(--module-accent));
+  background: color-mix(in srgb, var(--player-role-color, var(--module-accent)) 10%, #12344d);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--player-role-color, var(--module-accent)) 22%, transparent);
+}
+
+.roster-game-player-row {
+  grid-template-columns: 34px minmax(0, 1fr) 44px 29px;
+}
+
+.roster-role-choice-grid > button.auto-role {
+  grid-column: 1 / -1;
+}
+
+.roster-unified-card.generation-a {
+  animation: roster-card-enter-a 420ms cubic-bezier(.16, .84, .32, 1) var(--delay) both;
+}
+
+.roster-unified-card.generation-b {
+  animation: roster-card-enter-b 420ms cubic-bezier(.16, .84, .32, 1) var(--delay) both;
+}
+
+@keyframes roster-card-enter-a {
+  from { opacity: 0; transform: translate3d(0, 12px, 0) scale(.99); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes roster-card-enter-b {
+  from { opacity: 0; transform: translate3d(0, 12px, 0) scale(.99); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+.roster-game-deadlock .team-grid.cards-3 {
+  grid-template-columns: repeat(3, minmax(230px, 350px));
+  justify-content: center;
+}
+
+@media (max-width: 620px) {
+  .roster-role-choice-grid > button.auto-role {
+    grid-column: auto;
+  }
+}
+
+
+/* Los módulos de roster ya no fijan ni filtran roles por jugador. */
+.roster-game-player-row {
+  grid-template-columns: 34px minmax(0, 1fr) 44px 29px;
+}
+
+.roster-squad-tools {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Deadlock: cada jugador registra tres preferencias para el matchmaking. */
+.roster-game-deadlock .roster-unified-card {
+  --role-color: var(--module-accent);
+}
+
+.deadlock-candidate-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 7px;
+}
+
+.deadlock-candidate {
+  --candidate-color: var(--module-accent);
+  position: relative;
+  min-width: 0;
+  min-height: 112px;
+  border: 1px solid color-mix(in srgb, var(--candidate-color) 58%, #24485d);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--candidate-color) 18%, transparent), transparent 62%),
+    #071923;
+}
+
+.deadlock-candidate.primary {
+  grid-column: 1 / -1;
+  min-height: clamp(205px, 28vh, 285px);
+}
+
+.deadlock-candidate::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+  height: 3px;
+  background: var(--candidate-color);
+  box-shadow: 0 -3px 14px color-mix(in srgb, var(--candidate-color) 28%, transparent);
+}
+
+.deadlock-candidate > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  animation: deadlock-candidate-image-in 440ms cubic-bezier(.16, .84, .32, 1) both;
+  transition: transform 360ms cubic-bezier(.2, .75, .2, 1), filter 180ms ease;
+}
+
+.deadlock-candidate:hover > img {
+  transform: scale(1.035);
+  filter: saturate(1.06) contrast(1.02);
+}
+
+.deadlock-candidate-rank {
+  position: absolute;
+  z-index: 5;
+  top: 7px;
+  left: 7px;
+  min-width: 25px;
+  padding: 4px 5px;
+  color: #07131d;
+  background: var(--candidate-color);
+  font-size: .48rem;
+  font-weight: 950;
+  text-align: center;
+}
+
+.deadlock-candidate-gradient {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 36%, rgba(3, 12, 19, .18) 57%, rgba(3, 12, 19, .97) 100%);
+  pointer-events: none;
+}
+
+.deadlock-candidate-copy {
+  position: absolute;
+  z-index: 5;
+  right: 8px;
+  bottom: 8px;
+  left: 8px;
+  min-width: 0;
+  display: grid;
+  gap: 1px;
+}
+
+.deadlock-candidate-copy small {
+  color: var(--candidate-color);
+  font-size: .39rem;
+  font-weight: 950;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.deadlock-candidate-copy strong {
+  overflow: hidden;
+  color: #f2f8fc;
+  font-family: "Bahnschrift Condensed", "Arial Narrow", sans-serif;
+  font-size: .9rem;
+  line-height: 1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .72);
+}
+
+.deadlock-candidate.secondary .deadlock-candidate-copy strong {
+  font-size: .68rem;
+}
+
+.deadlock-candidate-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: color-mix(in srgb, var(--candidate-color) 56%, #6f8796);
+  opacity: .48;
+}
+
+.roster-game-deadlock .hero-card.is-rerolling .deadlock-candidate-grid {
+  animation: deadlock-candidate-reroll 280ms ease;
+}
+
+.roster-overwatch-layout .team-grid.roster-many-cards .deadlock-candidate.primary {
+  min-height: 175px;
+}
+
+.roster-overwatch-layout .team-grid.roster-many-cards .deadlock-candidate.secondary {
+  min-height: 92px;
+}
+
+.roster-overwatch-layout .team-grid.roster-many-cards .deadlock-candidate-copy strong {
+  font-size: .62rem;
+}
+
+.deadlock-details-candidates {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.deadlock-details-candidates > div {
+  position: relative;
+  min-width: 0;
+  min-height: 150px;
+  border: 1px solid rgba(209, 189, 119, .38);
+  overflow: hidden;
+  background: #071725;
+}
+
+.deadlock-details-candidates img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.deadlock-details-candidates span {
+  position: absolute;
+  z-index: 2;
+  top: 6px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  color: #07131d;
+  background: #d1bd77;
+  font-size: .52rem;
+  font-weight: 950;
+}
+
+.deadlock-details-candidates b {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 22px 7px 7px;
+  overflow: hidden;
+  color: #f0f6fa;
+  background: linear-gradient(transparent, rgba(3, 12, 19, .96));
+  font-size: .56rem;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes deadlock-candidate-image-in {
+  from { opacity: 0; transform: scale(1.035); filter: blur(4px) saturate(.78); }
+  to { opacity: 1; transform: scale(1); filter: blur(0) saturate(1); }
+}
+
+@keyframes deadlock-candidate-reroll {
+  0% { opacity: 1; transform: scale(1); filter: brightness(1); }
+  45% { opacity: .45; transform: scale(.985); filter: brightness(1.5); }
+  100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+}
+
+@media (max-width: 620px) {
+  .deadlock-candidate.primary {
+    min-height: 260px;
+  }
+
+  .deadlock-candidate.secondary {
+    min-height: 135px;
+  }
+
+  .deadlock-details-candidates {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Ajuste visual ligero: TF2 más cercano a los módulos nuevos */
+.tf2-wheel-stage { min-height: 500px; }
+.tf2-wheel-shell { width: min(420px, 92%); }
+.tf2-wheel-panel .roulette-section-heading.compact { min-height: 64px; }
+.tf2-class-row .roulette-hero-main img { border-width: 1.5px; }

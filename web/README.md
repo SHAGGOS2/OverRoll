@@ -1,32 +1,60 @@
-# React + TypeScript + Vite
+# OverRoll Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Port web de OverRoll para generar equipos y ruletas independientes de distintos hero shooters.
 
-Currently, two official plugins are available:
+## Juegos incluidos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Overwatch 2
+- Team Fortress 2
+- Plants vs. Zombies: Garden Warfare 2
+- Marvel Rivals
+- Valorant
+- Deadlock
+- Last Flag
+- THE FINALS
+- Paladins
+- FragPunk
+- Apex Legends
 
-## React Compiler
+Cada juego conserva su propio catálogo, jugadores, filtros, bloqueos, reglas y ruleta en `localStorage`. Cambiar de juego no borra la configuración de los demás.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funciones principales
 
-## Expanding the Oxlint configuration
+- Generación de equipos por número de jugadores.
+- Roles habilitables por jugador desde un selector compacto, sin barras internas en la escuadra.
+- Composición equilibrada de roles.
+- Reroll individual y bloqueo de resultados.
+- Filtros individuales de personajes.
+- Perfiles compartidos para nombres de jugadores.
+- Ruleta independiente con selección y peso de 1x a 5x.
+- Team-Ups en Marvel Rivals.
+- Builds completas en THE FINALS: complexión, especialización, arma y tres artefactos.
+- Interfaz de todos los juegos unificada con la base visual de Overwatch: escuadra, reglas, resultados y acciones.
+- Configuración por pestañas: cada opción muestra únicamente su propio contenido.
+- Exportación de imagen de equipo para los ocho módulos nuevos.
+- Interfaz adaptable a computadora y móvil.
+- Créditos, fuentes de datos y avisos de propiedad integrados.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Desarrollo
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev -- --host 0.0.0.0
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Compilación
+
+```bash
+npm run build
+```
+
+La salida se genera en `dist/`.
+
+## Créditos
+
+- Dirección de diseño, idea y pruebas: **SHAGGOS**.
+- Desarrollo e implementación: **OpenAI Codex**.
+- Datos de Overwatch: **OverFast API**.
+- Sonidos adicionales de interfaz: **Kenney, Interface Sounds 1.0, CC0 1.0**.
+
+OverRoll es una herramienta fan gratuita y no oficial. Las marcas, personajes, imágenes, sonidos y demás materiales de cada juego pertenecen a sus respectivos propietarios.

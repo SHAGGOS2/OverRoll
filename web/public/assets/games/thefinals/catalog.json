@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "source": "https://www.thefinals.wiki/wiki/Builds",
+  "heroes": [
+    {"key": "light", "name": "Ligero", "role": "light", "portrait": "light.svg"},
+    {"key": "medium", "name": "Medio", "role": "medium", "portrait": "medium.svg"},
+    {"key": "heavy", "name": "Pesado", "role": "heavy", "portrait": "heavy.svg"}
+  ]
+}
