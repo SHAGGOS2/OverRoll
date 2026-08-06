@@ -1,0 +1,1045 @@
+{
+  "schema_version": 2,
+  "source": "https://marvel-rivals-teambuilder.pages.dev/team-ups.html",
+  "updated": "2026-07-26",
+  "season": "9.0",
+  "teamups": [
+    {
+      "key": "hel-yeah-honey",
+      "name": "HEL-YEAH, HONEY",
+      "receiver": "rivals-deadpool",
+      "anchor": "rivals-hela",
+      "heroes": [
+        "rivals-deadpool",
+        "rivals-hela"
+      ]
+    },
+    {
+      "key": "abyssal-flames",
+      "name": "ABYSSAL FLAMES",
+      "receiver": "rivals-venom",
+      "anchor": "rivals-phoenix",
+      "heroes": [
+        "rivals-venom",
+        "rivals-phoenix"
+      ]
+    },
+    {
+      "key": "allied-agents",
+      "name": "ALLIED AGENTS",
+      "receiver": "rivals-black-widow",
+      "anchor": "rivals-hawkeye",
+      "heroes": [
+        "rivals-black-widow",
+        "rivals-hawkeye"
+      ]
+    },
+    {
+      "key": "ammo-overload",
+      "name": "AMMO OVERLOAD",
+      "receiver": "rivals-the-punisher",
+      "anchor": "rivals-rocket-raccoon",
+      "heroes": [
+        "rivals-the-punisher",
+        "rivals-rocket-raccoon"
+      ]
+    },
+    {
+      "key": "asgardians-of-the-galaxy",
+      "name": "ASGARDIANS OF THE GALAXY",
+      "receiver": "rivals-angela",
+      "anchor": "rivals-star-lord",
+      "heroes": [
+        "rivals-angela",
+        "rivals-star-lord"
+      ]
+    },
+    {
+      "key": "atlas-bond",
+      "name": "ATLAS BOND",
+      "receiver": "rivals-luna-snow",
+      "anchor": "rivals-white-fox",
+      "heroes": [
+        "rivals-luna-snow",
+        "rivals-white-fox"
+      ]
+    },
+    {
+      "key": "bestial-hunt",
+      "name": "BESTIAL HUNT",
+      "receiver": "rivals-the-punisher",
+      "anchor": "rivals-daredevil",
+      "heroes": [
+        "rivals-the-punisher",
+        "rivals-daredevil"
+      ]
+    },
+    {
+      "key": "binding-ties",
+      "name": "BINDING TIES",
+      "receiver": "rivals-black-cat",
+      "anchor": "rivals-spider-man",
+      "heroes": [
+        "rivals-black-cat",
+        "rivals-spider-man"
+      ]
+    },
+    {
+      "key": "blade-of-khonshu",
+      "name": "BLADE OF KHONSHU",
+      "receiver": "rivals-blade",
+      "anchor": "rivals-moon-knight",
+      "heroes": [
+        "rivals-blade",
+        "rivals-moon-knight"
+      ]
+    },
+    {
+      "key": "blast-slash",
+      "name": "BLAST SLASH",
+      "receiver": "rivals-wolverine",
+      "anchor": "rivals-cyclops",
+      "heroes": [
+        "rivals-wolverine",
+        "rivals-cyclops"
+      ]
+    },
+    {
+      "key": "bleed-for-battle",
+      "name": "BLEED FOR BATTLE",
+      "receiver": "rivals-blade",
+      "anchor": "rivals-captain-america",
+      "heroes": [
+        "rivals-blade",
+        "rivals-captain-america"
+      ]
+    },
+    {
+      "key": "blood-leech",
+      "name": "BLOOD LEECH",
+      "receiver": "rivals-venom",
+      "anchor": "rivals-blade",
+      "heroes": [
+        "rivals-venom",
+        "rivals-blade"
+      ]
+    },
+    {
+      "key": "blood-moon",
+      "name": "BLOOD MOON",
+      "receiver": "rivals-moon-knight",
+      "anchor": "rivals-elsa-bloodstone",
+      "heroes": [
+        "rivals-moon-knight",
+        "rivals-elsa-bloodstone"
+      ]
+    },
+    {
+      "key": "bubble-buddies",
+      "name": "BUBBLE BUDDIES",
+      "receiver": "rivals-groot",
+      "anchor": "rivals-jeff-the-land-shark",
+      "heroes": [
+        "rivals-groot",
+        "rivals-jeff-the-land-shark"
+      ]
+    },
+    {
+      "key": "burning-bullets",
+      "name": "BURNING BULLETS",
+      "receiver": "rivals-black-widow",
+      "anchor": "rivals-phoenix",
+      "heroes": [
+        "rivals-black-widow",
+        "rivals-phoenix"
+      ]
+    },
+    {
+      "key": "chain-of-cyttorak",
+      "name": "CHAIN OF CYTTORAK",
+      "receiver": "rivals-magik",
+      "anchor": "rivals-doctor-strange",
+      "heroes": [
+        "rivals-magik",
+        "rivals-doctor-strange"
+      ]
+    },
+    {
+      "key": "chilling-charisma",
+      "name": "CHILLING CHARISMA",
+      "receiver": "rivals-namor",
+      "anchor": "rivals-luna-snow",
+      "heroes": [
+        "rivals-namor",
+        "rivals-luna-snow"
+      ]
+    },
+    {
+      "key": "circle-of-life",
+      "name": "CIRCLE OF LIFE",
+      "receiver": "rivals-phoenix",
+      "anchor": "rivals-hela",
+      "heroes": [
+        "rivals-phoenix",
+        "rivals-hela"
+      ]
+    },
+    {
+      "key": "clobberin-research-dept",
+      "name": "CLOBBERIN' RESEARCH DEPT.",
+      "receiver": "rivals-mister-fantastic",
+      "anchor": "rivals-the-thing",
+      "heroes": [
+        "rivals-mister-fantastic",
+        "rivals-the-thing"
+      ]
+    },
+    {
+      "key": "comprehensive-defense",
+      "name": "COMPREHENSIVE DEFENSE",
+      "receiver": "rivals-daredevil",
+      "anchor": "rivals-iron-fist",
+      "heroes": [
+        "rivals-daredevil",
+        "rivals-iron-fist"
+      ]
+    },
+    {
+      "key": "cosmic-cyclone",
+      "name": "COSMIC CYCLONE",
+      "receiver": "rivals-adam-warlock",
+      "anchor": "rivals-storm",
+      "heroes": [
+        "rivals-adam-warlock",
+        "rivals-storm"
+      ]
+    },
+    {
+      "key": "damisa-yao",
+      "name": "DAMISA-YAO",
+      "receiver": "rivals-black-panther",
+      "anchor": "rivals-storm",
+      "heroes": [
+        "rivals-black-panther",
+        "rivals-storm"
+      ]
+    },
+    {
+      "key": "deep-wrath",
+      "name": "DEEP WRATH",
+      "receiver": "rivals-hela",
+      "anchor": "rivals-namor",
+      "heroes": [
+        "rivals-hela",
+        "rivals-namor"
+      ]
+    },
+    {
+      "key": "devilish-affair",
+      "name": "DEVILISH AFFAIR",
+      "receiver": "rivals-daredevil",
+      "anchor": "rivals-black-widow",
+      "heroes": [
+        "rivals-daredevil",
+        "rivals-black-widow"
+      ]
+    },
+    {
+      "key": "dimensional-shortcut",
+      "name": "DIMENSIONAL SHORTCUT",
+      "receiver": "rivals-black-panther",
+      "anchor": "rivals-magik",
+      "heroes": [
+        "rivals-black-panther",
+        "rivals-magik"
+      ]
+    },
+    {
+      "key": "divine-armory",
+      "name": "DIVINE ARMORY",
+      "receiver": "rivals-thor",
+      "anchor": "rivals-angela",
+      "heroes": [
+        "rivals-thor",
+        "rivals-angela"
+      ]
+    },
+    {
+      "key": "duality-dance",
+      "name": "DUALITY DANCE",
+      "receiver": "rivals-luna-snow",
+      "anchor": "rivals-adam-warlock",
+      "heroes": [
+        "rivals-luna-snow",
+        "rivals-adam-warlock"
+      ]
+    },
+    {
+      "key": "esu-alumnus",
+      "name": "ESU ALUMNUS",
+      "receiver": "rivals-squirrel-girl",
+      "anchor": "rivals-spider-man",
+      "heroes": [
+        "rivals-squirrel-girl",
+        "rivals-spider-man"
+      ]
+    },
+    {
+      "key": "expert-instinct",
+      "name": "EXPERT INSTINCT",
+      "receiver": "rivals-winter-soldier",
+      "anchor": "rivals-elsa-bloodstone",
+      "heroes": [
+        "rivals-winter-soldier",
+        "rivals-elsa-bloodstone"
+      ]
+    },
+    {
+      "key": "explosive-entanglement",
+      "name": "EXPLOSIVE ENTANGLEMENT",
+      "receiver": "rivals-rogue",
+      "anchor": "rivals-magneto",
+      "heroes": [
+        "rivals-rogue",
+        "rivals-magneto"
+      ]
+    },
+    {
+      "key": "fantastic-amplifier",
+      "name": "FANTASTIC AMPLIFIER",
+      "receiver": "rivals-mister-fantastic",
+      "anchor": "rivals-rocket-raccoon",
+      "heroes": [
+        "rivals-mister-fantastic",
+        "rivals-rocket-raccoon"
+      ]
+    },
+    {
+      "key": "favorable-odds",
+      "name": "FAVORABLE ODDS",
+      "receiver": "rivals-gambit",
+      "anchor": "rivals-magneto",
+      "heroes": [
+        "rivals-gambit",
+        "rivals-magneto"
+      ]
+    },
+    {
+      "key": "feline-alliance",
+      "name": "FELINE ALLIANCE",
+      "receiver": "rivals-black-cat",
+      "anchor": "rivals-black-panther",
+      "heroes": [
+        "rivals-black-cat",
+        "rivals-black-panther"
+      ]
+    },
+    {
+      "key": "fiery-sparks",
+      "name": "FIERY SPARKS",
+      "receiver": "rivals-human-torch",
+      "anchor": "rivals-jubilee",
+      "heroes": [
+        "rivals-human-torch",
+        "rivals-jubilee"
+      ]
+    },
+    {
+      "key": "first-family",
+      "name": "FIRST FAMILY",
+      "receiver": "rivals-invisible-woman",
+      "anchor": "rivals-mister-fantastic",
+      "heroes": [
+        "rivals-invisible-woman",
+        "rivals-mister-fantastic"
+      ]
+    },
+    {
+      "key": "flawless-design",
+      "name": "FLAWLESS DESIGN",
+      "receiver": "rivals-adam-warlock",
+      "anchor": "rivals-ultron",
+      "heroes": [
+        "rivals-adam-warlock",
+        "rivals-ultron"
+      ]
+    },
+    {
+      "key": "flora-munitions",
+      "name": "FLORA MUNITIONS",
+      "receiver": "rivals-star-lord",
+      "anchor": "rivals-groot",
+      "heroes": [
+        "rivals-star-lord",
+        "rivals-groot"
+      ]
+    },
+    {
+      "key": "frozen-haven",
+      "name": "FROZEN HAVEN",
+      "receiver": "rivals-cloak-dagger",
+      "anchor": "rivals-luna-snow",
+      "heroes": [
+        "rivals-cloak-dagger",
+        "rivals-luna-snow"
+      ]
+    },
+    {
+      "key": "gamma-charge",
+      "name": "GAMMA CHARGE",
+      "receiver": "rivals-iron-man",
+      "anchor": "rivals-hulk",
+      "heroes": [
+        "rivals-iron-man",
+        "rivals-hulk"
+      ]
+    },
+    {
+      "key": "gamma-fastball",
+      "name": "GAMMA FASTBALL",
+      "receiver": "rivals-hulk",
+      "anchor": "rivals-wolverine",
+      "heroes": [
+        "rivals-hulk",
+        "rivals-wolverine"
+      ]
+    },
+    {
+      "key": "gamma-maelstrom",
+      "name": "GAMMA MAELSTROM",
+      "receiver": "rivals-doctor-strange",
+      "anchor": "rivals-hulk",
+      "heroes": [
+        "rivals-doctor-strange",
+        "rivals-hulk"
+      ]
+    },
+    {
+      "key": "gamma-monstro",
+      "name": "GAMMA MONSTRO",
+      "receiver": "rivals-namor",
+      "anchor": "rivals-hulk",
+      "heroes": [
+        "rivals-namor",
+        "rivals-hulk"
+      ]
+    },
+    {
+      "key": "gods-of-thunder",
+      "name": "GODS OF THUNDER",
+      "receiver": "rivals-storm",
+      "anchor": "rivals-thor",
+      "heroes": [
+        "rivals-storm",
+        "rivals-thor"
+      ]
+    },
+    {
+      "key": "guardian-of-the-deep",
+      "name": "GUARDIAN OF THE DEEP",
+      "receiver": "rivals-jeff-the-land-shark",
+      "anchor": "rivals-venom",
+      "heroes": [
+        "rivals-jeff-the-land-shark",
+        "rivals-venom"
+      ]
+    },
+    {
+      "key": "gumbo-chimichangas",
+      "name": "GUMBO CHIMICHANGAS",
+      "receiver": "rivals-deadpool",
+      "anchor": "rivals-gambit",
+      "heroes": [
+        "rivals-deadpool",
+        "rivals-gambit"
+      ]
+    },
+    {
+      "key": "hel-tendrils",
+      "name": "HEL TENDRILS",
+      "receiver": "rivals-hela",
+      "anchor": "rivals-venom",
+      "heroes": [
+        "rivals-hela",
+        "rivals-venom"
+      ]
+    },
+    {
+      "key": "hellfire-sparks",
+      "name": "HELLFIRE SPARKS",
+      "receiver": "rivals-jubilee",
+      "anchor": "",
+      "heroes": [
+        "rivals-jubilee"
+      ]
+    },
+    {
+      "key": "hex-fireworks",
+      "name": "HEX FIREWORKS",
+      "receiver": "rivals-scarlet-witch",
+      "anchor": "rivals-jubilee",
+      "heroes": [
+        "rivals-scarlet-witch",
+        "rivals-jubilee"
+      ]
+    },
+    {
+      "key": "iced-out-diamond",
+      "name": "ICED OUT DIAMOND",
+      "receiver": "rivals-emma-frost",
+      "anchor": "rivals-luna-snow",
+      "heroes": [
+        "rivals-emma-frost",
+        "rivals-luna-snow"
+      ]
+    },
+    {
+      "key": "iron-stone",
+      "name": "IRON & STONE",
+      "receiver": "rivals-iron-fist",
+      "anchor": "rivals-the-thing",
+      "heroes": [
+        "rivals-iron-fist",
+        "rivals-the-thing"
+      ]
+    },
+    {
+      "key": "jaws-of-fate",
+      "name": "JAWS OF FATE",
+      "receiver": "rivals-storm",
+      "anchor": "rivals-jeff-the-land-shark",
+      "heroes": [
+        "rivals-storm",
+        "rivals-jeff-the-land-shark"
+      ]
+    },
+    {
+      "key": "kinetic-kin",
+      "name": "KINETIC KIN",
+      "receiver": "rivals-cyclops",
+      "anchor": "rivals-gambit",
+      "heroes": [
+        "rivals-cyclops",
+        "rivals-gambit"
+      ]
+    },
+    {
+      "key": "kumiho-palm",
+      "name": "KUMIHO PALM",
+      "receiver": "rivals-iron-fist",
+      "anchor": "rivals-white-fox",
+      "heroes": [
+        "rivals-iron-fist",
+        "rivals-white-fox"
+      ]
+    },
+    {
+      "key": "light-dark-darts",
+      "name": "LIGHT & DARK DARTS",
+      "receiver": "rivals-psylocke",
+      "anchor": "rivals-cloak-dagger",
+      "heroes": [
+        "rivals-psylocke",
+        "rivals-cloak-dagger"
+      ]
+    },
+    {
+      "key": "loudmouth-mercs",
+      "name": "LOUDMOUTH MERCS",
+      "receiver": "rivals-elsa-bloodstone",
+      "anchor": "rivals-deadpool",
+      "heroes": [
+        "rivals-elsa-bloodstone",
+        "rivals-deadpool"
+      ]
+    },
+    {
+      "key": "lucky-loan",
+      "name": "LUCKY LOAN",
+      "receiver": "rivals-white-fox",
+      "anchor": "rivals-black-cat",
+      "heroes": [
+        "rivals-white-fox",
+        "rivals-black-cat"
+      ]
+    },
+    {
+      "key": "luminous-moon",
+      "name": "LUMINOUS MOON",
+      "receiver": "rivals-moon-knight",
+      "anchor": "rivals-cloak-dagger",
+      "heroes": [
+        "rivals-moon-knight",
+        "rivals-cloak-dagger"
+      ]
+    },
+    {
+      "key": "magnetic-resonance",
+      "name": "MAGNETIC RESONANCE",
+      "receiver": "rivals-magneto",
+      "anchor": "rivals-emma-frost",
+      "heroes": [
+        "rivals-magneto",
+        "rivals-emma-frost"
+      ]
+    },
+    {
+      "key": "mammalian-bond",
+      "name": "MAMMALIAN BOND",
+      "receiver": "rivals-rocket-raccoon",
+      "anchor": "rivals-squirrel-girl",
+      "heroes": [
+        "rivals-rocket-raccoon",
+        "rivals-squirrel-girl"
+      ]
+    },
+    {
+      "key": "mental-projection",
+      "name": "MENTAL PROJECTION",
+      "receiver": "rivals-psylocke",
+      "anchor": "rivals-emma-frost",
+      "heroes": [
+        "rivals-psylocke",
+        "rivals-emma-frost"
+      ]
+    },
+    {
+      "key": "metallic-chaos",
+      "name": "METALLIC CHAOS",
+      "receiver": "rivals-magneto",
+      "anchor": "rivals-scarlet-witch",
+      "heroes": [
+        "rivals-magneto",
+        "rivals-scarlet-witch"
+      ]
+    },
+    {
+      "key": "moonlit-slash",
+      "name": "MOONLIT SLASH",
+      "receiver": "rivals-hawkeye",
+      "anchor": "rivals-cloak-dagger",
+      "heroes": [
+        "rivals-hawkeye",
+        "rivals-cloak-dagger"
+      ]
+    },
+    {
+      "key": "mr-mrs-x",
+      "name": "MR. & MRS. X",
+      "receiver": "rivals-rogue",
+      "anchor": "rivals-gambit",
+      "heroes": [
+        "rivals-rogue",
+        "rivals-gambit"
+      ]
+    },
+    {
+      "key": "mr-pool-s-interdimensional-toy-box",
+      "name": "MR. POOL'S INTERDIMENSIONAL TOY BOX",
+      "receiver": "rivals-jeff-the-land-shark",
+      "anchor": "rivals-deadpool",
+      "heroes": [
+        "rivals-jeff-the-land-shark",
+        "rivals-deadpool"
+      ]
+    },
+    {
+      "key": "oblivion-shroud",
+      "name": "OBLIVION SHROUD",
+      "receiver": "rivals-cloak-dagger",
+      "anchor": "",
+      "heroes": [
+        "rivals-cloak-dagger"
+      ]
+    },
+    {
+      "key": "odin-s-unacknowledged",
+      "name": "ODIN'S UNACKNOWLEDGED",
+      "receiver": "rivals-angela",
+      "anchor": "rivals-loki",
+      "heroes": [
+        "rivals-angela",
+        "rivals-loki"
+      ]
+    },
+    {
+      "key": "pair-of-threes",
+      "name": "PAIR OF THREES",
+      "receiver": "rivals-wolverine",
+      "anchor": "rivals-gambit",
+      "heroes": [
+        "rivals-wolverine",
+        "rivals-gambit"
+      ]
+    },
+    {
+      "key": "parker-power-up",
+      "name": "PARKER POWER-UP",
+      "receiver": "rivals-spider-man",
+      "anchor": "rivals-peni-parker",
+      "heroes": [
+        "rivals-spider-man",
+        "rivals-peni-parker"
+      ]
+    },
+    {
+      "key": "planet-x-pals",
+      "name": "PLANET X PALS",
+      "receiver": "rivals-rocket-raccoon",
+      "anchor": "rivals-groot",
+      "heroes": [
+        "rivals-rocket-raccoon",
+        "rivals-groot"
+      ]
+    },
+    {
+      "key": "prehistoric-trap",
+      "name": "PREHISTORIC TRAP",
+      "receiver": "rivals-elsa-bloodstone",
+      "anchor": "rivals-devil-dinosaur",
+      "heroes": [
+        "rivals-elsa-bloodstone",
+        "rivals-devil-dinosaur"
+      ]
+    },
+    {
+      "key": "primal-punishment",
+      "name": "PRIMAL PUNISHMENT",
+      "receiver": "rivals-devil-dinosaur",
+      "anchor": "rivals-the-punisher",
+      "heroes": [
+        "rivals-devil-dinosaur",
+        "rivals-the-punisher"
+      ]
+    },
+    {
+      "key": "psionic-fox",
+      "name": "PSIONIC FOX",
+      "receiver": "rivals-white-fox",
+      "anchor": "rivals-psylocke",
+      "heroes": [
+        "rivals-white-fox",
+        "rivals-psylocke"
+      ]
+    },
+    {
+      "key": "psionic-vortex",
+      "name": "PSIONIC VORTEX",
+      "receiver": "rivals-doctor-strange",
+      "anchor": "rivals-invisible-woman",
+      "heroes": [
+        "rivals-doctor-strange",
+        "rivals-invisible-woman"
+      ]
+    },
+    {
+      "key": "ragnarok-rebirth",
+      "name": "RAGNAROK REBIRTH",
+      "receiver": "rivals-thor",
+      "anchor": "rivals-hela",
+      "heroes": [
+        "rivals-thor",
+        "rivals-hela"
+      ]
+    },
+    {
+      "key": "rocket-network",
+      "name": "ROCKET NETWORK",
+      "receiver": "rivals-peni-parker",
+      "anchor": "rivals-rocket-raccoon",
+      "heroes": [
+        "rivals-peni-parker",
+        "rivals-rocket-raccoon"
+      ]
+    },
+    {
+      "key": "savage-slam",
+      "name": "SAVAGE SLAM",
+      "receiver": "rivals-hulk",
+      "anchor": "rivals-captain-america",
+      "heroes": [
+        "rivals-hulk",
+        "rivals-captain-america"
+      ]
+    },
+    {
+      "key": "senbonzakura-strike",
+      "name": "SENBONZAKURA STRIKE",
+      "receiver": "rivals-hawkeye",
+      "anchor": "rivals-psylocke",
+      "heroes": [
+        "rivals-hawkeye",
+        "rivals-psylocke"
+      ]
+    },
+    {
+      "key": "slim-and-red",
+      "name": "SLIM AND RED",
+      "receiver": "rivals-cyclops",
+      "anchor": "rivals-phoenix",
+      "heroes": [
+        "rivals-cyclops",
+        "rivals-phoenix"
+      ]
+    },
+    {
+      "key": "sorcerers-supreme",
+      "name": "SORCERERS SUPREME",
+      "receiver": "rivals-scarlet-witch",
+      "anchor": "rivals-doctor-strange",
+      "heroes": [
+        "rivals-scarlet-witch",
+        "rivals-doctor-strange"
+      ]
+    },
+    {
+      "key": "sp-dr-sync",
+      "name": "SP//DR SYNC",
+      "receiver": "rivals-ultron",
+      "anchor": "rivals-peni-parker",
+      "heroes": [
+        "rivals-ultron",
+        "rivals-peni-parker"
+      ]
+    },
+    {
+      "key": "sparkling-staff",
+      "name": "SPARKLING STAFF",
+      "receiver": "rivals-gambit",
+      "anchor": "rivals-jubilee",
+      "heroes": [
+        "rivals-gambit",
+        "rivals-jubilee"
+      ]
+    },
+    {
+      "key": "spirit-breaker",
+      "name": "SPIRIT BREAKER",
+      "receiver": "rivals-emma-frost",
+      "anchor": "rivals-mantis",
+      "heroes": [
+        "rivals-emma-frost",
+        "rivals-mantis"
+      ]
+    },
+    {
+      "key": "squirrel-missile",
+      "name": "SQUIRREL MISSILE",
+      "receiver": "rivals-squirrel-girl",
+      "anchor": "rivals-iron-man",
+      "heroes": [
+        "rivals-squirrel-girl",
+        "rivals-iron-man"
+      ]
+    },
+    {
+      "key": "star-blossom",
+      "name": "STAR BLOSSOM",
+      "receiver": "rivals-mantis",
+      "anchor": "rivals-star-lord",
+      "heroes": [
+        "rivals-mantis",
+        "rivals-star-lord"
+      ]
+    },
+    {
+      "key": "star-soul",
+      "name": "STAR-SOUL",
+      "receiver": "rivals-star-lord",
+      "anchor": "rivals-adam-warlock",
+      "heroes": [
+        "rivals-star-lord",
+        "rivals-adam-warlock"
+      ]
+    },
+    {
+      "key": "stark-protocol",
+      "name": "STARK PROTOCOL",
+      "receiver": "rivals-ultron",
+      "anchor": "rivals-iron-man",
+      "heroes": [
+        "rivals-ultron",
+        "rivals-iron-man"
+      ]
+    },
+    {
+      "key": "stars-aligned",
+      "name": "STARS ALIGNED",
+      "receiver": "rivals-captain-america",
+      "anchor": "rivals-winter-soldier",
+      "heroes": [
+        "rivals-captain-america",
+        "rivals-winter-soldier"
+      ]
+    },
+    {
+      "key": "storming-ignition",
+      "name": "STORMING IGNITION",
+      "receiver": "rivals-human-torch",
+      "anchor": "rivals-storm",
+      "heroes": [
+        "rivals-human-torch",
+        "rivals-storm"
+      ]
+    },
+    {
+      "key": "surf-turf",
+      "name": "SURF & TURF",
+      "receiver": "rivals-devil-dinosaur",
+      "anchor": "rivals-jeff-the-land-shark",
+      "heroes": [
+        "rivals-devil-dinosaur",
+        "rivals-jeff-the-land-shark"
+      ]
+    },
+    {
+      "key": "symbiote-bond",
+      "name": "SYMBIOTE BOND",
+      "receiver": "rivals-spider-man",
+      "anchor": "rivals-venom",
+      "heroes": [
+        "rivals-spider-man",
+        "rivals-venom"
+      ]
+    },
+    {
+      "key": "telekinetic-beatdown",
+      "name": "TELEKINETIC BEATDOWN",
+      "receiver": "rivals-phoenix",
+      "anchor": "rivals-rogue",
+      "heroes": [
+        "rivals-phoenix",
+        "rivals-rogue"
+      ]
+    },
+    {
+      "key": "thunder-overdrive",
+      "name": "THUNDER OVERDRIVE",
+      "receiver": "rivals-iron-man",
+      "anchor": "rivals-thor",
+      "heroes": [
+        "rivals-iron-man",
+        "rivals-thor"
+      ]
+    },
+    {
+      "key": "timeless-veterans",
+      "name": "TIMELESS VETERANS",
+      "receiver": "rivals-winter-soldier",
+      "anchor": "rivals-the-punisher",
+      "heroes": [
+        "rivals-winter-soldier",
+        "rivals-the-punisher"
+      ]
+    },
+    {
+      "key": "two-in-one",
+      "name": "TWO-IN-ONE",
+      "receiver": "rivals-the-thing",
+      "anchor": "rivals-human-torch",
+      "heroes": [
+        "rivals-the-thing",
+        "rivals-human-torch"
+      ]
+    },
+    {
+      "key": "unbreakable-forces",
+      "name": "UNBREAKABLE FORCES",
+      "receiver": "rivals-the-thing",
+      "anchor": "rivals-invisible-woman",
+      "heroes": [
+        "rivals-the-thing",
+        "rivals-invisible-woman"
+      ]
+    },
+    {
+      "key": "united-siblings",
+      "name": "UNITED SIBLINGS",
+      "receiver": "rivals-invisible-woman",
+      "anchor": "rivals-human-torch",
+      "heroes": [
+        "rivals-invisible-woman",
+        "rivals-human-torch"
+      ]
+    },
+    {
+      "key": "vampiric-kin",
+      "name": "VAMPIRIC KIN",
+      "receiver": "rivals-jubilee",
+      "anchor": "rivals-blade",
+      "heroes": [
+        "rivals-jubilee",
+        "rivals-blade"
+      ]
+    },
+    {
+      "key": "vibranium-mech",
+      "name": "VIBRANIUM MECH",
+      "receiver": "rivals-peni-parker",
+      "anchor": "rivals-black-panther",
+      "heroes": [
+        "rivals-peni-parker",
+        "rivals-black-panther"
+      ]
+    },
+    {
+      "key": "vibrant-vitality",
+      "name": "VIBRANT VITALITY",
+      "receiver": "rivals-loki",
+      "anchor": "rivals-mantis",
+      "heroes": [
+        "rivals-loki",
+        "rivals-mantis"
+      ]
+    },
+    {
+      "key": "villain-s-illusion",
+      "name": "VILLAIN'S ILLUSION",
+      "receiver": "rivals-loki",
+      "anchor": "rivals-hela",
+      "heroes": [
+        "rivals-loki",
+        "rivals-hela"
+      ]
+    },
+    {
+      "key": "vitality-pact",
+      "name": "VITALITY PACT",
+      "receiver": "rivals-mantis",
+      "anchor": "rivals-adam-warlock",
+      "heroes": [
+        "rivals-mantis",
+        "rivals-adam-warlock"
+      ]
+    },
+    {
+      "key": "void-pentagram",
+      "name": "VOID PENTAGRAM",
+      "receiver": "rivals-magik",
+      "anchor": "",
+      "heroes": [
+        "rivals-magik"
+      ]
+    },
+    {
+      "key": "voltaic-union",
+      "name": "VOLTAIC UNION",
+      "receiver": "rivals-captain-america",
+      "anchor": "rivals-thor",
+      "heroes": [
+        "rivals-captain-america",
+        "rivals-thor"
+      ]
+    },
+    {
+      "key": "wild-wall",
+      "name": "WILD WALL",
+      "receiver": "rivals-groot",
+      "anchor": "rivals-mantis",
+      "heroes": [
+        "rivals-groot",
+        "rivals-mantis"
+      ]
+    }
+  ]
+}

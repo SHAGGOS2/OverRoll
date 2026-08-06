@@ -1,16 +1,25 @@
-OVERROLL WEB - PASO 9: SONIDOS INTEGRADOS
+OVERROLL WEB — DEADLOCK, PVZ, TF2, ROLES E IMÁGENES
 
-1. Copia el contenido de este ZIP dentro de la carpeta web del repositorio.
-2. Sustituye los archivos existentes cuando se solicite.
-3. Reinicia Vite y actualiza con Ctrl+F5.
+El ZIP contiene una carpeta llamada web.
+Descomprímelo en la raíz del repositorio OverRoll, no dentro de web.
 
-Nuevos sonidos asignados:
-- Seleccionar, crear, duplicar y eliminar perfiles.
-- Clasificar heroes y asignar perfiles a jugadores.
-- Abrir y modificar filtros.
-- Fijar heroes.
-- Elegir perks.
-- Revolver jugadores.
-- Activar Stadium.
+En GitHub Codespaces:
 
-Los diez archivos proporcionados fueron normalizados y renombrados dentro de public/assets/sounds.
+cd /workspaces/OverRoll
+unzip -o OverRoll_Web_Deadlock_PVZ_TF2_Roles_Fix.zip
+cd web
+rm -rf node_modules dist
+npm install
+npm run build
+npm run dev -- --host 0.0.0.0
+
+Cambios principales:
+- Deadlock siempre genera al menos 3 personajes y puede ampliarse hasta 12.
+- PVZ "Generar ambos" produce Plantas y Zombis en una sola generación.
+- TF2 y PVZ tienen fichas visualmente renovadas.
+- Precarga y caché de retratos para evitar imágenes lentas, vacías o parpadeantes.
+- Animaciones estables sin ocultar la ficha durante la entrada.
+- Los roles de los juegos nuevos se asignan como Automático o Rol fijo; ya no se presentan como filtros múltiples.
+- Las composiciones automáticas respetan la estructura propia de cada juego.
+
+Después de validar, publica web/dist con el método que ya utiliza over-roll.com.

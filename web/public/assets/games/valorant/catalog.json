@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "source": "https://valorant-api.com/v1/agents?isPlayableCharacter=true",
+  "heroes": [
+    {
+      "key": "astra",
+      "name": "Astra",
+      "role": "controller",
+      "portrait": "astra.png"
+    },
+    {
+      "key": "brimstone",
+      "name": "Brimstone",
+      "role": "controller",
+      "portrait": "brimstone.png"
+    },
+    {
+      "key": "clove",
+      "name": "Clove",
+      "role": "controller",
+      "portrait": "clove.png"
+    },
+    {
+      "key": "harbor",
+      "name": "Harbor",
+      "role": "controller",
+      "portrait": "harbor.png"
+    },
+    {
+      "key": "miks",
+      "name": "Miks",
+      "role": "controller",
+      "portrait": "miks.png"
+    },
+    {
+      "key": "omen",
+      "name": "Omen",
+      "role": "controller",
+      "portrait": "omen.png"
+    },
+    {
+      "key": "viper",
+      "name": "Viper",
+      "role": "controller",
+      "portrait": "viper.png"
+    },
+    {
+      "key": "iso",
+      "name": "Iso",
+      "role": "duelist",
+      "portrait": "iso.png"
+    },
+    {
+      "key": "jett",
+      "name": "Jett",
+      "role": "duelist",
+      "portrait": "jett.png"
+    },
+    {
+      "key": "neon",
+      "name": "Neon",
+      "role": "duelist",
+      "portrait": "neon.png"
+    },
+    {
+      "key": "phoenix",
+      "name": "Phoenix",
+      "role": "duelist",
+      "portrait": "phoenix.png"
+    },
+    {
+      "key": "raze",
+      "name": "Raze",
+      "role": "duelist",
+      "portrait": "raze.png"
+    },
+    {
+      "key": "reyna",
+      "name": "Reyna",
+      "role": "duelist",
+      "portrait": "reyna.png"
+    },
+    {
+      "key": "waylay",
+      "name": "Waylay",
+      "role": "duelist",
+      "portrait": "waylay.png"
+    },
+    {
+      "key": "yoru",
+      "name": "Yoru",
+      "role": "duelist",
+      "portrait": "yoru.png"
+    },
+    {
+      "key": "breach",
+      "name": "Breach",
+      "role": "initiator",
+      "portrait": "breach.png"
+    },
+    {
+      "key": "fade",
+      "name": "Fade",
+      "role": "initiator",
+      "portrait": "fade.png"
+    },
+    {
+      "key": "gekko",
+      "name": "Gekko",
+      "role": "initiator",
+      "portrait": "gekko.png"
+    },
+    {
+      "key": "kay-o",
+      "name": "KAY/O",
+      "role": "initiator",
+      "portrait": "kay-o.png"
+    },
+    {
+      "key": "skye",
+      "name": "Skye",
+      "role": "initiator",
+      "portrait": "skye.png"
+    },
+    {
+      "key": "sova",
+      "name": "Sova",
+      "role": "initiator",
+      "portrait": "sova.png"
+    },
+    {
+      "key": "tejo",
+      "name": "Tejo",
+      "role": "initiator",
+      "portrait": "tejo.png"
+    },
+    {
+      "key": "chamber",
+      "name": "Chamber",
+      "role": "sentinel",
+      "portrait": "chamber.png"
+    },
+    {
+      "key": "cypher",
+      "name": "Cypher",
+      "role": "sentinel",
+      "portrait": "cypher.png"
+    },
+    {
+      "key": "deadlock",
+      "name": "Deadlock",
+      "role": "sentinel",
+      "portrait": "deadlock.png"
+    },
+    {
+      "key": "killjoy",
+      "name": "Killjoy",
+      "role": "sentinel",
+      "portrait": "killjoy.png"
+    },
+    {
+      "key": "sage",
+      "name": "Sage",
+      "role": "sentinel",
+      "portrait": "sage.png"
+    },
+    {
+      "key": "veto",
+      "name": "Veto",
+      "role": "sentinel",
+      "portrait": "veto.png"
+    },
+    {
+      "key": "vyse",
+      "name": "Vyse",
+      "role": "sentinel",
+      "portrait": "vyse.png"
+    }
+  ]
+}

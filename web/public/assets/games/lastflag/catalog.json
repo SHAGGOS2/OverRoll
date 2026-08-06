@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "source": "https://lastflag.com/contestants/",
+  "heroes": [
+    {
+      "key": "knives",
+      "name": "Knives",
+      "role": "assassin",
+      "portrait": "knives.png"
+    },
+    {
+      "key": "lumberjack",
+      "name": "Lumberjack",
+      "role": "tank",
+      "portrait": "lumberjack.png"
+    },
+    {
+      "key": "bounty-hunter",
+      "name": "Bounty Hunter",
+      "role": "all-rounder",
+      "portrait": "bounty-hunter.png"
+    },
+    {
+      "key": "scout",
+      "name": "Scout",
+      "role": "recon",
+      "portrait": "scout.png"
+    },
+    {
+      "key": "arsenal",
+      "name": "Arsenal",
+      "role": "area-control",
+      "portrait": "arsenal.png"
+    },
+    {
+      "key": "banshee",
+      "name": "Banshee",
+      "role": "support",
+      "portrait": "banshee.png"
+    },
+    {
+      "key": "roadie",
+      "name": "Roadie",
+      "role": "crowd-control",
+      "portrait": "roadie.png"
+    },
+    {
+      "key": "skyfire",
+      "name": "Skyfire",
+      "role": "offensive",
+      "portrait": "skyfire.png"
+    },
+    {
+      "key": "tango",
+      "name": "Tango",
+      "role": "control",
+      "portrait": "tango.png"
+    }
+  ]
+}

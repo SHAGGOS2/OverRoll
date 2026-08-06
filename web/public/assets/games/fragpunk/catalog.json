@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "source": "https://www.fragpunk.com/index.html",
+  "heroes": [
+    {
+      "key": "aura",
+      "name": "Aura",
+      "role": "lancer",
+      "portrait": "aura.png"
+    },
+    {
+      "key": "axon",
+      "name": "Axon",
+      "role": "lancer",
+      "portrait": "axon.png"
+    },
+    {
+      "key": "broker",
+      "name": "Broker",
+      "role": "lancer",
+      "portrait": "broker.png"
+    },
+    {
+      "key": "calamity",
+      "name": "Calamity",
+      "role": "lancer",
+      "portrait": "calamity.png"
+    },
+    {
+      "key": "chum",
+      "name": "Chum",
+      "role": "lancer",
+      "portrait": "chum.png"
+    },
+    {
+      "key": "corona",
+      "name": "Corona",
+      "role": "lancer",
+      "portrait": "corona.png"
+    },
+    {
+      "key": "feit",
+      "name": "Counterfeit",
+      "role": "lancer",
+      "portrait": "feit.png"
+    },
+    {
+      "key": "dex",
+      "name": "Dex",
+      "role": "lancer",
+      "portrait": "dex.png"
+    },
+    {
+      "key": "hollowpoint",
+      "name": "Hollowpoint",
+      "role": "lancer",
+      "portrait": "hollowpoint.png"
+    },
+    {
+      "key": "hurricane",
+      "name": "Hurricane",
+      "role": "lancer",
+      "portrait": "hurricane.png"
+    },
+    {
+      "key": "ixchel",
+      "name": "Ixchel",
+      "role": "lancer",
+      "portrait": "ixchel.png"
+    },
+    {
+      "key": "jaguar",
+      "name": "Jaguar",
+      "role": "lancer",
+      "portrait": "jaguar.png"
+    },
+    {
+      "key": "kismet",
+      "name": "Kismet",
+      "role": "lancer",
+      "portrait": "kismet.png"
+    },
+    {
+      "key": "nitro",
+      "name": "Nitro",
+      "role": "lancer",
+      "portrait": "nitro.png"
+    },
+    {
+      "key": "pathojen",
+      "name": "Pathojen",
+      "role": "lancer",
+      "portrait": "pathojen.png"
+    },
+    {
+      "key": "serket",
+      "name": "Serket",
+      "role": "lancer",
+      "portrait": "serket.png"
+    },
+    {
+      "key": "sonar",
+      "name": "Sonar",
+      "role": "lancer",
+      "portrait": "sonar.png"
+    },
+    {
+      "key": "spider",
+      "name": "Spider",
+      "role": "lancer",
+      "portrait": "spider.png"
+    },
+    {
+      "key": "wildstyle",
+      "name": "Wildstyle",
+      "role": "lancer",
+      "portrait": "wildstyle.png"
+    },
+    {
+      "key": "fengxingzhe",
+      "name": "Windwalker",
+      "role": "lancer",
+      "portrait": "fengxingzhe.png"
+    },
+    {
+      "key": "zephyr",
+      "name": "Zephyr",
+      "role": "lancer",
+      "portrait": "zephyr.png"
+    }
+  ]
+}

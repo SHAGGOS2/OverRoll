@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect width="256" height="256" fill="#071521"/>
+  <path d="M128 25 43 214h52l33-79 33 79h52z" fill="#50d8ff"/>
+  <text x="128" y="235" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="20" font-weight="700">LIGHT</text>
+</svg>
