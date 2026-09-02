@@ -1271,3 +1271,25 @@
 .tf2-wheel-shell { width: min(420px, 92%); }
 .tf2-wheel-panel .roulette-section-heading.compact { min-height: 64px; }
 .tf2-class-row .roulette-hero-main img { border-width: 1.5px; }
+
+
+.roster-floating-dock {
+  padding-right: 8px;
+}
+
+.roster-floating-generate {
+  border-color: color-mix(in srgb, var(--module-accent) 62%, transparent);
+  color: #081520;
+  background: linear-gradient(180deg, color-mix(in srgb, #ffffff 22%, var(--module-accent)), var(--module-accent));
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--module-accent) 24%, transparent);
+}
+
+
+.locked-teamup-card {
+  cursor: default;
+  pointer-events: none;
+}
+
+.locked-teamup-card i {
+  display: none;
+}

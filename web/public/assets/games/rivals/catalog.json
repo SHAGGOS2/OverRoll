@@ -1,371 +1,380 @@
 {
-    "schema_version":  1,
-    "source":  "https://www.marvelrivals.com/heroes/index.html",
-    "updated":  "2026-07-26",
-    "heroes":  [
-                   {
-                       "key":  "rivals-jubilee",
-                       "name":  "Jubilee",
-                       "role":  "strategist",
-                       "official_id":  "dc1d68ab-9f3f-465a-80c0-e77bb51a66bc",
-                       "portrait":  "data/assets/games/rivals/jubilee.png"
-                   },
-                   {
-                       "key":  "rivals-cyclops",
-                       "name":  "Cyclops",
-                       "role":  "duelist",
-                       "official_id":  "4b46591b-a837-43ba-ae41-571de988c190",
-                       "portrait":  "data/assets/games/rivals/cyclops.png"
-                   },
-                   {
-                       "key":  "rivals-devil-dinosaur",
-                       "name":  "Devil Dinosaur",
-                       "role":  "vanguard",
-                       "official_id":  "d579e90a-46a7-45fd-975f-4d63c7755d27",
-                       "portrait":  "data/assets/games/rivals/devil-dinosaur.png"
-                   },
-                   {
-                       "key":  "rivals-black-cat",
-                       "name":  "Black Cat",
-                       "role":  "duelist",
-                       "official_id":  "84b3b29a-326a-443d-bf18-4ebb9f2948fc",
-                       "portrait":  "data/assets/games/rivals/black-cat.png"
-                   },
-                   {
-                       "key":  "rivals-white-fox",
-                       "name":  "White Fox",
-                       "role":  "strategist",
-                       "official_id":  "bff0c7c6-3042-4384-8735-7ec6354baa1e",
-                       "portrait":  "data/assets/games/rivals/white-fox.png"
-                   },
-                   {
-                       "key":  "rivals-elsa-bloodstone",
-                       "name":  "Elsa Bloodstone",
-                       "role":  "duelist",
-                       "official_id":  "91b586e3-4d55-455c-bd7d-69fbe0563d26",
-                       "portrait":  "data/assets/games/rivals/elsa-bloodstone.png"
-                   },
-                   {
-                       "key":  "rivals-deadpool",
-                       "name":  "Deadpool",
-                       "role":  "flex",
-                       "official_id":  "3ef6b679-d1b4-4757-a8ee-0ea53379c754",
-                       "portrait":  "data/assets/games/rivals/deadpool.png"
-                   },
-                   {
-                       "key":  "rivals-rogue",
-                       "name":  "Rogue",
-                       "role":  "vanguard",
-                       "official_id":  "deb6b426-c97e-4449-b345-4d7131336a64",
-                       "portrait":  "data/assets/games/rivals/rogue.png"
-                   },
-                   {
-                       "key":  "rivals-gambit",
-                       "name":  "Gambit",
-                       "role":  "strategist",
-                       "official_id":  "46e47f1b-a312-4686-ae9f-328318c544dd",
-                       "portrait":  "data/assets/games/rivals/gambit.png"
-                   },
-                   {
-                       "key":  "rivals-daredevil",
-                       "name":  "Daredevil",
-                       "role":  "duelist",
-                       "official_id":  "043108d4-fd6b-4884-aee1-1ccbefb79790",
-                       "portrait":  "data/assets/games/rivals/daredevil.png"
-                   },
-                   {
-                       "key":  "rivals-angela",
-                       "name":  "Angela",
-                       "role":  "vanguard",
-                       "official_id":  "03af29d0-1a53-4077-9062-8201ed327635",
-                       "portrait":  "data/assets/games/rivals/angela.png"
-                   },
-                   {
-                       "key":  "rivals-blade",
-                       "name":  "Blade",
-                       "role":  "duelist",
-                       "official_id":  "4bb813d7-30ab-4c36-bd05-b9d299e4c1e3",
-                       "portrait":  "data/assets/games/rivals/blade.png"
-                   },
-                   {
-                       "key":  "rivals-phoenix",
-                       "name":  "Phoenix",
-                       "role":  "duelist",
-                       "official_id":  "f2521fc5-3180-477d-945c-403fa65fd7f5",
-                       "portrait":  "data/assets/games/rivals/phoenix.png"
-                   },
-                   {
-                       "key":  "rivals-ultron",
-                       "name":  "Ultron",
-                       "role":  "strategist",
-                       "official_id":  "dddc5632-ed86-4312-b8da-1616183fd909",
-                       "portrait":  "data/assets/games/rivals/ultron.png"
-                   },
-                   {
-                       "key":  "rivals-emma-frost",
-                       "name":  "Emma Frost",
-                       "role":  "vanguard",
-                       "official_id":  "011f4b5b-f020-4187-93f5-8a64df44ad48",
-                       "portrait":  "data/assets/games/rivals/emma-frost.png"
-                   },
-                   {
-                       "key":  "rivals-the-thing",
-                       "name":  "The Thing",
-                       "role":  "vanguard",
-                       "official_id":  "10bfa106-6a69-4dac-85f5-8b327e98e566",
-                       "portrait":  "data/assets/games/rivals/the-thing.png"
-                   },
-                   {
-                       "key":  "rivals-human-torch",
-                       "name":  "Human Torch",
-                       "role":  "duelist",
-                       "official_id":  "f0ec2612-649f-48bb-a18b-48ef1fe9ba56",
-                       "portrait":  "data/assets/games/rivals/human-torch.png"
-                   },
-                   {
-                       "key":  "rivals-invisible-woman",
-                       "name":  "Invisible Woman",
-                       "role":  "strategist",
-                       "official_id":  "9cc13662-5669-460f-adbf-f53aba63bb46",
-                       "portrait":  "data/assets/games/rivals/invisible-woman.png"
-                   },
-                   {
-                       "key":  "rivals-mister-fantastic",
-                       "name":  "Mister Fantastic",
-                       "role":  "duelist",
-                       "official_id":  "fccfe09c-c34c-40d6-b546-a34386612729",
-                       "portrait":  "data/assets/games/rivals/mister-fantastic.png"
-                   },
-                   {
-                       "key":  "rivals-squirrel-girl",
-                       "name":  "Squirrel Girl",
-                       "role":  "duelist",
-                       "official_id":  "4ed51741-f094-46ef-b5ca-bb2025b15c50",
-                       "portrait":  "data/assets/games/rivals/squirrel-girl.png"
-                   },
-                   {
-                       "key":  "rivals-black-widow",
-                       "name":  "Black Widow",
-                       "role":  "duelist",
-                       "official_id":  "baa0fe39-41ff-42f3-b48f-3e453317503a",
-                       "portrait":  "data/assets/games/rivals/black-widow.png"
-                   },
-                   {
-                       "key":  "rivals-wolverine",
-                       "name":  "Wolverine",
-                       "role":  "duelist",
-                       "official_id":  "a9b308ab-f0d8-412a-9362-e60091e57ded",
-                       "portrait":  "data/assets/games/rivals/wolverine.png"
-                   },
-                   {
-                       "key":  "rivals-cloak-dagger",
-                       "name":  "Cloak\u0026Dagger",
-                       "role":  "strategist",
-                       "official_id":  "5b5a8c7a-c9c0-4f4c-89a3-dae465db8c7f",
-                       "portrait":  "data/assets/games/rivals/cloak-dagger.png"
-                   },
-                   {
-                       "key":  "rivals-iron-fist",
-                       "name":  "Iron Fist",
-                       "role":  "duelist",
-                       "official_id":  "c90562b1-0bf1-4f90-94ed-d24a7650a2b0",
-                       "portrait":  "data/assets/games/rivals/iron-fist.png"
-                   },
-                   {
-                       "key":  "rivals-psylocke",
-                       "name":  "Psylocke",
-                       "role":  "duelist",
-                       "official_id":  "1c8d092c-74b9-4988-82ba-151a4b4f1308",
-                       "portrait":  "data/assets/games/rivals/psylocke.png"
-                   },
-                   {
-                       "key":  "rivals-hawkeye",
-                       "name":  "Hawkeye",
-                       "role":  "duelist",
-                       "official_id":  "e7e0573d-ac83-4d1e-b286-7c7e4c79fc81",
-                       "portrait":  "data/assets/games/rivals/hawkeye.png"
-                   },
-                   {
-                       "key":  "rivals-iron-man",
-                       "name":  "Iron Man",
-                       "role":  "duelist",
-                       "official_id":  "ef114434-6c2a-48ff-a4f7-05dc278aedde",
-                       "portrait":  "data/assets/games/rivals/iron-man.png"
-                   },
-                   {
-                       "key":  "rivals-namor",
-                       "name":  "Namor",
-                       "role":  "duelist",
-                       "official_id":  "afbd915c-3505-4660-9815-bebe2c96370b",
-                       "portrait":  "data/assets/games/rivals/namor.png"
-                   },
-                   {
-                       "key":  "rivals-moon-knight",
-                       "name":  "Moon Knight",
-                       "role":  "duelist",
-                       "official_id":  "7dc8b934-fe12-49ae-ac3b-7d7c3a688443",
-                       "portrait":  "data/assets/games/rivals/moon-knight.png"
-                   },
-                   {
-                       "key":  "rivals-star-lord",
-                       "name":  "Star-Lord",
-                       "role":  "duelist",
-                       "official_id":  "f052a66a-d95a-4062-911a-0c4cd35386ac",
-                       "portrait":  "data/assets/games/rivals/star-lord.png"
-                   },
-                   {
-                       "key":  "rivals-scarlet-witch",
-                       "name":  "Scarlet Witch",
-                       "role":  "duelist",
-                       "official_id":  "1d3f08cf-abee-4eb9-b2fd-31ce9947e5a1",
-                       "portrait":  "data/assets/games/rivals/scarlet-witch.png"
-                   },
-                   {
-                       "key":  "rivals-winter-soldier",
-                       "name":  "Winter Soldier",
-                       "role":  "duelist",
-                       "official_id":  "7b26015b-e5f2-4d01-983b-885540b6236d",
-                       "portrait":  "data/assets/games/rivals/winter-soldier.png"
-                   },
-                   {
-                       "key":  "rivals-magik",
-                       "name":  "Magik",
-                       "role":  "duelist",
-                       "official_id":  "dd9a323f-da66-4ba8-9e37-1d3e8398a9b4",
-                       "portrait":  "data/assets/games/rivals/magik.png"
-                   },
-                   {
-                       "key":  "rivals-spider-man",
-                       "name":  "Spider-Man",
-                       "role":  "duelist",
-                       "official_id":  "feef5830-45b0-435e-8f7b-829241918b4d",
-                       "portrait":  "data/assets/games/rivals/spider-man.png"
-                   },
-                   {
-                       "key":  "rivals-black-panther",
-                       "name":  "Black Panther",
-                       "role":  "duelist",
-                       "official_id":  "fa01bc79-aba9-4559-9a0e-fc4fb5666f0a",
-                       "portrait":  "data/assets/games/rivals/black-panther.png"
-                   },
-                   {
-                       "key":  "rivals-hela",
-                       "name":  "Hela",
-                       "role":  "duelist",
-                       "official_id":  "7db8153e-f7fd-4889-b234-af4e06a0cabe",
-                       "portrait":  "data/assets/games/rivals/hela.png"
-                   },
-                   {
-                       "key":  "rivals-storm",
-                       "name":  "Storm",
-                       "role":  "duelist",
-                       "official_id":  "93784596-43d9-42f9-bb0c-86a5140f4917",
-                       "portrait":  "data/assets/games/rivals/storm.png"
-                   },
-                   {
-                       "key":  "rivals-hulk",
-                       "name":  "Hulk",
-                       "role":  "vanguard",
-                       "official_id":  "9471f35c-3f81-4ae2-9726-b2944dd431e9",
-                       "portrait":  "data/assets/games/rivals/hulk.png"
-                   },
-                   {
-                       "key":  "rivals-jeff-the-land-shark",
-                       "name":  "Jeff The Land Shark",
-                       "role":  "strategist",
-                       "official_id":  "49e078be-c0c3-4efc-ad01-9c6f4b4f043e",
-                       "portrait":  "data/assets/games/rivals/jeff-the-land-shark.png"
-                   },
-                   {
-                       "key":  "rivals-the-punisher",
-                       "name":  "The Punisher",
-                       "role":  "duelist",
-                       "official_id":  "77ad32c5-b42c-405d-afeb-bd452681b8e8",
-                       "portrait":  "data/assets/games/rivals/the-punisher.png"
-                   },
-                   {
-                       "key":  "rivals-luna-snow",
-                       "name":  "Luna Snow",
-                       "role":  "strategist",
-                       "official_id":  "1077f07b-2178-49d3-80be-d915de78d17c",
-                       "portrait":  "data/assets/games/rivals/luna-snow.png"
-                   },
-                   {
-                       "key":  "rivals-adam-warlock",
-                       "name":  "Adam Warlock",
-                       "role":  "strategist",
-                       "official_id":  "ef4511de-a2ff-43f0-b061-d915f0ccb37d",
-                       "portrait":  "data/assets/games/rivals/adam-warlock.png"
-                   },
-                   {
-                       "key":  "rivals-rocket-raccoon",
-                       "name":  "Rocket Raccoon",
-                       "role":  "strategist",
-                       "official_id":  "e1fb7cc4-a1a0-473b-8809-68b04dcc9420",
-                       "portrait":  "data/assets/games/rivals/rocket-raccoon.png"
-                   },
-                   {
-                       "key":  "rivals-loki",
-                       "name":  "Loki",
-                       "role":  "strategist",
-                       "official_id":  "c6011abe-8d17-4962-ac88-7232dc3d208f",
-                       "portrait":  "data/assets/games/rivals/loki.png"
-                   },
-                   {
-                       "key":  "rivals-mantis",
-                       "name":  "Mantis",
-                       "role":  "strategist",
-                       "official_id":  "bbb138f7-80d3-4db4-a608-4ee2d29c5fc0",
-                       "portrait":  "data/assets/games/rivals/mantis.png"
-                   },
-                   {
-                       "key":  "rivals-peni-parker",
-                       "name":  "Peni Parker",
-                       "role":  "vanguard",
-                       "official_id":  "3929765b-c856-44c9-b97a-eb965f3fbdf6",
-                       "portrait":  "data/assets/games/rivals/peni-parker.png"
-                   },
-                   {
-                       "key":  "rivals-thor",
-                       "name":  "Thor",
-                       "role":  "vanguard",
-                       "official_id":  "fcddbb53-6a99-45f6-9cc8-65c68edd96e0",
-                       "portrait":  "data/assets/games/rivals/thor.png"
-                   },
-                   {
-                       "key":  "rivals-magneto",
-                       "name":  "Magneto",
-                       "role":  "vanguard",
-                       "official_id":  "2dffcc89-3280-4d43-907a-646eea9d3a74",
-                       "portrait":  "data/assets/games/rivals/magneto.png"
-                   },
-                   {
-                       "key":  "rivals-venom",
-                       "name":  "Venom",
-                       "role":  "vanguard",
-                       "official_id":  "fa12017d-641d-4734-b459-187c2a6cdeb1",
-                       "portrait":  "data/assets/games/rivals/venom.png"
-                   },
-                   {
-                       "key":  "rivals-groot",
-                       "name":  "Groot",
-                       "role":  "vanguard",
-                       "official_id":  "f29f3cf1-e8dd-4188-acce-e519dd94206d",
-                       "portrait":  "data/assets/games/rivals/groot.png"
-                   },
-                   {
-                       "key":  "rivals-captain-america",
-                       "name":  "Captain America",
-                       "role":  "vanguard",
-                       "official_id":  "b3e3bc0b-0a15-4fa8-8139-e08f7fcd9beb",
-                       "portrait":  "data/assets/games/rivals/captain-america.png"
-                   },
-                   {
-                       "key":  "rivals-doctor-strange",
-                       "name":  "Doctor Strange",
-                       "role":  "vanguard",
-                       "official_id":  "692c786c-08f4-4502-9803-a55f3bc8f83b",
-                       "portrait":  "data/assets/games/rivals/doctor-strange.png"
-                   }
-               ]
+  "schema_version": 1,
+  "source": "Marvel Rivals official roster; The Hood reference: https://marvelrivals.fandom.com/wiki/The_Hood",
+  "updated": "2026-08-11",
+  "heroes": [
+    {
+      "key": "rivals-jubilee",
+      "name": "Jubilee",
+      "role": "strategist",
+      "official_id": "dc1d68ab-9f3f-465a-80c0-e77bb51a66bc",
+      "portrait": "data/assets/games/rivals/jubilee.png"
+    },
+    {
+      "key": "rivals-cyclops",
+      "name": "Cyclops",
+      "role": "duelist",
+      "official_id": "4b46591b-a837-43ba-ae41-571de988c190",
+      "portrait": "data/assets/games/rivals/cyclops.png"
+    },
+    {
+      "key": "rivals-the-hood",
+      "name": "The Hood",
+      "role": "vanguard",
+      "portrait": "https://r.res.easebar.com/pic/20260807/21906805-5fb4-4c71-93c2-6e1267ecdbd1.png",
+      "real_name": "Parker Davis Robbins",
+      "reference": "https://marvelrivals.fandom.com/wiki/The_Hood",
+      "portrait_source": "Marvel Rivals official high-resolution hero asset"
+    },
+    {
+      "key": "rivals-devil-dinosaur",
+      "name": "Devil Dinosaur",
+      "role": "vanguard",
+      "official_id": "d579e90a-46a7-45fd-975f-4d63c7755d27",
+      "portrait": "data/assets/games/rivals/devil-dinosaur.png"
+    },
+    {
+      "key": "rivals-black-cat",
+      "name": "Black Cat",
+      "role": "duelist",
+      "official_id": "84b3b29a-326a-443d-bf18-4ebb9f2948fc",
+      "portrait": "data/assets/games/rivals/black-cat.png"
+    },
+    {
+      "key": "rivals-white-fox",
+      "name": "White Fox",
+      "role": "strategist",
+      "official_id": "bff0c7c6-3042-4384-8735-7ec6354baa1e",
+      "portrait": "data/assets/games/rivals/white-fox.png"
+    },
+    {
+      "key": "rivals-elsa-bloodstone",
+      "name": "Elsa Bloodstone",
+      "role": "duelist",
+      "official_id": "91b586e3-4d55-455c-bd7d-69fbe0563d26",
+      "portrait": "data/assets/games/rivals/elsa-bloodstone.png"
+    },
+    {
+      "key": "rivals-deadpool",
+      "name": "Deadpool",
+      "role": "flex",
+      "official_id": "3ef6b679-d1b4-4757-a8ee-0ea53379c754",
+      "portrait": "data/assets/games/rivals/deadpool.png"
+    },
+    {
+      "key": "rivals-rogue",
+      "name": "Rogue",
+      "role": "vanguard",
+      "official_id": "deb6b426-c97e-4449-b345-4d7131336a64",
+      "portrait": "data/assets/games/rivals/rogue.png"
+    },
+    {
+      "key": "rivals-gambit",
+      "name": "Gambit",
+      "role": "strategist",
+      "official_id": "46e47f1b-a312-4686-ae9f-328318c544dd",
+      "portrait": "data/assets/games/rivals/gambit.png"
+    },
+    {
+      "key": "rivals-daredevil",
+      "name": "Daredevil",
+      "role": "duelist",
+      "official_id": "043108d4-fd6b-4884-aee1-1ccbefb79790",
+      "portrait": "data/assets/games/rivals/daredevil.png"
+    },
+    {
+      "key": "rivals-angela",
+      "name": "Angela",
+      "role": "vanguard",
+      "official_id": "03af29d0-1a53-4077-9062-8201ed327635",
+      "portrait": "data/assets/games/rivals/angela.png"
+    },
+    {
+      "key": "rivals-blade",
+      "name": "Blade",
+      "role": "duelist",
+      "official_id": "4bb813d7-30ab-4c36-bd05-b9d299e4c1e3",
+      "portrait": "data/assets/games/rivals/blade.png"
+    },
+    {
+      "key": "rivals-phoenix",
+      "name": "Phoenix",
+      "role": "duelist",
+      "official_id": "f2521fc5-3180-477d-945c-403fa65fd7f5",
+      "portrait": "data/assets/games/rivals/phoenix.png"
+    },
+    {
+      "key": "rivals-ultron",
+      "name": "Ultron",
+      "role": "strategist",
+      "official_id": "dddc5632-ed86-4312-b8da-1616183fd909",
+      "portrait": "data/assets/games/rivals/ultron.png"
+    },
+    {
+      "key": "rivals-emma-frost",
+      "name": "Emma Frost",
+      "role": "vanguard",
+      "official_id": "011f4b5b-f020-4187-93f5-8a64df44ad48",
+      "portrait": "data/assets/games/rivals/emma-frost.png"
+    },
+    {
+      "key": "rivals-the-thing",
+      "name": "The Thing",
+      "role": "vanguard",
+      "official_id": "10bfa106-6a69-4dac-85f5-8b327e98e566",
+      "portrait": "data/assets/games/rivals/the-thing.png"
+    },
+    {
+      "key": "rivals-human-torch",
+      "name": "Human Torch",
+      "role": "duelist",
+      "official_id": "f0ec2612-649f-48bb-a18b-48ef1fe9ba56",
+      "portrait": "data/assets/games/rivals/human-torch.png"
+    },
+    {
+      "key": "rivals-invisible-woman",
+      "name": "Invisible Woman",
+      "role": "strategist",
+      "official_id": "9cc13662-5669-460f-adbf-f53aba63bb46",
+      "portrait": "data/assets/games/rivals/invisible-woman.png"
+    },
+    {
+      "key": "rivals-mister-fantastic",
+      "name": "Mister Fantastic",
+      "role": "duelist",
+      "official_id": "fccfe09c-c34c-40d6-b546-a34386612729",
+      "portrait": "data/assets/games/rivals/mister-fantastic.png"
+    },
+    {
+      "key": "rivals-squirrel-girl",
+      "name": "Squirrel Girl",
+      "role": "duelist",
+      "official_id": "4ed51741-f094-46ef-b5ca-bb2025b15c50",
+      "portrait": "data/assets/games/rivals/squirrel-girl.png"
+    },
+    {
+      "key": "rivals-black-widow",
+      "name": "Black Widow",
+      "role": "duelist",
+      "official_id": "baa0fe39-41ff-42f3-b48f-3e453317503a",
+      "portrait": "data/assets/games/rivals/black-widow.png"
+    },
+    {
+      "key": "rivals-wolverine",
+      "name": "Wolverine",
+      "role": "duelist",
+      "official_id": "a9b308ab-f0d8-412a-9362-e60091e57ded",
+      "portrait": "data/assets/games/rivals/wolverine.png"
+    },
+    {
+      "key": "rivals-cloak-dagger",
+      "name": "Cloak&Dagger",
+      "role": "strategist",
+      "official_id": "5b5a8c7a-c9c0-4f4c-89a3-dae465db8c7f",
+      "portrait": "data/assets/games/rivals/cloak-dagger.png"
+    },
+    {
+      "key": "rivals-iron-fist",
+      "name": "Iron Fist",
+      "role": "duelist",
+      "official_id": "c90562b1-0bf1-4f90-94ed-d24a7650a2b0",
+      "portrait": "data/assets/games/rivals/iron-fist.png"
+    },
+    {
+      "key": "rivals-psylocke",
+      "name": "Psylocke",
+      "role": "duelist",
+      "official_id": "1c8d092c-74b9-4988-82ba-151a4b4f1308",
+      "portrait": "data/assets/games/rivals/psylocke.png"
+    },
+    {
+      "key": "rivals-hawkeye",
+      "name": "Hawkeye",
+      "role": "duelist",
+      "official_id": "e7e0573d-ac83-4d1e-b286-7c7e4c79fc81",
+      "portrait": "data/assets/games/rivals/hawkeye.png"
+    },
+    {
+      "key": "rivals-iron-man",
+      "name": "Iron Man",
+      "role": "duelist",
+      "official_id": "ef114434-6c2a-48ff-a4f7-05dc278aedde",
+      "portrait": "data/assets/games/rivals/iron-man.png"
+    },
+    {
+      "key": "rivals-namor",
+      "name": "Namor",
+      "role": "duelist",
+      "official_id": "afbd915c-3505-4660-9815-bebe2c96370b",
+      "portrait": "data/assets/games/rivals/namor.png"
+    },
+    {
+      "key": "rivals-moon-knight",
+      "name": "Moon Knight",
+      "role": "duelist",
+      "official_id": "7dc8b934-fe12-49ae-ac3b-7d7c3a688443",
+      "portrait": "data/assets/games/rivals/moon-knight.png"
+    },
+    {
+      "key": "rivals-star-lord",
+      "name": "Star-Lord",
+      "role": "duelist",
+      "official_id": "f052a66a-d95a-4062-911a-0c4cd35386ac",
+      "portrait": "data/assets/games/rivals/star-lord.png"
+    },
+    {
+      "key": "rivals-scarlet-witch",
+      "name": "Scarlet Witch",
+      "role": "duelist",
+      "official_id": "1d3f08cf-abee-4eb9-b2fd-31ce9947e5a1",
+      "portrait": "data/assets/games/rivals/scarlet-witch.png"
+    },
+    {
+      "key": "rivals-winter-soldier",
+      "name": "Winter Soldier",
+      "role": "duelist",
+      "official_id": "7b26015b-e5f2-4d01-983b-885540b6236d",
+      "portrait": "data/assets/games/rivals/winter-soldier.png"
+    },
+    {
+      "key": "rivals-magik",
+      "name": "Magik",
+      "role": "duelist",
+      "official_id": "dd9a323f-da66-4ba8-9e37-1d3e8398a9b4",
+      "portrait": "data/assets/games/rivals/magik.png"
+    },
+    {
+      "key": "rivals-spider-man",
+      "name": "Spider-Man",
+      "role": "duelist",
+      "official_id": "feef5830-45b0-435e-8f7b-829241918b4d",
+      "portrait": "data/assets/games/rivals/spider-man.png"
+    },
+    {
+      "key": "rivals-black-panther",
+      "name": "Black Panther",
+      "role": "duelist",
+      "official_id": "fa01bc79-aba9-4559-9a0e-fc4fb5666f0a",
+      "portrait": "data/assets/games/rivals/black-panther.png"
+    },
+    {
+      "key": "rivals-hela",
+      "name": "Hela",
+      "role": "duelist",
+      "official_id": "7db8153e-f7fd-4889-b234-af4e06a0cabe",
+      "portrait": "data/assets/games/rivals/hela.png"
+    },
+    {
+      "key": "rivals-storm",
+      "name": "Storm",
+      "role": "duelist",
+      "official_id": "93784596-43d9-42f9-bb0c-86a5140f4917",
+      "portrait": "data/assets/games/rivals/storm.png"
+    },
+    {
+      "key": "rivals-hulk",
+      "name": "Hulk",
+      "role": "vanguard",
+      "official_id": "9471f35c-3f81-4ae2-9726-b2944dd431e9",
+      "portrait": "data/assets/games/rivals/hulk.png"
+    },
+    {
+      "key": "rivals-jeff-the-land-shark",
+      "name": "Jeff The Land Shark",
+      "role": "strategist",
+      "official_id": "49e078be-c0c3-4efc-ad01-9c6f4b4f043e",
+      "portrait": "data/assets/games/rivals/jeff-the-land-shark.png"
+    },
+    {
+      "key": "rivals-the-punisher",
+      "name": "The Punisher",
+      "role": "duelist",
+      "official_id": "77ad32c5-b42c-405d-afeb-bd452681b8e8",
+      "portrait": "data/assets/games/rivals/the-punisher.png"
+    },
+    {
+      "key": "rivals-luna-snow",
+      "name": "Luna Snow",
+      "role": "strategist",
+      "official_id": "1077f07b-2178-49d3-80be-d915de78d17c",
+      "portrait": "data/assets/games/rivals/luna-snow.png"
+    },
+    {
+      "key": "rivals-adam-warlock",
+      "name": "Adam Warlock",
+      "role": "strategist",
+      "official_id": "ef4511de-a2ff-43f0-b061-d915f0ccb37d",
+      "portrait": "data/assets/games/rivals/adam-warlock.png"
+    },
+    {
+      "key": "rivals-rocket-raccoon",
+      "name": "Rocket Raccoon",
+      "role": "strategist",
+      "official_id": "e1fb7cc4-a1a0-473b-8809-68b04dcc9420",
+      "portrait": "data/assets/games/rivals/rocket-raccoon.png"
+    },
+    {
+      "key": "rivals-loki",
+      "name": "Loki",
+      "role": "strategist",
+      "official_id": "c6011abe-8d17-4962-ac88-7232dc3d208f",
+      "portrait": "data/assets/games/rivals/loki.png"
+    },
+    {
+      "key": "rivals-mantis",
+      "name": "Mantis",
+      "role": "strategist",
+      "official_id": "bbb138f7-80d3-4db4-a608-4ee2d29c5fc0",
+      "portrait": "data/assets/games/rivals/mantis.png"
+    },
+    {
+      "key": "rivals-peni-parker",
+      "name": "Peni Parker",
+      "role": "vanguard",
+      "official_id": "3929765b-c856-44c9-b97a-eb965f3fbdf6",
+      "portrait": "data/assets/games/rivals/peni-parker.png"
+    },
+    {
+      "key": "rivals-thor",
+      "name": "Thor",
+      "role": "vanguard",
+      "official_id": "fcddbb53-6a99-45f6-9cc8-65c68edd96e0",
+      "portrait": "data/assets/games/rivals/thor.png"
+    },
+    {
+      "key": "rivals-magneto",
+      "name": "Magneto",
+      "role": "vanguard",
+      "official_id": "2dffcc89-3280-4d43-907a-646eea9d3a74",
+      "portrait": "data/assets/games/rivals/magneto.png"
+    },
+    {
+      "key": "rivals-venom",
+      "name": "Venom",
+      "role": "vanguard",
+      "official_id": "fa12017d-641d-4734-b459-187c2a6cdeb1",
+      "portrait": "data/assets/games/rivals/venom.png"
+    },
+    {
+      "key": "rivals-groot",
+      "name": "Groot",
+      "role": "vanguard",
+      "official_id": "f29f3cf1-e8dd-4188-acce-e519dd94206d",
+      "portrait": "data/assets/games/rivals/groot.png"
+    },
+    {
+      "key": "rivals-captain-america",
+      "name": "Captain America",
+      "role": "vanguard",
+      "official_id": "b3e3bc0b-0a15-4fa8-8139-e08f7fcd9beb",
+      "portrait": "data/assets/games/rivals/captain-america.png"
+    },
+    {
+      "key": "rivals-doctor-strange",
+      "name": "Doctor Strange",
+      "role": "vanguard",
+      "official_id": "692c786c-08f4-4502-9803-a55f3bc8f83b",
+      "portrait": "data/assets/games/rivals/doctor-strange.png"
+    }
+  ]
 }

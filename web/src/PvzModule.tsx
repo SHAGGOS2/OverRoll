@@ -616,15 +616,26 @@ export default function PvzModule({
     background.addColorStop(1, '#171022')
     context.fillStyle = background
     context.fillRect(0, 0, canvas.width, canvas.height)
+    context.strokeStyle = 'rgba(107, 191, 142, .08)'
+    context.lineWidth = 1
+    for (let x = 0; x <= canvas.width; x += 72) {
+      context.beginPath()
+      context.moveTo(x, 0)
+      context.lineTo(x, canvas.height)
+      context.stroke()
+    }
+    for (let y = 0; y <= canvas.height; y += 72) {
+      context.beginPath()
+      context.moveTo(0, y)
+      context.lineTo(canvas.width, y)
+      context.stroke()
+    }
     context.fillStyle = '#f7d85b'
     context.font = '900 31px system-ui, sans-serif'
     context.fillText('OVERROLL', 72, 72)
     context.fillStyle = '#f4fbf2'
     context.font = '900 56px system-ui, sans-serif'
-    context.fillText('PLANTS VS. ZOMBIES · GARDEN WARFARE 2', 72, 140)
-    context.fillStyle = '#9cb9a7'
-    context.font = '600 22px system-ui, sans-serif'
-    context.fillText(`${players.length} jugadores · ${plantCount} plantas · ${zombieCount} zombis`, 74, 180)
+    context.fillText('PVZ GW2', 72, 140)
 
     const columns = Math.min(4, Math.max(1, players.length))
     const rows = Math.ceil(players.length / columns)
@@ -880,6 +891,11 @@ export default function PvzModule({
               </article>
             })}
           </div></div>
+          <div className="floating-generate-dock pvz-floating-dock">
+            <button type="button" className={`floating-generate pvz-floating-generate ${generating ? 'generating' : ''}`} onClick={() => generateTeam('both')} disabled={generating || rerollingIndex !== null}>
+              <span className="generate-glow" /><PvzIcon name={generating ? 'reroll' : 'spark'} size={18} /><span>{generating ? 'Preparando…' : 'Generar ambos'}</span>
+            </button>
+          </div>
         </section>
 
         {filterPlayer && <div className="filter-layer pvz-filter-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) setFilterIndex(null) }}><section className={`filter-dialog pvz-filter-dialog ${filterPlayer.side}`} role="dialog" aria-modal="true"><header className="filter-heading"><div><span className="eyebrow">Filtro individual · {pvzSideSingular[filterPlayer.side]}</span><h2>{filterPlayer.name || `Jugador ${filterIndex! + 1}`}</h2><p>{eligibleBySide[filterPlayer.side].length - filterPlayer.blocked.filter((key) => eligibleBySide[filterPlayer.side].some((item) => item.key === key)).length} permitidos · {filterPlayer.blocked.length} bloqueados</p></div><button type="button" onClick={() => setFilterIndex(null)}><PvzIcon name="close" size={20} /></button></header><div className="filter-toolbar pvz-filter-toolbar"><label className="profile-search"><PvzIcon name="filter" size={16} /><input value={filterSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setFilterSearch(event.target.value)} placeholder="Buscar personaje o clase…" /></label><button type="button" className="reset-classification" onClick={clearFilter}><PvzIcon name="reset" size={15} /> Reiniciar</button></div><div className="pvz-filter-grid">{filterRows.map((item) => { const blocked = filterPlayer.blocked.includes(item.key); return <button type="button" className={`pvz-filter-card ${item.side} ${blocked ? 'blocked' : ''}`} onClick={() => toggleBlocked(item.key)} aria-pressed={blocked} key={item.key}><img src={asset(item.portrait)} alt="" /><span><strong>{item.name}</strong><small>{blocked ? 'BLOQUEADO' : item.isVariant ? item.baseName : 'PREDETERMINADO'}</small></span><i>{blocked ? '×' : '✓'}</i></button> })}</div></section></div>}

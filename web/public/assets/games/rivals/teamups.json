@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "source": "https://marvel-rivals-teambuilder.pages.dev/team-ups.html",
-  "updated": "2026-07-26",
-  "season": "9.0",
+  "updated": "2026-08-11",
+  "season": "9.5",
   "teamups": [
     {
       "key": "hel-yeah-honey",
@@ -468,9 +468,10 @@
       "key": "hellfire-sparks",
       "name": "HELLFIRE SPARKS",
       "receiver": "rivals-jubilee",
-      "anchor": "",
+      "anchor": "rivals-the-hood",
       "heroes": [
-        "rivals-jubilee"
+        "rivals-jubilee",
+        "rivals-the-hood"
       ]
     },
     {
@@ -647,9 +648,10 @@
       "key": "oblivion-shroud",
       "name": "OBLIVION SHROUD",
       "receiver": "rivals-cloak-dagger",
-      "anchor": "",
+      "anchor": "rivals-the-hood",
       "heroes": [
-        "rivals-cloak-dagger"
+        "rivals-cloak-dagger",
+        "rivals-the-hood"
       ]
     },
     {
@@ -1016,9 +1018,10 @@
       "key": "void-pentagram",
       "name": "VOID PENTAGRAM",
       "receiver": "rivals-magik",
-      "anchor": "",
+      "anchor": "rivals-the-hood",
       "heroes": [
-        "rivals-magik"
+        "rivals-magik",
+        "rivals-the-hood"
       ]
     },
     {

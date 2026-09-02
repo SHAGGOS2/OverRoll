@@ -1914,3 +1914,15 @@
 .pvz-wheel-stage { min-height: 500px; }
 .pvz-wheel-panel .pvz-roulette-section-heading.compact { min-height: 64px; }
 .pvz-wheel-shell { width: min(420px, 92%); margin-inline: auto; }
+
+
+.pvz-floating-dock {
+  padding-right: 8px;
+}
+
+.pvz-floating-generate {
+  border-color: rgba(121, 220, 114, .52);
+  color: #102118;
+  background: linear-gradient(180deg, #98f08c, #79dc72);
+  box-shadow: 0 12px 30px rgba(121, 220, 114, 0.22);
+}

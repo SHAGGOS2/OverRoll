@@ -100,6 +100,18 @@ type HeroData = {
   heroes: Hero[]
 }
 
+type OverFastHero = {
+  name: string
+  portrait?: string | null
+  role: Role
+  subrole: string
+  perks: {
+    minor: Perk[]
+    major: Perk[]
+  }
+  stadium_powers?: Perk[] | null
+}
+
 type UserProfile = {
   id: string
   name: string
@@ -230,7 +242,7 @@ const gameModuleIcons: Record<GameId, string> = {
 }
 
 const gameModules: Array<{ id: GameId; name: string; status: string; accent: string; available: boolean; catalogLabel: string; icon: string }> = [
-  { id: 'overwatch', name: 'Overwatch 2', status: 'Disponible', accent: '#f5a623', available: true, catalogLabel: '52 héroes', icon: gameModuleIcons.overwatch },
+  { id: 'overwatch', name: 'Overwatch', status: 'Disponible', accent: '#f5a623', available: true, catalogLabel: '53 héroes', icon: gameModuleIcons.overwatch },
   { id: 'tf2', name: 'Team Fortress 2', status: 'Disponible', accent: '#e8a45b', available: true, catalogLabel: '9 clases', icon: gameModuleIcons.tf2 },
   { id: 'pvzgw2', name: 'PVZ GW2', status: 'Disponible', accent: '#79dc72', available: true, catalogLabel: '121 personajes', icon: gameModuleIcons.pvzgw2 },
   ...rosterGameDefinitions.map((game) => ({
@@ -499,6 +511,54 @@ const rouletteRoleColors: Record<Role, string> = {
   tank: '#49c9ff',
   damage: '#ff6077',
   support: '#5ce1a2',
+}
+
+const DMON_FALLBACK_PORTRAIT = 'https://cdn.mos.cms.futurecdn.net/piadU3GPmdaehKi9ymCoNF.jpg'
+const OVERFAST_DMON_URL = 'https://overfast-api.tekrop.fr/heroes/dmon?locale=es-mx'
+
+function isRemoteAsset(path: string): boolean {
+  return /^(?:https?:)?\/\//i.test(path) || /^(?:data|blob):/i.test(path)
+}
+
+function dmonFallbackHero(): Hero {
+  return {
+    key: 'dmon',
+    name: 'D.Mon',
+    role: 'tank',
+    subrole: '',
+    portrait: DMON_FALLBACK_PORTRAIT,
+    gamemodes: ['quickplay'],
+    minorPerks: [],
+    majorPerks: [],
+    stadiumPowers: [],
+  }
+}
+
+function mapOverFastDmon(hero: OverFastHero, fallback: Hero): Hero {
+  const stadiumPowers = Array.isArray(hero.stadium_powers) ? hero.stadium_powers : []
+  return {
+    key: 'dmon',
+    name: hero.name || fallback.name,
+    role: hero.role === 'tank' || hero.role === 'damage' || hero.role === 'support' ? hero.role : fallback.role,
+    subrole: hero.subrole || fallback.subrole,
+    portrait: hero.portrait || fallback.portrait,
+    gamemodes: stadiumPowers.length ? ['quickplay', 'stadium'] : ['quickplay'],
+    minorPerks: Array.isArray(hero.perks?.minor) ? hero.perks.minor : fallback.minorPerks,
+    majorPerks: Array.isArray(hero.perks?.major) ? hero.perks.major : fallback.majorPerks,
+    stadiumPowers,
+  }
+}
+
+async function fetchDmonFromOverFast(signal: AbortSignal): Promise<Hero> {
+  const response = await fetch(OVERFAST_DMON_URL, {
+    cache: 'no-store',
+    credentials: 'omit',
+    mode: 'cors',
+    signal,
+  })
+  if (!response.ok) throw new Error(`OverFast D.Mon HTTP ${response.status}`)
+  const payload = await response.json() as OverFastHero
+  return mapOverFastDmon(payload, dmonFallbackHero())
 }
 
 function secureRandomIndex(length: number): number {
@@ -780,7 +840,7 @@ function buildTeam(options: {
 
 function App() {
   const baseUrl = import.meta.env.BASE_URL
-  const asset = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`
+  const asset = (path: string) => isRemoteAsset(path) ? path : `${baseUrl}${path.replace(/^\//, '')}`
 
   const [activeView, setActiveView] = useState<View>('principal')
   const [activeGame, setActiveGame] = useState<GameId>(() => readStorage('overroll.web.activeGame', 'overwatch'))
@@ -934,48 +994,91 @@ function App() {
   }, [baseUrl])
 
   useEffect(() => {
-    fetch(`${baseUrl}data/heroes.json`)
+    let cancelled = false
+    const controller = new AbortController()
+    const apiTimeout = window.setTimeout(() => controller.abort(), 6000)
+
+    const applyLoadedHeroes = (loaded: HeroData, apiSynced: boolean) => {
+      if (cancelled) return
+      const pool = loaded.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay'))
+      setData(loaded)
+      warmImageCache(loaded.heroes.map((hero) => asset(hero.portrait)), 10)
+      const validKeys = new Set(loaded.heroes.map((hero) => hero.key))
+      const storedSelection = rouletteSelectedKeys.filter((key) => validKeys.has(key))
+      const nextSelection = rouletteInitialized ? storedSelection : loaded.heroes.map((hero) => hero.key)
+      setRouletteSelectedKeys(nextSelection)
+      setRouletteWeights((current) => {
+        const normalized: Record<string, number> = {}
+        nextSelection.forEach((key) => {
+          const raw = Number(current[key] ?? 1)
+          normalized[key] = Math.max(1, Math.min(64, Math.round(Number.isFinite(raw) ? raw : 1)))
+        })
+        if (nextSelection.length === 1) normalized[nextSelection[0]] = Math.max(2, normalized[nextSelection[0]] ?? 2)
+        return normalized
+      })
+      if (!rouletteInitialized) setRouletteInitialized(true)
+      setPicks((current) => buildTeam({
+        heroes: pool,
+        players,
+        previous: current,
+        avoidRepeated,
+        roleComposition,
+        rolesOnly,
+        randomPerks,
+        stadium,
+        profiles,
+        profileMode,
+      }))
+      setStatus(`${pool.length} héroes listos${apiSynced ? ' · D.Mon sincronizada' : ''}`)
+      setGenerationRevision((value) => value + 1)
+    }
+
+    fetch(`${baseUrl}data/heroes.json`, { cache: 'no-store' })
       .then((response) => {
         if (!response.ok) throw new Error('No se pudo abrir el catálogo de héroes.')
         return response.json() as Promise<HeroData>
       })
-      .then((loaded) => {
-        const pool = loaded.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay'))
-        setData(loaded)
-        warmImageCache(loaded.heroes.map((hero) => asset(hero.portrait)), 10)
-        const validKeys = new Set(loaded.heroes.map((hero) => hero.key))
-        const storedSelection = rouletteSelectedKeys.filter((key) => validKeys.has(key))
-        const nextSelection = rouletteInitialized ? storedSelection : loaded.heroes.map((hero) => hero.key)
-        setRouletteSelectedKeys(nextSelection)
-        setRouletteWeights((current) => {
-          const normalized: Record<string, number> = {}
-          nextSelection.forEach((key) => {
-            const raw = Number(current[key] ?? 1)
-            normalized[key] = Math.max(1, Math.min(64, Math.round(Number.isFinite(raw) ? raw : 1)))
-          })
-          if (nextSelection.length === 1) normalized[nextSelection[0]] = Math.max(2, normalized[nextSelection[0]] ?? 2)
-          return normalized
-        })
-        if (!rouletteInitialized) setRouletteInitialized(true)
-        setPicks((current) => buildTeam({
-          heroes: pool,
-          players,
-          previous: current,
-          avoidRepeated,
-          roleComposition,
-          rolesOnly,
-          randomPerks,
-          stadium,
-          profiles,
-          profileMode,
-        }))
-        setStatus(`${pool.length} héroes listos`)
-        setGenerationRevision((value) => value + 1)
+      .then(async (localData) => {
+        const fallback = dmonFallbackHero()
+        const localHeroes = localData.heroes.some((hero) => hero.key === 'dmon')
+          ? localData.heroes
+          : [...localData.heroes, fallback]
+        const withFallback: HeroData = {
+          ...localData,
+          heroes: localHeroes,
+        }
+
+        // Paint the local catalog immediately so OverRoll never depends on the API to open.
+        applyLoadedHeroes(withFallback, false)
+
+        try {
+          const dmon = await fetchDmonFromOverFast(controller.signal)
+          if (cancelled) return
+          const merged: HeroData = {
+            source: `${localData.source} + OverFast API`,
+            updatedAt: new Date().toISOString(),
+            heroes: localHeroes.map((hero) => hero.key === 'dmon' ? dmon : hero),
+          }
+          setData(merged)
+          warmImageCache([asset(dmon.portrait)], 1)
+          setPicks((current) => current.map((pick) => pick.hero?.key === 'dmon' ? { ...pick, hero: dmon } : pick))
+          setStatus(`${merged.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay')).length} héroes listos · D.Mon sincronizada`)
+        } catch (error) {
+          if (!controller.signal.aborted) console.warn('D.Mon: no se pudo sincronizar OverFast; se usa el respaldo local.', error)
+        }
       })
       .catch((error: Error) => {
+        if (cancelled) return
         setLoadError(error.message)
         setStatus('Error al cargar los datos')
       })
+      .finally(() => window.clearTimeout(apiTimeout))
+
+    return () => {
+      cancelled = true
+      controller.abort()
+      window.clearTimeout(apiTimeout)
+    }
   }, [baseUrl])
 
   useEffect(() => {
@@ -1558,15 +1661,26 @@ function App() {
     background.addColorStop(1, '#302116')
     context.fillStyle = background
     context.fillRect(0, 0, canvas.width, canvas.height)
+    context.strokeStyle = 'rgba(232, 164, 91, .09)'
+    context.lineWidth = 1
+    for (let x = 0; x <= canvas.width; x += 72) {
+      context.beginPath()
+      context.moveTo(x, 0)
+      context.lineTo(x, canvas.height)
+      context.stroke()
+    }
+    for (let y = 0; y <= canvas.height; y += 72) {
+      context.beginPath()
+      context.moveTo(0, y)
+      context.lineTo(canvas.width, y)
+      context.stroke()
+    }
     context.fillStyle = '#e8a45b'
     context.font = '900 30px system-ui, sans-serif'
     context.fillText('OVERROLL', 72, 72)
     context.fillStyle = '#fff7e8'
     context.font = '900 54px system-ui, sans-serif'
-    context.fillText('TEAM FORTRESS 2 · MERCENARIOS', 72, 136)
-    context.fillStyle = '#c7ad91'
-    context.font = '600 22px system-ui, sans-serif'
-    context.fillText(`${tf2Players.length} jugadores · 9 clases · ${tf2AvoidRepeated ? 'sin repetidos' : 'repetidos permitidos'}`, 74, 176)
+    context.fillText('TEAM FORTRESS 2', 72, 136)
     const gap = 20
     const left = 72
     const top = 225
@@ -2253,6 +2367,7 @@ function App() {
     return new Promise<HTMLImageElement>((resolve, reject) => {
       const image = new Image()
       image.decoding = 'async'
+      if (/^https?:\/\//i.test(src)) image.crossOrigin = 'anonymous'
       image.onload = () => resolve(image)
       image.onerror = () => reject(new Error(`No se pudo cargar ${src}`))
       image.src = src
@@ -2323,10 +2438,7 @@ function App() {
     context.fillText('OVERROLL', 72, 74)
     context.fillStyle = '#ffffff'
     context.font = '900 54px system-ui, sans-serif'
-    context.fillText('OVERWATCH 2 · EQUIPO GENERADO', 72, 136)
-    context.fillStyle = '#8eaaba'
-    context.font = '600 22px system-ui, sans-serif'
-    context.fillText(`${players.length} jugadores · ${stadium ? 'Stadium' : 'Quick Play'} · ${compositionText}`, 74, 176)
+    context.fillText('OVERWATCH', 72, 136)
 
     const gap = 22
     const left = 72
@@ -2389,20 +2501,32 @@ function App() {
 
       context.textAlign = 'left'
       context.font = '700 16px system-ui, sans-serif'
-      const perkNames = pick?.perks.slice(0, stadium ? 4 : 2).map((perk) => perk.name) ?? []
-      perkNames.forEach((name, perkIndex) => {
-        const perkY = top + 580 + perkIndex * 45
+      const perkItems = pick?.perks.slice(0, stadium ? 4 : 2) ?? []
+      await Promise.all(perkItems.map(async (perk, perkIndex) => {
+        const perkY = top + 576 + perkIndex * 45
         context.fillStyle = 'rgba(12, 45, 61, .92)'
         context.fillRect(x + 16, perkY, cardWidth - 32, 34)
+        try {
+          const perkImage = await loadImageForCanvas(asset(perk.icon))
+          context.save()
+          context.beginPath()
+          context.rect(x + 20, perkY + 5, 24, 24)
+          context.clip()
+          context.drawImage(perkImage, x + 20, perkY + 5, 24, 24)
+          context.restore()
+        } catch {
+          context.fillStyle = '#193f57'
+          context.fillRect(x + 20, perkY + 5, 24, 24)
+        }
         context.fillStyle = '#ffc84a'
-        context.fillText(`${perkIndex + 1}.`, x + 28, perkY + 23)
+        context.fillText(`${perkIndex + 1}.`, x + 52, perkY + 23)
         context.fillStyle = '#e8f3f8'
-        const maxLength = Math.max(10, Math.floor(cardWidth / 11))
-        const label = name.length > maxLength ? `${name.slice(0, maxLength - 1)}…` : name
-        context.fillText(label, x + 54, perkY + 23)
-      })
+        const maxLength = Math.max(10, Math.floor(cardWidth / 12))
+        const label = perk.name.length > maxLength ? `${perk.name.slice(0, maxLength - 1)}…` : perk.name
+        context.fillText(label, x + 76, perkY + 23)
+      }))
 
-      if (perkNames.length === 0) {
+      if (perkItems.length === 0) {
         context.fillStyle = '#7892a1'
         context.font = '600 16px system-ui, sans-serif'
         context.fillText('Sin mejoras seleccionadas', x + 22, top + 610)
@@ -2771,7 +2895,7 @@ function App() {
           <div className="content-topline">
             <div className="game-identity">
               <span className="game-kicker">Selector principal</span>
-              <div className="game-title-row"><h1>Overwatch 2</h1><span className="web-badge">WEB BETA</span></div>
+              <div className="game-title-row"><h1>Overwatch</h1><span className="web-badge">WEB BETA</span></div>
             </div>
             <div className="topline-actions">
               <button type="button" className="generate-image-button" onClick={generateTeamImage} disabled={!picks.some((pick) => pick.hero)}>
@@ -2815,9 +2939,9 @@ function App() {
                       <div className="portrait">
                         <div className="portrait-grid" /><div className="portrait-fallback"><Icon name="gamepad" size={48} /></div>
                         {rolesOnly && visibleRole ? (
-                          <img className="role-only-image" src={asset(`assets/roles/${visibleRole}.png`)} alt={roleLabels[visibleRole]} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} />
+                          <img key={`role-${visibleRole}`} className="role-only-image" src={asset(`assets/roles/${visibleRole}.png`)} alt={roleLabels[visibleRole]} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} />
                         ) : hero ? (
-                          <img className="hero-image" src={asset(hero.portrait)} alt={hero.name} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} />
+                          <img key={hero.key} className="hero-image" src={asset(hero.portrait)} alt={hero.name} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} />
                         ) : (
                           <div className="portrait-loading"><span /><span /><span /></div>
                         )}
@@ -2868,6 +2992,11 @@ function App() {
               </div>
             </div>
           )}
+          <div className="floating-generate-dock">
+            <button type="button" className={`floating-generate ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!data || generating || rerollingIndex !== null}>
+              <span className="generate-glow" /><Icon name={generating ? 'refresh' : 'spark'} size={19} /><span>{generating ? 'Generando…' : 'Generar equipo'}</span>
+            </button>
+          </div>
         </section>
       </main>
     )
@@ -3201,7 +3330,7 @@ function App() {
                       <div><h2>Asignar a jugadores</h2><p>Pulsa una ficha para activar o quitar este perfil.</p></div>
                     </header>
                     <div className="profiles-game-assignment">
-                      <div className="profiles-game-label"><span className="settings-game-dot" style={{ '--module-accent': '#f5a623' } as CSSProperties} /><strong>Overwatch 2</strong><small>{players.length} fichas</small></div>
+                      <div className="profiles-game-label"><span className="settings-game-dot" style={{ '--module-accent': '#f5a623' } as CSSProperties} /><strong>Overwatch</strong><small>{players.length} fichas</small></div>
                       <div className="profiles-player-list">
                         {players.map((player, index) => {
                           const assigned = player.profileId === currentProfile.id

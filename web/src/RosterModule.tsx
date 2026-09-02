@@ -168,7 +168,7 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     maxPlayers: 6,
     rolePattern: ['vanguard', 'vanguard', 'duelist', 'duelist', 'strategist', 'strategist'],
     description: 'Forma una escuadra de seis héroes y prioriza combinaciones de Team-Up.',
-    catalogLabel: '52 héroes',
+    catalogLabel: '53 héroes',
     formatLabel: '6 jugadores',
     supportsTeamups: true,
     roles: [
@@ -361,9 +361,12 @@ function buildRolePlan(game: RosterGameDefinition, players: RosterPlayer[]): str
   const plan: string[] = []
   if (game.rolePattern?.length) {
     while (plan.length < players.length) plan.push(...game.rolePattern)
-  } else {
-    while (plan.length < players.length) plan.push(...shuffled(roles))
+    const resolved = plan.slice(0, players.length)
+    // Rivals mantiene la composición 2-2-2, pero los roles no pertenecen a slots fijos.
+    return game.id === 'rivals' ? shuffled(resolved) : resolved
   }
+
+  while (plan.length < players.length) plan.push(...shuffled(roles))
   return plan.slice(0, players.length)
 }
 
@@ -390,6 +393,7 @@ function normalizeRosterPlayers(raw: unknown, game: RosterGameDefinition): Roste
 }
 
 function normalizePortrait(gameId: RosterGameId, portrait: string): string {
+  if (/^(?:https?:)?\/\//i.test(portrait) || /^(?:data|blob):/i.test(portrait)) return portrait
   const filename = portrait.replace(/\\/g, '/').split('/').pop() ?? portrait
   return `assets/games/${gameId}/${filename}`
 }
@@ -515,7 +519,7 @@ export default function RosterModule({
   const [rouletteRotation, setRouletteRotation] = useState(0)
   const spinTimerRef = useRef<number | null>(null)
 
-  const asset = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`
+  const asset = (path: string) => /^(?:https?:)?\/\//i.test(path) || /^(?:data|blob):/i.test(path) ? path : `${baseUrl}${path.replace(/^\//, '')}`
 
   useEffect(() => {
     let cancelled = false
@@ -710,7 +714,10 @@ export default function RosterModule({
 
   function candidatePool(player: RosterPlayer, preferredRole: string | null, used: Set<string>, previousKey = ''): CatalogHero[] {
     const allowed = catalog.filter((hero) => player.roles[hero.role] !== false && !player.blocked.includes(hero.key))
-    const byRole = preferredRole ? allowed.filter((hero) => hero.role === preferredRole) : allowed
+    // Deadpool es Flexible en Rivals: puede ocupar cualquier hueco del plan 2-2-2.
+    const byRole = preferredRole
+      ? allowed.filter((hero) => hero.role === preferredRole || (game.id === 'rivals' && hero.role === 'flex'))
+      : allowed
     let pool = byRole.length ? byRole : allowed
     if (avoidRepeated) {
       const unique = pool.filter((hero) => !used.has(hero.key))
@@ -748,28 +755,33 @@ export default function RosterModule({
     if (explicit) return explicit
     const listed = teamup.heroes.find((key) => key !== teamup.receiver)
     if (listed) return listed
-    // Season 9 includes three base Team-Ups whose future enhancer, The Hood,
-    // is referenced before he exists in the selectable 52-hero catalog.
+    // Backward compatibility for older Season 9 snapshots where The Hood was not yet in the selectable catalog.
     if (['hellfire-sparks', 'oblivion-shroud', 'void-pentagram'].includes(teamup.key)) return 'rivals-the-hood'
     return ''
   }
 
-  function teamupAnchorName(teamup: Teamup): string {
-    const anchorKey = teamupAnchorKey(teamup)
-    return heroByKey(anchorKey)?.name ?? (anchorKey === 'rivals-the-hood' ? 'The Hood' : 'Compañero')
-  }
-
-  function teamupAnchorInitials(teamup: Teamup): string {
-    return teamupAnchorName(teamup)
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((part) => part.charAt(0).toUpperCase())
-      .join('') || 'TU'
-  }
-
   function teamupsForReceiver(heroKey: string): Teamup[] {
     return teamups.filter((teamup) => teamup.receiver === heroKey)
+  }
+
+  // The Hood is the partner/anchor for three Season 9 Team-Ups rather than the receiver.
+  // Keep the existing receiver-first behavior for the rest of the roster, but let his card
+  // expose and cycle those three relationships like any other Rivals card.
+  function selectableTeamupsForHero(heroKey: string): Teamup[] {
+    if (heroKey === 'rivals-the-hood') {
+      return teamups.filter((teamup) => teamup.receiver === heroKey || teamupAnchorKey(teamup) === heroKey)
+    }
+    return teamupsForReceiver(heroKey)
+  }
+
+  function teamupPartnerKey(teamup: Teamup, heroKey: string): string {
+    const anchorKey = teamupAnchorKey(teamup)
+    return anchorKey === heroKey ? (teamup.receiver ?? '') : anchorKey
+  }
+
+  function teamupPartnerName(teamup: Teamup, heroKey: string): string {
+    const partnerKey = teamupPartnerKey(teamup, heroKey)
+    return heroByKey(partnerKey)?.name ?? 'Compañero'
   }
 
   function teamupIsComplete(teamup: Teamup, selected: Set<string>): boolean {
@@ -787,7 +799,7 @@ export default function RosterModule({
     const selected = new Set(team.flatMap((pick) => pick.hero ? [pick.hero.key] : []))
     return team.map((pick) => {
       if (!pick.hero) return { ...pick, teamupKey: undefined }
-      const options = teamupsForReceiver(pick.hero.key)
+      const options = selectableTeamupsForHero(pick.hero.key)
       const complete = options.filter((teamup) => teamupIsComplete(teamup, selected))
       const existing = options.find((teamup) => teamup.key === pick.teamupKey)
       const chosen = priorityTeamups
@@ -795,25 +807,6 @@ export default function RosterModule({
         : existing ?? randomItem(options) ?? null
       return { ...pick, teamupKey: chosen?.key }
     })
-  }
-
-  function setPickTeamup(index: number, teamupKey: string) {
-    setPicks((current) => current.map((pick, pickIndex) => {
-      if (pickIndex !== index || !pick.hero) return pick
-      const valid = teamupsForReceiver(pick.hero.key).some((teamup) => teamup.key === teamupKey)
-      return valid ? { ...pick, teamupKey } : pick
-    }))
-    playModuleSound('click', 610)
-  }
-
-  function cyclePickTeamup(index: number) {
-    const pick = picks[index]
-    if (!pick?.hero) return
-    const options = teamupsForReceiver(pick.hero.key)
-    if (!options.length) return
-    const currentIndex = options.findIndex((teamup) => teamup.key === pick.teamupKey)
-    const next = options[(currentIndex + 1 + options.length) % options.length]
-    setPickTeamup(index, next.key)
   }
 
   function teamupBiasedHero(pool: CatalogHero[], used: Set<string>): CatalogHero | null {
@@ -831,6 +824,20 @@ export default function RosterModule({
   function assignedRole(index: number, rolePlan: string[]): string | null {
     if (!balancedRoles || game.roles.length <= 1) return null
     return rolePlan[index] ?? null
+  }
+
+  function rivalsMissingRole(excludeIndex: number): string | null {
+    if (game.id !== 'rivals') return null
+    const targets: Record<string, number> = { vanguard: 2, duelist: 2, strategist: 2 }
+    const counts: Record<string, number> = { vanguard: 0, duelist: 0, strategist: 0 }
+    picks.forEach((pick, index) => {
+      if (index === excludeIndex || !pick.hero || pick.hero.role === 'flex') return
+      if (counts[pick.hero.role] !== undefined) counts[pick.hero.role] += 1
+    })
+    const missing = Object.keys(targets).flatMap((role) =>
+      Array.from({ length: Math.max(0, targets[role] - counts[role]) }, () => role),
+    )
+    return randomItem(missing) ?? null
   }
 
   function generateTeam() {
@@ -1017,7 +1024,9 @@ export default function RosterModule({
 
       const used = new Set(chosenKeys.filter((_, pickIndex) => pickIndex !== index))
       const preferredRole = balancedRoles && current?.hero
-        ? current.hero.role
+        ? (game.id === 'rivals' && current.hero.role === 'flex'
+          ? rivalsMissingRole(index) ?? assignedRole(index, buildRolePlan(game, players))
+          : current.hero.role)
         : assignedRole(index, buildRolePlan(game, players))
       const pool = candidatePool(player, preferredRole, used, current?.hero?.key)
       const hero = teamupBiasedHero(pool, used)
@@ -1111,143 +1120,182 @@ export default function RosterModule({
       return
     }
 
-    const columns = Math.min(3, selected.length)
+    const columns = Math.min(selected.length <= 4 ? selected.length : 3, selected.length)
     const rows = Math.ceil(selected.length / columns)
     const cardWidth = 320
-    const cardHeight = game.supportsLoadouts ? 430 : gameId === 'deadlock' ? 405 : 370
-    const gap = 18
-    const headerHeight = 112
+    const cardHeight = game.supportsLoadouts ? 462 : gameId === 'deadlock' ? 420 : 420
+    const gap = 22
+    const headerHeight = 178
+    const footerHeight = 84
     const canvas = document.createElement('canvas')
-    canvas.width = columns * cardWidth + (columns + 1) * gap
-    canvas.height = headerHeight + rows * cardHeight + (rows + 1) * gap
+    canvas.width = columns * cardWidth + (columns - 1) * gap + 144
+    canvas.height = headerHeight + rows * cardHeight + (rows - 1) * gap + footerHeight + 84
     const context = canvas.getContext('2d')
     if (!context) return
 
-    context.fillStyle = '#06131e'
-    context.fillRect(0, 0, canvas.width, canvas.height)
-    context.fillStyle = game.accent
-    context.fillRect(0, 0, canvas.width, 7)
-    context.fillStyle = '#eef8ff'
-    context.font = '700 34px Arial'
-    context.fillText(game.name.toUpperCase(), gap, 48)
-    context.fillStyle = '#8aa3b6'
-    context.font = '700 15px Arial'
-    context.fillText(`${game.formatLabel.toUpperCase()} · ${game.catalogLabel.toUpperCase()}`, gap, 76)
-    context.fillStyle = game.accent
-    context.font = '700 12px Arial'
-    context.fillText('OVERROLL WEB', gap, 98)
-
+    const roleColor = (heroRole: string) => roleDefinition(game, heroRole).color
     const loadImage = (url: string) => new Promise<HTMLImageElement | null>((resolve) => {
       const image = new Image()
+      if (/^https?:\/\//i.test(url)) image.crossOrigin = 'anonymous'
       image.onload = () => resolve(image)
       image.onerror = () => resolve(null)
       image.src = url
     })
+    const drawCover = (image: HTMLImageElement, x: number, y: number, width: number, height: number) => {
+      const ratio = Math.max(width / image.width, height / image.height)
+      const drawWidth = image.width * ratio
+      const drawHeight = image.height * ratio
+      context.save()
+      context.beginPath()
+      context.rect(x, y, width, height)
+      context.clip()
+      context.drawImage(image, x + (width - drawWidth) / 2, y + (height - drawHeight) / 2, drawWidth, drawHeight)
+      context.restore()
+    }
+
+    const background = context.createLinearGradient(0, 0, canvas.width, canvas.height)
+    background.addColorStop(0, '#03111a')
+    background.addColorStop(1, '#071f2d')
+    context.fillStyle = background
+    context.fillRect(0, 0, canvas.width, canvas.height)
+    context.strokeStyle = `${game.accent}22`
+    context.lineWidth = 1
+    for (let x = 0; x <= canvas.width; x += 72) {
+      context.beginPath()
+      context.moveTo(x, 0)
+      context.lineTo(x, canvas.height)
+      context.stroke()
+    }
+    for (let y = 0; y <= canvas.height; y += 72) {
+      context.beginPath()
+      context.moveTo(0, y)
+      context.lineTo(canvas.width, y)
+      context.stroke()
+    }
+    context.fillStyle = '#ffc84a'
+    context.font = '800 28px system-ui, sans-serif'
+    context.fillText('OVERROLL', 72, 74)
+    context.fillStyle = '#ffffff'
+    context.font = '900 54px system-ui, sans-serif'
+    context.fillText(game.name.toUpperCase(), 72, 136)
 
     await Promise.all(selected.map(async ({ player, pick }, itemIndex) => {
       const deadlockCandidates = gameId === 'deadlock' ? rosterPickCandidates(pick) : []
       const hero = deadlockCandidates[0] ?? pick.hero
       if (!hero) return
-      const role = roleDefinition(game, hero.role)
+      const accent = roleColor(hero.role)
       const column = itemIndex % columns
       const row = Math.floor(itemIndex / columns)
-      const x = gap + column * (cardWidth + gap)
-      const y = headerHeight + gap + row * (cardHeight + gap)
-      context.fillStyle = '#0b2232'
+      const x = 72 + column * (cardWidth + gap)
+      const y = headerHeight + 22 + row * (cardHeight + gap)
+
+      context.fillStyle = 'rgba(4, 23, 34, .96)'
       context.fillRect(x, y, cardWidth, cardHeight)
-      context.fillStyle = role.color
-      context.fillRect(x, y, cardWidth, 5)
+      context.strokeStyle = accent
+      context.lineWidth = 4
+      context.strokeRect(x, y, cardWidth, cardHeight)
+      context.fillStyle = '#071925'
+      context.fillRect(x + 4, y + 4, cardWidth - 8, 54)
+      context.fillStyle = accent
+      context.font = '800 18px system-ui, sans-serif'
+      context.fillText(String(itemIndex + 1).padStart(2, '0'), x + 18, y + 38)
+      context.fillStyle = '#bfd1dc'
+      context.font = '700 17px system-ui, sans-serif'
+      context.fillText((player.name || `Jugador ${itemIndex + 1}`).slice(0, 22), x + 58, y + 38)
 
       if (gameId === 'deadlock') {
         const innerGap = 8
         const padding = 10
-        const mainHeight = 220
-        const secondaryHeight = 105
+        const mainHeight = 214
+        const secondaryHeight = 88
         const secondaryWidth = (cardWidth - padding * 2 - innerGap) / 2
         const drawCandidate = async (candidate: CatalogHero, candidateIndex: number, px: number, py: number, pw: number, ph: number) => {
           context.fillStyle = '#071923'
           context.fillRect(px, py, pw, ph)
           const candidateImage = await loadImage(asset(candidate.portrait))
-          if (candidateImage) {
-            const ratio = Math.max(pw / candidateImage.width, ph / candidateImage.height)
-            const width = candidateImage.width * ratio
-            const height = candidateImage.height * ratio
-            context.save()
-            context.beginPath()
-            context.rect(px, py, pw, ph)
-            context.clip()
-            context.drawImage(candidateImage, px + (pw - width) / 2, py + (ph - height) / 2, width, height)
-            const gradient = context.createLinearGradient(0, py + ph * 0.46, 0, py + ph)
-            gradient.addColorStop(0, 'rgba(6,19,30,0)')
-            gradient.addColorStop(1, 'rgba(6,19,30,.96)')
-            context.fillStyle = gradient
-            context.fillRect(px, py, pw, ph)
-            context.restore()
-          }
+          if (candidateImage) drawCover(candidateImage, px, py, pw, ph)
+          const gradient = context.createLinearGradient(0, py + ph * 0.42, 0, py + ph)
+          gradient.addColorStop(0, 'rgba(6,19,30,0)')
+          gradient.addColorStop(1, 'rgba(6,19,30,.97)')
+          context.fillStyle = gradient
+          context.fillRect(px, py, pw, ph)
+          context.fillStyle = 'rgba(5, 18, 29, .84)'
+          context.fillRect(px + 4, py + ph - 42, pw - 8, 34)
           context.fillStyle = game.accent
           context.font = '700 10px Arial'
-          context.fillText(`PREFERENCIA ${candidateIndex + 1}`, px + 8, py + ph - 28)
+          context.fillText(`PREFERENCIA ${candidateIndex + 1}`, px + 10, py + ph - 24)
           context.fillStyle = '#ffffff'
-          context.font = candidateIndex === 0 ? '700 21px Arial' : '700 14px Arial'
-          context.fillText(candidate.name.toUpperCase().slice(0, candidateIndex === 0 ? 22 : 15), px + 8, py + ph - 10)
+          context.font = candidateIndex === 0 ? '700 20px Arial' : '700 13px Arial'
+          context.fillText(candidate.name.toUpperCase().slice(0, candidateIndex === 0 ? 22 : 14), px + 10, py + ph - 8)
           context.strokeStyle = game.accent
           context.lineWidth = 1
           context.strokeRect(px + .5, py + .5, pw - 1, ph - 1)
         }
-
-        await Promise.all(deadlockCandidates.slice(0, 3).map((candidate, candidateIndex) => {
-          if (candidateIndex === 0) return drawCandidate(candidate, candidateIndex, x + padding, y + 14, cardWidth - padding * 2, mainHeight)
-          return drawCandidate(candidate, candidateIndex, x + padding + (candidateIndex - 1) * (secondaryWidth + innerGap), y + 14 + mainHeight + innerGap, secondaryWidth, secondaryHeight)
-        }))
-        context.fillStyle = '#9cb2c1'
-        context.font = '700 13px Arial'
-        context.fillText(player.name.slice(0, 28), x + padding, y + cardHeight - 18)
+        await Promise.all(deadlockCandidates.slice(0, 3).map((candidate, candidateIndex) => candidateIndex === 0 ? drawCandidate(candidate, candidateIndex, x + padding, y + 72, cardWidth - padding * 2, mainHeight) : drawCandidate(candidate, candidateIndex, x + padding + (candidateIndex - 1) * (secondaryWidth + innerGap), y + 72 + mainHeight + innerGap, secondaryWidth, secondaryHeight)))
         return
       }
 
+      const portraitX = x + 12
+      const portraitY = y + 70
+      const portraitWidth = cardWidth - 24
+      const portraitHeight = 240
+      context.fillStyle = '#0a2636'
+      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
       const image = await loadImage(asset(hero.portrait))
-      if (image) {
-        const portraitHeight = 245
-        const ratio = Math.max(cardWidth / image.width, portraitHeight / image.height)
-        const width = image.width * ratio
-        const height = image.height * ratio
-        context.save()
-        context.beginPath()
-        context.rect(x, y + 5, cardWidth, portraitHeight)
-        context.clip()
-        context.drawImage(image, x + (cardWidth - width) / 2, y + 5, width, height)
-        const gradient = context.createLinearGradient(0, y + 130, 0, y + 250)
-        gradient.addColorStop(0, 'rgba(6,19,30,0)')
-        gradient.addColorStop(1, '#0b2232')
-        context.fillStyle = gradient
-        context.fillRect(x, y + 120, cardWidth, 135)
-        context.restore()
-      }
+      if (image) drawCover(image, portraitX, portraitY, portraitWidth, portraitHeight)
+      const fade = context.createLinearGradient(0, portraitY + 130, 0, portraitY + portraitHeight)
+      fade.addColorStop(0, 'rgba(2, 12, 18, 0)')
+      fade.addColorStop(1, 'rgba(2, 12, 18, .92)')
+      context.fillStyle = fade
+      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
 
-      context.fillStyle = role.color
-      context.font = '700 12px Arial'
-      context.fillText(role.label.toUpperCase(), x + 16, y + 278)
+      context.textAlign = 'center'
       context.fillStyle = '#ffffff'
-      context.font = '700 25px Arial'
-      context.fillText(hero.name.toUpperCase().slice(0, 22), x + 16, y + 309)
-      context.fillStyle = '#9cb2c1'
-      context.font = '700 14px Arial'
-      context.fillText(player.name.slice(0, 28), x + 16, y + 334)
+      context.font = '900 30px system-ui, sans-serif'
+      context.fillText(hero.name.toUpperCase().slice(0, 22), x + cardWidth / 2, y + 344)
+      context.fillStyle = accent
+      context.font = '800 17px system-ui, sans-serif'
+      context.fillText(roleDefinition(game, hero.role).label.toUpperCase(), x + cardWidth / 2, y + 374)
+      context.textAlign = 'left'
 
       if (pick.loadout) {
         const summary = [pick.loadout.specialization, pick.loadout.weapon, ...pick.loadout.gadgets]
-        context.font = '700 11px Arial'
-        summary.forEach((item, index) => {
+        context.font = '700 12px Arial'
+        summary.slice(0, 5).forEach((item, index) => {
+          const lineY = y + 396 + index * 15
           context.fillStyle = index < 2 ? game.accent : '#b9cbd6'
-          context.fillText(item.slice(0, 34), x + 16, y + 360 + index * 14)
+          context.fillText(item.slice(0, 34), x + 16, lineY)
         })
       } else if (game.supportsTeamups) {
         const synergy = pick.teamupKey ? activeTeamups(hero.key).find((teamup) => teamup.key === pick.teamupKey) : undefined
-        context.fillStyle = synergy ? game.accent : '#718a9c'
-        context.font = '700 11px Arial'
-        context.fillText((synergy ? `TEAM-UP: ${synergy.name}` : 'SIN TEAM-UP COMPLETO').slice(0, 40), x + 16, y + 360)
+        const partnerKey = synergy ? teamupPartnerKey(synergy, hero.key) : ''
+        const partner = partnerKey ? heroByKey(partnerKey) : null
+        context.fillStyle = 'rgba(12, 45, 61, .92)'
+        context.fillRect(x + 16, y + 392, cardWidth - 32, 52)
+        if (partner) {
+          const partnerImage = await loadImage(asset(partner.portrait))
+          if (partnerImage) drawCover(partnerImage, x + 20, y + 398, 44, 40)
+        }
+        context.fillStyle = '#ffc84a'
+        context.font = '800 11px system-ui, sans-serif'
+        context.fillText(synergy?.complete ? 'ACTIVO' : 'TEAM-UP ELEGIDO', x + 72, y + 412)
+        context.fillStyle = '#e8f3f8'
+        context.font = '800 16px system-ui, sans-serif'
+        context.fillText((synergy?.name ?? 'SIN TEAM-UP').slice(0, 22), x + 72, y + 430)
+        context.fillStyle = '#89a6b8'
+        context.font = '600 12px system-ui, sans-serif'
+        context.fillText((partner ? `Con ${partner.name}` : 'Sin combinación completa').slice(0, 32), x + 72, y + 443)
+      } else {
+        context.fillStyle = '#8eaaba'
+        context.font = '600 14px system-ui, sans-serif'
+        context.fillText(player.name.slice(0, 28), x + 18, y + cardHeight - 26)
       }
     }))
+
+    context.textAlign = 'right'
+    context.fillStyle = '#708c9c'
+    context.font = '600 17px system-ui, sans-serif'
+    context.fillText('Generado con OverRoll', canvas.width - 72, canvas.height - 42)
 
     canvas.toBlob((blob) => {
       if (!blob) return
@@ -1264,8 +1312,19 @@ export default function RosterModule({
 
   function activeTeamups(heroKey: string): Array<Teamup & { complete: boolean }> {
     const selected = new Set(chosenKeys)
-    return teamupsForReceiver(heroKey)
+    return selectableTeamupsForHero(heroKey)
       .map((teamup) => ({ ...teamup, complete: teamupIsComplete(teamup, selected) }))
+  }
+
+  function relatedTeamups(heroKey: string): Array<Teamup & { complete: boolean; relation: 'receiver' | 'anchor' }> {
+    const selected = new Set(chosenKeys)
+    return teamups
+      .filter((teamup) => teamup.receiver === heroKey || teamupAnchorKey(teamup) === heroKey)
+      .map((teamup) => ({
+        ...teamup,
+        complete: teamupIsComplete(teamup, selected),
+        relation: teamup.receiver === heroKey ? 'receiver' : 'anchor',
+      }))
   }
 
   function renderLoadout(loadout: FinalsLoadout | undefined) {
@@ -1441,17 +1500,18 @@ export default function RosterModule({
                       )}
 
                       {hero && game.supportsTeamups && selectedTeamup && (() => {
-                        const anchor = heroByKey(teamupAnchorKey(selectedTeamup))
-                        const anchorName = teamupAnchorName(selectedTeamup)
+                        const partnerKey = teamupPartnerKey(selectedTeamup, hero.key)
+                        const partner = heroByKey(partnerKey)
+                        const partnerName = teamupPartnerName(selectedTeamup, hero.key)
+                        const heroIsAnchor = teamupAnchorKey(selectedTeamup) === hero.key
                         return (
                           <div className="roster-card-special roster-card-teamups">
-                            <button type="button" className={`${selectedTeamup.complete ? 'complete' : ''} selected`} onClick={() => cyclePickTeamup(index)} aria-label={receiverTeamups.length > 1 ? `Cambiar Team-Up de ${hero.name}` : `Team-Up de ${hero.name}`}>
-                              {anchor
-                                ? <img src={asset(anchor.portrait)} alt={anchor.name} decoding="async" loading="eager" />
-                                : <span className="roster-teamup-portrait-fallback" aria-label={anchorName}>{teamupAnchorInitials(selectedTeamup)}</span>}
-                              <span><b>{selectedTeamup.complete ? 'ACTIVO' : 'TEAM-UP ELEGIDO'}</b><strong>{selectedTeamup.name}</strong><small>{selectedTeamup.complete ? `Con ${anchorName}` : `Base · mejora con ${anchorName}`}</small></span>
-                              {receiverTeamups.length > 1 && <i>Cambiar</i>}
-                            </button>
+                            <div className={`${selectedTeamup.complete ? 'complete' : ''} selected locked-teamup-card`} aria-label={`Team-Up de ${hero.name}`}>
+                              {partner
+                                ? <img src={asset(partner.portrait)} alt={partner.name} decoding="async" loading="eager" />
+                                : <span className="roster-teamup-portrait-fallback" aria-label={partnerName}>{partnerName.split(/\s+/).slice(0, 2).map((part) => part.charAt(0).toUpperCase()).join('') || 'TU'}</span>}
+                              <span><b>{selectedTeamup.complete ? 'ACTIVO' : 'TEAM-UP ELEGIDO'}</b><strong>{selectedTeamup.name}</strong><small>{selectedTeamup.complete ? `Con ${partnerName}` : heroIsAnchor ? `Potencia a ${partnerName}` : `Base · mejora con ${partnerName}`}</small></span>
+                            </div>
                           </div>
                         )
                       })()}
@@ -1473,6 +1533,11 @@ export default function RosterModule({
               </div>
             </div>
           )}
+          <div className="floating-generate-dock roster-floating-dock">
+            <button type="button" className={`floating-generate roster-floating-generate ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!catalog.length || generating || rerollingIndex !== null || (game.supportsTeamups && priorityTeamups && !teamupsReady)}>
+              <span className="generate-glow" /><RosterIcon name="spark" size={19} /><span>{game.supportsTeamups && priorityTeamups && !teamupsReady ? 'Cargando Team-Ups…' : generating ? 'Generando…' : gameId === 'deadlock' ? 'Generar candidatos' : 'Generar equipo'}</span>
+            </button>
+          </div>
         </section>
 
         {filterIndex !== null && players[filterIndex] && (
@@ -1497,7 +1562,7 @@ export default function RosterModule({
               <header><div><span>{selectedDetailsRole.label}</span><h2>{selectedDetailsHero.name}</h2><p>{players[detailsIndex]?.name} · {game.shortName}</p></div><button type="button" onClick={() => setDetailsIndex(null)}><RosterIcon name="close" size={20} /></button></header>
               <div className="roster-details-hero"><img src={asset(selectedDetailsHero.portrait)} alt={selectedDetailsHero.name} /><div><small>DATOS DE {game.shortName.toUpperCase()}</small><h3>{selectedDetailsRole.label}</h3><p>{game.description}</p><span>{gameId === 'deadlock' ? '3 candidatos por jugador' : game.formatLabel} · {game.catalogLabel}</span></div></div>
               {gameId === 'deadlock' && selectedDetailsCandidates.length > 0 && <section><h3>Preferencias para matchmaking</h3><div className="deadlock-details-candidates">{selectedDetailsCandidates.map((candidate, candidateIndex) => <div key={candidate.key}><span>{candidateIndex + 1}</span><img src={asset(candidate.portrait)} alt="" /><b>{candidate.name}</b></div>)}</div></section>}
-              {game.supportsTeamups && <section><h3>Team-Ups relacionados</h3><div className="roster-details-tags">{activeTeamups(selectedDetailsHero.key).map((teamup) => { const selected = selectedDetails?.teamupKey === teamup.key; return <span className={selected && teamup.complete ? 'complete' : ''} key={teamup.key}><b>{selected && teamup.complete ? 'ACTIVO' : selected ? 'ELEGIDO' : teamup.complete ? 'DISPONIBLE' : 'BASE'}</b>{teamup.name}</span> })}</div></section>}
+              {game.supportsTeamups && <section><h3>Team-Ups relacionados</h3><div className="roster-details-tags">{relatedTeamups(selectedDetailsHero.key).map((teamup) => { const selected = selectedDetails?.teamupKey === teamup.key; const receiver = teamup.receiver ? heroByKey(teamup.receiver) : undefined; const relationLabel = teamup.relation === 'anchor' ? `ANCLA · ${receiver?.name ?? 'ALIADO'}` : selected && teamup.complete ? 'ACTIVO' : selected ? 'ELEGIDO' : teamup.complete ? 'DISPONIBLE' : 'BASE'; return <span className={(selected && teamup.complete) || (teamup.relation === 'anchor' && teamup.complete) ? 'complete' : ''} key={teamup.key}><b>{relationLabel}</b>{teamup.name}</span> })}</div></section>}
               {selectedDetails?.loadout && <section><h3>Equipamiento generado</h3>{renderLoadout(selectedDetails.loadout)}</section>}
               <section><h3>Reglas aplicadas</h3><div className="roster-details-rules"><span><b>{avoidRepeated ? 'ACTIVO' : 'INACTIVO'}</b>Evitar repetidos</span>{game.roles.length > 1 && <span><b>{balancedRoles ? 'ACTIVA' : 'INACTIVA'}</b>Composición de roles</span>}{game.supportsTeamups && <span><b>{priorityTeamups ? 'ACTIVA' : 'INACTIVA'}</b>Prioridad de Team-Ups</span>}</div></section>
             </aside>
