@@ -1940,3 +1940,82 @@
     0 14px 34px rgba(0, 0, 0, .34),
     0 0 24px rgba(221, 207, 91, .18);
 }
+
+
+/* =========================================================
+   PVZ Principal viewport polish
+   - No inherited giant empty stage.
+   - Sidebar controls stay usable inside the browser height.
+   - Side-specific generation stays on the left; Generar ambos stays in viewport.
+   ========================================================= */
+@media (min-width: 861px) {
+  .pvz-workspace {
+    height: calc(100dvh - 78px);
+    min-height: 0;
+  }
+
+  .pvz-sidebar {
+    height: 100%;
+    min-height: 0;
+    padding-bottom: 0;
+    overscroll-behavior: contain;
+  }
+
+  .pvz-sidebar-head {
+    position: sticky;
+    top: -14px;
+    z-index: 14;
+    margin: -14px -14px 10px;
+    padding: 17px 14px 10px;
+    border-bottom: 1px solid rgba(113, 213, 107, .22);
+    background: linear-gradient(180deg, rgba(8, 28, 20, .995), rgba(7, 22, 22, .97));
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+  }
+
+  .pvz-sidebar-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 15;
+    margin: auto -14px 0;
+    padding: 9px 14px 12px;
+    border-top: 1px solid rgba(223, 202, 90, .25);
+    background: linear-gradient(180deg, rgba(5, 18, 24, .92), rgba(7, 18, 24, .995) 28%);
+    box-shadow: 0 -12px 24px rgba(0, 0, 0, .24);
+  }
+
+  .pvz-status {
+    min-height: 34px;
+    margin-bottom: 0;
+  }
+
+  .pvz-side-generate-grid .pvz-generate {
+    min-height: 40px;
+  }
+
+  .pvz-content {
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .pvz-stage {
+    min-height: 0;
+    height: auto;
+  }
+
+  .pvz-team-grid {
+    align-content: start;
+  }
+}
+
+.pvz-principal-generate-dock {
+  right: max(16px, env(safe-area-inset-right)) !important;
+  bottom: max(14px, env(safe-area-inset-bottom)) !important;
+  z-index: 145 !important;
+}
+
+.pvz-principal-generate {
+  min-width: 238px;
+  min-height: 52px;
+}

@@ -13,7 +13,8 @@ import PvzModule from './PvzModule'
 import RosterModule, { rosterGameDefinitions, type RosterGameId } from './RosterModule'
 import { warmImageCache } from './imageCache'
 import { creditsJoke, creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
-import { installUiLocalization } from './uiLocalization'
+import { installUiLocalization, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
+import ViewportAction from './ViewportAction'
 
 type Role = 'tank' | 'damage' | 'support'
 type GameId = 'overwatch' | 'tf2' | 'pvzgw2' | RosterGameId
@@ -1500,7 +1501,6 @@ function App() {
         notify('Revisa los grupos y filtros de TF2.', 'warning')
       } else {
         setTf2Status('Equipo TF2 generado correctamente')
-        notify('Nuevo equipo de mercenarios generado', 'success')
       }
     }, animationsEnabled ? 300 : 30)
   }
@@ -1776,7 +1776,6 @@ function App() {
       setGenerating(false)
       setStatus(rolesOnly ? 'Composición de roles generada' : 'Equipo generado correctamente')
       playConfirmTone()
-      notify(rolesOnly ? 'Composición generada' : stadium ? 'Equipo Stadium generado' : 'Nuevo equipo generado', 'success')
     }, animationsEnabled ? 360 : 40)
   }
 
@@ -2638,7 +2637,7 @@ function App() {
               {tf2Players.map((player, index) => (
                 <div className="player-row tf2-player-row" key={player.id}>
                   <span className="number">{String(index + 1).padStart(2, '0')}</span>
-                  <input value={player.name} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => tf2UpdatePlayerName(index, event.target.value)} maxLength={22} aria-label={`Nombre TF2 ${index + 1}`} />
+                  <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => tf2UpdatePlayerName(index, event.target.value)} maxLength={22} aria-label={`Nombre TF2 ${index + 1}`} />
                   <select className="player-profile-inline" value={player.profileId} onChange={(event: ChangeEvent<HTMLSelectElement>) => tf2AssignPlayerProfile(index, event.target.value)} aria-label={`Perfil TF2 ${index + 1}`}>
                     <option value="">☆</option>{profiles.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
                   </select>
@@ -2688,7 +2687,7 @@ function App() {
                 return (
                   <article className={`hero-card tf2-card ${mercenary?.group ?? ''} ${generationClass} ${pick?.locked ? 'is-locked' : ''} ${tf2RerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--delay': `${index * 45}ms`, '--tf2-accent': mercenary ? tf2GroupColors[mercenary.group] : '#e8a45b' } as CSSProperties} key={player.id}>
                     <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
-                    <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span>{player.name || `Jugador ${index + 1}`}</span>{profile && <span className="profile-tag">{profile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}</div>
+                    <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span>{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : (player.name || localizedPlayerName(activeLocale, index + 1))}</span>{profile && <span className="profile-tag">{profile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}</div>
                     <div className="portrait tf2-portrait">
                       <div className="portrait-grid" /><div className="portrait-fallback"><Icon name="gamepad" size={48} /></div>
                       {mercenary ? <img className="hero-image" src={asset(mercenary.portrait)} alt={mercenary.name} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} /> : <div className="portrait-loading"><span /><span /><span /></div>}
@@ -2707,6 +2706,12 @@ function App() {
             </div>
           </div>
         </section>
+
+        <ViewportAction className="tf2-principal-generate-dock">
+          <button type="button" className={`generate principal-generate-action tf2-generate ${tf2Generating ? 'generating' : ''}`} onClick={generateTf2Team} disabled={tf2Generating || tf2RerollingIndex !== null}>
+            <span className="generate-glow" /><Icon name={tf2Generating ? 'refresh' : 'spark'} size={19} /><span>{tf2Generating ? 'Reuniendo…' : 'Generar equipo'}</span>
+          </button>
+        </ViewportAction>
       </main>
     )
   }
@@ -2769,11 +2774,6 @@ function App() {
           </aside>
         </section>
 
-        <div className="principal-generate-dock tf2-principal-generate-dock">
-          <button type="button" className={`generate principal-generate-action tf2-generate ${tf2Generating ? 'generating' : ''}`} onClick={generateTf2Team} disabled={tf2Generating || tf2RerollingIndex !== null}>
-            <span className="generate-glow" /><Icon name={tf2Generating ? 'refresh' : 'spark'} size={19} /><span>{tf2Generating ? 'Reuniendo…' : 'Generar equipo'}</span>
-          </button>
-        </div>
       </main>
     )
   }
@@ -2832,7 +2832,7 @@ function App() {
                 <div className="player-row" key={player.id}>
                   <span className="number">{String(index + 1).padStart(2, '0')}</span>
                   <input
-                    value={player.name}
+                    value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name}
                     disabled={Boolean(player.profileId)}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => updatePlayerName(index, event.target.value)}
                     aria-label={`Nombre del jugador ${index + 1}`}
@@ -2933,7 +2933,7 @@ function App() {
                       <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
                       <div className="card-player">
                         <span className="player-index">{String(index + 1).padStart(2, '0')}</span>
-                        <span>{player.name || `Jugador ${index + 1}`}</span>
+                        <span>{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : (player.name || localizedPlayerName(activeLocale, index + 1))}</span>
                         {assignedProfile && <span className="profile-tag" title={`Perfil: ${assignedProfile.name}`}>{assignedProfile.name.charAt(0).toUpperCase()}</span>}
                         {player.blocked.length > 0 && <span className="filter-count" title={`${player.blocked.length} héroes bloqueados`}>{player.blocked.length}</span>}
                         {pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}
@@ -2974,8 +2974,8 @@ function App() {
                       {!rolesOnly && hero && pick.perks.length > 0 && (
                         <div className={`card-perks ${stadium ? 'stadium' : 'quickplay'}`}>
                           {pick.perks.map((perk, perkIndex) => (
-                            <article className="card-perk" key={`${perk.name}-${perkIndex}`} title={perk.description}>
-                              {perk.icon ? <img src={asset(perk.icon)} alt="" loading="lazy" decoding="async" /> : <Icon name="spark" size={20} />}
+                            <article className="card-perk" style={{ '--perk-delay': `${index * 55 + 230 + perkIndex * 75}ms` } as CSSProperties} key={`${perk.name}-${perkIndex}`} title={perk.description}>
+                              {perk.icon ? <img src={asset(perk.icon)} alt="" loading="eager" decoding="async" /> : <Icon name="spark" size={20} />}
                               <span><small>{stadium ? `PODER ${perkIndex + 1}` : hero.minorPerks.some((item) => item.name === perk.name) ? 'MENOR' : 'MAYOR'}</small><b>{perk.name}</b></span>
                             </article>
                           ))}
@@ -2997,11 +2997,11 @@ function App() {
           )}
         </section>
 
-        <div className="principal-generate-dock overwatch-principal-generate-dock">
+        <ViewportAction className="overwatch-principal-generate-dock">
           <button type="button" className={`generate principal-generate-action ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!data || generating || rerollingIndex !== null}>
             <span className="generate-glow" /><Icon name={generating ? 'refresh' : 'spark'} size={19} /><span>{generating ? 'Generando…' : 'Generar equipo'}</span>
           </button>
-        </div>
+        </ViewportAction>
       </main>
     )
   }
@@ -3605,7 +3605,7 @@ function App() {
     )
   }
   return (
-    <div className={`app ${animationsEnabled ? '' : 'reduce-motion'} ${compactPerks ? 'compact-perks' : ''} ${lowPowerMode ? 'low-power' : ''} ${mobileCompactMode ? 'mobile-compact' : ''}`}>
+    <div className={`app view-${activeView} ${animationsEnabled ? '' : 'reduce-motion'} ${compactPerks ? 'compact-perks' : ''} ${lowPowerMode ? 'low-power' : ''} ${mobileCompactMode ? 'mobile-compact' : ''}`}>
       <div className="ambient-grid" /><div className="ambient-orb orb-one" /><div className="ambient-orb orb-two" /><div className="noise-layer" />
 
       <header className="topbar">
@@ -3629,6 +3629,7 @@ function App() {
           soundEnabled={soundEnabled}
           soundVolume={soundVolume}
           mobileCompactMode={mobileCompactMode}
+          locale={activeLocale}
           notify={notify}
         />
       )}
@@ -3643,6 +3644,7 @@ function App() {
           soundEnabled={soundEnabled}
           soundVolume={soundVolume}
           mobileCompactMode={mobileCompactMode}
+          locale={activeLocale}
           notify={notify}
           playUiSound={playSound}
           playConfirmTone={playConfirmTone}

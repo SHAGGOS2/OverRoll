@@ -9569,3 +9569,94 @@ button:disabled,
     padding-bottom: 82px;
   }
 }
+
+
+/* =========================================================
+   Principal CTA: true viewport layer (rendered through portal)
+   ========================================================= */
+.principal-generate-dock {
+  position: fixed !important;
+  right: max(16px, env(safe-area-inset-right)) !important;
+  bottom: max(14px, env(safe-area-inset-bottom)) !important;
+  z-index: 120 !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+.principal-generate-action {
+  min-width: 224px;
+  min-height: 52px;
+  pointer-events: auto;
+}
+
+/* Toasts no longer fight with the primary action in the lower-right corner. */
+.toast {
+  right: 18px;
+  bottom: 82px;
+  z-index: 130;
+}
+
+/* Perks arrive after the hero card instead of popping in instantly. */
+.hero-card.generation-a .card-perk,
+.hero-card.generation-b .card-perk {
+  animation: perk-card-reveal 360ms cubic-bezier(.16, .84, .32, 1) var(--perk-delay, 240ms) both;
+}
+
+@keyframes perk-card-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 7px, 0) scale(.94);
+    filter: blur(3px) brightness(1.35);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0) brightness(1);
+  }
+}
+
+@media (max-width: 860px) {
+  .principal-generate-dock {
+    right: max(10px, env(safe-area-inset-right)) !important;
+    left: max(10px, env(safe-area-inset-left)) !important;
+    bottom: max(10px, env(safe-area-inset-bottom)) !important;
+  }
+
+  .principal-generate-action {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .toast {
+    right: 12px;
+    bottom: 78px;
+    left: 12px;
+    max-width: none;
+  }
+}
+
+/* Keep Principal exactly inside the browser viewport; only its panels scroll. */
+@media (min-width: 861px) {
+  .app.view-principal {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .app.view-principal > .workspace {
+    height: calc(100dvh - 78px);
+    min-height: 0;
+  }
+}
+
+/* TF2 principal CTA lives in a body portal, so give it its game accent explicitly. */
+.tf2-principal-generate-dock {
+  --yellow: #e8a45b;
+  --yellow-bright: #f3bc7a;
+}
+
+
+/* Principal feedback must never cover the primary viewport action. */
+.toast {
+  bottom: 82px !important;
+}

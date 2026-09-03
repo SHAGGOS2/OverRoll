@@ -6,6 +6,9 @@ import {
   type CSSProperties,
 } from 'react'
 import { warmImageCache } from './imageCache'
+import type { SupportedLocale } from './localization'
+import { isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
+import ViewportAction from './ViewportAction'
 import './RosterModule.css'
 
 export type RosterGameId =
@@ -80,6 +83,7 @@ type FinalsRawLoadouts = Record<string, {
 }>
 
 type FinalsLoadout = {
+  role?: string
   specialization: string
   weapon: string
   gadgets: string[]
@@ -115,6 +119,7 @@ type Props = {
   soundEnabled: boolean
   soundVolume: number
   mobileCompactMode: boolean
+  locale: SupportedLocale
   notify: (message: string, tone?: ToastTone) => void
   playUiSound?: (sound: RosterSoundKey) => void
   playConfirmTone?: () => void
@@ -328,6 +333,21 @@ function randomItem<T>(items: T[]): T | undefined {
   return items[randomIndex(items.length)]
 }
 
+function weightedRandomItem<T>(items: T[], weightFor: (item: T) => number): T | undefined {
+  if (!items.length) return undefined
+  const weights = items.map((item) => Math.max(0, weightFor(item)))
+  const total = weights.reduce((sum, weight) => sum + weight, 0)
+  if (total <= 0) return randomItem(items)
+  const buffer = new Uint32Array(1)
+  crypto.getRandomValues(buffer)
+  let cursor = (buffer[0] / 0x100000000) * total
+  for (let index = 0; index < items.length; index += 1) {
+    cursor -= weights[index]
+    if (cursor < 0) return items[index]
+  }
+  return items[items.length - 1]
+}
+
 function shuffled<T>(items: T[]): T[] {
   const copy = [...items]
   for (let index = copy.length - 1; index > 0; index -= 1) {
@@ -433,7 +453,7 @@ function pickFinalsLoadout(raw: FinalsRawLoadouts | null, role: string): FinalsL
   while (gadgetPool.length && gadgets.length < 3) {
     gadgets.push(gadgetPool.splice(randomIndex(gadgetPool.length), 1)[0])
   }
-  return { specialization, weapon, gadgets }
+  return { role, specialization, weapon, gadgets }
 }
 
 function normalizeDegrees(value: number) {
@@ -480,6 +500,7 @@ export default function RosterModule({
   soundEnabled,
   soundVolume,
   mobileCompactMode,
+  locale,
   notify,
   playUiSound,
   playConfirmTone,
@@ -565,7 +586,12 @@ export default function RosterModule({
     if (game.supportsLoadouts) {
       fetch(`${baseUrl}assets/games/thefinals/loadouts.json`, { cache: 'no-store' })
         .then((response) => response.json() as Promise<FinalsRawLoadouts>)
-        .then((payload) => { if (!cancelled) setFinalsLoadouts(payload) })
+        .then((payload) => {
+          if (!cancelled) {
+            setFinalsLoadouts(payload)
+            setStatus('THE FINALS listo')
+          }
+        })
         .catch(() => undefined)
     }
 
@@ -811,14 +837,17 @@ export default function RosterModule({
 
   function teamupBiasedHero(pool: CatalogHero[], used: Set<string>): CatalogHero | null {
     if (!pool.length) return null
-    if (!game.supportsTeamups || !priorityTeamups || used.size === 0) return randomItem(pool) ?? null
+    const chooseHero = (choices: CatalogHero[]) => game.id === 'rivals'
+      ? weightedRandomItem(choices, (hero) => hero.key === 'rivals-deadpool' ? 0.85 : 1)
+      : randomItem(choices)
+    if (!game.supportsTeamups || !priorityTeamups || used.size === 0) return chooseHero(pool) ?? null
     const preferred = pool.filter((hero) => teamups.some((teamup) => {
       const receiverKey = teamup.receiver ?? ''
       const anchorKey = teamupAnchorKey(teamup)
       return (receiverKey === hero.key && used.has(anchorKey))
         || (anchorKey === hero.key && used.has(receiverKey))
     }))
-    return randomItem(preferred.length ? preferred : pool) ?? null
+    return chooseHero(preferred.length ? preferred : pool) ?? null
   }
 
   function assignedRole(index: number, rolePlan: string[]): string | null {
@@ -884,7 +913,7 @@ export default function RosterModule({
         if (playConfirmTone) playConfirmTone()
         else playTone(880, 0.18)
       }, animationsEnabled ? 420 : 1)
-      notify(completeCards === players.length ? 'Deadlock: tres candidatos por jugador generados' : 'Algunos filtros no permiten completar tres candidatos.', completeCards === players.length ? 'success' : 'warning')
+      if (completeCards !== players.length) notify('Algunos filtros no permiten completar tres candidatos.', 'warning')
       return
     }
 
@@ -992,7 +1021,6 @@ export default function RosterModule({
     if (game.supportsTeamups && priorityTeamups && !seededTeamup && activeTeamupCount === 0) {
       notify('No existe un Team-Up compatible con los roles y filtros actuales.', 'warning')
     } else {
-      notify(`${game.name}: equipo generado`, 'success')
     }
   }
 
@@ -1327,19 +1355,45 @@ export default function RosterModule({
       }))
   }
 
+  function finalsRoleFromLoadout(loadout: FinalsLoadout | undefined): string {
+    if (!loadout) return ''
+    if (loadout.role && ['light', 'medium', 'heavy'].includes(loadout.role)) return loadout.role
+    if (!finalsLoadouts) return ''
+    for (const roleId of ['light', 'medium', 'heavy']) {
+      const pool = finalsLoadouts[roleId]
+      if (!pool) continue
+      if (pool.specializations.includes(loadout.specialization) && pool.weapons.includes(loadout.weapon)) return roleId
+    }
+    return ''
+  }
+
   function renderLoadout(loadout: FinalsLoadout | undefined) {
     if (!loadout) return null
     const rows = [
-      { label: 'Especialización', name: loadout.specialization },
-      { label: 'Arma', name: loadout.weapon },
-      ...loadout.gadgets.map((name, index) => ({ label: `Artefacto ${index + 1}`, name })),
+      { kind: 'specialization', label: 'Especialización', name: loadout.specialization },
+      { kind: 'weapon', label: 'Arma', name: loadout.weapon },
+      ...loadout.gadgets.map((name, index) => ({ kind: 'gadget', label: `Artefacto ${index + 1}`, name })),
     ]
     return (
-      <div className="roster-loadout">
-        {rows.map((row) => (
-          <div key={`${row.label}-${row.name}`}>
-            <img src={finalsIcon(baseUrl, row.name)} alt="" onError={(event) => { event.currentTarget.style.display = 'none' }} />
-            <span><small>{row.label}</small><b>{row.name}</b></span>
+      <div className="roster-loadout finals-visual-loadout">
+        {rows.map((row, index) => (
+          <div className={`finals-loadout-item finals-loadout-${row.kind} finals-loadout-index-${index}`} key={`${row.label}-${row.name}`}>
+            <span className="finals-loadout-image"><img src={finalsIcon(baseUrl, row.name)} alt={row.name} onError={(event) => { event.currentTarget.style.display = 'none' }} /></span>
+            <span className="finals-loadout-copy"><small>{row.label}</small><b>{row.name}</b></span>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  function renderFinalsCardLoadout(loadout: FinalsLoadout | undefined) {
+    if (!loadout) return null
+    return (
+      <div className="finals-card-loadout" aria-label="Gadgets del build">
+        {loadout.gadgets.map((name, index) => (
+          <div className="finals-card-loadout-item finals-card-loadout-gadget" key={`${index}-${name}`}>
+            <span className="finals-card-loadout-image"><img src={finalsIcon(baseUrl, name)} alt={name} decoding="async" onError={(event) => { event.currentTarget.style.display = 'none' }} /></span>
+            <span className="finals-card-loadout-copy"><small>{`Gadget ${index + 1}`}</small><b>{name}</b></span>
           </div>
         ))}
       </div>
@@ -1387,7 +1441,7 @@ export default function RosterModule({
                 return (
                   <div className="player-row roster-game-player-row" key={player.id}>
                     <span className="number">{String(index + 1).padStart(2, '0')}</span>
-                    <input value={player.name} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} maxLength={22} aria-label={`Nombre de ${game.name} ${index + 1}`} />
+                    <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} maxLength={22} aria-label={`Nombre de ${game.name} ${index + 1}`} />
                     <select className="player-profile-inline" value={player.profileId} onChange={(event) => assignProfile(index, event.target.value)} title={profiles.find((item) => item.id === player.profileId)?.name ?? 'Sin perfil'} aria-label={`Perfil de ${game.name} ${index + 1}`}>
                       <option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id}>{profile.name}</option>)}
                     </select>
@@ -1449,7 +1503,12 @@ export default function RosterModule({
                   const pick = picks[index] ?? { hero: null, locked: false }
                   const deadlockCandidates = gameId === 'deadlock' ? rosterPickCandidates(pick) : []
                   const hero = deadlockCandidates[0] ?? pick.hero
-                  const role = hero ? roleDefinition(game, hero.role) : null
+                  const finalsLoadoutRole = game.supportsLoadouts ? finalsRoleFromLoadout(pick.loadout) : ''
+                  const displayHero = game.supportsLoadouts
+                    ? (finalsLoadoutRole ? catalog.find((item) => item.role === finalsLoadoutRole) ?? hero : hero)
+                    : hero
+                  const displayRoleId = game.supportsLoadouts ? (finalsLoadoutRole || displayHero?.role || '') : (displayHero?.role || '')
+                  const role = displayRoleId ? roleDefinition(game, displayRoleId) : null
                   const assignedProfile = profiles.find((profile) => profile.id === player.profileId)
                   const receiverTeamups = hero && game.supportsTeamups ? activeTeamups(hero.key) : []
                   const selectedTeamup = (pick.teamupKey ? receiverTeamups.find((teamup) => teamup.key === pick.teamupKey) : undefined) ?? receiverTeamups[0]
@@ -1457,7 +1516,7 @@ export default function RosterModule({
                   return (
                     <article className={`hero-card roster-unified-card ${game.supportsLoadouts ? 'roster-finals-card' : ''} ${generationClass} ${pick.locked ? 'is-locked' : ''} ${rerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--role-color': role?.color ?? game.accent, '--delay': `${index * 45}ms` } as CSSProperties} key={player.id}>
                       <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
-                      <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span>{player.name || `Jugador ${index + 1}`}</span>{assignedProfile && <span className="profile-tag">{assignedProfile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick.locked && <span className="mini-lock"><RosterIcon name="lock" size={12} /></span>}</div>
+                      <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span>{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : (player.name || localizedPlayerName(locale, index + 1))}</span>{assignedProfile && <span className="profile-tag">{assignedProfile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick.locked && <span className="mini-lock"><RosterIcon name="lock" size={12} /></span>}</div>
                       {gameId === 'deadlock' ? (
                         <div className="deadlock-candidate-grid" aria-label={`Tres candidatos de ${player.name}`}>
                           {Array.from({ length: 3 }, (_, candidateIndex) => {
@@ -1484,6 +1543,30 @@ export default function RosterModule({
                             )
                           })}
                         </div>
+                      ) : game.supportsLoadouts ? (
+                        <>
+                          <div className="portrait finals-build-visual">
+                            <div className="portrait-grid" />
+                            <div className="finals-build-photo-glow" />
+                            {pick.loadout ? (
+                              <>
+                                <img className="finals-build-weapon" src={finalsIcon(baseUrl, pick.loadout.weapon)} alt={pick.loadout.weapon} decoding="async" draggable={false} onError={(event) => { event.currentTarget.style.display = 'none' }} />
+                                <div className="finals-build-specialization">
+                                  <img src={finalsIcon(baseUrl, pick.loadout.specialization)} alt={pick.loadout.specialization} decoding="async" onError={(event) => { event.currentTarget.style.display = 'none' }} />
+                                  <span><small>Especialización</small><b>{pick.loadout.specialization}</b></span>
+                                </div>
+                              </>
+                            ) : (
+                              <div className="finals-build-empty"><RosterIcon name="gamepad" size={46} /><span>Genera un equipo</span></div>
+                            )}
+                            <div className="portrait-vignette" />
+                            <div className="finals-class-chip">
+                              {displayHero ? <img src={asset(displayHero.portrait)} alt="" aria-hidden="true" /> : <span>{role?.label.slice(0, 2).toUpperCase() ?? '?'}</span>}
+                              <div><small>Complexión</small><b>{role?.label ?? displayHero?.name ?? 'Pendiente'}</b></div>
+                            </div>
+                          </div>
+                          <div className="hero-info finals-hero-info"><div className="hero-name-row"><h2>{pick.loadout?.weapon ?? 'Build pendiente'}</h2><span className="role-dot" /></div><div className="hero-role">{pick.loadout ? `${role?.label ?? 'Complexión'} · ${pick.loadout.specialization}` : 'Genera un equipo'}</div></div>
+                        </>
                       ) : (
                         <>
                           <div className="portrait">
@@ -1512,7 +1595,7 @@ export default function RosterModule({
                           </div>
                         )
                       })()}
-                      {hero && pick.loadout && <div className="roster-card-special roster-card-finals">{renderLoadout(pick.loadout)}</div>}
+                      {game.supportsLoadouts && pick.loadout && <div className="roster-card-special roster-card-finals">{renderFinalsCardLoadout(pick.loadout)}</div>}
 
                       <div className="card-actions four-actions">
                         <button type="button" onClick={() => reroll(index)} disabled={!hero || pick.locked || rerollingIndex !== null} data-tooltip={gameId === 'deadlock' ? 'Cambiar los 3 candidatos' : 'Reroll'} aria-label={gameId === 'deadlock' ? `Cambiar los tres candidatos de ${player.name}` : `Reroll de ${player.name}`}><RosterIcon name="reroll" size={18} /></button>
@@ -1521,7 +1604,7 @@ export default function RosterModule({
                         <button type="button" onClick={() => toggleLock(index)} disabled={!hero} className={pick.locked ? 'active-lock' : ''} data-tooltip={pick.locked ? 'Liberar' : 'Fijar'} aria-label={gameId === 'deadlock' ? (pick.locked ? `Liberar candidatos de ${player.name}` : `Fijar candidatos de ${player.name}`) : pick.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><RosterIcon name={pick.locked ? 'unlock' : 'lock'} size={17} /></button>
                       </div>
                       <div className="loadout">
-                        <div><small>{gameId === 'deadlock' ? 'Candidatos' : pick.loadout ? 'Equipamiento' : game.supportsTeamups ? 'Team-Ups' : 'Formato'}</small><span>{gameId === 'deadlock' ? `${deadlockCandidates.length}/3 opciones para matchmaking` : pick.loadout ? `${1 + 1 + pick.loadout.gadgets.length} elementos equipados` : selectedTeamup?.complete ? `${selectedTeamup.name} activo` : selectedTeamup ? `${selectedTeamup.name} · base` : assignedProfile ? assignedProfile.name : game.formatLabel}</span></div>
+                        <div><small>{game.supportsLoadouts && pick.loadout ? 'Build' : gameId === 'deadlock' ? 'Candidatos' : game.supportsTeamups ? 'Team-Ups' : 'Formato'}</small><span>{game.supportsLoadouts && pick.loadout ? `${role?.label ?? 'Complexión'} · completo` : gameId === 'deadlock' ? `${deadlockCandidates.length}/3 opciones para matchmaking` : selectedTeamup?.complete ? `${selectedTeamup.name} activo` : selectedTeamup ? `${selectedTeamup.name} · base` : assignedProfile ? assignedProfile.name : game.formatLabel}</span></div>
                         <span className="loadout-status"><RosterIcon name="check" size={13} /></span>
                       </div>
                     </article>
@@ -1532,11 +1615,14 @@ export default function RosterModule({
           )}
         </section>
 
-        <div className="principal-generate-dock roster-principal-generate-dock">
+        <ViewportAction
+          className="roster-principal-generate-dock"
+          style={{ '--yellow': game.accent, '--yellow-bright': `color-mix(in srgb, ${game.accent} 82%, white)` } as CSSProperties}
+        >
           <button type="button" className={`generate principal-generate-action ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!catalog.length || generating || rerollingIndex !== null || (game.supportsTeamups && priorityTeamups && !teamupsReady)}>
             <span className="generate-glow" /><RosterIcon name="spark" size={19} /><span>{game.supportsTeamups && priorityTeamups && !teamupsReady ? 'Cargando Team-Ups…' : generating ? 'Generando…' : gameId === 'deadlock' ? 'Generar candidatos' : 'Generar equipo'}</span>
           </button>
-        </div>
+        </ViewportAction>
 
         {filterIndex !== null && players[filterIndex] && (
           <div className="roster-modal-layer" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) setFilterIndex(null) }}>

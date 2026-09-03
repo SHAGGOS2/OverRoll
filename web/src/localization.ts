@@ -1,4 +1,4 @@
-export type SupportedLocale = 'es-mx' | 'es-es' | 'en-us' | 'ja-jp' | 'pt-br' | 'fr-fr' | 'de-de' | 'ko-kr'
+export type SupportedLocale = 'es-mx' | 'es-es' | 'en-us' | 'ja-jp' | 'pt-br' | 'fr-fr' | 'de-de' | 'ko-kr' | 'zh-cn'
 export type LocalePreference = 'auto' | SupportedLocale
 
 export const localeChoices: Array<{ id: SupportedLocale; name: string }> = [
@@ -10,6 +10,7 @@ export const localeChoices: Array<{ id: SupportedLocale; name: string }> = [
   { id: 'fr-fr', name: 'Français' },
   { id: 'de-de', name: 'Deutsch' },
   { id: 'ko-kr', name: '한국어' },
+  { id: 'zh-cn', name: '简体中文' },
 ]
 
 type CopyKey =
@@ -116,6 +117,9 @@ const esMx: Record<CopyKey, string> = {
 }
 
 const translations: Partial<Record<SupportedLocale, Partial<Record<CopyKey, string>>>> = {
+  'zh-cn': {
+    random_picker: '随机英雄选择器', nav_home: '主页', nav_roulette: '轮盘', nav_profiles: '配置档', nav_more: '更多', settings_kicker: 'OverRoll 设置', settings_title: '设置', settings_intro: '打开一个分类，只修改该部分，不必混合选项或滚动整个页面。', catalog_active: '当前目录', profiles: '配置档', stored: '已保存', tab_general: '常规', tab_general_desc: '界面、性能与使用体验。', tab_audio: '音频', tab_audio_desc: '音量与交互音效。', tab_games: '游戏', tab_games_desc: '各模块的目录和快捷入口。', tab_language: '语言', tab_language_desc: '浏览器检测与界面语言偏好。', tab_credits: '制作人员', tab_credits_desc: 'OverRoll 的起源、社区与理念。', active_section: '当前分类', language_eyebrow: '语言与地区', language_title: '选择 OverRoll 的显示语言', language_intro: '自动模式会跟随浏览器首选语言。手动选择只保存在此设备。', language_auto_title: '跟随浏览器语言', language_auto_body: 'OverRoll 会检查 navigator.languages，并选择最接近的受支持语言。', language_detected: '检测到', language_manual_title: '手动选择', language_manual_body: '在切回自动模式之前，此选择优先于浏览器。', language_active: '当前语言', language_saved: '偏好已保存在此浏览器。', credits_kicker: 'OVERROLL · 粉丝项目', credits_title: '抽到什么就玩什么。', credits_intro: 'OverRoll 把选择交给随机：生成队伍、转动轮盘，然后用抽到的结果进入对局。', credits_play: '返回游戏', credits_project: '查看项目', credits_hammond_alt: 'Hammond 跳舞', credits_hammond_hint: '打开 Hammond 的舞蹈歌曲', credits_author_label: '创作与主导', credits_author_body: '原创概念、视觉形象、功能设计、产品决策以及 OverRoll 的持续发展。', credits_community_label: '特别感谢', credits_community_title: 'OVERROLL 社区', credits_community_body: '感谢所有测试版本、报告错误，并把朋友间的点子变成所有人都能使用的工具的人。', credits_idea: '我们的想法', credits_manifest: '转动。接受结果。开玩。', credits_legal_title: 'OverRoll 是免费、非官方的粉丝项目。', credits_legal_body: '商标、角色、图片和名称归各自权利方所有。OverRoll 与相关公司没有隶属或授权关系。', credits_thanks: '感谢游玩',
+  },
   'es-es': {
     random_picker: 'Selector aleatorio de héroes', nav_home: 'Principal', nav_roulette: 'Ruleta', nav_profiles: 'Perfiles', nav_more: 'Más',
     settings_kicker: 'Preferencias de OverRoll', settings_title: 'Configuración', settings_intro: 'Abre una categoría para modificar solo ese apartado, sin mezclar opciones ni recorrer toda la página.',
@@ -158,6 +162,7 @@ export function detectBrowserLocale(languages: readonly string[] = typeof naviga
     if (value.startsWith('fr')) return 'fr-fr'
     if (value.startsWith('de')) return 'de-de'
     if (value.startsWith('ko')) return 'ko-kr'
+    if (value.startsWith('zh')) return 'zh-cn'
     if (value.startsWith('en')) return 'en-us'
   }
   return 'en-us'
@@ -180,6 +185,7 @@ const creditSongs: Record<SupportedLocale, string> = {
   'pt-br': 'https://youtu.be/HAiHEQblKeQ?t=25',
   'ko-kr': 'https://youtu.be/hBpV2qzTGFE?t=95',
   'ja-jp': 'https://youtu.be/EjaQdBcF6K4?t=52',
+  'zh-cn': 'https://youtu.be/4Qy0vs80T5M?t=45',
 }
 
 const creditJokes: Record<SupportedLocale, string> = {
@@ -191,6 +197,7 @@ const creditJokes: Record<SupportedLocale, string> = {
   'pt-br': 'Hammond caiu no samba!',
   'ko-kr': '난 이미 트레이서야!',
   'ja-jp': 'ハモンド、オリオンまで転がった！',
+  'zh-cn': 'Hammond 已经滚进战场了！',
 }
 
 export function creditsSongUrl(locale: SupportedLocale): string {
