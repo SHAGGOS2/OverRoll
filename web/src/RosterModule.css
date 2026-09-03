@@ -461,7 +461,7 @@
   gap: 5px;
 }
 
-.roster-card-teamups button {
+.roster-card-teamups .locked-teamup-card {
   position: relative;
   min-width: 0;
   min-height: 54px;
@@ -479,19 +479,13 @@
   transition: border-color 140ms ease, background 140ms ease, transform 120ms ease;
 }
 
-.roster-card-teamups button:hover {
-  border-color: color-mix(in srgb, var(--module-accent) 58%, transparent);
-  background: color-mix(in srgb, var(--module-accent) 7%, #0a2232);
-  transform: translateY(-1px);
-}
-
-.roster-card-teamups button.complete {
+.roster-card-teamups .locked-teamup-card.complete {
   border-color: color-mix(in srgb, #5ce1a2 66%, transparent);
   color: #eaf8ff;
   background: color-mix(in srgb, #5ce1a2 8%, #0a2232);
 }
 
-.roster-card-teamups button.selected {
+.roster-card-teamups .locked-teamup-card.selected {
   border-color: var(--module-accent);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--module-accent) 42%, transparent);
 }
@@ -521,7 +515,7 @@
   box-shadow: inset 0 0 18px color-mix(in srgb, var(--module-accent) 10%, transparent);
 }
 
-.roster-card-teamups button > span {
+.roster-card-teamups .locked-teamup-card > span {
   min-width: 0;
   display: grid;
   gap: 1px;
@@ -550,11 +544,11 @@
   font-size: .38rem;
 }
 
-.roster-card-teamups button.complete small {
+.roster-card-teamups .locked-teamup-card.complete small {
   color: #71dfaa;
 }
 
-.roster-card-teamups button > i {
+.roster-card-teamups .locked-teamup-card > i {
   position: absolute;
   top: 4px;
   right: 5px;
@@ -1288,6 +1282,7 @@
 .locked-teamup-card {
   cursor: default;
   pointer-events: none;
+  user-select: none;
 }
 
 .locked-teamup-card i {

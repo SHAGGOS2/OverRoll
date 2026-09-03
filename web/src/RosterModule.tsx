@@ -1420,9 +1420,6 @@ export default function RosterModule({
 
           <div className="sidebar-footer">
             <div className={`status-line ${loadError ? 'error' : ''}`}><span className="status-icon"><RosterIcon name={loadError ? 'settings' : 'shield'} size={15} /></span><span>{status}</span></div>
-            <button type="button" className={`generate ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!catalog.length || generating || rerollingIndex !== null || (game.supportsTeamups && priorityTeamups && !teamupsReady)}>
-              <span className="generate-glow" /><RosterIcon name="spark" size={19} /><span>{game.supportsTeamups && priorityTeamups && !teamupsReady ? 'Cargando Team-Ups…' : generating ? 'Generando…' : gameId === 'deadlock' ? 'Generar candidatos' : 'Generar equipo'}</span>
-            </button>
           </div>
         </aside>
 
@@ -1533,12 +1530,13 @@ export default function RosterModule({
               </div>
             </div>
           )}
-          <div className="floating-generate-dock roster-floating-dock">
-            <button type="button" className={`floating-generate roster-floating-generate ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!catalog.length || generating || rerollingIndex !== null || (game.supportsTeamups && priorityTeamups && !teamupsReady)}>
-              <span className="generate-glow" /><RosterIcon name="spark" size={19} /><span>{game.supportsTeamups && priorityTeamups && !teamupsReady ? 'Cargando Team-Ups…' : generating ? 'Generando…' : gameId === 'deadlock' ? 'Generar candidatos' : 'Generar equipo'}</span>
-            </button>
-          </div>
         </section>
+
+        <div className="principal-generate-dock roster-principal-generate-dock">
+          <button type="button" className={`generate principal-generate-action ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!catalog.length || generating || rerollingIndex !== null || (game.supportsTeamups && priorityTeamups && !teamupsReady)}>
+            <span className="generate-glow" /><RosterIcon name="spark" size={19} /><span>{game.supportsTeamups && priorityTeamups && !teamupsReady ? 'Cargando Team-Ups…' : generating ? 'Generando…' : gameId === 'deadlock' ? 'Generar candidatos' : 'Generar equipo'}</span>
+          </button>
+        </div>
 
         {filterIndex !== null && players[filterIndex] && (
           <div className="roster-modal-layer" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) setFilterIndex(null) }}>

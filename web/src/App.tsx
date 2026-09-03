@@ -13,6 +13,7 @@ import PvzModule from './PvzModule'
 import RosterModule, { rosterGameDefinitions, type RosterGameId } from './RosterModule'
 import { warmImageCache } from './imageCache'
 import { creditsJoke, creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
+import { installUiLocalization } from './uiLocalization'
 
 type Role = 'tank' | 'damage' | 'support'
 type GameId = 'overwatch' | 'tf2' | 'pvzgw2' | RosterGameId
@@ -944,6 +945,8 @@ function App() {
     document.title = `OverRoll · ${translate(activeLocale, 'random_picker')}`
     window.localStorage.setItem('overroll.web.localePreference', JSON.stringify(localePreference))
   }, [activeLocale, localePreference])
+
+  useEffect(() => installUiLocalization(activeLocale), [activeLocale])
 
   useEffect(() => {
     warmImageCache(tf2Classes.map((item) => asset(item.portrait)), 9)
@@ -2659,9 +2662,6 @@ function App() {
 
           <div className="sidebar-footer">
             <div className="status-line tf2-status"><span className="status-icon"><Icon name="shield" size={15} /></span><span>{tf2Status}</span></div>
-            <button type="button" className={`generate tf2-generate ${tf2Generating ? 'generating' : ''}`} onClick={generateTf2Team} disabled={tf2Generating || tf2RerollingIndex !== null}>
-              <span className="generate-glow" /><Icon name={tf2Generating ? 'refresh' : 'spark'} size={19} /><span>{tf2Generating ? 'Reuniendo…' : 'Generar equipo'}</span>
-            </button>
           </div>
         </aside>
 
@@ -2768,6 +2768,12 @@ function App() {
             {!!tf2RouletteEntries.length && <details className="roulette-slot-list"><summary><span>Ver casillas construidas</span><b>{tf2RouletteEntries.length}</b></summary><div>{tf2RouletteBuiltClasses.map((item, index) => <span key={`${item.key}-${index}`} style={{ '--role-color': tf2GroupColors[item.group] } as CSSProperties}><i>{index + 1}</i><img src={asset(item.portrait)} alt="" /><strong>{item.name}</strong></span>)}</div></details>}
           </aside>
         </section>
+
+        <div className="principal-generate-dock tf2-principal-generate-dock">
+          <button type="button" className={`generate principal-generate-action tf2-generate ${tf2Generating ? 'generating' : ''}`} onClick={generateTf2Team} disabled={tf2Generating || tf2RerollingIndex !== null}>
+            <span className="generate-glow" /><Icon name={tf2Generating ? 'refresh' : 'spark'} size={19} /><span>{tf2Generating ? 'Reuniendo…' : 'Generar equipo'}</span>
+          </button>
+        </div>
       </main>
     )
   }
@@ -2885,9 +2891,6 @@ function App() {
 
           <div className="sidebar-footer">
             <div className={`status-line ${loadError ? 'error' : ''}`}><span className="status-icon"><Icon name={loadError ? 'warning' : 'shield'} size={15} /></span><span>{status}</span></div>
-            <button type="button" className={`generate ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!data || generating || rerollingIndex !== null}>
-              <span className="generate-glow" /><Icon name={generating ? 'refresh' : 'spark'} size={19} /><span>{generating ? 'Generando…' : 'Generar equipo'}</span>
-            </button>
           </div>
         </aside>
 
@@ -2992,12 +2995,13 @@ function App() {
               </div>
             </div>
           )}
-          <div className="floating-generate-dock">
-            <button type="button" className={`floating-generate ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!data || generating || rerollingIndex !== null}>
-              <span className="generate-glow" /><Icon name={generating ? 'refresh' : 'spark'} size={19} /><span>{generating ? 'Generando…' : 'Generar equipo'}</span>
-            </button>
-          </div>
         </section>
+
+        <div className="principal-generate-dock overwatch-principal-generate-dock">
+          <button type="button" className={`generate principal-generate-action ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!data || generating || rerollingIndex !== null}>
+            <span className="generate-glow" /><Icon name={generating ? 'refresh' : 'spark'} size={19} /><span>{generating ? 'Generando…' : 'Generar equipo'}</span>
+          </button>
+        </div>
       </main>
     )
   }

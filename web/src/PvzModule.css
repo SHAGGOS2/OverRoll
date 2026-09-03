@@ -1926,3 +1926,17 @@
   background: linear-gradient(180deg, #98f08c, #79dc72);
   box-shadow: 0 12px 30px rgba(121, 220, 114, 0.22);
 }
+
+
+.pvz-side-generate-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pvz-principal-generate {
+  color: #07141d;
+  border-color: #d9ce66;
+  background: linear-gradient(90deg, #79db78, #e8d55f 50%, #b98be3);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, .34),
+    0 0 24px rgba(221, 207, 91, .18);
+}

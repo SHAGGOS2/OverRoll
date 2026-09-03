@@ -870,7 +870,7 @@ export default function PvzModule({
 
           <div className="sidebar-footer pvz-sidebar-footer">
             <div className="status-line pvz-status"><span className="status-icon"><PvzIcon name="check" size={15} /></span><span>{status}</span></div>
-            <div className="pvz-generate-grid"><button type="button" className="pvz-generate plants" onClick={() => generateTeam('plants')} disabled={generating || rerollingIndex !== null}><PvzIcon name="spark" size={17} /><span>Generar plantas</span></button><button type="button" className="pvz-generate zombies" onClick={() => generateTeam('zombies')} disabled={generating || rerollingIndex !== null}><PvzIcon name="spark" size={17} /><span>Generar zombis</span></button><button type="button" className="pvz-generate both" onClick={() => generateTeam('both')} disabled={generating || rerollingIndex !== null}><PvzIcon name={generating ? 'reroll' : 'spark'} size={18} /><span>{generating ? 'Preparando…' : 'Generar ambos'}</span></button></div>
+            <div className="pvz-generate-grid pvz-side-generate-grid"><button type="button" className="pvz-generate plants" onClick={() => generateTeam('plants')} disabled={generating || rerollingIndex !== null}><PvzIcon name="spark" size={17} /><span>Generar plantas</span></button><button type="button" className="pvz-generate zombies" onClick={() => generateTeam('zombies')} disabled={generating || rerollingIndex !== null}><PvzIcon name="spark" size={17} /><span>Generar zombis</span></button></div>
           </div>
         </aside>
 
@@ -891,12 +891,13 @@ export default function PvzModule({
               </article>
             })}
           </div></div>
-          <div className="floating-generate-dock pvz-floating-dock">
-            <button type="button" className={`floating-generate pvz-floating-generate ${generating ? 'generating' : ''}`} onClick={() => generateTeam('both')} disabled={generating || rerollingIndex !== null}>
-              <span className="generate-glow" /><PvzIcon name={generating ? 'reroll' : 'spark'} size={18} /><span>{generating ? 'Preparando…' : 'Generar ambos'}</span>
-            </button>
-          </div>
         </section>
+
+        <div className="principal-generate-dock pvz-principal-generate-dock">
+          <button type="button" className={`generate principal-generate-action pvz-principal-generate ${generating ? 'generating' : ''}`} onClick={() => generateTeam('both')} disabled={generating || rerollingIndex !== null}>
+            <span className="generate-glow" /><PvzIcon name={generating ? 'reroll' : 'spark'} size={19} /><span>{generating ? 'Preparando…' : 'Generar ambos'}</span>
+          </button>
+        </div>
 
         {filterPlayer && <div className="filter-layer pvz-filter-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) setFilterIndex(null) }}><section className={`filter-dialog pvz-filter-dialog ${filterPlayer.side}`} role="dialog" aria-modal="true"><header className="filter-heading"><div><span className="eyebrow">Filtro individual · {pvzSideSingular[filterPlayer.side]}</span><h2>{filterPlayer.name || `Jugador ${filterIndex! + 1}`}</h2><p>{eligibleBySide[filterPlayer.side].length - filterPlayer.blocked.filter((key) => eligibleBySide[filterPlayer.side].some((item) => item.key === key)).length} permitidos · {filterPlayer.blocked.length} bloqueados</p></div><button type="button" onClick={() => setFilterIndex(null)}><PvzIcon name="close" size={20} /></button></header><div className="filter-toolbar pvz-filter-toolbar"><label className="profile-search"><PvzIcon name="filter" size={16} /><input value={filterSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setFilterSearch(event.target.value)} placeholder="Buscar personaje o clase…" /></label><button type="button" className="reset-classification" onClick={clearFilter}><PvzIcon name="reset" size={15} /> Reiniciar</button></div><div className="pvz-filter-grid">{filterRows.map((item) => { const blocked = filterPlayer.blocked.includes(item.key); return <button type="button" className={`pvz-filter-card ${item.side} ${blocked ? 'blocked' : ''}`} onClick={() => toggleBlocked(item.key)} aria-pressed={blocked} key={item.key}><img src={asset(item.portrait)} alt="" /><span><strong>{item.name}</strong><small>{blocked ? 'BLOQUEADO' : item.isVariant ? item.baseName : 'PREDETERMINADO'}</small></span><i>{blocked ? '×' : '✓'}</i></button> })}</div></section></div>}
       </main>
