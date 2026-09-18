@@ -1,6 +1,6 @@
 {
   "source": "OverRoll local snapshot",
-  "updatedAt": "2026-09-18T22:34:00.000Z",
+  "updatedAt": "2026-09-18T22:40:00.000Z",
   "heroes": [
     {
       "key": "anran",
@@ -3873,7 +3873,7 @@
       "name": "D.Mon",
       "role": "tank",
       "subrole": "stalwart",
-      "portrait": "https://cdn.mos.cms.futurecdn.net/piadU3GPmdaehKi9ymCoNF.jpg",
+      "portrait": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/9d32268bf455685710310a79f655f13848355d9de86cf19f7293dfc201e8cd8f.png",
       "gamemodes": [
         "quickplay"
       ],
@@ -3881,24 +3881,24 @@
         {
           "name": "La bestia interior",
           "description": "Los golpes de Sable de plasma restauran 40 de salud de Barrera de energía.",
-          "icon": ""
+          "icon": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/a49a4aa586ec9a0f10b16d299e541fdfeb6da4ee2c1bf75a4f2bab1f4170ee45.png"
         },
         {
           "name": "Movilidad del MEKA",
           "description": "Mientras mantengas la Barrera de energía, el consumo de combustible de Propulsores es un 30% menor.",
-          "icon": ""
+          "icon": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/8d2f97ae5a2dc9b137d45bcf277030fc32754a67155c55d3d7f0525d6ea9ac6e.png"
         }
       ],
       "majorPerks": [
         {
           "name": "Golpazo",
           "description": "Golpe de arremetida obtiene un 150% de robo de vida.",
-          "icon": ""
+          "icon": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/b87f463706a6816a371f8c8b0cb62cd77f33860e85baa19998dd2aad97f89662.png"
         },
         {
           "name": "Fusión concentrada",
           "description": "Repetidor de fusión dispara tiros más potentes sin dispersión a un ritmo más lento.",
-          "icon": ""
+          "icon": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/46d8466d7de4b04dea213c55cae621e407206055eb3b9247796b3f8cd7ba2b4e.png"
         }
       ],
       "stadiumPowers": []
