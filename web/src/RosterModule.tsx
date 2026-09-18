@@ -173,7 +173,7 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     maxPlayers: 6,
     rolePattern: ['vanguard', 'vanguard', 'duelist', 'duelist', 'strategist', 'strategist'],
     description: 'Forma una escuadra de seis héroes y prioriza combinaciones de Team-Up.',
-    catalogLabel: '53 héroes',
+    catalogLabel: '54 héroes',
     formatLabel: '6 jugadores',
     supportsTeamups: true,
     roles: [
@@ -561,7 +561,14 @@ export default function RosterModule({
         setCatalog(heroes)
         warmImageCache(heroes.map((hero) => asset(hero.portrait)))
         setStatus(`${heroes.length} ${game.catalogLabel.replace(/^\d+\s*/, '').toLowerCase()} listos`)
-        setRouletteSelected((current) => current.length ? current.filter((key) => heroes.some((hero) => hero.key === key)) : heroes.map((hero) => hero.key))
+        setRouletteSelected((current) => {
+          if (!current.length) return heroes.map((hero) => hero.key)
+          const valid = current.filter((key) => heroes.some((hero) => hero.key === key))
+          const missing = heroes.filter((hero) => !valid.includes(hero.key))
+          // Si el usuario tenía seleccionado el catálogo completo anterior, conserva
+          // ese comportamiento al llegar un único personaje nuevo.
+          return missing.length === 1 ? [...valid, missing[0].key] : valid
+        })
         setRouletteWeights((current) => ({ ...Object.fromEntries(heroes.map((hero) => [hero.key, 1])), ...current }))
       })
       .catch(() => {
