@@ -1,8 +1,17 @@
 {
   "schema_version": 1,
-  "source": "Marvel Rivals official roster; The Hood reference: https://marvelrivals.fandom.com/wiki/The_Hood",
-  "updated": "2026-08-11",
+  "source": "Marvel Rivals official roster; Season 10 / Gorr reference: https://www.marvelrivals.com/m/gameupdate/20260909/41548_1313441.html",
+  "updated": "2026-09-18",
   "heroes": [
+    {
+      "key": "rivals-gorr-the-god-butcher",
+      "name": "Gorr the God Butcher",
+      "role": "duelist",
+      "portrait": "https://r.res.easebar.com/pic/20260911/5852ef31-3df1-4f8c-a44d-c618091da996.png",
+      "real_name": "Gorr",
+      "reference": "https://www.marvelrivals.com/m/gameupdate/20260909/41548_1313441.html",
+      "portrait_source": "Marvel Rivals official hero asset"
+    },
     {
       "key": "rivals-jubilee",
       "name": "Jubilee",
