@@ -52,8 +52,7 @@ La salida se genera en `dist/`.
 
 ## Créditos
 
-- Dirección de diseño, idea y pruebas: **SHAGGOS**.
-- Desarrollo e implementación: **OpenAI Codex**.
+- Creado y dirigido por **SHAGGOS**.
 - Datos de Overwatch: **OverFast API**.
 - Sonidos adicionales de interfaz: **Kenney, Interface Sounds 1.0, CC0 1.0**.
 
