@@ -1,6 +1,6 @@
 {
-  "source": "OverRoll local snapshot + live D.Mon sync via OverFast API",
-  "updatedAt": "2026-08-11T22:30:00.000Z",
+  "source": "OverRoll local snapshot",
+  "updatedAt": "2026-09-18T22:34:00.000Z",
   "heroes": [
     {
       "key": "anran",
@@ -3872,13 +3872,35 @@
       "key": "dmon",
       "name": "D.Mon",
       "role": "tank",
-      "subrole": "",
+      "subrole": "stalwart",
       "portrait": "https://cdn.mos.cms.futurecdn.net/piadU3GPmdaehKi9ymCoNF.jpg",
       "gamemodes": [
         "quickplay"
       ],
-      "minorPerks": [],
-      "majorPerks": [],
+      "minorPerks": [
+        {
+          "name": "La bestia interior",
+          "description": "Los golpes de Sable de plasma restauran 40 de salud de Barrera de energía.",
+          "icon": ""
+        },
+        {
+          "name": "Movilidad del MEKA",
+          "description": "Mientras mantengas la Barrera de energía, el consumo de combustible de Propulsores es un 30% menor.",
+          "icon": ""
+        }
+      ],
+      "majorPerks": [
+        {
+          "name": "Golpazo",
+          "description": "Golpe de arremetida obtiene un 150% de robo de vida.",
+          "icon": ""
+        },
+        {
+          "name": "Fusión concentrada",
+          "description": "Repetidor de fusión dispara tiros más potentes sin dispersión a un ritmo más lento.",
+          "icon": ""
+        }
+      ],
       "stadiumPowers": []
     }
   ]
