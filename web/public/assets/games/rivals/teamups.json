@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "source": "https://marvel-rivals-teambuilder.pages.dev/team-ups.html",
-  "updated": "2026-07-26",
-  "season": "9.0",
+  "updated": "2026-09-18",
+  "season": "10",
   "teamups": [
     {
       "key": "hel-yeah-honey",
@@ -1039,6 +1039,46 @@
       "heroes": [
         "rivals-groot",
         "rivals-mantis"
+      ]
+    },
+    {
+      "key": "chaos-collision",
+      "name": "CHAOS COLLISION",
+      "receiver": "rivals-the-hood",
+      "anchor": "rivals-scarlet-witch",
+      "heroes": [
+        "rivals-the-hood",
+        "rivals-scarlet-witch"
+      ]
+    },
+    {
+      "key": "new-moon-s-shadow",
+      "name": "NEW MOON'S SHADOW",
+      "receiver": "rivals-the-hood",
+      "anchor": "rivals-moon-knight",
+      "heroes": [
+        "rivals-the-hood",
+        "rivals-moon-knight"
+      ]
+    },
+    {
+      "key": "ragnarok",
+      "name": "RAGNARÖK",
+      "receiver": "rivals-gorr-the-god-butcher",
+      "anchor": "rivals-hela",
+      "heroes": [
+        "rivals-gorr-the-god-butcher",
+        "rivals-hela"
+      ]
+    },
+    {
+      "key": "hive-mind",
+      "name": "HIVE MIND",
+      "receiver": "rivals-gorr-the-god-butcher",
+      "anchor": "rivals-venom",
+      "heroes": [
+        "rivals-gorr-the-god-butcher",
+        "rivals-venom"
       ]
     }
   ]

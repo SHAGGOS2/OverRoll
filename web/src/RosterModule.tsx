@@ -168,7 +168,7 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     maxPlayers: 6,
     rolePattern: ['vanguard', 'vanguard', 'duelist', 'duelist', 'strategist', 'strategist'],
     description: 'Forma una escuadra de seis héroes y prioriza combinaciones de Team-Up.',
-    catalogLabel: '52 héroes',
+    catalogLabel: '54 héroes',
     formatLabel: '6 jugadores',
     supportsTeamups: true,
     roles: [
@@ -220,7 +220,7 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     defaultPlayers: 3,
     maxPlayers: 3,
     description: 'Genera un equipo de tres concursantes con estilos completamente distintos.',
-    catalogLabel: '9 concursantes',
+    catalogLabel: '11 concursantes',
     formatLabel: '3 jugadores',
     roles: [
       { id: 'assassin', label: 'Asesino', color: '#f25f5c' },
@@ -389,7 +389,12 @@ function normalizeRosterPlayers(raw: unknown, game: RosterGameDefinition): Roste
   return Array.from({ length: Math.min(game.maxPlayers, targetLength) }, (_, index) => normalized[index] ?? makePlayer(index, game.roles))
 }
 
+function isRemoteRosterAsset(path: string): boolean {
+  return /^(?:https?:)?\/\//i.test(path) || /^(?:data|blob):/i.test(path)
+}
+
 function normalizePortrait(gameId: RosterGameId, portrait: string): string {
+  if (isRemoteRosterAsset(portrait) || portrait.startsWith('assets/')) return portrait
   const filename = portrait.replace(/\\/g, '/').split('/').pop() ?? portrait
   return `assets/games/${gameId}/${filename}`
 }
@@ -515,7 +520,7 @@ export default function RosterModule({
   const [rouletteRotation, setRouletteRotation] = useState(0)
   const spinTimerRef = useRef<number | null>(null)
 
-  const asset = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`
+  const asset = (path: string) => isRemoteRosterAsset(path) ? path : `${baseUrl}${path.replace(/^\//, '')}`
 
   useEffect(() => {
     let cancelled = false
@@ -536,7 +541,15 @@ export default function RosterModule({
         setCatalog(heroes)
         warmImageCache(heroes.map((hero) => asset(hero.portrait)))
         setStatus(`${heroes.length} ${game.catalogLabel.replace(/^\d+\s*/, '').toLowerCase()} listos`)
-        setRouletteSelected((current) => current.length ? current.filter((key) => heroes.some((hero) => hero.key === key)) : heroes.map((hero) => hero.key))
+        setRouletteSelected((current) => {
+          if (!current.length) return heroes.map((hero) => hero.key)
+          const filtered = current.filter((key) => heroes.some((hero) => hero.key === key))
+          const previousFullCount = gameId === 'rivals' ? 52 : gameId === 'lastflag' ? 9 : null
+          if (previousFullCount && current.length === previousFullCount && filtered.length === previousFullCount) {
+            return heroes.map((hero) => hero.key)
+          }
+          return filtered
+        })
         setRouletteWeights((current) => ({ ...Object.fromEntries(heroes.map((hero) => [hero.key, 1])), ...current }))
       })
       .catch(() => {

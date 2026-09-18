@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "source": "https://lastflag.com/contestants/",
+  "source": "https://steamcommunity.com/app/2721340/announcements/",
   "heroes": [
     {
       "key": "knives",
@@ -55,6 +55,23 @@
       "name": "Tango",
       "role": "control",
       "portrait": "tango.png"
+    },
+    {
+      "key": "graffiti",
+      "name": "Graffiti",
+      "role": "control",
+      "portrait": "assets/game-icons/lastflag.png",
+      "real_name": "Stella Wylde",
+      "reference": "https://steamcommunity.com/app/2721340/announcements/"
+    },
+    {
+      "key": "first-aid",
+      "name": "First Aid",
+      "role": "support",
+      "portrait": "assets/game-icons/lastflag.png",
+      "real_name": "Lucia Barbosa",
+      "reference": "https://steamcommunity.com/app/2721340/announcements/"
     }
-  ]
+  ],
+  "updated": "2026-09-18"
 }

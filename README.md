@@ -123,8 +123,6 @@ Puedes reportarlos desde la sección **Issues**. Una captura y una explicación 
 ## Créditos
 
 **Idea, diseño y pruebas:** SHAGGOS  
-**Desarrollo e implementación:** OpenAI Codex
-
 OverRoll es un proyecto fan gratuito y no oficial.
 
 Los nombres, personajes, imágenes, sonidos y marcas pertenecen a sus respectivos propietarios.

@@ -151,6 +151,12 @@ type Tf2Pick = {
 const roles: Role[] = ['tank', 'damage', 'support']
 const profileBuckets: ProfileBucket[] = ['main', 'played', 'practice', 'avoid']
 
+const DOCTRINE_RELEASE_AT = Date.parse('2026-10-05T00:00:00-06:00')
+
+function doctrineUnlocked(): boolean {
+  return Date.now() >= DOCTRINE_RELEASE_AT
+}
+
 const roleLabels: Record<Role, string> = {
   tank: 'Tanque',
   damage: 'Daño',
@@ -230,7 +236,7 @@ const gameModuleIcons: Record<GameId, string> = {
 }
 
 const gameModules: Array<{ id: GameId; name: string; status: string; accent: string; available: boolean; catalogLabel: string; icon: string }> = [
-  { id: 'overwatch', name: 'Overwatch 2', status: 'Disponible', accent: '#f5a623', available: true, catalogLabel: '52 héroes', icon: gameModuleIcons.overwatch },
+  { id: 'overwatch', name: 'Overwatch 2', status: 'Disponible', accent: '#f5a623', available: true, catalogLabel: doctrineUnlocked() ? '54 héroes' : '53 héroes', icon: gameModuleIcons.overwatch },
   { id: 'tf2', name: 'Team Fortress 2', status: 'Disponible', accent: '#e8a45b', available: true, catalogLabel: '9 clases', icon: gameModuleIcons.tf2 },
   { id: 'pvzgw2', name: 'PVZ GW2', status: 'Disponible', accent: '#79dc72', available: true, catalogLabel: '121 personajes', icon: gameModuleIcons.pvzgw2 },
   ...rosterGameDefinitions.map((game) => ({
@@ -499,6 +505,46 @@ const rouletteRoleColors: Record<Role, string> = {
   tank: '#49c9ff',
   damage: '#ff6077',
   support: '#5ce1a2',
+}
+
+function isRemoteAsset(path: string): boolean {
+  return /^(?:https?:)?\/\//i.test(path) || /^(?:data|blob):/i.test(path)
+}
+
+function doctrineHero(): Hero {
+  return {
+    key: 'doctrine',
+    name: 'Doctrine',
+    role: 'support',
+    subrole: 'survivor',
+    portrait: 'https://i.ytimg.com/vi/Ab1_HIoelTk/maxresdefault.jpg',
+    gamemodes: ['quickplay'],
+    minorPerks: [
+      {
+        name: 'Gracia salvadora',
+        description: 'Drones vigorizantes sana 40 de salud al aplicarse.',
+        icon: '',
+      },
+      {
+        name: 'Sifón sanguíneo',
+        description: 'Te sana un 50% del daño infligido con Cetro eterno infundido.',
+        icon: '',
+      },
+    ],
+    majorPerks: [
+      {
+        name: 'Transfusión',
+        description: 'Reduce el tiempo de reutilización de Infundir según el daño y la sanación realizados.',
+        icon: '',
+      },
+      {
+        name: 'Costo de vida',
+        description: 'Sacrifica 25 de salud máxima y aumenta un 20% la sanación de Cetro eterno.',
+        icon: '',
+      },
+    ],
+    stadiumPowers: [],
+  }
 }
 
 function secureRandomIndex(length: number): number {
@@ -780,7 +826,7 @@ function buildTeam(options: {
 
 function App() {
   const baseUrl = import.meta.env.BASE_URL
-  const asset = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`
+  const asset = (path: string) => isRemoteAsset(path) ? path : `${baseUrl}${path.replace(/^\//, '')}`
 
   const [activeView, setActiveView] = useState<View>('principal')
   const [activeGame, setActiveGame] = useState<GameId>(() => readStorage('overroll.web.activeGame', 'overwatch'))
@@ -940,20 +986,31 @@ function App() {
         return response.json() as Promise<HeroData>
       })
       .then((loaded) => {
-        const pool = loaded.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay'))
-        setData(loaded)
-        warmImageCache(loaded.heroes.map((hero) => asset(hero.portrait)), 10)
-        const validKeys = new Set(loaded.heroes.map((hero) => hero.key))
+        const visibleHeroes = doctrineUnlocked() && !loaded.heroes.some((hero) => hero.key === 'doctrine')
+          ? [...loaded.heroes, doctrineHero()]
+          : loaded.heroes
+        const visibleData: HeroData = { ...loaded, heroes: visibleHeroes }
+        const pool = visibleHeroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay'))
+        setData(visibleData)
+        warmImageCache(visibleHeroes.map((hero) => asset(hero.portrait)), 10)
+        const validKeys = new Set(visibleHeroes.map((hero) => hero.key))
         const storedSelection = rouletteSelectedKeys.filter((key) => validKeys.has(key))
-        const nextSelection = rouletteInitialized ? storedSelection : loaded.heroes.map((hero) => hero.key)
-        setRouletteSelectedKeys(nextSelection)
+        const publishedKeys = new Set(['dmon', 'doctrine'])
+        const missingPublished = visibleHeroes
+          .filter((hero) => publishedKeys.has(hero.key) && !storedSelection.includes(hero.key))
+          .map((hero) => hero.key)
+        const nextSelection = rouletteInitialized
+          ? storedSelection.length >= 52 ? [...storedSelection, ...missingPublished] : storedSelection
+          : visibleHeroes.map((hero) => hero.key)
+        const uniqueSelection = [...new Set(nextSelection)]
+        setRouletteSelectedKeys(uniqueSelection)
         setRouletteWeights((current) => {
           const normalized: Record<string, number> = {}
-          nextSelection.forEach((key) => {
+          uniqueSelection.forEach((key) => {
             const raw = Number(current[key] ?? 1)
             normalized[key] = Math.max(1, Math.min(64, Math.round(Number.isFinite(raw) ? raw : 1)))
           })
-          if (nextSelection.length === 1) normalized[nextSelection[0]] = Math.max(2, normalized[nextSelection[0]] ?? 2)
+          if (uniqueSelection.length === 1) normalized[uniqueSelection[0]] = Math.max(2, normalized[uniqueSelection[0]] ?? 2)
           return normalized
         })
         if (!rouletteInitialized) setRouletteInitialized(true)
