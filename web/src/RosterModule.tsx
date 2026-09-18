@@ -1418,7 +1418,7 @@ export default function RosterModule({
       <main className={`workspace roster-overwatch-layout roster-game-${gameId} ${mobileCompactMode ? 'roster-mobile-compact' : ''}`} style={{ '--module-accent': game.accent, '--yellow': game.accent, '--yellow-bright': `color-mix(in srgb, ${game.accent} 82%, white)` } as CSSProperties}>
         <aside className={`sidebar roster-unified-sidebar ${mobileConfigOpen ? 'mobile-config-open' : 'mobile-config-closed'}`}>
           <div className="sidebar-head">
-            <div><span className="eyebrow">Preparar partida</span><strong>Configuración</strong></div>
+            <strong>Configuración</strong>
             <span className="live-dot roster-live-dot"><span /> {game.shortName}</span>
             <button type="button" className="mobile-config-toggle" onClick={() => { setMobileConfigOpen((value) => !value); playModuleSound(mobileConfigOpen ? 'close' : 'open', 460) }} aria-expanded={mobileConfigOpen}>
               <RosterIcon name={mobileConfigOpen ? 'close' : 'settings'} size={15} /><span>{mobileConfigOpen ? 'Ocultar' : 'Editar'}</span>
@@ -1433,7 +1433,7 @@ export default function RosterModule({
           )}
 
           <section className={`side-panel squad-panel roster-squad-panel mobile-config-section ${mobileConfigTab === 'squad' ? 'mobile-active' : ''}`}>
-            <div className="panel-title-row"><div><label>Escuadra</label><small>Nombres, perfiles y filtros</small></div><RosterIcon name="users" size={17} /></div>
+            <div className="panel-title-row"><div><label>Escuadra</label></div><RosterIcon name="users" size={17} /></div>
             <div className="squad-counter">
               <button type="button" onClick={() => changePlayerCount(-1)} disabled={players.length <= minimumPlayers(game) || generating}>−</button>
               <strong>{players.length} jugador{players.length === 1 ? '' : 'es'}</strong>
@@ -1460,22 +1460,22 @@ export default function RosterModule({
           </section>
 
           <section className={`side-panel rules roster-unified-rules mobile-config-section ${mobileConfigTab === 'rules' ? 'mobile-active' : ''}`}>
-            <div className="panel-title-row"><div><label>Reglas</label><small>Ajustes exclusivos de {game.shortName}</small></div><RosterIcon name="settings" size={17} /></div>
+            <div className="panel-title-row"><div><label>Reglas</label></div><RosterIcon name="settings" size={17} /></div>
             <button type="button" className={`toggle-row ${avoidRepeated ? 'enabled' : ''}`} onClick={() => { const next = !avoidRepeated; setAvoidRepeated(next); playModuleSound(next ? 'toggleOn' : 'toggleOff', next ? 620 : 360) }} aria-pressed={avoidRepeated}>
-              <span className="switch"><span /></span><span><b>Evitar repetidos</b><small>No repite personajes mientras existan alternativas válidas.</small></span>
+              <span className="switch"><span /></span><span><b>Evitar repetidos</b><small>No repetir si hay otra opción.</small></span>
             </button>
             {game.roles.length > 1 && (
               <button type="button" className={`toggle-row ${balancedRoles ? 'enabled' : ''}`} onClick={() => { const next = !balancedRoles; setBalancedRoles(next); playModuleSound(next ? 'toggleOn' : 'toggleOff', next ? 620 : 360) }} aria-pressed={balancedRoles}>
-                <span className="switch"><span /></span><span><b>Composición de roles</b><small>Acomoda automáticamente una composición válida para el tamaño del equipo.</small></span>
+                <span className="switch"><span /></span><span><b>Composición de roles</b><small>Mantener una composición válida.</small></span>
               </button>
             )}
             {game.supportsTeamups && (
               <button type="button" className={`toggle-row ${priorityTeamups ? 'enabled' : ''}`} onClick={() => { const next = !priorityTeamups; setPriorityTeamups(next); playModuleSound(next ? 'toggleOn' : 'toggleOff', next ? 720 : 360) }} aria-pressed={priorityTeamups}>
-                <span className="switch"><span /></span><span><b>Priorizar Team-Ups</b><small>Favorece sinergias, pero conserva filtros, roles y bloqueo de repetidos.</small></span>
+                <span className="switch"><span /></span><span><b>Priorizar Team-Ups</b><small>Intentar formar Team-Ups compatibles.</small></span>
               </button>
             )}
             {game.supportsLoadouts && (
-              <div className="roster-fixed-condition"><RosterIcon name="shield" size={15} /><span><b>Loadout completo</b><small>Especialización, arma y tres artefactos únicos por ficha.</small></span></div>
+              <div className="roster-fixed-condition"><RosterIcon name="shield" size={15} /><span><b>Loadout completo</b><small>Especialización, arma y 3 artefactos.</small></span></div>
             )}
           </section>
 
@@ -1487,7 +1487,6 @@ export default function RosterModule({
         <section className="content roster-unified-content">
           <div className="content-topline">
             <div className="game-identity">
-              <span className="game-kicker">{game.kicker}</span>
               <div className="game-title-row"><h1>{game.name}</h1><span className="web-badge roster-game-badge">{game.catalogLabel.toUpperCase()}</span></div>
             </div>
             <div className="topline-actions">
@@ -1495,7 +1494,6 @@ export default function RosterModule({
               <div className="match-summary">
                 <div><small>Formato</small><strong>{game.formatLabel}</strong></div>
                 <div><small>Fijados</small><strong>{lockedCount}</strong></div>
-                <div><small>Catálogo</small><strong>{game.catalogLabel}</strong></div>
               </div>
             </div>
           </div>
@@ -1651,11 +1649,11 @@ export default function RosterModule({
           <div className="roster-modal-layer roster-details-layer" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) setDetailsIndex(null) }}>
             <aside className="roster-details-modal" role="dialog" aria-modal="true" aria-label={`Detalles de ${selectedDetailsHero.name}`} style={{ '--role-color': selectedDetailsRole.color } as CSSProperties}>
               <header><div><span>{selectedDetailsRole.label}</span><h2>{selectedDetailsHero.name}</h2><p>{players[detailsIndex]?.name} · {game.shortName}</p></div><button type="button" onClick={() => setDetailsIndex(null)}><RosterIcon name="close" size={20} /></button></header>
-              <div className="roster-details-hero"><img src={asset(selectedDetailsHero.portrait)} alt={selectedDetailsHero.name} /><div><small>DATOS DE {game.shortName.toUpperCase()}</small><h3>{selectedDetailsRole.label}</h3><p>{game.description}</p><span>{gameId === 'deadlock' ? '3 candidatos por jugador' : game.formatLabel} · {game.catalogLabel}</span></div></div>
+              <div className="roster-details-hero"><img src={asset(selectedDetailsHero.portrait)} alt={selectedDetailsHero.name} /><div><h3>{selectedDetailsRole.label}</h3><span>{gameId === 'deadlock' ? '3 candidatos por jugador' : game.formatLabel} · {game.catalogLabel}</span></div></div>
               {gameId === 'deadlock' && selectedDetailsCandidates.length > 0 && <section><h3>Preferencias para matchmaking</h3><div className="deadlock-details-candidates">{selectedDetailsCandidates.map((candidate, candidateIndex) => <div key={candidate.key}><span>{candidateIndex + 1}</span><img src={asset(candidate.portrait)} alt="" /><b>{candidate.name}</b></div>)}</div></section>}
               {game.supportsTeamups && <section><h3>Team-Ups relacionados</h3><div className="roster-details-tags">{relatedTeamups(selectedDetailsHero.key).map((teamup) => { const selected = selectedDetails?.teamupKey === teamup.key; const receiver = teamup.receiver ? heroByKey(teamup.receiver) : undefined; const relationLabel = teamup.relation === 'anchor' ? `ANCLA · ${receiver?.name ?? 'ALIADO'}` : selected && teamup.complete ? 'ACTIVO' : selected ? 'ELEGIDO' : teamup.complete ? 'DISPONIBLE' : 'BASE'; return <span className={(selected && teamup.complete) || (teamup.relation === 'anchor' && teamup.complete) ? 'complete' : ''} key={teamup.key}><b>{relationLabel}</b>{teamup.name}</span> })}</div></section>}
               {selectedDetails?.loadout && <section><h3>Equipamiento generado</h3>{renderLoadout(selectedDetails.loadout)}</section>}
-              <section><h3>Reglas aplicadas</h3><div className="roster-details-rules"><span><b>{avoidRepeated ? 'ACTIVO' : 'INACTIVO'}</b>Evitar repetidos</span>{game.roles.length > 1 && <span><b>{balancedRoles ? 'ACTIVA' : 'INACTIVA'}</b>Composición de roles</span>}{game.supportsTeamups && <span><b>{priorityTeamups ? 'ACTIVA' : 'INACTIVA'}</b>Prioridad de Team-Ups</span>}</div></section>
+              <section><h3>Reglas</h3><div className="roster-details-rules"><span><b>{avoidRepeated ? 'ACTIVO' : 'INACTIVO'}</b>Evitar repetidos</span>{game.roles.length > 1 && <span><b>{balancedRoles ? 'ACTIVA' : 'INACTIVA'}</b>Composición de roles</span>}{game.supportsTeamups && <span><b>{priorityTeamups ? 'ACTIVA' : 'INACTIVA'}</b>Prioridad de Team-Ups</span>}</div></section>
             </aside>
           </div>
         )}
@@ -1677,22 +1675,18 @@ export default function RosterModule({
       <main className="utility-page roulette-page roulette-maker-v2 roster-roulette-unified" style={{ '--module-accent': game.accent, '--yellow': game.accent, '--cyan': game.accent } as CSSProperties}>
         <header className="roulette-heading">
           <div>
-            <span className="eyebrow">Modo independiente · {game.shortName}</span>
-            <h1>Ruleta Maker</h1>
-            <p>Construye la rueda por casillas. Cada peso aumenta la probabilidad real de ese personaje.</p>
+            <h1>Ruleta · {game.shortName}</h1>
           </div>
           <div className="roulette-heading-stats" aria-label="Resumen de la ruleta">
             <span><small>PERSONAJES</small><b>{roulettePool.length}</b></span>
             <span><small>CASILLAS</small><b>{rouletteTotalSlots}/64</b></span>
-            <span className={rouletteDirty ? 'pending' : 'ready'}><small>ESTADO</small><b>{rouletteDirty ? 'EDITANDO' : 'LISTA'}</b></span>
           </div>
         </header>
 
         <section className="roulette-maker-layout">
           <section className="roulette-builder-panel">
             <header className="roulette-section-heading">
-              <div><span className="eyebrow">01 · Configuración</span><h2>Participantes y probabilidad</h2></div>
-              <span className={`roulette-build-badge ${rouletteDirty ? 'pending' : 'ready'}`}>{buildStatus}</span>
+              <div><h2>Personajes</h2></div>
             </header>
 
             <div className="roulette-toolbar roulette-toolbar-v2">
@@ -1742,13 +1736,13 @@ export default function RosterModule({
             {!filteredRouletteHeroes.length && <div className="roulette-empty-list"><RosterIcon name="filter" size={28} /><strong>No hay coincidencias</strong><span>Prueba otro nombre o cambia el rol visible.</span></div>}
 
             <footer className="roulette-builder-footer">
-              <div className="roulette-total-summary"><span><small>SELECCIONADOS</small><b>{roulettePool.length}</b></span><span><small>CASILLAS</small><b>{rouletteTotalSlots}</b></span><p>Máximo 64. Un único personaje usa automáticamente dos casillas.</p></div>
+              <div className="roulette-total-summary"><span><small>SELECCIONADOS</small><b>{roulettePool.length}</b></span><span><small>CASILLAS</small><b>{rouletteTotalSlots}</b></span></div>
               <button type="button" className="roulette-build-button" onClick={() => buildRoulette(true)} disabled={rouletteSpinning || !roulettePool.length || rouletteTotalSlots > 64}><RosterIcon name="roulette" size={20} /><span>CONSTRUIR RULETA</span></button>
             </footer>
           </section>
 
           <aside className="roulette-wheel-panel">
-            <header className="roulette-section-heading compact"><div><span className="eyebrow">02 · Resultado</span><h2>Rueda construida</h2></div><span className="roulette-game-chip" style={{ color: game.accent }}>{game.shortName}</span></header>
+            <header className="roulette-section-heading compact"><div><h2>Ruleta</h2></div><span className="roulette-game-chip" style={{ color: game.accent }}>{game.shortName}</span></header>
             <div className={`roulette-wheel-stage ${rouletteSpinning ? 'spinning' : ''} ${rouletteDirty ? 'dirty' : ''}`}>
               <span className="roulette-wheel-pointer" aria-hidden="true"><i /></span>
               {wheelCount >= 2 ? <div className="roulette-wheel-shell">
@@ -1761,11 +1755,10 @@ export default function RosterModule({
                   </g>
                 </svg>
                 <div className="roulette-wheel-hub" style={{ '--role-color': winner ? roleDefinition(game, winner.role).color : game.accent } as CSSProperties}>{winner ? <><img src={asset(winner.portrait)} alt="" /><span><small>GANADOR</small><strong>{winner.name}</strong></span></> : <><RosterIcon name="roulette" size={28} /><span><small>RULETA</small><strong>{wheelCount} casillas</strong></span></>}</div>
-              </div> : <div className="roulette-wheel-placeholder"><span><RosterIcon name="roulette" size={50} /></span><strong>Construye la ruleta</strong><p>Ajusta pesos y crea la rueda para ver las casillas reales.</p></div>}
+              </div> : <div className="roulette-wheel-placeholder"><span><RosterIcon name="roulette" size={50} /></span><strong>Sin construir</strong></div>}
             </div>
-            <div className="roulette-winner-strip">{winner ? <><div className="roulette-winner-portrait" style={{ '--role-color': roleDefinition(game, winner.role).color } as CSSProperties}><img src={asset(winner.portrait)} alt="" /></div><div><small>GANADOR DEL ÚLTIMO GIRO</small><strong>{winner.name}</strong><span>{roleDefinition(game, winner.role).label} · Peso x{rouletteWeight(winner.key)} · {rouletteProbability(winner.key).toFixed(1)}%</span></div></> : <><RosterIcon name={rouletteDirty ? 'settings' : 'check'} size={20} /><div><small>ESTADO</small><strong>{rouletteSpinning ? 'Girando…' : buildStatus}</strong><span>{rouletteDirty ? 'Construye para aplicar los cambios.' : 'La rueda está lista para girar.'}</span></div></>}</div>
+            <div className="roulette-winner-strip">{winner ? <><div className="roulette-winner-portrait" style={{ '--role-color': roleDefinition(game, winner.role).color } as CSSProperties}><img src={asset(winner.portrait)} alt="" /></div><div><small>ÚLTIMO GIRO</small><strong>{winner.name}</strong><span>{roleDefinition(game, winner.role).label} · Peso x{rouletteWeight(winner.key)} · {rouletteProbability(winner.key).toFixed(1)}%</span></div></> : <><RosterIcon name={rouletteDirty ? 'settings' : 'check'} size={20} /><div><strong>{rouletteSpinning ? 'Girando…' : buildStatus}</strong></div></>}</div>
             <button type="button" className={`roulette-spin-button ${rouletteSpinning ? 'spinning' : ''}`} onClick={spinRoulette} disabled={rouletteSpinning || !roulettePool.length}><RosterIcon name="roulette" size={24} /><span>{rouletteSpinning ? 'GIRANDO…' : rouletteDirty ? 'CONSTRUIR Y GIRAR' : 'GIRAR RULETA'}</span></button>
-            <small className="roulette-autosave"><RosterIcon name="check" size={13} /> Selección y pesos se guardan por separado para {game.shortName}.</small>
             {!!rouletteEntries.length && <details className="roulette-slot-list"><summary><span>Ver casillas construidas</span><b>{rouletteEntries.length}</b></summary><div>{rouletteBuiltHeroes.map((hero, index) => <span key={`${hero.key}-${index}`} style={{ '--role-color': roleDefinition(game, hero.role).color } as CSSProperties}><i>{index + 1}</i><img src={asset(hero.portrait)} alt="" /><strong>{hero.name}</strong></span>)}</div></details>}
           </aside>
         </section>
