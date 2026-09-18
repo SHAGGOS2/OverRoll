@@ -515,9 +515,6 @@ const rouletteRoleColors: Record<Role, string> = {
   support: '#5ce1a2',
 }
 
-const DMON_FALLBACK_PORTRAIT = 'https://cdn.mos.cms.futurecdn.net/piadU3GPmdaehKi9ymCoNF.jpg'
-const OVERFAST_DMON_URL = 'https://overfast-api.tekrop.fr/heroes/dmon?locale=es-mx'
-
 // Doctrine queda preparado desde ahora, pero OverRoll no lo incorpora al catálogo
 // hasta el 5 de octubre de 2026 a las 00:00 (hora del centro de México, UTC-6).
 const DOCTRINE_RELEASE_AT = Date.parse('2026-10-05T00:00:00-06:00')
@@ -526,47 +523,6 @@ const OVERFAST_DOCTRINE_URL = 'https://overfast-api.tekrop.fr/heroes/doctrine?lo
 
 function isRemoteAsset(path: string): boolean {
   return /^(?:https?:)?\/\//i.test(path) || /^(?:data|blob):/i.test(path)
-}
-
-function dmonFallbackHero(): Hero {
-  return {
-    key: 'dmon',
-    name: 'D.Mon',
-    role: 'tank',
-    subrole: '',
-    portrait: DMON_FALLBACK_PORTRAIT,
-    gamemodes: ['quickplay'],
-    minorPerks: [],
-    majorPerks: [],
-    stadiumPowers: [],
-  }
-}
-
-function mapOverFastDmon(hero: OverFastHero, fallback: Hero): Hero {
-  const stadiumPowers = Array.isArray(hero.stadium_powers) ? hero.stadium_powers : []
-  return {
-    key: 'dmon',
-    name: hero.name || fallback.name,
-    role: hero.role === 'tank' || hero.role === 'damage' || hero.role === 'support' ? hero.role : fallback.role,
-    subrole: hero.subrole || fallback.subrole,
-    portrait: hero.portrait || fallback.portrait,
-    gamemodes: stadiumPowers.length ? ['quickplay', 'stadium'] : ['quickplay'],
-    minorPerks: Array.isArray(hero.perks?.minor) ? hero.perks.minor : fallback.minorPerks,
-    majorPerks: Array.isArray(hero.perks?.major) ? hero.perks.major : fallback.majorPerks,
-    stadiumPowers,
-  }
-}
-
-async function fetchDmonFromOverFast(signal: AbortSignal): Promise<Hero> {
-  const response = await fetch(OVERFAST_DMON_URL, {
-    cache: 'no-store',
-    credentials: 'omit',
-    mode: 'cors',
-    signal,
-  })
-  if (!response.ok) throw new Error(`OverFast D.Mon HTTP ${response.status}`)
-  const payload = await response.json() as OverFastHero
-  return mapOverFastDmon(payload, dmonFallbackHero())
 }
 
 function doctrineUnlocked(): boolean {
@@ -1075,7 +1031,7 @@ function App() {
     const controller = new AbortController()
     const apiTimeout = window.setTimeout(() => controller.abort(), 6000)
 
-    const applyLoadedHeroes = (loaded: HeroData, apiSynced: boolean) => {
+    const applyLoadedHeroes = (loaded: HeroData, doctrineSynced: boolean) => {
       if (cancelled) return
       const pool = loaded.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay'))
       setData(loaded)
@@ -1110,7 +1066,7 @@ function App() {
         profiles,
         profileMode,
       }))
-      setStatus(`${pool.length} héroes listos${apiSynced ? ' · D.Mon sincronizada' : ''}`)
+      setStatus(`${pool.length} héroes listos${doctrineSynced ? ' · Doctrine sincronizado' : ''}`)
       setGenerationRevision((value) => value + 1)
     }
 
@@ -1120,54 +1076,39 @@ function App() {
         return response.json() as Promise<HeroData>
       })
       .then(async (localData) => {
-        const fallback = dmonFallbackHero()
-        let localHeroes = localData.heroes.some((hero) => hero.key === 'dmon')
-          ? localData.heroes
-          : [...localData.heroes, fallback]
+        let localHeroes = localData.heroes
 
         if (doctrineUnlocked() && !localHeroes.some((hero) => hero.key === 'doctrine')) {
           localHeroes = [...localHeroes, doctrineFallbackHero()]
         }
 
-        const withFallback: HeroData = {
+        const localSnapshot: HeroData = {
           ...localData,
           heroes: localHeroes,
         }
 
-        // Paint the local catalog immediately so OverRoll never depends on the API to open.
-        applyLoadedHeroes(withFallback, false)
+        // Todos los héroes publicados, incluida D.Mon, se pintan completos desde el snapshot local.
+        applyLoadedHeroes(localSnapshot, false)
+
+        if (!doctrineUnlocked()) return
 
         try {
-          const dmon = await fetchDmonFromOverFast(controller.signal)
+          const doctrine = await fetchDoctrineFromOverFast(controller.signal)
           if (cancelled) return
-          let doctrine: Hero | null = null
-          if (doctrineUnlocked()) {
-            try {
-              doctrine = await fetchDoctrineFromOverFast(controller.signal)
-            } catch (error) {
-              if (!controller.signal.aborted) console.warn('Doctrine: no se pudo sincronizar OverFast; se usa el respaldo preparado.', error)
-            }
-          }
 
           const merged: HeroData = {
-            source: `${localData.source} + OverFast API`,
+            source: `${localData.source} + OverFast API (Doctrine)`,
             updatedAt: new Date().toISOString(),
-            heroes: localHeroes.map((hero) => {
-              if (hero.key === 'dmon') return dmon
-              if (hero.key === 'doctrine' && doctrine) return doctrine
-              return hero
-            }),
+            heroes: localHeroes.map((hero) => hero.key === 'doctrine' ? doctrine : hero),
           }
           setData(merged)
-          warmImageCache([asset(dmon.portrait), ...(doctrine ? [asset(doctrine.portrait)] : [])], doctrine ? 2 : 1)
-          setPicks((current) => current.map((pick) => {
-            if (pick.hero?.key === 'dmon') return { ...pick, hero: dmon }
-            if (pick.hero?.key === 'doctrine' && doctrine) return { ...pick, hero: doctrine }
-            return pick
-          }))
-          setStatus(`${merged.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay')).length} héroes listos · D.Mon sincronizada`)
+          warmImageCache([asset(doctrine.portrait)], 1)
+          setPicks((current) => current.map((pick) => (
+            pick.hero?.key === 'doctrine' ? { ...pick, hero: doctrine } : pick
+          )))
+          setStatus(`${merged.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay')).length} héroes listos · Doctrine sincronizado`)
         } catch (error) {
-          if (!controller.signal.aborted) console.warn('D.Mon: no se pudo sincronizar OverFast; se usa el respaldo local.', error)
+          if (!controller.signal.aborted) console.warn('Doctrine: no se pudo sincronizar OverFast; se usa el respaldo preparado.', error)
         }
       })
       .catch((error: Error) => {
