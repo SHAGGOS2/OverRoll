@@ -244,7 +244,7 @@ const gameModuleIcons: Record<GameId, string> = {
 }
 
 const gameModules: Array<{ id: GameId; name: string; status: string; accent: string; available: boolean; catalogLabel: string; icon: string }> = [
-  { id: 'overwatch', name: 'Overwatch', status: 'Disponible', accent: '#f5a623', available: true, catalogLabel: '53 héroes', icon: gameModuleIcons.overwatch },
+  { id: 'overwatch', name: 'Overwatch', status: 'Disponible', accent: '#f5a623', available: true, catalogLabel: doctrineUnlocked() ? '54 héroes' : '53 héroes', icon: gameModuleIcons.overwatch },
   { id: 'tf2', name: 'Team Fortress 2', status: 'Disponible', accent: '#e8a45b', available: true, catalogLabel: '9 clases', icon: gameModuleIcons.tf2 },
   { id: 'pvzgw2', name: 'PVZ GW2', status: 'Disponible', accent: '#79dc72', available: true, catalogLabel: '121 personajes', icon: gameModuleIcons.pvzgw2 },
   ...rosterGameDefinitions.map((game) => ({
@@ -518,6 +518,12 @@ const rouletteRoleColors: Record<Role, string> = {
 const DMON_FALLBACK_PORTRAIT = 'https://cdn.mos.cms.futurecdn.net/piadU3GPmdaehKi9ymCoNF.jpg'
 const OVERFAST_DMON_URL = 'https://overfast-api.tekrop.fr/heroes/dmon?locale=es-mx'
 
+// Doctrine queda preparado desde ahora, pero OverRoll no lo incorpora al catálogo
+// hasta el 5 de octubre de 2026 a las 00:00 (hora del centro de México, UTC-6).
+const DOCTRINE_RELEASE_AT = Date.parse('2026-10-05T00:00:00-06:00')
+const DOCTRINE_FALLBACK_PORTRAIT = 'https://i.ytimg.com/vi/Ab1_HIoelTk/maxresdefault.jpg'
+const OVERFAST_DOCTRINE_URL = 'https://overfast-api.tekrop.fr/heroes/doctrine?locale=es-mx'
+
 function isRemoteAsset(path: string): boolean {
   return /^(?:https?:)?\/\//i.test(path) || /^(?:data|blob):/i.test(path)
 }
@@ -561,6 +567,73 @@ async function fetchDmonFromOverFast(signal: AbortSignal): Promise<Hero> {
   if (!response.ok) throw new Error(`OverFast D.Mon HTTP ${response.status}`)
   const payload = await response.json() as OverFastHero
   return mapOverFastDmon(payload, dmonFallbackHero())
+}
+
+function doctrineUnlocked(): boolean {
+  return Date.now() >= DOCTRINE_RELEASE_AT
+}
+
+function doctrineFallbackHero(): Hero {
+  return {
+    key: 'doctrine',
+    name: 'Doctrine',
+    role: 'support',
+    subrole: 'survivor',
+    portrait: DOCTRINE_FALLBACK_PORTRAIT,
+    gamemodes: ['quickplay'],
+    minorPerks: [
+      {
+        name: 'Gracia salvadora',
+        description: 'Drones vigorizantes sana 40 de salud al aplicarse.',
+        icon: '',
+      },
+      {
+        name: 'Sifón sanguíneo',
+        description: 'Te sana un 50% del daño infligido con Cetro eterno infundido.',
+        icon: '',
+      },
+    ],
+    majorPerks: [
+      {
+        name: 'Transfusión',
+        description: 'Reduce el tiempo de reutilización de Infundir según el daño y la sanación realizados.',
+        icon: '',
+      },
+      {
+        name: 'Costo de vida',
+        description: 'Sacrifica 25 de salud máxima y aumenta un 20% la sanación de Cetro eterno.',
+        icon: '',
+      },
+    ],
+    stadiumPowers: [],
+  }
+}
+
+function mapOverFastDoctrine(hero: OverFastHero, fallback: Hero): Hero {
+  const stadiumPowers = Array.isArray(hero.stadium_powers) ? hero.stadium_powers : []
+  return {
+    key: 'doctrine',
+    name: hero.name || fallback.name,
+    role: 'support',
+    subrole: hero.subrole || fallback.subrole,
+    portrait: hero.portrait || fallback.portrait,
+    gamemodes: stadiumPowers.length ? ['quickplay', 'stadium'] : ['quickplay'],
+    minorPerks: Array.isArray(hero.perks?.minor) && hero.perks.minor.length ? hero.perks.minor : fallback.minorPerks,
+    majorPerks: Array.isArray(hero.perks?.major) && hero.perks.major.length ? hero.perks.major : fallback.majorPerks,
+    stadiumPowers,
+  }
+}
+
+async function fetchDoctrineFromOverFast(signal: AbortSignal): Promise<Hero> {
+  const response = await fetch(OVERFAST_DOCTRINE_URL, {
+    cache: 'no-store',
+    credentials: 'omit',
+    mode: 'cors',
+    signal,
+  })
+  if (!response.ok) throw new Error(`OverFast Doctrine HTTP ${response.status}`)
+  const payload = await response.json() as OverFastHero
+  return mapOverFastDoctrine(payload, doctrineFallbackHero())
 }
 
 function secureRandomIndex(length: number): number {
@@ -1009,7 +1082,11 @@ function App() {
       warmImageCache(loaded.heroes.map((hero) => asset(hero.portrait)), 10)
       const validKeys = new Set(loaded.heroes.map((hero) => hero.key))
       const storedSelection = rouletteSelectedKeys.filter((key) => validKeys.has(key))
-      const nextSelection = rouletteInitialized ? storedSelection : loaded.heroes.map((hero) => hero.key)
+      const doctrineWasAdded = loaded.heroes.some((hero) => hero.key === 'doctrine') && !storedSelection.includes('doctrine')
+      const hadWholePreviousRoster = doctrineWasAdded && storedSelection.length === loaded.heroes.length - 1
+      const nextSelection = rouletteInitialized
+        ? hadWholePreviousRoster ? [...storedSelection, 'doctrine'] : storedSelection
+        : loaded.heroes.map((hero) => hero.key)
       setRouletteSelectedKeys(nextSelection)
       setRouletteWeights((current) => {
         const normalized: Record<string, number> = {}
@@ -1044,9 +1121,14 @@ function App() {
       })
       .then(async (localData) => {
         const fallback = dmonFallbackHero()
-        const localHeroes = localData.heroes.some((hero) => hero.key === 'dmon')
+        let localHeroes = localData.heroes.some((hero) => hero.key === 'dmon')
           ? localData.heroes
           : [...localData.heroes, fallback]
+
+        if (doctrineUnlocked() && !localHeroes.some((hero) => hero.key === 'doctrine')) {
+          localHeroes = [...localHeroes, doctrineFallbackHero()]
+        }
+
         const withFallback: HeroData = {
           ...localData,
           heroes: localHeroes,
@@ -1058,14 +1140,31 @@ function App() {
         try {
           const dmon = await fetchDmonFromOverFast(controller.signal)
           if (cancelled) return
+          let doctrine: Hero | null = null
+          if (doctrineUnlocked()) {
+            try {
+              doctrine = await fetchDoctrineFromOverFast(controller.signal)
+            } catch (error) {
+              if (!controller.signal.aborted) console.warn('Doctrine: no se pudo sincronizar OverFast; se usa el respaldo preparado.', error)
+            }
+          }
+
           const merged: HeroData = {
             source: `${localData.source} + OverFast API`,
             updatedAt: new Date().toISOString(),
-            heroes: localHeroes.map((hero) => hero.key === 'dmon' ? dmon : hero),
+            heroes: localHeroes.map((hero) => {
+              if (hero.key === 'dmon') return dmon
+              if (hero.key === 'doctrine' && doctrine) return doctrine
+              return hero
+            }),
           }
           setData(merged)
-          warmImageCache([asset(dmon.portrait)], 1)
-          setPicks((current) => current.map((pick) => pick.hero?.key === 'dmon' ? { ...pick, hero: dmon } : pick))
+          warmImageCache([asset(dmon.portrait), ...(doctrine ? [asset(doctrine.portrait)] : [])], doctrine ? 2 : 1)
+          setPicks((current) => current.map((pick) => {
+            if (pick.hero?.key === 'dmon') return { ...pick, hero: dmon }
+            if (pick.hero?.key === 'doctrine' && doctrine) return { ...pick, hero: doctrine }
+            return pick
+          }))
           setStatus(`${merged.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay')).length} héroes listos · D.Mon sincronizada`)
         } catch (error) {
           if (!controller.signal.aborted) console.warn('D.Mon: no se pudo sincronizar OverFast; se usa el respaldo local.', error)
