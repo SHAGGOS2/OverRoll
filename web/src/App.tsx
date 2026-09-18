@@ -2607,7 +2607,7 @@ function App() {
       <main className="workspace tf2-workspace">
         <aside className={`sidebar tf2-sidebar ${mobileConfigOpen ? 'mobile-config-open' : 'mobile-config-closed'}`}>
           <div className="sidebar-head">
-            <div><span className="eyebrow">Preparar partida</span><strong>Mercenarios</strong></div>
+            <strong>Mercenarios</strong>
             <span className="live-dot tf2-live"><span /> TF2</span>
             <button type="button" className="mobile-config-toggle" onClick={() => { setMobileConfigOpen((value) => !value); playSound('tf2Click') }} aria-expanded={mobileConfigOpen}>
               <Icon name={mobileConfigOpen ? 'close' : 'settings'} size={15} /><span>{mobileConfigOpen ? 'Ocultar' : 'Editar'}</span>
@@ -2622,7 +2622,7 @@ function App() {
           )}
 
           <section className={`side-panel squad-panel mobile-config-section ${mobileConfigTab === 'squad' ? 'mobile-active' : ''}`}>
-            <div className="panel-title-row"><div><label>Escuadra</label><small>Nombres, perfiles y grupos permitidos</small></div><Icon name="users" size={17} /></div>
+            <div className="panel-title-row"><div><label>Escuadra</label></div><Icon name="users" size={17} /></div>
             <div className="squad-counter tf2-counter">
               <button type="button" onClick={() => { playSound('tf2Click'); tf2ChangePlayerCount(-1) }} disabled={tf2Players.length <= 1 || tf2Generating}>−</button>
               <strong>{tf2Players.length} jugador{tf2Players.length === 1 ? '' : 'es'}</strong>
@@ -2650,7 +2650,7 @@ function App() {
           </section>
 
           <section className={`side-panel rules mobile-config-section ${mobileConfigTab === 'rules' ? 'mobile-active' : ''}`}>
-            <div className="panel-title-row"><div><label>Reglas</label><small>Ajustes exclusivos de TF2</small></div><Icon name="settings" size={17} /></div>
+            <div className="panel-title-row"><div><label>Reglas</label></div><Icon name="settings" size={17} /></div>
             <button type="button" className={`toggle-row tf2-toggle ${tf2AvoidRepeated ? 'enabled' : ''}`} onClick={() => { const next = !tf2AvoidRepeated; setTf2AvoidRepeated(next); playSound('tf2Click') }} aria-pressed={tf2AvoidRepeated}>
               <span className="switch"><span /></span><span><b>Evitar clases repetidas</b><small>Una clase por jugador cuando sea posible</small></span>
             </button>
@@ -2729,13 +2729,13 @@ function App() {
     return (
       <main className="utility-page roulette-page roulette-maker-v2 unified-game-roulette tf2-unified-roulette" style={{ '--yellow': '#e8a45b', '--cyan': '#e8a45b' } as CSSProperties}>
         <header className="roulette-heading">
-          <div><span className="eyebrow">Modo independiente · Team Fortress 2</span><h1>Ruleta Maker</h1><p>La misma rueda de Overwatch, adaptada al catálogo cerrado de nueve clases de TF2.</p></div>
-          <div className="roulette-heading-stats"><span><small>CLASES</small><b>{tf2RoulettePool.length}</b></span><span><small>CASILLAS</small><b>{tf2RouletteTotalSlots}/64</b></span><span className={tf2RouletteDirty ? 'pending' : 'ready'}><small>ESTADO</small><b>{tf2RouletteDirty ? 'EDITANDO' : 'LISTA'}</b></span></div>
+          <div><h1>Ruleta · TF2</h1></div>
+          <div className="roulette-heading-stats"><span><small>CLASES</small><b>{tf2RoulettePool.length}</b></span><span><small>CASILLAS</small><b>{tf2RouletteTotalSlots}/64</b></span></div>
         </header>
 
         <section className="roulette-maker-layout">
           <section className="roulette-builder-panel">
-            <header className="roulette-section-heading"><div><span className="eyebrow">01 · Configuración</span><h2>Participantes y probabilidad</h2></div><span className={`roulette-build-badge ${tf2RouletteDirty ? 'pending' : 'ready'}`}>{buildStatus}</span></header>
+            <header className="roulette-section-heading"><div><h2>Clases</h2></div></header>
 
             <div className="roulette-toolbar roulette-toolbar-v2">
               <label className="roulette-search"><Icon name="filter" size={16} /><input type="search" value={tf2RouletteSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setTf2RouletteSearch(event.target.value)} placeholder="Buscar clase…" /></label>
@@ -2761,13 +2761,13 @@ function App() {
               })}
             </div>
 
-            <footer className="roulette-builder-footer"><div className="roulette-total-summary"><span><small>SELECCIONADAS</small><b>{tf2RoulettePool.length}</b></span><span><small>CASILLAS</small><b>{tf2RouletteTotalSlots}</b></span><p>Máximo 64. Una única clase usa automáticamente dos casillas.</p></div><button type="button" className="roulette-build-button" onClick={() => buildTf2Roulette(true)} disabled={tf2RouletteSpinning || !tf2RoulettePool.length || tf2RouletteTotalSlots > 64}><Icon name="roulette" size={20} /><span>CONSTRUIR RULETA</span></button></footer>
+            <footer className="roulette-builder-footer"><div className="roulette-total-summary"><span><small>SELECCIONADAS</small><b>{tf2RoulettePool.length}</b></span><span><small>CASILLAS</small><b>{tf2RouletteTotalSlots}</b></span></div><button type="button" className="roulette-build-button" onClick={() => buildTf2Roulette(true)} disabled={tf2RouletteSpinning || !tf2RoulettePool.length || tf2RouletteTotalSlots > 64}><Icon name="roulette" size={20} /><span>CONSTRUIR RULETA</span></button></footer>
           </section>
 
           <aside className="roulette-wheel-panel">
-            <header className="roulette-section-heading compact"><div><span className="eyebrow">02 · Resultado</span><h2>Rueda construida</h2></div><span className="roulette-game-chip">TF2</span></header>
-            <div className={`roulette-wheel-stage ${tf2RouletteSpinning ? 'spinning' : ''} ${tf2RouletteDirty ? 'dirty' : ''}`}><span className="roulette-wheel-pointer" aria-hidden="true"><i /></span>{wheelCount >= 2 ? <div className="roulette-wheel-shell"><svg className="roulette-wheel-svg" viewBox="0 0 400 400"><defs>{tf2RouletteBuiltClasses.map((item, index) => { const angle = -90 + (index + .5) * 360 / wheelCount; const point = roulettePoint(imageRadius, angle); return <clipPath id={`tf2-unified-slot-${index}`} key={`clip-${item.key}-${index}`}><circle cx={point.x} cy={point.y} r={imageSize / 2} /></clipPath> })}</defs><g ref={tf2RouletteRotorRef} className="roulette-wheel-rotor" style={{ transform: `rotate(${tf2RouletteRotation}deg)` }}>{tf2RouletteBuiltClasses.map((item, index) => <path d={rouletteSectorPath(index, wheelCount)} fill={tf2GroupColors[item.group]} className="roulette-wheel-sector" key={`sector-${item.key}-${index}`} />)}{tf2RouletteBuiltClasses.map((item, index) => { const angle = -90 + (index + .5) * 360 / wheelCount; const point = roulettePoint(imageRadius, angle); return <g key={`portrait-${item.key}-${index}`}><circle cx={point.x} cy={point.y} r={imageSize / 2 + 2} fill="#061722" stroke="rgba(255,255,255,.72)" strokeWidth="1.5" /><image href={asset(item.portrait)} x={point.x - imageSize / 2} y={point.y - imageSize / 2} width={imageSize} height={imageSize} preserveAspectRatio="xMidYMid slice" clipPath={`url(#tf2-unified-slot-${index})`} /></g> })}<circle cx="200" cy="200" r="185" fill="none" stroke="rgba(211,241,255,.78)" strokeWidth="3" /></g></svg><div className="roulette-wheel-hub" style={{ '--role-color': tf2RouletteWinner ? tf2GroupColors[tf2RouletteWinner.group] : '#e8a45b' } as CSSProperties}>{tf2RouletteWinner ? <><img src={asset(tf2RouletteWinner.portrait)} alt="" /><span><small>GANADOR</small><strong>{tf2RouletteWinner.name}</strong></span></> : <><Icon name="roulette" size={28} /><span><small>RULETA</small><strong>{wheelCount} casillas</strong></span></>}</div></div> : <div className="roulette-wheel-placeholder"><span><Icon name="roulette" size={50} /></span><strong>Construye la ruleta</strong><p>Ajusta pesos y crea la rueda para ver las casillas reales.</p></div>}</div>
-            <div className="roulette-winner-strip">{tf2RouletteWinner ? <><div className="roulette-winner-portrait" style={{ '--role-color': tf2GroupColors[tf2RouletteWinner.group] } as CSSProperties}><img src={asset(tf2RouletteWinner.portrait)} alt="" /></div><div><small>GANADOR DEL ÚLTIMO GIRO</small><strong>{tf2RouletteWinner.name}</strong><span>{tf2GroupLabels[tf2RouletteWinner.group]} · Peso x{tf2RouletteWeight(tf2RouletteWinner.key)} · {tf2RouletteProbability(tf2RouletteWinner.key).toFixed(1)}%</span></div></> : <><Icon name={tf2RouletteDirty ? 'warning' : 'check'} size={20} /><div><small>ESTADO</small><strong>{tf2RouletteSpinning ? 'Girando…' : buildStatus}</strong><span>{tf2RouletteDirty ? 'Construye para aplicar los cambios.' : 'La rueda está lista para girar.'}</span></div></>}</div>
+            <header className="roulette-section-heading compact"><div><h2>Ruleta</h2></div><span className="roulette-game-chip">TF2</span></header>
+            <div className={`roulette-wheel-stage ${tf2RouletteSpinning ? 'spinning' : ''} ${tf2RouletteDirty ? 'dirty' : ''}`}><span className="roulette-wheel-pointer" aria-hidden="true"><i /></span>{wheelCount >= 2 ? <div className="roulette-wheel-shell"><svg className="roulette-wheel-svg" viewBox="0 0 400 400"><defs>{tf2RouletteBuiltClasses.map((item, index) => { const angle = -90 + (index + .5) * 360 / wheelCount; const point = roulettePoint(imageRadius, angle); return <clipPath id={`tf2-unified-slot-${index}`} key={`clip-${item.key}-${index}`}><circle cx={point.x} cy={point.y} r={imageSize / 2} /></clipPath> })}</defs><g ref={tf2RouletteRotorRef} className="roulette-wheel-rotor" style={{ transform: `rotate(${tf2RouletteRotation}deg)` }}>{tf2RouletteBuiltClasses.map((item, index) => <path d={rouletteSectorPath(index, wheelCount)} fill={tf2GroupColors[item.group]} className="roulette-wheel-sector" key={`sector-${item.key}-${index}`} />)}{tf2RouletteBuiltClasses.map((item, index) => { const angle = -90 + (index + .5) * 360 / wheelCount; const point = roulettePoint(imageRadius, angle); return <g key={`portrait-${item.key}-${index}`}><circle cx={point.x} cy={point.y} r={imageSize / 2 + 2} fill="#061722" stroke="rgba(255,255,255,.72)" strokeWidth="1.5" /><image href={asset(item.portrait)} x={point.x - imageSize / 2} y={point.y - imageSize / 2} width={imageSize} height={imageSize} preserveAspectRatio="xMidYMid slice" clipPath={`url(#tf2-unified-slot-${index})`} /></g> })}<circle cx="200" cy="200" r="185" fill="none" stroke="rgba(211,241,255,.78)" strokeWidth="3" /></g></svg><div className="roulette-wheel-hub" style={{ '--role-color': tf2RouletteWinner ? tf2GroupColors[tf2RouletteWinner.group] : '#e8a45b' } as CSSProperties}>{tf2RouletteWinner ? <><img src={asset(tf2RouletteWinner.portrait)} alt="" /><span><small>GANADOR</small><strong>{tf2RouletteWinner.name}</strong></span></> : <><Icon name="roulette" size={28} /><span><small>RULETA</small><strong>{wheelCount} casillas</strong></span></>}</div></div> : <div className="roulette-wheel-placeholder"><span><Icon name="roulette" size={50} /></span><strong>Sin construir</strong></div>}</div>
+            <div className="roulette-winner-strip">{tf2RouletteWinner ? <><div className="roulette-winner-portrait" style={{ '--role-color': tf2GroupColors[tf2RouletteWinner.group] } as CSSProperties}><img src={asset(tf2RouletteWinner.portrait)} alt="" /></div><div><small>ÚLTIMO GIRO</small><strong>{tf2RouletteWinner.name}</strong><span>{tf2GroupLabels[tf2RouletteWinner.group]} · Peso x{tf2RouletteWeight(tf2RouletteWinner.key)} · {tf2RouletteProbability(tf2RouletteWinner.key).toFixed(1)}%</span></div></> : <><Icon name={tf2RouletteDirty ? 'warning' : 'check'} size={20} /><div><strong>{tf2RouletteSpinning ? 'Girando…' : buildStatus}</strong></div></>}</div>
             <button type="button" className={`roulette-spin-button ${tf2RouletteSpinning ? 'spinning' : ''}`} onClick={spinTf2Roulette} disabled={tf2RouletteSpinning || !tf2RoulettePool.length}><Icon name="roulette" size={24} /><span>{tf2RouletteSpinning ? 'GIRANDO…' : tf2RouletteDirty ? 'CONSTRUIR Y GIRAR' : 'GIRAR RULETA'}</span></button>
             <small className="roulette-autosave"><Icon name="check" size={13} /> Selección y pesos de TF2 se guardan por separado.</small>
             {!!tf2RouletteEntries.length && <details className="roulette-slot-list"><summary><span>Ver casillas construidas</span><b>{tf2RouletteEntries.length}</b></summary><div>{tf2RouletteBuiltClasses.map((item, index) => <span key={`${item.key}-${index}`} style={{ '--role-color': tf2GroupColors[item.group] } as CSSProperties}><i>{index + 1}</i><img src={asset(item.portrait)} alt="" /><strong>{item.name}</strong></span>)}</div></details>}
@@ -2783,7 +2783,7 @@ function App() {
       <main className="workspace">
         <aside className={`sidebar ${mobileConfigOpen ? 'mobile-config-open' : 'mobile-config-closed'}`}>
           <div className="sidebar-head">
-            <div><span className="eyebrow">Preparar partida</span><strong>Configuración</strong></div>
+            <strong>Configuración</strong>
             <span className="live-dot"><span /> LOCAL</span>
             <button type="button" className="mobile-config-toggle" onClick={() => { setMobileConfigOpen((value) => !value); playSound('click') }} aria-expanded={mobileConfigOpen}>
               <Icon name={mobileConfigOpen ? 'close' : 'settings'} size={15} />
@@ -2811,7 +2811,7 @@ function App() {
 
           <section className={`side-panel squad-panel mobile-config-section ${mobileConfigTab === 'squad' ? 'mobile-active' : ''}`}>
             <div className="panel-title-row">
-              <div><label>Escuadra</label><small>Nombres, perfiles, filtros y roles</small></div>
+              <div><label>Escuadra</label></div>
               <Icon name="users" size={17} />
             </div>
 
@@ -2868,7 +2868,7 @@ function App() {
 
           <section className={`side-panel rules mobile-config-section ${mobileConfigTab === 'rules' ? 'mobile-active' : ''}`}>
             <div className="panel-title-row">
-              <div><label>Reglas</label><small>Ajustes de generación</small></div>
+              <div><label>Reglas</label></div>
               <Icon name="settings" size={17} />
             </div>
 
@@ -2897,8 +2897,7 @@ function App() {
         <section className="content">
           <div className="content-topline">
             <div className="game-identity">
-              <span className="game-kicker">Selector principal</span>
-              <div className="game-title-row"><h1>Overwatch</h1><span className="web-badge">WEB BETA</span></div>
+              <div className="game-title-row"><h1>Overwatch</h1></div>
             </div>
             <div className="topline-actions">
               <button type="button" className="generate-image-button" onClick={generateTeamImage} disabled={!picks.some((pick) => pick.hero)}>
@@ -3022,21 +3021,19 @@ function App() {
       <main className="utility-page roulette-page roulette-maker-v2">
         <header className="roulette-heading">
           <div>
-            <span className="eyebrow">Modo independiente</span>
-            <h1>Ruleta Maker</h1>
+            <h1>Ruleta · Overwatch</h1>
             <p>Construye la rueda por casillas. Cada peso aumenta la probabilidad real de ese héroe.</p>
           </div>
           <div className="roulette-heading-stats" aria-label="Resumen de la ruleta">
             <span><small>HÉROES</small><b>{roulettePool.length}</b></span>
             <span><small>CASILLAS</small><b>{rouletteTotalSlots}/64</b></span>
-            <span className={rouletteDirty ? 'pending' : 'ready'}><small>ESTADO</small><b>{rouletteDirty ? 'EDITANDO' : 'LISTA'}</b></span>
           </div>
         </header>
 
         <section className="roulette-maker-layout">
           <section className="roulette-builder-panel">
             <header className="roulette-section-heading">
-              <div><span className="eyebrow">01 · Configuración</span><h2>Participantes y probabilidad</h2></div>
+              <div><h2>Héroes</h2></div>
               <span className={`roulette-build-badge ${rouletteDirty ? 'pending' : 'ready'}`}>{buildStatus}</span>
             </header>
 
@@ -3113,7 +3110,7 @@ function App() {
 
           <aside className="roulette-wheel-panel">
             <header className="roulette-section-heading compact">
-              <div><span className="eyebrow">02 · Resultado</span><h2>Rueda construida</h2></div>
+              <div><h2>Ruleta</h2></div>
               <button type="button" className="roulette-image-button" onClick={generateRouletteImage} disabled={!rouletteWinner || rouletteSpinning}><Icon name="download" size={15} /> Imagen</button>
             </header>
 
@@ -3156,7 +3153,7 @@ function App() {
                   </div>
                 </div>
               ) : (
-                <div className="roulette-wheel-placeholder"><span><Icon name="roulette" size={50} /></span><strong>Construye la ruleta</strong><p>Ajusta pesos y crea la rueda para ver las casillas reales.</p></div>
+                <div className="roulette-wheel-placeholder"><span><Icon name="roulette" size={50} /></span><strong>Sin construir</strong></div>
               )}
             </div>
 
@@ -3164,10 +3161,10 @@ function App() {
               {rouletteWinner ? (
                 <>
                   <div className={`roulette-winner-portrait ${rouletteWinner.role}`}><img src={asset(rouletteWinner.portrait)} alt="" /></div>
-                  <div><small>GANADOR DEL ÚLTIMO GIRO</small><strong>{rouletteWinner.name}</strong><span>{roleLabels[rouletteWinner.role]} · Peso x{rouletteWeight(rouletteWinner.key)} · {rouletteProbability(rouletteWinner.key).toFixed(1)}%</span></div>
+                  <div><small>ÚLTIMO GIRO</small><strong>{rouletteWinner.name}</strong><span>{roleLabels[rouletteWinner.role]} · Peso x{rouletteWeight(rouletteWinner.key)} · {rouletteProbability(rouletteWinner.key).toFixed(1)}%</span></div>
                 </>
               ) : (
-                <><Icon name={rouletteDirty ? 'warning' : 'check'} size={20} /><div><small>ESTADO</small><strong>{rouletteSpinning ? 'Girando…' : buildStatus}</strong><span>{rouletteDirty ? 'Construye para aplicar los cambios.' : 'La rueda está lista para girar.'}</span></div></>
+                <><Icon name={rouletteDirty ? 'warning' : 'check'} size={20} /><div><strong>{rouletteSpinning ? 'Girando…' : buildStatus}</strong></div></>
               )}
             </div>
 
@@ -3228,7 +3225,6 @@ function App() {
       <main className="utility-page profiles-simple-page">
         <header className="profiles-simple-heading">
           <div>
-            <span className="eyebrow">Perfiles locales</span>
             <h1>Perfiles</h1>
           </div>
           <button type="button" className="primary" onClick={createProfile}><Icon name="plus" size={16} /> Nuevo perfil</button>
