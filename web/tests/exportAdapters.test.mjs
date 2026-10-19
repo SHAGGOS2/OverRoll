@@ -3,6 +3,7 @@ import fs from 'node:fs'
 import test from 'node:test'
 import vm from 'node:vm'
 import ts from 'typescript'
+import { fragpunkPortraitFrames } from '../src/portraitFrames.ts'
 import { pvzCharacters, pvzSideColors, pvzSideSingular } from '../src/pvzCatalog.ts'
 
 function extract(file, functions = [], variables = []) {
@@ -47,6 +48,6 @@ test('all eleven game adapters and OW role-only mode export valid local resource
       const items = read('assets/games/thefinals/loadouts.json')[hero.role]
       pick.loadout = { specialization: items.specializations[0], weapon: items.weapons[0], gadgets: items.gadgets.slice(0, 3) }
     }
-    await run('RosterModule.tsx', 'generateTeamImage', { functions: ['roleDefinition', 'rosterPickCandidates', 'finalsIcon', 'slugifyFinalsItem'] }, { game, gameId: game.id, baseUrl: '/', players, picks: [pick], asset, saveImage, activeTeamups: () => [{ key: 'pair', name: 'Team-Up', complete: true }], teamupPartnerKey: () => catalog[1].key, heroByKey: (key) => catalog.find((h) => h.key === key) })
+    await run('RosterModule.tsx', 'generateTeamImage', { functions: ['roleDefinition', 'rosterPickCandidates', 'finalsIcon', 'slugifyFinalsItem'] }, { game, fragpunkPortraitFrames, gameId: game.id, baseUrl: '/', players, picks: [pick], asset, saveImage, activeTeamups: () => [{ key: 'pair', name: 'Team-Up', complete: true }], teamupPartnerKey: () => catalog[1].key, heroByKey: (key) => catalog.find((h) => h.key === key) })
   }
 })

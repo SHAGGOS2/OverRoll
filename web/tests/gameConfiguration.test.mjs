@@ -6,7 +6,7 @@ import ts from 'typescript'
 import { repairOverRollStorage } from '../src/storageGuard.ts'
 const source = fs.readFileSync(new URL('../src/RosterModule.tsx', import.meta.url), 'utf8')
 const tree = ts.createSourceFile('RosterModule.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
-const names = ['makePlayer', 'minimumPlayers', 'normalizeRosterPlayers', 'buildRolePlan', 'normalizeRosterSelection', 'normalizeRosterWeights', 'buildWeightedEntries', 'candidatePool', 'toggleRosterRole']
+const names = ['makePlayer', 'minimumPlayers', 'normalizeRosterPlayers', 'buildRolePlan', 'normalizeRosterSelection', 'normalizeRosterWeights', 'buildWeightedEntries', 'candidatePool', 'toggleRosterRole', 'changePlayerCount', 'chooseDeadlockCandidates']
 const declarations = []
 function visit(n) {
   if (ts.isFunctionDeclaration(n) && names.includes(n.name?.text)) declarations.push(n.getText(tree))
@@ -107,4 +107,18 @@ test('Apex class variety can select every class; uniqueness takes priority when 
   const catalog = [{ key: 'used', role: 'support' }, { key: 'fresh', role: 'recon' }]
   const picker = setup({ game, catalog, avoidRepeated: true })
   assert.deepEqual(plain(picker.candidatePool({ roles: { support: true, recon: true }, blocked: [] }, 'support', new Set(['used']))), [{ key: 'fresh', role: 'recon' }])
+})
+
+
+test('Deadlock supports one player without changing the three distinct candidates per player', () => {
+  const game = games.find((g) => g.id === 'deadlock')
+  let players = [{ name: 'Solo', roles: { hero: true }, blocked: [] }], picks = [{ hero: null, locked: false }]
+  const catalog = Array.from({ length: 8 }, (_, i) => ({ key: 'hero' + i, role: 'hero' }))
+  const helpers = setup({ game, players, catalog, avoidRepeated: true, randomItem: (items) => items[0], setPlayers: (change) => { players = change(players) }, setPicks: (change) => { picks = change(picks) }, setFilterIndex() {}, setDetailsIndex() {}, setStatus() {}, playModuleSound() {} })
+  assert.equal(helpers.minimumPlayers(game), 1)
+  assert.equal(helpers.normalizeRosterPlayers(players, game).length, 1)
+  helpers.changePlayerCount(-1); assert.equal(players.length, 1)
+  const candidates = helpers.chooseDeadlockCandidates(players[0], new Set())
+  assert.equal(candidates.length, 3); assert.equal(new Set(candidates.map((hero) => hero.key)).size, 3)
+  helpers.changePlayerCount(1); assert.equal(players.length, 2); assert.equal(picks.length, 2)
 })

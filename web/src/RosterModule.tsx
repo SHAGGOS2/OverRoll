@@ -13,6 +13,7 @@ import { isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
 import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH } from './personName.ts'
 import './RosterModule.css'
+import { fragpunkPortraitFrames } from './portraitFrames'
 
 export type RosterGameId =
   | 'rivals'
@@ -40,12 +41,10 @@ export type RosterGameDefinition = {
   id: RosterGameId
   name: string
   shortName: string
-  kicker: string
   accent: string
   defaultPlayers: number
   minPlayers?: number
   maxPlayers: number
-  description: string
   catalogLabel: string
   formatLabel: string
   roles: RoleDefinition[]
@@ -171,12 +170,10 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     id: 'rivals',
     name: 'Marvel Rivals',
     shortName: 'Rivals',
-    kicker: 'Team-Ups y roles',
     accent: '#6ae4ff',
     defaultPlayers: 6,
     maxPlayers: 6,
     rolePattern: ['vanguard', 'vanguard', 'duelist', 'duelist', 'strategist', 'strategist'],
-    description: 'Forma una escuadra de seis héroes y prioriza combinaciones de Team-Up.',
     catalogLabel: '54 héroes',
     formatLabel: '6 jugadores',
     supportsTeamups: true,
@@ -191,12 +188,10 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     id: 'valorant',
     name: 'Valorant',
     shortName: 'Valorant',
-    kicker: 'Agentes por rol',
     accent: '#ff5868',
     defaultPlayers: 5,
     maxPlayers: 5,
     rolePattern: ['controller', 'duelist', 'initiator', 'sentinel', 'duelist'],
-    description: 'Genera una composición de cinco agentes respetando los roles habilitados.',
     catalogLabel: '29 agentes',
     formatLabel: '5 jugadores',
     roles: [
@@ -210,25 +205,21 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     id: 'deadlock',
     name: 'Deadlock',
     shortName: 'Deadlock',
-    kicker: 'Tres preferencias por jugador',
     accent: '#d1bd77',
     defaultPlayers: 3,
-    minPlayers: 3,
+    minPlayers: 1,
     maxPlayers: 12,
-    description: 'Genera tres preferencias de héroe por jugador; Deadlock decide cuál asigna al entrar a la partida.',
     catalogLabel: '43 héroes',
-    formatLabel: '3 a 12 jugadores',
+    formatLabel: '1 a 12 jugadores',
     roles: [{ id: 'hero', label: 'Héroe', color: '#d1bd77' }],
   },
   {
     id: 'lastflag',
     name: 'Last Flag',
     shortName: 'Last Flag',
-    kicker: 'Captura la bandera · 5 contra 5',
     accent: '#efcd4f',
     defaultPlayers: 5,
     maxPlayers: 5,
-    description: 'Genera un equipo de cinco concursantes sin clases obligatorias.',
     catalogLabel: '9 concursantes',
     formatLabel: '5 jugadores',
     roles: [{ id: 'contestant', label: 'Concursante', color: '#efcd4f' }],
@@ -237,12 +228,10 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     id: 'thefinals',
     name: 'THE FINALS',
     shortName: 'THE FINALS',
-    kicker: 'Builds completas',
     accent: '#f7db22',
     defaultPlayers: 3,
     maxPlayers: 3,
     rolePattern: ['light', 'medium', 'heavy'],
-    description: 'Elige complexión, especialización, arma y tres artefactos para cada concursante.',
     catalogLabel: '3 complexiones',
     formatLabel: '3 jugadores',
     supportsLoadouts: true,
@@ -256,12 +245,10 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     id: 'paladins',
     name: 'Paladins',
     shortName: 'Paladins',
-    kicker: 'Campeones por clase',
     accent: '#50c7e8',
     defaultPlayers: 5,
     maxPlayers: 5,
     rolePattern: ['frontline', 'damage', 'flank', 'support', 'damage'],
-    description: 'Forma una escuadra de cinco campeones con daño, flanco, frontline y apoyo.',
     catalogLabel: '59 campeones',
     formatLabel: '5 jugadores',
     roles: [
@@ -275,11 +262,9 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     id: 'fragpunk',
     name: 'FragPunk',
     shortName: 'FragPunk',
-    kicker: 'Lancers aleatorios',
     accent: '#ffea3b',
     defaultPlayers: 5,
     maxPlayers: 5,
-    description: 'Reparte cinco Lancers sin mezclar su estado con ningún otro juego.',
     catalogLabel: '21 Lancers',
     formatLabel: '5 jugadores',
     roles: [{ id: 'lancer', label: 'Lancer', color: '#ffea3b' }],
@@ -288,11 +273,9 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     id: 'apex',
     name: 'Apex Legends',
     shortName: 'Apex',
-    kicker: 'Trío de leyendas',
     accent: '#ee5a49',
     defaultPlayers: 3,
     maxPlayers: 3,
-    description: 'Genera un trío de leyendas y filtra por las cinco clases actuales.',
     catalogLabel: '28 leyendas',
     formatLabel: '3 jugadores',
     roles: [
@@ -1202,7 +1185,7 @@ export default function RosterModule({
 
 
   async function generateTeamImage() {
-    await saveImage({ title: game.name, subtitle: game.kicker + ' · ' + players.length + ' jugadores', accent: game.accent, filename: 'overroll-' + gameId + '-equipo', cards: players.flatMap((player, index) => {
+    await saveImage({ title: game.name, subtitle: players.length + (players.length === 1 ? ' jugador' : ' jugadores'), accent: game.accent, filename: 'overroll-' + gameId + '-equipo', cards: players.flatMap((player, index) => {
       const pick = picks[index], hero = pick?.hero
       if (!hero) return []
       const role = roleDefinition(game, hero.role)
@@ -1213,7 +1196,7 @@ export default function RosterModule({
         { label: 'Arma · ' + pick.loadout.weapon, image: finalsIcon(baseUrl, pick.loadout.weapon) },
         ...pick.loadout.gadgets.map((label) => ({ label, image: finalsIcon(baseUrl, label) })),
       ] : game.supportsTeamups ? [{ label: synergy ? (synergy.complete ? 'Activo · ' : 'Team-Up · ') + synergy.name : 'Sin Team-Up', image: partner ? asset(partner.portrait) : undefined }] : []
-      return [{ player: player.name, name: gameId === 'deadlock' ? '1 · ' + hero.name : hero.name, role: gameId === 'deadlock' ? 'Tres preferencias de selección' : role.label, color: role.color, portrait: pick.loadout ? finalsIcon(baseUrl, pick.loadout.weapon) : asset(hero.portrait), fit: pick.loadout || gameId === 'fragpunk' ? 'contain' as const : 'cover' as const, icon: role.icon ? asset(role.icon) : undefined, locked: pick.locked, details, alternatives: gameId === 'deadlock' ? rosterPickCandidates(pick).slice(1, 3).map((candidate, i) => ({ label: (i + 2) + ' · ' + candidate.name, image: asset(candidate.portrait) })) : [] }]
+      return [{ player: player.name, name: gameId === 'deadlock' ? '1 · ' + hero.name : hero.name, role: gameId === 'deadlock' ? 'Tres preferencias de selección' : role.label, color: role.color, portrait: pick.loadout ? finalsIcon(baseUrl, pick.loadout.weapon) : asset(hero.portrait), fit: pick.loadout || gameId === 'fragpunk' || gameId === 'deadlock' ? 'contain' as const : 'cover' as const, frame: gameId === 'fragpunk' ? fragpunkPortraitFrames[hero.key] : undefined, icon: role.icon ? asset(role.icon) : undefined, locked: pick.locked, details, alternatives: gameId === 'deadlock' ? rosterPickCandidates(pick).slice(1, 3).map((candidate, i) => ({ label: (i + 2) + ' · ' + candidate.name, image: asset(candidate.portrait) })) : [] }]
     }) })
   }
 
@@ -1315,7 +1298,6 @@ export default function RosterModule({
               <button type="button" onClick={clearPlayerNames}><RosterIcon name="trash" size={14} /><span>Nombres</span></button>
               <button type="button" onClick={shufflePlayerOrder}><RosterIcon name="shuffle" size={14} /><span>Revolver</span></button>
             </div>
-            <p className="squad-guidance">{gameId === 'deadlock' ? 'Tres preferencias por jugador. Usa el filtro para excluir héroes.' : game.roles.length > 1 ? (game.supportsLoadouts ? 'Elige las complexiones permitidas para cada jugador.' : 'Activa los roles que puede recibir cada jugador.') : gameId === 'lastflag' ? 'Cinco concursantes, sin clases obligatorias.' : 'Sin roles obligatorios. Filtra los personajes de cada jugador.'}</p>
             <div className="players roster-unified-players">
               {players.map((player, index) => {
                 return (
@@ -1340,21 +1322,19 @@ export default function RosterModule({
           <section className={`side-panel rules roster-unified-rules mobile-config-section ${mobileConfigTab === 'rules' ? 'mobile-active' : ''}`}>
             <div className="panel-title-row"><div><label>Reglas</label></div><RosterIcon name="settings" size={17} /></div>
             <button type="button" className={`toggle-row ${avoidRepeated ? 'enabled' : ''}`} onClick={() => { const next = !avoidRepeated; setAvoidRepeated(next); playModuleSound(next ? 'toggleOn' : 'toggleOff', next ? 620 : 360) }} aria-pressed={avoidRepeated}>
-              <span className="switch"><span /></span><span><b>Evitar repetidos</b><small>No repetir si hay otra opción.</small></span>
+              <span className="switch"><span /></span><span><b>Evitar repetidos</b></span>
             </button>
             {game.roles.length > 1 && (
               <button type="button" className={`toggle-row ${balancedRoles ? 'enabled' : ''}`} onClick={() => { const next = !balancedRoles; setBalancedRoles(next); playModuleSound(next ? 'toggleOn' : 'toggleOff', next ? 620 : 360) }} aria-pressed={balancedRoles}>
-                <span className="switch"><span /></span><span><b>{gameId === 'thefinals' ? 'Variar complexiones' : gameId === 'apex' ? 'Variar clases' : 'Priorizar composición'}</b><small>{gameId === 'rivals' ? 'Preferir 2–2–2 dentro de tus filtros.' : gameId === 'thefinals' ? 'Preferir ligero, medio y pesado.' : gameId === 'apex' ? 'Buscar clases distintas en el trío.' : 'Buscar variedad dentro de tus filtros.'}</small></span>
+                <span className="switch"><span /></span><span><b>{gameId === 'thefinals' ? 'Variar complexiones' : gameId === 'apex' ? 'Variar clases' : 'Priorizar composición'}</b></span>
               </button>
             )}
             {game.supportsTeamups && (
               <button type="button" className={`toggle-row ${priorityTeamups ? 'enabled' : ''}`} onClick={() => { const next = !priorityTeamups; setPriorityTeamups(next); playModuleSound(next ? 'toggleOn' : 'toggleOff', next ? 720 : 360) }} aria-pressed={priorityTeamups}>
-                <span className="switch"><span /></span><span><b>Priorizar Team-Ups</b><small>Intentar formar Team-Ups compatibles.</small></span>
+                <span className="switch"><span /></span><span><b>Priorizar Team-Ups</b></span>
               </button>
             )}
-            {game.supportsLoadouts && (
-              <div className="roster-fixed-condition"><RosterIcon name="shield" size={15} /><span><b>Loadout completo</b><small>Especialización, arma y 3 artefactos.</small></span></div>
-            )}
+
           </section>
 
           <div className="sidebar-footer">
@@ -1365,7 +1345,7 @@ export default function RosterModule({
         <section className="content roster-unified-content">
           <div className="content-topline">
             <div className="game-identity">
-              <span className="game-kicker">{game.kicker}</span><div className="game-title-row"><h1>{game.name}</h1><span className="web-badge roster-game-badge">{game.catalogLabel.toUpperCase()}</span></div>
+              <div className="game-title-row"><h1>{game.name}</h1><span className="web-badge roster-game-badge">{game.catalogLabel.toUpperCase()}</span></div>
             </div>
             <div className="topline-actions">
               <button type="button" className="generate-image-button roster-image-button" onClick={generateTeamImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.hero)}><RosterIcon name="download" size={17} /> Generar imagen</button>
@@ -1407,6 +1387,7 @@ export default function RosterModule({
                             const candidateRole = candidate ? roleDefinition(game, candidate.role) : null
                             return (
                               <div
+                                aria-label={`Preferencia ${candidateIndex + 1}: ${candidate?.name ?? 'Sin selección'}`}
                                 className={`deadlock-candidate ${candidateIndex === 0 ? 'primary' : 'secondary'} ${candidate ? 'has-candidate' : 'empty'}`}
                                 style={{ '--candidate-color': candidateRole?.color ?? game.accent } as CSSProperties}
                                 key={candidate?.key ?? `empty-${candidateIndex}`}
@@ -1419,7 +1400,7 @@ export default function RosterModule({
                                 )}
                                 <div className="deadlock-candidate-gradient" />
                                 <div className="deadlock-candidate-copy">
-                                  <small>Preferencia {candidateIndex + 1}</small>
+
                                   <strong>{candidate?.name ?? 'Sin selección'}</strong>
                                 </div>
                               </div>
@@ -1454,11 +1435,16 @@ export default function RosterModule({
                         <>
                           <div className="portrait">
                             <div className="portrait-grid" /><div className="portrait-fallback"><RosterIcon name="gamepad" size={48} /></div>
-                            {hero ? <img key={hero.key} className="hero-image" src={asset(hero.portrait)} alt={hero.name} decoding="async" draggable={false} onLoad={(event) => { event.currentTarget.style.removeProperty('display') }} onError={(event) => { event.currentTarget.style.display = 'none' }} /> : <div className="portrait-loading"><span /><span /><span /></div>}
+                            {hero ? gameId === 'fragpunk' && fragpunkPortraitFrames[hero.key] ? (() => {
+                              const frame = fragpunkPortraitFrames[hero.key]
+                              return <svg key={hero.key} className="hero-image fragpunk-character-art" viewBox={`${frame.x} ${frame.y} ${frame.width} ${frame.height}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={hero.name}>
+                                <image href={asset(hero.portrait)} x="0" y="0" width={frame.sourceWidth} height={frame.sourceHeight} onError={(event) => { const svg = event.currentTarget.ownerSVGElement; if (svg) svg.style.display = 'none' }} />
+                              </svg>
+                            })() : <img key={hero.key} className="hero-image" src={asset(hero.portrait)} alt={hero.name} decoding="async" draggable={false} onLoad={(event) => { event.currentTarget.style.removeProperty('display') }} onError={(event) => { event.currentTarget.style.display = 'none' }} /> : <div className="portrait-loading"><span /><span /><span /></div>}
                             <div className="portrait-vignette" />
-                            <div className="role-watermark" aria-hidden="true">{role?.icon ? <img src={asset(role.icon)} alt="" /> : <span className="role-watermark-fallback">{role?.label.slice(0, 2).toUpperCase() ?? '?'}</span>}</div>
+                            {role?.icon && <div className="role-watermark" aria-hidden="true"><img src={asset(role.icon)} alt="" /></div>}
                           </div>
-                          <div className="hero-info"><div className="hero-name-row"><h2>{hero?.name ?? 'Sin selección'}</h2><span className="role-dot" /></div><div className="hero-role">{role?.icon && <img className="hero-role-icon" src={asset(role.icon)} alt="" aria-hidden="true" />}{role?.label ?? 'Genera un equipo'}</div></div>
+                          <div className="hero-info"><div className="hero-name-row"><h2>{hero?.name ?? 'Sin selección'}</h2><span className="role-dot" /></div>{game.roles.length > 1 && <div className="hero-role">{role?.icon && <img className="hero-role-icon" src={asset(role.icon)} alt="" aria-hidden="true" />}{role?.label ?? 'Sin selección'}</div>}</div>
                         </>
                       )}
 
@@ -1486,10 +1472,7 @@ export default function RosterModule({
                         <button type="button" onClick={() => { setDetailsIndex(index); playModuleSound('open', 590) }} disabled={!hero} data-tooltip="Detalles" aria-label={`Detalles de ${hero?.name ?? 'personaje'}`}><RosterIcon name="details" size={18} /></button>
                         <button type="button" onClick={() => toggleLock(index)} disabled={!hero} className={pick.locked ? 'active-lock' : ''} data-tooltip={pick.locked ? 'Liberar' : 'Fijar'} aria-label={gameId === 'deadlock' ? (pick.locked ? `Liberar candidatos de ${player.name}` : `Fijar candidatos de ${player.name}`) : pick.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><RosterIcon name={pick.locked ? 'unlock' : 'lock'} size={17} /></button>
                       </div>
-                      <div className="loadout">
-                        <div><small>{game.supportsLoadouts && pick.loadout ? 'Build' : gameId === 'deadlock' ? 'Candidatos' : game.supportsTeamups ? 'Team-Ups' : 'Formato'}</small><span>{game.supportsLoadouts && pick.loadout ? `${role?.label ?? 'Complexión'} · completo` : gameId === 'deadlock' ? `${deadlockCandidates.length}/3 opciones para matchmaking` : selectedTeamup?.complete ? `${selectedTeamup.name} activo` : selectedTeamup ? `${selectedTeamup.name} · base` : assignedProfile ? assignedProfile.name : game.formatLabel}</span></div>
-                        <span className="loadout-status"><RosterIcon name="check" size={13} /></span>
-                      </div>
+                      {assignedProfile && <div className="loadout"><div><small>Perfil</small><span>{assignedProfile.name}</span></div></div>}
                     </article>
                   )
                 })}

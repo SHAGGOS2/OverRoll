@@ -14,8 +14,9 @@ import './App.css'
 import PvzModule from './PvzModule'
 import RosterModule, { rosterGameDefinitions, type RosterGameId } from './RosterModule'
 import './GameExperience.css'
+import './Preferences.css'
 import { warmImageCache } from './imageCache'
-import { creditsJoke, creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
+import { creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
 import { installUiLocalization, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
 import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH, PROFILE_NAME_MAX_LENGTH } from './personName.ts'
@@ -2238,22 +2239,7 @@ function App() {
     }) })
   }
 
-  function localDataUsage() {
-    try {
-      let bytes = 0
-      for (let index = 0; index < window.localStorage.length; index += 1) {
-        const key = window.localStorage.key(index)
-        if (!key || !key.startsWith('overroll.web.')) continue
-        const value = window.localStorage.getItem(key) ?? ''
-        bytes += (key.length + value.length) * 2
-      }
-      if (bytes < 1024) return `${bytes} B`
-      if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
-      return `${(bytes / (1024 * 1024)).toFixed(2)} MB`
-    } catch {
-      return 'No disponible'
-    }
-  }
+
 
   function restoreRecommendedSettings() {
     setSoundEnabled(true)
@@ -2334,7 +2320,7 @@ function App() {
           <section className={`side-panel rules mobile-config-section ${mobileConfigTab === 'rules' ? 'mobile-active' : ''}`}>
             <div className="panel-title-row"><div><label>Reglas</label></div><Icon name="settings" size={17} /></div>
             <button type="button" className={`toggle-row tf2-toggle ${tf2AvoidRepeated ? 'enabled' : ''}`} onClick={() => { const next = !tf2AvoidRepeated; setTf2AvoidRepeated(next); playSound('tf2Click') }} aria-pressed={tf2AvoidRepeated}>
-              <span className="switch"><span /></span><span><b>Evitar clases repetidas</b><small>Una clase por jugador cuando sea posible</small></span>
+              <span className="switch"><span /></span><span><b>Evitar clases repetidas</b></span>
             </button>
             <div className="tf2-class-legend">
               {tf2Groups.map((group) => <span className={group} key={group}><i />{tf2GroupLabels[group]}<small>{tf2Classes.filter((item) => item.group === group).map((item) => item.name).join(', ')}</small></span>)}
@@ -2348,7 +2334,7 @@ function App() {
 
         <section className="content tf2-content">
           <div className="content-topline tf2-topline">
-            <div className="game-identity"><span className="game-kicker">Modo Mercenarios</span><div className="game-title-row"><h1>Team Fortress 2</h1><span className="web-badge tf2-badge">9 CLASES</span></div></div>
+            <div className="game-identity"><div className="game-title-row"><h1>Team Fortress 2</h1><span className="web-badge tf2-badge">9 CLASES</span></div></div>
             <div className="topline-actions">
               <button type="button" className="generate-image-button tf2-image-button" onClick={generateTf2TeamImage} aria-busy={imageExporting} disabled={imageExporting || !tf2Picks.some((pick) => pick.mercenary)}><Icon name="download" size={17} /> Generar imagen</button>
               <div className="match-summary tf2-summary">
@@ -2483,10 +2469,10 @@ function App() {
 
           <section className={`side-panel profile-panel mobile-config-section ${mobileConfigTab === 'profile' ? 'mobile-active' : ''}`}>
             <div className="panel-title-row">
-              <div><label>Modo de perfiles</label><small>{profileModeInfo.description}</small></div>
+              <div><label>Modo de perfiles</label></div>
               <Icon name="profile" size={17} />
             </div>
-            <select value={profileMode} onChange={(event: ChangeEvent<HTMLSelectElement>) => { setProfileMode(event.target.value as ProfileMode); playSound('profileSelect') }}>
+            <select value={profileMode} title={profileModeInfo.description} onChange={(event: ChangeEvent<HTMLSelectElement>) => { setProfileMode(event.target.value as ProfileMode); playSound('profileSelect') }}>
               {profileModes.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
             </select>
           </section>
@@ -2555,10 +2541,10 @@ function App() {
             </div>
 
             <button type="button" className={`toggle-row ${avoidRepeated ? 'enabled' : ''}`} onClick={() => { const next = !avoidRepeated; setAvoidRepeated(next); toggleRuleSound(next) }} aria-pressed={avoidRepeated}>
-              <span className="switch"><span /></span><span><b>Evitar repetidos</b><small>Un héroe por equipo</small></span>
+              <span className="switch"><span /></span><span><b>Evitar repetidos</b></span>
             </button>
             <button type="button" className={`toggle-row ${roleComposition ? 'enabled' : ''}`} onClick={() => { const next = !roleComposition; setRoleComposition(next); toggleRuleSound(next) }} aria-pressed={roleComposition}>
-              <span className="switch"><span /></span><span><b>Composición de roles</b><small>Distribución automática</small></span>
+              <span className="switch"><span /></span><span><b>Composición de roles</b></span>
             </button>
             <button type="button" className={`toggle-row perks-toggle ${randomPerks ? 'enabled' : ''}`} onClick={toggleRandomPerks} aria-pressed={randomPerks}>
               <span className="switch"><span /></span><span><b>Perks aleatorias</b><small>{stadium ? 'Cuatro poderes Stadium' : 'Una menor y una mayor'}</small></span>
@@ -2567,7 +2553,7 @@ function App() {
               <span className="switch"><span /></span><span><b>Modo Stadium</b><small>Solo héroes compatibles</small></span>
             </button>
             <button type="button" className={`toggle-row ${rolesOnly ? 'enabled' : ''}`} onClick={() => { const next = !rolesOnly; setRolesOnly(next); toggleRuleSound(next) }} aria-pressed={rolesOnly}>
-              <span className="switch"><span /></span><span><b>Solo rol</b><small>Oculta los héroes</small></span>
+              <span className="switch"><span /></span><span><b>Solo rol</b></span>
             </button>
           </section>
 
@@ -2704,7 +2690,7 @@ function App() {
         <header className="roulette-heading">
           <div>
             <h1>Ruleta · Overwatch</h1>
-            <p>Construye la rueda por casillas. Cada peso aumenta la probabilidad real de ese héroe.</p>
+
           </div>
           <div className="roulette-heading-stats" aria-label="Resumen de la ruleta">
             <span><small>HÉROES</small><b>{roulettePool.length}</b></span>
@@ -2782,7 +2768,7 @@ function App() {
               <div className="roulette-total-summary">
                 <span><small>SELECCIONADOS</small><b>{roulettePool.length}</b></span>
                 <span><small>CASILLAS</small><b>{rouletteTotalSlots}</b></span>
-                <p>Máximo 64. Un héroe único usa automáticamente dos casillas.</p>
+
               </div>
               <button type="button" className="roulette-build-button" onClick={() => buildRoulette(true)} disabled={rouletteSpinning || roulettePool.length === 0 || rouletteTotalSlots > 64}>
                 <Icon name="roulette" size={20} /><span>CONSTRUIR RULETA</span>
@@ -2916,7 +2902,7 @@ function App() {
           <section className="profiles-simple-empty">
             <Icon name="profile" size={42} />
             <h2>Crea tu primer perfil</h2>
-            <p>Marca tus héroes y úsalo en una o varias fichas.</p>
+
             <button type="button" className="primary" onClick={createProfile}><Icon name="plus" size={16} /> Crear perfil</button>
           </section>
         ) : (
@@ -3009,7 +2995,7 @@ function App() {
                 {profileTab === 'players' && (
                   <div className="profiles-simple-section">
                     <header className="profiles-section-title">
-                      <div><h2>Asignar a jugadores</h2><p>Pulsa una ficha para activar o quitar este perfil.</p></div>
+                      <div><h2>Asignar a jugadores</h2></div>
                     </header>
                     <div className="profiles-game-assignment">
                       <div className="profiles-game-label"><span className="settings-game-dot" style={{ '--module-accent': '#f5a623' } as CSSProperties} /><strong>Overwatch</strong><small>{players.length} fichas</small></div>
@@ -3049,13 +3035,13 @@ function App() {
                 {profileTab === 'mode' && (
                   <div className="profiles-simple-section">
                     <header className="profiles-section-title">
-                      <div><h2>Reglas del perfil</h2><p>Decide cómo se usan las categorías cuando generas un equipo.</p></div>
+                      <div><h2>Reglas del perfil</h2></div>
                     </header>
                     <div className="profiles-mode-list">
                       {profileModes.map((mode) => (
-                        <button type="button" className={profileMode === mode.id ? 'active' : ''} onClick={() => { setProfileMode(mode.id); playSound('profileSelect') }} aria-pressed={profileMode === mode.id} key={mode.id}>
+                        <button type="button" title={mode.description} className={profileMode === mode.id ? 'active' : ''} onClick={() => { setProfileMode(mode.id); playSound('profileSelect') }} aria-pressed={profileMode === mode.id} key={mode.id}>
                           <span className="mode-radio"><i /></span>
-                          <span><strong>{mode.name}</strong><small>{mode.description}</small></span>
+                          <span><strong>{mode.name}</strong></span>
                         </button>
                       ))}
                     </div>
@@ -3070,215 +3056,95 @@ function App() {
   }
 
   function renderMore() {
-    const storedUsage = localDataUsage()
-    const heroCount = data?.heroes.length ?? 0
-    const activeModule = gameModules.find((game) => game.id === activeGame)
-    const activeCatalogLabel = activeGame === 'overwatch' ? `${heroCount} héroes` : activeModule?.catalogLabel ?? 'Catálogo local'
-    const settingsTabs: Array<{ id: SettingsTab; label: string; icon: IconName; description: string }> = [
-      { id: 'general', label: t('tab_general'), icon: 'settings', description: t('tab_general_desc') },
-      { id: 'audio', label: t('tab_audio'), icon: 'sound', description: t('tab_audio_desc') },
-      { id: 'catalogs', label: t('tab_games'), icon: 'gamepad', description: t('tab_games_desc') },
-      { id: 'language', label: t('tab_language'), icon: 'language', description: t('tab_language_desc') },
-      { id: 'credits', label: t('tab_credits'), icon: 'spark', description: t('tab_credits_desc') },
+    const tabs: Array<{ id: SettingsTab; label: string; icon: IconName }> = [
+      { id: 'general', label: t('tab_general'), icon: 'settings' },
+      { id: 'audio', label: t('tab_audio'), icon: 'sound' },
+      { id: 'language', label: t('tab_language'), icon: 'language' },
+      { id: 'catalogs', label: t('tab_games'), icon: 'gamepad' },
+      { id: 'credits', label: t('tab_credits'), icon: 'spark' },
     ]
-    const activeSettings = settingsTabs.find((tab) => tab.id === settingsTab) ?? settingsTabs[0]
+    const selectedTab = tabs.find((tab) => tab.id === settingsTab) ?? tabs[0]
+    const switchRow = (label: string, checked: boolean, change: (value: boolean) => void, disabled = false, feedback = true) => (
+      <label className={`preference-row ${disabled ? 'disabled' : ''}`}>
+        <span>{label}</span>
+        <input className="preference-checkbox" type="checkbox" checked={checked} disabled={disabled} onChange={(event) => { change(event.target.checked); if (feedback) toggleRuleSound(event.target.checked) }} />
+        <span className="preference-switch" aria-hidden="true"><span /></span>
+      </label>
+    )
 
     return (
-      <main className="utility-page settings-page-v2 settings-tabbed-page">
-        <header className="settings-heading-v2">
-          <div>
-            <span className="eyebrow">{t('settings_kicker')}</span>
-            <h1>{t('settings_title')}</h1>
-            <p>{t('settings_intro')}</p>
-          </div>
-          <div className="settings-status-v2" aria-label="Estado local">
-            <span><small>{t('catalog_active')}</small><strong>{activeCatalogLabel}</strong></span>
-            <span><small>{t('profiles')}</small><strong>{profiles.length}</strong></span>
-            <span><small>{t('stored')}</small><strong>{storedUsage}</strong></span>
-          </div>
+      <main className="utility-page preferences-page">
+        <header className="preferences-header">
+          <h1>{t('settings_title')}</h1>
+          <button type="button" className="preferences-back" onClick={() => navigate('principal')}><Icon name="close" size={18} /><span>Volver</span></button>
         </header>
-
-        <nav className="settings-jump-nav settings-tab-nav" aria-label="Secciones de configuración" role="tablist">
-          {settingsTabs.map((tab) => (
-            <button
-              type="button"
-              className={settingsTab === tab.id ? 'active' : ''}
-              onClick={() => { setSettingsTab(tab.id); playSound('click') }}
-              role="tab"
-              aria-selected={settingsTab === tab.id}
-              aria-controls={`settings-panel-${tab.id}`}
-              key={tab.id}
-            >
-              <Icon name={tab.icon} size={16} />
-              <span>{tab.label}</span>
-            </button>
-          ))}
-        </nav>
-
-        <section className="settings-active-overview" aria-live="polite">
-          <span className="settings-active-overview-icon"><Icon name={activeSettings.icon} size={22} /></span>
-          <div><small>{t('active_section')}</small><strong>{activeSettings.label}</strong><p>{activeSettings.description}</p></div>
-          <span className="settings-active-index">{String(settingsTabs.findIndex((tab) => tab.id === settingsTab) + 1).padStart(2, '0')} / {String(settingsTabs.length).padStart(2, '0')}</span>
-        </section>
-
-        <div className="settings-tab-stage">
-          {settingsTab === 'general' && (
-            <section className="settings-section-v2 settings-tab-panel" id="settings-panel-general" role="tabpanel">
-              <header className="settings-section-heading-v2">
-                <span className="settings-section-icon"><Icon name="settings" size={22} /></span>
-                <div><small>GENERAL</small><h2>Interfaz y rendimiento</h2><p>Cambios visuales reales, sin alterar las reglas de generación de cada juego.</p></div>
-              </header>
-              <div className="settings-list-v2">
-                <article className="setting-row-v2">
-                  <span className="setting-row-icon"><Icon name="spark" size={19} /></span>
-                  <div><strong>Animaciones</strong><p>Transiciones, entradas de fichas y movimiento de la ruleta.</p></div>
-                  <button type="button" className={`setting-toggle-v2 ${animationsEnabled ? 'enabled' : ''}`} onClick={() => { const next = !animationsEnabled; setAnimationsEnabled(next); toggleRuleSound(next) }} aria-pressed={animationsEnabled}><span /><b>{animationsEnabled ? 'Activas' : 'Reducidas'}</b></button>
-                </article>
-                <article className="setting-row-v2">
-                  <span className="setting-row-icon"><Icon name="details" size={19} /></span>
-                  <div><strong>Mejoras compactas</strong><p>Reduce el espacio de perks, Team-Ups y equipamientos dentro de las fichas.</p></div>
-                  <button type="button" className={`setting-toggle-v2 ${compactPerks ? 'enabled' : ''}`} onClick={() => { const next = !compactPerks; setCompactPerks(next); toggleRuleSound(next) }} aria-pressed={compactPerks}><span /><b>{compactPerks ? 'Compactas' : 'Completas'}</b></button>
-                </article>
-                <article className="setting-row-v2">
-                  <span className="setting-row-icon"><Icon name="gamepad" size={19} /></span>
-                  <div><strong>Vista compacta en móvil</strong><p>Acorta retratos y controles para recorrer el equipo con menos desplazamiento.</p></div>
-                  <button type="button" className={`setting-toggle-v2 ${mobileCompactMode ? 'enabled' : ''}`} onClick={() => { const next = !mobileCompactMode; setMobileCompactMode(next); toggleRuleSound(next) }} aria-pressed={mobileCompactMode}><span /><b>{mobileCompactMode ? 'Activa' : 'Normal'}</b></button>
-                </article>
-                <article className="setting-row-v2">
-                  <span className="setting-row-icon"><Icon name="shield" size={19} /></span>
-                  <div><strong>Modo ligero</strong><p>Quita fondos animados, desenfoques y sombras costosas para reducir carga gráfica.</p></div>
-                  <button type="button" className={`setting-toggle-v2 ${lowPowerMode ? 'enabled' : ''}`} onClick={() => { const next = !lowPowerMode; setLowPowerMode(next); toggleRuleSound(next) }} aria-pressed={lowPowerMode}><span /><b>{lowPowerMode ? 'Activo' : 'Normal'}</b></button>
-                </article>
+        <div className="preferences-layout">
+          <nav className="preferences-nav" role="tablist" aria-label="Configuración" aria-orientation="vertical">
+            {tabs.map((tab, index) => (
+              <button type="button" id={`preferences-tab-${tab.id}`} role="tab" aria-selected={settingsTab === tab.id} aria-controls={`preferences-panel-${tab.id}`} tabIndex={settingsTab === tab.id ? 0 : -1} className={settingsTab === tab.id ? 'active' : ''} key={tab.id}
+                onClick={() => { setSettingsTab(tab.id); playSound('click') }}
+                onKeyDown={(event) => {
+                  const step = event.key === 'ArrowDown' || event.key === 'ArrowRight' ? 1 : event.key === 'ArrowUp' || event.key === 'ArrowLeft' ? -1 : 0
+                  if (!step && event.key !== 'Home' && event.key !== 'End') return
+                  event.preventDefault()
+                  const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + step + tabs.length) % tabs.length
+                  setSettingsTab(tabs[next].id)
+                  event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus()
+                }}>
+                <Icon name={tab.icon} size={18} /><span>{tab.label}</span>
+              </button>
+            ))}
+          </nav>
+          <section className="preferences-panel" id={`preferences-panel-${selectedTab.id}`} role="tabpanel" aria-labelledby={`preferences-tab-${selectedTab.id}`}>
+            <header className="preferences-panel-header"><h2>{selectedTab.label}</h2></header>
+            {settingsTab === 'general' && <>
+              <div className="preferences-rows">
+                {switchRow('Animaciones', animationsEnabled, setAnimationsEnabled)}
+                {switchRow('Mejoras compactas', compactPerks, setCompactPerks)}
+                {switchRow('Vista compacta en móvil', mobileCompactMode, setMobileCompactMode)}
+                {switchRow('Modo ligero', lowPowerMode, setLowPowerMode)}
               </div>
-              <footer className="settings-section-footer-v2 settings-general-actions"><button type="button" className="settings-secondary-action" onClick={restoreRecommendedSettings}><Icon name="reset" size={15} /> Restaurar ajustes recomendados</button><button type="button" className="settings-danger-action" onClick={resetLocalData}><Icon name="trash" size={15} /> Borrar datos locales</button></footer>
-            </section>
-          )}
-
-          {settingsTab === 'audio' && (
-            <section className="settings-section-v2 settings-tab-panel" id="settings-panel-audio" role="tabpanel">
-              <header className="settings-section-heading-v2">
-                <span className="settings-section-icon"><Icon name="sound" size={22} /></span>
-                <div><small>AUDIO</small><h2>Sonidos de interfaz</h2><p>El volumen se aplica a botones, generación, perfiles y ruletas de todos los juegos.</p></div>
-              </header>
-              <div className="settings-list-v2">
-                <article className="setting-row-v2">
-                  <span className="setting-row-icon"><Icon name="sound" size={19} /></span>
-                  <div><strong>Audio general</strong><p>Activa o silencia todos los sonidos de OverRoll.</p></div>
-                  <button type="button" className={`setting-toggle-v2 ${soundEnabled ? 'enabled' : ''}`} onClick={toggleSounds} aria-pressed={soundEnabled}><span /><b>{soundEnabled ? 'Activo' : 'Silenciado'}</b></button>
-                </article>
-                <article className="setting-row-v2 volume-row-v2">
-                  <span className="setting-row-icon"><Icon name="sound" size={19} /></span>
-                  <div><strong>Volumen</strong><p>Ajuste maestro para todos los efectos.</p></div>
-                  <label className="settings-volume-v2"><input type="range" min="0" max="1" step="0.05" value={soundVolume} disabled={!soundEnabled} onChange={(event: ChangeEvent<HTMLInputElement>) => setSoundVolume(Number(event.target.value))} onPointerUp={() => playSound('click')} aria-label="Volumen de la interfaz" /><b>{Math.round(soundVolume * 100)}%</b></label>
-                </article>
-                <article className="setting-row-v2">
-                  <span className="setting-row-icon"><Icon name="spark" size={19} /></span>
-                  <div><strong>Sonido al pasar el mouse</strong><p>Está apagado por defecto para evitar ruido constante.</p></div>
-                  <button type="button" className={`setting-toggle-v2 ${hoverSounds ? 'enabled' : ''}`} onClick={() => { const next = !hoverSounds; setHoverSounds(next); toggleRuleSound(next) }} aria-pressed={hoverSounds}><span /><b>{hoverSounds ? 'Activo' : 'Apagado'}</b></button>
-                </article>
-              </div>
-              <footer className="settings-section-footer-v2"><button type="button" className="settings-primary-action" disabled={!soundEnabled} onClick={playConfirmTone}><Icon name="sound" size={15} /> Probar sonido</button></footer>
-            </section>
-          )}
-
-          {settingsTab === 'catalogs' && (
-            <section className="settings-section-v2 settings-tab-panel settings-catalog-panel" id="settings-panel-catalogs" role="tabpanel">
-              <header className="settings-section-heading-v2">
-                <span className="settings-section-icon"><Icon name="gamepad" size={22} /></span>
-                <div><small>JUEGOS</small><h2>Catálogos de OverRoll</h2><p>Cada juego conserva sus reglas, límites, composición y ruleta sin mezclar su estado con los demás.</p></div>
-              </header>
-              <div className="settings-games-grid-v2">
-                {gameModules.map((game) => {
-                  const selected = game.id === activeGame
-                  return (
-                    <button type="button" className={`settings-game-card-v2 ${game.available ? 'available' : ''} ${selected ? 'selected-game' : ''}`} style={{ '--module-accent': game.accent } as CSSProperties} onClick={() => game.available ? activateGame(game.id) : notify(`${game.name}: ${game.status}`, 'info')} key={game.name}>
-                      <span className="settings-game-icon-v3"><img src={asset(game.icon)} alt="" decoding="async" /></span>
-                      <span className="settings-game-copy-v3"><strong>{game.name}</strong><small>{selected ? 'Juego activo' : game.catalogLabel}</small></span>
-                      <b>{selected ? 'Activo' : 'Abrir'}</b>
-                    </button>
-                  )
-                })}
-              </div>
-            </section>
-          )}
-
-          {settingsTab === 'language' && (
-            <section className="settings-section-v2 settings-tab-panel language-page-v1" id="settings-panel-language" role="tabpanel">
-              <header className="settings-section-heading-v2">
-                <span className="settings-section-icon"><Icon name="language" size={22} /></span>
-                <div><small>{t('language_eyebrow')}</small><h2>{t('language_title')}</h2><p>{t('language_intro')}</p></div>
-              </header>
-              <div className="language-choice-v1">
-                <button type="button" className={`language-auto-v1 ${localePreference === 'auto' ? 'active' : ''}`} onClick={() => { setLocalePreference('auto'); playSound('click') }} aria-pressed={localePreference === 'auto'}>
-                  <span className="language-radio-v1"><i /></span>
-                  <span><strong>{t('language_auto_title')}</strong><small>{t('language_auto_body')}</small><em>{t('language_detected')}: {localeName(browserLocale)}</em></span>
-                  <Icon name="language" size={20} />
-                </button>
-                <div className="language-manual-v1">
-                  <div><strong>{t('language_manual_title')}</strong><p>{t('language_manual_body')}</p></div>
-                  <div className="language-grid-v1">
-                    {localeChoices.map((choice) => (
-                      <button type="button" className={localePreference === choice.id ? 'active' : ''} onClick={() => { setLocalePreference(choice.id); playSound('click') }} aria-pressed={localePreference === choice.id} lang={choice.id} key={choice.id}>
-                        <span className="language-radio-v1"><i /></span><strong>{choice.name}</strong><small>{choice.id}</small>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <footer className="language-status-v1"><Icon name="check" size={16} /><span><small>{t('language_active')}</small><strong>{localeName(activeLocale)}</strong><p>{t('language_saved')}</p></span></footer>
-            </section>
-          )}
-
-          {settingsTab === 'credits' && (
-            <section className="settings-section-v2 settings-tab-panel credits-page-v4" id="settings-panel-credits" role="tabpanel">
-              <div className="credits-hero-v4">
-                <div className="credits-hero-copy-v4">
-                  <span className="credits-kicker-v4">{t('credits_kicker')}</span>
-                  <h2>{t('credits_title')}</h2>
-                  <p>{t('credits_intro')}</p>
-                  <div className="credits-actions-v4">
-                    <button type="button" onClick={() => navigate('principal')}><Icon name="gamepad" size={16} /> {t('credits_play')}</button>
-                    <a href="https://github.com/SHAGGOS2/OverRoll" target="_blank" rel="noreferrer"><Icon name="download" size={16} /> {t('credits_project')}</a>
-                  </div>
-                </div>
-                <a className="credits-hero-visual-v4 credits-hammond-link-v1" href={creditsSongUrl(activeLocale)} target="_blank" rel="noreferrer" title={t('credits_hammond_hint')}>
-                  <img src={asset('assets/hammond_credits.gif')} alt={t('credits_hammond_alt')} />
-                  <span>{creditsJoke(activeLocale)}</span>
-                </a>
-              </div>
-
-              <div className="credits-story-v4">
-                <article className="credits-author-v4">
-                  <small>{t('credits_author_label')}</small>
-                  <h3>SHAGGOS</h3>
-                  <p>{t('credits_author_body')}</p>
-                </article>
-                <article className="credits-community-v4">
-                  <small>{t('credits_community_label')}</small>
-                  <h3>{t('credits_community_title')}</h3>
-                  <p>{t('credits_community_body')}</p>
-                </article>
-              </div>
-
-              <div className="credits-manifest-v4">
-                <span>{t('credits_idea')}</span>
-                <blockquote>{t('credits_manifest')}</blockquote>
-              </div>
-
-              <footer className="credits-legal-v4">
-                <div><b>{t('credits_legal_title')}</b><p>{t('credits_legal_body')}</p></div>
-                <strong>{t('credits_thanks')}</strong>
+              <footer className="preferences-actions">
+                <button type="button" onClick={restoreRecommendedSettings}><Icon name="reset" size={16} />Restablecer ajustes</button>
+                <button type="button" className="preferences-danger" onClick={resetLocalData}><Icon name="trash" size={16} />Borrar datos guardados</button>
               </footer>
-            </section>
-          )}
-        </div>
-
-        {settingsTab !== 'credits' && settingsTab !== 'language' && (
-          <section className="settings-about-v2 settings-about-compact">
-            <div><span className="eyebrow">OVERROLL WEB</span><h2>Configuración independiente por módulo</h2><p>Los cambios visuales son globales; cada juego conserva por separado sus escuadras, reglas y ruletas.</p></div>
-            <span className="settings-version-v2"><Icon name="check" size={16} /> Guardado automático</span>
+            </>}
+            {settingsTab === 'audio' && <>
+              <div className="preferences-rows">
+                {switchRow('Sonidos', soundEnabled, () => toggleSounds(), false, false)}
+                <label className={`preference-row preference-volume ${!soundEnabled ? 'disabled' : ''}`}>
+                  <span>Volumen</span>
+                  <input type="range" min="0" max="1" step="0.05" value={soundVolume} disabled={!soundEnabled} onChange={(event) => setSoundVolume(Number(event.target.value))} onPointerUp={() => playSound('click')} />
+                  <output>{Math.round(soundVolume * 100)}%</output>
+                </label>
+                {switchRow('Sonido al pasar el mouse', hoverSounds, setHoverSounds, !soundEnabled)}
+              </div>
+              <footer className="preferences-actions"><button type="button" disabled={!soundEnabled} onClick={playConfirmTone}><Icon name="sound" size={16} />Probar sonido</button></footer>
+            </>}
+            {settingsTab === 'language' && <div className="preferences-rows">
+              <label className="preference-row preference-language"><span>{t('tab_language')}</span>
+                <select value={localePreference} onChange={(event) => { setLocalePreference(event.target.value as LocalePreference); playSound('click') }}>
+                  <option value="auto">{t('language_auto_title')} · {localeName(browserLocale)}</option>
+                  {localeChoices.map((choice) => <option value={choice.id} lang={choice.id} key={choice.id}>{choice.name}</option>)}
+                </select>
+              </label>
+            </div>}
+            {settingsTab === 'catalogs' && <div className="preferences-games">
+              {gameModules.map((game) => <button type="button" className={game.id === activeGame ? 'selected' : ''} onClick={() => game.available ? activateGame(game.id) : notify(`${game.name}: ${game.status}`, 'info')} key={game.id}>
+                <img src={asset(game.icon)} alt="" decoding="async" />
+                <span><strong>{game.name}</strong><small>{game.catalogLabel}</small></span>
+                <span className="preferences-game-action">{game.id === activeGame ? <Icon name="check" size={18} /> : 'Abrir'}</span>
+              </button>)}
+            </div>}
+            {settingsTab === 'credits' && <div className="preferences-credits">
+              <div className="preferences-credit-main">
+                <div><h3>OverRoll</h3><p>Creado por <strong>SHAGGOS</strong></p><a href="https://github.com/SHAGGOS2/OverRoll" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
+                <a className="preferences-hammond" href={creditsSongUrl(activeLocale)} target="_blank" rel="noreferrer" title={t('credits_hammond_hint')}><img src={asset('assets/hammond_credits.gif')} alt={t('credits_hammond_alt')} /></a>
+              </div>
+              <p className="preferences-attribution">{t('credits_legal_body')}</p>
+            </div>}
           </section>
-        )}
+        </div>
       </main>
     )
   }

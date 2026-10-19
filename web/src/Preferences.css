@@ -1,0 +1,84 @@
+.app .preferences-page { width: min(1120px, calc(100% - 48px)); margin: 36px auto 80px; padding: 0; }
+.preferences-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
+.preferences-header h1 { margin: 0; font-size: clamp(26px, 3vw, 36px); font-weight: 800; letter-spacing: -.03em; }
+.preferences-back { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid #314359; border-radius: 8px; color: #bacbdd; background: #111f2e; font-size: 13px; }
+.preferences-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); align-items: start; gap: 28px; }
+.preferences-nav { display: grid; gap: 6px; padding-top: 4px; }
+.preferences-nav button { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 12px 16px; border: 1px solid transparent; border-radius: 9px; color: #a3b4c7; background: transparent; text-align: left; font-size: 14px; font-weight: 650; }
+.preferences-nav button:hover { color: #fff; background: #152436; }
+.preferences-nav button.active { border-color: #f5c35b4d; color: #ffcf6b; background: #ffc43b0d; }
+.preferences-panel { min-width: 0; border: 1px solid #2a3c50; border-radius: 14px; background: #101c29; overflow: hidden; }
+.preferences-panel-header { padding: 24px 28px; border-bottom: 1px solid #293a4d; }
+.preferences-panel-header h2 { margin: 0; font-size: 20px; font-weight: 750; }
+.preferences-rows { padding: 0 28px; }
+.preference-row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 78px; border-bottom: 1px solid #25374a; color: #e1eaf4; font-size: 14px; cursor: pointer; }
+.preference-row:last-child { border-bottom: 0; }
+.preference-row > span:first-child { min-width: 0; line-height: 1.5; }
+.preference-row.disabled { opacity: .45; cursor: default; }
+.app .preference-checkbox { position: absolute; width: 1px; height: 1px; padding: 0; margin: 0; border: 0; clip-path: inset(50%); overflow: hidden; white-space: nowrap; }
+.preference-switch { width: 44px; height: 26px; flex: none; padding: 3px; border: 1px solid #42546b; border-radius: 20px; background: #223348; transition: background 140ms, border-color 140ms; }
+.preference-switch > span { display: block; width: 18px; height: 18px; border-radius: 50%; background: #aab9c9; transition: transform 140ms, background 140ms; }
+.preference-checkbox:checked + .preference-switch { border-color: #ffcb5e; background: #ffcb5e; }
+.preference-checkbox:checked + .preference-switch > span { transform: translateX(18px); background: #17202a; }
+.preference-checkbox:focus-visible + .preference-switch { outline: 2px solid #6fd9ff; outline-offset: 4px; }
+.preferences-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 22px 28px; border-top: 1px solid #293a4d; background: #0c1724; }
+.preferences-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 10px 14px; border: 1px solid #364b62; border-radius: 7px; color: #d2e0ee; background: #16273a; font-size: 12px; font-weight: 650; }
+.preferences-actions .preferences-danger { margin-left: auto; border-color: #b95b694d; color: #ff9fa9; background: transparent; }
+.preferences-actions button:hover:not(:disabled), .preferences-back:hover { border-color: #ffca62; color: #fff; }
+.app .preference-volume input { min-width: 80px; max-width: 260px; width: 44%; padding: 0; height: 24px; border: 0; background: transparent; accent-color: #ffcb5e; cursor: pointer; }
+.preference-volume > span:first-child { flex: 1; }
+.preference-volume output { width: 42px; text-align: right; font-size: 13px; color: #aabed2; font-variant-numeric: tabular-nums; }
+.app .preference-language select { width: min(360px, 65%); min-height: 42px; padding: 8px 12px; border: 1px solid #354b64; border-radius: 7px; color: #e1eaf4; background: #15273a; font-size: 13px; }
+.preferences-games { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #293a4d; }
+.preferences-games > button { min-width: 0; min-height: 88px; display: flex; align-items: center; gap: 14px; padding: 18px 22px; border: 0; color: #dde9f4; background: #101c29; text-align: left; }
+.preferences-games > button:hover { background: #182a3d; }
+.preferences-games > button.selected { background: #ffc43b0a; }
+.preferences-games img { width: 34px; height: 34px; object-fit: contain; flex: none; }
+.preferences-games > button > span:nth-child(2) { display: grid; min-width: 0; gap: 5px; }
+.preferences-games strong { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.preferences-games small { font-size: 11px; color: #8fa8bf; }
+.preferences-game-action { flex: none; margin-left: auto; color: #ffcf6b; font-size: 11px; }
+.preferences-credits { padding: 28px; }
+.preferences-credit-main { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.preferences-credit-main h3 { margin: 0 0 10px; font-size: 32px; letter-spacing: -.04em; }
+.preferences-credit-main p { margin: 0 0 22px; font-size: 14px; color: #a5bad0; }
+.preferences-credit-main a { color: #ffcf6b; font-size: 14px; text-decoration: none; }
+.preferences-credit-main a:hover { text-decoration: underline; }
+.preferences-hammond { display: block; width: 160px; flex: none; }
+.preferences-hammond img { display: block; width: 100%; max-height: 190px; object-fit: contain; }
+.preferences-attribution { margin: 30px 0 0; padding-top: 22px; border-top: 1px solid #293a4d; color: #8ea5bc; font-size: 11px; line-height: 1.7; }
+@media (max-width: 760px) {
+  .app .preferences-page { width: calc(100% - 28px); margin: 24px auto 40px; }
+  .preferences-header { margin-bottom: 18px; }
+  .preferences-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .preferences-nav { display: flex; gap: 5px; padding: 0 0 6px; overflow-x: auto; scrollbar-width: thin; }
+  .preferences-nav button { min-height: 42px; padding: 10px 13px; flex: none; gap: 7px; font-size: 12px; }
+  .preferences-panel-header { padding: 20px; }
+  .preferences-rows { padding: 0 20px; }
+  .preference-row { min-height: 72px; gap: 14px; font-size: 13px; }
+  .preferences-actions { padding: 18px 20px; }
+  .preferences-actions .preferences-danger { margin-left: 0; }
+  .preferences-games { grid-template-columns: minmax(0, 1fr); }
+  .preferences-games > button { min-height: 76px; }
+  .preferences-credits { padding: 22px; }
+}
+@media (max-width: 420px) {
+  .preferences-back span { display: none; }
+  .preference-language { align-items: stretch; flex-direction: column; justify-content: center; gap: 8px; padding: 16px 0; }
+  .app .preference-language select { width: 100%; }
+  .preferences-hammond { width: 100px; }
+}
+@media (prefers-reduced-motion: reduce) { .preference-switch, .preference-switch > span { transition: none; } }
+/* Match the in-game configuration panels to the same compact controls. */
+.app .sidebar > .side-panel { padding: 16px 0; margin: 0; border: 0; border-bottom: 1px solid #293b4d; border-radius: 0; background: transparent; box-shadow: none; }
+.app .sidebar > .side-panel::after { display: none; }
+.app .sidebar .panel-title-row { margin-bottom: 12px; }
+.app .sidebar .panel-title-row label { font-size: 11px; color: #b7cada; letter-spacing: .08em; }
+.app .sidebar .squad-counter { padding: 4px; gap: 6px; border-color: #31465c; background: #0b1724; }
+.app .sidebar .squad-counter button { min-height: 34px; border-radius: 5px; }
+.app .sidebar .squad-tools button { border-color: #2a4054; color: #9fb8ce; background: transparent; }
+.app .sidebar .toggle-row { min-height: 44px; padding: 9px; border: 1px solid transparent; border-radius: 7px; background: transparent; }
+.app .sidebar .toggle-row.enabled { border-color: color-mix(in srgb, var(--module-accent, var(--yellow)) 18%, #293b4d); background: color-mix(in srgb, var(--module-accent, var(--yellow)) 5%, #0d1a28); }
+.app .sidebar .toggle-row b { font-size: 12px; font-weight: 650; }
+.app .sidebar .player-row { border-radius: 7px; }
+.app .sidebar-footer .status-line { border: 0; background: transparent; }

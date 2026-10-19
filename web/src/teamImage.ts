@@ -1,9 +1,10 @@
 import { downloadCanvasPng, loadExportImage } from './imageExport.ts'
+import type { PortraitFrame } from './portraitFrames.ts'
 
 export type ImageDetail = { label: string; image?: string }
 export type TeamImageCard = {
   player: string; name: string; role: string; color: string
-  portrait?: string; icon?: string; locked?: boolean; fit?: 'cover' | 'contain'
+  portrait?: string; icon?: string; locked?: boolean; fit?: 'cover' | 'contain'; frame?: PortraitFrame
   details?: ImageDetail[]; alternatives?: ImageDetail[]
 }
 export type TeamImageOptions = { assetBase?: string; title: string; subtitle?: string; accent: string; filename: string; cards: TeamImageCard[] }
@@ -46,17 +47,19 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
       while (trimmed.length && ctx.measureText(trimmed).width > width) trimmed = trimmed.slice(0, -1)
       ctx.fillText(trimmed.length < label.length ? `${trimmed.slice(0, -1)}…` : trimmed, x, y)
     }
-    const picture = (src: string | undefined, x: number, y: number, width: number, height: number, contain = false) => {
+    const picture = (src: string | undefined, x: number, y: number, width: number, height: number, contain = false, frame?: PortraitFrame) => {
       const image = src ? images.get(src) : undefined
       if (!image) return
-      const scale = (contain ? Math.min : Math.max)(width / image.naturalWidth, height / image.naturalHeight)
-      const w = image.naturalWidth * scale, h = image.naturalHeight * scale
+      const sx = frame?.x ?? 0, sy = frame?.y ?? 0
+      const sw = frame?.width ?? image.naturalWidth, sh = frame?.height ?? image.naturalHeight
+      const scale = (contain ? Math.min : Math.max)(width / sw, height / sh)
+      const w = sw * scale, h = sh * scale
       ctx.save(); ctx.beginPath(); ctx.roundRect(x, y, width, height, 10); ctx.clip()
-      ctx.drawImage(image, x + (width - w) / 2, y + (height - h) * .2, w, h); ctx.restore()
+      ctx.drawImage(image, sx, sy, sw, sh, x + (width - w) / 2, y + (height - h) * (contain ? .5 : .2), w, h); ctx.restore()
     }
     text('OVERROLL', 48, 88, layout.width - 96, 26, options.accent, 900)
     text(options.title.toUpperCase(), 48, 142, layout.width - 96, 36, '#ffffff', 900, 24)
-    text(options.subtitle ?? `${options.cards.length} jugadores · Tu próxima partida empieza aquí`, 48, 176, layout.width - 96, 16, '#a4b7cb', 500)
+    text(options.subtitle ?? `${options.cards.length} ${options.cards.length === 1 ? 'jugador' : 'jugadores'}`, 48, 176, layout.width - 96, 16, '#a4b7cb', 500)
     options.cards.forEach((card, index) => {
       const x = 48 + index % layout.columns * (layout.cardWidth + 24)
       const y = 222 + Math.floor(index / layout.columns) * (layout.cardHeight + 24)
@@ -66,7 +69,7 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
       text(String(index + 1).padStart(2, '0'), x + 34, y + 40, 28, 16, card.color, 900)
       text(card.player, x + 74, y + 40, 286, 19, '#f4f7fc', 700, 13)
       ctx.fillStyle = '#172a3e'; ctx.beginPath(); ctx.roundRect(x + 16, y + 62, 352, 320, 12); ctx.fill()
-      picture(card.portrait, x + 16, y + 62, 352, 320, card.fit === 'contain')
+      picture(card.portrait, x + 16, y + 62, 352, 320, card.fit === 'contain', card.frame)
       if (!card.portrait || !images.has(card.portrait)) text('OVERROLL', x + 100, y + 238, 210, 24, '#647d95', 900)
       const fade = ctx.createLinearGradient(0, y + 270, 0, y + 382); fade.addColorStop(0, '#101e2e00'); fade.addColorStop(1, '#101e2e')
       ctx.fillStyle = fade; ctx.fillRect(x + 16, y + 270, 352, 112)
@@ -82,7 +85,7 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
       }
       ;(card.alternatives ?? []).slice(0, 2).forEach((item, i) => {
         const ax = x + 20 + i * 176
-        picture(item.image, ax, detailY + 2, 168, 82)
+        picture(item.image, ax, detailY + 2, 168, 82, true)
         text(item.label, ax + 4, detailY + 106, 160, 12, '#b7cadd')
       })
     })

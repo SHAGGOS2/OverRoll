@@ -36,12 +36,11 @@
 .app .card-actions button { border-radius: 6px; }
 .app .role-watermark img { width: 100%; height: 100%; object-fit: contain; }
 .app .roster-card-special .locked-teamup-card { border-radius: 8px; }
-.app .roster-game-fragpunk .portrait > .hero-image, .app .roster-game-lastflag .portrait > .hero-image { object-fit: contain; padding: 4px 6px 0; }
+.app .roster-game-lastflag .portrait > .hero-image { object-fit: contain; padding: 4px 6px 0; }
 .app .roster-game-valorant .portrait > .hero-image { object-position: center 10%; }
 .app .roster-game-apex .portrait > .hero-image { object-position: center 12%; }
 .app .roster-game-deadlock .deadlock-candidate img { object-position: center 12%; }
 .app .roster-game-thefinals .finals-card-loadout-item, .app .roster-game-thefinals .finals-build-specialization { border-radius: 8px; }
-.app .squad-guidance { margin: 9px 1px 12px; color: #9eb4c8; font-size: 12px; line-height: 1.65; }
 .app .roster-unified-players { gap: 8px; }
 .app .roster-game-player-row { display: grid; grid-template-columns: 26px minmax(0, 1fr) 36px 32px; min-height: 0; height: auto; gap: 6px; padding: 9px; border: 1px solid #2c4055; border-radius: 10px; background: #0b1725; }
 .app .roster-game-player-row > .number { width: 26px; color: #819bb3; font-size: .63rem; }
@@ -67,7 +66,6 @@
   .app .side-panel { border-radius: 10px; }
   .app .roster-game-player-row { padding: 10px; }
   .app .player-role-choice { min-height: 36px; font-size: 12px; }
-  .app .squad-guidance { font-size: 12px; }
   .app .hero-card { border-radius: 10px; }
   .app .game-kicker { font-size: .54rem; letter-spacing: .1em; }
 }
@@ -81,3 +79,29 @@
 .app .pvz-portrait { background: radial-gradient(ellipse at center, color-mix(in srgb, var(--pvz-accent) 14%, #172638), #0b1725); }
 .app .pvz-portrait img { object-position: center 15%; filter: drop-shadow(0 12px 16px #0004); }
 .app .pvz-card-actions button, .app .pvz-variant-panel { border-radius: 7px; }
+/* Portraits use each game's artwork proportions rather than generic crops. */
+.app .roster-game-deadlock .team-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); width: 100%; min-width: 0; max-width: 1420px; margin-inline: auto; align-items: start; }
+.app .roster-game-deadlock .team-grid.cards-1 { grid-template-columns: minmax(0, 900px); justify-content: center; }
+.app .roster-game-deadlock .team-grid.cards-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.app .roster-game-deadlock .roster-unified-card { container-type: inline-size; }
+.app .roster-game-deadlock .deadlock-candidate { min-height: 0; border-radius: 7px; }
+.app .roster-game-deadlock .deadlock-candidate.primary { min-height: 0; }
+.app .roster-game-deadlock .deadlock-candidate > img { position: relative; inset: auto; display: block; width: 100%; height: clamp(220px, 27vh, 280px); padding: 5px 5px 0; object-fit: contain; object-position: center; transform: none; animation: none; }
+.app .roster-game-deadlock .deadlock-candidate.secondary > img { height: clamp(145px, 18vh, 185px); }
+.app .roster-game-deadlock .deadlock-candidate-copy { position: relative; inset: auto; min-height: 34px; display: flex; align-items: center; justify-content: center; padding: 8px 6px; background: #101e2c; }
+.app .roster-game-deadlock .deadlock-candidate-copy strong { font-size: 12px; line-height: 1.3; }
+.app .roster-game-deadlock .deadlock-candidate-gradient { display: none; }
+.app .roster-game-deadlock .deadlock-candidate.empty { min-height: 180px; }
+.app .roster-game-deadlock .deadlock-candidate.empty .deadlock-candidate-copy { position: absolute; inset: auto 0 0; }
+@container (min-width: 520px) {
+  .app .roster-game-deadlock .deadlock-candidate-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .app .roster-game-deadlock .deadlock-candidate.primary { grid-column: auto; }
+  .app .roster-game-deadlock .deadlock-candidate > img,
+  .app .roster-game-deadlock .deadlock-candidate.secondary > img { height: auto; aspect-ratio: 14 / 19; }
+  .app .roster-game-deadlock .deadlock-candidate-copy strong { font-size: 14px; }
+}
+.app .roster-game-fragpunk .portrait > .fragpunk-character-art { padding: 4px 2px 0; overflow: hidden; transform: none; }
+.app .toggle-row { min-height: 44px; }
+@media (max-width: 700px) {
+  .app .roster-game-deadlock .team-grid, .app .roster-game-deadlock .team-grid.cards-2 { grid-template-columns: minmax(0, 1fr); }
+}
