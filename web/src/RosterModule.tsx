@@ -9,6 +9,7 @@ import { warmImageCache } from './imageCache'
 import type { SupportedLocale } from './localization'
 import { isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
+import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH } from './personName.ts'
 import './RosterModule.css'
 
 export type RosterGameId =
@@ -362,7 +363,7 @@ function shuffled<T>(items: T[]): T[] {
 function makePlayer(index: number, roles: RoleDefinition[]): RosterPlayer {
   return {
     id: crypto.randomUUID(),
-    name: `Jugador ${index + 1}`,
+    name: `Jugador${index + 1}`,
     profileId: '',
     roles: Object.fromEntries(roles.map((role) => [role.id, true])),
     blocked: [],
@@ -400,7 +401,7 @@ function normalizeRosterPlayers(raw: unknown, game: RosterGameDefinition): Roste
     const roles = Object.fromEntries(game.roles.map((role) => [role.id, true])) as Record<string, boolean>
     return {
       id: typeof row.id === 'string' && row.id ? row.id : crypto.randomUUID(),
-      name: typeof row.name === 'string' && row.name.trim() ? row.name.slice(0, 22) : `Jugador ${index + 1}`,
+      name: sanitizePersonName(row.name) || `Jugador${index + 1}`,
       profileId: typeof row.profileId === 'string' ? row.profileId : '',
       roles,
       blocked: Array.isArray(row.blocked) ? row.blocked.filter((key): key is string => typeof key === 'string') : [],
@@ -729,13 +730,13 @@ export default function RosterModule({
   }
 
   function updatePlayerName(index: number, name: string) {
-    setPlayers((current) => current.map((player, playerIndex) => playerIndex === index ? { ...player, name } : player))
+    setPlayers((current) => current.map((player, playerIndex) => playerIndex === index ? { ...player, name: sanitizePersonName(name) } : player))
   }
 
   function assignProfile(index: number, profileId: string) {
     const profile = profiles.find((item) => item.id === profileId)
     setPlayers((current) => current.map((player, playerIndex) => playerIndex === index
-      ? { ...player, profileId, name: profile?.name ?? `Jugador ${index + 1}` }
+      ? { ...player, profileId, name: sanitizePersonName(profile?.name ?? `Jugador${index + 1}`) }
       : player))
     playModuleSound('profileAssign', 620)
   }
@@ -744,7 +745,7 @@ export default function RosterModule({
     setPlayers((current) => current.map((player, index) => ({
       ...player,
       profileId: '',
-      name: `Jugador ${index + 1}`,
+      name: `Jugador${index + 1}`,
     })))
     setStatus('Nombres restablecidos')
     playModuleSound('click', 430)
@@ -1251,7 +1252,7 @@ export default function RosterModule({
       context.fillText(String(itemIndex + 1).padStart(2, '0'), x + 18, y + 38)
       context.fillStyle = '#bfd1dc'
       context.font = '700 17px system-ui, sans-serif'
-      context.fillText((player.name || `Jugador ${itemIndex + 1}`).slice(0, 22), x + 58, y + 38)
+      context.fillText((player.name || `Jugador${itemIndex + 1}`).slice(0, 22), x + 58, y + 38)
 
       if (gameId === 'deadlock') {
         const innerGap = 8
@@ -1463,7 +1464,7 @@ export default function RosterModule({
                 return (
                   <div className="player-row roster-game-player-row" key={player.id}>
                     <span className="number">{String(index + 1).padStart(2, '0')}</span>
-                    <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} maxLength={22} aria-label={`Nombre de ${game.name} ${index + 1}`} />
+                    <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre de ${game.name} ${index + 1}`} />
                     <select className="player-profile-inline" value={player.profileId} onChange={(event) => assignProfile(index, event.target.value)} title={profiles.find((item) => item.id === player.profileId)?.name ?? 'Sin perfil'} aria-label={`Perfil de ${game.name} ${index + 1}`}>
                       <option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id}>{profile.name}</option>)}
                     </select>

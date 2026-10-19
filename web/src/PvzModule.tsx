@@ -20,6 +20,7 @@ import { warmImageCache } from './imageCache'
 import type { SupportedLocale } from './localization'
 import { isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
+import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH } from './personName.ts'
 import './PvzModule.css'
 
 type PvzView = 'principal' | 'roulette'
@@ -100,7 +101,7 @@ function readStorage<T>(key: string, fallback: T): T {
 
 function makePlayer(index: number): PvzPlayer {
   const side: PvzSide = index < 2 ? 'plants' : 'zombies'
-  return { id: `pvz-player-${index + 1}`, name: `Jugador ${index + 1}`, side, profileId: '', blocked: [] }
+  return { id: `pvz-player-${index + 1}`, name: `Jugador${index + 1}`, side, profileId: '', blocked: [] }
 }
 
 function normalizePlayers(raw: unknown): PvzPlayer[] {
@@ -109,7 +110,7 @@ function normalizePlayers(raw: unknown): PvzPlayer[] {
     const source = item && typeof item === 'object' ? item as Partial<PvzPlayer> : {}
     return {
       id: typeof source.id === 'string' ? source.id : `pvz-player-${index + 1}`,
-      name: typeof source.name === 'string' ? source.name : `Jugador ${index + 1}`,
+      name: typeof source.name === 'string' ? sanitizePersonName(source.name) : `Jugador${index + 1}`,
       side: source.side === 'zombies' ? 'zombies' : 'plants',
       profileId: typeof source.profileId === 'string' ? source.profileId : '',
       blocked: Array.isArray(source.blocked) ? source.blocked.filter((key): key is string => typeof key === 'string') : [],
@@ -411,12 +412,16 @@ export default function PvzModule({
     playSound('click')
   }
 
+  function updatePlayerName(index: number, name: string) {
+    setPlayers((current) => current.map((player, playerIndex) => playerIndex === index ? { ...player, name: sanitizePersonName(name) } : player))
+  }
+
   function assignProfile(index: number, profileId: string) {
     const profile = profiles.find((item) => item.id === profileId)
     setPlayers((current) => current.map((player, playerIndex) => playerIndex === index ? {
       ...player,
       profileId,
-      name: profile?.name ?? (player.profileId ? `Jugador ${index + 1}` : player.name),
+      name: sanitizePersonName(profile?.name ?? (player.profileId ? `Jugador${index + 1}` : player.name)),
     } : player))
     playSound('click')
   }
@@ -434,13 +439,13 @@ export default function PvzModule({
     const character = chooseForSide(player, index, side)
     setPlayers((current) => current.map((item, playerIndex) => playerIndex === index ? { ...item, side } : item))
     setPicks((current) => current.map((pick, pickIndex) => pickIndex === index ? { character, locked: false } : pick))
-    setStatus(`${player.name || `Jugador ${index + 1}`} cambió a ${pvzSideLabels[side]}`)
+    setStatus(`${player.name || `Jugador${index + 1}`} cambió a ${pvzSideLabels[side]}`)
     setGenerationRevision((value) => value + 1)
     playSound('click')
   }
 
   function clearNames() {
-    setPlayers((current) => current.map((player, index) => ({ ...player, name: player.profileId ? profiles.find((profile) => profile.id === player.profileId)?.name ?? `Jugador ${index + 1}` : '' })))
+    setPlayers((current) => current.map((player, index) => ({ ...player, name: sanitizePersonName(player.profileId ? profiles.find((profile) => profile.id === player.profileId)?.name ?? `Jugador${index + 1}` : '') })))
     playSound('click')
     notify('Nombres de PVZ limpiados')
   }
@@ -550,7 +555,7 @@ export default function PvzModule({
     window.setTimeout(() => {
       setPicks((rows) => rows.map((pick, pickIndex) => pickIndex === index ? { character, locked: false } : pick))
       setRerollingIndex(null)
-      setStatus(`Reroll de ${player.name || `Jugador ${index + 1}`}`)
+      setStatus(`Reroll de ${player.name || `Jugador${index + 1}`}`)
       if (!character) notify('No hay otro personaje compatible con ese filtro.', 'warning')
     }, animationsEnabled ? 210 : 20)
   }
@@ -670,7 +675,7 @@ export default function PvzModule({
       context.fillText(String(index + 1).padStart(2, '0'), x + 17, y + 34)
       context.fillStyle = '#e7f3ea'
       context.font = '700 17px system-ui, sans-serif'
-      context.fillText((player.name || `Jugador ${index + 1}`).slice(0, 24), x + 55, y + 34)
+      context.fillText((player.name || `Jugador${index + 1}`).slice(0, 24), x + 55, y + 34)
       const portraitX = x + 12
       const portraitY = y + 64
       const portraitWidth = cardWidth - 24
@@ -854,7 +859,7 @@ export default function PvzModule({
             <div className="players pvz-players">
               {players.map((player, index) => <div className={`pvz-player-row ${player.side}`} key={player.id}>
                 <span className="pvz-player-number">{String(index + 1).padStart(2, '0')}</span>
-                <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => setPlayers((current) => current.map((item, playerIndex) => playerIndex === index ? { ...item, name: event.target.value } : item))} maxLength={22} aria-label={`Nombre PVZ ${index + 1}`} />
+                <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => updatePlayerName(index, event.target.value)} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre PVZ ${index + 1}`} />
                 <select value={player.profileId} onChange={(event: ChangeEvent<HTMLSelectElement>) => assignProfile(index, event.target.value)} aria-label={`Perfil PVZ ${index + 1}`}><option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id}>{profile.name}</option>)}</select>
                 <div className="pvz-side-buttons"><button type="button" className={`plants ${player.side === 'plants' ? 'active' : ''}`} onClick={() => setPlayerSide(index, 'plants')} aria-pressed={player.side === 'plants'}><span>PL</span><small>Planta</small></button><button type="button" className={`zombies ${player.side === 'zombies' ? 'active' : ''}`} onClick={() => setPlayerSide(index, 'zombies')} aria-pressed={player.side === 'zombies'}><span>ZO</span><small>Zombi</small></button></div>
               </div>)}
@@ -903,7 +908,7 @@ export default function PvzModule({
           </button>
         </ViewportAction>
 
-        {filterPlayer && <div className="filter-layer pvz-filter-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) setFilterIndex(null) }}><section className={`filter-dialog pvz-filter-dialog ${filterPlayer.side}`} role="dialog" aria-modal="true"><header className="filter-heading"><div><span className="eyebrow">Filtro individual · {pvzSideSingular[filterPlayer.side]}</span><h2>{filterPlayer.name || `Jugador ${filterIndex! + 1}`}</h2><p>{eligibleBySide[filterPlayer.side].length - filterPlayer.blocked.filter((key) => eligibleBySide[filterPlayer.side].some((item) => item.key === key)).length} permitidos · {filterPlayer.blocked.length} bloqueados</p></div><button type="button" onClick={() => setFilterIndex(null)}><PvzIcon name="close" size={20} /></button></header><div className="filter-toolbar pvz-filter-toolbar"><label className="profile-search"><PvzIcon name="filter" size={16} /><input value={filterSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setFilterSearch(event.target.value)} placeholder="Buscar personaje o clase…" /></label><button type="button" className="reset-classification" onClick={clearFilter}><PvzIcon name="reset" size={15} /> Reiniciar</button></div><div className="pvz-filter-grid">{filterRows.map((item) => { const blocked = filterPlayer.blocked.includes(item.key); return <button type="button" className={`pvz-filter-card ${item.side} ${blocked ? 'blocked' : ''}`} onClick={() => toggleBlocked(item.key)} aria-pressed={blocked} key={item.key}><img src={asset(item.portrait)} alt="" /><span><strong>{item.name}</strong><small>{blocked ? 'BLOQUEADO' : item.isVariant ? item.baseName : 'PREDETERMINADO'}</small></span><i>{blocked ? '×' : '✓'}</i></button> })}</div></section></div>}
+        {filterPlayer && <div className="filter-layer pvz-filter-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) setFilterIndex(null) }}><section className={`filter-dialog pvz-filter-dialog ${filterPlayer.side}`} role="dialog" aria-modal="true"><header className="filter-heading"><div><span className="eyebrow">Filtro individual · {pvzSideSingular[filterPlayer.side]}</span><h2>{filterPlayer.name || `Jugador${filterIndex! + 1}`}</h2><p>{eligibleBySide[filterPlayer.side].length - filterPlayer.blocked.filter((key) => eligibleBySide[filterPlayer.side].some((item) => item.key === key)).length} permitidos · {filterPlayer.blocked.length} bloqueados</p></div><button type="button" onClick={() => setFilterIndex(null)}><PvzIcon name="close" size={20} /></button></header><div className="filter-toolbar pvz-filter-toolbar"><label className="profile-search"><PvzIcon name="filter" size={16} /><input value={filterSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setFilterSearch(event.target.value)} placeholder="Buscar personaje o clase…" /></label><button type="button" className="reset-classification" onClick={clearFilter}><PvzIcon name="reset" size={15} /> Reiniciar</button></div><div className="pvz-filter-grid">{filterRows.map((item) => { const blocked = filterPlayer.blocked.includes(item.key); return <button type="button" className={`pvz-filter-card ${item.side} ${blocked ? 'blocked' : ''}`} onClick={() => toggleBlocked(item.key)} aria-pressed={blocked} key={item.key}><img src={asset(item.portrait)} alt="" /><span><strong>{item.name}</strong><small>{blocked ? 'BLOQUEADO' : item.isVariant ? item.baseName : 'PREDETERMINADO'}</small></span><i>{blocked ? '×' : '✓'}</i></button> })}</div></section></div>}
       </main>
     )
   }

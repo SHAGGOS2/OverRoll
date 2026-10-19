@@ -1,6 +1,8 @@
+import { sanitizePersonName, PLAYER_NAME_MAX_LENGTH, PROFILE_NAME_MAX_LENGTH } from './personName.ts'
+
 const STORAGE_PREFIX = 'overroll.web.'
 const SCHEMA_KEY = `${STORAGE_PREFIX}schemaVersion`
-const CURRENT_SCHEMA = 2
+const CURRENT_SCHEMA = 3
 
 type JsonRecord = Record<string, unknown>
 
@@ -90,6 +92,18 @@ function repairArray(key: string) {
   if (value !== undefined && !Array.isArray(value)) removeValue(key)
 }
 
+function repairPeopleNames(key: string, maxLength = PLAYER_NAME_MAX_LENGTH) {
+  const value = readValue(key)
+  if (value === undefined) return
+  if (!Array.isArray(value)) {
+    removeValue(key)
+    return
+  }
+  writeValue(key, value.map((person) => isRecord(person) && typeof person.name === 'string'
+    ? { ...person, name: sanitizePersonName(person.name, maxLength) }
+    : person))
+}
+
 function repairWeightRecord(key: string) {
   const value = readValue(key)
   if (value === undefined) return
@@ -175,6 +189,13 @@ export function repairOverRollStorage() {
     'pvz.players',
     'pvz.picks',
   ].forEach((suffix) => repairArray(`${STORAGE_PREFIX}${suffix}`))
+
+  ;[
+    'players', 'tf2.players', 'pvz.players', 'rivals.players', 'valorant.players',
+    'deadlock.players', 'lastflag.players', 'thefinals.players', 'paladins.players',
+    'fragpunk.players', 'apex.players',
+  ].forEach((suffix) => repairPeopleNames(`${STORAGE_PREFIX}${suffix}`))
+  repairPeopleNames(`${STORAGE_PREFIX}profiles`, PROFILE_NAME_MAX_LENGTH)
 
   repairEnum(`${STORAGE_PREFIX}pvz.rouletteSide`, {
     allowed: ['plants', 'zombies'],

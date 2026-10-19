@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import type { SupportedLocale } from './localization'
+import { sanitizePersonName } from './personName.ts'
 
 type Dict = Record<string, string>
 
@@ -376,22 +377,22 @@ function playerWord(locale: SupportedLocale, count: number): string {
 
 export function localizedPlayerName(locale: SupportedLocale, index: number): string {
   switch (locale) {
-    case 'en-us': return `Player ${index}`
-    case 'de-de': return `Spieler ${index}`
-    case 'fr-fr': return `Joueur ${index}`
-    case 'pt-br': return `Jogador ${index}`
-    case 'ja-jp': return `プレイヤー ${index}`
-    case 'ko-kr': return `플레이어 ${index}`
-    case 'zh-cn': return `玩家 ${index}`
-    default: return `Jugador ${index}`
+    case 'en-us': return `Player${index}`
+    case 'de-de': return `Spieler${index}`
+    case 'fr-fr': return `Joueur${index}`
+    case 'pt-br': return `Jogador${index}`
+    case 'ja-jp': return `プレイヤー${index}`
+    case 'ko-kr': return `플레이어${index}`
+    case 'zh-cn': return `玩家${index}`
+    default: return `Jugador${index}`
   }
 }
 
 export function isDefaultPlayerName(value: string, index: number): boolean {
-  const normalized = value.trim()
+  const normalized = sanitizePersonName(value)
   return [
-    `Jugador ${index}`, `Player ${index}`, `Spieler ${index}`, `Joueur ${index}`, `Jogador ${index}`,
-    `プレイヤー ${index}`, `플레이어 ${index}`, `玩家 ${index}`,
+    `Jugador${index}`, `Player${index}`, `Spieler${index}`, `Joueur${index}`, `Jogador${index}`,
+    `プレイヤー${index}`, `플레이어${index}`, `玩家${index}`,
   ].includes(normalized)
 }
 
@@ -413,7 +414,7 @@ export function translateUiText(locale: SupportedLocale, value: string): string 
     return `${leading}${translated}${trailing}`
   }
 
-  const player = core.match(/^Jugador\s+(\d+)$/i)
+  const player = core.match(/^Jugador\s*(\d+)$/i)
   if (player) return `${leading}${localizedPlayerName(locale, Number(player[1]))}${trailing}`
 
   const players = core.match(/^(\d+)\s+jugadores?$/i)

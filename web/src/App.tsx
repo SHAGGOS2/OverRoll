@@ -15,6 +15,7 @@ import { warmImageCache } from './imageCache'
 import { creditsJoke, creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
 import { installUiLocalization, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
+import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH, PROFILE_NAME_MAX_LENGTH } from './personName.ts'
 
 type Role = 'tank' | 'damage' | 'support'
 type GameId = 'overwatch' | 'tf2' | 'pvzgw2' | RosterGameId
@@ -365,7 +366,7 @@ function emptyProfileHeroes(): Record<ProfileBucket, string[]> {
 function makePlayer(index: number): Player {
   return {
     id: `player-${index + 1}`,
-    name: `Jugador ${index + 1}`,
+    name: `Jugador${index + 1}`,
     roles: { tank: true, damage: true, support: true },
     profileId: '',
     blocked: [],
@@ -378,7 +379,7 @@ function normalizePlayers(raw: unknown): Player[] {
     const source = typeof item === 'object' && item ? item as Partial<Player> : {}
     return {
       id: typeof source.id === 'string' ? source.id : `player-${index + 1}`,
-      name: typeof source.name === 'string' ? source.name : `Jugador ${index + 1}`,
+      name: typeof source.name === 'string' ? sanitizePersonName(source.name) : `Jugador${index + 1}`,
       roles: {
         tank: source.roles?.tank !== false,
         damage: source.roles?.damage !== false,
@@ -393,7 +394,7 @@ function normalizePlayers(raw: unknown): Player[] {
 function makeTf2Player(index: number): Tf2Player {
   return {
     id: `tf2-player-${index + 1}`,
-    name: `Jugador ${index + 1}`,
+    name: `Jugador${index + 1}`,
     groups: { offense: true, defense: true, support: true },
     profileId: '',
     blocked: [],
@@ -406,7 +407,7 @@ function normalizeTf2Players(raw: unknown): Tf2Player[] {
     const source = typeof item === 'object' && item ? item as Partial<Tf2Player> : {}
     return {
       id: typeof source.id === 'string' ? source.id : `tf2-player-${index + 1}`,
-      name: typeof source.name === 'string' ? source.name : `Jugador ${index + 1}`,
+      name: typeof source.name === 'string' ? sanitizePersonName(source.name) : `Jugador${index + 1}`,
       groups: {
         offense: source.groups?.offense !== false,
         defense: source.groups?.defense !== false,
@@ -487,7 +488,7 @@ function normalizeProfiles(raw: unknown): UserProfile[] {
     const heroes = source.heroes && typeof source.heroes === 'object' ? source.heroes : emptyProfileHeroes()
     return [{
       id: typeof source.id === 'string' && source.id ? source.id : `profile-${Date.now()}-${index}`,
-      name: typeof source.name === 'string' && source.name.trim() ? source.name.trim() : `Perfil ${index + 1}`,
+      name: sanitizePersonName(source.name, PROFILE_NAME_MAX_LENGTH) || `Perfil${index + 1}`,
       heroes: {
         main: Array.isArray(heroes.main) ? heroes.main.filter((key): key is string => typeof key === 'string') : [],
         played: Array.isArray(heroes.played) ? heroes.played.filter((key): key is string => typeof key === 'string') : [],
@@ -1474,14 +1475,14 @@ function App() {
   }
 
   function tf2UpdatePlayerName(index: number, name: string) {
-    setTf2Players((old) => old.map((player, playerIndex) => playerIndex === index ? { ...player, name } : player))
+    setTf2Players((old) => old.map((player, playerIndex) => playerIndex === index ? { ...player, name: sanitizePersonName(name) } : player))
   }
 
   function tf2AssignPlayerProfile(index: number, profileId: string) {
     const assigned = profiles.find((item) => item.id === profileId)
     playSound('profileAssign')
     setTf2Players((old) => old.map((player, playerIndex) => playerIndex === index
-      ? { ...player, profileId, name: assigned?.name ?? (player.profileId ? `Jugador ${index + 1}` : player.name) }
+      ? { ...player, profileId, name: sanitizePersonName(assigned?.name ?? (player.profileId ? `Jugador${index + 1}` : player.name)) }
       : player))
     notify(assigned ? `${assigned.name} asignado al mercenario ${index + 1}` : `Perfil retirado del mercenario ${index + 1}`)
   }
@@ -1502,7 +1503,7 @@ function App() {
   function tf2ClearNames() {
     setTf2Players((old) => old.map((player, index) => ({
       ...player,
-      name: player.profileId ? profiles.find((item) => item.id === player.profileId)?.name ?? `Jugador ${index + 1}` : '',
+      name: sanitizePersonName(player.profileId ? profiles.find((item) => item.id === player.profileId)?.name ?? `Jugador${index + 1}` : ''),
     })))
     playSound('tf2Click')
     notify('Nombres de TF2 limpiados')
@@ -1565,7 +1566,7 @@ function App() {
       const mercenary = options[secureRandomIndex(options.length)] ?? current?.mercenary ?? null
       setTf2Picks((old) => old.map((pick, pickIndex) => pickIndex === index ? { mercenary, locked: false } : pick))
       setTf2RerollingIndex(null)
-      setTf2Status(`Reroll de ${player.name || `Jugador ${index + 1}`}`)
+      setTf2Status(`Reroll de ${player.name || `Jugador${index + 1}`}`)
       if (!mercenary) notify('No hay otra clase compatible con ese filtro.', 'warning')
     }, animationsEnabled ? 220 : 20)
   }
@@ -1748,7 +1749,7 @@ function App() {
       context.fillText(String(index + 1).padStart(2, '0'), x + 18, top + 38)
       context.fillStyle = '#eadccc'
       context.font = '700 17px system-ui, sans-serif'
-      context.fillText((player.name || `Jugador ${index + 1}`).slice(0, 20), x + 58, top + 38)
+      context.fillText((player.name || `Jugador${index + 1}`).slice(0, 20), x + 58, top + 38)
       const portraitX = x + 12
       const portraitY = top + 72
       const portraitWidth = cardWidth - 24
@@ -1855,7 +1856,7 @@ function App() {
         pickIndex === index ? { hero, locked: false, role: selectedRole ?? null, perks: rollPerks(hero, randomPerks, stadium) } : pick
       )))
       setRerollingIndex(null)
-      setStatus(`Reroll de ${player.name || `Jugador ${index + 1}`}`)
+      setStatus(`Reroll de ${player.name || `Jugador${index + 1}`}`)
       if (!hero) notify('No hay otro héroe compatible con ese perfil y filtro.', 'warning')
     }, animationsEnabled ? 280 : 30)
   }
@@ -1901,7 +1902,7 @@ function App() {
 
   function updatePlayerName(index: number, name: string) {
     setPlayers((old) => old.map((player, playerIndex) => (
-      playerIndex === index ? { ...player, name } : player
+      playerIndex === index ? { ...player, name: sanitizePersonName(name) } : player
     )))
   }
 
@@ -1910,7 +1911,7 @@ function App() {
     playSound('profileAssign')
     setPlayers((old) => old.map((player, playerIndex) => (
       playerIndex === index
-        ? { ...player, profileId, name: assigned?.name ?? (player.profileId ? `Jugador ${index + 1}` : player.name) }
+        ? { ...player, profileId, name: sanitizePersonName(assigned?.name ?? (player.profileId ? `Jugador${index + 1}` : player.name)) }
         : player
     )))
     notify(assigned ? `${assigned.name} asignado al Jugador ${index + 1}` : `Perfil retirado del Jugador ${index + 1}`)
@@ -1920,7 +1921,7 @@ function App() {
     playSound('click')
     setPlayers((old) => old.map((player, index) => ({
       ...player,
-      name: player.profileId ? (profiles.find((item) => item.id === player.profileId)?.name ?? `Jugador ${index + 1}`) : '',
+      name: sanitizePersonName(player.profileId ? (profiles.find((item) => item.id === player.profileId)?.name ?? `Jugador${index + 1}`) : ''),
     })))
     notify('Nombres libres limpiados')
   }
@@ -1997,7 +1998,7 @@ function App() {
 
   function createProfile() {
     const id = `profile-${Date.now()}`
-    const next: UserProfile = { id, name: `Nuevo perfil ${profiles.length + 1}`, heroes: emptyProfileHeroes() }
+    const next: UserProfile = { id, name: `NuevoPerfil${profiles.length + 1}`, heroes: emptyProfileHeroes() }
     setProfiles((old) => [...old, next])
     setCurrentProfileId(id)
     playSound('profileCreate')
@@ -2005,14 +2006,16 @@ function App() {
   }
 
   function renameCurrentProfile(name: string) {
-    setProfiles((old) => old.map((profile) => profile.id === currentProfileId ? { ...profile, name } : profile))
+    const profileName = sanitizePersonName(name, PROFILE_NAME_MAX_LENGTH)
+    const squadName = sanitizePersonName(profileName)
+    setProfiles((old) => old.map((profile) => profile.id === currentProfileId ? { ...profile, name: profileName } : profile))
     setPlayers((old) => old.map((player) => {
       if (player.profileId !== currentProfileId) return player
-      return { ...player, name }
+      return { ...player, name: squadName }
     }))
     setTf2Players((old) => old.map((player) => {
       if (player.profileId !== currentProfileId) return player
-      return { ...player, name }
+      return { ...player, name: squadName }
     }))
   }
 
@@ -2021,10 +2024,10 @@ function App() {
     const id = currentProfile.id
     setProfiles((old) => old.filter((profile) => profile.id !== id))
     setPlayers((old) => old.map((player, index) => (
-      player.profileId === id ? { ...player, profileId: '', name: `Jugador ${index + 1}` } : player
+      player.profileId === id ? { ...player, profileId: '', name: `Jugador${index + 1}` } : player
     )))
     setTf2Players((old) => old.map((player, index) => (
-      player.profileId === id ? { ...player, profileId: '', name: `Jugador ${index + 1}` } : player
+      player.profileId === id ? { ...player, profileId: '', name: `Jugador${index + 1}` } : player
     )))
     setCurrentProfileId('')
     playSound('profileDelete')
@@ -2509,7 +2512,7 @@ function App() {
       context.fillText(String(index + 1).padStart(2, '0'), x + 18, top + 38)
       context.fillStyle = '#bfd1dc'
       context.font = '700 17px system-ui, sans-serif'
-      context.fillText((player.name || `Jugador ${index + 1}`).slice(0, 22), x + 58, top + 38)
+      context.fillText((player.name || `Jugador${index + 1}`).slice(0, 22), x + 58, top + 38)
 
       const portraitX = x + 12
       const portraitY = top + 70
@@ -2679,7 +2682,7 @@ function App() {
               {tf2Players.map((player, index) => (
                 <div className="player-row tf2-player-row" key={player.id}>
                   <span className="number">{String(index + 1).padStart(2, '0')}</span>
-                  <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => tf2UpdatePlayerName(index, event.target.value)} maxLength={22} aria-label={`Nombre TF2 ${index + 1}`} />
+                  <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => tf2UpdatePlayerName(index, event.target.value)} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre TF2 ${index + 1}`} />
                   <select className="player-profile-inline" value={player.profileId} onChange={(event: ChangeEvent<HTMLSelectElement>) => tf2AssignPlayerProfile(index, event.target.value)} aria-label={`Perfil TF2 ${index + 1}`}>
                     <option value="">☆</option>{profiles.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
                   </select>
@@ -2878,8 +2881,8 @@ function App() {
                     disabled={Boolean(player.profileId)}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => updatePlayerName(index, event.target.value)}
                     aria-label={`Nombre del jugador ${index + 1}`}
-                    title={player.profileId ? 'El nombre lo controla el perfil asignado.' : ''}
-                    maxLength={22}
+                    title={player.profileId ? 'El nombre lo controla el perfil asignado.' : PERSON_NAME_HINT}
+                    maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN}
                   />
                   <select
                     className="player-profile-inline"
@@ -3247,7 +3250,7 @@ function App() {
     const id = `profile-${Date.now()}`
     const copy: UserProfile = {
       id,
-      name: `${currentProfile.name} copia`.slice(0, 28),
+      name: sanitizePersonName(`${currentProfile.name}copia`, PROFILE_NAME_MAX_LENGTH),
       heroes: Object.fromEntries(
         profileBuckets.map((bucket) => [bucket, [...currentProfile.heroes[bucket]]]),
       ) as Record<ProfileBucket, string[]>,
@@ -3293,7 +3296,7 @@ function App() {
                 <>
                   <label className="profile-name-field">
                     <span>Nombre</span>
-                    <input value={currentProfile.name} onChange={(event: ChangeEvent<HTMLInputElement>) => renameCurrentProfile(event.target.value)} maxLength={28} />
+                    <input value={currentProfile.name} onChange={(event: ChangeEvent<HTMLInputElement>) => renameCurrentProfile(event.target.value)} maxLength={PROFILE_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} />
                   </label>
                   <div className="profiles-simple-count"><b>{markedHeroes}</b><span>de {totalHeroes || '—'} clasificados</span></div>
                   <div className="profiles-simple-actions">
@@ -3380,7 +3383,7 @@ function App() {
                           return (
                             <button type="button" className={assigned ? 'assigned' : ''} onClick={() => assignPlayerProfile(index, assigned ? '' : currentProfile.id)} key={player.id}>
                               <span className="player-number">{String(index + 1).padStart(2, '0')}</span>
-                              <span><strong>{player.name || `Jugador ${index + 1}`}</strong><small>{assigned ? currentProfile.name : otherProfile ? `Usa ${otherProfile.name}` : 'Sin perfil'}</small></span>
+                              <span><strong>{player.name || `Jugador${index + 1}`}</strong><small>{assigned ? currentProfile.name : otherProfile ? `Usa ${otherProfile.name}` : 'Sin perfil'}</small></span>
                               <Icon name={assigned ? 'check' : 'profile'} size={18} />
                             </button>
                           )
@@ -3396,7 +3399,7 @@ function App() {
                           return (
                             <button type="button" className={assigned ? 'assigned' : ''} onClick={() => tf2AssignPlayerProfile(index, assigned ? '' : currentProfile.id)} key={player.id}>
                               <span className="player-number">{String(index + 1).padStart(2, '0')}</span>
-                              <span><strong>{player.name || `Jugador ${index + 1}`}</strong><small>{assigned ? currentProfile.name : otherProfile ? `Usa ${otherProfile.name}` : 'Sin perfil'}</small></span>
+                              <span><strong>{player.name || `Jugador${index + 1}`}</strong><small>{assigned ? currentProfile.name : otherProfile ? `Usa ${otherProfile.name}` : 'Sin perfil'}</small></span>
                               <Icon name={assigned ? 'check' : 'profile'} size={18} />
                             </button>
                           )
@@ -3734,7 +3737,7 @@ function App() {
         <div className="filter-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) closeFilter() }}>
           <section className="filter-dialog" role="dialog" aria-modal="true" aria-label={`Filtro de ${filterPlayer.name}`}>
             <header className="filter-heading">
-              <div><span className="eyebrow">Filtro individual</span><h2>{filterPlayer.name || `Jugador ${filterIndex + 1}`}</h2><p>{availableHeroes.length - filterPlayer.blocked.length} visibles · {filterPlayer.blocked.length} bloqueados</p></div>
+              <div><span className="eyebrow">Filtro individual</span><h2>{filterPlayer.name || `Jugador${filterIndex + 1}`}</h2><p>{availableHeroes.length - filterPlayer.blocked.length} visibles · {filterPlayer.blocked.length} bloqueados</p></div>
               <button type="button" onClick={closeFilter} aria-label="Cerrar filtro"><Icon name="close" size={20} /></button>
             </header>
 
@@ -3774,7 +3777,7 @@ function App() {
       {activeGame === 'tf2' && tf2FilterIndex !== null && tf2FilterPlayer && (
         <div className="filter-layer tf2-filter-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) closeTf2Filter() }}>
           <section className="filter-dialog tf2-filter-dialog" role="dialog" aria-modal="true" aria-label={`Filtro TF2 de ${tf2FilterPlayer.name}`}>
-            <header className="filter-heading"><div><span className="eyebrow">Filtro individual · TF2</span><h2>{tf2FilterPlayer.name || `Jugador ${tf2FilterIndex + 1}`}</h2><p>{tf2Classes.length - tf2FilterPlayer.blocked.length} permitidas · {tf2FilterPlayer.blocked.length} bloqueadas</p></div><button type="button" onClick={closeTf2Filter}><Icon name="close" size={20} /></button></header>
+            <header className="filter-heading"><div><span className="eyebrow">Filtro individual · TF2</span><h2>{tf2FilterPlayer.name || `Jugador${tf2FilterIndex + 1}`}</h2><p>{tf2Classes.length - tf2FilterPlayer.blocked.length} permitidas · {tf2FilterPlayer.blocked.length} bloqueadas</p></div><button type="button" onClick={closeTf2Filter}><Icon name="close" size={20} /></button></header>
             <div className="filter-toolbar"><div className="profile-search"><Icon name="filter" size={16} /><input value={tf2FilterSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setTf2FilterSearch(event.target.value)} placeholder="Buscar clase…" /></div><div className="role-filter-tabs tf2-filter-tabs"><button type="button" className={tf2FilterGroup === 'all' ? 'active' : ''} onClick={() => setTf2FilterGroup('all')}>Todas</button>{tf2Groups.map((group) => <button type="button" className={`${group} ${tf2FilterGroup === group ? 'active' : ''}`} onClick={() => setTf2FilterGroup(group)} key={group}>{tf2GroupLabels[group]}</button>)}</div><button type="button" className="reset-classification" onClick={clearTf2Filter}><Icon name="reset" size={15} /> Reiniciar</button></div>
             <div className="filter-hero-grid tf2-filter-class-grid">{tf2VisibleFilterClasses.map((item) => { const blocked = tf2FilterPlayer.blocked.includes(item.key); return <button type="button" className={`filter-hero tf2-filter-class ${item.group} ${blocked ? 'blocked' : ''}`} onClick={() => toggleTf2BlockedClass(item.key)} aria-pressed={blocked} key={item.key}><img src={asset(item.portrait)} alt={item.name} /><span><strong>{item.name}</strong><small>{blocked ? 'BLOQUEADA' : tf2GroupLabels[item.group].toUpperCase()}</small></span><i>{blocked ? '×' : '✓'}</i></button> })}</div>
           </section>

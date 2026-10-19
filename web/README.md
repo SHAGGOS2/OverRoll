@@ -50,6 +50,21 @@ npm run build
 
 La salida se genera en `dist/`.
 
+## Nombres de personas
+
+Los nombres de escuadra aceptan únicamente letras Unicode y dígitos, hasta
+22 caracteres. Se conservan la ñ y las vocales con tilde; se eliminan espacios,
+símbolos, emojis y caracteres de control al escribir, pegar, asignar perfiles
+y cargar datos guardados. Los nombres de perfiles siguen la misma regla con
+su límite de 28 caracteres. Al asignarlos a la escuadra se aplica el límite de 22.
+
+La interfaz muestra estos valores como texto de React y las exportaciones de
+imagen usan texto de canvas. No deben insertarse en HTML, scripts, URL o CSS.
+La validación de nombres complementa esas salidas seguras; no las sustituye.
+
+Ejecuta `npm test` para comprobar cargas maliciosas, perfiles, nombres guardados
+de los once juegos y los nombres predeterminados de cada idioma.
+
 ## Créditos
 
 - Creado y dirigido por **SHAGGOS**.
