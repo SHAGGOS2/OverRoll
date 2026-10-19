@@ -1,0 +1,83 @@
+/* Shared surfaces; each module keeps its game mechanics and accent. */
+.app { --line-soft: #94b1cf29; --muted: #9aafc4; background: radial-gradient(ellipse at 80% 0, #172c443b, transparent 55%), #070d16; }
+.app .topbar { border-bottom-color: #314056; background: #090f19ed; box-shadow: 0 8px 30px #0003; }
+.app .topbar::after { opacity: .3; }
+.app .sidebar { background: linear-gradient(170deg, #111d2bed, #0a131fed); border-right-color: #26364a; }
+.app .sidebar-head { border-bottom-color: #2a3a4c; }
+.app .side-panel { border-color: #29394b; border-radius: 12px; background: #101d2a9e; box-shadow: none; }
+.app .panel-title-row label { letter-spacing: .09em; font-size: 12px; }
+.app .squad-counter { border-radius: 9px; border-color: #35485e; background: #0a1420; }
+.app .squad-counter button { border-radius: 7px; }
+.app .squad-counter strong { font-size: .78rem; }
+.app .squad-tools button { min-height: 32px; border-radius: 7px; border-color: #2d4054; background: #162536; color: #bbcede; }
+.app .toggle-row { min-height: 58px; border-radius: 9px; border-color: #293d50; }
+.app .toggle-row.enabled { border-color: color-mix(in srgb, var(--module-accent, var(--yellow)) 28%, #293d50); background: color-mix(in srgb, var(--module-accent, var(--yellow)) 4%, #122131); }
+.app .toggle-row small { color: #9db1c4; line-height: 1.5; }
+.app .content-topline { gap: 16px; }
+.app .game-kicker { display: block; margin-bottom: 6px; color: var(--module-accent, var(--yellow)); font-size: .6rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.app .game-title-row h1 { letter-spacing: -.035em; }
+.app .web-badge { border-radius: 5px; letter-spacing: .04em; }
+.app .match-summary { border-color: #2b3d51; border-radius: 10px; background: #101d2bb3; }
+.app .generate-image-button { min-height: 38px; border-radius: 8px; border-color: #3c536b; background: #162638; }
+.app .generate-image-button:hover:not(:disabled) { color: #fff; border-color: var(--module-accent, var(--yellow)); background: #20354b; }
+.app button[aria-busy="true"] { cursor: progress; }
+.app .team-stage { border-radius: 14px; border-color: #293d50; background: radial-gradient(ellipse at top, color-mix(in srgb, var(--module-accent, #5bd7ff) 5%, transparent), transparent 70%), #0a131e; }
+.app .hero-card { border-radius: 12px; clip-path: none; border-color: color-mix(in srgb, var(--role-color, #72bce2) 33%, #213346); background: #112031; box-shadow: 0 14px 30px #0004; overflow: hidden; }
+.app .hero-card:hover { border-color: color-mix(in srgb, var(--role-color, #72bce2) 70%, #213346); }
+.app .card-player { border-bottom-color: #ffffff13; background: #132338; }
+.app .portrait { background: radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--role-color, #5bd7ff) 16%, #172638), #0b1725); }
+.app .hero-image { object-position: center 18%; filter: drop-shadow(0 12px 16px #0004); }
+.app .portrait-grid { opacity: .32; }
+.app .portrait-vignette { background: linear-gradient(0deg, #112031 0%, transparent 43%); }
+.app .hero-info { background: #112031; }
+.app .hero-name-row h2 { letter-spacing: -.025em; }
+.app .hero-role { display: flex; align-items: center; gap: 7px; line-height: 1.45; }
+.app .hero-role-icon { width: 16px; height: 16px; object-fit: contain; flex: none; }
+.app .card-actions button { border-radius: 6px; }
+.app .role-watermark img { width: 100%; height: 100%; object-fit: contain; }
+.app .roster-card-special .locked-teamup-card { border-radius: 8px; }
+.app .roster-game-fragpunk .portrait > .hero-image, .app .roster-game-lastflag .portrait > .hero-image { object-fit: contain; padding: 4px 6px 0; }
+.app .roster-game-valorant .portrait > .hero-image { object-position: center 10%; }
+.app .roster-game-apex .portrait > .hero-image { object-position: center 12%; }
+.app .roster-game-deadlock .deadlock-candidate img { object-position: center 12%; }
+.app .roster-game-thefinals .finals-card-loadout-item, .app .roster-game-thefinals .finals-build-specialization { border-radius: 8px; }
+.app .squad-guidance { margin: 9px 1px 12px; color: #9eb4c8; font-size: 12px; line-height: 1.65; }
+.app .roster-unified-players { gap: 8px; }
+.app .roster-game-player-row { display: grid; grid-template-columns: 26px minmax(0, 1fr) 36px 32px; min-height: 0; height: auto; gap: 6px; padding: 9px; border: 1px solid #2c4055; border-radius: 10px; background: #0b1725; }
+.app .roster-game-player-row > .number { width: 26px; color: #819bb3; font-size: .63rem; }
+.app .roster-game-player-row input { width: 100%; min-width: 0; height: 32px; padding: 0 6px; border-color: transparent; border-radius: 5px; background: #122339; font-size: 12px; }
+.app .roster-game-player-row .player-profile-inline { min-width: 0; width: 36px; height: 32px; border-radius: 5px; border-color: #30475c; background: #14263a; }
+.app .roster-inline-filter { min-height: 32px; height: 32px; border-radius: 5px; }
+.app .player-role-choices { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.app .player-role-choice { flex: 1 0 auto; min-height: 32px; max-width: 100%; padding: 5px 7px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; border: 1px solid #304255; border-radius: 6px; color: #8ba0b4; background: #102033; font-size: 11px; font-weight: 700; transition: border-color 150ms, background 150ms, color 150ms; }
+.app .player-role-choice img { width: 16px; height: 16px; flex: none; object-fit: contain; opacity: .45; }
+.app .player-role-choice.active { color: #e7f2fb; border-color: color-mix(in srgb, var(--choice-accent) 62%, #304255); background: color-mix(in srgb, var(--choice-accent) 13%, #102033); }
+.app .player-role-choice.active img { opacity: 1; }
+.app .player-role-choice:hover { border-color: var(--choice-accent); }
+.app .player-role-choice:focus-visible { outline: 2px solid var(--choice-accent); outline-offset: 2px; }
+.app .roster-game-apex .player-role-choice { flex-basis: 30%; }
+.app .role-filter-tabs button { border-radius: 6px; }
+.app .filter-dialog, .app .roster-filter-modal, .app .settings-section-v2 { border-radius: 14px; }
+.app .settings-game-card-v2 { border-radius: 9px; }
+.app .sidebar-footer .status-line { color: #a9bfd1; }
+@media (min-width: 861px) {
+  .app .roster-unified-sidebar { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #405a70 transparent; }
+}
+@media (max-width: 860px) {
+  .app .side-panel { border-radius: 10px; }
+  .app .roster-game-player-row { padding: 10px; }
+  .app .player-role-choice { min-height: 36px; font-size: 12px; }
+  .app .squad-guidance { font-size: 12px; }
+  .app .hero-card { border-radius: 10px; }
+  .app .game-kicker { font-size: .54rem; letter-spacing: .1em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app .hero-card, .app .player-role-choice, .app .hero-image { animation: none !important; transition: none !important; }
+}
+.app .sidebar > .side-panel { flex-shrink: 0; }
+.app .tf2-card { --role-color: var(--tf2-accent); }
+.app .pvz-card { border-radius: 12px; border-color: color-mix(in srgb, var(--pvz-accent) 40%, #293d50); background: #112031; box-shadow: 0 14px 30px #0004; overflow: hidden; }
+.app .pvz-card-player { background: #132338; border-bottom-color: #ffffff13; }
+.app .pvz-portrait { background: radial-gradient(ellipse at center, color-mix(in srgb, var(--pvz-accent) 14%, #172638), #0b1725); }
+.app .pvz-portrait img { object-position: center 15%; filter: drop-shadow(0 12px 16px #0004); }
+.app .pvz-card-actions button, .app .pvz-variant-panel { border-radius: 7px; }

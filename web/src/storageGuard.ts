@@ -2,7 +2,7 @@ import { sanitizePersonName, PLAYER_NAME_MAX_LENGTH, PROFILE_NAME_MAX_LENGTH } f
 
 const STORAGE_PREFIX = 'overroll.web.'
 const SCHEMA_KEY = `${STORAGE_PREFIX}schemaVersion`
-const CURRENT_SCHEMA = 3
+const CURRENT_SCHEMA = 4
 
 type JsonRecord = Record<string, unknown>
 
@@ -136,8 +136,15 @@ function repairRoleRecord(key: string) {
 export function repairOverRollStorage() {
   if (typeof window === 'undefined') return
 
+  if (Number(readValue(SCHEMA_KEY) ?? 0) < 4) {
+    const previousSquad = readValue(`${STORAGE_PREFIX}lastflag.players`)
+    if (Array.isArray(previousSquad) && previousSquad.length === 3) {
+      writeValue(`${STORAGE_PREFIX}lastflag.players`, [...previousSquad, { name: 'Jugador4' }, { name: 'Jugador5' }])
+    }
+  }
+
   repairEnum(`${STORAGE_PREFIX}activeGame`, {
-    allowed: ['overwatch', 'tf2', 'pvzgw2'],
+    allowed: ['overwatch', 'tf2', 'pvzgw2', 'rivals', 'valorant', 'deadlock', 'lastflag', 'thefinals', 'paladins', 'fragpunk', 'apex'],
     fallback: 'overwatch',
     aliases: { pvz: 'pvzgw2', gardenwarfare2: 'pvzgw2' },
   })
@@ -166,6 +173,14 @@ export function repairOverRollStorage() {
     'pvz.includeDlc',
     'pvz.sideSwitchEnabled',
   ].forEach((suffix) => repairBoolean(`${STORAGE_PREFIX}${suffix}`, suffix !== 'rolesOnly' && suffix !== 'stadium' && suffix !== 'hoverSounds' && suffix !== 'compactPerks' && suffix !== 'lowPowerMode'))
+
+  for (const game of ['rivals', 'valorant', 'deadlock', 'lastflag', 'thefinals', 'paladins', 'fragpunk', 'apex']) {
+    repairStringArray(`${STORAGE_PREFIX}${game}.rouletteSelected`)
+    repairWeightRecord(`${STORAGE_PREFIX}${game}.rouletteWeights`)
+    repairBoolean(`${STORAGE_PREFIX}${game}.avoidRepeated`, true)
+    repairBoolean(`${STORAGE_PREFIX}${game}.balancedRoles`, ['rivals', 'valorant', 'thefinals', 'paladins'].includes(game))
+    repairBoolean(`${STORAGE_PREFIX}${game}.priorityTeamups`, true)
+  }
 
   repairNumber(`${STORAGE_PREFIX}soundVolume`, 0.42, 0, 1)
   repairRoleRecord(`${STORAGE_PREFIX}rouletteRolesEnabled`)

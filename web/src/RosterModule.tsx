@@ -1,3 +1,5 @@
+import { useImageExport } from './useImageExport'
+import { safeAssetUrl } from './imageExport.ts'
 import {
   useEffect,
   useMemo,
@@ -31,6 +33,7 @@ type RoleDefinition = {
   id: string
   label: string
   color: string
+  icon?: string
 }
 
 export type RosterGameDefinition = {
@@ -178,10 +181,10 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     formatLabel: '6 jugadores',
     supportsTeamups: true,
     roles: [
-      { id: 'vanguard', label: 'Vanguardia', color: '#79b7ff' },
-      { id: 'duelist', label: 'Duelista', color: '#ff6969' },
-      { id: 'strategist', label: 'Estratega', color: '#7ce7a3' },
-      { id: 'flex', label: 'Flexible', color: '#d69cff' },
+      { id: 'vanguard', label: 'Vanguardia', color: '#79b7ff', icon: 'assets/games/rivals/ui/vanguard.png' },
+      { id: 'duelist', label: 'Duelista', color: '#ff6969', icon: 'assets/games/rivals/ui/duelist.png' },
+      { id: 'strategist', label: 'Estratega', color: '#7ce7a3', icon: 'assets/games/rivals/ui/strategist.png' },
+      { id: 'flex', label: 'Flexible', color: '#d69cff', icon: 'assets/games/rivals/ui/flex.svg' },
     ],
   },
   {
@@ -197,10 +200,10 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     catalogLabel: '29 agentes',
     formatLabel: '5 jugadores',
     roles: [
-      { id: 'controller', label: 'Controlador', color: '#9c8cff' },
-      { id: 'duelist', label: 'Duelista', color: '#ff5868' },
-      { id: 'initiator', label: 'Iniciador', color: '#ffb454' },
-      { id: 'sentinel', label: 'Centinela', color: '#65d6bd' },
+      { id: 'controller', label: 'Controlador', color: '#9c8cff', icon: 'assets/games/valorant/ui/controller.svg' },
+      { id: 'duelist', label: 'Duelista', color: '#ff5868', icon: 'assets/games/valorant/ui/duelist.svg' },
+      { id: 'initiator', label: 'Iniciador', color: '#ffb454', icon: 'assets/games/valorant/ui/initiator.svg' },
+      { id: 'sentinel', label: 'Centinela', color: '#65d6bd', icon: 'assets/games/valorant/ui/sentinel.svg' },
     ],
   },
   {
@@ -221,24 +224,14 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     id: 'lastflag',
     name: 'Last Flag',
     shortName: 'Last Flag',
-    kicker: 'Tres concursantes',
+    kicker: 'Captura la bandera · 5 contra 5',
     accent: '#efcd4f',
-    defaultPlayers: 3,
-    maxPlayers: 3,
-    description: 'Genera un equipo de tres concursantes con estilos completamente distintos.',
+    defaultPlayers: 5,
+    maxPlayers: 5,
+    description: 'Genera un equipo de cinco concursantes sin clases obligatorias.',
     catalogLabel: '9 concursantes',
-    formatLabel: '3 jugadores',
-    roles: [
-      { id: 'assassin', label: 'Asesino', color: '#f25f5c' },
-      { id: 'tank', label: 'Tanque', color: '#5d9cec' },
-      { id: 'all-rounder', label: 'Versátil', color: '#a78bfa' },
-      { id: 'recon', label: 'Reconocimiento', color: '#4dd0e1' },
-      { id: 'area-control', label: 'Control de área', color: '#f6b352' },
-      { id: 'support', label: 'Apoyo', color: '#72d6a0' },
-      { id: 'crowd-control', label: 'Control', color: '#c79bf2' },
-      { id: 'offensive', label: 'Ofensivo', color: '#ff7d66' },
-      { id: 'control', label: 'Táctico', color: '#70b7ff' },
-    ],
+    formatLabel: '5 jugadores',
+    roles: [{ id: 'contestant', label: 'Concursante', color: '#efcd4f' }],
   },
   {
     id: 'thefinals',
@@ -254,9 +247,9 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     formatLabel: '3 jugadores',
     supportsLoadouts: true,
     roles: [
-      { id: 'light', label: 'Ligero', color: '#78d6ff' },
-      { id: 'medium', label: 'Medio', color: '#f7db22' },
-      { id: 'heavy', label: 'Pesado', color: '#ff7d58' },
+      { id: 'light', label: 'Ligero', color: '#78d6ff', icon: 'assets/games/thefinals/ui/light.svg' },
+      { id: 'medium', label: 'Medio', color: '#f7db22', icon: 'assets/games/thefinals/ui/medium.svg' },
+      { id: 'heavy', label: 'Pesado', color: '#ff7d58', icon: 'assets/games/thefinals/ui/heavy.svg' },
     ],
   },
   {
@@ -272,10 +265,10 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     catalogLabel: '59 campeones',
     formatLabel: '5 jugadores',
     roles: [
-      { id: 'frontline', label: 'Frontline', color: '#5ca8ff' },
-      { id: 'damage', label: 'Daño', color: '#ff675f' },
-      { id: 'flank', label: 'Flanco', color: '#d593ff' },
-      { id: 'support', label: 'Apoyo', color: '#67d69a' },
+      { id: 'frontline', label: 'Frontline', color: '#5ca8ff', icon: 'assets/games/paladins/ui/frontline.svg' },
+      { id: 'damage', label: 'Daño', color: '#ff675f', icon: 'assets/games/paladins/ui/damage.svg' },
+      { id: 'flank', label: 'Flanco', color: '#d593ff', icon: 'assets/games/paladins/ui/flank.svg' },
+      { id: 'support', label: 'Apoyo', color: '#67d69a', icon: 'assets/games/paladins/ui/support.svg' },
     ],
   },
   {
@@ -303,11 +296,11 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     catalogLabel: '28 leyendas',
     formatLabel: '3 jugadores',
     roles: [
-      { id: 'assault', label: 'Asalto', color: '#ef655f' },
-      { id: 'skirmisher', label: 'Escaramuza', color: '#f59f4a' },
-      { id: 'recon', label: 'Reconocimiento', color: '#65b8ff' },
-      { id: 'controller', label: 'Control', color: '#b694ff' },
-      { id: 'support', label: 'Apoyo', color: '#67d69a' },
+      { id: 'assault', label: 'Asalto', color: '#ef655f', icon: 'assets/games/apex/ui/assault.svg' },
+      { id: 'skirmisher', label: 'Escaramuza', color: '#f59f4a', icon: 'assets/games/apex/ui/skirmisher.svg' },
+      { id: 'recon', label: 'Reconocimiento', color: '#65b8ff', icon: 'assets/games/apex/ui/recon.svg' },
+      { id: 'controller', label: 'Control', color: '#b694ff', icon: 'assets/games/apex/ui/controller.svg' },
+      { id: 'support', label: 'Apoyo', color: '#67d69a', icon: 'assets/games/apex/ui/support.svg' },
     ],
   },
 ]
@@ -377,18 +370,28 @@ function minimumPlayers(game: RosterGameDefinition): number {
 
 function buildRolePlan(game: RosterGameDefinition, players: RosterPlayer[]): string[] {
   const roles = game.roles.filter((role) => role.id !== 'flex').map((role) => role.id)
-  if (!roles.length) return Array.from({ length: players.length }, () => '')
-
+  if (!roles.length) return players.map(() => '')
+  const pattern = game.rolePattern?.length ? game.rolePattern : roles
+  const source = players.length < pattern.length ? [...new Set(pattern)] : pattern
   const plan: string[] = []
-  if (game.rolePattern?.length) {
-    while (plan.length < players.length) plan.push(...game.rolePattern)
-    const resolved = plan.slice(0, players.length)
-    // Rivals mantiene la composición 2-2-2, pero los roles no pertenecen a slots fijos.
-    return game.id === 'rivals' ? shuffled(resolved) : resolved
+  while (plan.length < players.length) plan.push(...source)
+  const slots = shuffled(plan.slice(0, players.length))
+  const allows = (player: RosterPlayer, role: string) => player.roles[role] !== false || (game.id === 'rivals' && player.roles.flex === true)
+  const order = shuffled(players.map((_, index) => index)).sort((a, b) => slots.filter((role) => allows(players[a], role)).length - slots.filter((role) => allows(players[b], role)).length)
+  const result = Array<string>(players.length).fill('')
+  function assign(position: number, remaining: string[]): boolean {
+    if (position === order.length) return true
+    const playerIndex = order[position]
+    for (const role of new Set(remaining)) {
+      if (!allows(players[playerIndex], role)) continue
+      result[playerIndex] = role
+      const next = [...remaining]
+      next.splice(next.indexOf(role), 1)
+      if (assign(position + 1, next)) return true
+    }
+    return false
   }
-
-  while (plan.length < players.length) plan.push(...shuffled(roles))
-  return plan.slice(0, players.length)
+  return assign(0, slots) ? result : slots
 }
 
 function normalizeRosterPlayers(raw: unknown, game: RosterGameDefinition): RosterPlayer[] {
@@ -398,7 +401,9 @@ function normalizeRosterPlayers(raw: unknown, game: RosterGameDefinition): Roste
 
   const normalized = raw.slice(0, game.maxPlayers).map((value, index) => {
     const row = value && typeof value === 'object' ? value as Record<string, unknown> : {}
-    const roles = Object.fromEntries(game.roles.map((role) => [role.id, true])) as Record<string, boolean>
+    const savedRoles = row.roles && typeof row.roles === 'object' ? row.roles as Record<string, unknown> : {}
+    const roles = Object.fromEntries(game.roles.map((role) => [role.id, savedRoles[role.id] !== false])) as Record<string, boolean>
+    if (!Object.values(roles).some(Boolean)) game.roles.forEach((role) => { roles[role.id] = true })
     return {
       id: typeof row.id === 'string' && row.id ? row.id : crypto.randomUUID(),
       name: sanitizePersonName(row.name) || `Jugador${index + 1}`,
@@ -414,7 +419,7 @@ function normalizeRosterPlayers(raw: unknown, game: RosterGameDefinition): Roste
 }
 
 function normalizePortrait(gameId: RosterGameId, portrait: string): string {
-  if (/^(?:https?:)?\/\//i.test(portrait) || /^(?:data|blob):/i.test(portrait)) return portrait
+  if (/^[a-z][a-z0-9+.-]*:|^\/\//i.test(portrait)) return ''
   const filename = portrait.replace(/\\/g, '/').split('/').pop() ?? portrait
   return `assets/games/${gameId}/${filename}`
 }
@@ -486,6 +491,15 @@ function rouletteSectorPath(index: number, total: number) {
   return `M 200 200 L ${first.x.toFixed(3)} ${first.y.toFixed(3)} A 184 184 0 ${largeArc} 1 ${second.x.toFixed(3)} ${second.y.toFixed(3)} Z`
 }
 
+function normalizeRosterSelection(raw: unknown): string[] {
+  return Array.isArray(raw) ? [...new Set(raw.filter((key): key is string => typeof key === 'string' && key.length <= 120))].slice(0, 500) : []
+}
+
+function normalizeRosterWeights(raw: unknown): Record<string, number> {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {}
+  return Object.fromEntries(Object.entries(raw).slice(0, 500).filter(([key]) => key.length <= 120).map(([key, value]) => [key, typeof value === 'number' && Number.isFinite(value) ? Math.max(1, Math.min(5, Math.round(value))) : 1]))
+}
+
 function buildWeightedEntries(keys: string[], weights: Record<string, number>): string[] {
   const entries: string[] = []
   keys.forEach((key) => {
@@ -527,7 +541,7 @@ export default function RosterModule({
   ))
   const [picks, setPicks] = useState<RosterPick[]>(() => Array.from({ length: players.length }, () => ({ hero: null, locked: false })))
   const [avoidRepeated, setAvoidRepeated] = useState(() => readStorage(`${storagePrefix}.avoidRepeated`, true))
-  const [balancedRoles, setBalancedRoles] = useState(() => readStorage(`${storagePrefix}.balancedRoles`, game.roles.length > 1))
+  const [balancedRoles, setBalancedRoles] = useState(() => readStorage(`${storagePrefix}.balancedRoles`, Boolean(game.rolePattern?.length)))
   const [priorityTeamups, setPriorityTeamups] = useState(() => readStorage(`${storagePrefix}.priorityTeamups`, true))
   const [status, setStatus] = useState(`Cargando ${game.name}…`)
   const [generating, setGenerating] = useState(false)
@@ -541,8 +555,8 @@ export default function RosterModule({
   const [filterRole, setFilterRole] = useState('all')
   const [rouletteSearch, setRouletteSearch] = useState('')
   const [rouletteRole, setRouletteRole] = useState('all')
-  const [rouletteSelected, setRouletteSelected] = useState<string[]>(() => readStorage(`${storagePrefix}.rouletteSelected`, []))
-  const [rouletteWeights, setRouletteWeights] = useState<Record<string, number>>(() => readStorage(`${storagePrefix}.rouletteWeights`, {}))
+  const [rouletteSelected, setRouletteSelected] = useState<string[]>(() => normalizeRosterSelection(readStorage<unknown>(`${storagePrefix}.rouletteSelected`, [])))
+  const [rouletteWeights, setRouletteWeights] = useState<Record<string, number>>(() => normalizeRosterWeights(readStorage<unknown>(`${storagePrefix}.rouletteWeights`, {})))
   const [rouletteEntries, setRouletteEntries] = useState<string[]>([])
   const [rouletteDirty, setRouletteDirty] = useState(true)
   const [rouletteWinner, setRouletteWinner] = useState('')
@@ -550,7 +564,8 @@ export default function RosterModule({
   const [rouletteRotation, setRouletteRotation] = useState(0)
   const spinTimerRef = useRef<number | null>(null)
 
-  const asset = (path: string) => /^(?:https?:)?\/\//i.test(path) || /^(?:data|blob):/i.test(path) ? path : `${baseUrl}${path.replace(/^\//, '')}`
+  const [imageExporting, saveImage] = useImageExport(notify)
+  const asset = (path: string) => safeAssetUrl(path, baseUrl)
 
   useEffect(() => {
     let cancelled = false
@@ -563,11 +578,14 @@ export default function RosterModule({
       })
       .then((payload) => {
         if (cancelled) return
-        const heroes = (payload.heroes ?? []).map((hero) => ({
+        if (!Array.isArray(payload.heroes)) throw new Error('Catálogo inválido')
+        const heroes = payload.heroes.slice(0, 500).filter((hero) => hero && typeof hero.key === 'string' && typeof hero.name === 'string' && (gameId === 'lastflag' || game.roles.some((role) => role.id === hero.role)) && typeof hero.portrait === 'string').map((hero) => ({
           ...hero,
           key: hero.key.startsWith(`${gameId}-`) || gameId !== 'rivals' ? hero.key : `${gameId}-${hero.key}`,
+          role: gameId === 'lastflag' ? 'contestant' : hero.role,
           portrait: normalizePortrait(gameId, hero.portrait),
         }))
+        if (!heroes.length) throw new Error('Catálogo vacío')
         setCatalog(heroes)
         warmImageCache(heroes.map((hero) => asset(hero.portrait)))
         setStatus(`${heroes.length} ${game.catalogLabel.replace(/^\d+\s*/, '').toLowerCase()} listos`)
@@ -585,7 +603,7 @@ export default function RosterModule({
           // ese comportamiento al llegar un único personaje nuevo.
           return missing.length === 1 ? [...valid, missing[0].key] : valid
         })
-        setRouletteWeights((current) => ({ ...Object.fromEntries(heroes.map((hero) => [hero.key, 1])), ...current }))
+        setRouletteWeights((current) => Object.fromEntries(heroes.map((hero) => [hero.key, current[hero.key] ?? 1])))
       })
       .catch(() => {
         if (cancelled) return
@@ -619,7 +637,7 @@ export default function RosterModule({
     }
 
     return () => { cancelled = true }
-  }, [baseUrl, game.catalogLabel, game.name, game.supportsLoadouts, game.supportsTeamups, gameId])
+  }, [baseUrl, game.catalogLabel, game.name, game.roles, game.supportsLoadouts, game.supportsTeamups, gameId])
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -760,6 +778,19 @@ export default function RosterModule({
     playModuleSound('shuffle', 560)
   }
 
+
+  function toggleRosterRole(index: number, roleId: string) {
+    const selected = players[index]
+    if (selected?.roles[roleId] && game.roles.filter((role) => selected.roles[role.id]).length === 1) {
+      notify('Mantén al menos un rol activo por jugador.', 'info')
+      return
+    }
+    setPlayers((current) => current.map((player, rowIndex) => {
+      if (rowIndex !== index) return player
+      return { ...player, roles: { ...player.roles, [roleId]: !player.roles[roleId] } }
+    }))
+    playModuleSound('click', 560)
+  }
 
   function candidatePool(player: RosterPlayer, preferredRole: string | null, used: Set<string>, previousKey = ''): CatalogHero[] {
     const allowed = catalog.filter((hero) => player.roles[hero.role] !== false && !player.blocked.includes(hero.key))
@@ -1165,200 +1196,19 @@ export default function RosterModule({
 
 
   async function generateTeamImage() {
-    const selected = players.map((player, index) => ({ player, pick: picks[index] })).filter((item) => item.pick?.hero)
-    if (!selected.length) {
-      notify(`Genera primero un equipo de ${game.name}.`, 'warning')
-      return
-    }
-
-    const columns = Math.min(selected.length <= 4 ? selected.length : 3, selected.length)
-    const rows = Math.ceil(selected.length / columns)
-    const cardWidth = 320
-    const cardHeight = game.supportsLoadouts ? 462 : gameId === 'deadlock' ? 420 : 420
-    const gap = 22
-    const headerHeight = 178
-    const footerHeight = 84
-    const canvas = document.createElement('canvas')
-    canvas.width = columns * cardWidth + (columns - 1) * gap + 144
-    canvas.height = headerHeight + rows * cardHeight + (rows - 1) * gap + footerHeight + 84
-    const context = canvas.getContext('2d')
-    if (!context) return
-
-    const roleColor = (heroRole: string) => roleDefinition(game, heroRole).color
-    const loadImage = (url: string) => new Promise<HTMLImageElement | null>((resolve) => {
-      const image = new Image()
-      if (/^https?:\/\//i.test(url)) image.crossOrigin = 'anonymous'
-      image.onload = () => resolve(image)
-      image.onerror = () => resolve(null)
-      image.src = url
-    })
-    const drawCover = (image: HTMLImageElement, x: number, y: number, width: number, height: number) => {
-      const ratio = Math.max(width / image.width, height / image.height)
-      const drawWidth = image.width * ratio
-      const drawHeight = image.height * ratio
-      context.save()
-      context.beginPath()
-      context.rect(x, y, width, height)
-      context.clip()
-      context.drawImage(image, x + (width - drawWidth) / 2, y + (height - drawHeight) / 2, drawWidth, drawHeight)
-      context.restore()
-    }
-
-    const background = context.createLinearGradient(0, 0, canvas.width, canvas.height)
-    background.addColorStop(0, '#03111a')
-    background.addColorStop(1, '#071f2d')
-    context.fillStyle = background
-    context.fillRect(0, 0, canvas.width, canvas.height)
-    context.strokeStyle = `${game.accent}22`
-    context.lineWidth = 1
-    for (let x = 0; x <= canvas.width; x += 72) {
-      context.beginPath()
-      context.moveTo(x, 0)
-      context.lineTo(x, canvas.height)
-      context.stroke()
-    }
-    for (let y = 0; y <= canvas.height; y += 72) {
-      context.beginPath()
-      context.moveTo(0, y)
-      context.lineTo(canvas.width, y)
-      context.stroke()
-    }
-    context.fillStyle = '#ffc84a'
-    context.font = '800 28px system-ui, sans-serif'
-    context.fillText('OVERROLL', 72, 74)
-    context.fillStyle = '#ffffff'
-    context.font = '900 54px system-ui, sans-serif'
-    context.fillText(game.name.toUpperCase(), 72, 136)
-
-    await Promise.all(selected.map(async ({ player, pick }, itemIndex) => {
-      const deadlockCandidates = gameId === 'deadlock' ? rosterPickCandidates(pick) : []
-      const hero = deadlockCandidates[0] ?? pick.hero
-      if (!hero) return
-      const accent = roleColor(hero.role)
-      const column = itemIndex % columns
-      const row = Math.floor(itemIndex / columns)
-      const x = 72 + column * (cardWidth + gap)
-      const y = headerHeight + 22 + row * (cardHeight + gap)
-
-      context.fillStyle = 'rgba(4, 23, 34, .96)'
-      context.fillRect(x, y, cardWidth, cardHeight)
-      context.strokeStyle = accent
-      context.lineWidth = 4
-      context.strokeRect(x, y, cardWidth, cardHeight)
-      context.fillStyle = '#071925'
-      context.fillRect(x + 4, y + 4, cardWidth - 8, 54)
-      context.fillStyle = accent
-      context.font = '800 18px system-ui, sans-serif'
-      context.fillText(String(itemIndex + 1).padStart(2, '0'), x + 18, y + 38)
-      context.fillStyle = '#bfd1dc'
-      context.font = '700 17px system-ui, sans-serif'
-      context.fillText((player.name || `Jugador${itemIndex + 1}`).slice(0, 22), x + 58, y + 38)
-
-      if (gameId === 'deadlock') {
-        const innerGap = 8
-        const padding = 10
-        const mainHeight = 214
-        const secondaryHeight = 88
-        const secondaryWidth = (cardWidth - padding * 2 - innerGap) / 2
-        const drawCandidate = async (candidate: CatalogHero, candidateIndex: number, px: number, py: number, pw: number, ph: number) => {
-          context.fillStyle = '#071923'
-          context.fillRect(px, py, pw, ph)
-          const candidateImage = await loadImage(asset(candidate.portrait))
-          if (candidateImage) drawCover(candidateImage, px, py, pw, ph)
-          const gradient = context.createLinearGradient(0, py + ph * 0.42, 0, py + ph)
-          gradient.addColorStop(0, 'rgba(6,19,30,0)')
-          gradient.addColorStop(1, 'rgba(6,19,30,.97)')
-          context.fillStyle = gradient
-          context.fillRect(px, py, pw, ph)
-          context.fillStyle = 'rgba(5, 18, 29, .84)'
-          context.fillRect(px + 4, py + ph - 42, pw - 8, 34)
-          context.fillStyle = game.accent
-          context.font = '700 10px Arial'
-          context.fillText(`PREFERENCIA ${candidateIndex + 1}`, px + 10, py + ph - 24)
-          context.fillStyle = '#ffffff'
-          context.font = candidateIndex === 0 ? '700 20px Arial' : '700 13px Arial'
-          context.fillText(candidate.name.toUpperCase().slice(0, candidateIndex === 0 ? 22 : 14), px + 10, py + ph - 8)
-          context.strokeStyle = game.accent
-          context.lineWidth = 1
-          context.strokeRect(px + .5, py + .5, pw - 1, ph - 1)
-        }
-        await Promise.all(deadlockCandidates.slice(0, 3).map((candidate, candidateIndex) => candidateIndex === 0 ? drawCandidate(candidate, candidateIndex, x + padding, y + 72, cardWidth - padding * 2, mainHeight) : drawCandidate(candidate, candidateIndex, x + padding + (candidateIndex - 1) * (secondaryWidth + innerGap), y + 72 + mainHeight + innerGap, secondaryWidth, secondaryHeight)))
-        return
-      }
-
-      const portraitX = x + 12
-      const portraitY = y + 70
-      const portraitWidth = cardWidth - 24
-      const portraitHeight = 240
-      context.fillStyle = '#0a2636'
-      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
-      const image = await loadImage(asset(hero.portrait))
-      if (image) drawCover(image, portraitX, portraitY, portraitWidth, portraitHeight)
-      const fade = context.createLinearGradient(0, portraitY + 130, 0, portraitY + portraitHeight)
-      fade.addColorStop(0, 'rgba(2, 12, 18, 0)')
-      fade.addColorStop(1, 'rgba(2, 12, 18, .92)')
-      context.fillStyle = fade
-      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
-
-      context.textAlign = 'center'
-      context.fillStyle = '#ffffff'
-      context.font = '900 30px system-ui, sans-serif'
-      context.fillText(hero.name.toUpperCase().slice(0, 22), x + cardWidth / 2, y + 344)
-      context.fillStyle = accent
-      context.font = '800 17px system-ui, sans-serif'
-      context.fillText(roleDefinition(game, hero.role).label.toUpperCase(), x + cardWidth / 2, y + 374)
-      context.textAlign = 'left'
-
-      if (pick.loadout) {
-        const summary = [pick.loadout.specialization, pick.loadout.weapon, ...pick.loadout.gadgets]
-        context.font = '700 12px Arial'
-        summary.slice(0, 5).forEach((item, index) => {
-          const lineY = y + 396 + index * 15
-          context.fillStyle = index < 2 ? game.accent : '#b9cbd6'
-          context.fillText(item.slice(0, 34), x + 16, lineY)
-        })
-      } else if (game.supportsTeamups) {
-        const synergy = pick.teamupKey ? activeTeamups(hero.key).find((teamup) => teamup.key === pick.teamupKey) : undefined
-        const partnerKey = synergy ? teamupPartnerKey(synergy, hero.key) : ''
-        const partner = partnerKey ? heroByKey(partnerKey) : null
-        context.fillStyle = 'rgba(12, 45, 61, .92)'
-        context.fillRect(x + 16, y + 392, cardWidth - 32, 52)
-        if (partner) {
-          const partnerImage = await loadImage(asset(partner.portrait))
-          if (partnerImage) drawCover(partnerImage, x + 20, y + 398, 44, 40)
-        }
-        context.fillStyle = '#ffc84a'
-        context.font = '800 11px system-ui, sans-serif'
-        context.fillText(synergy?.complete ? 'ACTIVO' : 'TEAM-UP ELEGIDO', x + 72, y + 412)
-        context.fillStyle = '#e8f3f8'
-        context.font = '800 16px system-ui, sans-serif'
-        context.fillText((synergy?.name ?? 'SIN TEAM-UP').slice(0, 22), x + 72, y + 430)
-        context.fillStyle = '#89a6b8'
-        context.font = '600 12px system-ui, sans-serif'
-        context.fillText((partner ? `Con ${partner.name}` : 'Sin combinación completa').slice(0, 32), x + 72, y + 443)
-      } else {
-        context.fillStyle = '#8eaaba'
-        context.font = '600 14px system-ui, sans-serif'
-        context.fillText(player.name.slice(0, 28), x + 18, y + cardHeight - 26)
-      }
-    }))
-
-    context.textAlign = 'right'
-    context.fillStyle = '#708c9c'
-    context.font = '600 17px system-ui, sans-serif'
-    context.fillText('Generado con OverRoll', canvas.width - 72, canvas.height - 42)
-
-    canvas.toBlob((blob) => {
-      if (!blob) return
-      const link = document.createElement('a')
-      const url = URL.createObjectURL(blob)
-      link.href = url
-      link.download = `OverRoll_${gameId}_equipo.png`
-      link.click()
-      URL.revokeObjectURL(url)
-      notify(`Imagen de ${game.name} generada`, 'success')
-      playModuleSound('click', 760, 0.16)
-    }, 'image/png')
+    await saveImage({ title: game.name, subtitle: game.kicker + ' · ' + players.length + ' jugadores', accent: game.accent, filename: 'overroll-' + gameId + '-equipo', cards: players.flatMap((player, index) => {
+      const pick = picks[index], hero = pick?.hero
+      if (!hero) return []
+      const role = roleDefinition(game, hero.role)
+      const synergy = game.supportsTeamups ? activeTeamups(hero.key).find((item) => item.key === pick.teamupKey) : undefined
+      const partner = synergy ? heroByKey(teamupPartnerKey(synergy, hero.key)) : null
+      const details = pick.loadout ? [
+        { label: 'Especialización · ' + pick.loadout.specialization, image: finalsIcon(baseUrl, pick.loadout.specialization) },
+        { label: 'Arma · ' + pick.loadout.weapon, image: finalsIcon(baseUrl, pick.loadout.weapon) },
+        ...pick.loadout.gadgets.map((label) => ({ label, image: finalsIcon(baseUrl, label) })),
+      ] : game.supportsTeamups ? [{ label: synergy ? (synergy.complete ? 'Activo · ' : 'Team-Up · ') + synergy.name : 'Sin Team-Up', image: partner ? asset(partner.portrait) : undefined }] : []
+      return [{ player: player.name, name: gameId === 'deadlock' ? '1 · ' + hero.name : hero.name, role: gameId === 'deadlock' ? 'Tres preferencias de selección' : role.label, color: role.color, portrait: pick.loadout ? finalsIcon(baseUrl, pick.loadout.weapon) : asset(hero.portrait), fit: pick.loadout || gameId === 'fragpunk' ? 'contain' as const : 'cover' as const, icon: role.icon ? asset(role.icon) : undefined, locked: pick.locked, details, alternatives: gameId === 'deadlock' ? rosterPickCandidates(pick).slice(1, 3).map((candidate, i) => ({ label: (i + 2) + ' · ' + candidate.name, image: asset(candidate.portrait) })) : [] }]
+    }) })
   }
 
   function activeTeamups(heroKey: string): Array<Teamup & { complete: boolean }> {
@@ -1459,6 +1309,7 @@ export default function RosterModule({
               <button type="button" onClick={clearPlayerNames}><RosterIcon name="trash" size={14} /><span>Nombres</span></button>
               <button type="button" onClick={shufflePlayerOrder}><RosterIcon name="shuffle" size={14} /><span>Revolver</span></button>
             </div>
+            <p className="squad-guidance">{gameId === 'deadlock' ? 'Tres preferencias por jugador. Usa el filtro para excluir héroes.' : game.roles.length > 1 ? (game.supportsLoadouts ? 'Elige las complexiones permitidas para cada jugador.' : 'Activa los roles que puede recibir cada jugador.') : gameId === 'lastflag' ? 'Cinco concursantes, sin clases obligatorias.' : 'Sin roles obligatorios. Filtra los personajes de cada jugador.'}</p>
             <div className="players roster-unified-players">
               {players.map((player, index) => {
                 return (
@@ -1469,6 +1320,11 @@ export default function RosterModule({
                       <option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id}>{profile.name}</option>)}
                     </select>
                     <button type="button" className={`roster-inline-filter ${player.blocked.length ? 'active-filter' : ''}`} onClick={() => { setFilterIndex(index); setFilterSearch(''); setFilterRole('all'); playModuleSound('filter', 560) }} title="Filtros individuales"><RosterIcon name="filter" size={14} />{player.blocked.length > 0 && <b>{player.blocked.length}</b>}</button>
+                    {game.roles.length > 1 && <div className="player-role-choices" role="group" aria-label={`Roles permitidos de ${player.name}`}>
+                      {game.roles.map((role) => <button type="button" className={`player-role-choice ${player.roles[role.id] ? 'active' : ''}`} key={role.id} aria-pressed={Boolean(player.roles[role.id])} title={role.label} style={{ '--choice-accent': role.color } as CSSProperties} onClick={() => toggleRosterRole(index, role.id)}>
+                        {role.icon && <img src={asset(role.icon)} alt="" aria-hidden="true" />}<span>{role.label}</span>
+                      </button>)}
+                    </div>}
                   </div>
                 )
               })}
@@ -1482,7 +1338,7 @@ export default function RosterModule({
             </button>
             {game.roles.length > 1 && (
               <button type="button" className={`toggle-row ${balancedRoles ? 'enabled' : ''}`} onClick={() => { const next = !balancedRoles; setBalancedRoles(next); playModuleSound(next ? 'toggleOn' : 'toggleOff', next ? 620 : 360) }} aria-pressed={balancedRoles}>
-                <span className="switch"><span /></span><span><b>Composición de roles</b><small>Mantener una composición válida.</small></span>
+                <span className="switch"><span /></span><span><b>{gameId === 'thefinals' ? 'Variar complexiones' : gameId === 'apex' ? 'Variar clases' : 'Priorizar composición'}</b><small>{gameId === 'rivals' ? 'Preferir 2–2–2 dentro de tus filtros.' : gameId === 'thefinals' ? 'Preferir ligero, medio y pesado.' : gameId === 'apex' ? 'Buscar clases distintas en el trío.' : 'Buscar variedad dentro de tus filtros.'}</small></span>
               </button>
             )}
             {game.supportsTeamups && (
@@ -1503,10 +1359,10 @@ export default function RosterModule({
         <section className="content roster-unified-content">
           <div className="content-topline">
             <div className="game-identity">
-              <div className="game-title-row"><h1>{game.name}</h1><span className="web-badge roster-game-badge">{game.catalogLabel.toUpperCase()}</span></div>
+              <span className="game-kicker">{game.kicker}</span><div className="game-title-row"><h1>{game.name}</h1><span className="web-badge roster-game-badge">{game.catalogLabel.toUpperCase()}</span></div>
             </div>
             <div className="topline-actions">
-              <button type="button" className="generate-image-button roster-image-button" onClick={generateTeamImage} disabled={!picks.some((pick) => pick.hero)}><RosterIcon name="download" size={17} /> Generar imagen</button>
+              <button type="button" className="generate-image-button roster-image-button" onClick={generateTeamImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.hero)}><RosterIcon name="download" size={17} /> Generar imagen</button>
               <div className="match-summary">
                 <div><small>Formato</small><strong>{game.formatLabel}</strong></div>
                 <div><small>Fijados</small><strong>{lockedCount}</strong></div>
@@ -1594,9 +1450,9 @@ export default function RosterModule({
                             <div className="portrait-grid" /><div className="portrait-fallback"><RosterIcon name="gamepad" size={48} /></div>
                             {hero ? <img key={hero.key} className="hero-image" src={asset(hero.portrait)} alt={hero.name} decoding="async" draggable={false} onLoad={(event) => { event.currentTarget.style.removeProperty('display') }} onError={(event) => { event.currentTarget.style.display = 'none' }} /> : <div className="portrait-loading"><span /><span /><span /></div>}
                             <div className="portrait-vignette" />
-                            <div className="role-watermark" aria-hidden="true"><span className="role-watermark-fallback">{role?.label.slice(0, 2).toUpperCase() ?? '?'}</span></div>
+                            <div className="role-watermark" aria-hidden="true">{role?.icon ? <img src={asset(role.icon)} alt="" /> : <span className="role-watermark-fallback">{role?.label.slice(0, 2).toUpperCase() ?? '?'}</span>}</div>
                           </div>
-                          <div className="hero-info"><div className="hero-name-row"><h2>{hero?.name ?? 'Sin selección'}</h2><span className="role-dot" /></div><div className="hero-role">{role?.label ?? 'Genera un equipo'}</div></div>
+                          <div className="hero-info"><div className="hero-name-row"><h2>{hero?.name ?? 'Sin selección'}</h2><span className="role-dot" /></div><div className="hero-role">{role?.icon && <img className="hero-role-icon" src={asset(role.icon)} alt="" aria-hidden="true" />}{role?.label ?? 'Genera un equipo'}</div></div>
                         </>
                       )}
 
@@ -1649,7 +1505,7 @@ export default function RosterModule({
           <div className="roster-modal-layer" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) setFilterIndex(null) }}>
             <section className="roster-filter-modal" role="dialog" aria-modal="true" aria-label={`Filtros de ${players[filterIndex].name}`}>
               <header><div><span>Filtros individuales</span><h2>{players[filterIndex].name}</h2></div><button type="button" onClick={() => { setFilterIndex(null); playModuleSound('close', 420) }}>×</button></header>
-              <div className="roster-filter-tools"><input value={filterSearch} onChange={(event) => setFilterSearch(event.target.value)} placeholder="Buscar personaje" /><select value={filterRole} onChange={(event) => setFilterRole(event.target.value)}><option value="all">Todos los roles</option>{game.roles.map((role) => <option value={role.id} key={role.id}>{role.label}</option>)}</select></div>
+              <div className="roster-filter-tools"><input value={filterSearch} onChange={(event) => setFilterSearch(event.target.value)} placeholder="Buscar personaje" /><select aria-label="Filtrar por rol o clase" value={filterRole} onChange={(event) => setFilterRole(event.target.value)}><option value="all">Todos los roles</option>{game.roles.map((role) => <option value={role.id} key={role.id}>{role.label}</option>)}</select></div>
               <div className="roster-filter-grid">
                 {catalog.filter((hero) => (!filterSearch || hero.name.toLowerCase().includes(filterSearch.toLowerCase())) && (filterRole === 'all' || hero.role === filterRole)).map((hero) => {
                   const blocked = players[filterIndex].blocked.includes(hero.key)
@@ -1709,7 +1565,7 @@ export default function RosterModule({
               <label className="roulette-search"><RosterIcon name="filter" size={16} /><input type="search" value={rouletteSearch} onChange={(event) => setRouletteSearch(event.target.value)} placeholder="Buscar personaje…" /></label>
               <div className="roulette-role-toggles roster-role-toggles" role="group" aria-label="Rol visible">
                 <button type="button" className={rouletteRole === 'all' ? 'active' : ''} onClick={() => setRouletteRole('all')}>Todos</button>
-                {game.roles.map((role) => <button type="button" className={rouletteRole === role.id ? 'active' : ''} style={{ '--role-color': role.color } as CSSProperties} onClick={() => setRouletteRole(role.id)} key={role.id}><i className="roulette-generic-role-mark" />{role.label}</button>)}
+                {game.roles.map((role) => <button type="button" className={rouletteRole === role.id ? 'active' : ''} style={{ '--role-color': role.color } as CSSProperties} onClick={() => setRouletteRole(role.id)} key={role.id}>{role.icon ? <img className="hero-role-icon" src={asset(role.icon)} alt="" aria-hidden="true" /> : <i className="roulette-generic-role-mark" />}{role.label}</button>)}
               </div>
               <div className="roulette-toolbar-actions">
                 <button type="button" onClick={() => { setRouletteSelected((current) => [...new Set([...current, ...filteredRouletteHeroes.map((hero) => hero.key)])]); markRouletteDirty() }} disabled={filteredRouletteHeroes.length === 0}>Añadir visibles</button>

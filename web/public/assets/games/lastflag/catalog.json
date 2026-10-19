@@ -5,55 +5,55 @@
     {
       "key": "knives",
       "name": "Knives",
-      "role": "assassin",
+      "role": "contestant",
       "portrait": "knives.png"
     },
     {
       "key": "lumberjack",
       "name": "Lumberjack",
-      "role": "tank",
+      "role": "contestant",
       "portrait": "lumberjack.png"
     },
     {
       "key": "bounty-hunter",
       "name": "Bounty Hunter",
-      "role": "all-rounder",
+      "role": "contestant",
       "portrait": "bounty-hunter.png"
     },
     {
       "key": "scout",
       "name": "Scout",
-      "role": "recon",
+      "role": "contestant",
       "portrait": "scout.png"
     },
     {
       "key": "arsenal",
       "name": "Arsenal",
-      "role": "area-control",
+      "role": "contestant",
       "portrait": "arsenal.png"
     },
     {
       "key": "banshee",
       "name": "Banshee",
-      "role": "support",
+      "role": "contestant",
       "portrait": "banshee.png"
     },
     {
       "key": "roadie",
       "name": "Roadie",
-      "role": "crowd-control",
+      "role": "contestant",
       "portrait": "roadie.png"
     },
     {
       "key": "skyfire",
       "name": "Skyfire",
-      "role": "offensive",
+      "role": "contestant",
       "portrait": "skyfire.png"
     },
     {
       "key": "tango",
       "name": "Tango",
-      "role": "control",
+      "role": "contestant",
       "portrait": "tango.png"
     }
   ]

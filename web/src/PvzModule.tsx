@@ -1,3 +1,5 @@
+import { useImageExport } from './useImageExport'
+import { safeAssetUrl } from './imageExport.ts'
 import {
   useEffect,
   useMemo,
@@ -171,23 +173,9 @@ function normalizedDegrees(value: number) {
   return ((value % 360) + 360) % 360
 }
 
-function loadCanvasImage(url: string): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const image = new Image()
-    image.onload = () => resolve(image)
-    image.onerror = () => reject(new Error(`No se pudo cargar ${url}`))
-    image.src = url
-  })
-}
 
-function drawCover(context: CanvasRenderingContext2D, image: HTMLImageElement, x: number, y: number, width: number, height: number) {
-  const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight)
-  const sourceWidth = width / scale
-  const sourceHeight = height / scale
-  const sourceX = (image.naturalWidth - sourceWidth) / 2
-  const sourceY = (image.naturalHeight - sourceHeight) / 2
-  context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, x, y, width, height)
-}
+
+
 
 export default function PvzModule({
   view,
@@ -200,7 +188,8 @@ export default function PvzModule({
   locale,
   notify,
 }: Props) {
-  const asset = (path: string) => `${baseUrl}${path.replace(/^\//, '')}`
+  const [imageExporting, saveImage] = useImageExport(notify)
+  const asset = (path: string) => safeAssetUrl(path, baseUrl)
   const [players, setPlayers] = useState<PvzPlayer[]>(() => normalizePlayers(readStorage<unknown>('overroll.web.pvz.players', [])))
   const [picks, setPicks] = useState<PvzPick[]>(() => {
     const storedPlayers = normalizePlayers(readStorage<unknown>('overroll.web.pvz.players', []))
@@ -244,7 +233,7 @@ export default function PvzModule({
       rouletteWin: 'assets/pvzgw2/sounds/Audio_Always_Loaded.082.ogg',
     }
     Object.entries(soundPaths).forEach(([key, path]) => {
-      const audio = new Audio(`${asset(path)}?v=20`)
+      const audio = new Audio(`${baseUrl}${path}?v=20`)
       audio.preload = 'auto'
       soundsRef.current[key as PvzSound] = audio
     })
@@ -610,112 +599,10 @@ export default function PvzModule({
   }, [filterPlayer, filterSearch, eligibleBySide])
 
   async function generateImage() {
-    if (!picks.some((pick) => pick.character)) {
-      notify('Primero genera al menos un bando.', 'warning')
-      return
-    }
-    const canvas = document.createElement('canvas')
-    canvas.width = 2000
-    canvas.height = 1260
-    const context = canvas.getContext('2d')
-    if (!context) return
-    const background = context.createLinearGradient(0, 0, canvas.width, canvas.height)
-    background.addColorStop(0, '#071a12')
-    background.addColorStop(.52, '#0b1a20')
-    background.addColorStop(1, '#171022')
-    context.fillStyle = background
-    context.fillRect(0, 0, canvas.width, canvas.height)
-    context.strokeStyle = 'rgba(107, 191, 142, .08)'
-    context.lineWidth = 1
-    for (let x = 0; x <= canvas.width; x += 72) {
-      context.beginPath()
-      context.moveTo(x, 0)
-      context.lineTo(x, canvas.height)
-      context.stroke()
-    }
-    for (let y = 0; y <= canvas.height; y += 72) {
-      context.beginPath()
-      context.moveTo(0, y)
-      context.lineTo(canvas.width, y)
-      context.stroke()
-    }
-    context.fillStyle = '#f7d85b'
-    context.font = '900 31px system-ui, sans-serif'
-    context.fillText('OVERROLL', 72, 72)
-    context.fillStyle = '#f4fbf2'
-    context.font = '900 56px system-ui, sans-serif'
-    context.fillText('PVZ GW2', 72, 140)
-
-    const columns = Math.min(4, Math.max(1, players.length))
-    const rows = Math.ceil(players.length / columns)
-    const gap = 22
-    const left = 72
-    const top = 225
-    const totalWidth = canvas.width - left * 2
-    const totalHeight = 930
-    const cardWidth = (totalWidth - gap * (columns - 1)) / columns
-    const cardHeight = (totalHeight - gap * (rows - 1)) / rows
-    await Promise.all(players.map(async (player, index) => {
-      const pick = picks[index]
-      const character = pick?.character
-      const color = pvzSideColors[player.side]
-      const column = index % columns
-      const row = Math.floor(index / columns)
-      const x = left + column * (cardWidth + gap)
-      const y = top + row * (cardHeight + gap)
-      context.fillStyle = player.side === 'plants' ? 'rgba(9,35,23,.96)' : 'rgba(30,20,42,.96)'
-      context.fillRect(x, y, cardWidth, cardHeight)
-      context.strokeStyle = pick?.locked ? '#ffd35a' : color
-      context.lineWidth = pick?.locked ? 6 : 4
-      context.strokeRect(x, y, cardWidth, cardHeight)
-      context.fillStyle = 'rgba(2,10,12,.72)'
-      context.fillRect(x + 4, y + 4, cardWidth - 8, 48)
-      context.fillStyle = color
-      context.font = '800 17px system-ui, sans-serif'
-      context.fillText(String(index + 1).padStart(2, '0'), x + 17, y + 34)
-      context.fillStyle = '#e7f3ea'
-      context.font = '700 17px system-ui, sans-serif'
-      context.fillText((player.name || `Jugador${index + 1}`).slice(0, 24), x + 55, y + 34)
-      const portraitX = x + 12
-      const portraitY = y + 64
-      const portraitWidth = cardWidth - 24
-      const portraitHeight = Math.max(180, cardHeight - 170)
-      context.fillStyle = '#0a1a18'
-      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
-      if (character) {
-        try {
-          const image = await loadCanvasImage(asset(character.portrait))
-          drawCover(context, image, portraitX, portraitY, portraitWidth, portraitHeight)
-        } catch { /* keep fallback */ }
-      }
-      const fade = context.createLinearGradient(0, portraitY + portraitHeight * .55, 0, portraitY + portraitHeight)
-      fade.addColorStop(0, 'rgba(2,8,10,0)')
-      fade.addColorStop(1, 'rgba(2,8,10,.94)')
-      context.fillStyle = fade
-      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
-      context.textAlign = 'center'
-      context.fillStyle = '#ffffff'
-      context.font = '900 28px system-ui, sans-serif'
-      context.fillText((character?.name ?? 'SIN SELECCIÓN').toUpperCase(), x + cardWidth / 2, y + cardHeight - 82)
-      context.fillStyle = color
-      context.font = '800 16px system-ui, sans-serif'
-      context.fillText(`${pvzSideSingular[player.side].toUpperCase()} · ${character?.baseName.toUpperCase() ?? 'CATÁLOGO'}`, x + cardWidth / 2, y + cardHeight - 48)
-      context.textAlign = 'left'
-    }))
-    context.textAlign = 'right'
-    context.fillStyle = '#8ba09a'
-    context.font = '600 17px system-ui, sans-serif'
-    context.fillText('Generado con OverRoll', canvas.width - 72, canvas.height - 42)
-    canvas.toBlob((blob) => {
-      if (!blob) return
-      const url = URL.createObjectURL(blob)
-      const anchor = document.createElement('a')
-      anchor.href = url
-      anchor.download = `overroll-pvzgw2-${new Date().toISOString().slice(0, 10)}.png`
-      anchor.click()
-      URL.revokeObjectURL(url)
-      notify('Imagen de PVZ GW2 generada', 'success')
-    }, 'image/png')
+    await saveImage({ title: 'Plants vs. Zombies · GW2', accent: '#f7d85b', filename: 'overroll-pvzgw2-equipo', cards: players.map((player, index) => {
+      const pick = picks[index], hero = pick?.character
+      return { player: player.name, name: hero?.name ?? 'Sin selección', role: pvzSideSingular[player.side] + (hero ? ' · ' + hero.baseName : ''), color: pvzSideColors[player.side], portrait: hero ? asset(hero.portrait) : undefined, locked: pick?.locked }
+    }) })
   }
 
   const rouletteEligible = eligibleBySide[rouletteSide]
@@ -853,7 +740,7 @@ export default function PvzModule({
 
           <section className={`side-panel pvz-side-panel pvz-squad-panel mobile-config-section ${mobileTab === 'squad' ? 'mobile-active' : ''}`}>
             <div className="panel-title-row"><div><label>Escuadra</label><small>Nombres, perfiles y bando por jugador</small></div><PvzIcon name="users" size={17} /></div>
-            <div className="squad-counter pvz-counter"><button type="button" onClick={() => changePlayerCount(-1)} disabled={players.length <= 1 || generating}>−</button><strong>{players.length} jugador{players.length === 1 ? '' : 'es'}</strong><button type="button" onClick={() => changePlayerCount(1)} disabled={players.length >= 8 || generating}>+</button></div>
+            <div className="squad-counter pvz-counter"><button type="button" onClick={() => changePlayerCount(-1)} disabled={players.length <= 2 || generating}>−</button><strong>{players.length} jugador{players.length === 1 ? '' : 'es'}</strong><button type="button" onClick={() => changePlayerCount(1)} disabled={players.length >= 8 || generating}>+</button></div>
             <div className="pvz-side-balance"><span className="plants">{plantCount} plantas</span><i /><span className="zombies">{zombieCount} zombis</span></div>
             <div className="squad-tools pvz-squad-tools"><button type="button" onClick={clearNames}><PvzIcon name="trash" size={14} /><span>Nombres</span></button><button type="button" onClick={shufflePlayers}><PvzIcon name="shuffle" size={14} /><span>Revolver</span></button><button type="button" onClick={resetSides}><PvzIcon name="reset" size={14} /><span>Bandos</span></button></div>
             <div className="players pvz-players">
@@ -884,7 +771,7 @@ export default function PvzModule({
         </aside>
 
         <section className="content pvz-content">
-          <div className="content-topline pvz-topline"><div className="game-identity"><span className="game-kicker">Selector por facción</span><div className="game-title-row"><h1>PVZ Garden Warfare 2</h1><span className="web-badge pvz-badge">121 PERSONAJES</span></div></div><div className="topline-actions"><button type="button" className="generate-image-button pvz-image-button" onClick={generateImage} disabled={!picks.some((pick) => pick.character)}><PvzIcon name="download" size={17} /> Generar imagen</button><div className="match-summary pvz-summary"><div><small>Plantas</small><strong>{plantCount}</strong></div><div><small>Zombis</small><strong>{zombieCount}</strong></div><div><small>Fijados</small><strong>{lockedCount}</strong></div></div></div></div>
+          <div className="content-topline pvz-topline"><div className="game-identity"><span className="game-kicker">Selector por facción</span><div className="game-title-row"><h1>PVZ Garden Warfare 2</h1><span className="web-badge pvz-badge">121 PERSONAJES</span></div></div><div className="topline-actions"><button type="button" className="generate-image-button pvz-image-button" onClick={generateImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.character)}><PvzIcon name="download" size={17} /> Generar imagen</button><div className="match-summary pvz-summary"><div><small>Plantas</small><strong>{plantCount}</strong></div><div><small>Zombis</small><strong>{zombieCount}</strong></div><div><small>Fijados</small><strong>{lockedCount}</strong></div></div></div></div>
           <div className="team-stage pvz-stage"><div className="stage-grid" /><div className={`pvz-team-grid cards-${players.length}`}>
             {players.map((player, index) => {
               const pick = picks[index]

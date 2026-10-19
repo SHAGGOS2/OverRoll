@@ -1,3 +1,5 @@
+import { useImageExport } from './useImageExport'
+import { safeAssetUrl } from './imageExport.ts'
 import {
   useEffect,
   useMemo,
@@ -11,6 +13,7 @@ import {
 import './App.css'
 import PvzModule from './PvzModule'
 import RosterModule, { rosterGameDefinitions, type RosterGameId } from './RosterModule'
+import './GameExperience.css'
 import { warmImageCache } from './imageCache'
 import { creditsJoke, creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
 import { installUiLocalization, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
@@ -519,12 +522,10 @@ const rouletteRoleColors: Record<Role, string> = {
 // Doctrine queda preparado desde ahora, pero OverRoll no lo incorpora al catálogo
 // hasta el 5 de octubre de 2026 a las 00:00 (hora del centro de México, UTC-6).
 const DOCTRINE_RELEASE_AT = Date.parse('2026-10-05T00:00:00-06:00')
-const DOCTRINE_FALLBACK_PORTRAIT = 'https://i.ytimg.com/vi/Ab1_HIoelTk/maxresdefault.jpg'
+const DOCTRINE_FALLBACK_PORTRAIT = 'assets/heroes/doctrine.png'
 const OVERFAST_DOCTRINE_URL = 'https://overfast-api.tekrop.fr/heroes/doctrine?locale=es-mx'
 
-function isRemoteAsset(path: string): boolean {
-  return /^(?:https?:)?\/\//i.test(path) || /^(?:data|blob):/i.test(path)
-}
+
 
 function doctrineUnlocked(): boolean {
   return Date.now() >= DOCTRINE_RELEASE_AT
@@ -871,8 +872,9 @@ function buildTeam(options: {
 }
 
 function App() {
+  const [imageExporting, saveImage] = useImageExport(notify)
   const baseUrl = import.meta.env.BASE_URL
-  const asset = (path: string) => isRemoteAsset(path) ? path : `${baseUrl}${path.replace(/^\//, '')}`
+  const asset = (path: string) => safeAssetUrl(path, baseUrl)
 
   const [activeView, setActiveView] = useState<View>('principal')
   const [activeGame, setActiveGame] = useState<GameId>(() => readStorage('overroll.web.activeGame', 'overwatch'))
@@ -1012,7 +1014,7 @@ function App() {
     }
 
     Object.entries(soundPaths).forEach(([key, path]) => {
-      const audio = new Audio(`${asset(path)}?v=9`)
+      const audio = new Audio(`${baseUrl}${path}?v=9`)
       audio.preload = 'metadata'
       audioRef.current[key as SoundKey] = audio
     })
@@ -1693,106 +1695,10 @@ function App() {
   }
 
   async function generateTf2TeamImage() {
-    if (!tf2Picks.some((pick) => pick.mercenary)) {
-      notify('Primero genera un equipo TF2.', 'warning')
-      return
-    }
-    const canvas = document.createElement('canvas')
-    canvas.width = 1800
-    canvas.height = 1000
-    const context = canvas.getContext('2d')
-    if (!context) return
-    const background = context.createLinearGradient(0, 0, canvas.width, canvas.height)
-    background.addColorStop(0, '#160f0b')
-    background.addColorStop(1, '#302116')
-    context.fillStyle = background
-    context.fillRect(0, 0, canvas.width, canvas.height)
-    context.strokeStyle = 'rgba(232, 164, 91, .09)'
-    context.lineWidth = 1
-    for (let x = 0; x <= canvas.width; x += 72) {
-      context.beginPath()
-      context.moveTo(x, 0)
-      context.lineTo(x, canvas.height)
-      context.stroke()
-    }
-    for (let y = 0; y <= canvas.height; y += 72) {
-      context.beginPath()
-      context.moveTo(0, y)
-      context.lineTo(canvas.width, y)
-      context.stroke()
-    }
-    context.fillStyle = '#e8a45b'
-    context.font = '900 30px system-ui, sans-serif'
-    context.fillText('OVERROLL', 72, 72)
-    context.fillStyle = '#fff7e8'
-    context.font = '900 54px system-ui, sans-serif'
-    context.fillText('TEAM FORTRESS 2', 72, 136)
-    const gap = 20
-    const left = 72
-    const top = 225
-    const totalWidth = canvas.width - left * 2
-    const cardWidth = (totalWidth - gap * (tf2Players.length - 1)) / tf2Players.length
-    await Promise.all(tf2Players.map(async (player, index) => {
-      const pick = tf2Picks[index]
-      const mercenary = pick?.mercenary
-      const accent = mercenary ? tf2GroupColors[mercenary.group] : '#7d6b5c'
-      const x = left + index * (cardWidth + gap)
-      context.fillStyle = 'rgba(25, 17, 12, .96)'
-      context.fillRect(x, top, cardWidth, 650)
-      context.strokeStyle = accent
-      context.lineWidth = pick?.locked ? 6 : 4
-      context.strokeRect(x, top, cardWidth, 650)
-      context.fillStyle = '#241912'
-      context.fillRect(x + 4, top + 4, cardWidth - 8, 54)
-      context.fillStyle = accent
-      context.font = '800 18px system-ui, sans-serif'
-      context.fillText(String(index + 1).padStart(2, '0'), x + 18, top + 38)
-      context.fillStyle = '#eadccc'
-      context.font = '700 17px system-ui, sans-serif'
-      context.fillText((player.name || `Jugador${index + 1}`).slice(0, 20), x + 58, top + 38)
-      const portraitX = x + 12
-      const portraitY = top + 72
-      const portraitWidth = cardWidth - 24
-      const portraitHeight = 420
-      context.fillStyle = '#342419'
-      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
-      if (mercenary) {
-        try {
-          const image = await loadImageForCanvas(asset(mercenary.portrait))
-          drawImageCover(context, image, portraitX, portraitY, portraitWidth, portraitHeight)
-        } catch { /* keep fallback */ }
-      }
-      const fade = context.createLinearGradient(0, portraitY + 270, 0, portraitY + portraitHeight)
-      fade.addColorStop(0, 'rgba(20, 12, 7, 0)')
-      fade.addColorStop(1, 'rgba(20, 12, 7, .94)')
-      context.fillStyle = fade
-      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
-      context.textAlign = 'center'
-      context.fillStyle = '#ffffff'
-      context.font = '900 30px system-ui, sans-serif'
-      context.fillText((mercenary?.name ?? 'SIN SELECCIÓN').toUpperCase(), x + cardWidth / 2, top + 545)
-      context.fillStyle = accent
-      context.font = '800 17px system-ui, sans-serif'
-      context.fillText(mercenary ? tf2GroupLabels[mercenary.group].toUpperCase() : 'MERCENARIO', x + cardWidth / 2, top + 580)
-      context.fillStyle = '#bca58f'
-      context.font = '600 15px system-ui, sans-serif'
-      context.fillText(player.profileId ? 'PERFIL ASIGNADO' : 'SELECCIÓN ALEATORIA', x + cardWidth / 2, top + 620)
-      context.textAlign = 'left'
-    }))
-    context.textAlign = 'right'
-    context.fillStyle = '#a78e76'
-    context.font = '600 17px system-ui, sans-serif'
-    context.fillText('Generado con OverRoll', canvas.width - 72, canvas.height - 42)
-    canvas.toBlob((blob) => {
-      if (!blob) return
-      const url = URL.createObjectURL(blob)
-      const anchor = document.createElement('a')
-      anchor.href = url
-      anchor.download = `overroll-tf2-${new Date().toISOString().slice(0, 10)}.png`
-      anchor.click()
-      URL.revokeObjectURL(url)
-      notify('Imagen del equipo TF2 generada', 'success')
-    }, 'image/png')
+    await saveImage({ title: 'Team Fortress 2', accent: '#e8a45b', filename: 'overroll-tf2-equipo', cards: tf2Players.map((player, index) => {
+      const pick = tf2Picks[index], hero = pick?.mercenary
+      return { player: player.name, name: hero?.name ?? 'Sin selección', role: hero ? tf2GroupLabels[hero.group] : 'Mercenario', color: hero ? tf2GroupColors[hero.group] : '#b9a18b', portrait: hero ? asset(hero.portrait) : undefined, icon: hero ? asset('assets/tf2/icons/' + hero.key.replace(/^tf2-/, '') + '.png') : undefined, locked: pick?.locked }
+    }) })
   }
 
   function generateTeam() {
@@ -2301,98 +2207,8 @@ function App() {
   }
 
   async function generateRouletteImage() {
-    if (!rouletteWinner) {
-      notify('Gira la ruleta antes de generar la imagen.', 'warning')
-      return
-    }
-
-    const canvas = document.createElement('canvas')
-    canvas.width = 1400
-    canvas.height = 788
-    const context = canvas.getContext('2d')
-    if (!context) {
-      notify('El navegador no pudo crear la imagen.', 'warning')
-      return
-    }
-
-    const accent = rouletteRoleColors[rouletteWinner.role]
-    const background = context.createLinearGradient(0, 0, canvas.width, canvas.height)
-    background.addColorStop(0, '#02070d')
-    background.addColorStop(1, '#09283a')
-    context.fillStyle = background
-    context.fillRect(0, 0, canvas.width, canvas.height)
-
-    context.strokeStyle = 'rgba(92, 215, 255, .09)'
-    for (let x = 0; x <= canvas.width; x += 64) {
-      context.beginPath(); context.moveTo(x, 0); context.lineTo(x, canvas.height); context.stroke()
-    }
-    for (let y = 0; y <= canvas.height; y += 64) {
-      context.beginPath(); context.moveTo(0, y); context.lineTo(canvas.width, y); context.stroke()
-    }
-
-    context.fillStyle = '#ffc43b'
-    context.font = '900 32px system-ui, sans-serif'
-    context.fillText('OVERROLL', 68, 72)
-    context.fillStyle = '#ffffff'
-    context.font = '900 58px system-ui, sans-serif'
-    context.fillText('RULETA MAKER', 68, 138)
-    context.fillStyle = '#8fa9b9'
-    context.font = '700 20px system-ui, sans-serif'
-    context.fillText(`${rouletteEntries.length} casillas · ${rouletteProbability(rouletteWinner.key).toFixed(1)}% de probabilidad`, 70, 176)
-
-    context.fillStyle = 'rgba(5, 24, 36, .96)'
-    context.fillRect(68, 218, 1264, 488)
-    context.strokeStyle = accent
-    context.lineWidth = 4
-    context.strokeRect(68, 218, 1264, 488)
-
-    try {
-      const image = await loadImageForCanvas(asset(rouletteWinner.portrait))
-      drawImageCover(context, image, 72, 222, 635, 480)
-    } catch {
-      context.fillStyle = '#153346'
-      context.fillRect(72, 222, 635, 480)
-    }
-
-    const fade = context.createLinearGradient(640, 0, 980, 0)
-    fade.addColorStop(0, 'rgba(5, 24, 36, 0)')
-    fade.addColorStop(1, 'rgba(5, 24, 36, .98)')
-    context.fillStyle = fade
-    context.fillRect(520, 222, 808, 480)
-
-    context.fillStyle = accent
-    context.font = '900 22px system-ui, sans-serif'
-    context.fillText('GANADOR', 770, 340)
-    context.fillStyle = '#ffffff'
-    context.font = '900 66px system-ui, sans-serif'
-    context.fillText(rouletteWinner.name.toUpperCase(), 770, 420)
-    context.fillStyle = accent
-    context.font = '850 24px system-ui, sans-serif'
-    context.fillText(`${roleLabels[rouletteWinner.role].toUpperCase()} · ${(subroleLabels[rouletteWinner.subrole] ?? rouletteWinner.subrole).toUpperCase()}`, 772, 462)
-    context.fillStyle = '#8ca8b8'
-    context.font = '700 20px system-ui, sans-serif'
-    context.fillText(`Peso x${rouletteWeight(rouletteWinner.key)}`, 772, 520)
-    context.fillText(`${rouletteProbability(rouletteWinner.key).toFixed(1)}% de probabilidad`, 772, 556)
-
-    context.textAlign = 'right'
-    context.fillStyle = '#7592a3'
-    context.font = '600 16px system-ui, sans-serif'
-    context.fillText('Generado con OverRoll', canvas.width - 68, canvas.height - 28)
-
-    canvas.toBlob((blob) => {
-      if (!blob) {
-        notify('No se pudo terminar la imagen.', 'warning')
-        return
-      }
-      const url = URL.createObjectURL(blob)
-      const anchor = document.createElement('a')
-      anchor.href = url
-      anchor.download = `overroll-ruleta-${rouletteWinner.key}-${new Date().toISOString().slice(0, 10)}.png`
-      anchor.click()
-      URL.revokeObjectURL(url)
-      playConfirmTone()
-      notify('Imagen del ganador generada', 'success')
-    }, 'image/png')
+    if (!rouletteWinner) return
+    await saveImage({ title: 'Overwatch · Ruleta', accent: '#ffc43b', filename: 'overroll-ruleta-ganador', subtitle: 'Peso x' + rouletteWeight(rouletteWinner.key) + ' · ' + rouletteProbability(rouletteWinner.key).toFixed(1) + '% de probabilidad', cards: [{ player: 'Ganador', name: rouletteWinner.name, role: roleLabels[rouletteWinner.role], color: '#ffc43b', portrait: asset(rouletteWinner.portrait), icon: asset('assets/roles/' + rouletteWinner.role + '.png') }] })
   }
 
   function navigate(view: View) {
@@ -2410,195 +2226,16 @@ function App() {
     event.currentTarget.parentElement?.classList.remove('portrait-error')
   }
 
-  function loadImageForCanvas(src: string) {
-    return new Promise<HTMLImageElement>((resolve, reject) => {
-      const image = new Image()
-      image.decoding = 'async'
-      if (/^https?:\/\//i.test(src)) image.crossOrigin = 'anonymous'
-      image.onload = () => resolve(image)
-      image.onerror = () => reject(new Error(`No se pudo cargar ${src}`))
-      image.src = src
-    })
-  }
 
-  function drawImageCover(
-    context: CanvasRenderingContext2D,
-    image: HTMLImageElement,
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-  ) {
-    const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight)
-    const sourceWidth = width / scale
-    const sourceHeight = height / scale
-    const sourceX = Math.max(0, (image.naturalWidth - sourceWidth) / 2)
-    const sourceY = Math.max(0, (image.naturalHeight - sourceHeight) / 2)
-    context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, x, y, width, height)
-  }
+
+
 
   async function generateTeamImage() {
-    const team = players.map((player, index) => ({ player, pick: picks[index] }))
-    if (!team.some(({ pick }) => pick?.hero)) {
-      notify('Primero genera un equipo.', 'warning')
-      return
-    }
-
-    const canvas = document.createElement('canvas')
-    canvas.width = 1800
-    canvas.height = 1050
-    const context = canvas.getContext('2d')
-    if (!context) {
-      notify('El navegador no pudo crear la imagen.', 'warning')
-      return
-    }
-
-    const roleColors: Record<Role, string> = {
-      tank: '#4fc9ff',
-      damage: '#ff5578',
-      support: '#55e4ad',
-    }
-
-    const background = context.createLinearGradient(0, 0, canvas.width, canvas.height)
-    background.addColorStop(0, '#03111a')
-    background.addColorStop(1, '#071f2d')
-    context.fillStyle = background
-    context.fillRect(0, 0, canvas.width, canvas.height)
-
-    context.strokeStyle = 'rgba(71, 194, 255, .12)'
-    context.lineWidth = 1
-    for (let x = 0; x <= canvas.width; x += 72) {
-      context.beginPath()
-      context.moveTo(x, 0)
-      context.lineTo(x, canvas.height)
-      context.stroke()
-    }
-    for (let y = 0; y <= canvas.height; y += 72) {
-      context.beginPath()
-      context.moveTo(0, y)
-      context.lineTo(canvas.width, y)
-      context.stroke()
-    }
-
-    context.fillStyle = '#ffc84a'
-    context.font = '800 28px system-ui, sans-serif'
-    context.fillText('OVERROLL', 72, 74)
-    context.fillStyle = '#ffffff'
-    context.font = '900 54px system-ui, sans-serif'
-    context.fillText('OVERWATCH', 72, 136)
-
-    const gap = 22
-    const left = 72
-    const top = 225
-    const totalWidth = canvas.width - left * 2
-    const cardWidth = (totalWidth - gap * (team.length - 1)) / team.length
-    const cardHeight = 710
-
-    await Promise.all(team.map(async ({ player, pick }, index) => {
-      const x = left + index * (cardWidth + gap)
-      const role = pick?.role ?? pick?.hero?.role ?? assignedRoles[index]
-      const accent = role ? roleColors[role] : '#67859a'
-
-      context.fillStyle = 'rgba(4, 23, 34, .96)'
-      context.fillRect(x, top, cardWidth, cardHeight)
-      context.strokeStyle = accent
-      context.lineWidth = 4
-      context.strokeRect(x, top, cardWidth, cardHeight)
-
-      context.fillStyle = '#071925'
-      context.fillRect(x + 4, top + 4, cardWidth - 8, 54)
-      context.fillStyle = accent
-      context.font = '800 18px system-ui, sans-serif'
-      context.fillText(String(index + 1).padStart(2, '0'), x + 18, top + 38)
-      context.fillStyle = '#bfd1dc'
-      context.font = '700 17px system-ui, sans-serif'
-      context.fillText((player.name || `Jugador${index + 1}`).slice(0, 22), x + 58, top + 38)
-
-      const portraitX = x + 12
-      const portraitY = top + 70
-      const portraitWidth = cardWidth - 24
-      const portraitHeight = 390
-      context.fillStyle = '#0a2636'
-      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
-
-      const hero = pick?.hero
-      if (hero) {
-        try {
-          const image = await loadImageForCanvas(asset(hero.portrait))
-          drawImageCover(context, image, portraitX, portraitY, portraitWidth, portraitHeight)
-        } catch {
-          context.fillStyle = '#17384a'
-          context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
-        }
-      }
-
-      const fade = context.createLinearGradient(0, portraitY + 260, 0, portraitY + portraitHeight)
-      fade.addColorStop(0, 'rgba(2, 12, 18, 0)')
-      fade.addColorStop(1, 'rgba(2, 12, 18, .92)')
-      context.fillStyle = fade
-      context.fillRect(portraitX, portraitY, portraitWidth, portraitHeight)
-
-      context.fillStyle = '#ffffff'
-      context.font = '900 30px system-ui, sans-serif'
-      context.textAlign = 'center'
-      context.fillText((hero?.name ?? 'SIN SELECCIÓN').toUpperCase(), x + cardWidth / 2, top + 505)
-      context.fillStyle = accent
-      context.font = '800 17px system-ui, sans-serif'
-      context.fillText(role ? roleLabels[role].toUpperCase() : 'SIN ROL', x + cardWidth / 2, top + 536)
-
-      context.textAlign = 'left'
-      context.font = '700 16px system-ui, sans-serif'
-      const perkItems = pick?.perks.slice(0, stadium ? 4 : 2) ?? []
-      await Promise.all(perkItems.map(async (perk, perkIndex) => {
-        const perkY = top + 576 + perkIndex * 45
-        context.fillStyle = 'rgba(12, 45, 61, .92)'
-        context.fillRect(x + 16, perkY, cardWidth - 32, 34)
-        try {
-          const perkImage = await loadImageForCanvas(asset(perk.icon))
-          context.save()
-          context.beginPath()
-          context.rect(x + 20, perkY + 5, 24, 24)
-          context.clip()
-          context.drawImage(perkImage, x + 20, perkY + 5, 24, 24)
-          context.restore()
-        } catch {
-          context.fillStyle = '#193f57'
-          context.fillRect(x + 20, perkY + 5, 24, 24)
-        }
-        context.fillStyle = '#ffc84a'
-        context.fillText(`${perkIndex + 1}.`, x + 52, perkY + 23)
-        context.fillStyle = '#e8f3f8'
-        const maxLength = Math.max(10, Math.floor(cardWidth / 12))
-        const label = perk.name.length > maxLength ? `${perk.name.slice(0, maxLength - 1)}…` : perk.name
-        context.fillText(label, x + 76, perkY + 23)
-      }))
-
-      if (perkItems.length === 0) {
-        context.fillStyle = '#7892a1'
-        context.font = '600 16px system-ui, sans-serif'
-        context.fillText('Sin mejoras seleccionadas', x + 22, top + 610)
-      }
-    }))
-
-    context.textAlign = 'right'
-    context.fillStyle = '#708c9c'
-    context.font = '600 17px system-ui, sans-serif'
-    context.fillText('Generado con OverRoll', canvas.width - 72, canvas.height - 42)
-
-    canvas.toBlob((blob) => {
-      if (!blob) {
-        notify('No se pudo terminar la imagen.', 'warning')
-        return
-      }
-      const url = URL.createObjectURL(blob)
-      const anchor = document.createElement('a')
-      anchor.href = url
-      anchor.download = `overroll-equipo-${new Date().toISOString().slice(0, 10)}.png`
-      anchor.click()
-      URL.revokeObjectURL(url)
-      playConfirmTone()
-      notify('Imagen del equipo generada', 'success')
-    }, 'image/png')
+    const colors: Record<Role, string> = { tank: '#4fc9ff', damage: '#ff5578', support: '#55e4ad' }
+    await saveImage({ title: stadium ? 'Overwatch · Stadium' : 'Overwatch', accent: '#ffc84a', filename: 'overroll-overwatch-equipo', cards: players.map((player, index) => {
+      const pick = picks[index], hero = pick?.hero, role = pick?.role ?? hero?.role
+      return { player: player.name, name: rolesOnly && role ? roleLabels[role] : hero?.name ?? 'Sin selección', role: role ? roleLabels[role] : 'Sin rol', color: role ? colors[role] : '#8197af', fit: rolesOnly ? 'contain' as const : 'cover' as const, portrait: rolesOnly && role ? asset('assets/roles/' + role + '.png') : hero ? asset(hero.portrait) : undefined, icon: role ? asset('assets/roles/' + role + '.png') : undefined, locked: pick?.locked, details: rolesOnly ? [] : (pick?.perks ?? []).slice(0, stadium ? 4 : 2).map((perk) => ({ label: perk.name, image: asset(perk.icon) })) }
+    }) })
   }
 
   function localDataUsage() {
@@ -2713,7 +2350,7 @@ function App() {
           <div className="content-topline tf2-topline">
             <div className="game-identity"><span className="game-kicker">Modo Mercenarios</span><div className="game-title-row"><h1>Team Fortress 2</h1><span className="web-badge tf2-badge">9 CLASES</span></div></div>
             <div className="topline-actions">
-              <button type="button" className="generate-image-button tf2-image-button" onClick={generateTf2TeamImage} disabled={!tf2Picks.some((pick) => pick.mercenary)}><Icon name="download" size={17} /> Generar imagen</button>
+              <button type="button" className="generate-image-button tf2-image-button" onClick={generateTf2TeamImage} aria-busy={imageExporting} disabled={imageExporting || !tf2Picks.some((pick) => pick.mercenary)}><Icon name="download" size={17} /> Generar imagen</button>
               <div className="match-summary tf2-summary">
                 <div><small>Jugadores</small><strong>{tf2Players.length}</strong></div>
                 <div><small>Fijados</small><strong>{tf2Picks.filter((pick) => pick.locked).length}</strong></div>
@@ -2738,7 +2375,7 @@ function App() {
                       {mercenary ? <img className="hero-image" src={asset(mercenary.portrait)} alt={mercenary.name} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} /> : <div className="portrait-loading"><span /><span /><span /></div>}
                       <div className="portrait-vignette" /><div className="tf2-class-stamp" aria-hidden="true"><span>{mercenary ? tf2GroupLabels[mercenary.group] : 'TF2'}</span></div>
                     </div>
-                    <div className="hero-info"><div className="hero-name-row"><h2>{mercenary?.name ?? 'Sin selección'}</h2><span className={`role-dot tf2-dot ${mercenary?.group ?? ''}`} /></div><div className={`hero-role tf2-role ${mercenary?.group ?? ''}`}>{mercenary ? tf2GroupLabels[mercenary.group] : 'Genera un equipo'}{mercenary && <><span>•</span>MERCENARIO</>}</div></div>
+                    <div className="hero-info"><div className="hero-name-row"><h2>{mercenary?.name ?? 'Sin selección'}</h2><span className={`role-dot tf2-dot ${mercenary?.group ?? ''}`} /></div><div className={`hero-role tf2-role ${mercenary?.group ?? ''}`}>{mercenary && <img className="hero-role-icon" src={asset('assets/tf2/icons/' + mercenary.key.replace(/^tf2-/, '') + '.png')} alt="" aria-hidden="true" />}{mercenary ? tf2GroupLabels[mercenary.group] : 'Genera un equipo'}{mercenary && <><span>•</span>MERCENARIO</>}</div></div>
                     <div className="card-actions tf2-card-actions">
                       <button type="button" onClick={() => rerollTf2(index)} disabled={!mercenary || pick?.locked || tf2RerollingIndex !== null} data-tooltip="Cambiar clase"><Icon name="reroll" size={18} /></button>
                       <button type="button" onClick={() => openTf2Filter(index)} className={player.blocked.length > 0 ? 'active-filter' : ''} data-tooltip="Filtro"><Icon name="filter" size={18} /></button>
@@ -2945,7 +2582,7 @@ function App() {
               <div className="game-title-row"><h1>Overwatch</h1></div>
             </div>
             <div className="topline-actions">
-              <button type="button" className="generate-image-button" onClick={generateTeamImage} disabled={!picks.some((pick) => pick.hero)}>
+              <button type="button" className="generate-image-button" onClick={generateTeamImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.hero || pick.role)}>
                 <Icon name="download" size={17} /> Generar imagen
               </button>
               <div className="match-summary">
@@ -3156,7 +2793,7 @@ function App() {
           <aside className="roulette-wheel-panel">
             <header className="roulette-section-heading compact">
               <div><h2>Ruleta</h2></div>
-              <button type="button" className="roulette-image-button" onClick={generateRouletteImage} disabled={!rouletteWinner || rouletteSpinning}><Icon name="download" size={15} /> Imagen</button>
+              <button type="button" className="roulette-image-button" onClick={generateRouletteImage} aria-busy={imageExporting} disabled={imageExporting || !rouletteWinner || rouletteSpinning}><Icon name="download" size={15} /> Imagen</button>
             </header>
 
             <div className={`roulette-wheel-stage ${rouletteSpinning ? 'spinning' : ''} ${rouletteDirty ? 'dirty' : ''}`}>
@@ -3651,7 +3288,7 @@ function App() {
 
       <header className="topbar">
         <button type="button" className="brand" onMouseEnter={hoverSound} onClick={() => navigate('principal')} aria-label={t('nav_home')}>
-          <span className="brand-mark"><img src={asset('app_icon.png')} alt="" /></span><span className="brand-copy"><strong>OverRoll</strong><small>{gameModules.find((game) => game.id === activeGame)?.name ?? t('random_picker')}</small></span>
+          <span className="brand-mark"><img src={`${baseUrl}app_icon.png`} alt="" /></span><span className="brand-copy"><strong>OverRoll</strong><small>{gameModules.find((game) => game.id === activeGame)?.name ?? t('random_picker')}</small></span>
         </button>
         <nav aria-label="OverRoll">
           <button type="button" className={activeView === 'principal' ? 'nav-active' : ''} onMouseEnter={hoverSound} onClick={() => navigate('principal')}><Icon name="gamepad" size={16} /><span>{t('nav_home')}</span></button>
