@@ -96,3 +96,15 @@ test('all TF2 HUD class icons are packaged using the class key suffix', () => {
   assert.equal(keys.length, 9)
   for (const key of keys) assert(fs.existsSync(new URL(`../public/assets/tf2/icons/${key.replace(/^tf2-/, '')}.png`, import.meta.url)))
 })
+
+test('Apex class variety can select every class; uniqueness takes priority when a preferred pool is exhausted', () => {
+  let rotation = 0
+  const helpers = setup({ shuffled: (values) => { const n = rotation++ % values.length; return [...values.slice(n), ...values.slice(0, n)] } })
+  const game = games.find((g) => g.id === 'apex'), players = Array.from({ length: 3 }, () => ({ roles: Object.fromEntries(game.roles.map((r) => [r.id, true])) }))
+  const seen = new Set()
+  for (let i = 0; i < 20; i++) helpers.buildRolePlan(game, players).forEach((role) => seen.add(role))
+  assert.deepEqual([...seen].sort(), plain(game.roles.map((role) => role.id).sort()))
+  const catalog = [{ key: 'used', role: 'support' }, { key: 'fresh', role: 'recon' }]
+  const picker = setup({ game, catalog, avoidRepeated: true })
+  assert.deepEqual(plain(picker.candidatePool({ roles: { support: true, recon: true }, blocked: [] }, 'support', new Set(['used']))), [{ key: 'fresh', role: 'recon' }])
+})

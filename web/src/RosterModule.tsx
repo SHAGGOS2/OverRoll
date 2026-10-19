@@ -372,7 +372,9 @@ function buildRolePlan(game: RosterGameDefinition, players: RosterPlayer[]): str
   const roles = game.roles.filter((role) => role.id !== 'flex').map((role) => role.id)
   if (!roles.length) return players.map(() => '')
   const pattern = game.rolePattern?.length ? game.rolePattern : roles
-  const source = players.length < pattern.length ? [...new Set(pattern)] : pattern
+  const source = game.rolePattern?.length
+    ? players.length < pattern.length ? [...new Set(pattern)] : pattern
+    : shuffled(roles)
   const plan: string[] = []
   while (plan.length < players.length) plan.push(...source)
   const slots = shuffled(plan.slice(0, players.length))
@@ -802,6 +804,10 @@ export default function RosterModule({
     if (avoidRepeated) {
       const unique = pool.filter((hero) => !used.has(hero.key))
       if (unique.length) pool = unique
+      else {
+        const otherRoles = allowed.filter((hero) => !used.has(hero.key))
+        if (otherRoles.length) pool = otherRoles
+      }
     }
     const withoutPrevious = pool.filter((hero) => hero.key !== previousKey)
     if (withoutPrevious.length) pool = withoutPrevious
