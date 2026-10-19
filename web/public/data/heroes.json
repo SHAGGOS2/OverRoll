@@ -1,6 +1,6 @@
 {
-  "source": "OverRoll local snapshot",
-  "updatedAt": "2026-09-18T22:40:00.000Z",
+  "source": "Overwatch official hero pages (es-MX)",
+  "updatedAt": "2026-10-19T15:56:51.976Z",
   "heroes": [
     {
       "key": "anran",
@@ -62,19 +62,19 @@
       "majorPerks": [
         {
           "name": "Visión letal",
-          "description": "Dos aciertos consecutivos con la mira infligen 25 de daño adicional.",
+          "description": "Acertar dos disparos con la mira sobre un mismo objetivo inflige 25 de daño adicional.",
           "icon": "assets/perks/ashe_major_01_viper-s-sting.webp"
         },
         {
           "name": "Superexplosión",
-          "description": "El radio de detonación de Dinamita aumenta un 40% al estar en el aire y devuelve 6 de munición al lanzarse.",
+          "description": "Dinamita tiene un radio de detonación un 40% mayor en el aire y devuelve 6 de munición al lanzarse.",
           "icon": "assets/perks/ashe_major_02_airburst.webp"
         }
       ],
       "stadiumPowers": [
         {
           "name": "Terapia de recarga",
-          "description": "Cuando recargas un disparo o restauras munición, recuperas 5% de vida.",
+          "description": "Cuando recargas o restauras munición, recuperas 5% de vida.",
           "icon": "assets/perks/ashe_stadium_01_reload-therapy.webp"
         },
         {
@@ -119,7 +119,7 @@
         },
         {
           "name": "B.O.B. Jr.",
-          "description": "B.O.B. cuesta 50% menos de carga de habilidad máxima, pero tiene menos vida, 20% menos de velocidad de ataque y su tamaño es mucho menor.",
+          "description": "B.O.B. cuesta 60% menos de carga de habilidad máxima, pero tiene menos vida, 20% menos de velocidad de ataque y su tamaño es mucho menor.",
           "icon": "assets/perks/ashe_stadium_10_bob-jr.webp"
         },
         {
@@ -186,9 +186,9 @@
           "icon": "assets/perks/cassidy_minor_01_bang-bang.webp"
         },
         {
-          "name": "Equilibrar la balanza",
-          "description": "Regenera 40 de salud por segundo por cada enemigo objetivo de Tiro certero.",
-          "icon": "assets/perks/cassidy_minor_02_even-the-odds.webp"
+          "name": "Arre",
+          "description": "Después de usar Voltereta de combate, Cassidy obtiene un 60% más de velocidad de movimiento que decae durante 1.5 segundos.",
+          "icon": "assets/perks/cassidy_minor_02_b0d48ad9c8bdf1ce.png"
         }
       ],
       "majorPerks": [
@@ -211,7 +211,7 @@
         },
         {
           "name": "Agallas de pistolero",
-          "description": "Cuando recargas un disparo o restauras munición, recuperas 2% de vida por cada munición restaurada.",
+          "description": "Cuando recargas un disparo o restauras munición, recuperas 2.5% de vida por cada munición restaurada.",
           "icon": "assets/perks/cassidy_stadium_02_gunslinger-grit.webp"
         },
         {
@@ -247,7 +247,7 @@
         {
           "name": "Bala de plata",
           "description": "Vaciar el cargador se reemplaza con Habilidad: Dispara un disparo perforante de Pacificador que inflige 50 de daño adicional durante 2.5 s. El tiempo de reutilización se restablece al usar una habilidad o un artefacto. ",
-          "icon": "assets/perks/cassidy_stadium_09_silver-bullet.webp"
+          "icon": "assets/perks/cassidy_major_02_silver-bullet.webp"
         },
         {
           "name": "El más rápido del oeste",
@@ -277,9 +277,9 @@
       ],
       "minorPerks": [
         {
-          "name": "Aceleración concentrada",
-          "description": "El alcance de Rayo de concentración aumenta 6 metros y la velocidad de movimiento aumenta un 20% cuando está activo.",
-          "icon": "assets/perks/echo_minor_01_focused-rush.webp"
+          "name": "Municiones aéreas",
+          "description": "Echo tiene munición infinita durante Vuelo.",
+          "icon": "assets/perks/echo_minor_01_63cadc2da0d3063b.png"
         },
         {
           "name": "Escaneo parcial",
@@ -294,9 +294,9 @@
           "icon": "assets/perks/echo_major_01_full-salvo.webp"
         },
         {
-          "name": "Luces altas",
-          "description": "Las eliminaciones con Rayo de concentración restablecen el tiempo de reutilización de Vuelo.",
-          "icon": "assets/perks/echo_major_02_high-beams.webp"
+          "name": "Aceleración concentrada",
+          "description": "El alcance de Rayo de concentración aumenta 8 metros y la velocidad de movimiento aumenta un 25% cuando está activo.",
+          "icon": "assets/perks/echo_minor_01_focused-rush.webp"
         }
       ],
       "stadiumPowers": []
@@ -313,7 +313,7 @@
       "minorPerks": [
         {
           "name": "Seguridad opresiva",
-          "description": "Los disparos de luz de Protocolo de control automático ralentizan a los enemigos un 30% durante 1 segundo.",
+          "description": "Las balas ligeras de Protocolo de control automático ralentizan a los enemigos un 30% durante 1.5 segundos.",
           "icon": "assets/perks/emre_minor_01_suppressive-security.webp"
         },
         {
@@ -349,7 +349,7 @@
       "minorPerks": [
         {
           "name": "Bombardeo despiadado",
-          "description": "Los impactos directos con Apuntar te devuelven 8 de munición de saetas de carga automática.",
+          "description": "Los impactos directos con Apuntar te devuelven 5 de munición de saetas de carga automática.",
           "icon": "assets/perks/freja_minor_01_relentless-barrage.webp"
         },
         {
@@ -423,7 +423,7 @@
         },
         {
           "name": "Bien fritos",
-          "description": "La zona de daño de Boleadora inflige un 20% más de daño y dura 3 s.­ Las eliminaciones con Boleadora cuentan para Cazarrecompensas.",
+          "description": "La zona de daño de Boleadora inflige un 20% más de daño y dura 2 s. Las eliminaciones con Boleadora cuentan para Cazarrecompensas.",
           "icon": "assets/perks/freja_stadium_11_so-cooked.webp"
         },
         {
@@ -480,7 +480,7 @@
         },
         {
           "name": "Velocidad cibernética",
-          "description": "Infligir daño con Shuriken otorga un 2% de velocidad de ataque de Shuriken durante  3 s, acumulándose hasta 15 veces.",
+          "description": "Infligir daño con Shuriken otorga un 3% de velocidad de ataque de Shuriken durante 3 s, acumulándose hasta 15 veces.",
           "icon": "assets/perks/genji_stadium_03_cybernetic-speed.webp"
         },
         {
@@ -490,7 +490,7 @@
         },
         {
           "name": "Ataque de Iaido",
-          "description": "Después de que termina Desviar, realizas un ataque rápido con tu Hoja dragón una vez con un 50% de efectividad.",
+          "description": "Después de que termina Desviar, realizas un ataque rápido con tu Hoja dragón una vez con un 75% de efectividad.",
           "icon": "assets/perks/genji_stadium_05_iaido-strike.webp"
         },
         {
@@ -505,7 +505,7 @@
         },
         {
           "name": "Laceración",
-          "description": "Golpe ágil inflige 30% de daño adicional durante 3 s.­ El tiempo de reutilización de Golpe ágil se reduce en 2 s por cada enemigo dañado por Golpe ágil después del objetivo inicial.",
+          "description": "Golpe ágil inflige 30% de daño adicional durante 3 s. El tiempo de reutilización de Golpe ágil se reduce en 2.5 s por cada enemigo dañado por Golpe ágil después del objetivo inicial.",
           "icon": "assets/perks/genji_stadium_08_laceration.webp"
         },
         {
@@ -627,7 +627,7 @@
         },
         {
           "name": "Trampa II, escudero",
-          "description": "Después de que Mina de conmoción se fija al suelo, su detonación genera una Trampa de acero miniatura que ralentiza en lugar de inmovilizar. Puedes generar hasta 5 Trampas de acero miniatura.",
+          "description": "Detonar una Mina de conmoción genera una Trampa de acero en miniatura que ralentiza en lugar de inmovilizar. Puedes generar hasta 5 Trampas de acero en miniatura.",
           "icon": "assets/perks/junkrat_stadium_06_trap-ii--esquire.webp"
         },
         {
@@ -657,7 +657,7 @@
         },
         {
           "name": "Grasa de cierre",
-          "description": "Después de detonar Mina de conmoción, tu siguiente disparo de Lanzagranadas de fragmentación obtiene 200% de velocidad de proyectil e inflige un 10% más de daño a los enemigos que están en el aire.",
+          "description": "Después de detonar Mina de conmoción, tu siguiente disparo de Lanzagranadas de fragmentación obtiene 200% de velocidad de proyectil e inflige un 25% más de daño a los enemigos que están en el aire.",
           "icon": "assets/perks/junkrat_stadium_12_zip-grease.webp"
         }
       ]
@@ -704,7 +704,7 @@
         },
         {
           "name": "Bola lenta",
-          "description": "Tras usar una habilidad o un artefacto, tu siguiente 2 Carámbano lanza una bola de nieve adicional con un 200% de velocidad de proyectil que aplica un 30% de ralentización al impactar. ",
+          "description": "Tras usar una habilidad o un artefacto, tus siguientes 2 Carámbanos lanzan una bola de nieve adicional con un 200% de velocidad de proyectil que aplica un 30% de ralentización al impactar.",
           "icon": "assets/perks/mei_stadium_02_slowball.webp"
         },
         {
@@ -714,7 +714,7 @@
         },
         {
           "name": "Armadura helada",
-          "description": "Obtienes una cantidad de armadura equivalente al 5% del daño que infliges con ­ el disparo principal de Bláster endotérmico, hasta un máximo de 100, hasta el final de la ronda.",
+          "description": "Obtienes una cantidad de armadura equivalente al 3% del daño que infliges con el disparo principal de Bláster endotérmico, hasta un máximo de 100, hasta el final de la ronda.",
           "icon": "assets/perks/mei_stadium_04_frost-armor.webp"
         },
         {
@@ -754,7 +754,7 @@
         },
         {
           "name": "Enfriamientos profundos",
-          "description": "Golpear continuamente a un enemigo con el disparo principal de Bláster endotérmico lo congelará durante 0.75 s.",
+          "description": "Golpear continuamente a un enemigo con el disparo principal de Bláster endotérmico lo congelará durante 0.65 s.",
           "icon": "assets/perks/mei_stadium_12_deep-chills.webp"
         }
       ]
@@ -841,7 +841,7 @@
         },
         {
           "name": "Triple salva",
-          "description": "Después de usar una habilidad, tu siguiente disparo principal dispara 3 cohetes que infligen 40% de daño cada uno.",
+          "description": "Después de usar una habilidad on un artefacto, tu siguiente disparo principal dispara 3 cohetes que infligen 40% de daño cada uno.",
           "icon": "assets/perks/pharah_stadium_10_triple-volley.webp"
         },
         {
@@ -893,7 +893,7 @@
       "stadiumPowers": [
         {
           "name": "Ruina giratoria",
-          "description": "Los impactos a corta distancia (7 m) de Escopeta infernal aumentan tu velocidad de ataque un 4% durante 1 s, con una acumulación de hasta 10 veces.",
+          "description": "Los impactos a corta distancia (7 m) de Escopeta infernal aumentan tu velocidad de ataque un 5% durante 1 s, con una acumulación de hasta 10 veces.",
           "icon": "assets/perks/reaper_stadium_01_revolving-ruin.webp"
         },
         {
@@ -928,7 +928,7 @@
         },
         {
           "name": "Sudario infernal",
-          "description": "Mientras estás en Forma espectral, atravesar a los enemigos los quema por 25% de tu vida máxima y reduce su velocidad de movimiento y su velocidad de ataque un 30% durante 3 s.",
+          "description": "Mientras estás en Forma espectral, atravesar a los enemigos los quema por 20% de tu vida máxima y reduce su velocidad de movimiento y su velocidad de ataque un 20% durante 2 s.",
           "icon": "assets/perks/reaper_stadium_08_hellshroud.webp"
         },
         {
@@ -944,7 +944,7 @@
         {
           "name": "Dedo en el gatillo",
           "description": "Después de usar una habilidad o un artefacto, o recargar, se restablece el tiempo de reutilización de Gatillos extremos.",
-          "icon": "assets/perks/reaper_stadium_11_trigger-finger.webp"
+          "icon": "assets/perks/reaper_major_02_trigger-finger.webp"
         },
         {
           "name": "Alas espantosas",
@@ -964,9 +964,9 @@
       ],
       "minorPerks": [
         {
-          "name": "Recarga rápida",
-          "description": "Evadir recarga 9 balas.",
-          "icon": "assets/perks/shion_minor_01_rapid-reload.webp"
+          "name": "Instinto de supervivencia",
+          "description": "La duración de la salud excedente de Evadir aumenta 1 segundo.",
+          "icon": "assets/perks/shion_minor_01_2785c741990d138c.png"
         },
         {
           "name": "X Machina",
@@ -1053,7 +1053,7 @@
         },
         {
           "name": "Propulsores dobles",
-          "description": "Deslizamiento impulsor otorga una carga adicional y su salto cambia a un movimiento lateral.",
+          "description": "Deslizamiento impulsor obtiene una carga adicional y su salto cambia a un movimiento lateral.",
           "icon": "assets/perks/sojourn_major_02_dual-thrusters.webp"
         }
       ],
@@ -1085,7 +1085,7 @@
         },
         {
           "name": "Patada perforante",
-          "description": "+50% de velocidad de Deslizamiento impulsor.­ Durante Deslizamiento impulsor, obtienes 25% de reducción de daño e infliges 75 de daño a los enemigos cercanos. ",
+          "description": "+50% de velocidad de Deslizamiento impulsor. Durante Deslizamiento impulsor, obtienes un 25% de reducción de daño e infliges 75 de daño a los enemigos cercanos.",
           "icon": "assets/perks/sojourn_stadium_06_drill-kick.webp"
         },
         {
@@ -1220,17 +1220,17 @@
     {
       "key": "sombra",
       "name": "Sombra",
-      "role": "damage",
-      "subrole": "recon",
+      "role": "support",
+      "subrole": "tactician",
       "portrait": "assets/heroes/sombra.webp",
       "gamemodes": [
         "quickplay"
       ],
       "minorPerks": [
         {
-          "name": "Carga encriptada",
-          "description": "Puedes usar Hackeo mientras eres invisible. Los hackeos exitosos aumentan la duración del sigilo 3 segundos.",
-          "icon": "assets/perks/sombra_minor_01_encrypted-upload.webp"
+          "name": "Hackeo vital",
+          "description": "PEM aplica Hotfix a los aliados cercanos.",
+          "icon": "assets/perks/sombra_minor_01_34e108b70ea2d33e.png"
         },
         {
           "name": "CTRL ALT ESC",
@@ -1240,14 +1240,14 @@
       ],
       "majorPerks": [
         {
-          "name": "Ancho de banda de alta velocidad",
-          "description": "Los suministros de salud hackeados aumentan un 25% la velocidad de movimiento de los aliados y les otorgan 50 de salud excedente durante 4 segundos.",
-          "icon": "assets/perks/sombra_major_01_high-speed-bandwidth.webp"
+          "name": "Paquete de datos",
+          "description": "Hackear suministros de salud con Hotfix reduce su tiempo de reutilización principal en 4 segundos.",
+          "icon": "assets/perks/sombra_major_01_87fec003fc9753ad.png"
         },
         {
-          "name": "Replicación viral",
-          "description": "Al impactar a un enemigo hackeado con Virus, este se propaga a los demás dentro de un radio de 8 metros.",
-          "icon": "assets/perks/sombra_major_02_viral-replication.webp"
+          "name": "Ciberseguridad",
+          "description": "Duplica la sanación de Ciberespacio si la salud del aliado está por debajo de la mitad.",
+          "icon": "assets/perks/sombra_major_02_28a09178c65bff6e.png"
         }
       ],
       "stadiumPowers": []
@@ -1311,9 +1311,9 @@
       ],
       "majorPerks": [
         {
-          "name": "Saetas de anclaje",
-          "description": "El alcance de lanzamiento de Desplegar torreta aumenta un 50% y ahora puede adherirse a paredes y techos.",
-          "icon": "assets/perks/torbjorn_major_01_anchor-bolts.webp"
+          "name": "Pernos de anclaje",
+          "description": "El alcance de lanzamiento de Desplegar torreta aumenta un 25% y ahora puede adherirse a paredes y techos.",
+          "icon": "assets/perks/torbjorn_major_01_5f3ae1fcd2f9a78a.png"
         },
         {
           "name": "Torreta sobrecargada",
@@ -1339,7 +1339,7 @@
         },
         {
           "name": "Vengan por armadura",
-          "description": "Durante Sobrecarga, arrojas 2 suministros de armadura que otorgan una cantidad de armadura equivalente a un 20% de tu vida máxima. Los suministros de armadura no se acumulan.",
+          "description": "Durante Sobrecarga, arrojas 2 suministros de armadura que otorgan una cantidad de armadura equivalente a un 15% de tu vida máxima. Los suministros de armadura no se acumulan.",
           "icon": "assets/perks/torbjorn_stadium_04_come-get-yer-armor.webp"
         },
         {
@@ -1364,7 +1364,7 @@
         },
         {
           "name": "Herrero",
-          "description": "Golpear a un aliado con Martillo forjador lo cura una cantidad equivalente a un 75% del daño de ­ Martillo forjador.",
+          "description": "Golpear a un aliado con Martillo forjador lo cura una cantidad equivalente a un 100% del daño de Martillo forjador.",
           "icon": "assets/perks/torbjorn_stadium_09_blacksmith.webp"
         },
         {
@@ -1374,7 +1374,7 @@
         },
         {
           "name": "Torrellizas",
-          "description": "Puedes tener hasta 3 Torretas activas. Todas empiezan en nivel 1, cuentan con 50% de salud y 75% de velocidad de ataque, y se pueden mejorar temporalmente con golpes de Martillo forjador durante un máximo de 24 s.",
+          "description": "Puedes tener hasta 3 Torretas activas. Todas empiezan en nivel 1, cuentan con 50% de salud y 65% de velocidad de ataque, y se pueden mejorar temporalmente con golpes de Martillo forjador durante un máximo de 24 s.",
           "icon": "assets/perks/torbjorn_stadium_11_turriplets.webp"
         },
         {
@@ -1396,9 +1396,9 @@
       ],
       "minorPerks": [
         {
-          "name": "Aceleración cronal",
-          "description": "La distancia de Traslación aumenta un 20%.",
-          "icon": "assets/perks/tracer_minor_01_chronal-dash.webp"
+          "name": "Regeneración temporal",
+          "description": "La regeneración de salud pasiva se activa un 100% más rápido.",
+          "icon": "assets/perks/tracer_minor_01_abd0ec9faa55dabc.png"
         },
         {
           "name": "Recarga cinética",
@@ -1461,7 +1461,7 @@
         },
         {
           "name": "Impulsiva",
-          "description": "Cuando usas Regresión, arrojas una Bomba de pulso que detona un 50% más rápido, pero inflige un 60% menos de daño.",
+          "description": "Cuando usas Regresión, arrojas una Bomba de pulso que detona un 50% más rápido, pero inflige un 70% menos de daño.",
           "icon": "assets/perks/tracer_stadium_09_impulsive.webp"
         },
         {
@@ -1533,7 +1533,7 @@
         },
         {
           "name": "Golpe sobrecargado",
-          "description": "Tras usar Corte volador, tu siguiente golpe desde arriba en el aire puede canalizar una Espada desgarradora de nivel 1 con 50% de daño aumentado.",
+          "description": "Tras usar Corte volador, tu siguiente golpe desde arriba en el aire puede canalizar una Espada desgarradora de nivel 1 con 25% de daño aumentado.",
           "icon": "assets/perks/vendetta_stadium_04_overloaded-strike.webp"
         },
         {
@@ -1573,7 +1573,7 @@
         },
         {
           "name": "Sed de sangre suprema",
-          "description": "Obtienes 5% de robo de vida y tus habilidades se restablecen un 5% más rápido por cada acumulación de Arremetida que tengas.",
+          "description": "Obtienes 4% de robo de vida y tus habilidades se restablecen un 3% más rápido por cada acumulación de Arremetida que tengas.",
           "icon": "assets/perks/vendetta_stadium_12_apex-bloodlust.webp"
         }
       ]
@@ -1590,7 +1590,7 @@
       "minorPerks": [
         {
           "name": "Excavación profunda",
-          "description": "La distancia de Ataque perforante es un 50% más larga mientras está bajo tierra.",
+          "description": "La distancia de Ataque perforante es un 75% más larga mientras está bajo tierra.",
           "icon": "assets/perks/venture_minor_01_deep-burrow.webp"
         },
         {
@@ -1607,7 +1607,7 @@
         },
         {
           "name": "Lleno de suciedad",
-          "description": "Infligir daño con Paliza otorga hasta 30 de escudo de Determinación del explorador.",
+          "description": "Infligir daño con Paliza otorga hasta 40 de escudo de Determinación del explorador.",
           "icon": "assets/perks/venture_major_02_covered-in-dirt.webp"
         }
       ],
@@ -1660,9 +1660,9 @@
       ],
       "minorPerks": [
         {
-          "name": "Atontamiento",
-          "description": "Los enemigos que se despiertan del Dardo tranquilizante quedan ralentizados y reciben 50 de daño durante 2 segundos.",
-          "icon": "assets/perks/ana_minor_01_groggy.webp"
+          "name": "Anestesia local",
+          "description": "Dardo tranquilizante explota al impactar, lo cual ralentiza a los enemigos y les inflige 45 de daño a lo largo de 3 segundos.",
+          "icon": "assets/perks/ana_minor_01_ae02fae670005f98.png"
         },
         {
           "name": "Suero de velocidad",
@@ -1695,7 +1695,7 @@
         },
         {
           "name": "Campo soñado",
-          "description": "Los impactos de Dardo tranquilizante curan a los aliados en un radio de 5 m por 10% de tu vida máxima por segundo durante 5 s.",
+          "description": "Los impactos de Dardo tranquilizante curan a los aliados en un radio de 5 m por 20% de tu vida máxima por segundo durante 5 s.",
           "icon": "assets/perks/ana_stadium_03_dream-field.webp"
         },
         {
@@ -1725,7 +1725,7 @@
         },
         {
           "name": "Dulces sueños",
-          "description": "+75 de daño base de Dardo tranquilizante.­ Mientras apuntas con la mira de Rifle biótico, puedes disparar un Dardo tranquilizante con el Rifle biótico, con un 300% más de velocidad de proyectil.",
+          "description": "Mientras usas la mira, puedes disparar Dardo tranquilizante con un 300% más de velocidad de proyectil y un 75 de daño base. Acertar con Dardo tranquilizante reduce su tiempo de reutilización en 5 s.",
           "icon": "assets/perks/ana_stadium_09_artsy-dartsy.webp"
         },
         {
@@ -1740,7 +1740,7 @@
         },
         {
           "name": "Halconera",
-          "description": "Nanopotenciamiento también otorga un 30% más de velocidad de ataque y un 25% de carga de habilidad máxima.",
+          "description": "Nanopotenciamiento también otorga un 50% más de velocidad de ataque y un 10% de carga de habilidad máxima.",
           "icon": "assets/perks/ana_stadium_12_falconer.webp"
         }
       ]
@@ -1930,15 +1930,15 @@
         },
         {
           "name": "Transporte escudado",
-          "description": "Obtienes hasta 50 de salud de escudo adicional mientras transportas a un héroe.",
+          "description": "Obtienes hasta 50 de salud de escudo adicional mientras transportas a otro héroe.",
           "icon": "assets/perks/jetpack-cat_minor_02_transport-shielding.webp"
         }
       ],
       "majorPerks": [
         {
-          "name": "Cabezazo",
-          "description": "Miauniobra de vuelo puede repeler a un enemigo e infligir 50 de daño cuando impacta si vuelas a la velocidad suficiente.",
-          "icon": "assets/perks/jetpack-cat_major_01_headbutt.webp"
+          "name": "Forma perrrfecta",
+          "description": "Cada pulso de Ronroneo contiene 3 oleadas.",
+          "icon": "assets/perks/jetpack-cat_major_01_7b90c625a71b1ab6.png"
         },
         {
           "name": "Sacar las garras",
@@ -1949,12 +1949,12 @@
       "stadiumPowers": [
         {
           "name": "Territorial",
-          "description": "Los enemigos que estén dentro de tu Ronroneo reciben un daño equivalente al 30% de su sanación.",
+          "description": "Los enemigos que estén dentro de tu Ronroneo reciben un daño equivalente al 20% de su sanación.",
           "icon": "assets/perks/jetpack-cat_stadium_01_territorial.webp"
         },
         {
           "name": "Ronroneo persistente",
-          "description": "La duración de Ronroneo aumenta en 15% por cada aliado o enemigo al que afecte, hasta un máximo de 75%. La cantidad de pulsos de sanación se reinicia cada 4 pulsos.",
+          "description": "La duración de Ronroneo aumenta en 10% por cada aliado o enemigo al que afecte, hasta un máximo de 50%. La cantidad de pulsos de sanación se reinicia cada 4 pulsos.",
           "icon": "assets/perks/jetpack-cat_stadium_02_purr-sistence.webp"
         },
         {
@@ -1964,7 +1964,7 @@
         },
         {
           "name": "Patagrúas",
-          "description": "Recibes 20% de combustible al soltar al objetivo de Línea vital o Michirrapto. ­ Restauras un 1% de combustible por cada 7.5 de daño de habilidad infligido.",
+          "description": "Recibes 20% de combustible al soltar al objetivo de Línea vital o Michirrapto. Restauras un 1% de combustible por cada 10 de daño infligido.",
           "icon": "assets/perks/jetpack-cat_stadium_04_tow-beans.webp"
         },
         {
@@ -2071,7 +2071,7 @@
         },
         {
           "name": "Propulsores instantáneos",
-          "description": "Potenciamiento de planeo ahora tiene 3 cargas cortas que duran un 75% menos y un tiempo de reutilización que dura un 50% menos.",
+          "description": "Potenciamiento de planeo ahora tiene 3 cargas cortas que duran un 75% menos y un tiempo de reutilización que dura un 30% menos.",
           "icon": "assets/perks/juno_stadium_06_blink-boosts.webp"
         },
         {
@@ -2143,12 +2143,12 @@
       "stadiumPowers": [
         {
           "name": "Pirotecnia de zorrito",
-          "description": "Después de usar una habilidad o un artefacto, los próximos 3 Kunai explotarán al contacto, lo que inflige 20 de daño a los enemigos cercanos.",
+          "description": "Después de usar una habilidad o un artefacto, los próximos 5 Kunai explotarán al contacto, lo que inflige 20 de daño a los enemigos cercanos.",
           "icon": "assets/perks/kiriko_stadium_01_foxy-fireworks.webp"
         },
         {
           "name": "Kunai inteligente",
-          "description": "Los impactos críticos de Kunai reducen un 15% los tiempos de reutilización de las habilidades y devuelven 3 de munición.",
+          "description": "Los impactos críticos de Kunai reducen un 25% los tiempos de reutilización de las habilidades y devuelven 3 de munición.",
           "icon": "assets/perks/kiriko_stadium_02_keen-kunai.webp"
         },
         {
@@ -2173,12 +2173,12 @@
         },
         {
           "name": "Pies ligeros",
-          "description": "Paso ágil se puede usar de forma direccional sin un objetivo. El alcance se reduce un 50% si se usa sin un objetivo.",
+          "description": "Paso ágil se puede usar de forma direccional sin un objetivo. El alcance se reduce un 50% y el tiempo de reutilización se reduce un 20% si se usa sin un objetivo.",
           "icon": "assets/perks/kiriko_stadium_07_fleet-foot.webp"
         },
         {
           "name": "Conjuración de clones",
-          "description": "Después de usar Paso ágil, creas un clon que dura 4 s. El clon tiene un 75% menos de daño y sanación.",
+          "description": "Después de usar Paso ágil, creas un clon que dura 4 s. El clon tiene un 65% menos de daño y sanación.",
           "icon": "assets/perks/kiriko_stadium_08_clone-conjuration.webp"
         },
         {
@@ -2256,7 +2256,7 @@
         },
         {
           "name": "Cambio de ritmo",
-          "description": "Sube el volumen está activo durante Barrera de sonido.",
+          "description": "Sube el volumen permanece activo durante 4 segundos tras lanzar Barrera de sonido.",
           "icon": "assets/perks/lucio_minor_02_beat-drop.webp"
         }
       ],
@@ -2310,23 +2310,23 @@
         },
         {
           "name": "Para el público",
-          "description": "Después de usar Onda sonora, curas a todos los aliados afectados por Mezclador una cantidad equivalente a un 33% del daño de Onda sonora. Esta sanación se duplica mientras Sube el volumen está activo.",
+          "description": "Después de usar Onda sonora, curas a todos los aliados afectados por Mezclador una cantidad equivalente a un 40% del daño de Onda sonora. Esta sanación se duplica mientras Sube el volumen está activo.",
           "icon": "assets/perks/lucio_stadium_08_crowd-pleaser.webp"
         },
         {
           "name": "Riel rítmico",
-          "description": "Usar Caminamuros durante 3 s carga tu próxima Onda sonora, que aumenta su repulsión un 25% y su daño un 75%.",
+          "description": "Usar Caminamuros durante 3 s carga tu próxima Onda sonora, que aumenta su repulsión un 25% y su daño un 100%.",
           "icon": "assets/perks/lucio_stadium_09_rhythm-rail.webp"
         },
         {
           "name": "Reverberación",
-          "description": "Después de usar Onda sonora, durante 3 s, puedes usar Onda sonora de nuevo con un 60% menos de efectividad.",
+          "description": "Después de usar Onda sonora, durante 3 s, puedes usar Onda sonora de nuevo con un 50% menos de efectividad.",
           "icon": "assets/perks/lucio_stadium_10_reverb.webp"
         },
         {
           "name": "Cambio de ritmo",
           "description": "Si aterrizas con Barrera de sonido, se produce una explosión que inflige 75 de daño y puede infligir daño crítico por un 300% de daño. Si gastas tu carga de habilidad máxima, el daño de Barrera de sonido se duplica.",
-          "icon": "assets/perks/lucio_stadium_11_beat-drop.webp"
+          "icon": "assets/perks/lucio_minor_02_beat-drop.webp"
         },
         {
           "name": "Hip hop",
@@ -2360,7 +2360,7 @@
       "majorPerks": [
         {
           "name": "Potenciación en cadena",
-          "description": "Bastón caduceo aumenta su daño un 5% y se conecta a un segundo aliado cercano.",
+          "description": "La potenciación de daño de Bastón caduceo aumenta un 5% y se conecta a un segundo aliado cercano.",
           "icon": "assets/perks/mercy_major_01_chain-boost.webp"
         },
         {
@@ -2397,8 +2397,8 @@
         },
         {
           "name": "Dosis doble",
-          "description": "Obtienes una carga adicional de Sanación rápida. Durante Valquiria, se restablecen todas las cargas de Sanación rápida.",
-          "icon": "assets/perks/mercy_stadium_06_double-dose.webp"
+          "description": "Obtienes una carga adicional de Sanación rápida. Cuando Valquiria se activa, se restablece una carga de Sanación rápida.",
+          "icon": "assets/perks/mercy_major_02_double-dose.webp"
         },
         {
           "name": "Serenidad",
@@ -2407,7 +2407,7 @@
         },
         {
           "name": "Distorsión",
-          "description": "Cuando usas Sanación rápida, le otorgas al objetivo salud excedente equivalente al 30% de tu vida máxima durante 2 s y repeles a los enemigos 5 m alrededor del objetivo.",
+          "description": "Cuando usas Sanación rápida, le otorgas al objetivo salud excedente equivalente al 25% de tu vida máxima durante 2 s y repeles a los enemigos 5 m alrededor del objetivo.",
           "icon": "assets/perks/mercy_stadium_08_distortion.webp"
         },
         {
@@ -2461,7 +2461,7 @@
         },
         {
           "name": "Paso Rápido",
-          "description": "Mientras Retorno a katashiro está activo, la velocidad de movimiento de los aliados que están dentro de Aura curativa aumenta un 25%.",
+          "description": "Mientras Retorno a katashiro está activo, la velocidad de movimiento de los aliados que están dentro de Aura curativa aumenta un 20%.",
           "icon": "assets/perks/mizuki_major_02_quickstep.webp"
         }
       ],
@@ -2504,7 +2504,7 @@
       "stadiumPowers": [
         {
           "name": "Orbe necrótico",
-          "description": "Habilidad: Usa Recargar para desplegar un Orbe que inflige hasta 35 de daño y reduce el daño que infligen los enemigos golpeados en 30% durante 3 s.­ (Tiempo de reutilización de 8 s).",
+          "description": "Habilidad: Usa Recargar para desplegar un Orbe que inflige hasta 35 de daño y reduce el daño que infligen los enemigos golpeados en 50% durante 3 s. (Tiempo de reutilización de 8 s).",
           "icon": "assets/perks/moira_stadium_01_necrotic-orb.webp"
         },
         {
@@ -2544,17 +2544,17 @@
         },
         {
           "name": "Reciprocidad a distancia",
-          "description": "Después de curar 300 con Agarre biótico, obtienes 25% de alcance del disparo secundario de Agarre biótico e infliges 15% más de daño durante 3 s.",
+          "description": "Después de curar 300 con Agarre biótico, obtienes 25% de alcance del disparo secundario de Agarre biótico e infliges 15% más de daño durante 5 s.",
           "icon": "assets/perks/moira_stadium_09_remote-reciprocity.webp"
         },
         {
           "name": "Orbexplosión",
-          "description": "Vuelve a lanzar Orbe biótico para hacer explotar todos los Orbes bióticos activos, por lo que recuperas hasta 35% de salud o infliges hasta 25% de daño de la capacidad máxima del Orbe biótico.",
+          "description": "Vuelve a lanzar Orbe biótico para hacer explotar todos los Orbes bióticos activos, por lo que recuperas hasta 45% de salud o infliges hasta 30% de daño de la capacidad máxima del Orbe biótico.",
           "icon": "assets/perks/moira_stadium_10_orbsplosion.webp"
         },
         {
           "name": "Rayo espectral",
-          "description": "Si atraviesas a un enemigo durante el uso de Evanescencia, lanzas Coalescencia durante 1.25 s con 60% de efectividad. Por cada enemigo adicional, la habilidad dura 0.75 s más. ",
+          "description": "Si atraviesas a un enemigo durante el uso de Evanescencia, lanzas Coalescencia durante 1.25 s con un 100% de efectividad. Por cada enemigo adicional, la habilidad dura 0.75 s más.",
           "icon": "assets/perks/moira_stadium_11_spectral-beam.webp"
         },
         {
@@ -2606,12 +2606,12 @@
         },
         {
           "name": "Sentido de ondas",
-          "description": "El Orbe de agua potenciado se puede dirigir con más libertad y tiene un radio de explosión aumentado un 35%. Cada 5 s, tu siguiente Orbe de agua revelará a todos los enemigos en un radio de 8 m al impactar durante 5 s.",
+          "description": "El Orbe de agua potenciado se puede dirigir con más libertad y tiene un radio de explosión aumentado un 35%. Cada 5 s, el impacto de tu siguiente Orbe de agua revelará a todos los enemigos en un radio de 8 m al impactar durante 5 s.",
           "icon": "assets/perks/wuyang_stadium_02_ripple-sense.webp"
         },
         {
           "name": "Gotas de dolor",
-          "description": "Después de usar una habilidad o un artefacto, tus siguientes 2 Orbes de agua disparan 2 orbes adicionales. Cada uno inflige 20% de daño.",
+          "description": "Después de usar una habilidad o un artefacto, tus siguientes 3 Orbes de agua disparan 2 orbes adicionales. Cada uno inflige 30% de daño.",
           "icon": "assets/perks/wuyang_stadium_03_paindrops.webp"
         },
         {
@@ -2621,7 +2621,7 @@
         },
         {
           "name": "Bifurcación",
-          "description": "Después de usar una habilidad, tu Corriente restauradora (activa) se encadena al objetivo anterior con 100% de sanación durante 4 s. Puedes colocar una Corriente restauradora (pasiva) adicional.",
+          "description": "Después de usar una habilidad, tu Corriente restauradora (activa) se encadena al objetivo anterior con 100% de sanación durante 5 s. Puedes colocar una Corriente restauradora (pasiva) adicional.",
           "icon": "assets/perks/wuyang_stadium_05_bifurcation.webp"
         },
         {
@@ -2631,7 +2631,7 @@
         },
         {
           "name": "Hidrodinámica",
-          "description": "Durante Torrente impetuoso, aplicas Corriente restauradora (pasivo) a todos los demás aliados que estén en tu línea de visión con 25% menos de sanación.",
+          "description": "Cuando usas Torrente impetuoso, aplicas Corriente restauradora (pasivo) a todos los demás aliados que estén en tu línea de visión con 25% menos de sanación.",
           "icon": "assets/perks/wuyang_stadium_07_streamline.webp"
         },
         {
@@ -2657,7 +2657,7 @@
         {
           "name": "Flujo y reflujo",
           "description": "Ola guardiana retrocede hasta su ubicación inicial con un 50% de daño.",
-          "icon": "assets/perks/wuyang_stadium_12_ebb-and-flow.webp"
+          "icon": "assets/perks/wuyang_major_01_ebb-and-flow.webp"
         }
       ]
     },
@@ -2674,7 +2674,7 @@
       "minorPerks": [
         {
           "name": "Reparación discordante",
-          "description": "Zenyatta obtiene un 10% de robo de vida contra los enemigos que tienen Orbe de discordancia.",
+          "description": "Zenyatta obtiene un 15% de robo de vida contra los enemigos que tienen Orbe de discordancia.",
           "icon": "assets/perks/zenyatta_minor_01_discordant-repair.webp"
         },
         {
@@ -2708,13 +2708,13 @@
         },
         {
           "name": "Iluminación",
-          "description": "Los aliados afectados por Orbe de armonía se curan por 40% del daño que infliges.",
+          "description": "Los aliados afectados por Orbe de armonía se curan por 30% del daño que infliges.",
           "icon": "assets/perks/zenyatta_stadium_03_enlightenment.webp"
         },
         {
           "name": "Armonía dual",
           "description": "Adquieres un segundo Orbe de armonía, pero ambos curan 35% menos.",
-          "icon": "assets/perks/zenyatta_stadium_04_dual-harmony.webp"
+          "icon": "assets/perks/zenyatta_major_02_dual-harmony.webp"
         },
         {
           "name": "Hay que tener fe",
@@ -2723,7 +2723,7 @@
         },
         {
           "name": "Paz interior",
-          "description": "Obtienes un Orbe de armonía que se mantiene unido a ti. Tiene una efectividad reducida en 75%.",
+          "description": "Obtienes un Orbe de armonía que se mantiene unido a ti. Tiene una efectividad reducida en 80%.",
           "icon": "assets/perks/zenyatta_stadium_06_inner-peace.webp"
         },
         {
@@ -2795,7 +2795,7 @@
       "stadiumPowers": [
         {
           "name": "Fusión concentrada",
-          "description": "La dispersión de Cañón de fusión se reduce un 50% y la reducción de daño extiende su alcance 20 m.",
+          "description": "La dispersión de Cañón de fusión se reduce un 50% y la disminución de daño por distancia aumenta en 20 m. Al infligir daño de arma a los enemigos que a una distancia mayor a 8 m, Matriz de defensa se recupera un 33% más rápido.",
           "icon": "assets/perks/dva_stadium_01_focused-fusion.webp"
         },
         {
@@ -2810,48 +2810,48 @@
         },
         {
           "name": "Contramedidas",
-          "description": "Cuando mitigas 150 de daño con Matriz de defensa, disparas automáticamente 2 Micromisiles.",
+          "description": "Cuando mitigas 150 de daño con Matriz de defensa, disparas automáticamente 3 Micromisiles.",
           "icon": "assets/perks/dva_stadium_04_countermeasures.webp"
         },
         {
           "name": "Ráfaga de ignición",
-          "description": "La repulsión de Propulsores quema a los enemigos y les inflige 60 de daño durante 3 s.",
+          "description": "El daño de Propulsores quema a los enemigos y les inflige 40 de daño durante 2 s.",
           "icon": "assets/perks/dva_stadium_05_ignition-burst.webp"
         },
         {
           "name": "Puñetazo MEKA",
-          "description": "Mientras usas Propulsores, Cuerpo a cuerpo rápido tiene 50% más de velocidad de ataque. Las eliminaciones con ­ Cuerpo a cuerpo rápido restauran el tiempo de reutilización de Propulsores.",
+          "description": "Mientras usas Propulsores, Cuerpo a cuerpo rápido tiene 50% más de velocidad de ataque. Las eliminaciones con Cuerpo a cuerpo rápido y Propulsores restauran el tiempo de reutilización de Propulsores.",
           "icon": "assets/perks/dva_stadium_06_meka-punch.webp"
         },
         {
           "name": "Impac-Tokki",
-          "description": "Mientras usas los Propulsores, usa Agacharse para golpear el suelo con fuerza, lo que inflige daño equivalente al 25% de tu armadura máxima y escudos, y lanza por los aires a los enemigos alcanzados.",
+          "description": "Mientras usas los Propulsores, usa Agacharse para golpear el suelo con fuerza, lo que inflige un daño de Propulsores equivalente al 15% de tu vida máxima y derriba a los enemigos alcanzados.",
           "icon": "assets/perks/dva_stadium_07_tokki-slam.webp"
         },
         {
           "name": "Bloqueo de cara",
-          "description": "Matriz de defensa te cura un ­ 30% del daño que bloquea.",
+          "description": "Tras mitigar 150 de daño con Matriz de defensa, te sanas un 15% de ese daño y sanas un 25% de ese daño a todos los demás aliados en un rango de 6 m.",
           "icon": "assets/perks/dva_stadium_08_facetanking.webp"
         },
         {
           "name": "Aumento de estadísticas",
-          "description": "Durante los primeros 2 s de Propulsores, Matriz de defensa se recupera un 125% más rápido.",
+          "description": "El daño de Propulsores aumenta su duración en 0.5 s, restaura 5% de energía de Matriz de defensa y sana un 5% de vida máxima.",
           "icon": "assets/perks/dva_stadium_09_stat-boost.webp"
         },
         {
-          "name": "Detonación exprés",
-          "description": "+50% de radio de Llamar armadura robótica­ Autodestrucción explota un 15% más rápido.",
-          "icon": "assets/perks/dva_stadium_10_express-detonation.webp"
-        },
-        {
-          "name": "Nitro de Nano Cola™",
-          "description": "Cuando te eyectas de tu Armadura robótica, obtienes un 40% de vida máxima de bonificación y un 30% de velocidad de movimiento.",
-          "icon": "assets/perks/dva_stadium_11_nano-cola--nitrous.webp"
+          "name": "Eyector de MEKA",
+          "description": "Autodestrucción explota un 25% más rápido y cuesta un 60% menos de carga de habilidad máxima, pero inflige un 75% menos de daño y solo otorga un 75% de carga de habilidad máxima tras la detonación.",
+          "icon": "assets/perks/dva_stadium_10_7ac621d3abe95810.png"
         },
         {
           "name": "Módulo multitarea",
           "description": "Los Cañones de fusión ahora pueden dispararse mientras se usa Matriz de defensa.",
           "icon": "assets/perks/dva_stadium_12_multi-task-mod.webp"
+        },
+        {
+          "name": "Escudo de evacuación de MEKA",
+          "description": "+50% de radio de Llamar armadura robótica. Al eyectarte o reingresar a tu Armadura robótica, otorgas salud excedente equivalente al 20% de tu vida máxima a todos los aliados cercanos durante 5 s.",
+          "icon": "assets/perks/dva_stadium_12_df1b48ee1dca0920.png"
         }
       ]
     },
@@ -3017,14 +3017,14 @@
         },
         {
           "name": "Empalamientos explosivos",
-          "description": "El impacto de Ráfaga de púas marca a los objetivos con púas. Los ataques cuerpo a cuerpo rápidos y el corte de Salto violento detonan las púas para infligir 30 de daño explosivo.",
+          "description": "Los impactos de Ráfaga de púas marcan a los objetivos con púas. Los ataques cuerpo a cuerpo rápidos y el corte de Salto violento detonan las púas e infligen 30 de daño explosivo.",
           "icon": "assets/perks/hazard_major_02_explosive-impalements.webp"
         }
       ],
       "stadiumPowers": [
         {
           "name": "Huesos podridos",
-          "description": "Infligir 6 instancias de daño de arma marca a los objetivos con púas. Los ataques de Cuerpo a cuerpo rápido y Salto violento las detona para infligir 50 de daño.",
+          "description": "Infligir 6 instancias de daño de arma marca a los objetivos con púas. Los ataques de Cuerpo a cuerpo rápido y Salto violento las detona para infligir 60 de daño.",
           "icon": "assets/perks/hazard_stadium_01_bonerot.webp"
         },
         {
@@ -3039,7 +3039,7 @@
         },
         {
           "name": "Colmillos gemelos",
-          "description": "Cada 3 disparos de Ráfaga de púas, lanzas un segundo disparo gratuito que inflige 50% de daño.",
+          "description": "Cada 3 disparos de Ráfaga de púas, lanzas un segundo disparo gratuito que inflige 75% de daño.",
           "icon": "assets/perks/hazard_stadium_04_twin-fang.webp"
         },
         {
@@ -3064,7 +3064,7 @@
         },
         {
           "name": "Líquido sanador",
-          "description": "Cuando aparece Muro de púas, cura por un 30% de tu vida máxima a todos los aliados en un radio de 12 m durante 3 s.",
+          "description": "Cuando aparece Muro de púas, cura por un 20% de tu vida máxima a todos los aliados en un radio de 8 m durante 3 s.",
           "icon": "assets/perks/hazard_stadium_09_juiced.webp"
         },
         {
@@ -3126,7 +3126,7 @@
         },
         {
           "name": "Balas regias",
-          "description": "Los golpes críticos de Escopeta aplican una Herida que inflige 25 de daño durante 2 s.",
+          "description": "Los golpes críticos de Escopeta aplican una Herida que inflige 20 de daño durante 2 s.",
           "icon": "assets/perks/junker-queen_stadium_02_royal-bullets.webp"
         },
         {
@@ -3141,7 +3141,7 @@
         },
         {
           "name": "¡Córtalos, Gracie!",
-          "description": "El tiempo de reutilización de Hoja dentada se reduce en 1 s cada vez que impacta a un enemigo.­ Al retirar Hoja dentada, su radio aumenta un 100% e inflige 40 de daño de impacto.",
+          "description": "El tiempo de reutilización de Hoja dentada se reduce en 1 s cada vez que impacta a un enemigo. Al retirar Hoja dentada, su radio aumenta un 100% e inflige 30 de daño de impacto.",
           "icon": "assets/perks/junker-queen_stadium_05_cut--em--gracie.webp"
         },
         {
@@ -3176,7 +3176,7 @@
         },
         {
           "name": "Inclínate ante mí",
-          "description": "Al lanzar Desenfreno, te vuelves imparable y se restablecen los tiempos de reutilización de todas las habilidades. Desenfreno derriba a los enemigos impactados durante 2 s.",
+          "description": "Al lanzar Desenfreno, te vuelves imparable y se restablecen los tiempos de reutilización de todas las habilidades. Desenfreno derriba a los enemigos impactados durante 1.5 s.",
           "icon": "assets/perks/junker-queen_stadium_12_bow-down.webp"
         }
       ]
@@ -3210,7 +3210,7 @@
         },
         {
           "name": "Combustible de combate",
-          "description": "Los golpes críticos otorgan a Mauga 3 de salud excedente temporal con el siguiente uso de Sobrecarga cardíaca, hasta 150 de salud excedente.",
+          "description": "Los golpes críticos otorgan a Mauga 4 de salud excedente temporal con el siguiente uso de Sobrecarga cardíaca, hasta 150 de salud excedente.",
           "icon": "assets/perks/mauga_major_02_combat-fuel.webp"
         }
       ],
@@ -3240,9 +3240,9 @@
       ],
       "majorPerks": [
         {
-          "name": "Jabalina cargada",
-          "description": "Mantén  para cargar Jabalina de energía, lo que aumenta su repulsión hasta un 25% y la velocidad de su proyectil hasta un 100%. Con la máxima potencia, atraviesa a los enemigos.",
-          "icon": "assets/perks/orisa_major_01_charged-javelin.webp"
+          "name": "Jabalina pesada",
+          "description": "La repulsión de Jabalina de energía aumenta un 25% y el daño de impacto contra la pared aumenta en 15.",
+          "icon": "assets/perks/orisa_major_01_bcfd342643f783df.png"
         },
         {
           "name": "Barrera protectora",
@@ -3272,18 +3272,13 @@
           "icon": "assets/perks/orisa_stadium_04_spynstem-update.webp"
         },
         {
-          "name": "Enfriamiento de núcleo",
-          "description": "Mientras Fortificar está activo, se reduce el Calor generado en 90% y obtienes un 10% de velocidad de ataque.",
-          "icon": "assets/perks/orisa_stadium_05_core-cooling.webp"
-        },
-        {
           "name": "Enlazar",
           "description": "Al impactar, Jabalina de energía atraerá a los enemigos en un radio de 4 m hacia sí misma. Obtienes 3% de carga de habilidad máxima por cada enemigo atraído.",
           "icon": "assets/perks/orisa_stadium_06_lassoed.webp"
         },
         {
           "name": "Cargador crítico",
-          "description": "La Jabalina de energía puede asestar un impacto crítico con un 50% de daño adicional.­ Jabalina de energía puede cargarse con hasta un 200% de velocidad de proyectil y atravesar a los enemigos al máximo de potencia.",
+          "description": "La Jabalina de energía puede asestar un impacto crítico con un 100% de daño adicional. Jabalina de energía puede cargarse con hasta un 200% de velocidad de proyectil y atravesar a los enemigos al máximo de potencia.",
           "icon": "assets/perks/orisa_stadium_07_critical-charger.webp"
         },
         {
@@ -3307,6 +3302,11 @@
           "icon": "assets/perks/orisa_stadium_11_supercharger.webp"
         },
         {
+          "name": "Escalador OR-15",
+          "description": "Tu daño de arma aumenta según tu Calor, hasta un máximo de un 30%.",
+          "icon": "assets/perks/orisa_stadium_11_c34242dfd6b9bda4.png"
+        },
+        {
           "name": "Palas de Oladelicóptero",
           "description": "Mientras usas Giro de lanza e Impacto terrestre, obtienes vuelo libre y un 20% más de velocidad de movimiento, pero Impacto terrestre inflige un 50% menos de daño. ",
           "icon": "assets/perks/orisa_stadium_12_oladele-copter-blades.webp"
@@ -3326,12 +3326,12 @@
       "minorPerks": [
         {
           "name": "Forma amplificadora",
-          "description": "Mientras está activa la Forma de némesis, las eliminaciones extienden su duración 2 segundos. Durante Aniquilación, la extensión obtenida es de 1 segundo.",
+          "description": "Mientras la Forma de némesis está activa, las eliminaciones extienden su duración 2 segundos. Durante Aniquilación, la extensión obtenida es de 1 segundo.",
           "icon": "assets/perks/ramattra_minor_01_relentless-form.webp"
         },
         {
           "name": "Extensión de barrera",
-          "description": "La duración y el tamaño de Barrera del vacío aumenta un 25%.",
+          "description": "La duración y el tamaño de Barrera del vacío aumentan un 25%.",
           "icon": "assets/perks/ramattra_minor_02_prolonged-barrier.webp"
         }
       ],
@@ -3351,7 +3351,7 @@
         {
           "name": "Oleada del vacío",
           "description": "Acelerador del vacío libera de forma periódica una ráfaga de 6 proyectiles adicionales al disparar de manera continua.",
-          "icon": "assets/perks/ramattra_stadium_01_void-surge.webp"
+          "icon": "assets/perks/ramattra_major_01_void-surge.webp"
         },
         {
           "name": "Peste del vacío",
@@ -3395,12 +3395,12 @@
         },
         {
           "name": "Espiral insaciable",
-          "description": "+50% de radio de Vórtice voraz­ +30% de daño de Vórtice voraz",
+          "description": "+50% de radio de Vórtice voraz +15% de daño de Vórtice voraz",
           "icon": "assets/perks/ramattra_stadium_10_insatiable-spiral.webp"
         },
         {
           "name": "Vórtice destructor",
-          "description": "Cuando Vórtice voraz se detona, inflige 50 de daño y te otorga un 2% de carga de habilidad máxima por cada enemigo golpeado.",
+          "description": "Cuando Vórtice voraz se detona, inflige 25 de daño y te otorga un 2% de carga de habilidad máxima por cada enemigo golpeado.",
           "icon": "assets/perks/ramattra_stadium_11_ravaging-vortex.webp"
         },
         {
@@ -3519,13 +3519,13 @@
       "minorPerks": [
         {
           "name": "Gancho de chatarra",
-          "description": "Los golpes de Gancho con cadena recargan 2 de munición.",
+          "description": "Los golpes de Gancho con cadena recargan 4 de munición.",
           "icon": "assets/perks/roadhog_minor_01_scrap-hook.webp"
         },
         {
-          "name": "Lanzador de metralla",
-          "description": "Amplía el alcance del disparo secundario de la Pistola de chatarra un 50% y reduce su dispersión en ráfagas un 25%.",
-          "icon": "assets/perks/roadhog_minor_02_shrapnel-launcher.webp"
+          "name": "Ven aquí, cerdito",
+          "description": "Durante A todo jabalí, el tiempo de reutilización de Gancho con cadena se reduce un 80%.",
+          "icon": "assets/perks/roadhog_minor_02_4b0364924157ffcb.png"
         }
       ],
       "majorPerks": [
@@ -3535,9 +3535,9 @@
           "icon": "assets/perks/roadhog_major_01_hogdrogen-exposure.webp"
         },
         {
-          "name": "Tiradito de cerdo",
-          "description": "Obtienes salud excedente según la distancia que te separe de los enemigos a los que arrastras con Gancho de cadena, hasta 300.",
-          "icon": "assets/perks/roadhog_major_02_pulled-pork.webp"
+          "name": "Escape tóxico",
+          "description": "Mientras Compactador de basura está activo, los enemigos frente a Roadhog sufren un 30% de ralentización y reciben 20 de daño por segundo.",
+          "icon": "assets/perks/roadhog_major_02_d9dcccfe7fb8e200.png"
         }
       ],
       "stadiumPowers": []
@@ -3560,7 +3560,7 @@
         },
         {
           "name": "Hiperregeneración",
-          "description": "Un 40% del daño de Hiperesferas restaura la salud de Barrera experimental.",
+          "description": "Un 30% del daño de Hiperesferas restaura la salud de Barrera experimental.",
           "icon": "assets/perks/sigma_minor_02_hyper-regeneration.webp"
         }
       ],
@@ -3669,14 +3669,14 @@
         },
         {
           "name": "Barrera revitalizante",
-          "description": "Proyector de barrera cura a los aliados en su interior 30 de salud por segundo.",
+          "description": "Proyector de barrera cura a los aliados en su interior 35 de salud por segundo.",
           "icon": "assets/perks/winston_major_02_revitalizing-barrier.webp"
         }
       ],
       "stadiumPowers": [
         {
           "name": "Disyuntor",
-          "description": "Obtienes un 10% del daño eléctrico infligido como salud excedente, hasta 100.",
+          "description": "Obtienes un 10% del daño eléctrico como salud excedente, hasta un máximo de 100.",
           "icon": "assets/perks/winston_stadium_01_circuit-breaker.webp"
         },
         {
@@ -3691,7 +3691,7 @@
         },
         {
           "name": "Voltaje volátil",
-          "description": "El disparo secundario de Cañón Tesla puede asestar golpes críticos que infligen un 250% del daño. ",
+          "description": "El disparo secundario de Cañón Tesla puede asestar golpes críticos que infligen un 250% de daño.",
           "icon": "assets/perks/winston_stadium_04_volatile-volt.webp"
         },
         {
@@ -3721,7 +3721,7 @@
         },
         {
           "name": "Estabilizador de tensión",
-          "description": "Los aliados dentro de Proyector de barrera obtienen 30 de salud excedente temporal por segundo, hasta un máximo de 200.",
+          "description": "Los aliados dentro de Proyector de barrera reciben 30 de curación por segundo.",
           "icon": "assets/perks/winston_stadium_10_surge-protector.webp"
         },
         {
@@ -3765,7 +3765,7 @@
         },
         {
           "name": "Barrera adaptativa",
-          "description": "Cuando se activa, Escudo adaptable genera una barrera durante 1.5 segundos.",
+          "description": "Cuando se activa, Escudo adaptable genera una barrera durante 1 segundo.",
           "icon": "assets/perks/wrecking-ball_major_02_adaptive-barrier.webp"
         }
       ],
@@ -3828,7 +3828,7 @@
         },
         {
           "name": "Vórtice de Volskaya",
-          "description": "Tras desplegar una Barrera, el disparo secundario de Cañón de partículas genera un vórtice ralentizador que inflige 80 de daño durante 2 s.",
+          "description": "Tras desplegar una Barrera, el disparo secundario de Cañón de partículas genera un vórtice ralentizador que inflige 60 de daño durante 2 s.",
           "icon": "assets/perks/zarya_stadium_05_volskaya-vortex.webp"
         },
         {
@@ -3873,7 +3873,7 @@
       "name": "D.Mon",
       "role": "tank",
       "subrole": "stalwart",
-      "portrait": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/9d32268bf455685710310a79f655f13848355d9de86cf19f7293dfc201e8cd8f.png",
+      "portrait": "assets/heroes/dmon-3d.png",
       "gamemodes": [
         "quickplay"
       ],
@@ -3881,24 +3881,59 @@
         {
           "name": "La bestia interior",
           "description": "Los golpes de Sable de plasma restauran 40 de salud de Barrera de energía.",
-          "icon": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/a49a4aa586ec9a0f10b16d299e541fdfeb6da4ee2c1bf75a4f2bab1f4170ee45.png"
+          "icon": "assets/perks/dmon_minor_01_a49a4aa586ec9a0f.png"
         },
         {
           "name": "Movilidad del MEKA",
           "description": "Mientras mantengas la Barrera de energía, el consumo de combustible de Propulsores es un 30% menor.",
-          "icon": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/8d2f97ae5a2dc9b137d45bcf277030fc32754a67155c55d3d7f0525d6ea9ac6e.png"
+          "icon": "assets/perks/dmon_minor_02_8d2f97ae5a2dc9b1.png"
         }
       ],
       "majorPerks": [
         {
           "name": "Golpazo",
           "description": "Golpe de arremetida obtiene un 150% de robo de vida.",
-          "icon": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/b87f463706a6816a371f8c8b0cb62cd77f33860e85baa19998dd2aad97f89662.png"
+          "icon": "assets/perks/dmon_major_01_b87f463706a6816a.png"
         },
         {
           "name": "Fusión concentrada",
           "description": "Repetidor de fusión dispara tiros más potentes sin dispersión a un ritmo más lento.",
-          "icon": "https://d15f34w2p8l1cc.cloudfront.net/overwatch/46d8466d7de4b04dea213c55cae621e407206055eb3b9247796b3f8cd7ba2b4e.png"
+          "icon": "assets/perks/dmon_major_02_46d8466d7de4b04d.png"
+        }
+      ],
+      "stadiumPowers": []
+    },
+    {
+      "key": "doctrine",
+      "name": "Doctrine",
+      "role": "support",
+      "subrole": "survivor",
+      "portrait": "assets/heroes/doctrine.png",
+      "gamemodes": [
+        "quickplay"
+      ],
+      "minorPerks": [
+        {
+          "name": "Gracia salvadora",
+          "description": "Los Drones revitalizantes restauran 40 de salud al aplicarse.",
+          "icon": "assets/perks/doctrine_minor_01_65d3986853fa5e6f.png"
+        },
+        {
+          "name": "Extractor sanguíneo",
+          "description": "Te sanas por un valor equivalente al 50% del daño infligido con Cetro eterno con Infusión.",
+          "icon": "assets/perks/doctrine_minor_02_32ffd184fd6bf247.png"
+        }
+      ],
+      "majorPerks": [
+        {
+          "name": "Transfusión",
+          "description": "Reduce el tiempo de reutilización de Infusión según el daño infligido y la sanación aplicada.",
+          "icon": "assets/perks/doctrine_major_01_d4231c031993e68b.png"
+        },
+        {
+          "name": "Costo de vida",
+          "description": "Sacrificas 25 de tu salud máxima. La sanación de Cetro eterno aumenta un 20%.",
+          "icon": "assets/perks/doctrine_major_02_1f60c2577f3709fe.png"
         }
       ],
       "stadiumPowers": []

@@ -1090,7 +1090,9 @@ function App() {
         // Todos los héroes publicados, incluida D.Mon, se pintan completos desde el snapshot local.
         applyLoadedHeroes(localSnapshot, false)
 
-        if (!doctrineUnlocked()) return
+        // A published snapshot already contains Doctrine's current perks and local artwork.
+        // Only synchronize legacy snapshots that still lack the released hero.
+        if (!doctrineUnlocked() || localData.heroes.some((hero) => hero.key === 'doctrine')) return
 
         try {
           const doctrine = await fetchDoctrineFromOverFast(controller.signal)

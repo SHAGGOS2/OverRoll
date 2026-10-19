@@ -6,7 +6,9 @@ usuario solicita una actualizacion.
 
 ## Disponibles
 
-- Overwatch: snapshot local actualizable manualmente.
+- Overwatch: snapshot local actualizable manualmente desde las páginas oficiales
+  de héroes de Blizzard en español de México. La versión web se guarda en
+  `web/public/data/heroes.json`, con retratos e iconos en `web/public/assets`.
 - Marvel Rivals: catalogo local guardado por la aplicacion.
 - Team Fortress 2: catalogo local de clases.
 - Plants vs. Zombies: Garden Warfare 2: catalogo local de clases y variantes.
@@ -26,6 +28,14 @@ usuario solicita una actualizacion.
 
 ## Referencias
 
+- Overwatch: `https://overwatch.blizzard.com/es-mx/heroes/` y
+  `https://overwatch.blizzard.com/en-us/news/patch-notes/live/2026/10/`.
+  Catálogo web verificado el 19 de octubre de 2026: 54 héroes, sus ventajas
+  menores y mayores, y los poderes de Estadio publicados. Sombra pertenece a
+  Apoyo / Táctico. D.Mon usa el retrato 3D oficial guardado localmente como
+  `assets/heroes/dmon-3d.png`, para evitar el retrato 2D antiguo y la dependencia
+  de una URL externa. Doctrine también forma parte del catálogo local; la web
+  solo consulta OverFast para él si recibe un snapshot antiguo sin ese héroe.
 - Valorant: `https://developer.riotgames.com/docs/valorant` y
   `https://valorant-api.com/`.
 - Last Flag: `https://lastflag.com/contestants/`.
