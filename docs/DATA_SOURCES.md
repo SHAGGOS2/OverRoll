@@ -15,7 +15,11 @@ usuario solicita una actualizacion.
 - Valorant: snapshot local de agentes y retratos. La app no incluye una clave
   de Riot ni consulta la API durante una partida.
 - Last Flag: snapshot local mantenido desde el reparto publicado en su sitio oficial.
-- Deadlock: snapshot local creado a partir de la API comunitaria documentada.
+- Deadlock: snapshot local creado a partir de la API comunitaria documentada,
+  incluyendo solo héroes con `player_selectable: true` y sin `disabled: true`.
+  Catálogo web verificado el 19 de octubre de 2026: 43 héroes, con Rat King,
+  Baba, Solomon, Deadman Danny y Violet. Nurse Harrow sigue pendiente de su
+  lanzamiento del 20 de octubre. Los retratos se conservan dentro de la web.
 - THE FINALS: catalogo local de tamanos, armas, especializaciones y artefactos.
 - Paladins: 59 campeones y retratos locales. La API oficial de Hi-Rez documenta
   el catalogo y sus URL de iconos, pero exige Developer ID, Authentication Key
@@ -39,7 +43,11 @@ usuario solicita una actualizacion.
 - Valorant: `https://developer.riotgames.com/docs/valorant` y
   `https://valorant-api.com/`.
 - Last Flag: `https://lastflag.com/contestants/`.
-- Deadlock: `https://api.deadlock-api.com/docs`.
+- Deadlock: `https://api.deadlock-api.com/docs`,
+  `https://api.deadlock-api.com/v1/assets/heroes` y
+  `https://www.playdeadlock.com/cityneversleeps`.
+  El calendario de estrenos se contrasta con las noticias oficiales de Valve:
+  `https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/?appid=1422450&count=30&maxlength=0`.
 - THE FINALS: `https://www.thefinals.wiki/wiki/Builds`,
   `https://www.thefinals.wiki/wiki/Weapons` y
   `https://www.thefinals.wiki/wiki/Specializations`.

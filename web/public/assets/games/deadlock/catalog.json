@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "source": "https://assets.deadlock-api.com/v2/heroes?language=english",
+  "source": "https://api.deadlock-api.com/v1/assets/heroes",
   "heroes": [
     {
       "key": "abrams",
@@ -13,6 +13,12 @@
       "name": "Apollo",
       "role": "hero",
       "portrait": "apollo.png"
+    },
+    {
+      "key": "baba",
+      "name": "Baba",
+      "role": "hero",
+      "portrait": "baba.png"
     },
     {
       "key": "bebop",
@@ -37,6 +43,12 @@
       "name": "Celeste",
       "role": "hero",
       "portrait": "celeste.png"
+    },
+    {
+      "key": "deadman-danny",
+      "name": "Deadman Danny",
+      "role": "hero",
+      "portrait": "deadman-danny.png"
     },
     {
       "key": "drifter",
@@ -147,6 +159,12 @@
       "portrait": "pocket.png"
     },
     {
+      "key": "rat-king",
+      "name": "Rat King",
+      "role": "hero",
+      "portrait": "rat-king.png"
+    },
+    {
       "key": "rem",
       "name": "Rem",
       "role": "hero",
@@ -177,6 +195,12 @@
       "portrait": "sinclair.png"
     },
     {
+      "key": "solomon",
+      "name": "Solomon",
+      "role": "hero",
+      "portrait": "solomon.png"
+    },
+    {
       "key": "the-doorman",
       "name": "The Doorman",
       "role": "hero",
@@ -199,6 +223,12 @@
       "name": "Vindicta",
       "role": "hero",
       "portrait": "vindicta.png"
+    },
+    {
+      "key": "violet",
+      "name": "Violet",
+      "role": "hero",
+      "portrait": "violet.png"
     },
     {
       "key": "viscous",
@@ -230,5 +260,6 @@
       "role": "hero",
       "portrait": "yamato.png"
     }
-  ]
+  ],
+  "updated": "2026-10-19"
 }

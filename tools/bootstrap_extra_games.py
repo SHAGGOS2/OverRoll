@@ -104,13 +104,13 @@ def deadlock_portrait(row: dict[str, Any]) -> str:
 
 
 def build_deadlock() -> None:
-    endpoint = "https://assets.deadlock-api.com/v2/heroes?language=english"
+    endpoint = "https://api.deadlock-api.com/v1/assets/heroes"
     payload = read_json(endpoint)
     rows = payload.get("heroes", payload) if isinstance(payload, dict) else payload
     directory = ASSET_ROOT / "deadlock"
     heroes: list[dict[str, Any]] = []
     for row in rows if isinstance(rows, list) else []:
-        if not isinstance(row, dict) or row.get("disabled") is True:
+        if not isinstance(row, dict) or row.get("disabled") is True or row.get("player_selectable") is not True:
             continue
         name = str(row.get("name") or row.get("class_name") or "").strip()
         portrait_url = deadlock_portrait(row)

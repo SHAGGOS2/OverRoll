@@ -212,7 +212,7 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     minPlayers: 3,
     maxPlayers: 12,
     description: 'Genera tres preferencias de héroe por jugador; Deadlock decide cuál asigna al entrar a la partida.',
-    catalogLabel: '38 héroes',
+    catalogLabel: '43 héroes',
     formatLabel: '3 a 12 jugadores',
     roles: [{ id: 'hero', label: 'Héroe', color: '#d1bd77' }],
   },
@@ -418,6 +418,15 @@ function normalizePortrait(gameId: RosterGameId, portrait: string): string {
   return `assets/games/${gameId}/${filename}`
 }
 
+function expandCompleteCatalogSelection(selectedKeys: string[], catalogKeys: string[], previousCatalogKeys: string[]): string[] {
+  const available = new Set(catalogKeys)
+  const selected = new Set(selectedKeys.filter((key) => available.has(key)))
+  const previous = previousCatalogKeys.filter((key) => available.has(key))
+  return previous.length > 0 && previous.every((key) => selected.has(key))
+    ? [...available]
+    : [...selected]
+}
+
 function roleDefinition(game: RosterGameDefinition, roleId: string): RoleDefinition {
   return game.roles.find((role) => role.id === roleId) ?? {
     id: roleId,
@@ -563,6 +572,12 @@ export default function RosterModule({
         setStatus(`${heroes.length} ${game.catalogLabel.replace(/^\d+\s*/, '').toLowerCase()} listos`)
         setRouletteSelected((current) => {
           if (!current.length) return heroes.map((hero) => hero.key)
+          if (gameId === 'deadlock') {
+            // Weights retain every hero from the previously loaded catalog, even
+            // when only a custom subset is selected. After this load they include
+            // the new heroes too, so later exclusions stay excluded on reload.
+            return expandCompleteCatalogSelection(current, heroes.map((hero) => hero.key), Object.keys(rouletteWeights))
+          }
           const valid = current.filter((key) => heroes.some((hero) => hero.key === key))
           const missing = heroes.filter((hero) => !valid.includes(hero.key))
           // Si el usuario tenía seleccionado el catálogo completo anterior, conserva
