@@ -19,7 +19,7 @@ export default function AnimatedLayer({ open, enabled, onClose, className = 'fil
     const overflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     const focusable = () => Array.from(layer.current?.querySelectorAll<HTMLElement>('input, select, button, a[href], [tabindex="0"]') ?? []).filter((element) => !element.hasAttribute('disabled') && element.getClientRects().length > 0)
-    const frame = requestAnimationFrame(() => (layer.current?.querySelector<HTMLElement>('input:not([type="checkbox"])') ?? focusable()[0] ?? layer.current)?.focus())
+    const frame = requestAnimationFrame(() => (layer.current?.querySelector<HTMLElement>('[data-initial-focus], input:not([type="checkbox"])') ?? focusable()[0] ?? layer.current)?.focus())
     const keydown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); close.current() }
       if (event.key !== 'Tab') return

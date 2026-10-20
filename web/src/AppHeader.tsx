@@ -1,16 +1,17 @@
-import { useId, type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
+import GamePicker from './GamePicker'
 import { translate, type SupportedLocale } from './localization'
 
 type View = 'principal' | 'roulette' | 'profiles' | 'more'
 type Game<Id extends string> = { id: Id; name: string; icon: string; accent: string; available: boolean }
 type Props<Id extends string> = {
   games: Game<Id>[]; activeGame: Id; activeView: View; locale: SupportedLocale
+  animationsEnabled: boolean; onMenuToggle: (open: boolean) => void
   logoSrc: string; asset: (path: string) => string
   onGameChange: (game: Id) => void; onNavigate: (view: View) => void; onHover: () => void
 }
 
-export default function AppHeader<Id extends string>({ games, activeGame, activeView, locale, logoSrc, asset, onGameChange, onNavigate, onHover }: Props<Id>) {
-  const selectorId = useId()
+export default function AppHeader<Id extends string>({ games, activeGame, activeView, locale, logoSrc, asset, onGameChange, onNavigate, onHover, animationsEnabled, onMenuToggle }: Props<Id>) {
   const currentGame = games.find((game) => game.id === activeGame) ?? games[0]
   const t = (key: Parameters<typeof translate>[1]) => translate(locale, key)
   const tabs: Array<{ id: View; label: string; path: string }> = [
@@ -24,16 +25,7 @@ export default function AppHeader<Id extends string>({ games, activeGame, active
       <span className="brand-mark"><img src={logoSrc} alt="" /></span>
       <span className="brand-copy"><strong>OverRoll</strong></span>
     </button>
-    <div className="topbar-game-picker">
-      {currentGame && <img className="topbar-game-icon" src={asset(currentGame.icon)} alt="" aria-hidden="true" />}
-      <label htmlFor={selectorId}><span>{t('tab_games')}</span>
-        <select id={selectorId} value={activeGame} onChange={(event) => {
-          const game = games.find((game) => game.id === event.target.value && game.available)
-          if (game && game.id !== activeGame) onGameChange(game.id)
-        }}>{games.map((game) => <option value={game.id} key={game.id} disabled={!game.available} translate="no">{game.name}</option>)}</select>
-      </label>
-      <svg className="topbar-picker-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
-    </div>
+    <GamePicker games={games} activeGame={activeGame} locale={locale} asset={asset} animationsEnabled={animationsEnabled} onGameChange={onGameChange} onMenuToggle={onMenuToggle} onHover={onHover} />
     <nav aria-label="OverRoll">
       {tabs.map((tab) => <button type="button" key={tab.id} className={activeView === tab.id ? 'nav-active' : ''} aria-current={activeView === tab.id ? 'page' : undefined} onMouseEnter={onHover} onClick={() => onNavigate(tab.id)}>
         <svg className="topbar-nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={tab.path} /></svg>

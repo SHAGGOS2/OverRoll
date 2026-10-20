@@ -27,6 +27,7 @@ import './SharedRoulette.css'
 import './Profiles.css'
 import './StandardGames.css'
 import './AppHeader.css'
+import './GamePicker.css'
 import { warmImageCache } from './imageCache'
 import { creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
 import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
@@ -1854,14 +1855,15 @@ function App() {
                       <div className="portrait-grid" /><div className="portrait-fallback"><Icon name="gamepad" size={48} /></div>
                       {mercenary ? <img className="hero-image" src={asset(mercenary.portrait)} alt={mercenary.name} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} /> : <div className="portrait-loading"><span /><span /><span /></div>}
                       <div className="portrait-vignette" />
+                      {mercenary && <span className="class-emblem" aria-hidden="true"><img src={asset('assets/tf2/icons/' + mercenary.key.replace(/^tf2-/, '') + '.png')} alt="" /></span>}
                     </div>
                     <div className="hero-info"><div className="hero-name-row"><h2>{mercenary?.name ?? 'Sin selección'}</h2><span className={`role-dot tf2-dot ${mercenary?.group ?? ''}`} /></div><div className={`hero-role tf2-role ${mercenary?.group ?? ''}`}>{mercenary && <img className="hero-role-icon" src={asset('assets/tf2/icons/' + mercenary.key.replace(/^tf2-/, '') + '.png')} alt="" aria-hidden="true" />}{mercenary ? tf2GroupLabels[mercenary.group] : 'Genera un equipo'}</div></div>
+                    {profile && <div className="loadout"><div><small>Perfil</small><span translate="no">{profile.name}</span></div></div>}
                     <div className="card-actions tf2-card-actions">
                       <button type="button" onClick={() => rerollTf2(index)} disabled={!mercenary || pick?.locked || tf2RerollingIndex !== null} data-tooltip="Cambiar clase"><Icon name="reroll" size={18} /></button>
                       <button type="button" onClick={() => openTf2Filter(index)} className={player.blocked.length > 0 ? 'active-filter' : ''} data-tooltip="Filtro"><Icon name="filter" size={18} /></button>
                       <button type="button" onClick={() => toggleTf2Lock(index)} disabled={!mercenary} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
                     </div>
-                    {profile && <div className="loadout"><div><small>Perfil</small><span translate="no">{profile.name}</span></div></div>}
                   </article>
                 )
               })}
@@ -2042,13 +2044,6 @@ function App() {
                         </div>
                       </div>
 
-                      <div className="card-actions four-actions">
-                        <button type="button" onClick={() => reroll(index)} disabled={!hero || pick?.locked || rolesOnly || rerollingIndex !== null} data-tooltip="Reroll" aria-label={`Reroll de ${player.name}`}><Icon name="reroll" size={18} /></button>
-                        <button type="button" onClick={() => openFilter(index)} disabled={rolesOnly} data-tooltip="Filtro" aria-label={`Filtro de ${player.name}`} className={player.blocked.length > 0 ? 'active-filter' : ''}><Icon name="filter" size={18} /></button>
-                        <button type="button" onClick={() => openDetails(index)} disabled={!hero} data-tooltip="Perks y detalles" aria-label={`Detalles de ${hero?.name ?? 'héroe'}`}><Icon name="details" size={18} /></button>
-                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero || rolesOnly} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'} aria-label={pick?.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
-                      </div>
-
                       {!rolesOnly && hero && pick.perks.length > 0 && (
                         <div className={`card-perks ${stadium ? 'stadium' : 'quickplay'}`}>
                           {pick.perks.map((perk, perkIndex) => (
@@ -2060,12 +2055,12 @@ function App() {
                         </div>
                       )}
 
-                      <div className="loadout">
-                        <div>
-                          <small>{stadium ? 'Poderes equipados' : pick.perks.length > 0 ? 'Equipamiento' : 'Perfil'}</small>
-                          <span>{stadium ? `${pick.perks.length} poderes seleccionados` : pick.perks.length > 0 ? `${pick.perks.length} mejoras seleccionadas` : assignedProfile ? assignedProfile.name : 'Sin perfil asignado'}</span>
-                        </div>
-                        <span className="loadout-status"><Icon name="check" size={13} /></span>
+                      {assignedProfile && <div className="loadout"><div><small>Perfil</small><span translate="no">{assignedProfile.name}</span></div></div>}
+                      <div className="card-actions four-actions">
+                        <button type="button" onClick={() => reroll(index)} disabled={!hero || pick?.locked || rolesOnly || rerollingIndex !== null} data-tooltip="Reroll" aria-label={`Reroll de ${player.name}`}><Icon name="reroll" size={18} /></button>
+                        <button type="button" onClick={() => openFilter(index)} disabled={rolesOnly} data-tooltip="Filtro" aria-label={`Filtro de ${player.name}`} className={player.blocked.length > 0 ? 'active-filter' : ''}><Icon name="filter" size={18} /></button>
+                        <button type="button" onClick={() => openDetails(index)} disabled={!hero} data-tooltip="Perks y detalles" aria-label={`Detalles de ${hero?.name ?? 'héroe'}`}><Icon name="details" size={18} /></button>
+                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero || rolesOnly} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'} aria-label={pick?.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
                       </div>
                     </article>
                   )
@@ -2433,7 +2428,7 @@ function App() {
     <div className={`app view-${activeView} ${animationsEnabled ? '' : 'reduce-motion'} ${compactPerks ? 'compact-perks' : ''} ${lowPowerMode ? 'low-power' : ''} ${mobileCompactMode ? 'mobile-compact' : ''}`}>
       <div className="ambient-grid" /><div className="ambient-orb orb-one" /><div className="ambient-orb orb-two" /><div className="noise-layer" />
 
-      <AppHeader logoSrc={`${baseUrl}app_icon.png`} games={gameModules} activeGame={activeGame} activeView={activeView} locale={activeLocale} asset={asset} onGameChange={activateGame} onNavigate={navigate} onHover={hoverSound} />
+      <AppHeader animationsEnabled={animationsEnabled && !lowPowerMode} onMenuToggle={(open) => playSound(open ? 'open' : 'close')} logoSrc={`${baseUrl}app_icon.png`} games={gameModules} activeGame={activeGame} activeView={activeView} locale={activeLocale} asset={asset} onGameChange={activateGame} onNavigate={navigate} onHover={hoverSound} />
 
       {activeGame === 'pvzgw2' && (activeView === 'principal' || activeView === 'roulette') && (
         <PvzModule

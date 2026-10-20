@@ -41,10 +41,11 @@
 .topbar-game-picker:hover,
 .topbar-game-picker:focus-within { border-color: var(--active-accent); }
 .topbar-game-icon { width: 32px; height: 32px; flex: none; padding: 4px; border: 1px solid #ffffff12; border-radius: 6px; object-fit: contain; background: #06121e; }
-.topbar-game-picker label { display: grid; flex: 1; min-width: 0; gap: 1px; }
-.topbar-game-picker label > span { color: #8eabc1; font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
-.topbar-game-picker select { width: 100%; min-width: 0; padding: 1px 0; border: 0; outline: 0; color: #edf4f8; background: transparent; appearance: none; font-size: 12px; font-weight: 700; cursor: pointer; text-overflow: ellipsis; }
-.topbar-game-picker select option { color: #edf4f8; background: #102232; }
+.topbar-game-picker { width: 100%; text-align: left; cursor: pointer; font: inherit; }
+.topbar-game-copy { display: grid; flex: 1; min-width: 0; gap: 2px; }
+.topbar-game-copy small { color: #8eabc1; font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
+.topbar-game-copy strong { overflow: hidden; color: #edf4f8; font-size: 12px; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+.topbar-game-picker:focus-visible { outline: 2px solid var(--active-accent); outline-offset: 3px; }
 .topbar-picker-chevron { position: absolute; right: 10px; top: 17px; color: var(--active-accent); pointer-events: none; }
 .app .topbar nav {
   position: static;
@@ -113,8 +114,8 @@
   .app .topbar .brand-copy strong { font-size: 19px; }
   .topbar-game-picker { justify-self: end; width: min(100%, 220px); height: 44px; gap: 7px; padding-left: 6px; }
   .topbar-game-icon { width: 28px; height: 28px; }
-  .topbar-game-picker label > span { font-size: 8px; }
-  .topbar-game-picker select { font-size: 11px; }
+  .topbar-game-copy small { font-size: 8px; }
+  .topbar-game-copy strong { font-size: 11px; }
   .topbar-picker-chevron { top: 15px; }
   .app .topbar nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; height: calc(64px + env(safe-area-inset-bottom)); padding: 5px 7px calc(5px + env(safe-area-inset-bottom)); border: 0; border-top: 1px solid #3c5369; border-radius: 0; background: #0b1725f7; box-shadow: 0 -8px 25px #0004; }
   .app .topbar nav button { flex-direction: column; min-width: 0; min-height: 50px; padding: 5px 2px; gap: 3px; border-radius: 7px; font-size: 10px; }
