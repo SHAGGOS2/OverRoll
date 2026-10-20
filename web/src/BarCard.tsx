@@ -45,8 +45,9 @@ export function TeleportPortrait({ src, alt, crop, revision, enabled, locked = f
 }
 
 export default function BarCard(props: Props) {
+  if (props.design === 'orbit' || props.design === 'hex') return <ShapeCard {...props} />
   const { player, index, name, role, roleId, roleIcon, portrait, rolesOnly, locked, profile, blocked, perks, actions, revision, motion, locale, design = 'bars', gameId = 'overwatch', accent, fit, frame, candidates, extras, subtitle } = props
-  const portraitMotion = design === 'horizontal' ? 'slide' : design === 'hex' ? 'flip' : design === 'orbit' ? 'orbit' : 'teleport'
+  const portraitMotion = design === 'horizontal' ? 'slide' : 'teleport'
   return <article className={`bar-card ${design !== 'bars' && design !== 'classic' ? `is-${design}` : ''} bar-game-${gameId} ${roleId ?? ''} ${locked ? 'is-locked' : ''} ${candidates ? 'has-candidates' : ''} ${perks.length ? 'has-perks' : ''}`} style={{ ...(accent ? { '--role-color': accent } : {}), '--bar-perk-rows': perks.length } as CSSProperties} aria-label={`${player} · ${name}`}>
     <header className="bar-card-player"><small>{String(index + 1).padStart(2, '0')}</small><strong translate="no" title={player}>{player}</strong>{design === 'horizontal' && profile && <span className="bar-card-profile" translate="no" title={profile}>{profile}</span>}{locked && <span aria-hidden="true">◆</span>}{blocked > 0 && <small>{blocked}</small>}</header>
     <div className="bar-card-panel">
@@ -61,6 +62,34 @@ export default function BarCard(props: Props) {
     </div>
     {extras && <div className="bar-card-extras">{extras}</div>}
     <div className="bar-card-actions">{actions}</div>
+  </article>
+}
+
+function ShapeCard(props: Props) {
+  const { player, index, name, role, roleId, roleIcon, portrait, rolesOnly, locked, profile, blocked, perks, actions, revision, motion, locale, design, gameId = 'overwatch', accent, fit, frame, candidates, extras, subtitle } = props
+  const orbit = design === 'orbit'
+  const identity = <div className="shape-identity"><h2 translate="no" title={name}>{name}</h2><span className="shape-role">{role}</span>{subtitle && <small>{subtitle}</small>}</div>
+  return <article className={`bar-card shape-card is-${design} bar-game-${gameId} ${roleId ?? ''} ${locked ? 'is-locked' : ''} ${candidates ? 'has-candidates' : ''}`} style={accent ? { '--role-color': accent } as CSSProperties : undefined} aria-label={`${player} · ${name}`}>
+    <div className="shape-stage">
+      <div className="shape-outline" aria-hidden="true" />
+      {candidates ? <div className="shape-candidates">{candidates.map((candidate, i) => <div className="shape-candidate" key={i} aria-label={`${i + 1} · ${candidate.name}`}>
+        <div className="shape-candidate-art"><TeleportPortrait motionStyle={orbit ? 'orbit' : 'flip'} src={candidate.portrait} alt={candidate.name} revision={revision} enabled={motion} locked={locked} fit="contain" /></div>
+        <span aria-hidden="true">{i + 1}</span><strong translate="no" title={candidate.name}>{candidate.name}</strong>
+      </div>)}</div> : <div className="shape-portrait"><TeleportPortrait motionStyle={orbit ? 'orbit' : 'flip'} src={portrait} alt={name} crop={frame} revision={revision} enabled={motion} locked={locked} rolesOnly={rolesOnly} fit={fit} /></div>}
+      {roleIcon && <span className="shape-role-medallion"><img src={roleIcon} alt="" aria-hidden="true" /></span>}
+      <span className="shape-sequence" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+      {!orbit && identity}
+      <span className="shape-glint" aria-hidden="true" />
+    </div>
+    {orbit && identity}
+    {perks.length > 0 && !rolesOnly && <div className={`shape-perks ${perks.length > 2 ? 'is-stadium' : ''}`}>
+      {perks.map((perk, i) => <div className="shape-perk" title={`${perk.name}${perk.description ? '\n' + perk.description : ''}`} key={i}>
+        <span>{perk.icon ? <img src={perk.icon} alt="" /> : '✦'}</span><div><small>{perk.tier}</small><b translate="no" lang={locale}>{perk.name}</b></div>
+      </div>)}
+    </div>}
+    <div className="shape-player"><strong translate="no" title={player}>{player}</strong>{locked && <span aria-hidden="true">◆</span>}{blocked > 0 && <span>{blocked}</span>}{profile && <small translate="no" title={profile}>{profile}</small>}</div>
+    {extras && <div className="bar-card-extras shape-extras">{extras}</div>}
+    <div className="bar-card-actions shape-actions">{actions}</div>
   </article>
 }
 

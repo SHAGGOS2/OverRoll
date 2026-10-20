@@ -19,7 +19,7 @@ export function teamImageLayout(count: number, detailCount: number, alternatives
   }
   if (design === 'hex' || design === 'orbit') {
     const columns = Math.min(3, Math.max(1, count)), rows = Math.ceil(count / columns), cardWidth = 320
-    const cardHeight = 390 + Math.min(8, detailCount) * 38 + (alternatives ? 200 : 0)
+    const cardHeight = (design === 'orbit' && alternatives ? 470 : 430) + Math.min(8, detailCount) * 40
     return { columns, rows, cardWidth, cardHeight, width: 96 + columns * cardWidth + (columns - 1) * 24, height: 222 + rows * cardHeight + (rows - 1) * 24 + 80 }
   }
   if (design === 'bars') {
@@ -108,32 +108,79 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
     })
     else if (options.design === 'hex' || options.design === 'orbit') options.cards.forEach((card, index) => {
       const x = 48 + index % layout.columns * (layout.cardWidth + 24), y = 222 + Math.floor(index / layout.columns) * (layout.cardHeight + 24)
-      ctx.fillStyle = '#101e2e'; ctx.beginPath(); ctx.roundRect(x, y, layout.cardWidth, layout.cardHeight, 14); ctx.fill()
-      ctx.strokeStyle = card.locked ? '#ffcf6b' : card.color; ctx.lineWidth = card.locked ? 2 : 1; ctx.stroke()
-      text(String(index + 1).padStart(2, '0'), x + 16, y + 29, 24, 13, card.color, 900)
-      text(card.player, x + 50, y + 29, 250, 17, '#f4f7fc', 750, 12)
-      const portrait = (src: string | undefined, px: number, py: number, size: number, frame?: PortraitFrame) => {
-        ctx.save(); ctx.beginPath()
-        if (options.design === 'orbit') ctx.arc(px + size / 2, py + size / 2, size / 2, 0, Math.PI * 2)
-        else { ctx.moveTo(px + size * .25, py); ctx.lineTo(px + size * .75, py); ctx.lineTo(px + size, py + size * .5); ctx.lineTo(px + size * .75, py + size); ctx.lineTo(px + size * .25, py + size); ctx.lineTo(px, py + size * .5); ctx.closePath() }
-        ctx.fillStyle = '#1a3044'; ctx.fill(); ctx.clip(); picture(src, px, py, size, size, card.fit === 'contain', frame); ctx.restore()
+      const orbit = options.design === 'orbit', border = card.locked ? '#ffcf6b' : card.color
+      const details = (card.details ?? []).slice(0, 8)
+      const candidates = card.alternatives?.length ? [{ label: card.name, image: card.portrait }, ...card.alternatives.slice(0, 2)] : undefined
+      const center = (label: string, ty: number, width: number, size: number, color = '#f4f7fc', weight = 700, minSize = size) => {
+        ctx.save(); ctx.textAlign = 'center'; text(label, x + 160, ty, width, size, color, weight, minSize); ctx.restore()
       }
-      if (card.alternatives?.length) {
-        const candidates = [{ label: card.name, image: card.portrait }, ...card.alternatives.slice(0, 2)]
-        candidates.forEach((candidate, i) => { portrait(candidate.image, x + 105, y + 54 + i * 150, 110); text(candidate.label, x + 22, y + 184 + i * 150, 276, 14, '#edf5ff', 750, 10) })
-        text(card.role, x + 22, y + layout.cardHeight - 28, 276, 12, card.color)
-      } else {
-        portrait(card.portrait, x + 60, y + 52, 200, card.frame)
-        text(card.name.toUpperCase(), x + 20, y + 286, 280, 24, '#ffffff', 900, 15)
-        picture(card.icon, x + 20, y + 302, 19, 19, true)
-        text(card.role, x + (card.icon ? 47 : 20), y + 317, card.icon ? 253 : 280, 13, card.color)
-        ;(card.details ?? []).slice(0, 8).forEach((detail, i) => {
-          const dy = y + 346 + i * 38
-          ctx.fillStyle = '#1a2b3d'; ctx.beginPath(); ctx.roundRect(x + 16, dy - 8, 288, 32, 5); ctx.fill()
-          picture(detail.image, x + 22, dy - 4, 24, 24, true)
-          text(detail.label, x + (detail.image ? 55 : 24), dy + 13, detail.image ? 241 : 272, 12, '#edf5ff', 600, 10)
+      const hexagon = (px: number, py: number, w: number, h: number) => {
+        ctx.beginPath(); ctx.moveTo(px + w / 2, py); ctx.lineTo(px + w, py + h * .18); ctx.lineTo(px + w, py + h * .82)
+        ctx.lineTo(px + w / 2, py + h); ctx.lineTo(px, py + h * .82); ctx.lineTo(px, py + h * .18); ctx.closePath()
+      }
+      const portrait = (src: string | undefined, px: number, py: number, w: number, h: number, frame?: PortraitFrame) => {
+        ctx.save()
+        if (orbit) { ctx.beginPath(); ctx.arc(px + w / 2, py + h / 2, w / 2, 0, Math.PI * 2) }
+        else hexagon(px, py, w, h)
+        ctx.fillStyle = '#1a3044'; ctx.fill(); ctx.clip(); picture(src, px, py, w, h, candidates ? true : card.fit === 'contain', frame); ctx.restore()
+      }
+      const detailTop = orbit && candidates ? 370 : orbit ? 340 : 360
+      if (orbit) {
+        const cy = y + (candidates ? 165 : 143), radius = candidates ? 149 : 133
+        ctx.strokeStyle = border; ctx.lineWidth = 1; ctx.setLineDash([3, 6]); ctx.beginPath(); ctx.arc(x + 160, cy, radius, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([])
+        ctx.lineWidth = 3
+        for (const angle of [-.85, 2.3]) { ctx.beginPath(); ctx.arc(x + 160, cy, radius - 7, angle, angle + 1.15); ctx.stroke() }
+        if (candidates) candidates.forEach((candidate, i) => {
+          const px = i === 0 ? x + 105 : i === 1 ? x + 29 : x + 181, py = y + (i === 0 ? 16 : 167)
+          portrait(candidate.image, px, py, 110, 110)
+          ctx.save(); ctx.textAlign = 'center'; text(candidate.label, px + 55, py + 132, 137, 13, '#edf5ff', 750, 10); ctx.restore()
         })
+        else portrait(card.portrait, x + 43, y + 26, 234, 234, card.frame)
+        const plaqueY = y + (candidates ? 318 : 243), plaqueH = candidates ? 41 : 80
+        ctx.fillStyle = '#101e2e'; ctx.beginPath(); ctx.roundRect(x + 17, plaqueY, 286, plaqueH, 22); ctx.fill(); ctx.strokeStyle = border; ctx.lineWidth = 1; ctx.stroke()
+        if (candidates) center(card.role, plaqueY + 25, 262, 13, card.color)
+        else { center(card.name.toUpperCase(), plaqueY + 31, 262, 24, '#ffffff', 900, 14); center(card.role, plaqueY + 57, 254, 13, card.color) }
+        ctx.fillStyle = '#101e2e'; ctx.beginPath(); ctx.arc(x + 48, y + 51, 18, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
+        ctx.save(); ctx.textAlign = 'center'; text(String(index + 1).padStart(2, '0'), x + 48, y + 56, 30, 12, card.color, 800); ctx.restore()
+        if (card.icon) { ctx.beginPath(); ctx.arc(x + 274, y + 57, 21, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); picture(card.icon, x + 262, y + 45, 24, 24, true) }
+      } else {
+        hexagon(x + 4, y, 312, 350); ctx.fillStyle = '#101e2e'; ctx.fill(); ctx.strokeStyle = border; ctx.lineWidth = card.locked ? 3 : 1.5; ctx.stroke()
+        if (candidates) {
+          candidates.forEach((candidate, i) => {
+            const left = i % 2 === 0, py = y + 43 + i * 74
+            portrait(candidate.image, x + (left ? 17 : 233), py, 70, 70)
+            ctx.save(); ctx.textAlign = left ? 'left' : 'right'; text(candidate.label, x + (left ? 98 : 222), py + 42, 190, 14, '#edf5ff', 750, 10); ctx.restore()
+          })
+          center(card.role, y + 294, 250, 13, card.color)
+        } else {
+          portrait(card.portrait, x + 8, y + 4, 304, 342, card.frame)
+          ctx.save(); hexagon(x + 8, y + 4, 304, 342); ctx.clip()
+          const fade = ctx.createLinearGradient(0, y + 170, 0, y + 325); fade.addColorStop(0, '#07121f00'); fade.addColorStop(.7, '#07121ff2'); fade.addColorStop(1, '#07121f')
+          ctx.fillStyle = fade; ctx.fillRect(x + 8, y + 170, 304, 176); ctx.restore()
+          text(card.name.toUpperCase(), x + 33, y + 262, 254, 26, '#ffffff', 900, 15)
+          text(card.role, x + 33, y + 285, 254, 13, card.color)
+          if (card.icon) { hexagon(x + 17, y + 85, 42, 44); ctx.fillStyle = '#101e2e'; ctx.fill(); picture(card.icon, x + 27, y + 96, 22, 22, true) }
+        }
+        center(String(index + 1).padStart(2, '0'), y + 26, 40, 12, card.color, 800)
       }
+      details.forEach((detail, i) => {
+        const dx = x + (orbit ? i % 2 ? 24 : 6 : 9), dy = y + detailTop + i * 40, w = orbit ? 290 : 302
+        ctx.fillStyle = '#13283a'; ctx.strokeStyle = border; ctx.lineWidth = 1
+        ctx.beginPath()
+        if (orbit) ctx.roundRect(dx, dy, w, 34, 17)
+        else { ctx.moveTo(dx + 9, dy); ctx.lineTo(dx + w, dy); ctx.lineTo(dx + w, dy + 25); ctx.lineTo(dx + w - 9, dy + 34); ctx.lineTo(dx, dy + 34); ctx.lineTo(dx, dy + 9); ctx.closePath() }
+        ctx.fill(); ctx.stroke()
+        picture(detail.image, dx + 6, dy + 5, 24, 24, true)
+        text(detail.label, dx + (detail.image ? 38 : 12), dy + 22, w - (detail.image ? 48 : 24), 12, '#edf5ff', 600, 10)
+      })
+      const playerY = y + detailTop + details.length * 40 + 25
+      ctx.strokeStyle = border; ctx.lineWidth = 1; ctx.beginPath()
+      if (orbit) { ctx.moveTo(x + 65, playerY - 9); ctx.lineTo(x + 255, playerY - 9) }
+      else { ctx.moveTo(x + 10, playerY - 7); ctx.lineTo(x + 10, playerY + 23) }
+      ctx.stroke()
+      if (orbit) center(card.player, playerY + 15, 264, 17, '#f4f7fc', 750, 12)
+      else text(card.player, x + 22, playerY + 15, 269, 17, '#f4f7fc', 750, 12)
+      if (card.locked) text('◆', x + 298, playerY + 15, 18, 12, '#ffcf6b')
     })
     else if (options.design === 'bars') options.cards.forEach((card, index) => {
       const x = 48 + index * (layout.cardWidth + 24), y = 258, w = layout.cardWidth, h = layout.cardHeight - 36, slant = 52

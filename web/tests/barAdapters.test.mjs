@@ -93,7 +93,7 @@ test('all eight roster bar adapters preserve the correct icons, artwork, candida
     buttons(row.element.props.actions)[0].props.onClick(); assert.equal(row.actions[0][0], 'reroll')
     if (game.roles.length > 1) assert(row.element.props.roleIcon)
     else assert.equal(row.element.props.roleIcon, undefined)
-    if (game.id === 'deadlock') { assert.equal(row.element.props.candidates.length, 3); assert.equal((row.html.match(/class="bar-card-candidate"/g) ?? []).length, 3); for (const candidate of catalog.slice(0, 3)) assert(row.html.includes(candidate.name)) }
+    if (game.id === 'deadlock') { assert.equal(row.element.props.candidates.length, 3); assert.equal((row.html.match(design === 'hex' || design === 'orbit' ? /class="shape-candidate"/g : /class="bar-card-candidate"/g) ?? []).length, 3); for (const candidate of catalog.slice(0, 3)) assert(row.html.includes(candidate.name)) }
     if (game.id === 'fragpunk') { assert(row.element.props.frame); assert(row.html.includes(`viewBox="${fragpunkPortraitFrames[hero.key].x}`)) }
     if (game.supportsTeamups) { assert(row.html.includes('bar-card-teamup complete')); assert(row.html.includes(partner.name)) }
     if (game.supportsLoadouts) { assert.equal(row.element.props.perks.length, 1); for (const gadget of pick.loadout.gadgets) assert(row.html.includes(gadget)); assert.notEqual(row.element.props.portrait, '/' + hero.portrait) }

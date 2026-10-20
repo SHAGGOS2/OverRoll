@@ -121,17 +121,19 @@ test('slide, orbit and flip transitions retain the outgoing portrait until the s
   }
 })
 
-test('bar cards retain accessible actions, profile, role, translated perks and Stadium powers', () => {
+test('bars, orbit and hex retain accessible controls and all game data with distinct shape compositions', () => {
   const Bar = load('BarCard.tsx').default
   const base = { player: 'Javo', index: 0, name: 'Mercy', role: 'Support', roleId: 'support', roleIcon: '/assets/roles/support.png', portrait: '/assets/heroes/mercy.webp', rolesOnly: false, locked: true, blocked: 2, profile: 'Main', revision: 0, motion: false, locale: 'en-us', actions: ['Reroll', 'Filter', 'Details', 'Unlock'].map((label) => React.createElement('button', { key: label, 'aria-label': label }, label)) }
-  for (const count of [0, 2, 4]) {
+  for (const design of ['bars', 'orbit', 'hex']) for (const count of [0, 2, 4]) {
     const perks = Array.from({ length: count }, (_, i) => ({ name: 'Power ' + i, description: 'Description ' + i, icon: '/assets/perks/a.png', tier: 'POWER' }))
-    const html = renderToStaticMarkup(React.createElement(Bar, { ...base, perks }))
+    const html = renderToStaticMarkup(React.createElement(Bar, { ...base, design, perks }))
     assert.equal((html.match(/<button/g) ?? []).length, 4)
-    assert.equal((html.match(/class="bar-card-perk"/g) ?? []).length, count)
+    assert.equal((html.match(design === 'bars' ? /class="bar-card-perk"/g : /class="shape-perk"/g) ?? []).length, count)
+    assert.equal(html.includes('class="bar-card-panel"'), design === 'bars')
+    assert.equal(html.includes('class="shape-stage"'), design !== 'bars')
     assert(html.includes('Javo · Mercy')); assert(html.includes('Main')); assert(html.includes('Support'))
-    const roleOnly = renderToStaticMarkup(React.createElement(Bar, { ...base, rolesOnly: true, perks }))
-    assert(!roleOnly.includes('class="bar-card-perk"'))
+    const roleOnly = renderToStaticMarkup(React.createElement(Bar, { ...base, design, rolesOnly: true, perks }))
+    assert(!roleOnly.includes('class="bar-card-perk"')); assert(!roleOnly.includes('class="shape-perk"'))
   }
 })
 
@@ -162,7 +164,8 @@ test('orbit and hexagon exports fit all twelve players, full loadouts and candid
     assert(box.width * box.height < MAX_EXPORT_PIXELS)
     assert.equal(box.columns, Math.min(3, count))
     assert(222 + box.rows * box.cardHeight + (box.rows - 1) * 24 < box.height - 30)
-    if (!alternatives && details) assert(346 + (details - 1) * 38 + 26 < box.cardHeight)
+    const detailTop = design === 'orbit' ? alternatives ? 370 : 340 : 360
+    assert(detailTop + details * 40 + 40 < box.cardHeight)
   }
 })
 
