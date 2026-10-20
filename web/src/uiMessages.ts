@@ -138,5 +138,7 @@ const rows: Record<string, string[]> = {
  'Sin Team-Up compatible': ['No compatible Team-Up','Kein passendes Team-Up','Aucune association compatible','Nenhum Team-Up compatível','対応する連携スキルなし','호환되는 협공 없음','无兼容的英雄联携'],
  'Esto borrará perfiles, nombres, reglas, ruleta y configuración guardada en este navegador. ¿Continuar?': ['This will erase profiles, names, rules, roulette and settings saved in this browser. Continue?','Dadurch werden Profile, Namen, Regeln, Glücksrad und Einstellungen in diesem Browser gelöscht. Fortfahren?','Les profils, noms, règles, roulette et paramètres enregistrés dans ce navigateur seront effacés. Continuer ?','Isso apagará perfis, nomes, regras, roleta e configurações salvos neste navegador. Continuar?','このブラウザーに保存したプロフィール、名前、ルール、ルーレット、設定を削除します。続行しますか？','이 브라우저에 저장된 프로필, 이름, 규칙, 룰렛 및 설정이 삭제됩니다. 계속할까요?','这将清除此浏览器中保存的档案、名称、规则、轮盘和设置。继续吗？'],
 
+ 'No se pudo cargar el idioma.': ['Could not load this language.','Diese Sprache konnte nicht geladen werden.','Impossible de charger cette langue.','Não foi possível carregar este idioma.','この言語を読み込めませんでした。','이 언어를 불러올 수 없습니다.','无法加载此语言。'],
+
 }
 export const uiMessages: Partial<Record<SupportedLocale, Record<string, string>>> = Object.fromEntries(locales.map((locale, index) => [locale, Object.fromEntries(Object.entries(rows).map(([source, values]) => [source, values[index]]))]))

@@ -1,0 +1,2450 @@
+{
+  "anran/minorPerks/assets/perks/anran_minor_01_smoulder.webp": {
+    "name": "Braise fumante",
+    "description": "Les personnages ennemis enflammés brûlent pendant 1,5 s de plus."
+  },
+  "anran/minorPerks/assets/perks/anran_minor_02_heat-shield.webp": {
+    "name": "Bouclier chauffant",
+    "description": "Vous obtenez un surplus de 50 points de vie lorsque vous utilisez votre capacité ultime et 50 points de plus par cible embrasée par celle-ci."
+  },
+  "anran/majorPerks/assets/perks/anran_major_01_short-fuse.webp": {
+    "name": "Mèche courte",
+    "description": "Lorsque vous touchez une cible adverse avec Ruée ardente, son temps de recharge est réduit de 1,5 s."
+  },
+  "anran/majorPerks/assets/perks/anran_major_02_hungering-blaze.webp": {
+    "name": "Flambée dévorante",
+    "description": "Vous récupérez 25 points de vie par cible touchée après le premier coup de Flambée ondoyante."
+  },
+  "ashe/minorPerks/assets/perks/ashe_minor_01_remote-detonator.webp": {
+    "name": "Détonateur à distance",
+    "description": "Après avoir utilisé Dynamite, appuyez sur E de nouveau pour causer une explosion différée de 0,5 s."
+  },
+  "ashe/minorPerks/assets/perks/ashe_minor_02_double-barreled.webp": {
+    "name": "Double canon",
+    "description": "Lorsque vous repoussez une cible adverse avec Canon scié, vous pouvez l’utiliser une fois de plus dans les 2 s qui suivent."
+  },
+  "ashe/majorPerks/assets/perks/ashe_major_01_viper-s-sting.webp": {
+    "name": "Morsure de vipère",
+    "description": "Si vous réussissez 2 tirs à la lunette consécutifs contre une même cible, vous lui infligez 25 points de dégâts supplémentaires."
+  },
+  "ashe/majorPerks/assets/perks/ashe_major_02_airburst.webp": {
+    "name": "Détonation aérienne",
+    "description": "Votre dynamite bénéficie d’un rayon d’explosion augmenté de 40 % lorsqu’elle est en l’air et vous récupérez 6 munitions lorsque vous la lancez."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_01_reload-therapy.webp": {
+    "name": "Rechargement thérapeutique",
+    "description": "Lorsque vous rechargez votre arme ou récupérez des munitions, vous récupérez 5 % de vos points de vie."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_02_fire-at-my-fingertips.webp": {
+    "name": "Le feu au bout des doigts",
+    "description": "Lorsque vous infligez des dégâts à une cible en feu avec le Cobra, vous récupérez 1 munitions."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_03_my-business--my-rules.webp": {
+    "name": "Mon plan, mes règles",
+    "description": "Lorsque vous infligez des dégâts à une cible en feu avec le Cobra, les temps de recharge de vos capacités sont réduits de 10 %."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_04_what-in-tarnation.webp": {
+    "name": "Par tous les enfers !",
+    "description": "Après vous être projetée dans les airs avec Canon scié, Dans le mille augmente votre vitesse d’attaque de 20 % et réduit la vitesse de chute pendant 3 s. Si Canon scié n’inflige aucun dégât, son temps de recharge est réduit de 3 s."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_05_calamity.webp": {
+    "name": "Calamity",
+    "description": "L’utilisation de Canon scié vous rend 25 % de vos munitions max. Les balles ainsi restaurées appliquent un effet de brûlure qui inflige 40 points de dégâts supplémentaires en 3 s."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_06_double-barreled.webp": {
+    "name": "Canon double",
+    "description": "Canon scié obtient une charge supplémentaire."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_07_slow-burn.webp": {
+    "name": "Cuisson lente",
+    "description": "Lorsque vous visez à la lunette, les dégâts critiques brûlent les adversaires et leur infligent 20 % de dégâts supplémentaires en 3 s."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_08_controlled-boom.webp": {
+    "name": "Explosion à distance",
+    "description": "Après avoir lancé Dynamite, réactivez la capacité pour la faire exploser avec 0,5 s de délai. Les dynamites qui explosent en l’air brûlent des adversaires 1 s plus longtemps."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_09_out-with-a-bang.webp": {
+    "name": "Final explosif",
+    "description": "Lorsque votre dynamite explose, elle génère 3 bombes collantes qui infligent des dégâts réduits de 50 %."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_10_bob-jr.webp": {
+    "name": "B.O.B. Jr.",
+    "description": "B.O.B consomme 60 % de charge de capacité ultime en moins, mais ses points de vie sont réduits, sa vitesse d’attaque est diminuée de 20 % et il est nettement plus petit."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_11_stacked-sticks.webp": {
+    "name": "Bâtons chargés",
+    "description": "Le rayon d’explosion de Dynamite est augmenté de 40 % et celle-ci brûle les adversaires 40 % plus vite."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_12_pinbob.webp": {
+    "name": "B.O.B. téléguidé",
+    "description": "Capacité : Une fois que B.O.B. a fini de charger, réactivez la capacité ultime pour le faire charger à nouveau. (Temps de recharge : 3 s).­ Les éliminations réinitialisent le temps de recharge et augmentent la durée de B.O.B. de 2 s."
+  },
+  "bastion/minorPerks/assets/perks/bastion_minor_01_smart-bomb.webp": {
+    "name": "Bombe intelligente",
+    "description": "L’effet de recul que vous subissez en utilisant votre grenade tactique A-36 augmente de 25 %, mais il ne vous inflige plus de dégâts."
+  },
+  "bastion/minorPerks/assets/perks/bastion_minor_02_configuration-reload.webp": {
+    "name": "Configuration : rechargement",
+    "description": "Lorsque vous changez de configuration, le temps de recharge de Grenade tactique A-36 est réduit de 4 s."
+  },
+  "bastion/majorPerks/assets/perks/bastion_major_01_lindholm-explosives.webp": {
+    "name": "Explosifs Lindholm",
+    "description": "L’arme de votre configuration : assaut n’est plus un canon rotatif et tire lentement des obus explosifs."
+  },
+  "bastion/majorPerks/assets/perks/bastion_major_02_self-repair.webp": {
+    "name": "Autoréparation",
+    "description": "Appuyez sur E pour vous soigner rapidement."
+  },
+  "cassidy/minorPerks/assets/perks/cassidy_minor_01_bang-bang.webp": {
+    "name": "Boum ! Boum !",
+    "description": "Vous lancez une seconde grenade flash qui parcourt une plus grande distance, mais les deux grenades infligent des dégâts réduits de 40 %."
+  },
+  "cassidy/minorPerks/assets/perks/cassidy_minor_02_b0d48ad9c8bdf1ce.png": {
+    "name": "En selle",
+    "description": "Après l’utilisation de Roulade, Cassidy obtient un bonus de vitesse de déplacement de 60 % qui se dissipe en 1,5 s."
+  },
+  "cassidy/majorPerks/assets/perks/cassidy_major_01_rollin--round-up.webp": {
+    "name": "Roulade guérisseuse",
+    "description": "Roulade vous rend 15 points de vie par balle rechargée."
+  },
+  "cassidy/majorPerks/assets/perks/cassidy_major_02_silver-bullet.webp": {
+    "name": "Balle d’argent",
+    "description": "Le tir secondaire du pacificateur est remplacé par un tir perforant qui inflige un saignement. Roulade et Implacable réinitialisent son temps de recharge."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_01_quick-draw.webp": {
+    "name": "Gâchette rapide",
+    "description": "Après l’utilisation de Roulade, le prochain tir de Pacificateur peut viser automatiquement les cibles à moins de 15 m tant que la capacité est en cours de recharge."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_02_gunslinger-grit.webp": {
+    "name": "Cran du pistolero",
+    "description": "Lorsque vous rechargez votre arme ou récupérez des munitions, vous récupérez 2,5 % de vos points de vie pour chaque munition régénérée."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_03_bullseye.webp": {
+    "name": "Dans le mille",
+    "description": "Les coups réussis avec Grenade flash et les coups critiques réduisent le temps de recharge de Roulade de 2 s."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_04_think-flasht.webp": {
+    "name": "Grenade instinctive",
+    "description": "Vous lâchez une grenade flash lorsque vous initiez une roulade.­ La durée d’entrave de Grenade flash est augmentée de 25 %."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_05_easy-rider.webp": {
+    "name": "Easy Rider",
+    "description": "Lorsque vous éliminez une cible adverse récemment blessée par Grenade flash, vous gagnez 20 % de charge de capacité ultime. Lorsque vous utilisez Implacable, vous gagnez un surplus de 100 points de vie et 25 % de vitesse de déplacement."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_06_it-s-twelve-o-clock-somewhere.webp": {
+    "name": "On a tous une dernière volonté…",
+    "description": "Chaque élimination à l’aide d’Implacable vous octroie 25 % de charge de capacité ultime. Si vous n’éliminez personne avec Implacable, vous récupérez 33 % de charge de capacité ultime."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_07_dead-man-walkin.webp": {
+    "name": "À tue-tête",
+    "description": "Les cibles adverses ayant moins de 30 % de points de vie sont marquées à la tête. Les têtes marquées sont plus grandes et les coups critiques sur les cibles marquées appliquent 50 % de vol de vie d’arme."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_08_barrage-blastin.webp": {
+    "name": "Déluge de balles",
+    "description": "La première fois que vous tombez à court de munitions lorsque Mitraillage est actif, vous rechargez immédiatement et continuez à tirer, mais les dégâts sont réduits de 60 %."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_major_02_silver-bullet.webp": {
+    "name": "Balle d’argent",
+    "description": "Mitraillage est remplacé par Capacité : Vous tirez une balle perforante de Pacificateur qui inflige 50 points de dégâts supplémentaires en 2,5 s. Le temps de recharge est réinitialisé lorsque vous utilisez une capacité ou un gadget."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_10_buck-wild.webp": {
+    "name": "Fou de la gâchette",
+    "description": "Les dégâts infligés par Pacificateur augmentent la vitesse de déplacement de 1 % pendant 5 s. Cet effet peut se cumuler 15 fois. Lorsque vous atteignez le nombre maximal de cumuls, vous obtenez 10 % de réduction des dégâts."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_11_barrel-roll.webp": {
+    "name": "Tonneau",
+    "description": "Votre Roulade vous emmène 50 % plus loin et inflige 65 points de dégâts aux adversaires."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_12_hot-potato.webp": {
+    "name": "Patate chaude",
+    "description": "Grenade flash devient magnétique et sa distance de lancer est augmentée de 125 %."
+  },
+  "echo/minorPerks/assets/perks/echo_minor_01_63cadc2da0d3063b.png": {
+    "name": "Munitions aériennes",
+    "description": "Écho a des munitions illimitées lors de Vol."
+  },
+  "echo/minorPerks/assets/perks/echo_minor_02_partial-scan.webp": {
+    "name": "Scan partiel",
+    "description": "Duplication commence avec 30 % de charge de capacité ultime."
+  },
+  "echo/majorPerks/assets/perks/echo_major_01_full-salvo.webp": {
+    "name": "Grande salve",
+    "description": "Bombes collantes tire désormais 2 projectiles de plus."
+  },
+  "echo/majorPerks/assets/perks/echo_minor_01_focused-rush.webp": {
+    "name": "Assaut focalisé",
+    "description": "La portée de Rayon focalisé est augmentée de 8 m et votre vitesse de déplacement de 25 % lorsqu’il est actif."
+  },
+  "emre/minorPerks/assets/perks/emre_minor_01_suppressive-security.webp": {
+    "name": "Sécurité répressive",
+    "description": "Les munitions légères de Protocole de remplacement ralentissent les cibles adverses de 30 % pendant 1,5 s."
+  },
+  "emre/minorPerks/assets/perks/emre_minor_02_enhanced-agility.webp": {
+    "name": "Agilité améliorée",
+    "description": "Le bonus de vitesse de déplacement de Pistolet drainant est augmenté de 20 % lorsque vous ne tirez pas."
+  },
+  "emre/majorPerks/assets/perks/emre_major_01_heat-sink.webp": {
+    "name": "Dissipateur thermique",
+    "description": "Les tirs directs réussis avec Pistolet drainant dissipent 60 % de la chaleur et augmentent la durée de la compétence de 0,1 s."
+  },
+  "emre/majorPerks/assets/perks/emre_major_02_cyber-adhesion.webp": {
+    "name": "Cyberadhérence",
+    "description": "Cybergrenade colle désormais à l’impact, ce qui inflige 40 points de dégâts supplémentaires aux cibles adverses collées."
+  },
+  "freja/minorPerks/assets/perks/freja_minor_01_relentless-barrage.webp": {
+    "name": "Barrage impitoyable",
+    "description": "Les dégâts directs infligés par Dans le mille rendent 5 carreaux."
+  },
+  "freja/minorPerks/assets/perks/freja_minor_02_momentum-boost.webp": {
+    "name": "Prise d’inertie",
+    "description": "La distance de Ruée rapide est augmentée de 20 %."
+  },
+  "freja/majorPerks/assets/perks/freja_major_01_aerial-recovery.webp": {
+    "name": "Guérison aérienne",
+    "description": "Après avoir utilisé Courant ascendant, vous récupérez 30 points de vie par seconde jusqu’à ce que vous atterrissiez."
+  },
+  "freja/majorPerks/assets/perks/freja_major_02_rising-winds.webp": {
+    "name": "Vents porteurs",
+    "description": "Courant ascendant obtient une charge supplémentaire."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_01_seismic-shot.webp": {
+    "name": "Tir sismique",
+    "description": "Le rayon d’explosion de Dans le mille augmente de 50 %. Cet effet est doublé si le carreau est collé à la cible."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_02_seekerpoint.webp": {
+    "name": "Tête chercheuse",
+    "description": "Lorsqu’un carreau de Dans le mille colle à la cible, vous envoyez automatiquement dans sa direction 3 carreaux d’arbalète supplémentaires qui infligent des dégâts réduits de 66 %."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_03_redux.webp": {
+    "name": "Renouveau",
+    "description": "Les tirs à l’arbalète Rafale qui touchent des cibles piégées par Dans le mille ou Tir de bolas réduisent le temps de recharge de vos capacités de 5 % et vous rendent 1 munition."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_04_cyclone.webp": {
+    "name": "Cyclone",
+    "description": "Lorsque vous utilisez Courant ascendant, vous tirez un carreau de ­ Dans le mille dont les dégâts d’explosion sont réduits de 25 % à l’endroit ciblé par votre viseur."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_05_peak-performance.webp": {
+    "name": "Performance maximale",
+    "description": "La hauteur de Courant ascendant est augmentée de 20 %.­ Tant que vous attaquez avec votre arbalète Rafale, votre vitesse de chute est réduite de 80 %.­ Lorsque vous êtes en l’air, votre vitesse de déplacement augmente de 20 %."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_06_deep-pockets.webp": {
+    "name": "Poches profondes",
+    "description": "Lorsque vous utilisez une capacité, vous récupérez 30 % de votre maximum de munitions."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_07_volley---deux.webp": {
+    "name": "Volée à deux",
+    "description": "Tous les 3 tirs à l’arbalète Rafale, vous décochez 2 carreaux supplémentaires qui infligent des dégâts réduits de 60 %."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_08_forager.webp": {
+    "name": "Herboriste",
+    "description": "Pendant 2 s après l’utilisation de Ruée rapide, les tirs réussis de votre arbalète Rafale vous rendent 4 % de vos points de vie maximum."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_09_lille-f-lde.webp": {
+    "name": "Lille Fælde",
+    "description": "Après Courant ascendant, votre prochain Dans le mille depuis les airs lance un mini tir de bolas qui n’attire pas l’adversaire et inflige des dégâts réduits de 40 %."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_10_mighty-gust.webp": {
+    "name": "Bourrasque puissante",
+    "description": "Courant ascendant projette une rafale dans la direction de votre viseur, ce qui repousse les adversaires et leur inflige 60 points de dégâts."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_11_so-cooked.webp": {
+    "name": "Cuisson parfaite",
+    "description": "La zone de dégâts de Tir de bolas persiste pendant 2 s et inflige des dégâts augmentés de 20 %.­ Les éliminations à l’aide de Tir de bolas comptent pour Chasseuse de primes."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_12_thread-the-needle.webp": {
+    "name": "Enfiler l’aiguille",
+    "description": "Les carreaux de Dans le mille transpercent la première cible adverse touchée. Les explosions supplémentaires infligent des dégâts réduits de 66 %."
+  },
+  "genji/minorPerks/assets/perks/genji_minor_01_swift-cuts.webp": {
+    "name": "Coupe-vent",
+    "description": "Les coups en mêlée réduisent le temps de recharge de Frappe du vent de 3 s."
+  },
+  "genji/minorPerks/assets/perks/genji_minor_02_dragon-s-thirst.webp": {
+    "name": "Soif du dragon",
+    "description": "Chaque frappe de Lame du dragon inflige 30 % de vol de vie."
+  },
+  "genji/majorPerks/assets/perks/genji_major_01_blade-twisting.webp": {
+    "name": "Torsion de lame",
+    "description": "Frappe du vent inflige 25 points de dégâts supplémentaires sur la durée si l’adversaire a moins de 50 % de ses points de vie."
+  },
+  "genji/majorPerks/assets/perks/genji_major_02_meditation.webp": {
+    "name": "Méditation",
+    "description": "Vous récupérez 50 points de vie par seconde tant que Riposte est active."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_01_sacred-shuriken.webp": {
+    "name": "Shuriken sacré",
+    "description": "La vitesse des projectiles du tir principal de Shuriken est augmentée de 50 %. Le tir principal de Shuriken­ lance 2 shurikens supplémentaires qui ne consomment pas de munitions."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_02_hanamura-healing.webp": {
+    "name": "Soins d’Hanamura",
+    "description": "Les coups critiques et les frappes du vent vous octroient un surplus de points de vie égal à 25 % des dégâts infligés."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_03_cybernetic-speed.webp": {
+    "name": "Vitesse cybernétique",
+    "description": "Les dégâts infligés par Shuriken augmentent de 3 % la vitesse d’attaque de Shuriken pendant 3 s. Cet effet peut se cumuler 15 fois."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_04_wyrm-s-maw.webp": {
+    "name": "Gueule de wyrm",
+    "description": "Après avoir infligé des dégâts avec vos shurikens, votre prochaine frappe du vent voit ses dégâts augmentés de 10 % et sa portée de 5 %. Cet effet peut se cumuler 5 fois."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_05_iaido-strike.webp": {
+    "name": "Technique d’iaido",
+    "description": "Lorsque Riposte prend fin, vous effectuez une frappe rapide avec votre lame du dragon avec une efficacité de 75 %."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_06_hidden-blade.webp": {
+    "name": "Lame dissimulée",
+    "description": "Vos dégâts de mêlée bénéficient de 60 % de vol de vie et les dégâts de votre coup en mêlée augmentent de 15."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_07_forged-under-fire.webp": {
+    "name": "Forgé sous le feu",
+    "description": "Tant que votre riposte est active, vous vous soignez à hauteur de 100 % des dégâts bloqués."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_08_laceration.webp": {
+    "name": "Lacération",
+    "description": "Frappe du vent inflige 30 % points de dégâts supplémentaires en 3 s.­ Pour chaque cible supplémentaire touchée par Frappe du vent, le temps de recharge de Frappe du vent est réduit de 2,5 s."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_09_deflect-o-bot.webp": {
+    "name": "Riposte-o-tron",
+    "description": "Vitesse des projectiles renvoyés augmentée de 200 %.­ Vous renvoyez automatiquement les projectiles en direction des adversaires. Pendant les 0,3 premières secondes de Riposte, les tirs renvoyés infligent 50 % de dégâts critiques supplémentaires."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_10_hashimoto-s-bane.webp": {
+    "name": "Fléau des Hashimoto",
+    "description": "Après l’utilisation d’une capacité, votre prochain tir secondaire lance 2 shurikens supplémentaires qui traquent les adversaires, mais infligent des dégâts réduits de 50 %."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_11_dragon-s-breath.webp": {
+    "name": "Souffle du dragon",
+    "description": "Les frappes de Lame du dragon projettent un large projectile perforant qui inflige 100 % des dégâts de Lame du dragon et inflige également des dégâts augmentés de 25 % aux adversaires en l’air."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_12_spirit-of-sojiro.webp": {
+    "name": "Esprit de Sojiro",
+    "description": "Durée de Riposte augmentée de 1 s.­ Riposte vous protège désormais des attaques venant des deux côtés."
+  },
+  "hanzo/minorPerks/assets/perks/hanzo_minor_01_sonic-disruption.webp": {
+    "name": "Perturbation sonique",
+    "description": "Flèche sonique pirate les kits de soins à proximité pendant 30 s."
+  },
+  "hanzo/minorPerks/assets/perks/hanzo_minor_02_dragon-fury.webp": {
+    "name": "Fureur du dragon",
+    "description": "Lorsque vous touchez une cible adverse avec votre tir principal, votre vitesse d’attaque augmente de 20 % pendant 1,5 s."
+  },
+  "hanzo/majorPerks/assets/perks/hanzo_major_01_frost-arrow.webp": {
+    "name": "Flèche de givre",
+    "description": "Lorsque vous appuyez sur R, vous encochez une flèche de givre explosive qui ralentit les cibles adverses touchées de 35 % pendant 2 s."
+  },
+  "hanzo/majorPerks/assets/perks/hanzo_major_02_scatter-arrows.webp": {
+    "name": "Mille-flèches",
+    "description": "Lors du premier ricochet, les flèches de Rafale se divisent en 5 projectiles qui infligent 33 % des dégâts habituels et peuvent ricocher encore une fois."
+  },
+  "junkrat/minorPerks/assets/perks/junkrat_minor_01_nitro-boost.webp": {
+    "name": "Nitroboost",
+    "description": "Pendant Pneumastic, vous pouvez utiliser MAJ GAUCHE pour gagner un bref bonus de vitesse. Cela réduit les dégâts de Pneumastic de 50 %."
+  },
+  "junkrat/minorPerks/assets/perks/junkrat_minor_02_bomb-voyage.webp": {
+    "name": "Bombe voyage",
+    "description": "Après vous être élancé avec Mine incapacitante, votre vitesse d’attaque est augmentée de 35 % pendant 3 s."
+  },
+  "junkrat/majorPerks/assets/perks/junkrat_major_01_mine-recycling.webp": {
+    "name": "Recyclage des mines",
+    "description": "Les éliminations avec Mine incapacitante rendent une charge de Mine incapacitante."
+  },
+  "junkrat/majorPerks/assets/perks/junkrat_major_02_frag-cannon.webp": {
+    "name": "Canon explosif",
+    "description": "La vitesse des projectiles de Lance-grenades est augmentée de 25 %."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_01_frags-for-days.webp": {
+    "name": "Grenades à gogo",
+    "description": "Lance-grenades a 25 % de chances de tirer un projectile supplémentaire dont les dégâts sont réduits de 66 %."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_02_big-bang.webp": {
+    "name": "Big Bang",
+    "description": "Lorsqu’un projectile du lance-grenades ricoche, sa taille augmente de 33 %."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_03_soot-shaker.webp": {
+    "name": "Souffle-suie",
+    "description": "Après avoir déclenché votre mine incapacitante, votre vitesse d’attaque augmente de 15 % pendant 1,5 s et vous récupérez 20 % de vos munitions maximum."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_04_bango.webp": {
+    "name": "Boum !",
+    "description": "Les tirs directs de Lance-grenades qui touchent une cible sans avoir ricoché brûlent cette dernière et lui infligent 20 % de dégâts supplémentaires en 2 s."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_05_double-trouble.webp": {
+    "name": "Dédoublement",
+    "description": "Vous gagnez 1 charge supplémentaire de Piège d’acier."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_06_trap-ii--esquire.webp": {
+    "name": "Piège, 2e du nom",
+    "description": "La détonation de Mine incapacitante génère à son emplacement un piège d’acier miniature qui ralentit les adversaires au lieu de les immobiliser. Vous pouvez générer jusqu’à 5 pièges d’acier miniatures."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_07_hop-boom.webp": {
+    "name": "Rebonds explosifs",
+    "description": "Après une projection à l’aide d’une Mine incapacitante, vous en déclenchez une autre à l’endroit où vous atterrissez avec une efficacité réduite de 20 %."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_08_slapnel.webp": {
+    "name": "Obus-é",
+    "description": "Capacité : Votre coup en mêlée fait exploser une mine incapacitante qui inflige 20 % de dégâts, vous propulse et repousse les cibles.­ (Temps de recharge : 8 s)"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_09_rainin--lead.webp": {
+    "name": "Pluie de plomb",
+    "description": "Rayon d’explosion de Mauvais perdant augmenté de 25 %.­ Lorsque vous vous propulsez, vous lâchez 1 bombe de Mauvais perdant à l’efficacité réduite de 25 % toutes les 0,35 s tant que vous êtes en l’air."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_10_rip-roll.webp": {
+    "name": "Roulé-boulé explosif",
+    "description": "Coût de la capacité ultime réduit de 20 %.­ Vous entrez dans votre pneumastic pendant la capacité ultime. Vous en sortez et déclenchez Mauvais perdant lorsque celui-ci est détruit ou que vous le faites exploser."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_11_successful-heist.webp": {
+    "name": "Braquage réussi",
+    "description": "Chaque cible touchée par l’explosion de Mine incapacitante réduit le temps de recharge de Mine incapacitante de 0,5 s."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_12_zip-grease.webp": {
+    "name": "Graisse fulgurante",
+    "description": "Après avoir déclenché votre mine incapacitante, la vitesse des projectiles de votre prochain tir de Lance-grenades est augmentée de 200 % et il inflige 25 % de dégâts supplémentaires aux adversaires en l’air."
+  },
+  "mei/minorPerks/assets/perks/mei_minor_01_skating-rink.webp": {
+    "name": "Patinoire",
+    "description": "Blizzard augmente la vitesse de déplacement des personnages alliés dans son rayon de 25 % et leur rend 50 points de vie par seconde."
+  },
+  "mei/minorPerks/assets/perks/mei_minor_02_glacial-propulsion.webp": {
+    "name": "Propulsion glaciale",
+    "description": "Effectuer un double saut crée un petit pilier de glace qui propulse Mei dans les airs."
+  },
+  "mei/majorPerks/assets/perks/mei_major_01_deep-freeze.webp": {
+    "name": "Congélation",
+    "description": "Lorsque vous touchez une cible adverse à plusieurs reprises avec votre tir principal, celle-ci est gelée pendant quelques instants."
+  },
+  "mei/majorPerks/assets/perks/mei_major_02_cryo-storm.webp": {
+    "name": "Tempête cryogénique",
+    "description": "Cryostase ralentit les adversaires proches et leur inflige 70 points de dégâts par seconde."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_01_permafrost.webp": {
+    "name": "Pergélisol",
+    "description": "Pour chaque tranche de 1 % de votre puissance de capacité, vos points de vie max. sont augmentés de 0,5."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_02_slowball.webp": {
+    "name": "Boule de neige lente",
+    "description": "Après l’utilisation d’une capacité ou d’un gadget, vos 2 prochains tirs de Stalactite lancent une boule de neige avec une vitesse de projectile de 200 % qui applique un effet de ralentissement de 30 % à l’impact."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_03_extendothermics.webp": {
+    "name": "Extendothermique",
+    "description": "La portée du tir principal de votre canon endothermique augmente de 6 m."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_04_frost-armor.webp": {
+    "name": "Armure de glace",
+    "description": "Vous gagnez des points d’armure à hauteur de 3 % des dégâts infligés par le tir principal de ­ Canon endothermique, jusqu’à un maximum de 100, et ce jusqu’à la fin de la manche."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_05_snowball-flight.webp": {
+    "name": "Envol de boules de neige",
+    "description": "Capacité : lorsque vous sautez en étant déjà dans les airs, vous créez sous vos pieds un grand pilier de glace à l’aide de Mur de glace. (Temps de recharge : 12 s)"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_06_twice-as-ice.webp": {
+    "name": "Deux fois plus de glace",
+    "description": "Lorsque vous utilisez Cryostase, le prochain temps de recharge de Mur de glace est réinitialisé."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_07_iceberg.webp": {
+    "name": "Iceberg",
+    "description": "Mur de glace fait apparaître un petit blizzard qui ralentit les adversaires."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_08_cryclone.webp": {
+    "name": "Cyclone glacial",
+    "description": "Cryostase fait apparaître un petit blizzard qui ralentit les adversaires."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_09_coulder.webp": {
+    "name": "Boule froide",
+    "description": "Cryostase vous enferme désormais dans une boule de glace mobile qui peut repousser les adversaires et leur infliger 20 points de dégâts."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_10_frost-nova.webp": {
+    "name": "Nova de givre",
+    "description": "Lorsque Cryostase prend fin, vous repoussez les adversaires à proximité et leur infligez 60 points de dégâts."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_11_frosting.webp": {
+    "name": "Glaçage",
+    "description": "Lorsque vous vous tenez dans le blizzard, vous récupérez 8 % de vos points de vie max. par seconde."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_12_deep-chills.webp": {
+    "name": "Engourdissements",
+    "description": "Lorsque vous touchez une cible adverse à plusieurs reprises avec le tir principal de Canon endothermique, celle-ci est gelée pendant 0,65 s."
+  },
+  "pharah/minorPerks/assets/perks/pharah_minor_01_concussive-force.webp": {
+    "name": "Conflagration accrue",
+    "description": "Conflagration inflige jusqu’à 30 points de dégâts d’explosion."
+  },
+  "pharah/minorPerks/assets/perks/pharah_minor_02_helix-shields.webp": {
+    "name": "Bouclier LX",
+    "description": "Vous convertissez 125 points de vie en points de bouclier. Les dégâts directs infligés par Lance-roquettes déclenchent une régénération passive du bouclier."
+  },
+  "pharah/majorPerks/assets/perks/pharah_major_01_fuel-stores.webp": {
+    "name": "Réserve de carburant",
+    "description": "Élan propulseur vous octroie 50 % de carburant. Surplus de carburant maximum augmenté de 100 %."
+  },
+  "pharah/majorPerks/assets/perks/pharah_major_02_rocket-salvo.webp": {
+    "name": "Salve de roquettes",
+    "description": "Après l’utilisation d’une capacité de déplacement, votre prochain tir principal tire également deux mini-roquettes qui explosent et infligent chacune 30 points de dégâts."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_01_evasive-maneuvers.webp": {
+    "name": "Manœuvres d’évitement",
+    "description": "Après avoir utilisé Réacteurs, le projectile de Conflagration est à tête chercheuse et il entrave les adversaires pendant 1,5 s en cas de tir direct."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_02_carpet-bomb.webp": {
+    "name": "Tapis de bombes",
+    "description": "Vitesse de déplacement de Barrage augmentée de 40 %.­ Barrage dure 50 % plus longtemps."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_03_cyclic-salvo.webp": {
+    "name": "Salve cyclique",
+    "description": "Les tirs directs de Lance-roquettes octroient 10 points de carburant et réduisent vos temps de recharge de 1 s."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_04_blitz-barrage.webp": {
+    "name": "Barrage éclair",
+    "description": "Vitesse de déplacement de Barrage augmentée de 40 %.­ Après avoir utilisé Élan propulseur, vous lancez un barrage qui tire 75 % de mini-roquettes en moins."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_05_fuel-depot.webp": {
+    "name": "Réserve de carburant",
+    "description": "Les tirs directs de Lance-roquettes augmentent votre carburant maximum de 2 de façon permanente. Cet effet se cumule jusqu’à 25 fois."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_06_nosedive.webp": {
+    "name": "Chute en piqué",
+    "description": "Capacité : Lorsque vous êtes en l’air, utilisez la commande d’accroupissement pour foncer vers le sol et récupérer 50 % de carburant. ­ (Temps de recharge : 6 s)."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_07_heat-seekers.webp": {
+    "name": "Guidage thermique",
+    "description": "Après avoir utilisé Élan propulseur, votre prochain tir principal est une roquette à tête chercheuse qui cible les adversaires."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_08_launch-vector.webp": {
+    "name": "Vecteur de lancement",
+    "description": "Chaque fois que vous repoussez des adversaires avec Conflagration, vous tirez dans leur direction 3 mini-roquettes à tête chercheuse."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_09_speed-kills.webp": {
+    "name": "Vitesse excessive",
+    "description": "Lorsque vous infligez des dégâts avec votre arme, votre vitesse de déplacement est augmentée de 5 % et votre vitesse d’attaque de 3 % pendant 3 s. Cet effet peut se cumuler 6 fois. Les tirs directs octroient le double de cumuls."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_10_triple-volley.webp": {
+    "name": "Triple salve",
+    "description": "Après avoir utilisé une capacité ou un gadget, votre prochain tir principal tire 3 roquettes infligeant chacune 40 % des dégâts habituels."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_11_recursion-battery.webp": {
+    "name": "Batterie récursive",
+    "description": "Les mini-roquettes obtiennent 25 % de vol de vie de capacité."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_12_extra-charge.webp": {
+    "name": "Charge supplémentaire",
+    "description": "Conflagration obtient 1 charge supplémentaire."
+  },
+  "reaper/minorPerks/assets/perks/reaper_minor_01_soul-reaving.webp": {
+    "name": "Récolte d’âmes",
+    "description": "Les globes d’âme que vous récupérez sur les personnages adverses morts vous rendent 50 points de vie."
+  },
+  "reaper/minorPerks/assets/perks/reaper_minor_02_lingering-wraith.webp": {
+    "name": "Spectre résiduel",
+    "description": "Lorsque vous quittez votre forme spectrale, votre vitesse de déplacement est augmentée de 30 % pendant 2 s."
+  },
+  "reaper/majorPerks/assets/perks/reaper_major_01_shadow-blink.webp": {
+    "name": "Transfert des ombres",
+    "description": "Les temps de lancement et de recharge de Voie des ombres sont réduits de 25 %, tandis que sa portée est réduite de 25 %."
+  },
+  "reaper/majorPerks/assets/perks/reaper_major_02_trigger-finger.webp": {
+    "name": "Doigt sur la détente",
+    "description": "Lorsque vous utilisez une capacité ou rechargez votre arme, le temps de recharge de Sinistres gâchettes est réinitialisé."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_01_revolving-ruin.webp": {
+    "name": "Ruine tourbillonnante",
+    "description": "Les tirs à courte portée (7 m) de vos Pompes funèbres augmentent votre vitesse d’attaque de 5 % pendant 1 s. Cet effet peut se cumuler 10 fois."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_02_shrouded-shrapnel.webp": {
+    "name": "Éclats dissimulés",
+    "description": "L’utilisation de Forme spectrale augmente de 25 % le nombre de plombs projetés par chaque tir de votre prochain chargeur et augmente la dispersion des tirs de 50 %."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_03_death-step.webp": {
+    "name": "Pas mortel",
+    "description": "Après l’utilisation de Voie des ombres, vous lancez une éclosion mortelle qui dure 1,5 s et inflige des dégâts réduits de 50 %."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_04_strangle-step.webp": {
+    "name": "Pas étouffant",
+    "description": "La vitesse de lancement de Voie des ombres est augmentée de 15 %.­ Après l’utilisation de Voie des ombres, votre effet de vol de vie est doublé pendant 3 s."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_05_spirited-to-slay.webp": {
+    "name": "Esprit de massacre",
+    "description": "Les éliminations réduisent le temps de recharge de Forme spectrale de 50 % et celui de Voie des ombres de 100 %."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_06_bloodletters.webp": {
+    "name": "Saignée",
+    "description": "Sinistres gâchettes inflige 30 points de dégâts supplémentaires en 3 s aux adversaires en l’air et aux adversaires à plus de 8 m."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_07_wraith-renewal.webp": {
+    "name": "Forme spectrale renouvelée",
+    "description": "Tant que vous êtes en forme spectrale, vous récupérez 7 % de vos points de vie par seconde. Ce montant est doublé si vous avez moins de 50 % de vos points de vie."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_08_hellshroud.webp": {
+    "name": "Voile infernal",
+    "description": "Lorsque vous traversez un personnage adverse avec votre forme spectrale, vous le brûlez à hauteur de 20 % de vos points de vie max. et ses vitesses de déplacement et d’attaque sont réduites de 20 % pendant 2 s."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_09_wall-of-life-and-death.webp": {
+    "name": "Mur de la vie et de la mort",
+    "description": "Tant que vous êtes en forme spectrale, vous devenez 50 % plus grand et bloquez les projectiles tout en rendant 35 points de vie par seconde à tous les autres personnages alliés dans un rayon de 6 m."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_10_harvest-fest.webp": {
+    "name": "Fête de la moisson",
+    "description": "Les coups de Pompes funèbres ont 20 % de chances de faire apparaître un globe d’âme. Lorsque vous ramassez un globe, vous récupérez 15 % points de vie et 15 % munitions, et votre vitesse de déplacement augmente de 15 % pendant 3 s."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_major_02_trigger-finger.webp": {
+    "name": "Doigt sur la détente",
+    "description": "Après l’utilisation d’une capacité ou d’un gadget, ou après avoir rechargé votre arme, le temps de recharge de Sinistres gâchettes est réinitialisé."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_12_wretched-wings.webp": {
+    "name": "Ailes abjectes",
+    "description": "Vous pouvez voler pendant l’utilisation de Forme spectrale.­ Lorsque vous êtes en l’air, appuyer sur la touche de saut pour planer."
+  },
+  "shion/minorPerks/assets/perks/shion_minor_01_2785c741990d138c.png": {
+    "name": "Instinct de survie",
+    "description": "Durée de surplus de points de vie d’Esquive augmentée de 1 s."
+  },
+  "shion/minorPerks/assets/perks/shion_minor_02_x-machina.webp": {
+    "name": "X machina",
+    "description": "Exécution inflige 20 % de dégâts supplémentaires aux adversaires en dessous de 50 % de points de vie."
+  },
+  "shion/majorPerks/assets/perks/shion_major_01_refuel.webp": {
+    "name": "Plein d’essence",
+    "description": "Folle virée restaure instantanément 50 points de vie et rend 20 points de vie par seconde tant qu’elle est active."
+  },
+  "shion/majorPerks/assets/perks/shion_major_02_faces-of-death.webp": {
+    "name": "Les visages de la mort",
+    "description": "Vous obtenez tous les autres passifs des sous-rôles de dégâts (reconnaissance, spécialiste et spécialiste en précision)"
+  },
+  "sierra/minorPerks/assets/perks/sierra_minor_01_full-flight.webp": {
+    "name": "Vol libre",
+    "description": "Les portées du vol et du grappin de Drone d’ancrage sont augmentées de 25 %."
+  },
+  "sierra/minorPerks/assets/perks/sierra_minor_02_tight-grip.webp": {
+    "name": "Prise solide",
+    "description": "L’angle de dispersion des tirs de Fusil LX rétrécit 70 % plus vite et s’élargit 30 % moins vite."
+  },
+  "sierra/majorPerks/assets/perks/sierra_major_01_medi-drone.webp": {
+    "name": "Drone médical",
+    "description": "Les drones d’ancrage contiennent un kit de soins qui peut soigner Sierra."
+  },
+  "sierra/majorPerks/assets/perks/sierra_major_02_locked-in.webp": {
+    "name": "Verrouillage de cible",
+    "description": "Lorsque vous touchez une cible adverse avec Tir téléguidé, votre vitesse d’attaque augmente de 20 % pendant 2 s."
+  },
+  "sojourn/minorPerks/assets/perks/sojourn_minor_01_overcharged.webp": {
+    "name": "À bloc",
+    "description": "Énergie maximum du canon électrique augmentée de 50 points quand Surcadençage est actif."
+  },
+  "sojourn/minorPerks/assets/perks/sojourn_minor_02_deceleration-field.webp": {
+    "name": "Champ décélérateur",
+    "description": "Les cibles adverses touchées par Tir disruptif sont ralenties de 25 %."
+  },
+  "sojourn/majorPerks/assets/perks/sojourn_major_01_friction-generators.webp": {
+    "name": "Générateurs de friction",
+    "description": "Tacle génère jusqu’à 75 points d’énergie."
+  },
+  "sojourn/majorPerks/assets/perks/sojourn_major_02_dual-thrusters.webp": {
+    "name": "Bipropulseurs",
+    "description": "Tacle gagne une deuxième charge et son saut en hauteur devient un déplacement latéral."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_01_unconventional-tactics.webp": {
+    "name": "Tactiques non conventionnelles",
+    "description": "Tacle laisse derrière vous un mini tir disruptif lorsque vous commencez à glisser et lorsque vous sautez pendant le tacle."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_02_commotion-cycle.webp": {
+    "name": "Cycle disruptif",
+    "description": "Lorsque vous infligez des dégâts avec Tir chargé, vous réduisez jusqu’à 35 % du temps de recharge de vos capacités en fonction de la charge de Canon électrique dépensée."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_03_experimental-tech.webp": {
+    "name": "Technologie expérimentale",
+    "description": "Tir disruptif ralentit les adversaires dans sa zone de 25 % et convertit 50 % des dégâts de capacité infligés en charge de Canon électrique."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_04_overcharge.webp": {
+    "name": "Surcharge",
+    "description": "La charge max. de Canon électrique est augmentée à 150. Les attaques et capacités à pleine charge ne consomment toujours pas plus de 100 de charge."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_05_fine-tuned-thrusters.webp": {
+    "name": "Propulseurs recalibrés",
+    "description": "La durée de Tacle est augmentée de 1 s.­ Les éliminations réinitialisent le temps de recharge de Tacle."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_06_drill-kick.webp": {
+    "name": "Coup de pied glissé",
+    "description": "La vitesse de Tacle est augmentée de 50 %.­ Pendant Tacle, vous obtenez 25 % de réduction des dégâts et infligez 75 points de dégâts aux adversaires à proximité."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_07_hard-stuck.webp": {
+    "name": "Colle forte",
+    "description": "Le projectile de Tir disruptif peut adhérer aux cibles adverses. Les projectiles de Tir disruptif qui adhèrent aux cibles adverses infligent 25 % de dégâts en moins."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_08_enhanced-targeting-system.webp": {
+    "name": "Système de ciblage amélioré",
+    "description": "Pendant Surcadençage, le tir principal de Canon électrique cible automatiquement les adversaires."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_09_dynamic-dispatch.webp": {
+    "name": "Élimination dynamique",
+    "description": "Pendant Tacle et le saut qui suit, la taille du projectile de Tir chargé est augmentée de 50 %, la vitesse d’attaque de 35 % et votre arme gagne 35 % de vol de vie."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_10_aftershock.webp": {
+    "name": "Réplique",
+    "description": "Les tirs chargés à pleine charge ou les coups critiques de Tir chargé déclenchent une explosion qui inflige 50 % de dégâts aux adversaires à proximité."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_11_zoom-zoom-zoom.webp": {
+    "name": "Accélération glissée",
+    "description": "Vous gagnez une charge supplémentaire de Tacle."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_12_conductor-chase.webp": {
+    "name": "Conducteurs de Chase",
+    "description": "Pendant Tacle et le saut qui suit, vous obtenez 10 % de charge de Canon électrique et récupérez 50 % de vos munitions max. par seconde. La charge de Canon électriquese dissipe 75 % plus lentement."
+  },
+  "soldier-76/minorPerks/assets/perks/soldier-76_minor_01_helix-propulsion.webp": {
+    "name": "Propulsion LX",
+    "description": "La vitesse des projectiles de Roquettes LX est augmentée de 50 %."
+  },
+  "soldier-76/minorPerks/assets/perks/soldier-76_minor_02_tactical-salvo.webp": {
+    "name": "Salve tactique",
+    "description": "Pendant Visière tactique, le temps de recharge de Roquettes LX est réduit de 80 % et Roquettes LX n’interrompt plus les tirs de Fusil à impulsions."
+  },
+  "soldier-76/majorPerks/assets/perks/soldier-76_major_01_full-stride.webp": {
+    "name": "Pleine vitesse",
+    "description": "Le bonus de vitesse de déplacement de Sprint augmente progressivement de 25 % supplémentaires en 2 s."
+  },
+  "soldier-76/majorPerks/assets/perks/soldier-76_major_02_stim-pack.webp": {
+    "name": "Stimulant",
+    "description": "Stimulant remplace Champ biotique. À l’utilisation, Stimulant vous rend 30 points de vie par seconde et augmente votre vitesse d’attaque de 20 % pendant 5 secondes."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_01_super-visor.webp": {
+    "name": "Super visière",
+    "description": "Après l’utilisation de Roquette LX, vous activez Visière tactique pendant 0,5 s."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_02_peripheral-pulse.webp": {
+    "name": "Impulsion périphérique",
+    "description": "Pendant Visière tactique, Fusil à impulsions cible automatiquement 1 cible adverse supplémentaire et ses dégâts sont réduits de 50 %."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_03_run-and-gun.webp": {
+    "name": "Tir sportif",
+    "description": "Lorsque vous tirez avec Fusil à impulsions et utilisez des capacités, Sprint n’est pas interrompu. ­ Si vous infligez des dégâts pendant Sprint, la vitesse de déplacement de Sprint est augmentée de 1 % et vous obtenez 1 % de vol de vie pendant 5 s, jusqu’à un maximum de 25 %."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_04_chaingun.webp": {
+    "name": "Fusil automatique",
+    "description": "Lorsque vous tirez en continu avec votre fusil à impulsions, chaque tir augmente votre puissance d’arme de 0,5 %. Cet effet peut se cumuler 100 fois."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_05_double-helix.webp": {
+    "name": "Double LX",
+    "description": "Roquette LX tire une seconde roquette LX à tête chercheuse qui inflige des dégâts réduits de 70 %."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_06_cratered.webp": {
+    "name": "Cratère",
+    "description": "Le rayon d’explosion de Roquette LX augmente de 40 % et les dégâts de l’explosion augmentent de 15 %."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_07_hunker-down.webp": {
+    "name": "À terre",
+    "description": "Lorsque vous infligez des dégâts avec Roquettes LX, vous faites apparaître un champ biotique ayant une durée réduite de 50 % et une efficacité réduite de 50 % à votre emplacement."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_08_aura-cloud.webp": {
+    "name": "Nuage d’aura",
+    "description": "Rayon de Champ biotique augmenté de 40 %.­ Les adversaires à l’intérieur de votre champ biotique subissent des dégâts égaux à 100 % de ses soins."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_09_on-me.webp": {
+    "name": "Avec moi !",
+    "description": "Champ biotique vous suit."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_10_track-and-field.webp": {
+    "name": "Athlétisme",
+    "description": "Pendant Sprint, les temps de recharge des capacités sont réduits de 75 % et vous récupérez 15 % de vos munitions max. par seconde."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_11_frontliners.webp": {
+    "name": "Premières lignes",
+    "description": "Les personnages alliés qui sont à portée de votre champ biotique au moment de son déploiement gagnent un surplus de points de vie égal à 25 % de vos points de vie maximum pendant 2 s."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_12_biotic-bullseye.webp": {
+    "name": "Dans le mille biotique",
+    "description": "Lorsque vous vous tenez dans votre champ biotique, vous obtenez 50 % de charge de capacité ultime en plus, et les coups critiques vous rendent 20 % de vos munitions max. et prolongent la durée de Champ biotique de 0,5 s, jusqu’à un maximum de 5 s."
+  },
+  "sombra/minorPerks/assets/perks/sombra_minor_01_34e108b70ea2d33e.png": {
+    "name": "Impulsion électro-corrective",
+    "description": "IEM applique Correctif à tous les personnages alliés proches."
+  },
+  "sombra/minorPerks/assets/perks/sombra_minor_02_ctrl-alt-esc.webp": {
+    "name": "CTRL ALT ÉCHAP",
+    "description": "Lorsque vous utilisez Transducteur pour vous téléporter alors que vos points de vie sont inférieurs à 50 %, vous déclenchez votre régénération de points de vie passive."
+  },
+  "sombra/majorPerks/assets/perks/sombra_major_01_87fec003fc9753ad.png": {
+    "name": "Paquet de données",
+    "description": "Lorsque vous piratez des kits de soins avec Correctif, son temps de recharge principal est réduit de 4 s."
+  },
+  "sombra/majorPerks/assets/perks/sombra_major_02_28a09178c65bff6e.png": {
+    "name": "Cybersécurité",
+    "description": "Le montant de soins de Cyberespace est doublé pour les personnages alliés ayant moins de 50 % de leurs points de vie."
+  },
+  "symmetra/minorPerks/assets/perks/symmetra_minor_01_sentry-capacity.webp": {
+    "name": "Tourelle supplémentaire",
+    "description": "Tourelle sentinelle obtient une charge supplémentaire."
+  },
+  "symmetra/minorPerks/assets/perks/symmetra_minor_02_perfect-alignment.webp": {
+    "name": "Alignement parfait",
+    "description": "La portée du tir principal de Projecteur à photons est augmentée de 20 %."
+  },
+  "symmetra/majorPerks/assets/perks/symmetra_major_01_hovering-barrier.webp": {
+    "name": "Écran flottant",
+    "description": "Téléporteur a la possibilité de créer un écran qui avance à la place du téléporteur habituel. Appuyez sur E à nouveau pour ralentir la vitesse de déplacement de l’écran."
+  },
+  "symmetra/majorPerks/assets/perks/symmetra_major_02_shield-battery.webp": {
+    "name": "Recharge de bouclier",
+    "description": "Vous récupérez 20 points de bouclier par seconde quand vous êtes à moins de 10 m de votre téléporteur."
+  },
+  "torbjorn/minorPerks/assets/perks/torbjorn_minor_01_hammer-time.webp": {
+    "name": "Martel en tête",
+    "description": "Votre vitesse de déplacement est augmentée de 20 % lorsque Marteau de forge est équipé."
+  },
+  "torbjorn/minorPerks/assets/perks/torbjorn_minor_02_pre-heated.webp": {
+    "name": "Préchauffage",
+    "description": "Cœur de magma active Surcharge."
+  },
+  "torbjorn/majorPerks/assets/perks/torbjorn_major_01_5f3ae1fcd2f9a78a.png": {
+    "name": "Boulons d’ancrage",
+    "description": "La portée de Déploiement de tourelle est augmentée de 25 % et celle-ci peut désormais être fixée sur les murs et les plafonds."
+  },
+  "torbjorn/majorPerks/assets/perks/torbjorn_major_02_overloaded-turret.webp": {
+    "name": "Tourelle surchargée",
+    "description": "Surcharge améliore votre tourelle pendant 5 s, ce qui augmente ses points de vie et les dégâts qu’elle inflige."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_01_all-grown-up.webp": {
+    "name": "Tourelle adulte",
+    "description": "Lorsque Surcharge est active, les tourelles sont améliorées d’un niveau, jusqu’au niveau 3 maximum."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_02_swedish-sauna.webp": {
+    "name": "Sauna suédois",
+    "description": "Cœur de magma soigne les personnages alliés qui se trouvent dans ses flaques à hauteur de 50 % des dégâts de Cœur de magma toutes les 1 s."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_03_magmini.webp": {
+    "name": "Magmini",
+    "description": "Lorsque vous utilisez Surcharge, vous obtenez 2 munitions de Cœur de magma avec une durée et des dégâts réduits de 66 %."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_04_come-get-yer-armor.webp": {
+    "name": "Venez prendre de l’armure",
+    "description": "Lorsque vous utilisez Surcharge, vous lancez 2 modules d’armure qui octroient un montant d’armure équivalent à 15 % de vos points de vie max. Les modules d’armure ne se cumulent pas."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_05_let-off-some-steam.webp": {
+    "name": "Relâcher la pression",
+    "description": "Lorsque Surcharge n’est pas active, son temps de recharge est réduit de 8 % chaque fois que vous infligez des dégâts d’arme ou appliquez des soins d’arme."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_06_forged-in-fire.webp": {
+    "name": "Forgé par le feu",
+    "description": "Pendant que Surcharge est active, chaque coup de Marteau de forge explose et inflige des dégâts supplémentaires équivalents à 10 % de vos points de vie max. dans un rayon de 3 m."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_07_dwarlord.webp": {
+    "name": "Seigneur nain",
+    "description": "Surcharge confère 10 % de vitesse d’attaque et un surplus de points de vie équivalent à 50 % du surplus de points de vie de Surcharge aux personnages alliés dans un rayon de 5 m."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_08_riveting.webp": {
+    "name": "Rivets jumelés",
+    "description": "Tous les 5 tirs de Pistolet à rivets, vous utilisez à la fois le tir principal et le tir secondaire de votre arme. Le tir bonus inflige des dégâts réduits de 10 %."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_09_blacksmith.webp": {
+    "name": "Forgeron",
+    "description": "Utilisez Marteau de forge sur un personnage allié pour le soigner à hauteur de 100 % des dégâts de Marteau de forge."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_10_hammer-throw.webp": {
+    "name": "Lancer de marteau",
+    "description": "Capacité : Lorsque Marteau de forge est équipé, utilisez votre tir secondaire pour le lancer. Le marteau soigne avec une efficacité de 200 % les tourelles et les personnages alliés.­ (Temps de recharge : 2 s)"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_11_turriplets.webp": {
+    "name": "Trirelles",
+    "description": "Vous pouvez avoir 3 tourelles actives. Elles débutent au niveau 1, ont 50 % de points de vie et 65 % de vitesse d’attaque, et peuvent être améliorées temporairement en les frappant avec Marteau de forge pendant un maximum de 24 s."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_12_clocked.webp": {
+    "name": "Marquage chronométré",
+    "description": "Les dégâts de Tourelle marquent les adversaires pendant 8 s. Votre arme gagne 25 % de vol de vie et ses dégâts sont augmentés de 15 % contre les cibles marquées."
+  },
+  "tracer/minorPerks/assets/perks/tracer_minor_01_abd0ec9faa55dabc.png": {
+    "name": "Régénération temporaire",
+    "description": "La régénération de points de vie passive se déclenche 100 % plus vite."
+  },
+  "tracer/minorPerks/assets/perks/tracer_minor_02_kinetic-reload.webp": {
+    "name": "Rechargement cinétique",
+    "description": "Vous récupérez 12 munitions lorsque vous réussissez un coup en mêlée."
+  },
+  "tracer/majorPerks/assets/perks/tracer_major_01_blink-packs.webp": {
+    "name": "Transfert de kits",
+    "description": "Les kits de soins restituent 1 charge de Transfert."
+  },
+  "tracer/majorPerks/assets/perks/tracer_major_02_quantum-entanglement.webp": {
+    "name": "Intrication quantique",
+    "description": "Rappel octroie un surplus de 50 points de vie et 20 munitions qui diminuent avec le temps."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_01_flash-fist.webp": {
+    "name": "Coup de poing éclair",
+    "description": "Pendant 1 s après l’utilisation de Transfert, votre prochain coup en mêlée est affecté par la puissance de capacité, il inflige 25 de dégâts supplémentaires et repousse les adversaires."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_02_quantum-clip.webp": {
+    "name": "Chargeur quantique",
+    "description": "Si vous utilisez Transfert en rechargeant, vous obtenez 25 % de munitions max. et votre arme gagne 10 % de vol de vie jusqu’à votre prochain rechargement."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_03_auto-recall.webp": {
+    "name": "Rappel automatique",
+    "description": "Une fois par manche, vous pouvez utiliser Rappel gratuitement au lieu de mourir.­ Utiliser votre charge de capacité ultime réduit le temps de recharge de Rappel de 50 %."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_04_timelapse.webp": {
+    "name": "Fenêtre de tir",
+    "description": "Lorsque vous touchez la même cible 2 fois d’affilée sans jamais rater, les dégâts sont augmentés de 2 pendant 2 s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_05_get-stuffed.webp": {
+    "name": "Va t’faire empailler !",
+    "description": "Les coups en mêlée réussis vous octroient 5 % de charge de capacité ultime et réduisent le temps de recharge de Rappel de 2 s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_06_quantum-reload.webp": {
+    "name": "Recharge quantique",
+    "description": "Après avoir utilisé Rappel, vous obtenez un nombre de munitions égal à 100 % de vos munitions max. qui disparaissent progressivement."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_07_blink-hop.webp": {
+    "name": "Saut transféré",
+    "description": "Transfert vous téléporte 0,2 m plus loin.­ Lorsque vous utilisez Transfert en l’air, vous pouvez effectuer un saut aérien et le temps de recharge de Transfert est réduit de 3 s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_08_temportal.webp": {
+    "name": "Temportail",
+    "description": "Après avoir utilisé Rappel, vous laissez derrière vous un portail temporel qui dure 8 s. Jusqu’à 3 personnages alliés peuvent interagir avec ce portail une fois pour revenir 1 s en arrière avec Rappel."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_09_impulsive.webp": {
+    "name": "Impulsivité",
+    "description": "Lorsque vous utilisez Rappel, vous lancez une bombe à impulsion qui explose 50 % plus vite, mais inflige 70 % de dégâts en moins."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_10_alternate-ending.webp": {
+    "name": "Fin alternative",
+    "description": "Lorsque vous utilisez Rappel, vous soignez les personnages alliés dans un rayon de 6 m à hauteur de 100 % des dégâts qu’ils ont subi lors des 3 s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_11_bullet-time.webp": {
+    "name": "Bullet time",
+    "description": "Lorsque vous utilisez Rappel, vous laissez derrière vous un champ temporel qui ralentit les projectiles de 95 % et les adversaires de 20 %.­ Vous subissez 25 % de dégâts des hitscans en moins pendant 4 s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_12_chrono-stabilizer.webp": {
+    "name": "Stabilisateur temporel",
+    "description": "Après l’utilisation de Transfert, les personnages alliés dans un rayon de 6 m récupèrent 40 points de vie et vous en récupérez 10."
+  },
+  "vendetta/minorPerks/assets/perks/vendetta_minor_01_extra-edge.webp": {
+    "name": "Lame allégée",
+    "description": "Projection de lame coûte 25 % d’énergie en moins."
+  },
+  "vendetta/minorPerks/assets/perks/vendetta_minor_02_raging-storm.webp": {
+    "name": "Tempête déchaînée",
+    "description": "Élan tournoyant poursuit sa rotation, frappant les adversaires 3 fois de plus en infligeant 30 points de dégâts dans une large zone."
+  },
+  "vendetta/majorPerks/assets/perks/vendetta_major_01_siphoning-strike.webp": {
+    "name": "Frappe drainante",
+    "description": "Vos attaques verticales obtiennent 40 % de vol de vie."
+  },
+  "vendetta/majorPerks/assets/perks/vendetta_major_02_relentless.webp": {
+    "name": "Impitoyable",
+    "description": "Assaut peut obtenir 3 cumuls de plus, ce qui augmente la vitesse d’attaque de 5 % et la vitesse de déplacement de 3 % par cumul."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_01_rampant-onslaught.webp": {
+    "name": "Assaut irrépressible",
+    "description": "Les cumuls max. d’Assaut sont augmentés de 1 toutes les 2 éliminations, jusqu’à un maximum de 3."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_02_undying-fury.webp": {
+    "name": "Fureur immortelle",
+    "description": "Au lieu de mourir, vous êtes entravée et empêchez les personnages alliés de vous soigner, vous obtenez un surplus de points de vie égal à vos points de vie max. qui disparaît progressivement et vos cumuls d’Assaut et votre effet vol de vie sont doublés. ­ (Temps de recharge : 90 s)"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_03_skycut.webp": {
+    "name": "Tranche-cieux",
+    "description": "Après avoir utilisé Entaille fulgurante, votre prochain coup vertical tire une projection de lame qui inflige 75 % de dégâts lorsque vous atterrissez."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_04_overloaded-strike.webp": {
+    "name": "Frappe surchargée",
+    "description": "Après avoir utilisé Entaille fulgurante, votre prochain coup vertical en l’air peut canaliser le niveau 1 d’Équarrisseuse qui inflige 25 % de dégâts supplémentaires."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_05_defiance-core.webp": {
+    "name": "Au cœur du défi",
+    "description": "L’énergie de Posture défensive se régénère désormais même lorsque vous bloquez les dégâts, à un taux de 75 %.­ Pour chaque projection de lame lancée, les temps de recharge d’Élan tournoyant et d’Entaille fulgurante sont réduits de 0,5 s."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_06_riposte.webp": {
+    "name": "Riposte",
+    "description": "Après avoir bloqué des dégâts, la pénalité de vitesse de déplacement de Posture défensive est supprimée. Votre prochain coup d’épée devient un coup vertical."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_07_cyclone-charge.webp": {
+    "name": "Charge cyclonique",
+    "description": "Élan tournoyant peut tourner 3 fois de plus en infligeant 75 % de dégâts."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_08_double-dash.webp": {
+    "name": "Élan double",
+    "description": "Après la fin d’Élan tournoyant, celui-ci peut être réactivé dans les 3 s qui suivent et infliger 75 % de dégâts."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_09_exalted-empress.webp": {
+    "name": "Impératrice exaltée",
+    "description": "Après avoir utilisé Entaille fulgurante, 30 % des dégâts du coup vertical ou d’Équarrisseuse sont convertis en surplus de points de vie, jusqu’à un maximum de 200."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_10_cataclisma.webp": {
+    "name": "Cataclisma",
+    "description": "Projection de lame et Entaille fulgurante explosent en touchant l’adversaire, ce qui inflige 30 points de dégâts aux adversaires dans un rayon de 4 m."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_11_furious-friction.webp": {
+    "name": "Friction enragée",
+    "description": "Le taux de régénération d’énergie de Posture défensive augmente de 25 %. ­ Lorsque vous infligez des dégâts avec Projection de lame, vous obtenez 50 % de régénération d’énergie bonus pendant 3 s."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_12_apex-bloodlust.webp": {
+    "name": "Soif inextinguible de sang",
+    "description": "Vous obtenez 4 % de vol de vie et les temps de recharge de vos capacités sont réduits de 3 % par cumul d’Assaut que vous possédez."
+  },
+  "venture/minorPerks/assets/perks/venture_minor_01_deep-burrow.webp": {
+    "name": "Enfouissement profond",
+    "description": "Lorsque vous êtes sous terre, la distance de Forage rapide est augmentée de 75 %."
+  },
+  "venture/minorPerks/assets/perks/venture_minor_02_excavation-exhilaration.webp": {
+    "name": "Excavation exaltante",
+    "description": "Lorsque Secousse sismique est active, les temps de recharge se renouvellent 300 % plus rapidement."
+  },
+  "venture/majorPerks/assets/perks/venture_major_01_smart-extender.webp": {
+    "name": "Extension de FUTÉ",
+    "description": "Utilisez E pour renforcer l’excavateur FUTÉ, ce qui augmente la portée maximale de ses projectiles de 100 % pendant 4 secondes."
+  },
+  "venture/majorPerks/assets/perks/venture_major_02_covered-in-dirt.webp": {
+    "name": "Couverture terrestre",
+    "description": "Vous gagnez jusqu’à 40 points de bouclier de Volonté d’explorer lorsque vous infligez des dégâts avec Castagne."
+  },
+  "widowmaker/minorPerks/assets/perks/widowmaker_minor_01_scoped-efficiency.webp": {
+    "name": "Efficacité à la lunette",
+    "description": "Les tirs à la lunette coûtent 3 munitions au lieu de 5."
+  },
+  "widowmaker/minorPerks/assets/perks/widowmaker_minor_02_sniper-s-instinct.webp": {
+    "name": "Instinct de sniper",
+    "description": "Après avoir utilisé Grappin, les tirs à la lunette se chargent 100 % plus rapidement pendant 2 s."
+  },
+  "widowmaker/majorPerks/assets/perks/widowmaker_major_01_seeker-mine.webp": {
+    "name": "Mine chercheuse",
+    "description": "Mine venimeuse tire maintenant des fléchettes empoisonnées sur les adversaires dans un rayon de 10 m et reste active après son déclenchement."
+  },
+  "widowmaker/majorPerks/assets/perks/widowmaker_major_02_widow-s-bite.webp": {
+    "name": "Morsure de la veuve",
+    "description": "Les tirs à la lunette peuvent se charger jusqu’à 125 % et transpercent les adversaires à pleine charge."
+  },
+  "ana/minorPerks/assets/perks/ana_minor_01_ae02fae670005f98.png": {
+    "name": "Anesthésie locale",
+    "description": "Fléchette hypodermique explose à l’impact, ce qui ralentit les adversaires et leur inflige 45 points de dégâts en 3 s."
+  },
+  "ana/minorPerks/assets/perks/ana_minor_02_speed-serum.webp": {
+    "name": "Sérum de vitesse",
+    "description": "Nanoboost augmente la vitesse de déplacement d’Ana et de sa cible de 30 %."
+  },
+  "ana/majorPerks/assets/perks/ana_major_01_biotic-bounce.webp": {
+    "name": "Rebond biotique",
+    "description": "Après son explosion, Grenade biotique rebondit et explose une deuxième fois pour infliger 60 points de dégâts et rendre 60 points de vie."
+  },
+  "ana/majorPerks/assets/perks/ana_major_02_headhunter.webp": {
+    "name": "Chasse aux têtes",
+    "description": "Fusil biotique peut infliger des coups critiques aux adversaires."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_01_no-scope-needed.webp": {
+    "name": "Pas besoin de lunette",
+    "description": "Les tirs à l’œil nu de votre Fusil biotique augmentent la vitesse d’attaque de 10 % pendant 2 s. Cet effet peut se cumuler 3 fois."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_02_pinpoint-prescription.webp": {
+    "name": "Prescription parfaite",
+    "description": "Votre fusil biotique peut désormais infliger des coups critiques, que sa cible soit alliée ou adverse."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_03_dream-field.webp": {
+    "name": "Rêve éveillé",
+    "description": "Les tirs de Fléchette hypodermique soignent les personnages alliés dans un rayon de 5 m à hauteur de 20 % de vos points de vie max. par seconde pendant 5 s."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_04_comfy-cloud.webp": {
+    "name": "Nuage douillet",
+    "description": "Fléchette hypodermique explose à l’impact et touche les cibles à moins de 3 m, mais son effet de sommeil voit sa durée réduite de 50 %."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_05_home-remedy.webp": {
+    "name": "Remède maison",
+    "description": "Rayon de Grenade biotique augmenté de 30 %.­ Grenade biotique octroie un surplus de points de vie égal à 30 % de vos points de vie max. pour toute la durée de Grenade biotique."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_06_venomous.webp": {
+    "name": "Vénéneuse",
+    "description": "Grenade biotique inflige 75 points de dégâts supplémentaires en 2 s aux personnages adverses affectés."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_07_my-turn.webp": {
+    "name": "À mon tour",
+    "description": "Nanoboost s’applique aussi à vous pendant 100 % de sa durée."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_08_our-turn.webp": {
+    "name": "À notre tour",
+    "description": "L’utilisation de Nanoboost affecte également les autres personnages alliés dans votre champ de vision, mais la durée de son effet est réduite de 25 % pour eux."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_09_artsy-dartsy.webp": {
+    "name": "Fléchette professionnelle",
+    "description": "Lorsque vous visez à la lunette, vous pouvez tirer votre fléchette hypodermique avec une vitesse de projectile augmentée de 300 % et 75 des dégâts de base. Si la fléchette hypodermique tirée à la lunette touche une cible adverse, son temps de recharge est réduit de 5 s."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_10_fountain-of-soothe.webp": {
+    "name": "Fontaine d’apaisement",
+    "description": "Fléchette hypodermique fait apparaître une grenade biotique avec une efficacité de 50 %."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_11_nanonade.webp": {
+    "name": "Nanonade",
+    "description": "Grenade biotique applique Nanoboost aux personnages alliés touchés pendant 1,5 s avec une efficacité de 25 %."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_12_falconer.webp": {
+    "name": "Fauconnière",
+    "description": "Nanoboost octroie également 50 % de vitesse d’attaque et 10 % de charge de capacité ultime."
+  },
+  "baptiste/minorPerks/assets/perks/baptiste_minor_01_expanded-field.webp": {
+    "name": "Champ élargi",
+    "description": "Le rayon de Champ d’immortalité est augmenté de 30 %."
+  },
+  "baptiste/minorPerks/assets/perks/baptiste_minor_02_assault-burst.webp": {
+    "name": "Salve offensive",
+    "description": "Salve régénérante augmente désormais aussi la vitesse d’attaque de Baptiste de 20 % pendant 3 s."
+  },
+  "baptiste/majorPerks/assets/perks/baptiste_major_01_automated-healing.webp": {
+    "name": "Soins automatisés",
+    "description": "L’utilisation d’une capacité active la tourelle d’épaule de Baptiste, qui tire à intervalles réguliers et jusqu’à 3 fois en direction des personnages alliés pour leur rendre 40 points de vie par tir."
+  },
+  "baptiste/majorPerks/assets/perks/baptiste_major_02_rocket-boots.webp": {
+    "name": "Bottes à réaction",
+    "description": "Lorsque vous êtes en l’air après avoir utilisé Exo-bottes, vous pouvez utiliser ESPACE pour vous propulser à l’horizontale."
+  },
+  "brigitte/minorPerks/assets/perks/brigitte_minor_01_combat-medic.webp": {
+    "name": "Aide-soignante militaire",
+    "description": "Les attaques de mêlée qui touchent des adversaires réduisent le temps de recharge de Module de réparation de 0,75 s."
+  },
+  "brigitte/minorPerks/assets/perks/brigitte_minor_02_morale-boost.webp": {
+    "name": "Coup de pouce",
+    "description": "L’effet d’Inspiration dure 3 s de plus lorsqu’il est déclenché par Fléau cinglant."
+  },
+  "brigitte/majorPerks/assets/perks/brigitte_major_01_inspiring-strike.webp": {
+    "name": "Frappe inspirante",
+    "description": "Charge de bouclier augmente de 30 % votre vitesse de déplacement pendant 2 s. Les soins d’Inspiration sont instantanés lorsqu’ils sont déclenchés par Charge de bouclier."
+  },
+  "brigitte/majorPerks/assets/perks/brigitte_major_02_whiplash.webp": {
+    "name": "Coup de fouet",
+    "description": "L’effet de recul de Fléau cinglant peut projeter les adversaires contre les murs pour leur infliger 60 points de dégâts supplémentaires."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_01_whirlwhip.webp": {
+    "name": "Fléau tourbillonnant",
+    "description": "Après avoir utilisé Charge de bouclier ou Fléau cinglant, votre prochain coup de Fléau à réaction inflige 25 % de dégâts supplémentaires et touche toutes les cibles adverses dans un rayon de 5 m."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_02_righteous-cleave.webp": {
+    "name": "Fléau vertueux",
+    "description": "Après avoir utilisé Charge de bouclier ou Fléau cinglant, votre prochain coup réussi de Fléau à réaction soigne les personnages alliés dans un rayon de 10 m à hauteur de 125 % des dégâts infligés."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_03_burst-aid.webp": {
+    "name": "Salve de soins",
+    "description": "Capacité : Utilisez Recharger pour consommer 1 charge de Module de réparation, récupérer 20 % de vos points de vie max. et obtenir un bonus de vitesse de déplacement de 50 %.­ (Temps de recharge : 3 s)"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_04_optimizer.webp": {
+    "name": "Optimisatrice",
+    "description": "Pour chaque Module de réparation actif, vous augmentez les soins de Module de réparation de 10 % et vous vous soignez à hauteur de 4 % de vos points de vie maximum par seconde."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_05_packstacker.webp": {
+    "name": "Collectionneuse de modules",
+    "description": "La durée de Module de réparation est augmentée de 25 %. Les dégâts de capacité augmentent la durée de tous les Modules de réparation actifs de 1 s."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_06_maces-to-faces.webp": {
+    "name": "Masses dans vos faces",
+    "description": "La taille de Fléau cinglant est augmentée de 1 m et il peut toucher plusieurs adversaires. Inspiration dure 1 s de plus si elle est déclenchée par Fléau cinglant."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_07_god-ray.webp": {
+    "name": "Rayon divin",
+    "description": "Les dégâts de capacité infligés aux cibles à plus de 10 m les brûlent en leur infligeant 5 % de dégâts supplémentaires par mètre parcouru par la capacité."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_08_sk-ldkastning.webp": {
+    "name": "Sköldkastning",
+    "description": "Lorsque vous utilisez Charge de bouclier, votre prochain coup de Fléau à réaction projette un bouclier-boomerang qui inflige 40 % des dégâts de Charge de bouclier."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_09_lindholm-wall.webp": {
+    "name": "Mur des Lindholm",
+    "description": "La taille de Bouclier-écran est augmentée de 60 % et ses points de vie de 100 %. Charge de bouclier peut toucher plusieurs adversaires."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_10_mender-bender.webp": {
+    "name": "Charge réparatrice",
+    "description": "Après avoir utilisé Charge de bouclier, votre Bouclier-écran récupère 33 % points de vie et Inspiration se déclenche."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_11_aura-farming.webp": {
+    "name": "Partage d’aura",
+    "description": "Tous les personnages affectés par Inspiration lorsque celle-ci est déclenchée par une capacité obtiennent un surplus de points de vie équivalent à 4 % de vos points de vie maximum pendant 5 s."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_12_consecrated-ground.webp": {
+    "name": "Terre consacrée",
+    "description": "Charge de capacité ultime initiale augmentée de 25 %.­ Lorsque Ralliement est actif, Inspiration se déclenche toutes les 1,5 s et les temps de recharge des capacités sont réduits de 25 %."
+  },
+  "illari/minorPerks/assets/perks/illari_minor_01_rapid-construction.webp": {
+    "name": "Construction accélérée",
+    "description": "La vitesse de construction du pylône de soin est augmentée de 300 % et son temps de recharge est réduit de 2 s."
+  },
+  "illari/minorPerks/assets/perks/illari_minor_02_summer-solstice.webp": {
+    "name": "Solstice d’été",
+    "description": "Soleil accablant rallonge la durée de vol d’Illari de 3 s et augmente ses vitesses de vol et d’attaque de 20 %."
+  },
+  "illari/majorPerks/assets/perks/illari_major_01_solar-flare.webp": {
+    "name": "Éruption solaire",
+    "description": "Appuyez sur en utilisant le rayon de soin du fusil solaire pour rendre 100 points de vie à tous les personnages alliés situés devant vous."
+  },
+  "illari/majorPerks/assets/perks/illari_major_02_sunburn.webp": {
+    "name": "Coup de soleil",
+    "description": "Éruption embrase les adversaires, ce qui leur inflige 50 points de dégâts supplémentaires en 3 s."
+  },
+  "jetpack-cat/minorPerks/assets/perks/jetpack-cat_minor_01_ulterior-motive.webp": {
+    "name": "Aide intéressée",
+    "description": "Vous récupérez un montant de carburant égal à 15 % des soins prodigués par Coussinets biotiques."
+  },
+  "jetpack-cat/minorPerks/assets/perks/jetpack-cat_minor_02_transport-shielding.webp": {
+    "name": "Bouclier de transport",
+    "description": "Vous obtenez jusqu’à 50 points de bouclier supplémentaires lorsque vous transportez un autre personnage."
+  },
+  "jetpack-cat/majorPerks/assets/perks/jetpack-cat_major_01_7b90c625a71b1ab6.png": {
+    "name": "Ronronnement sonore",
+    "description": "Chaque impulsion de Ronronnement contient 3 vagues."
+  },
+  "jetpack-cat/majorPerks/assets/perks/jetpack-cat_major_02_claws-out.webp": {
+    "name": "Toutes griffes dehors",
+    "description": "Vos coups en mêlée sont renforcés toutes les 6 s, ce qui inflige 40 points de dégâts aux adversaires et les ralentit de 30 % pendant 1 s."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_01_territorial.webp": {
+    "name": "Défense territoriale",
+    "description": "Les adversaires à l’intérieur de votre ronronnement subissent des dégâts égaux à 20 % de ses soins."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_02_purr-sistence.webp": {
+    "name": "Ronronnement entêtant",
+    "description": "L’effet de Ronronnement persiste 10 % plus longtemps pour chaque personnage allié ou adverse affecté par Ronronnement, jusqu’à un maximum de 50 %. Le nombre d’impulsions de soins se réinitialise toutes les 4 impulsions."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_03_battle-fur-mation.webp": {
+    "name": "For-miaou-tion de combat",
+    "description": "Soutien aéroporté peut transporter 1 personnage allié supplémentaire."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_04_tow-beans.webp": {
+    "name": "Chat perché",
+    "description": "Lorsque vous relâchez une cible de Soutien aéroporté ou Chat-trappe, vous gagnez 20 % de points de carburant. ­ Vous récupérez 1 % de carburant par tranche de 10 points de dégâts infligés."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_05_frenzy.webp": {
+    "name": "Frénésie",
+    "description": "Capacité : votre prochain coup en mêlée ralentit et inflige 40 points de dégâts en 3 s, et il augmente la vitesse d’attaque de vos coups en mêlée de 100 % pendant 1 s. ­ (Temps de recharge : 8 s)."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_06_zoomies.webp": {
+    "name": "Folie féline",
+    "description": "Après avoir activé Vol frénétique pendant 0,5 s, la prochaine fois que vous entrez en collision avec un personnage adverse, vous provoquez une explosion qui inflige jusqu’à 120 points de dégâts et vous récupérez jusqu’à 40 % de points de carburant en fonction de la distance parcourue. ­ (Temps de recharge : 1,5 s)"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_07_lindholm-inspiration.webp": {
+    "name": "Inspiration des Lindholm",
+    "description": "À la fin de Ronronnement, tous les autres personnages alliés dans le rayon de Ronronnement obtiennent un surplus de points de vie égal à 30 % des dégâts infligés pendant Ronronnement, et vous obtenez un surplus de points de vie égal à 10 % des dégâts pendant 3 s."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_08_tomcat-reserves.webp": {
+    "name": "Vol sans escale",
+    "description": "Tant que Vol frénétique est actif, le temps de recharge de Ronronnement est réduit de 40 % et ceux de toutes les autres capacités de 80 %."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_09_ambidex-fur-ous.webp": {
+    "name": "Double ration biotique",
+    "description": "Tant que Ronronnement est actif, vous tirez avec les deux canons. Le tir bonus a une efficacité de 35 %."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_10_bell-bomb.webp": {
+    "name": "Bombe à clochette",
+    "description": "Capacité : Soutien aéroporté transporte une balle de jeu explosive dont l’explosion inflige jusqu’à 120 points de dégâts à l’impact. ­ (Temps de recharge : 6 s)"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_11_scratch-ageddon.webp": {
+    "name": "Griff-ageddon",
+    "description": "La charge de capacité ultime initiale est augmentée de 25 %.­ Chat-trappe griffe chaque adversaire à proximité à l’impact, ce qui les ralentit et leur inflige 150 points de dégâts en 3 s."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_12_bouncing-biscuits.webp": {
+    "name": "Biscuits rebondissants",
+    "description": "Lorsque vous touchez un personnage allié avec un projectile de Coussinets biotiques, celui-ci rebondit vers 1 personnage allié à moins de 15 m avec une efficacité de 50 %."
+  },
+  "juno/minorPerks/assets/perks/juno_minor_01_familiar-vitals.webp": {
+    "name": "Anatomie familière",
+    "description": "Les torpilles à neutrons verrouillent les personnages alliés 35 % plus vite."
+  },
+  "juno/minorPerks/assets/perks/juno_minor_02_locked-on.webp": {
+    "name": "Cible verrouillée",
+    "description": "Le temps de recharge de Torpilles à neutrons est réduit de 1 s par cible adverse touchée."
+  },
+  "juno/majorPerks/assets/perks/juno_major_01_lift-off.webp": {
+    "name": "Décollage",
+    "description": "Vous pouvez désormais effectuer un triple saut avec Bottes martiennes."
+  },
+  "juno/majorPerks/assets/perks/juno_major_02_faster-blaster.webp": {
+    "name": "Autoblaster",
+    "description": "Lorsque Vol plané est actif, Médiblaster tire en continu."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_01_medimaster.webp": {
+    "name": "Médimaster",
+    "description": "Médiblaster inflige 50 % points de dégâts critiques supplémentaires et peut infliger des coups critiques aux personnages alliés. ­ Les coups critiques réduisent le temps de recharge d’Hyperanneau de 0,2 s."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_02_stinger.webp": {
+    "name": "Piqûre",
+    "description": "Votre médiblaster inflige 10 points de dégâts supplémentaires aux adversaires en 1 s. (Cet effet n’est pas cumulable.)"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_03_medicinal-missiles.webp": {
+    "name": "Missiles médicinaux",
+    "description": "Les personnages alliés touchés par Torpilles à neutrons reçoivent des soins augmentés de 50 % pendant 3 s."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_04_pulsar-plus.webp": {
+    "name": "Neutrons améliorés",
+    "description": "Torpilles à neutrons obtient 1 charge supplémentaire."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_05_torpedo-glide.webp": {
+    "name": "Torpilles en vol",
+    "description": "Pendant Vol plané, le temps de recharge de Torpilles à neutrons est réduit de 1 s chaque fois que vous infligez 75 points de dégâts d’arme ou prodiguez 100 points de soins d’arme."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_06_blink-boosts.webp": {
+    "name": "Vol rapide",
+    "description": "Vol plané dispose désormais de 3 charges courtes, sa durée est réduite de 75 % et son temps de recharge est réduit de 30 %."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_07_hyper-healer.webp": {
+    "name": "Hypersoins",
+    "description": "Les personnages alliés affectés par Hyperanneau gagnent un surplus de 85 points de vie."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_08_stellar-focus.webp": {
+    "name": "Concentration cosmique",
+    "description": "Lorsque vous planez avec Vol plané ou Bottes martiennes, vos dégâts et vos soins vous octroient 75 % de charge de capacité ultime en plus. ­ Rayon orbital vous suit désormais et sa durée est augmentée de 50 %."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_09_pulstar-destroyers.webp": {
+    "name": "Destructeurs à neutrons",
+    "description": "Vos torpilles à neutrons explosent à l’impact en infligeant 20 points de dégâts ou en rendant 20 points de vie."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_10_fission-chamber.webp": {
+    "name": "Chambre de fission",
+    "description": "Lorsque vous bénéficiez de l’effet d’Hyperanneau, Médiblaster tire en continu."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_11_heal-formation.webp": {
+    "name": "Formation de soutien",
+    "description": "Les personnages alliés qui bénéficient d’Hyperanneau sont soignés à hauteur de 40 % des dégâts que vous infligez."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_12_marswalking.webp": {
+    "name": "Marcher sur Mars",
+    "description": "Hyperanneau se déploie face contre terre et il augmente votre hauteur de saut de 250 %.­ Le temps de recharge d’Hyperanneau est réduit de 1 s lorsque des personnages alliés le traversent."
+  },
+  "kiriko/minorPerks/assets/perks/kiriko_minor_01_urgent-care.webp": {
+    "name": "Soins urgents",
+    "description": "La vitesse des projectiles d’O-fuda de guérison est augmentée de 50 % lorsque vous ciblez des personnages alliés dont les points de vie sont inférieurs à 50 %."
+  },
+  "kiriko/minorPerks/assets/perks/kiriko_minor_02_fortune-teller.webp": {
+    "name": "Voyance",
+    "description": "Les kunais qui touchent leur cible envoient 2 o-fuda de guérison à un personnage allié devant vous."
+  },
+  "kiriko/majorPerks/assets/perks/kiriko_major_01_ready-step.webp": {
+    "name": "Pas assuré",
+    "description": "Pas véloce augmente les vitesses d’attaque et de rechargement de Kiriko de 40 % pendant 3 s."
+  },
+  "kiriko/majorPerks/assets/perks/kiriko_major_02_foxtrot.webp": {
+    "name": "Foxtrot",
+    "description": "Suzu de protection augmente de 30 % la vitesse de déplacement des personnages alliés pendant 4 s."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_01_foxy-fireworks.webp": {
+    "name": "Feux d’artifice rusés",
+    "description": "Après l’utilisation d’une capacité ou d’un gadget, les 5 prochains kunais explosent à l’impact en infligeant 20 points de dégâts aux adversaires proches."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_02_keen-kunai.webp": {
+    "name": "Kunai acéré",
+    "description": "Les coups critiques de Kunai réduisent vos temps de recharge de 25 % et vous rendent 3 munitions."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_03_good-fortune.webp": {
+    "name": "Bonne fortune",
+    "description": "Les kunais qui touchent leur cible envoient 3 o-fuda de guérison à un personnage allié devant vous."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_04_leaf-on-the-wind.webp": {
+    "name": "Feuille dans le vent",
+    "description": "O-fuda de guérison rebondit vers un autre personnage allié jusqu’à 2 fois avec une efficacité de 30 %."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_05_self-care.webp": {
+    "name": "Soins personnels",
+    "description": "Lorsque vous utilisez O-fuda de guérison, chaque o-fuda de guérison lancé vous soigne à hauteur de 2 % de vos points de vie max."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_06_supported-shooting.webp": {
+    "name": "Tirs assistés",
+    "description": "Rayon d’efficacité d’O-fuda de guérison augmenté de 100 %­ Lorsque O-fuda de guérison soigne des personnages alliés, ceux-ci voient leur vitesse d’attaque augmentée de 20 % pendant 3 s."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_07_fleet-foot.webp": {
+    "name": "Pied léger",
+    "description": "Pas véloce peut être utilisé dans n’importe quelle direction, sans nécessiter de cible. Sa portée est réduite de 50 % et son temps de recharge est réduit de 20 % lorsqu’il est utilisé sans cible."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_08_clone-conjuration.webp": {
+    "name": "Invocation de clone",
+    "description": "Après l’utilisation de Pas véloce, vous créez un clone de vous-même qui persiste 4 s. Les dégâts et les soins de votre clone sont réduits de 65 %."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_09_cleansing-charge.webp": {
+    "name": "Purification énergisante",
+    "description": "Lorsque vous dissipez des effets négatifs avec Suzu de protection, vous gagnez 5 % de charge de capacité ultime pour chaque personnage purifié."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_10_donut-delivery.webp": {
+    "name": "Livraison de donuts",
+    "description": "Pas véloce rend 80 points de vie en 2 s aux personnages alliés à proximité."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_11_talisman-of-life.webp": {
+    "name": "Talisman de vie",
+    "description": "Suzu de protection vous octroie un surplus de80 points de vie pendant 5 s. Pour chaque personnage allié affecté, le temps de recharge de Pas véloce est réduit de 1 s."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_12_our-bikes.webp": {
+    "name": "Nos motos",
+    "description": "Après l’utilisation de Ruée de kitsune, les temps de recharge de toutes les autres capacités sont réinitialisés. ­ Les personnages alliés affectés par Ruée de kitsune récupèrent 80 points de vie par seconde."
+  },
+  "lifeweaver/minorPerks/assets/perks/lifeweaver_minor_01_petal-protection.webp": {
+    "name": "Protection de pétales",
+    "description": "Les personnages alliés récupèrent 20 points de vie par seconde lorsqu’ils se trouvent sur une plateforme de pétales."
+  },
+  "lifeweaver/minorPerks/assets/perks/lifeweaver_minor_02_dashing-escape.webp": {
+    "name": "Évasion fringante",
+    "description": "La distance d’Élan régénérant est augmentée de 30 %."
+  },
+  "lifeweaver/majorPerks/assets/perks/lifeweaver_major_01_sow-the-seed.webp": {
+    "name": "Ensemencement",
+    "description": "Lorsque vous infligez un coup en mêlée avec Fleur de soins, vous lancez une graine. Un autre personnage allié peut la ramasser pour obtenir un surplus de points de vie et un bonus de vitesse de déplacement."
+  },
+  "lifeweaver/majorPerks/assets/perks/lifeweaver_major_02_superbloom.webp": {
+    "name": "Superfloraison",
+    "description": "Les épines explosent et infligent 40 points de dégâts supplémentaires si un nombre suffisant de projectiles touche sa cible en 2,5 s."
+  },
+  "lucio/minorPerks/assets/perks/lucio_minor_01_soundwave-rider.webp": {
+    "name": "Surfeur d’ondes",
+    "description": "Wall Ride renforce votre prochaine onde sonore, augmentant son effet de recul de 25 % et ses dégâts de 50 %."
+  },
+  "lucio/minorPerks/assets/perks/lucio_minor_02_beat-drop.webp": {
+    "name": "Chute de rythme",
+    "description": "Volume max. est activé pendant 4 s après avoir lancé Mur de son."
+  },
+  "lucio/majorPerks/assets/perks/lucio_major_01_noise-violation.webp": {
+    "name": "Nuisance sonore",
+    "description": "La portée de Crossfade est augmentée de 150 % lorsque Volume max. est actif."
+  },
+  "lucio/majorPerks/assets/perks/lucio_major_02_accelerando.webp": {
+    "name": "Accelerando",
+    "description": "Votre vitesse d’attaque augmente de 15 % lorsque le beat de vitesse de Lúcio est actif. Ce montant est triplé pendant Volume max."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_01_premium-streaming.webp": {
+    "name": "Streaming premium",
+    "description": "Vitesse des projectiles augmentée de 50 %.­ Votre vitesse d’attaque est augmentée de 6 % pour chaque autre personnage allié bénéficiant de Crossfade, et ceux-ci reçoivent des soins égaux à 30 % des dégâts subis. Ce bonus est doublé pendant Volume max.."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_02_mixtape.webp": {
+    "name": "Mixtape",
+    "description": "Lorsque vous passez au beat de soins, Crossfade prodigue 65 % de ses soins pour chaque seconde d’utilisation du beat de vitesse."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_03_signature-shift.webp": {
+    "name": "Effet signature",
+    "description": "Tant que Volume max. est actif, ­ Ampli tire en continu et la taille des projectiles est augmentée de 80 %."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_04_fast-forward.webp": {
+    "name": "Avance rapide",
+    "description": "Vos dégâts et vos soins augmentent jusqu’à un maximum de 30 % en fonction de votre vitesse de déplacement et votre élan actuels."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_05_radio-edit.webp": {
+    "name": "Radio Edit",
+    "description": "Après avoir utilisé Volume max., vous générez un Mur de son qui octroie un surplus de points de vie réduit de 80 %."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_06_vivace.webp": {
+    "name": "Vivace",
+    "description": "Toutes les 0,5 s de Wall ride ou chaque fois que vous infligez des dégâts d’arme, vous obtenez 1 % de vitesse de déplacement pendant 5 s. Cet effet peut se cumuler 30 fois."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_07_megaphone.webp": {
+    "name": "Mégaphone",
+    "description": "Tant que Volume max. est actif, le rayon de Crossfade est augmenté de 150 % et les dégâts d’arme augmentent la durée de Volume max. de 0,25 s, jusqu’à un maximum de 3 s."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_08_crowd-pleaser.webp": {
+    "name": "Ovation",
+    "description": "Après avoir utilisé Onde sonore, vous soignez tous les personnages alliés affectés par Crossfade à hauteur de 40 % des dégâts infligés par Onde sonore. Ce montant est doublé lorsque Volume max. est actif."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_09_rhythm-rail.webp": {
+    "name": "Rail rythmique",
+    "description": "Lorsque vous utilisez Wall Ride pendant 3 s, vous chargez votre prochaine onde sonore, ce qui augmente son effet de recul de 25 % et ses dégâts de 100 %."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_10_reverb.webp": {
+    "name": "Réverbération",
+    "description": "Après avoir utilisé Onde sonore, pendant 3 s, vous pouvez réutiliser Onde sonore avec une efficacité réduite de 50 %."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_minor_02_beat-drop.webp": {
+    "name": "Chute de rythme",
+    "description": "Lorsque vous atterrissez avec Mur de son, celui-ci explose en infligeant 75 points de dégâts et peut infliger des dégâts critiques à hauteur de 300 % des dégâts normaux. Si vous dépensez votre charge de capacité ultime, les dégâts de Mur de son sont doublés."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_12_hip-hop.webp": {
+    "name": "Hip-hop",
+    "description": "Vous gagnez un saut supplémentaire lorsque vous êtes en l’air après un wall ride. Pendant Wall ride ou lorsque vous êtes en l’air, les temps de recharge des capacités sont réduits de 10 %."
+  },
+  "mercy/minorPerks/assets/perks/mercy_minor_01_angelic-resurrection.webp": {
+    "name": "Résurrection angélique",
+    "description": "Ange gagne un surplus de 100 points de vie après avoir lancé Résurrection."
+  },
+  "mercy/minorPerks/assets/perks/mercy_minor_02_winged-reach.webp": {
+    "name": "Portée d’ailes",
+    "description": "Portée d’Ange gardien augmentée de 30 %."
+  },
+  "mercy/majorPerks/assets/perks/mercy_major_01_chain-boost.webp": {
+    "name": "Amplification en chaîne",
+    "description": "L’amplification des dégâts de Caducée est augmentée de 5 % et elle affecte un second personnage allié à proximité."
+  },
+  "mercy/majorPerks/assets/perks/mercy_major_02_double-dose.webp": {
+    "name": "Double dose",
+    "description": "Soins rapides obtient une charge supplémentaire, mais ses soins de base sont réduits de 10 points."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_01_threads-of-fate.webp": {
+    "name": "Fils du destin",
+    "description": "Votre caducée affecte aussi votre cible précédente pendant 3 s avec une efficacité de 30 %."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_02_battle-medic.webp": {
+    "name": "Secouriste militaire",
+    "description": "Lorsque vous dégainez votre miséricorde, votre vitesse d’attaque augmente de 20 % et votre arme obtient 20 % de vol de vie pendant 2 s pour chaque seconde où Caducée était lié à quelqu’un, jusqu’à un maximum de 20 s."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_03_renaissance.webp": {
+    "name": "Renaissance",
+    "description": "Après une Résurrection réussie, vous activez Valkyrie pendant 5 s."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_04_equivalent-exchange.webp": {
+    "name": "Échange équivalent",
+    "description": "Résurrection dispose de 3 charges et son temps de lancement est réduit de 33 %, mais son temps de recharge ne se réinitialise plus. ­ Infligez 750 points de dégâts avec Miséricorde pour régénérer 1charge."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_05_the-whambulance.webp": {
+    "name": "Tirer sur l’ambulance",
+    "description": "Lorsqu’Ange gardien prend fin, vous rendez 4 points de vie à votre cible pour chaque intervalle de 1 m parcouru."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_major_02_double-dose.webp": {
+    "name": "Double dose",
+    "description": "Vous obtenez une charge supplémentaire de Soins rapides. Lorsque Valkyrie est activée, une charge de Soins rapides est réinitialisée."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_07_serenity.webp": {
+    "name": "Sérénité",
+    "description": "Guérison favorable rend 10 % de points de vie supplémentaires et vous soigne même lorsque vous aidez un personnage allié ayant tous ses points de vie. ­ Caducée peut octroyer jusqu’à 50 points de vie en surplus."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_08_distortion.webp": {
+    "name": "Distorsion",
+    "description": "Lorsque vous utilisez Soins rapides, vous octroyez un surplus de points de vie à la cible égal à 25 % de vos points de vie max. pendant 2 s et repoussez les adversaires dans un rayon de 5 m autour de la cible."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_09_first-responder.webp": {
+    "name": "Soins d’urgence",
+    "description": "Lorsque vous utilisez Résurrection sur un personnage allié, lui et vous gagnez un surplus de 250 points de vie pendant 6 s."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_10_angelic-acrobatics.webp": {
+    "name": "Acrobaties angéliques",
+    "description": "Vitesse de décollage d’Ange gardien augmentée de 15 %.­ Le temps de recharge d’Ange gardien commence dès que vous sautez ou vous accroupissez."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_11_supply-surge.webp": {
+    "name": "Surapprovisionnement",
+    "description": "Soins rapides augmente votre vitesse de déplacement de 20 % et diminue les temps de recharge de 100 %, et la cible et vous-même gagnez 20 % de vol de vie pendant 2 s."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_12_tethered-tourniquet.webp": {
+    "name": "Garrot lié",
+    "description": "Lorsque vous dégainez votre miséricorde, Caducée soigne automatiquement les personnages alliés à 100 % d’efficacité pendant 2 s pour chaque seconde où Caducée était lié à quelqu’un, jusqu’à un maximum de 20 s."
+  },
+  "mizuki/minorPerks/assets/perks/mizuki_minor_01_wellspring.webp": {
+    "name": "Source pure",
+    "description": "La génération d’Aura curative est augmentée de 25 %."
+  },
+  "mizuki/minorPerks/assets/perks/mizuki_minor_02_exposed-soul.webp": {
+    "name": "Âme exposée",
+    "description": "Lorsque vous touchez une cible adverse avec Entrave spirituelle, vous lui infligez 30 % de dégâts supplémentaires pendant 2 s."
+  },
+  "mizuki/majorPerks/assets/perks/mizuki_major_01_resonant-return.webp": {
+    "name": "Retour retentissant",
+    "description": "Kasa guérisseur rebondit une fois de plus. Les soins augmentent de 10 points à chaque rebond."
+  },
+  "mizuki/majorPerks/assets/perks/mizuki_major_02_quickstep.webp": {
+    "name": "Marche rapide",
+    "description": "Tant que Retour de katashiro est activé, les personnages alliés se trouvant dans Aura curative obtiennent un bonus de 20 % de vitesse de déplacement."
+  },
+  "moira/minorPerks/assets/perks/moira_minor_01_destruction-s-divide.webp": {
+    "name": "Scission de destruction",
+    "description": "Coalescence inflige uniquement des dégâts ou prodigue uniquement des soins, selon ce que vous choisissez, et son effet est augmenté de 30 %."
+  },
+  "moira/minorPerks/assets/perks/moira_minor_02_ethical-nourishment.webp": {
+    "name": "Alimentation éthique",
+    "description": "Quand votre orbe biotique trouve un personnage allié, il commence par lui rendre instantanément 30 points de vie."
+  },
+  "moira/majorPerks/assets/perks/moira_major_01_reversal.webp": {
+    "name": "Inversion",
+    "description": "La réactivation d’Orbe biotique inverse sa direction."
+  },
+  "moira/majorPerks/assets/perks/moira_major_02_phantom-step.webp": {
+    "name": "Pas fantôme",
+    "description": "La durée de Volatilité est augmentée de 0,5 s et la hauteur de son saut de 50 %."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_01_necrotic-orb.webp": {
+    "name": "Orbe nécrotique",
+    "description": "Capacité : Utilisez Recharger pour envoyer un orbe qui inflige jusqu’à un maximum de 35 points de dégâts et réduit les dégâts infligés par les cibles adverses touchées de 50 % pendant 3 s.­ (Temps de recharge : 8 s)"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_02_ethereal-excision.webp": {
+    "name": "Ablation éthérée",
+    "description": "L’utilisation d’Emprise biotique ou Coalescence sur une cible affectée par un orbe inflige 20 % de dégâts critiques ou prodigue 20 % de soins."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_03_chain-grasp.webp": {
+    "name": "Emprise propagée",
+    "description": "Après l’utilisation d’une capacité ou d’un gadget, le tir secondaire d’Emprise biotique se propage à 2 adversaires supplémentaires dans un rayon de 10 m pendant 2 s."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_04_cross-orbal.webp": {
+    "name": "Orbes croisés",
+    "description": "Orbe biotique projette également un orbe de l’autre type qui dispose d’une charge réduite de 60 %."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_05_multiball.webp": {
+    "name": "Orbes multiples",
+    "description": "Orbe biotique projette 2 orbes supplémentaires du type choisi, mais leur efficacité est réduite de 85 %."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_06_phantasm.webp": {
+    "name": "Phantasme",
+    "description": "Lorsque vous utilisez Volatilité, une copie immobile du dernier orbe biotique sélectionné apparaît. Sa durée est réduite de 50 % et sa charge est réduite de 50 %."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_07_precarious-potency.webp": {
+    "name": "Puissance précaire",
+    "description": "Les personnages alliés soignés par Emprise biotique récupèrent des points de vie supplémentaires à hauteur de 25 % des soins d’Emprise biotique en 5 s."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_08_voidhoppers.webp": {
+    "name": "Marche-vide",
+    "description": "Lorsque vous utilisez Volatilité, traverser une cible adverse vous octroie un surplus de points de vie égal à 10 % de vos points de vie max. Traverser un personnage allié lui confère également ce surplus de points de vie, ainsi que l’effet de phase."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_09_remote-reciprocity.webp": {
+    "name": "Réciprocité à distance",
+    "description": "Après avoir prodigué 300 points de soins avec Emprise biotique, la portée du tir secondaire d’Emprise biotique est augmentée de 25 % et ses dégâts de 15 % pendant 5 s."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_10_orbsplosion.webp": {
+    "name": "Explosion d’orbes",
+    "description": "Si vous réactivez Orbe biotique, tous les orbes biotiques actifs explosent. Les soins prodigués peuvent atteindre un maximum de 45 % et les dégâts infligés un maximum de 30 % de la charge maximale d’Orbe biotique."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_11_spectral-beam.webp": {
+    "name": "Rayon spectral",
+    "description": "Si vous passez au travers d’un personnage adverse pendant Volatilité, vous lancez Coalescence pendant 1,25 s avec une efficacité de 100 %. Pour chaque cible adverse supplémentaire, vous la lancez pendant 0,75 s de plus."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_12_destruction-s-divide.webp": {
+    "name": "Scission de destruction",
+    "description": "Coût de la capacité ultime réduit de 25 %.­ Coalescence inflige uniquement des dégâts ou prodigue uniquement des soins, selon ce que vous choisissez, mais son effet est augmenté de 30 %."
+  },
+  "wuyang/minorPerks/assets/perks/wuyang_minor_01_overflow.webp": {
+    "name": "Débordement",
+    "description": "Vous obtenez 10 munitions et 50 % de ressources de soins à l’activation de Ruée torrentielle."
+  },
+  "wuyang/minorPerks/assets/perks/wuyang_minor_02_balance.webp": {
+    "name": "Équilibre",
+    "description": "Lorsque vous infligez des dégâts avec vos orbes d’eau, les soins passifs de Courant vivifiant sont augmentés de 30 % pendant 2 s."
+  },
+  "wuyang/majorPerks/assets/perks/wuyang_major_01_ebb-and-flow.webp": {
+    "name": "Flux et reflux",
+    "description": "Vague protectrice reflue vers son point de départ."
+  },
+  "wuyang/majorPerks/assets/perks/wuyang_major_02_falling-rain.webp": {
+    "name": "Averse",
+    "description": "Vous contrôlez 3 orbes d’eau à la fois. Leurs dégâts sont réduits de 60 % et le rayon des explosions renforcées est réduit de 25 %."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_01_undertow.webp": {
+    "name": "Ressac",
+    "description": "Pour chaque tir d’orbe d’eau réussi, vous récupérez 10 % d’énergie de Courant vivifiant et les temps de recharge de vos capacités sont réduits de 0,5 s."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_02_ripple-sense.webp": {
+    "name": "Ondulation",
+    "description": "L’orbe d’eau renforcé peut être dirigé plus librement et son rayon d’explosion est augmenté de 35 %. Toutes les 5 s, votre prochain orbe d’eau révèle les adversaires dans un rayon de 8 m à l’impact pendant 5 s."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_03_paindrops.webp": {
+    "name": "Comme trois gouttes d’eau",
+    "description": "Après l’utilisation d’une capacité ou d’un gadget, vos 3 prochains orbes d’eau tirent 2 orbes supplémentaires qui infligent chacun 30 % des dégâts habituels."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_04_flow-state.webp": {
+    "name": "État liquide",
+    "description": "Lorsque Ruée torrentielle est active, sa durée est augmentée de 1 s (jusqu’à un maximum de 5 s) pour chaque tranche de 50 points de dégâts infligés ou 75 points de vie restaurés."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_05_bifurcation.webp": {
+    "name": "Bifurcation",
+    "description": "Après avoir utilisé une capacité, l’effet actif de Courant vivifiant affecte aussi la cible précédente avec une efficacité des soins de 100 % pendant 5 s. Vous pouvez placer un effet passif de Courant vivifiant supplémentaire."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_06_tidal-save.webp": {
+    "name": "Écume protectrice",
+    "description": "Vague protectrice soigne les personnages alliés affectés par l’effet passif de Courant vivifiant de 75 % points supplémentaires en 4 s et rend 15 % d’énergie de Courant vivifiant par cible touchée."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_07_streamline.webp": {
+    "name": "Eau claire",
+    "description": "Lorsque vous utilisez Ruée torrentielle, vous appliquez l’effet passif de Courant vivifiant à tous les autres personnages alliés dans votre ligne de visée avec une efficacité des soins réduite de 25 %."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_08_puddle-stomp.webp": {
+    "name": "À pieds joints",
+    "description": "Lorsque Ruée torrentielle est active, l’atterrissage après un saut soigne les personnages alliés dans un rayon de 6 m à hauteur de 75 points par seconde passée en l’air après le saut."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_09_splash-strike.webp": {
+    "name": "Coup éclaboussant",
+    "description": "Lorsque Ruée torrentielle est active, si vous utilisez Coup en mêlée dans les airs, vous créez une petite vague protectrice avec une efficacité de 75 % autour de vous.­ (Temps de recharge : 8 s)"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_10_waveshatter.webp": {
+    "name": "Fracas des vagues",
+    "description": "Vague protectrice peut infliger des coups critiques aux adversaires à courte portée, et elle obtient un bonus de largeur maximum de 150 % et un bonus d’efficacité maximum de 75 % en fonction du temps passé à se propager vers le bas."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_11_current-confluence.webp": {
+    "name": "Confluence de courants",
+    "description": "Durée de Courant vivifiant augmentée de 25 %.­ Les personnages alliés affectés par l’effet passif de Courant vivifiant ou l’effet de soins bonus de Vague protectrice sont soignés à hauteur de 30 % des dégâts que vous infligez."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_major_01_ebb-and-flow.webp": {
+    "name": "Flux et reflux",
+    "description": "Vague protectrice reflue vers son point de départ en infligeant 50 % de dégâts."
+  },
+  "zenyatta/minorPerks/assets/perks/zenyatta_minor_01_discordant-repair.webp": {
+    "name": "Réparation discordante",
+    "description": "Zenyatta obtient 15 % de vol de vie contre les cibles adverses affectées par Orbe de discorde."
+  },
+  "zenyatta/minorPerks/assets/perks/zenyatta_minor_02_ascendance.webp": {
+    "name": "Ascension",
+    "description": "Activez et maintenez la commande de double saut pour léviter pendant 3 s maximum."
+  },
+  "zenyatta/majorPerks/assets/perks/zenyatta_major_01_focused-destruction.webp": {
+    "name": "Destruction concentrée",
+    "description": "Le tir secondaire se charge 20 % plus rapidement et peut accumuler 1 orbe de destruction supplémentaire."
+  },
+  "zenyatta/majorPerks/assets/perks/zenyatta_major_02_dual-harmony.webp": {
+    "name": "Double harmonie",
+    "description": "Vous gagnez un deuxième orbe d’harmonie, mais vos deux orbes soignent à hauteur de 70 % des soins habituels."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_01_flying-kick.webp": {
+    "name": "Coup de pied volant",
+    "description": "Capacité : En l’air, votre coup en mêlée se transforme en coup de pied sauté vers l’avant qui inflige 25 % de dégâts supplémentaires. Il étourdit la cible et lui inflige 40 points de dégâts si celle-ci heurte un mur.­ (Temps de recharge : 5 s)"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_02_it-s-orbin--time.webp": {
+    "name": "Orbes à gogo",
+    "description": "Le tir secondaire de votre orbe de destruction peut charger jusqu’à 3 projectiles supplémentaires."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_03_enlightenment.webp": {
+    "name": "Illumination",
+    "description": "Les personnages alliés qui bénéficient de votre orbe d’harmonie sont soignés à hauteur de 30 % des dégâts que vous infligez."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_major_02_dual-harmony.webp": {
+    "name": "Double harmonie",
+    "description": "Vous gagnez un deuxième orbe d’harmonie, mais les soins de vos orbes sont réduits de 35 %."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_05_gotta-have-faith.webp": {
+    "name": "Foi inébranlable",
+    "description": "La cible de votre orbe d’harmonie peut rester hors de votre ligne de vue pendant 10 s de plus avant de perdre l’orbe."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_06_inner-peace.webp": {
+    "name": "Paix intérieure",
+    "description": "Vous bénéficiez d’un orbe d’harmonie personnel et permanent. Celui-ci prodigue des soins réduits de 80 %."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_07_discord-inferno.webp": {
+    "name": "Brasier de discorde",
+    "description": "Lorsque vous infligez un coup critique à la cible de votre orbe de discorde, il explose et inflige 50 points de dégâts."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_08_discord-fever.webp": {
+    "name": "Fièvre de discorde",
+    "description": "Lorsqu’une cible adverse subit les effets de votre orbe de discorde, elle subit 50 points de dégâts en 5 s."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_09_instant-karma.webp": {
+    "name": "Karma instantané",
+    "description": "Lorsque la cible de votre orbe de discorde vous inflige des dégâts, vous récupérez un montant de points de vie égal à 25 % de ces dégâts en 2 s."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_10_circle-of-strife.webp": {
+    "name": "Cercle de conflit",
+    "description": "Lorsque vous utilisez Transcendance, vous appliquez un orbe de discorde à chaque adversaire à portée."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_11_soul-control.webp": {
+    "name": "Contrôle de l’âme",
+    "description": "Transcendance peut être interrompue avant la fin de son effet pour conserver jusqu’à 65 % de sa charge."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_12_sharpened-focus.webp": {
+    "name": "Concentration renforcée",
+    "description": "Le tir secondaire d’Orbe de destruction se charge 20 % plus vite. Lors du chargement, votre vitesse de déplacement est augmentée de 5 % et vous obtenez un surplus de points de vie égal à 5 % de vos points de vie max. pour chaque orbe chargé."
+  },
+  "dva/minorPerks/assets/perks/dva_minor_01_bunny-power.webp": {
+    "name": "Puissance du lapin",
+    "description": "Éjection vous octroie un surplus de 75 points de vie temporaires et le rayon de dégâts d’Appel du méca est augmenté de 50 %."
+  },
+  "dva/minorPerks/assets/perks/dva_minor_02_extended-boosters.webp": {
+    "name": "Turboréacteurs renforcés",
+    "description": "Quand Turboréacteurs touche une cible adverse, ses dégâts sont augmentés de 40 % et sa durée est prolongée de 0,5 s."
+  },
+  "dva/majorPerks/assets/perks/dva_major_01_shield-system.webp": {
+    "name": "Système de bouclier",
+    "description": "100 points de vie sont convertis en points de bouclier. Matrice défensive rend des points de bouclier à hauteur de 25 % des dégâts absorbés."
+  },
+  "dva/majorPerks/assets/perks/dva_major_02_precision-fusion.webp": {
+    "name": "Fusion de précision",
+    "description": "Appuyez sur R pour réduire la dispersion de Fusio-canons de 75 % pendant 3 s."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_01_focused-fusion.webp": {
+    "name": "Fusion ciblée",
+    "description": "La dispersion de Fusio-canon est réduite de 50 % et sa portée d’atténuation des dégâts est augmentée de 20 m. Lorsque vous infligez des dégâts d’arme à des adversaires à plus de 8 m, Matrice défensive se régénère 33 % plus vite."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_02_legendary-loadout.webp": {
+    "name": "Arsenal légendaire",
+    "description": "Les micro-missiles sont remplacés par 6 Roquettes lourdes, qui infligent 375 % de dégâts d’explosion supplémentaires dans un rayon augmenté de 100 %."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_03_overstocked.webp": {
+    "name": "Surstockage",
+    "description": "Vous obtenez 1 charge supplémentaire de Micro-missiles."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_04_countermeasures.webp": {
+    "name": "Contre-mesures",
+    "description": "Lorsque vous bloquez 150 points de dégâts avec Matrice défensive, vous tirez automatiquement 3 Micro-missiles."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_05_ignition-burst.webp": {
+    "name": "Allumage explosif",
+    "description": "Les dégâts de Turboréacteurs brûlent les adversaires et leur inflige 40 points de dégâts en 2 s."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_06_meka-punch.webp": {
+    "name": "Frappe MEKA",
+    "description": "Tant que vos turboréacteurs sont actifs, la vitesse d’attaque de vos coups en mêlée est augmentée de 50 %. ­ Les éliminations réalisées avec des coups en mêlée et Turboréacteurs réinitialisent le temps de recharge de Turboréacteurs."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_07_tokki-slam.webp": {
+    "name": "Frappe de Tokki",
+    "description": "Pendant l’utilisation de Turboréacteurs, utilisez la commande d’accroupissement pour heurter le sol, ce qui inflige des dégâts de Turboréacteurs égaux à 15 % de vos points de vie max. et renverse les cibles adverses touchées."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_08_facetanking.webp": {
+    "name": "Tank ultime",
+    "description": "Lorsque vous bloquez 150 points de dégâts avec Matrice défensive, vous vous soignez à hauteur de 15 % de ces dégâts et soignez tous les personnages alliés dans un rayon de 6 m à hauteur de 25 % de ces dégâts."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_09_stat-boost.webp": {
+    "name": "Boost de stats",
+    "description": "Lorsque vous infligez des dégâts avec Turboréacteurs, la durée de Turboréacteurs est augmentée de 0,5 s, et vous récupérez 5 % d’énergie de Matrice défensive et 5 % de vos points de vie max."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_10_7ac621d3abe95810.png": {
+    "name": "Éjection MEKA",
+    "description": "Autodestruction explose 25 % plus vite et coûte 60 % de charge de capacité ultime en moins, mais inflige des dégâts réduits de 75 % et n’octroie que 75 % de charge de capacité ultime après la détonation."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_12_multi-task-mod.webp": {
+    "name": "Mode multitâche",
+    "description": "Vous pouvez désormais actionner vos fusio-canons tout en utilisant Matrice défensive."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_12_df1b48ee1dca0920.png": {
+    "name": "Bouclier d’évacuation MEKA",
+    "description": "Le rayon d’Appel du méca est augmenté de 50 %.­ Lorsque vous vous éjectez ou réintégrez votre méca, vous octroyez un surplus de points de vie équivalent à 20 % de vos points de vie max. à tous les personnages alliés proches pendant 5 s."
+  },
+  "domina/minorPerks/assets/perks/domina_minor_01_efficient-design.webp": {
+    "name": "Conception efficace",
+    "description": "Après avoir utilisé Matrice d’écrans, vous récupérez 50 points de bouclier et votre régénération de points de vie passive s’active."
+  },
+  "domina/minorPerks/assets/perks/domina_minor_02_extended-power.webp": {
+    "name": "Puissance étendue",
+    "description": "La portée de Magnum à photons est augmentée de 20 %."
+  },
+  "domina/majorPerks/assets/perks/domina_major_01_disruptive-detonation.webp": {
+    "name": "Détonation perturbatrice",
+    "description": "Les cibles adverses touchées par l’explosion de Charge cristalline sont ralenties de 30 % pendant 2 s."
+  },
+  "domina/majorPerks/assets/perks/domina_major_02_corporate-retreat.webp": {
+    "name": "Séminaire d’entreprise",
+    "description": "Tant que Matrice d’écrans est active, elle peut être déplacée une fois vers un autre emplacement."
+  },
+  "doomfist/minorPerks/assets/perks/doomfist_minor_01_one-two.webp": {
+    "name": "Gauche-droite",
+    "description": "Lorsque vous envoyez une cible adverse dans un mur avec Direct d’enfer, votre calibre prosthétique est entièrement rechargé et obtient 2 munitions supplémentaires."
+  },
+  "doomfist/minorPerks/assets/perks/doomfist_minor_02_survival-of-the-fittest.webp": {
+    "name": "Survie des plus aptes",
+    "description": "La meilleure défense… octroie un surplus de 25 points de vie par élimination et le maximum de surplus de points de vie est augmenté à 50."
+  },
+  "doomfist/majorPerks/assets/perks/doomfist_major_01_aftershock.webp": {
+    "name": "Répliques",
+    "description": "Les cibles adverses touchées par Onde de choc sont ralenties de 40 % pendant 2 s."
+  },
+  "doomfist/majorPerks/assets/perks/doomfist_major_02_power-matrix.webp": {
+    "name": "Matrice puissante",
+    "description": "Parade puissante absorbe les projectiles pendant 0,8 s après son activation."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_01_rising-uppercut.webp": {
+    "name": "Uppercut",
+    "description": "Capacité : Votre prochain coup en mêlée devient un uppercut qui inflige 20 de dégâts supplémentaires.­ (Temps de recharge : 10 s)"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_02_jab-cross.webp": {
+    "name": "Une-deux",
+    "description": "Après l’utilisation d’une capacité, votre vitesse d’attaque est augmentée de 75 % et la portée de Coup en mêlée est augmentée de 1 m pendant 0,75 s."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_03_the-bestest-defense.webp": {
+    "name": "La défense ultime…",
+    "description": "Les coups en mêlée réussis et les coups critiques de Calibre prosthétique réussis déclenchent La meilleure défense… avec une efficacité de 50 %."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_04_slam-wham.webp": {
+    "name": "Onde destructrice",
+    "description": "Les dégâts d’Onde de choc sont augmentés jusqu’à un maximum de 75 % et sa portée jusqu’à un maximum de 50 % en fonction du temps passé en l’air."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_05_overpowered.webp": {
+    "name": "Surpuissant",
+    "description": "Direct d’enfer peut être davantage renforcé en bloquant 150 % de dégâts supplémentaires avec Parade puissante, ce qui lui octroie un bonus de 50 % de dégâts et 50 % de portée."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_06_jetforce-jab.webp": {
+    "name": "Crochet d’enfer",
+    "description": "Direct d’enfer peut transpercer plusieurs adversaires et les brûle en infligeant 20 % de dégâts supplémentaires en 3 s."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_07_boomfist.webp": {
+    "name": "Boomfist",
+    "description": "Lorsque vous touchez plusieurs adversaires avec Direct d’enfer, vous gagnez 5 % de charge de capacité ultime et le temps de recharge de Parade puissante est réduit de 0,5 s pour chaque cible adverse supplémentaire touchée."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_08_asteroid-smash.webp": {
+    "name": "Frappe astéroïde",
+    "description": "Capacité : Lorsque vous utilisez la touche d’accroupissement en l’air, cela déclenche une mini frappe météore qui attire les adversaires au sol et inflige jusqu’à 150 de dégâts en fonction de la distance parcourue.­ (Temps de recharge : 8 s)"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_09_aftershock.webp": {
+    "name": "Réplique",
+    "description": "La réplique d’Onde de choc se réitère après un délai de 1,5 s en infligeant 40 % de dégâts."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_10_seismic-rally.webp": {
+    "name": "Onde de ralliement",
+    "description": "Pour chaque seconde passée à bondir avec ­ Onde de choc, vous octroyez un surplus de points de vie équivalant à 5 % de vos points de vie maximum à tous les personnages alliés dans votre ligne de vue pendant 3 s."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_11_block-party.webp": {
+    "name": "Parade de groupe",
+    "description": "Tant que Parade puissante est active, vous vous soignez à hauteur de 8 % de vos points de vie maximum et soignez tous les personnages alliés dans un rayon de 8 m à hauteur de 20 % de vos points de vie maximum chaque seconde."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_12_helping-hand.webp": {
+    "name": "Coup de main",
+    "description": "La meilleure défense… octroie un surplus de points de vie bonus équivalent à 10 % de vos points de vie maximum supplémentaires. Lorsque vous obtenez un surplus de points de vie grâce à l’une de vos capacités, vous en octroyez 25 % au personnage allié le plus proche."
+  },
+  "hazard/minorPerks/assets/perks/hazard_minor_01_reconstitution.webp": {
+    "name": "Reconstitution",
+    "description": "Les coups de Mur dentelé confèrent 25 % d’énergie supplémentaire à Garde hérissée, ce bonus pouvant dépasser la charge maximale de Garde hérissée."
+  },
+  "hazard/minorPerks/assets/perks/hazard_minor_02_anarchic-zeal.webp": {
+    "name": "Zèle anarchique",
+    "description": "Les pointes de Garde hérissée obtiennent 40 % de vol de vie."
+  },
+  "hazard/majorPerks/assets/perks/hazard_major_01_deep-leap.webp": {
+    "name": "Saut en longueur",
+    "description": "Portée de Saut violent augmentée de 20 %."
+  },
+  "hazard/majorPerks/assets/perks/hazard_major_02_explosive-impalements.webp": {
+    "name": "Empalements explosifs",
+    "description": "Les tirs réussis d’Éperon osseux marquent les cibles avec des pointes. Touchez une cible marquée avec un coup en mêlée ou le coup de Saut violent pour déclencher une explosion des pointes qui inflige 30 points de dégâts."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_01_bonerot.webp": {
+    "name": "Nécrose osseuse",
+    "description": "Après avoir infligé 6 instances de dégâts avec votre arme à une cible, celle-ci est marquée avec des pointes. Touchez une cible marquée avec un coup en mêlée et le coup de Saut violent pour déclencher une explosion des pointes qui inflige 60 points de dégâts."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_02_barbed-shot.webp": {
+    "name": "Tir barbelé",
+    "description": "Le tir d’Éperon osseux tire également 2 pointes de Garde hérissée sur les cibles touchées, leur infligeant 8 points de dégâts."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_03_needle-storm.webp": {
+    "name": "Tempête d’aiguilles",
+    "description": "Garde hérissée vise désormais l’ensemble des adversaires devant Danger."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_04_twin-fang.webp": {
+    "name": "Coup double",
+    "description": "Tous les trois tirs d’Éperon osseux, vous tirez une deuxième salve gratuite qui inflige 75 % de dégâts."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_05_woof-woof.webp": {
+    "name": "Ouaf ouaf !",
+    "description": "Après avoir utilisé Saut violent, la portée de Garde hérissée est augmentée de 50 % pendant 3 s."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_06_bunny-hop.webp": {
+    "name": "Saut de lapin",
+    "description": "Lorsque vous utilisez Saut violent sans donner de coup, cela diminue les temps de recharge de Saut violent et Mur dentelé de 2 s, et cela octroie aux personnages alliés à proximité un surplus de points de vie égal à 10 % de vos points de vie max. pendant 3 s."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_07_slasher.webp": {
+    "name": "Déchiqueteur",
+    "description": "Le coup de Saut violent tire un projectile perforant qui inflige 80 points de dégâts et ignore les adversaires dans un rayon de 7 m."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_08_off-the-wall.webp": {
+    "name": "Hors-les-murs",
+    "description": "Lorsque Mur dentelé apparaît, il repousse les adversaires dans un rayon de 8 m après 1,5 s et leur inflige 40 points de dégâts."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_09_juiced.webp": {
+    "name": "Élixir dentelé",
+    "description": "Lorsque Mur dentelé apparaît, les personnages alliés dans un rayon de 8 m sont soignés à hauteur de 20 % de vos points de vie max. en 3 s."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_10_fortress.webp": {
+    "name": "Forteresse",
+    "description": "Mur dentelé devient 35 % plus grand.­ Le recul appliqué par Mur dentelé inflige 25 points de dégâts supplémentaires."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_11_bringin--the-pain.webp": {
+    "name": "Pluie revigorante",
+    "description": "Déluge coûte 20 % de charge de capacité ultime en moins.­ Après avoir utilisé Déluge, tous les temps de recharge sont immédiatement réinitialisés et vous obtenez 25 % de réduction des temps de recharge pendant 10 s."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_12_boomslang-s-blaster.webp": {
+    "name": "Blaster de Boomslang",
+    "description": "Capacité : utilisez votre Coup en mêlée pendant ­ Garde hérissée pour tirer instantanément 5 pointes sur vos cibles. ­ (Temps de recharge : 10 s)"
+  },
+  "junker-queen/minorPerks/assets/perks/junker-queen_minor_01_rampant-charge.webp": {
+    "name": "Charge irrépressible",
+    "description": "Lorsque vous utilisez Massacre, vous gagnez l’effet Inarrêtable et tous vos temps de recharge sont réduits de 6 s."
+  },
+  "junker-queen/minorPerks/assets/perks/junker-queen_minor_02_battle-shout.webp": {
+    "name": "Cri de guerre",
+    "description": "Cri de commandement recharge complètement votre fusil à dispersion et augmente de 50 % la vitesse de rechargement des personnages alliés."
+  },
+  "junker-queen/majorPerks/assets/perks/junker-queen_major_01_willy-willy.webp": {
+    "name": "Lame tourbillonnante",
+    "description": "Lorsque vous faites revenir votre lame crantée, son rayon est augmenté de 100 % et elle inflige 30 points de dégâts d’impact supplémentaires."
+  },
+  "junker-queen/majorPerks/assets/perks/junker-queen_major_02_savage-satiation.webp": {
+    "name": "Satiété sauvage",
+    "description": "Les impacts de Carnage infligent 100 % de vol de vie."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_01_thrill-of-battle.webp": {
+    "name": "Frisson de la bataille",
+    "description": "Montée d’adrénaline soigne également les personnages alliés à moins de 12 m pour un montant égal à 100 % des soins qu’il vous octroie."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_02_royal-bullets.webp": {
+    "name": "Balles royales",
+    "description": "Les coups critiques de votre fusil à dispersion appliquent des blessures qui infligent 20 points de dégâts en 2 s."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_03_twist-the-knife.webp": {
+    "name": "Torsion de lame",
+    "description": "Les coups critiques de votre fusil à dispersion prolongent la durée de toutes les blessures subies par la cible de 2 s."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_04_blade-parade.webp": {
+    "name": "Parade de lame",
+    "description": "Lorsque vous tenez votre lame crantée avant de la lancer, elle se charge pour infliger jusqu’à 75 % de dégâts et la vitesse du projectile est augmentée jusqu’à un maximum de 200 %."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_05_cut--em--gracie.webp": {
+    "name": "Découpe-les, Gracie !",
+    "description": "Chaque cible adverse touchée par Lame crantée réduit le temps de recharge de la capacité de 1 s.­ Lorsque vous faites revenir votre lame crantée, son rayon est augmenté de 100 % et elle inflige 30 points de dégâts d’impact."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_06_merciless-magnetism.webp": {
+    "name": "Magnétisme impitoyable",
+    "description": "Lame crantée peut désormais infliger des dégâts critiques à hauteur de 50 % de dégâts supplémentaires.­ La force d’attraction de Lame crantée est augmentée de 50 %. Lorsque Lame crantée inflige un coup critique, ce bonus est doublé."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_07_soaring-stone.webp": {
+    "name": "Pierre volante",
+    "description": "Carnage devient un coup sauté si vous sautez pendant son temps d’incantation."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_08_chop-chop.webp": {
+    "name": "Schlak Schlak",
+    "description": "Carnage bénéficie d’une charge supplémentaire, mais sa réduction du temps de recharge par coup porté est atténuée de 1 s."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_09_reckoner-s-roar.webp": {
+    "name": "Rugissement calculé",
+    "description": "L’utilisation de Cri de commandement blesse les adversaires à moins de 10 m et leur inflige 30 points de dégâts en 3 s."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_10_let-s-go-win.webp": {
+    "name": "En route pour la victoire",
+    "description": "Les éliminations réduisent les temps de recharge de Lame crantée et Cri de commandement de 50 %."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_11_bloodcrazed.webp": {
+    "name": "Furie sanguinaire",
+    "description": "Chaque coup infligé par Massacre ou Carnage vous octroie un surplus de points de vie égal à 15 % de vos points de vie max., jusqu’à un maximum de 45 %."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_12_bow-down.webp": {
+    "name": "Inclinez-vous",
+    "description": "Lorsque vous utilisez Massacre, vous devenez inarrêtable et les temps de recharge de toutes les capacités sont réinitialisés. Massacre renverse les cibles touchées pendant 1,5 s."
+  },
+  "mauga/minorPerks/assets/perks/mauga_minor_01_kinetic-bandolier.webp": {
+    "name": "Cartouchière cinétique",
+    "description": "Vous récupérez jusqu’à 150 munitions lors de la première seconde de la charge de Déferlement."
+  },
+  "mauga/minorPerks/assets/perks/mauga_minor_02_pyromaniac.webp": {
+    "name": "Pyromane",
+    "description": "Embraser des adversaires avec Canon mitrailleur incendiaire vous octroie un surplus de 50 points de vie."
+  },
+  "mauga/majorPerks/assets/perks/mauga_major_01_firewalker.webp": {
+    "name": "Marche-feu",
+    "description": "Déferlement enflamme les cibles adverses touchées."
+  },
+  "mauga/majorPerks/assets/perks/mauga_major_02_combat-fuel.webp": {
+    "name": "Énergie combative",
+    "description": "Chaque coup critique vous octroie un surplus de 4 points de vie temporaires qui apparaîtront à la prochaine utilisation de Cent à l’heure, jusqu’à un surplus maximum de 150 points de vie temporaires."
+  },
+  "orisa/minorPerks/assets/perks/orisa_minor_01_defense-protocol.webp": {
+    "name": "Protocole de défense",
+    "description": "Vous récupérez 100 points de vie par seconde en chargeant Vague Terra."
+  },
+  "orisa/minorPerks/assets/perks/orisa_minor_02_mobile-fortification.webp": {
+    "name": "Rempart mobile",
+    "description": "Lorsque Blindage est actif, vous ne subissez plus de pénalité de vitesse de déplacement et Canon à fusion ne génère plus de chaleur."
+  },
+  "orisa/majorPerks/assets/perks/orisa_major_01_bcfd342643f783df.png": {
+    "name": "Javelot lourd",
+    "description": "L’effet de recul de Javelot d’énergie est augmenté de 25 % et ses dégâts d’impact contre un mur de 15 points."
+  },
+  "orisa/majorPerks/assets/perks/orisa_major_02_protective-barrier.webp": {
+    "name": "Dispositif de protection",
+    "description": "Votre Rotation de javelot déploie désormais un écran."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_01_scorched-earth.webp": {
+    "name": "Terre brûlée",
+    "description": "Lorsque vous êtes en surchauffe, vous faites brûler les adversaires à moins de 6 m, ce qui leur inflige des dégâts égaux à 20 % de vos points de vie maximum en 4 s."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_02_shield-divergence.webp": {
+    "name": "Divergence de bouclier",
+    "description": "Lorsque vous êtes en surchauffe, vous déployez devant vous un écran qui bénéficie de 500 points de vie."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_03_advanced-throwbotics.webp": {
+    "name": "Lancer robotique",
+    "description": "Lorsque vous utilisez Rotation de javelot, vous lancez un javelot d’énergie qui inflige 75 % de dégâts."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_04_spynstem-update.webp": {
+    "name": "Mise à jour tournoyante",
+    "description": "Rotation de javelot renvoie désormais les projectiles et 20 % des dégâts infligés par les projectiles renvoyés sont convertis en charge de capacité ultime."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_06_lassoed.webp": {
+    "name": "Au lasso",
+    "description": "Au moment de l’impact, Javelot d’énergie attire les adversaires à moins de 4 m. Vous obtenez 3 % de charge de capacité ultime par personnage adverse attiré."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_07_critical-charger.webp": {
+    "name": "Charge critique",
+    "description": "Javelot d’énergie peut désormais infliger des dégâts critiques à hauteur de 100 % de dégâts supplémentaires.­ Vous pouvez charger Javelot d’énergie pour augmenter sa vitesse de projectile max. de 200 %, et à pleine puissance, le javelot transperce les cibles adverses."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_08_hooves-of-steel.webp": {
+    "name": "Sabots d’acier",
+    "description": "Après la fin de Blindage, vous gagnez des points de bouclier à hauteur de 60 % des dégâts d’arme infligés pendant la durée de la capacité, jusqu’à un maximum de 200. Cet effet est réinitialisé à la prochaine utilisation de Blindage."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_09_restortify.webp": {
+    "name": "Blindage médical",
+    "description": "Tant que Blindage est actif, vous récupérez 5 % de vos points de vie max. par seconde."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_10_centripetal-charge.webp": {
+    "name": "Charge centripète",
+    "description": "Coût de la capacité ultime réduit de 25 %.­ Après l’utilisation de Vague Terra, les temps de recharge de vos capacités sont réduits."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_11_supercharger.webp": {
+    "name": "Surchargeur",
+    "description": "Vague Terra fait apparaître un surchargeur qui augmente les dégâts des personnages alliés à proximité de 25 % pendant 15 s."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_11_c34242dfd6b9bda4.png": {
+    "name": "Escalator OR-15",
+    "description": "Vos dégâts d’arme augmentent en fonction de votre chaleur, jusqu’à des dégâts d’arme max. de 30 %."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_12_oladele-copter-blades.webp": {
+    "name": "Lame d’Oladelecoptère",
+    "description": "Vous pouvez voler librement et bénéficiez d’une vitesse de déplacement augmentée de 20 % pendant l’utilisation de Rotation de javelot et de Vague Terra, mais les dégâts de Vague Terra sont réduits de 50 %."
+  },
+  "ramattra/minorPerks/assets/perks/ramattra_minor_01_relentless-form.webp": {
+    "name": "Forme impitoyable",
+    "description": "Lorsque Forme de némésis est active, les éliminations allongent sa durée de 2 s, ou de 1 s pendant Annihilation."
+  },
+  "ramattra/minorPerks/assets/perks/ramattra_minor_02_prolonged-barrier.webp": {
+    "name": "Barrière durable",
+    "description": "Durée et taille de Barrière du vide augmentées de 25 %."
+  },
+  "ramattra/majorPerks/assets/perks/ramattra_major_01_void-surge.webp": {
+    "name": "Afflux du vide",
+    "description": "Lorsque vous tirez en continu, Accélérateur du vide projette à intervalles réguliers une salve de 6 projectiles supplémentaires."
+  },
+  "ramattra/majorPerks/assets/perks/ramattra_major_02_nanite-repair.webp": {
+    "name": "Réparation nanorobotique",
+    "description": "Vous récupérez 100 points de vie par seconde tant que Vortex vorace est actif."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_major_01_void-surge.webp": {
+    "name": "Afflux du vide",
+    "description": "Lorsque vous tirez en continu, Accélérateur du vide projette à intervalles réguliers une salve de 6 projectiles supplémentaires."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_02_void-blight.webp": {
+    "name": "Chancre du vide",
+    "description": "Accélérateur du vide infecte les adversaires avec des nanorobots qui, après avoir infligé 100 points de dégâts, explosent en infligeant 30 points de dégâts."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_03_recursion-relay.webp": {
+    "name": "Relais récursif",
+    "description": "La taille de Barrière du vide augmente de 25 %.­ Les projectiles d’Accélérateur du vide et les martèlements qui traversent Barrière du vide infligent 15 % de dégâts supplémentaires."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_04_ramparts.webp": {
+    "name": "Remparts",
+    "description": "Barrière du vide obtient une charge supplémentaire."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_05_second-phase.webp": {
+    "name": "Deuxième phase",
+    "description": "Lorsque Forme de némésis est activée, le temps de recharge de Vortex vorace est réduit de 75 %."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_06_final-form.webp": {
+    "name": "Forme ultime",
+    "description": "Lorsque Forme de némésis est active, vous récupérez 50 points de vie par seconde tant que Vortex vorace est actif."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_07_breakout.webp": {
+    "name": "Déclenchement",
+    "description": "Lorsque vous bloquez les dégâts sous forme de némésis, Martèlement vous permet d’infliger un coup de poing sauté. ­ (Temps de recharge : 4 s)"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_08_retaliation.webp": {
+    "name": "Représailles",
+    "description": "Lorsque vous relâchez votre blocage, vous infligez des dégâts égaux à 100 % des dégâts atténués aux adversaires dans un rayon de 6 m, jusqu’à un maximum de 150."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_09_conversion-protocol.webp": {
+    "name": "Protocole de conversion",
+    "description": "Blocage vous soigne à hauteur de 25 % des points de dégâts atténués en 3 s."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_10_insatiable-spiral.webp": {
+    "name": "Spirale insatiable",
+    "description": "Le rayon de Vortex vorace est augmenté de 50 %­ Les dégâts de Vortex vorace sont augmentés de +15 %."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_11_ravaging-vortex.webp": {
+    "name": "Vortex dévastateur",
+    "description": "Lorsque Vortex vorace explose, il inflige 25 points de dégâts et vous obtenez 2 % de charge de capacité ultime par cible touchée."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_12_dreadknight.webp": {
+    "name": "Chevalier de l’effroi",
+    "description": "Les dégâts d’Annihilation sont augmentés de 50 %.­ La durée d’Annihilation est augmentée de 1 s."
+  },
+  "reinhardt/minorPerks/assets/perks/reinhardt_minor_01_crusader-s-fire.webp": {
+    "name": "Feu de croisé",
+    "description": "Vous récupérez une charge de Frappe de feu lorsque vous étourdissez une cible adverse et pouvez ainsi cumuler jusqu’à 3 charges."
+  },
+  "reinhardt/minorPerks/assets/perks/reinhardt_minor_02_crusader-s-resolve.webp": {
+    "name": "Résolution de croisé",
+    "description": "Quand vous utilisez Écran, votre régénération de points de vie passive se déclenche 75 % plus vite."
+  },
+  "reinhardt/majorPerks/assets/perks/reinhardt_major_01_shield-slam.webp": {
+    "name": "Heurt de bouclier",
+    "description": "Quand Écran est actif, vous pouvez utiliser pour repousser les adversaires et leur infliger des dégâts."
+  },
+  "reinhardt/majorPerks/assets/perks/reinhardt_major_02_ignited-fury.webp": {
+    "name": "Fureur ardente",
+    "description": "Pour chaque cible adverse touchée par Frappe de feu, votre vitesse d’attaque est augmentée de 25 % pendant 2 s."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_01_to-me--my-friends.webp": {
+    "name": "Rejoignez-moi, camarades.",
+    "description": "Tant que votre écran est actif, les personnages alliés à moins de 5 m sont soignés à hauteur de 3 % de vos points de vie maximum chaque seconde."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_02_crusader-slam.webp": {
+    "name": "Heurt du croisé",
+    "description": "Capacité : Quand Écran est actif, utilisez votre tir principal pour infliger des dégâts de mêlée à hauteur de 5 % des points de vie d’Écran.­ (Temps de recharge : 8 s)"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_03_iron-drift.webp": {
+    "name": "Dérapage d’acier",
+    "description": "Durée de Charge augmentée de 200 %.­ Charge peut désormais empaler plusieurs adversaires et être ralentie en maintenant enfoncée la touche reculer."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_04_shield-stampede.webp": {
+    "name": "Ruée protectrice",
+    "description": "La puissance de recul de Charge est augmentée de 50 %.­ Vous déployez automatiquement Écran pendant votre Charge."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_05_barrier-reconstruction.webp": {
+    "name": "Reconstruction d’écran",
+    "description": "Lorsque vous infligez des dégâts de mêlée ou avec Frappe de feu, Écran récupère 15 % de ses points de vie."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_06_vroom-boom-boom.webp": {
+    "name": "Vroum boum boum",
+    "description": "Si vous heurtez un mur pendant Charge, vous provoquez une explosion qui inflige 30 % des dégâts qu’inflige normalement Charge lorsque vous écrasez un personnage adverse."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_07_impact-burst.webp": {
+    "name": "Salve explosive",
+    "description": "Frappe de feu déclenche une explosion lorsqu’elle touche une cible pour la première fois, ce qui inflige 30 % de ses dégâts aux autres cibles dans un rayon de 3 m."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_08_magma-strike.webp": {
+    "name": "Frappe du magma",
+    "description": "Une frappe de feu sur deux laisse au sol une traînée de lave pendant 2 s qui brûle les adversaires à hauteur de 50 % des points de dégâts de Frappe de feu."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_09_blazing-blitz.webp": {
+    "name": "Assaut flamboyant",
+    "description": "La charge de capacité ultime initiale est augmentée de 25 %.­ Pendant 5 s après l’utilisation de Choc sismique, chaque coup de votre marteau à réaction s’accompagne d’une frappe de feu."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_10_smashing.webp": {
+    "name": "Renversant !",
+    "description": "Lorsque vous infligez des dégâts avec Marteau à réaction, vous gagnez 1 % de vitesse de déplacement et votre arme gagne 3 % de vol de vie pendant 2 s. Cet effet peut se cumuler 10 fois."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_11_feeling-the-burn.webp": {
+    "name": "Tout feu tout flamme",
+    "description": "Tous les trois coups, votre marteau à réaction cause des brûlures qui infligent 30 % de dégâts de marteau à réaction en 2 s."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_12_infusion-generator.webp": {
+    "name": "Générateur d’injection",
+    "description": "Les points de vie de votre écran augmentent à hauteur de 250 % de vos points de vie maximum supplémentaires."
+  },
+  "roadhog/minorPerks/assets/perks/roadhog_minor_01_scrap-hook.webp": {
+    "name": "Ferrailleur",
+    "description": "Les coups de Traquelard vous rendent 4 munitions."
+  },
+  "roadhog/minorPerks/assets/perks/roadhog_minor_02_4b0364924157ffcb.png": {
+    "name": "Par ici mon cochon",
+    "description": "Pendant Équarrisseur, le temps de recharge de Traquelard est réduit de 80 %."
+  },
+  "roadhog/majorPerks/assets/perks/roadhog_major_01_hogdrogen-exposure.webp": {
+    "name": "Inhalation porcine",
+    "description": "Inhalateur prodigue également 50 % de ses soins aux personnages alliés proches."
+  },
+  "roadhog/majorPerks/assets/perks/roadhog_major_02_d9dcccfe7fb8e200.png": {
+    "name": "Rejets toxiques",
+    "description": "Lorsque Chopper utilise Compacteur de déchets, les cibles adverses situées en face de lui sont ralenties de 30 % et subissent 20 points de dégâts par seconde."
+  },
+  "sigma/minorPerks/assets/perks/sigma_minor_01_kinetic-cycle.webp": {
+    "name": "Cycle cinétique",
+    "description": "Les projectiles absorbés par Captation cinétique réduisent également le temps de recharge de Concrétion."
+  },
+  "sigma/minorPerks/assets/perks/sigma_minor_02_hyper-regeneration.webp": {
+    "name": "Hyper-régénération",
+    "description": "Écran expérimental récupère un montant de points de vie égal à 30 % des dégâts infligés par Hypersphères."
+  },
+  "sigma/majorPerks/assets/perks/sigma_major_01_hyper-strike.webp": {
+    "name": "Frappe dévastatrice",
+    "description": "Tous les 5 coups directs portés à l’aide d’Hypersphères, votre prochain coup en mêlée réussi vous fait léviter et repousse les adversaires."
+  },
+  "sigma/majorPerks/assets/perks/sigma_major_02_levitation.webp": {
+    "name": "Lévitation",
+    "description": "Activez et maintenez la commande de double saut pour léviter brièvement."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_01_zero-gravity.webp": {
+    "name": "Apesanteur",
+    "description": "Lorsque vous utilisez une capacité ou un gadget, vous pouvez voler pendant 2,5 s."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_02_trinisphere.webp": {
+    "name": "Trinisphère",
+    "description": "Votre tir principal lance une troisième hypersphère qui inflige 50 % de dégâts."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_03_symphonic-syzygy.webp": {
+    "name": "Syzygie symphonique",
+    "description": "À la fin de Captation cinétique, vous gagnez 10 % de vitesse d’attaque pour chaque tranche de 50 points de dégâts absorbés pendant 4 s. Cet effet peut être cumulé 4 fois."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_04_event-horizon.webp": {
+    "name": "Horizon des évènements",
+    "description": "Les dégâts absorbés par Captation cinétique octroient un surplus de points de vie aux personnages alliés visibles et régénèrent les points de vie d’Écran expérimental. L’excédent est converti en surplus de points de vie."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_05_philharmonic-fortitude.webp": {
+    "name": "Résistance philharmonique",
+    "description": "Le maximum de points de vie d’Écran expérimental est augmenté de 25 %. L’écran régénère constamment ses points de vie, mais cet effet est ralenti de 50 % tant que l’écran est déployé."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_06_orbital-barrier.webp": {
+    "name": "Écran orbital",
+    "description": "Vous obtenez un écran expérimental miniature qui tourne autour de vous. Cet écran dispose de points de vie réduits de 50 %."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_07_singularity.webp": {
+    "name": "Singularité",
+    "description": "Les dégâts de zone de Concrétion sont augmentés de 75 % et les cibles adverses sont attirées vers le centre de l’explosion.­ Le temps de recharge de Concrétion est réduit de 35 % en cas de tir direct."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_08_hyperloop.webp": {
+    "name": "Hypercycle",
+    "description": "Le temps de recharge de Concrétion est réduit de 0,8 s chaque fois qu’Hypersphères touche directement une cible adverse."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_09_maestro.webp": {
+    "name": "Maestro",
+    "description": "Le coût de votre capacité ultime est réduit de 50 %.­ Le rayon de Flux gravitationnel est réduit de 35 % et vous récupérez 50 % de charge de capacité ultime si aucune cible adverse n’est affectée."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_10_apogee-alignment.webp": {
+    "name": "Alignement paroxystique",
+    "description": "Lorsque vous utilisez une capacité, vous créez 2 hypersphères qui gravitent autour de vous et infligent 75 % de dégâts."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_11_astrophysical.webp": {
+    "name": "Astrophysicien",
+    "description": "Capacité : Vos coups en mêlée soulèvent vos adversaires dans les airs pendant 1 s.­ (Temps de recharge : 10 s)"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_12_mass-driver.webp": {
+    "name": "Projection de masse",
+    "description": "Les projectiles de Concrétion qui traversent l’écran expérimental voient leur vitesse augmentée de 300 % et leurs dégâts de 25 %, et ils rendent 150 de points de vie à l’écran expérimental."
+  },
+  "winston/minorPerks/assets/perks/winston_minor_01_electric-charge.webp": {
+    "name": "Charge électrique",
+    "description": "La vitesse de déplacement de Winston est augmentée de 10 % pour chaque cible adverse à laquelle il inflige des dégâts avec le tir principal du Canon Tesla, jusqu’à 30 % maximum."
+  },
+  "winston/minorPerks/assets/perks/winston_minor_02_heavy-landing.webp": {
+    "name": "Atterrissage brutal",
+    "description": "Pendant Rage primordiale, les dégâts et la zone d’effet de vos propulseurs augmentent d’un montant pouvant aller jusqu’à 75 % quand vous êtes en l’air."
+  },
+  "winston/majorPerks/assets/perks/winston_major_01_chain-lightning.webp": {
+    "name": "Chaîne d’éclairs",
+    "description": "À pleine charge, votre tir secondaire ricoche pour toucher jusqu’à 2 cibles supplémentaires."
+  },
+  "winston/majorPerks/assets/perks/winston_major_02_revitalizing-barrier.webp": {
+    "name": "Barrière revitalisante",
+    "description": "Générateur d’écran rend 35 points de vie par seconde aux personnages alliés dans sa zone d’effet."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_01_circuit-breaker.webp": {
+    "name": "Disjoncteur",
+    "description": "Vous obtenez un surplus de points de vie égal à 10 % des dégâts électriques infligés, jusqu’à un maximum de 100."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_02_electro-cluster.webp": {
+    "name": "Faisceau électrique",
+    "description": "La portée maximum du tir principal de Canon Tesla est augmentée de 15 %.­ Les dégâts du tir principal de Canon Tesla sont augmentés de 2 % par cible touchée."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_03_lightning-rod.webp": {
+    "name": "Paratonnerre",
+    "description": "Les tirs secondaires à pleine charge réussis avec Canon Tesla ricochent sur toutes les autres cibles adverses dans un rayon de 8 m en infligeant 75 % des dégâts normaux."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_04_volatile-volt.webp": {
+    "name": "Survoltage",
+    "description": "Les tirs secondaires de Canon Tesla peuvent infliger des dégâts critiques à hauteur de 250 % des dégâts normaux."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_05_primal-punch.webp": {
+    "name": "Poing primordial",
+    "description": "Les éliminations réalisées avec un coup en mêlée, Propulseurs ou le tir secondaire de Canon Tesla réinitialisent le temps de recharge de Propulseurs.­ Les dégâts de votre coup en mêlée augmentent de 3 % pour chaque tranche de 25 points d’armure dont vous bénéficiez."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_06_moon-landing.webp": {
+    "name": "Alunissage",
+    "description": "Vous récupérez un montant de points de vie équivalent à 7 % de vos points de vie maximum par cible touchée par l’atterrissage de Propulseurs."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_07_lunar-leap.webp": {
+    "name": "Saut lunaire",
+    "description": "Vous obtenez 3 % de bonus de charge de la capacité ultime par cible touchée par l’atterrissage de Propulseurs. Lorsque vous utilisez Propulseurs, vous obtenez un surplus de points de vie égal à 5 % de vos points de vie maximum par seconde, jusqu’à un maximum de 100 points de vie en surplus."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_08_pocket-projector.webp": {
+    "name": "Générateur de poche",
+    "description": "À l’activation de Générateur d’écran, un petit générateur d’écran supplémentaire doté de 10 % points de vie vient vous protéger."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_09_tesla-field.webp": {
+    "name": "Champ Tesla",
+    "description": "Les adversaires se trouvant dans le générateur d’écran subissent 40 points de dégâts électriques par seconde."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_10_surge-protector.webp": {
+    "name": "Relais de surtension",
+    "description": "Les personnages alliés protégés par le générateur d’écran récupèrent 30 points de vie par seconde."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_11_primal-slam.webp": {
+    "name": "Onde primordiale",
+    "description": "Après avoir utilisé Propulseurs, appuyez sur la touche de saut pour frapper rapidement le sol dans la direction de votre viseur. Pendant Rage primordiale, la vitesse à laquelle vous frappez le sol est augmentée de 50 %."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_12_lucheng-launchers.webp": {
+    "name": "Lanceurs Lucheng",
+    "description": "Les dégâts des propulseurs deviennent électriques et sont augmentés d’un maximum de 75 % de points en l’air. Pendant Rage primordiale, ce montant est doublé."
+  },
+  "wrecking-ball/minorPerks/assets/perks/wrecking-ball_minor_01_steamroller.webp": {
+    "name": "Rouleau compresseur",
+    "description": "Les impacts de Roulé-boulé infligent 100 % de dégâts supplémentaires aux tanks."
+  },
+  "wrecking-ball/minorPerks/assets/perks/wrecking-ball_minor_02_multi-ball.webp": {
+    "name": "Multi-balle",
+    "description": "Lorsque vous appuyez sur A dans les 5 secondes suivant l’utilisation de Champ de mines, vous déployez 7 mines supplémentaires."
+  },
+  "wrecking-ball/majorPerks/assets/perks/wrecking-ball_major_01_hang-time.webp": {
+    "name": "Instant suspendu",
+    "description": "Vous mettez plus de temps pour préparer votre pilonnage, mais vous pouvez contrôler vos déplacements dans les airs et vous infligez jusqu’à 50 % de dégâts supplémentaires."
+  },
+  "wrecking-ball/majorPerks/assets/perks/wrecking-ball_major_02_adaptive-barrier.webp": {
+    "name": "Écran dynamique",
+    "description": "À son activation, Bouclier dynamique génère un écran qui dure 1 s."
+  },
+  "zarya/minorPerks/assets/perks/zarya_minor_01_jump-ups.webp": {
+    "name": "Bond vigoureux",
+    "description": "L’effet de recul que vous subissez en utilisant votre tir secondaire augmente de 75 %."
+  },
+  "zarya/minorPerks/assets/perks/zarya_minor_02_spotter.webp": {
+    "name": "Vigilance",
+    "description": "Écran généré active la régénération de points de vie des personnages alliés et augmente leur vitesse de déplacement de 20 %."
+  },
+  "zarya/majorPerks/assets/perks/zarya_major_01_extra-oomph.webp": {
+    "name": "Trop plein d’énergie",
+    "description": "Tant qu’un écran est actif, vous générez de l’énergie lorsque vous infligez des dégâts avec le rayon de votre canon à particules."
+  },
+  "zarya/majorPerks/assets/perks/zarya_major_02_energy-lance.webp": {
+    "name": "Lance d’énergie",
+    "description": "Le rayon de Canon à particules transperce les cibles adverses."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_01_charged-link.webp": {
+    "name": "Lien chargé",
+    "description": "Les tirs secondaires de votre canon à particules octroient 2 unités d’énergie et la portée du tir principal de votre canon à particules augmente de 20 % pendant 3 s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_02_pre-workout.webp": {
+    "name": "Pré-entraînement",
+    "description": "Vous gagnez un effet de vol de vie avec votre arme et une capacité de vol de vie à hauteur de 15 % de votre énergie."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_03_no-limits.webp": {
+    "name": "Sans limites",
+    "description": "Votre maximum d’énergie passe à 150. Au-delà de 100 points, l’énergie se dissipe 150 % plus vite."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_04_particle-accelerator.webp": {
+    "name": "Accélérateur de particules",
+    "description": "La vitesse d’attaque du tir secondaire de Canon à particules augmente de 20 %. Après l’utilisation d’une capacité, ce bonus est multiplié par cinq pendant 5 s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_05_volskaya-vortex.webp": {
+    "name": "Vortex de Volskaya",
+    "description": "Après le déploiement d’un écran, le prochain tir secondaire du canon à particules fait apparaître un vortex qui ralentit les adversaires et leur inflige 60 points de dégâts en 2 s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_06_lifelift.webp": {
+    "name": "Bonus de vie",
+    "description": "Taille d’Écran de particules augmentée de 50 %.­ Les points de vie max. de vos écrans augmentent à hauteur de 50 % des points de vie max. bonus octroyé par les objets."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_07_barrier-benefits.webp": {
+    "name": "Avantages de l’écran",
+    "description": "Quand vos écrans expirent, ils octroient à leur cible un surplus de points de vie égal à 100 % de leurs points de vie restants pendant 2 s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_08_major-flex.webp": {
+    "name": "Frime majeure",
+    "description": "Écran repousse les adversaires à moins de 5 m chaque seconde et leur inflige 25 points de dégâts qui augmentent avec l’énergie."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_09_containment-shield.webp": {
+    "name": "Bouclier de contention",
+    "description": "Quand votre écran est actif, il rend 5 % de vos points de vie maximum à la cible toutes les 1 s et augmente la vitesse de déplacement de 20 %."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_10_here-to-spot-you.webp": {
+    "name": "Coup de main",
+    "description": "Portée d’Écran généré augmentée de 20 %.­ Écran généré vous attire vers le personnage allié ciblé et vous rend 30 % de vos points de vie max. en 3 s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_11_fission-field.webp": {
+    "name": "Champ de fission",
+    "description": "Écran généré s’applique également à 1 personnage allié supplémentaire à moins de 10 m, mais son gain d’Énergie maximum est réduit de 25 % et sa durée de 20 %."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_12_graviton-anomaly.webp": {
+    "name": "Anomalie gravitationnelle",
+    "description": "Coût de la capacité ultime réduit de 25 %.­ Les dégâts de base d’Orbe à gravitons passent à 30 et augmentent avec l’énergie, mais la durée de cette capacité est réduite de 25 %."
+  },
+  "dmon/minorPerks/assets/perks/dmon_minor_01_a49a4aa586ec9a0f.png": {
+    "name": "Bête intérieure",
+    "description": "Les frappes de sabre à plasma rendent 40 points de vie à l’écran énergétique."
+  },
+  "dmon/minorPerks/assets/perks/dmon_minor_02_8d2f97ae5a2dc9b1.png": {
+    "name": "Mobilité MEKA",
+    "description": "Tant que l’écran énergétique est déployé, le coût en carburant de Propulsion est réduit de 30 %."
+  },
+  "dmon/majorPerks/assets/perks/dmon_major_01_b87f463706a6816a.png": {
+    "name": "Frappe réparatrice",
+    "description": "Frappe propulsée obtient 150 % de vol de vie."
+  },
+  "dmon/majorPerks/assets/perks/dmon_major_02_46d8466d7de4b04d.png": {
+    "name": "Fusion concentrée",
+    "description": "Les tirs de Répétiteur à fusion sont plus puissants, n’ont aucune dispersion et ont une cadence de tir plus faible."
+  },
+  "doctrine/minorPerks/assets/perks/doctrine_minor_01_65d3986853fa5e6f.png": {
+    "name": "Déploiement salvateur",
+    "description": "Les drones revigorants rendent instantanément 40 points de vie lorsqu’ils sont déployés."
+  },
+  "doctrine/minorPerks/assets/perks/doctrine_minor_02_32ffd184fd6bf247.png": {
+    "name": "Siphon sanguin",
+    "description": "Vous vous soignez à hauteur de 50 % des dégâts infligés par votre Sceptre éternel imprégné."
+  },
+  "doctrine/majorPerks/assets/perks/doctrine_major_01_d4231c031993e68b.png": {
+    "name": "Transfusion",
+    "description": "Réduit davantage le temps de recharge d’Imprégnation lorsque vous infligez des dégâts ou prodiguez des soins."
+  },
+  "doctrine/majorPerks/assets/perks/doctrine_major_02_1f60c2577f3709fe.png": {
+    "name": "Coût de la vie",
+    "description": "Vous sacrifiez 25 points de vie max. Les soins de Sceptre éternel sont augmentés de 20 %."
+  }
+}

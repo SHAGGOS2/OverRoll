@@ -1128,7 +1128,7 @@ export default function RosterModule({
                 return (
                   <div className="player-row roster-game-player-row" key={player.id}>
                     <span className="number">{String(index + 1).padStart(2, '0')}</span>
-                    <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre de ${game.name} ${index + 1}`} />
+                    <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} onFocus={() => playModuleSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre de ${game.name} ${index + 1}`} />
                     <select className="player-profile-inline" value={player.profileId} onChange={(event) => assignProfile(index, event.target.value)} title={profiles.find((item) => item.id === player.profileId)?.name ?? 'Sin perfil'} aria-label={`Perfil de ${game.name} ${index + 1}`}>
                       <option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id} translate="no">{profile.name}</option>)}
                     </select>
@@ -1318,14 +1318,14 @@ export default function RosterModule({
         <AnimatedLayer open={Boolean(filterIndex !== null && players[filterIndex])} enabled={animationsEnabled} onClose={() => setFilterIndex(null)} className="roster-modal-layer">{filterIndex !== null && players[filterIndex] && (<>
             <section className="roster-filter-modal" role="dialog" aria-modal="true" aria-label={`Filtros de ${players[filterIndex].name}`}>
               <header><div><span>Filtros individuales</span><h2>{players[filterIndex].name}</h2></div><button type="button" onClick={() => { setFilterIndex(null); playModuleSound('close', 420) }} aria-label="Cerrar filtro">×</button></header>
-              <div className="roster-filter-tools"><input value={filterSearch} onChange={(event) => setFilterSearch(event.target.value)} placeholder="Buscar personaje" /><select aria-label="Filtrar por rol o clase" value={filterRole} onChange={(event) => setFilterRole(event.target.value)}><option value="all">Todos los roles</option>{game.roles.map((role) => <option value={role.id} key={role.id}>{role.label}</option>)}</select></div>
+              <div className="roster-filter-tools"><input value={filterSearch} onFocus={() => playModuleSound('click')} onChange={(event) => setFilterSearch(event.target.value)} placeholder="Buscar personaje" /><select aria-label="Filtrar por rol o clase" value={filterRole} onChange={(event) => { setFilterRole(event.target.value); playModuleSound('click') }}><option value="all">Todos los roles</option>{game.roles.map((role) => <option value={role.id} key={role.id}>{role.label}</option>)}</select></div>
               <div className="roster-filter-grid">
                 {catalog.filter((hero) => (!filterSearch || `${hero.name} ${translateGameText(gameId, locale, hero.name)}`.toLocaleLowerCase(locale).includes(filterSearch.toLocaleLowerCase(locale))) && (filterRole === 'all' || hero.role === filterRole)).map((hero) => {
                   const blocked = players[filterIndex].blocked.includes(hero.key)
                   return <button type="button" className={blocked ? 'blocked' : ''} onClick={() => toggleBlocked(hero.key)} aria-pressed={blocked} key={hero.key}><img src={asset(hero.portrait)} alt="" /><span><b>{hero.name}</b><small>{blocked ? 'Bloqueado' : roleDefinition(game, hero.role).label}</small></span></button>
                 })}
               </div>
-              <footer><button type="button" onClick={() => setPlayers((current) => current.map((player, index) => index === filterIndex ? { ...player, blocked: [] } : player))}>Restaurar todos</button><button type="button" className="primary" onClick={() => setFilterIndex(null)}>Listo</button></footer>
+              <footer><button type="button" onClick={() => { setPlayers((current) => current.map((player, index) => index === filterIndex ? { ...player, blocked: [] } : player)); playModuleSound('click') }}>Restaurar todos</button><button type="button" className="primary" onClick={() => { setFilterIndex(null); playModuleSound('close') }}>Listo</button></footer>
             </section>
           </>)}</AnimatedLayer>
 

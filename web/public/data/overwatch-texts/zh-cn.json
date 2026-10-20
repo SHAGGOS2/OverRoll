@@ -1,0 +1,2450 @@
+{
+  "anran/minorPerks/assets/perks/anran_minor_01_smoulder.webp": {
+    "name": "长燃之焰",
+    "description": "点燃敌人的燃烧持续时间延长1.5秒"
+  },
+  "anran/minorPerks/assets/perks/anran_minor_02_heat-shield.webp": {
+    "name": "烈火护体",
+    "description": "使出你的终极技能以及每以终极技能点燃一名敌人时，可以获得50点过量生命值"
+  },
+  "anran/majorPerks/assets/perks/anran_major_01_short-fuse.webp": {
+    "name": "易燃易爆",
+    "description": "怒炎冲击中敌人时，其冷却时间缩短1.5秒"
+  },
+  "anran/majorPerks/assets/perks/anran_major_02_hungering-blaze.webp": {
+    "name": "噬心狂炎",
+    "description": "熠闪舞后续攻击所提供的治疗量提高25点"
+  },
+  "ashe/minorPerks/assets/perks/ashe_minor_01_remote-detonator.webp": {
+    "name": "远程引爆器",
+    "description": "使用延时雷管后，再次按下 E 可使其在0.5秒延迟后引爆"
+  },
+  "ashe/minorPerks/assets/perks/ashe_minor_02_double-barreled.webp": {
+    "name": "双筒猎枪",
+    "description": "使用短筒猎枪击退敌人后，可在2秒内再次使用此技能"
+  },
+  "ashe/majorPerks/assets/perks/ashe_major_01_viper-s-sting.webp": {
+    "name": "毒蛇之刺",
+    "description": "对同一目标连续2次狙击命中，可额外造成25点伤害"
+  },
+  "ashe/majorPerks/assets/perks/ashe_major_02_airburst.webp": {
+    "name": "空爆雷管",
+    "description": "延时雷管在空中的引爆半径范围提高40%，并且在投掷时返还6发子弹"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_01_reload-therapy.webp": {
+    "name": "装弹疗法",
+    "description": "装填子弹或恢复弹药时，治疗5%生命值"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_02_fire-at-my-fingertips.webp": {
+    "name": "指尖灼火",
+    "description": "使用毒蛇对燃烧中的敌人造成伤害时，恢复1发弹药"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_03_my-business--my-rules.webp": {
+    "name": "这行得听我的",
+    "description": "使用毒蛇对燃烧中的敌人造成伤害时，你的技能冷却时间缩短10%"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_04_what-in-tarnation.webp": {
+    "name": "这是什么鬼！？",
+    "description": "短筒猎枪将你击飞到空中的3秒内，精准射击会使攻击速度提高20%并减缓降落速度。如果短筒猎枪没有造成任何伤害，则返还3秒冷却时间"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_05_calamity.webp": {
+    "name": "灾星现世",
+    "description": "使用短筒猎枪会恢复子弹，数量为子弹数量上限的25%。用恢复的子弹射击时，会施加燃烧，在3秒内造成40点伤害"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_06_double-barreled.webp": {
+    "name": "双筒猎枪",
+    "description": "可额外使用一次短筒猎枪"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_07_slow-burn.webp": {
+    "name": "渐燃子弹",
+    "description": "狙击瞄准时，爆击伤害会燃烧敌人，在3秒内额外造成20%的伤害"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_08_controlled-boom.webp": {
+    "name": "遥控引爆",
+    "description": "丢出延时雷管后，重新启动技能会使其在0.5秒延迟后爆炸。在空中爆炸的延时雷管会多燃烧1秒"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_09_out-with-a-bang.webp": {
+    "name": "炸上加炸",
+    "description": "当延时雷管爆炸时，会生成3个黏性延时雷管，造成的伤害降低50%"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_10_bob-jr.webp": {
+    "name": "小小鲍勃",
+    "description": "召唤鲍勃消耗的终极技能充能降低60%，但生命值减少、攻击速度降低20%，且体型大幅缩小"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_11_stacked-sticks.webp": {
+    "name": "捆扎炸药",
+    "description": "延时雷管爆炸半径范围提高40%，燃烧速度提高40%"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_12_pinbob.webp": {
+    "name": "鲍勃锁定",
+    "description": "技能：召唤鲍勃冲刺后，重新启动终极技能以再次冲刺（3秒冷却时间） 击杀敌人会重置冷却时间，并使召唤鲍勃持续时间延长2秒"
+  },
+  "bastion/minorPerks/assets/perks/bastion_minor_01_smart-bomb.webp": {
+    "name": "智慧型炸弹",
+    "description": "A-36战术榴弹的自我击退距离提高25%，并且不再对你造成伤害"
+  },
+  "bastion/minorPerks/assets/perks/bastion_minor_02_configuration-reload.webp": {
+    "name": "装弹模式",
+    "description": "变换模式时，A-36战术榴弹的冷却时间缩短4秒"
+  },
+  "bastion/majorPerks/assets/perks/bastion_major_01_lindholm-explosives.webp": {
+    "name": "林德霍姆炸药",
+    "description": "强攻模式的武器会缓慢发射爆破弹，而非旋转机枪"
+  },
+  "bastion/majorPerks/assets/perks/bastion_major_02_self-repair.webp": {
+    "name": "自我修复",
+    "description": "按下E即可快速治疗自己"
+  },
+  "cassidy/minorPerks/assets/perks/cassidy_minor_01_bang-bang.webp": {
+    "name": "双发连闪",
+    "description": "卡西迪丢出第二个飞得更远的闪光弹，但两个闪光弹造成的伤害都降低40%"
+  },
+  "cassidy/minorPerks/assets/perks/cassidy_minor_02_b0d48ad9c8bdf1ce.png": {
+    "name": "驾！",
+    "description": "使用战术翻滚后，卡西迪的移动速度提高60%，但加速效果会在1.5秒内持续衰退"
+  },
+  "cassidy/majorPerks/assets/perks/cassidy_major_01_rollin--round-up.webp": {
+    "name": "翻身愈合",
+    "description": "战术翻滚每装填一发子弹，还会恢复15点生命值"
+  },
+  "cassidy/majorPerks/assets/perks/cassidy_major_02_silver-bullet.webp": {
+    "name": "银质子弹",
+    "description": "维和者的次要攻击替换为一发会造成流血的穿刺射击。战术翻滚与神射手都会重置其冷却时间"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_01_quick-draw.webp": {
+    "name": "快枪出膛",
+    "description": "使用战术翻滚后，在技能的冷却期间，维和者的下一次射击会自动瞄准15米内的目标"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_02_gunslinger-grit.webp": {
+    "name": "尽情翻滚",
+    "description": "装填子弹或恢复弹药时，每恢复一发子弹就恢复2.5%生命值"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_03_bullseye.webp": {
+    "name": "正中靶心",
+    "description": "闪光弹命中和爆击时会使战术翻滚的冷却时间缩短2秒"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_04_think-flasht.webp": {
+    "name": "灵光一闪",
+    "description": "当你战术翻滚时，会在原地留下一颗闪光弹 闪光弹的阻碍持续时间延长25%"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_05_easy-rider.webp": {
+    "name": "潇洒牛仔",
+    "description": "击杀刚刚受闪光弹伤害的敌人会获得20%终极技能充能。使用神射手期间获得100点过量生命值，移动速度提高25%"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_06_it-s-twelve-o-clock-somewhere.webp": {
+    "name": "总有午时……",
+    "description": "神射手每造成一次击杀会给予25%终极技能充能。如果神射手没有造成任何击杀，则返还33%终极技能充能"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_07_dead-man-walkin.webp": {
+    "name": "在劫难逃",
+    "description": "生命值低于30%的敌人头上会出现标记。受到标记的头会变大，对标记敌人造成的爆击拥有50%武器生命窃取"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_08_barrage-blastin.webp": {
+    "name": "满堂红",
+    "description": "在快速击发期间第一次用尽子弹时，立刻装填子弹并持续射击，伤害降低60%"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_major_02_silver-bullet.webp": {
+    "name": "银弹",
+    "description": "快速击发替换为技能：射出一发会在2.5秒内造成50点额外伤害的穿刺维和者子弹。使用技能或小工具时重置冷却时间"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_10_buck-wild.webp": {
+    "name": "脱缰野马",
+    "description": "使用维和者造成伤害会使移动速度提高1%，持续5秒，最多可叠加15次。叠加至上限后，获得10%伤害减免"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_11_barrel-roll.webp": {
+    "name": "桶滚动作",
+    "description": "战术翻滚距离提高50%，对敌人造成65点伤害"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_12_hot-potato.webp": {
+    "name": "烫手山芋",
+    "description": "闪光弹带有磁性，投掷距离提高125%"
+  },
+  "echo/minorPerks/assets/perks/echo_minor_01_63cadc2da0d3063b.png": {
+    "name": "空中弹药",
+    "description": "回音在飞行期间拥有无限弹药"
+  },
+  "echo/minorPerks/assets/perks/echo_minor_02_partial-scan.webp": {
+    "name": "局部扫描",
+    "description": "人格复制开始时可获得30%终极技能充能"
+  },
+  "echo/majorPerks/assets/perks/echo_major_01_full-salvo.webp": {
+    "name": "炸弹齐射",
+    "description": "黏性炸弹会额外发射2个抛射物"
+  },
+  "echo/majorPerks/assets/perks/echo_minor_01_focused-rush.webp": {
+    "name": "专注猛冲",
+    "description": "聚焦光线的距离提高8米，且启动期间移动速度提高25%"
+  },
+  "emre/minorPerks/assets/perks/emre_minor_01_suppressive-security.webp": {
+    "name": "压制安防",
+    "description": "覆盖协议的轻型弹药会使敌人缓速30%，持续1.5秒"
+  },
+  "emre/minorPerks/assets/perks/emre_minor_02_enhanced-agility.webp": {
+    "name": "敏捷强化",
+    "description": "未开枪时，虹吸爆能枪的移动速度加成提高20%"
+  },
+  "emre/majorPerks/assets/perks/emre_major_01_heat-sink.webp": {
+    "name": "散热装置",
+    "description": "虹吸爆能枪直接命中时，会回收60%的热能并使持续时间延长0.1秒"
+  },
+  "emre/majorPerks/assets/perks/emre_major_02_cyber-adhesion.webp": {
+    "name": "赛博黏附",
+    "description": "赛博手雷会在接触后附着在目标身上，对附着到的敌人造成40点额外伤害"
+  },
+  "freja/minorPerks/assets/perks/freja_minor_01_relentless-barrage.webp": {
+    "name": "无情弹幕",
+    "description": "使用瞄准射击直接命中敌人会回收5发自动箭矢"
+  },
+  "freja/minorPerks/assets/perks/freja_minor_02_momentum-boost.webp": {
+    "name": "疾奔之势",
+    "description": "疾冲距离提高20%"
+  },
+  "freja/majorPerks/assets/perks/freja_major_01_aerial-recovery.webp": {
+    "name": "飞空愈疗",
+    "description": "使用上升气流后，每秒恢复30点生命值，直到弗蕾亚落地为止"
+  },
+  "freja/majorPerks/assets/perks/freja_major_02_rising-winds.webp": {
+    "name": "劲风再起",
+    "description": "可额外使用一次上升气流"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_01_seismic-shot.webp": {
+    "name": "震爆射击",
+    "description": "瞄准射击爆炸半径范围扩大50%。如果箭矢刺在目标身上，则半径范围会加倍扩大"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_02_seekerpoint.webp": {
+    "name": "寻踪瞄准",
+    "description": "当瞄准射击箭矢刺在敌人身上时，自动对其额外发射3发十字弓箭矢，该箭矢造成的伤害减少66%"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_03_redux.webp": {
+    "name": "焕新之箭",
+    "description": "如果连发十字弓命中的目标身上附有瞄准射击箭矢或流星索，则技能的冷却时间缩短5%，并返还1发子弹"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_04_cyclone.webp": {
+    "name": "强袭气旋",
+    "description": "使用上升气流时，朝准星方向发射一支瞄准射击箭矢，所造成的爆炸伤害降低25%"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_05_peak-performance.webp": {
+    "name": "巅峰表现",
+    "description": "+20%上升气流高度 连发十字弓发射时，你的降落速度降低80% 在空中时，移动速度提高20%"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_06_deep-pockets.webp": {
+    "name": "弹药充沛",
+    "description": "使用技能时，恢复弹药数量上限的30%"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_07_volley---deux.webp": {
+    "name": "双箭在侧",
+    "description": "每3发连发十字弓射击会额外分散射出2发箭矢，该箭矢造成的伤害降低60%"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_08_forager.webp": {
+    "name": "觅食专家",
+    "description": "使用疾冲后的2秒内，连发十字弓命中会恢复你最大生命值的4%"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_09_lille-f-lde.webp": {
+    "name": "小型缚索",
+    "description": "使用上升气流后位于空中时，下一次的瞄准射击会改为发射迷你流星索，不再拉近敌人，且效力降低40%"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_10_mighty-gust.webp": {
+    "name": "狂风来袭",
+    "description": "上升气流会朝准星方向发出一阵狂风，击退敌人并造成60点伤害"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_11_so-cooked.webp": {
+    "name": "流星天劫",
+    "description": "流星索的伤害范围额外造成20%伤害，留存2秒 流星索击杀算入赏金狩猎"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_12_thread-the-needle.webp": {
+    "name": "穿针引线",
+    "description": "瞄准射击箭矢会穿透第一位命中的敌人。额外造成的爆炸伤害降低66%"
+  },
+  "genji/minorPerks/assets/perks/genji_minor_01_swift-cuts.webp": {
+    "name": "刃至影随",
+    "description": "快速近战攻击可使“影”的冷却时间缩短3秒"
+  },
+  "genji/minorPerks/assets/perks/genji_minor_02_dragon-s-thirst.webp": {
+    "name": "神竜之渴",
+    "description": "挥舞“斩”时，获得30%的生命窃取效果"
+  },
+  "genji/majorPerks/assets/perks/genji_major_01_blade-twisting.webp": {
+    "name": "扭转刃影",
+    "description": "“影”会对生命值低于一半的敌人额外造成25点持续伤害。"
+  },
+  "genji/majorPerks/assets/perks/genji_major_02_meditation.webp": {
+    "name": "冥思一闪",
+    "description": "在“闪”期间每秒恢复50点生命值"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_01_sacred-shuriken.webp": {
+    "name": "神佑忍镖",
+    "description": "+50%“镖”主要攻击抛射物移动速度 “镖”的主要攻击会额外投掷2个不消耗子弹的“镖”"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_02_hanamura-healing.webp": {
+    "name": "花村疗愈",
+    "description": "爆击和“影”会给予过量生命值，数值等同于其造成伤害的25%"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_03_cybernetic-speed.webp": {
+    "name": "赛博疾速",
+    "description": "使用“镖”造成伤害会赋予3%“镖”攻击速度，持续3秒，最多可叠加15次"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_04_wyrm-s-maw.webp": {
+    "name": "巨龙之喉",
+    "description": "造成“镖”伤害后，下一次“影”的伤害提高10%且范围提高5%，最多可叠加5次"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_05_iaido-strike.webp": {
+    "name": "居合斩",
+    "description": "“闪”结束后，快速挥砍“斩”一次，效果为一般的75%"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_06_hidden-blade.webp": {
+    "name": "隐秘锋刃",
+    "description": "获得60%近战生命窃取效果，快速近战攻击伤害提高15点"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_07_forged-under-fire.webp": {
+    "name": "烈火锤炼",
+    "description": "在“闪”期间，恢复格挡伤害100%的生命值"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_08_laceration.webp": {
+    "name": "裂伤迅影",
+    "description": "“影”在3秒内额外造成30%点伤害 除了第一个目标外，“影”每对一个额外敌人造成伤害，就会使“影”冷却时间缩短2.5秒"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_09_deflect-o-bot.webp": {
+    "name": "弹反机器",
+    "description": "+200%“闪”抛射物移动速度 自动向敌人反弹抛射物。在“闪”开始的0.3秒内，反弹命中时会额外造成50%爆击伤害"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_10_hashimoto-s-bane.webp": {
+    "name": "桥元克星",
+    "description": "使用技能后，下一次次要攻击会投掷2个会追踪敌人的额外“镖”，但造成的伤害降低50%"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_11_dragon-s-breath.webp": {
+    "name": "神竜之息",
+    "description": "挥舞“斩”时会发射一道大型的穿透性抛射物，造成“斩”伤害量100%的伤害，对空中敌人造成的伤害提高25%"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_12_spirit-of-sojiro.webp": {
+    "name": "宗次郎之魂",
+    "description": "+1秒“闪”持续时间 “闪”可反弹来自两侧的攻击"
+  },
+  "hanzo/minorPerks/assets/perks/hanzo_minor_01_sonic-disruption.webp": {
+    "name": "干扰之音",
+    "description": "“音”会骇入附近的治疗包，持续30秒"
+  },
+  "hanzo/minorPerks/assets/perks/hanzo_minor_02_dragon-fury.webp": {
+    "name": "神竜之怒",
+    "description": "使用主要攻击命中敌人后，攻击速度提高20%，持续1.5秒"
+  },
+  "hanzo/majorPerks/assets/perks/hanzo_major_01_frost-arrow.webp": {
+    "name": "霜冻之箭",
+    "description": "按下R即可准备一发爆破冰霜箭，使命中的敌人缓速35%，持续2秒"
+  },
+  "hanzo/majorPerks/assets/perks/hanzo_major_02_scatter-arrows.webp": {
+    "name": "狂岚尽散",
+    "description": "“岚”第一次弹射时会分裂为5发箭矢，每个造成33%伤害，并且可额外弹跳1次"
+  },
+  "junkrat/minorPerks/assets/perks/junkrat_minor_01_nitro-boost.webp": {
+    "name": "氮气推进",
+    "description": "使用炸弹轮胎时，使用左Shift会短时间加速，但这会使炸弹轮胎的伤害降低50%"
+  },
+  "junkrat/minorPerks/assets/perks/junkrat_minor_02_bomb-voyage.webp": {
+    "name": "一炸冲天",
+    "description": "被震荡地雷炸往空中后，炸弹鼠的攻击速度提高35%，持续3秒"
+  },
+  "junkrat/majorPerks/assets/perks/junkrat_major_01_mine-recycling.webp": {
+    "name": "地雷回收",
+    "description": "以震荡地雷击杀敌人会恢复一次使用次数"
+  },
+  "junkrat/majorPerks/assets/perks/junkrat_major_02_frag-cannon.webp": {
+    "name": "榴弹火炮",
+    "description": "榴弹发射器的抛射物移动速度提高25%"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_01_frags-for-days.webp": {
+    "name": "炸个不停",
+    "description": "榴弹发射器有25%机率额外射出一发榴弹，额外榴弹的伤害降低66%"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_02_big-bang.webp": {
+    "name": "大炸弹",
+    "description": "榴弹发射器的榴弹弹跳时，尺寸提高33%"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_03_soot-shaker.webp": {
+    "name": "炸到上头",
+    "description": "引爆震荡地雷后，攻击速度提高15%，持续1.5秒，并恢复20%子弹数量上限"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_04_bango.webp": {
+    "name": "炸得亮！",
+    "description": "榴弹发射器未经弹跳直接命中时施加燃烧，在2秒内额外造成20%伤害"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_05_double-trouble.webp": {
+    "name": "麻烦夹倍",
+    "description": "捕兽夹使用次数额外增加1次"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_06_trap-ii--esquire.webp": {
+    "name": "夹二代",
+    "description": "引爆震荡地雷后，会生成一个迷你捕兽夹，该陷阱会使敌人缓速而非无法移动。你最多可以生成5个迷你捕兽夹"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_07_hop-boom.webp": {
+    "name": "嘣嘣跳跳",
+    "description": "在使用震荡地雷弹射自己后，于落地处引爆一个效力降低20%的震荡地雷"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_08_slapnel.webp": {
+    "name": "一拳轰飞",
+    "description": "技能：快速近战攻击会引爆一枚震荡地雷，造成20%伤害，将你弹射并击退目标 （8秒冷却时间）"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_09_rainin--lead.webp": {
+    "name": "天降炸弹",
+    "description": "+25%临别礼物爆炸半径范围 弹射自己后，在空中每0.35秒会丢下1颗临别礼物炸弹，该炸弹伤害降低25%"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_10_rip-roll.webp": {
+    "name": "炸弹滚滚",
+    "description": "+20%终极技能消耗减免 在施展终极技能期间，进入你的炸弹轮胎。在炸弹轮胎遭到摧毁或引爆后，弹出并触发临别礼物"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_11_successful-heist.webp": {
+    "name": "爆炸扭蛋",
+    "description": "震荡地雷引爆时每命中一个目标，震荡地雷冷却时间就缩短0.5秒"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_12_zip-grease.webp": {
+    "name": "炸得响！",
+    "description": "引爆震荡地雷后，你的下一发榴弹发射器抛射物移动速度提高200%，且对空中敌人造成的伤害提高25%"
+  },
+  "mei/minorPerks/assets/perks/mei_minor_01_skating-rink.webp": {
+    "name": "冰上畅滑",
+    "description": "在暴雪内的队友移动速度提高25%，且每秒恢复50点生命值"
+  },
+  "mei/minorPerks/assets/perks/mei_minor_02_glacial-propulsion.webp": {
+    "name": "寒冰疾涌",
+    "description": "二连跳会产生一小根冰柱，将小美送往空中"
+  },
+  "mei/majorPerks/assets/perks/mei_major_01_deep-freeze.webp": {
+    "name": "深度冰冻",
+    "description": "使用主要攻击持续命中敌人会使其短暂冻结"
+  },
+  "mei/majorPerks/assets/perks/mei_major_02_cryo-storm.webp": {
+    "name": "急冻风暴",
+    "description": "急冻会使附近敌人缓速，且每秒造成70点伤害"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_01_permafrost.webp": {
+    "name": "永冻坚冰",
+    "description": "你每提高1%技能强度，最大生命值就提高0.5"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_02_slowball.webp": {
+    "name": "减速雪球",
+    "description": "使用技能或小工具后，你接下来2个冻霜碎片会射出抛射物移动速度为200%的雪球，此雪球命中时会施加30%缓速"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_03_extendothermics.webp": {
+    "name": "延距冰霜",
+    "description": "冰霜冲击枪主要攻击范围提高6米"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_04_frost-armor.webp": {
+    "name": "霜寒护甲",
+    "description": "获得装甲，数值等同于你以冰霜冲击枪主要攻击所造成伤害的3%，最多可获得100点，持续到回合结束"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_05_snowball-flight.webp": {
+    "name": "墙立一跳",
+    "description": "技能：在空中跳跃会在你下方产生巨大的冰墙冰柱 （12秒冷却时间）"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_06_twice-as-ice.webp": {
+    "name": "冰上加冰",
+    "description": "使用急冻时，重置冰墙下一次的冷却时间"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_07_iceberg.webp": {
+    "name": "严寒冰山",
+    "description": "冰墙会生成缓速敌人的迷你暴雪"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_08_cryclone.webp": {
+    "name": "急冻旋风",
+    "description": "急冻会生成能缓速敌人的迷你暴雪"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_09_coulder.webp": {
+    "name": "寒冰滚球",
+    "description": "急冻现在会将你封在滚动的冰球中，可击退敌人并造成20点伤害"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_10_frost-nova.webp": {
+    "name": "冰霜新星",
+    "description": "急冻结束时，击退附近敌人并造成60点伤害"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_11_frosting.webp": {
+    "name": "流风回雪",
+    "description": "在暴雪中的队友会受到治疗，每1秒治疗量等同你最大生命值的8%"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_12_deep-chills.webp": {
+    "name": "急冻冲击枪",
+    "description": "以冰霜冲击枪的主要攻击持续命中一名敌人，会使其冻结0.65秒"
+  },
+  "pharah/minorPerks/assets/perks/pharah_minor_01_concussive-force.webp": {
+    "name": "震荡爆冲",
+    "description": "震荡冲击最多可造成30点爆炸伤害"
+  },
+  "pharah/minorPerks/assets/perks/pharah_minor_02_helix-shields.webp": {
+    "name": "海力士护盾",
+    "description": "将125点生命值转换成护盾值。火箭发射器直接命中会触发护盾值再生被动技能"
+  },
+  "pharah/majorPerks/assets/perks/pharah_major_01_fuel-stores.webp": {
+    "name": "燃油储备",
+    "description": "使用疾冲背包可以获得50%燃料。超量燃料的上限提高100%"
+  },
+  "pharah/majorPerks/assets/perks/pharah_major_02_rocket-salvo.webp": {
+    "name": "火箭齐射",
+    "description": "使用移动技能后，你的下一次主要攻击会同时发射两发螺旋前进的迷你火箭，其爆炸时会各自造成30点伤害"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_01_evasive-maneuvers.webp": {
+    "name": "机动规避",
+    "description": "使用推进背包后，震荡冲击可获得追踪效果，并在直接命中时阻碍敌人1.5秒"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_02_carpet-bomb.webp": {
+    "name": "地毯狂轰",
+    "description": "+40%火箭弹幕移动速度 火箭弹幕持续时间延长50%"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_03_cyclic-salvo.webp": {
+    "name": "循环炮火",
+    "description": "火箭发射器直接命中会给予10点燃料，并使你的冷却时间缩短1秒"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_04_blitz-barrage.webp": {
+    "name": "闪击弹幕",
+    "description": "+40%火箭弹幕移动速度 使用疾冲背包后会发射火箭弹幕，但小型火箭数量减少75%"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_05_fuel-depot.webp": {
+    "name": "燃料储备",
+    "description": "火箭发射器直接命中会使你的燃料上限永久提高2点，最多可叠加25次"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_06_nosedive.webp": {
+    "name": "燃料转化",
+    "description": "技能：在空中时，使用蹲下向地面冲刺并恢复50%燃料 （6秒冷却时间）"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_07_heat-seekers.webp": {
+    "name": "热感追踪",
+    "description": "使用疾冲背包后，你下一次主要攻击会锁定敌人"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_08_launch-vector.webp": {
+    "name": "发射矢量",
+    "description": "以震荡冲击击退敌人时，会对其发射3发追踪小型火箭"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_09_speed-kills.webp": {
+    "name": "急速强袭",
+    "description": "造成武器伤害时，移动速度提高5%且攻击速度提高3%，持续3秒，最多可叠加6次。直接命中可获得双倍叠加"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_10_triple-volley.webp": {
+    "name": "三发齐射",
+    "description": "使用技能后，你下一次主要攻击会发射3发火箭，各自造成40%伤害"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_11_recursion-battery.webp": {
+    "name": "递归电池",
+    "description": "小型火箭获得25%技能生命窃取"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_12_extra-charge.webp": {
+    "name": "超量充能",
+    "description": "震荡冲击获得额外1次使用次数"
+  },
+  "reaper/minorPerks/assets/perks/reaper_minor_01_soul-reaving.webp": {
+    "name": "灵魂收割",
+    "description": "从死掉的敌人身上收集魂魄以恢复50点生命值"
+  },
+  "reaper/minorPerks/assets/perks/reaper_minor_02_lingering-wraith.webp": {
+    "name": "萦绕幽灵",
+    "description": "离开幽灵形态时，移动速度会提高30%，持续2秒"
+  },
+  "reaper/majorPerks/assets/perks/reaper_major_01_shadow-blink.webp": {
+    "name": "暗影闪现",
+    "description": "暗影步的施放时间和冷却时间缩短25%，但是范围也降低25%"
+  },
+  "reaper/majorPerks/assets/perks/reaper_major_02_trigger-finger.webp": {
+    "name": "开火冲动",
+    "description": "使用技能或装填子弹时，会重置极恶扳机的冷却时间"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_01_revolving-ruin.webp": {
+    "name": "萦绕毁伤",
+    "description": "地狱火霰弹枪在近距离（7米）命中时，攻击速度提高5%，持续1秒，最多可叠加10次"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_02_shrouded-shrapnel.webp": {
+    "name": "灵体破片",
+    "description": "使用幽灵形态会使你下一个弹匣每次额外发射25%子弹，且弹道扩散提高50%"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_03_death-step.webp": {
+    "name": "死亡步",
+    "description": "使用暗影步后，会施放持续1.5秒且伤害降低50%的死亡绽放"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_04_strangle-step.webp": {
+    "name": "窒息步",
+    "description": "+15%暗影步施放速度 使用暗影步后，生命窃取效果加倍，持续3秒"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_05_spirited-to-slay.webp": {
+    "name": "夺命渴望",
+    "description": "击杀会使幽灵形态冷却时间缩短50%，同时会使暗影步冷却时间缩短100%"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_06_bloodletters.webp": {
+    "name": "背刺偷袭",
+    "description": "极恶扳机命中空中敌人和8米外的敌人后，会在3秒内额外造成30点伤害"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_07_wraith-renewal.webp": {
+    "name": "幽灵恢复",
+    "description": "处于幽灵形态时，每秒恢复最大生命值的7%。生命值低于50%时，此效果会加倍"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_08_hellshroud.webp": {
+    "name": "鬼影缠身",
+    "description": "在幽灵形态时，穿过敌人时会使其燃烧，造成你最大生命值20%的伤害，并使其移动速度和攻击速度降低20%，持续2秒"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_09_wall-of-life-and-death.webp": {
+    "name": "有血同享",
+    "description": "在幽灵形态时，变大50%，阻挡来袭的抛射物，且每1秒恢复6米内所有其他队友35点生命值"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_10_harvest-fest.webp": {
+    "name": "收割盛宴",
+    "description": "地狱火霰弹枪命中时有20%机率生成魂魄。拾取魂魄后，恢复15%生命值、15%子弹，移动速度提高15%，持续3秒"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_major_02_trigger-finger.webp": {
+    "name": "扳机指",
+    "description": "使用技能、小工具或装填子弹后，重置极恶扳机的冷却时间"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_12_wretched-wings.webp": {
+    "name": "死寂步",
+    "description": "使用幽灵形态时获得飞行能力 在空中时，使用跳跃即可滑翔"
+  },
+  "shion/minorPerks/assets/perks/shion_minor_01_2785c741990d138c.png": {
+    "name": "生存直觉",
+    "description": "机动闪避的过量生命值持续时间延长1秒"
+  },
+  "shion/minorPerks/assets/perks/shion_minor_02_x-machina.webp": {
+    "name": "天外杀神",
+    "description": "交叉枪决对生命值低于一半的敌人造成的伤害提高20%。"
+  },
+  "shion/majorPerks/assets/perks/shion_major_01_refuel.webp": {
+    "name": "补充燃料",
+    "description": "纵情狂飙会立即恢复50点生命值，并在纵情狂飙期间每秒恢复20点生命值"
+  },
+  "shion/majorPerks/assets/perks/shion_major_02_faces-of-death.webp": {
+    "name": "死亡面容",
+    "description": "获得所有其他攻击副角色被动技能（侦查者、专家和神射手）"
+  },
+  "sierra/minorPerks/assets/perks/sierra_minor_01_full-flight.webp": {
+    "name": "全速飞行",
+    "description": "锚点无人机的飞行与钩索距离提高25%"
+  },
+  "sierra/minorPerks/assets/perks/sierra_minor_02_tight-grip.webp": {
+    "name": "紧盯不放",
+    "description": "螺旋步枪的弹道扩散缩小速度提高70%，加宽速度降低30%"
+  },
+  "sierra/majorPerks/assets/perks/sierra_major_01_medi-drone.webp": {
+    "name": "医疗无人机",
+    "description": "锚点无人机会带着一个可以治疗席艾拉的治疗包"
+  },
+  "sierra/majorPerks/assets/perks/sierra_major_02_locked-in.webp": {
+    "name": "锁定猛攻",
+    "description": "使用追踪弹命中敌人会使攻击速度提高20%，持续2秒"
+  },
+  "sojourn/minorPerks/assets/perks/sojourn_minor_01_overcharged.webp": {
+    "name": "机体过载",
+    "description": "在机体超频期间，电磁炮的能量上限提高50点"
+  },
+  "sojourn/minorPerks/assets/perks/sojourn_minor_02_deceleration-field.webp": {
+    "name": "减速力场",
+    "description": "被干扰弹命中的敌人移动速度降低25%"
+  },
+  "sojourn/majorPerks/assets/perks/sojourn_major_01_friction-generators.webp": {
+    "name": "摩擦供能",
+    "description": "机动滑铲最多可产生75点能量"
+  },
+  "sojourn/majorPerks/assets/perks/sojourn_major_02_dual-thrusters.webp": {
+    "name": "双重推进器",
+    "description": "机动滑铲额外获得一次使用次数，且跳跃高度转移至横向移动距离"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_01_unconventional-tactics.webp": {
+    "name": "非常规战术",
+    "description": "使用机动滑铲开始滑行及最后跳跃时，机动滑铲会生成一个小型的干扰弹"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_02_commotion-cycle.webp": {
+    "name": "扰动循环",
+    "description": "充能射击造成伤害时，会依据消耗的电磁炮充能量，最多返还35%的技能冷却时间"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_03_experimental-tech.webp": {
+    "name": "实验科技",
+    "description": "干扰弹会使范围内敌人缓速25%，且造成技能伤害的50%将转换为电磁炮充能量"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_04_overcharge.webp": {
+    "name": "机体过载",
+    "description": "电磁炮充能量上限提高至150点。完全充能攻击和技能最多仍仅会消耗100点充能量"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_05_fine-tuned-thrusters.webp": {
+    "name": "精调助推器",
+    "description": "+1秒机动滑铲持续时间 击杀会重置机动滑铲的冷却时间"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_06_drill-kick.webp": {
+    "name": "荷枪实弹",
+    "description": "+50%机动滑铲速度 在机动滑铲期间，获得25%伤害减免，并对附近敌人造成75点伤害"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_07_hard-stuck.webp": {
+    "name": "牢固附着",
+    "description": "干扰弹可以黏在敌人身上。成功黏住的干扰弹所造成的伤害降低25%"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_08_enhanced-targeting-system.webp": {
+    "name": "强化锁定系统",
+    "description": "机体超频期间，电磁炮的主要攻击会自动瞄准敌人"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_09_dynamic-dispatch.webp": {
+    "name": "回响子弹",
+    "description": "在机动滑铲期间和后续的一次跳跃时，充能射击抛射物大小提高50%，攻击速度提高35%，并获得35%武器生命窃取"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_10_aftershock.webp": {
+    "name": "爆破回响",
+    "description": "完全充能的充能射击或充能射击爆击时会爆炸，对附近其他敌人造成50%的伤害"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_11_zoom-zoom-zoom.webp": {
+    "name": "风驰电掣",
+    "description": "机动滑铲额外获得一次使用次数"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_12_conductor-chase.webp": {
+    "name": "蔡斯导体",
+    "description": "在机动滑铲和后续的一次跳跃时，每1秒获得10%电磁炮充能量并恢复子弹数量上限的50%。电磁炮充能量衰退速度降低75%"
+  },
+  "soldier-76/minorPerks/assets/perks/soldier-76_minor_01_helix-propulsion.webp": {
+    "name": "螺旋推进",
+    "description": "螺旋飞弹的抛射物移动速度提高50%"
+  },
+  "soldier-76/minorPerks/assets/perks/soldier-76_minor_02_tactical-salvo.webp": {
+    "name": "战术齐射",
+    "description": "在战术目镜效果期间，螺旋飞弹冷却时间缩短80%，且不会中断重型脉冲步枪射击"
+  },
+  "soldier-76/majorPerks/assets/perks/soldier-76_major_01_full-stride.webp": {
+    "name": "全速疾奔",
+    "description": "疾跑的移动速度加成会在2秒内逐渐额外提高25%"
+  },
+  "soldier-76/majorPerks/assets/perks/soldier-76_major_02_stim-pack.webp": {
+    "name": "强化药剂",
+    "description": "生物力场替换为战斗药剂。士兵76使用后每秒恢复30点生命值，攻击速度提高20%，持续5秒"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_01_super-visor.webp": {
+    "name": "超级目镜",
+    "description": "使用螺旋飞弹后，会启动战术目镜，持续0.5秒"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_02_peripheral-pulse.webp": {
+    "name": "附带脉冲",
+    "description": "在战术目镜效果期间，脉冲步枪会额外向1名敌人自动瞄准，造成降低50%的伤害"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_03_run-and-gun.webp": {
+    "name": "一路狂奔",
+    "description": "以脉冲步枪射击和使用技能不会中断疾跑 在疾跑时造成伤害会让疾跑移动速度提高1%，并获得生命窃取，持续5秒，最高25%"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_04_chaingun.webp": {
+    "name": "链式步枪",
+    "description": "使用脉冲步枪持续射击时，每发子弹都会使武器强度提高0.5%，最多叠加100次"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_05_double-helix.webp": {
+    "name": "双重螺旋",
+    "description": "螺旋飞弹会发射第二枚伤害降低70%的追踪螺旋飞弹"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_06_cratered.webp": {
+    "name": "增爆飞弹",
+    "description": "螺旋飞弹爆炸半径范围提高40%，爆炸伤害提高15%"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_07_hunker-down.webp": {
+    "name": "战术整备",
+    "description": "螺旋飞弹造成伤害时，在你的位置产生生物力场，持续时间缩短50%且效果降低50%"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_08_aura-cloud.webp": {
+    "name": "离我远点",
+    "description": "+40%生物力场半径范围 位于你生物力场中的敌人会受到伤害，数值等同于其治疗量的100%"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_09_on-me.webp": {
+    "name": "向我靠拢！",
+    "description": "生物力场会随着你移动"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_10_track-and-field.webp": {
+    "name": "疾奔力场",
+    "description": "在疾跑期间，技能冷却速度提高75%，且每1秒恢复子弹数量上限的15%"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_11_frontliners.webp": {
+    "name": "前线将士",
+    "description": "生成生物力场时，在其范围内的所有队友会获得过量生命值，数值等同于你最大生命值的25%，持续2秒"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_12_biotic-bullseye.webp": {
+    "name": "生物靶心",
+    "description": "位于生物力场中时，获得的终极技能充能提高50%，爆击会恢复子弹数量上限的20%，并使生物力场持续时间延长0.5秒，最多延长5秒"
+  },
+  "sombra/minorPerks/assets/perks/sombra_minor_01_34e108b70ea2d33e.png": {
+    "name": "生命骇客",
+    "description": "电磁脉冲会对附近所有队友施加在线修复"
+  },
+  "sombra/minorPerks/assets/perks/sombra_minor_02_ctrl-alt-esc.webp": {
+    "name": "紧急逃生",
+    "description": "生命值低于一半时，使用位移传动进行传送会触发被动生命值恢复。"
+  },
+  "sombra/majorPerks/assets/perks/sombra_major_01_87fec003fc9753ad.png": {
+    "name": "资料包",
+    "description": "使用在线修复骇入治疗包时，其主要冷却时间缩短4秒"
+  },
+  "sombra/majorPerks/assets/perks/sombra_major_02_28a09178c65bff6e.png": {
+    "name": "网路安全",
+    "description": "赛博空间对生命值低于一半的盟友造成的治疗效果翻倍。"
+  },
+  "symmetra/minorPerks/assets/perks/symmetra_minor_01_sentry-capacity.webp": {
+    "name": "哨戒容限",
+    "description": "哨戒炮额外获得一次使用次数"
+  },
+  "symmetra/minorPerks/assets/perks/symmetra_minor_02_perfect-alignment.webp": {
+    "name": "完美协同",
+    "description": "光子发射器的主要攻击范围提高20%"
+  },
+  "symmetra/majorPerks/assets/perks/symmetra_major_01_hovering-barrier.webp": {
+    "name": "悬浮屏障",
+    "description": "传送面板可以改为产生向前移动的屏障。再次按下E会减缓屏障的移动速度"
+  },
+  "symmetra/majorPerks/assets/perks/symmetra_major_02_shield-battery.webp": {
+    "name": "护盾充能",
+    "description": "辛梅塔位于她传送面板10米范围内时，每秒可恢复20点护盾值"
+  },
+  "torbjorn/minorPerks/assets/perks/torbjorn_minor_01_hammer-time.webp": {
+    "name": "铁锤快抡",
+    "description": "装备锻造锤时移动速度提高20%"
+  },
+  "torbjorn/minorPerks/assets/perks/torbjorn_minor_02_pre-heated.webp": {
+    "name": "核心预热",
+    "description": "熔火核心会启动热力过载"
+  },
+  "torbjorn/majorPerks/assets/perks/torbjorn_major_01_5f3ae1fcd2f9a78a.png": {
+    "name": "锚固螺栓",
+    "description": "部署炮台的投掷距离提高25%，且现在可以将炮塔安装在墙壁及天花板上"
+  },
+  "torbjorn/majorPerks/assets/perks/torbjorn_major_02_overloaded-turret.webp": {
+    "name": "过载炮台",
+    "description": "热力过载会使你的炮塔升级5秒，提高其生命值和伤害"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_01_all-grown-up.webp": {
+    "name": "茁壮成长",
+    "description": "在热力过载期间，炮塔提升1级，最高升至等级3"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_02_swedish-sauna.webp": {
+    "name": "瑞典桑拿",
+    "description": "熔火核心会治疗站在熔渣池内的队友，每1秒恢复熔火核心伤害50%的生命值"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_03_magmini.webp": {
+    "name": "迷你熔火",
+    "description": "使用热力过载时，可射击2发熔火核心熔渣，但伤害量及持续时间降低66%"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_04_come-get-yer-armor.webp": {
+    "name": "快来拿护甲",
+    "description": "使用热力过载时，投出2个装甲强化包，给予等同你最大生命值15%的装甲值，装甲强化包无法叠加"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_05_let-off-some-steam.webp": {
+    "name": "加油鼓气",
+    "description": "非热力过载状态下，造成武器伤害和武器治疗会使热力过载冷却时间缩短8%"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_06_forged-in-fire.webp": {
+    "name": "烈火铸就",
+    "description": "在热力过载期间，每次挥动锻造锤都会爆炸，在3米半径范围造成等同于自身最大生命值10%的额外伤害"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_07_dwarlord.webp": {
+    "name": "矮人战帅",
+    "description": "热力过载会使5米内的所有队友获得过量生命值，治疗量等同于热力过载的50%，以及10%攻击速度"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_08_riveting.webp": {
+    "name": "铆钉齐发",
+    "description": "每5发铆钉枪射击会同时射出主要攻击和次要攻击。额外射击造成的伤害降低10%"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_09_blacksmith.webp": {
+    "name": "愈伤铁匠",
+    "description": "使用锻造锤敲打队友会治疗他，数值等同锻造锤伤害的100%"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_10_hammer-throw.webp": {
+    "name": "正向强化",
+    "description": "技能：装备锻造锤期间，使用次要攻击即可掷出锤子。其对炮塔和队友可造成200%的效果 （2秒冷却时间）"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_11_turriplets.webp": {
+    "name": "三胞炮台",
+    "description": "你最多能同时拥有3座炮塔。它们的等级会从等级1开始，生命值为50%且攻击速度为65%，使用锻造锤敲打炮塔可暂时将其升级，持续24秒"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_12_clocked.webp": {
+    "name": "指哪打哪",
+    "description": "炮塔造成伤害时会标记敌人，持续8秒。攻击受标记的敌人时获得25%武器生命窃取，且武器伤害提高15%"
+  },
+  "tracer/minorPerks/assets/perks/tracer_minor_01_abd0ec9faa55dabc.png": {
+    "name": "时光再生",
+    "description": "生命值再生被动技能的触发时间提早100%"
+  },
+  "tracer/minorPerks/assets/perks/tracer_minor_02_kinetic-reload.webp": {
+    "name": "动能装填",
+    "description": "近战命中可装填12发子弹"
+  },
+  "tracer/majorPerks/assets/perks/tracer_major_01_blink-packs.webp": {
+    "name": "闪现急救包",
+    "description": "使用治疗包时，会恢复1次闪现使用次数"
+  },
+  "tracer/majorPerks/assets/perks/tracer_major_02_quantum-entanglement.webp": {
+    "name": "量子纠缠",
+    "description": "使用闪回时，会赋予持续衰退的50点过量生命值和20发子弹"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_01_flash-fist.webp": {
+    "name": "快闪一拳",
+    "description": "使用闪现后的1秒内，你的下一次快速近战攻击会受到技能强度的影响，造成25点额外伤害，并且击退敌人"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_02_quantum-clip.webp": {
+    "name": "量子弹夹",
+    "description": "在装填子弹期间使用闪现时，子弹数量上限提高25%并获得10%武器生命窃取，直到装填子弹为止"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_03_auto-recall.webp": {
+    "name": "自动闪回",
+    "description": "每回合生效一次。当你即将死亡时，改为免费使用闪回 消耗终极技能充能会使闪回的冷却时间缩短50%"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_04_timelapse.webp": {
+    "name": "聚焦连拍",
+    "description": "连续命中相同目标2次且未失准时，在2秒内造成2点额外伤害"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_05_get-stuffed.webp": {
+    "name": "拳力充沛！",
+    "description": "快速近战攻击命中时获得5%终极技能充能，并使闪回的冷却时间缩短2秒"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_06_quantum-reload.webp": {
+    "name": "预见未来",
+    "description": "在闪回后，获得等同于子弹数量上限100%的子弹，子弹量会持续衰减"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_07_blink-hop.webp": {
+    "name": "夺目一闪",
+    "description": "闪现距离延长3米 在空中使用闪现后，可在空中跳跃一次，并使闪现的冷却时间缩短0.2秒"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_08_temportal.webp": {
+    "name": "时光之门",
+    "description": "闪回会留下一道时光传送门，持续8秒。最多3名队友可与其互动一次，闪回到1秒前的所在处"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_09_impulsive.webp": {
+    "name": "投弹冲动",
+    "description": "使用闪回时，投掷一颗引爆速度加快50%的脉冲炸弹，其造成的伤害降低70%"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_10_alternate-ending.webp": {
+    "name": "改写结局",
+    "description": "使用闪回时，距离6米内的队友恢复生命值，数值等同在过去3秒内所受伤害的100%"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_11_bullet-time.webp": {
+    "name": "子弹时间",
+    "description": "使用闪回时，留下一个暂时性力场，该力场会使抛射物缓速95%，并使敌人缓速20% 你受到的直击伤害降低25%，持续4秒"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_12_chrono-stabilizer.webp": {
+    "name": "竞速高手",
+    "description": "在你使用闪现后，6米内的队友恢复40点生命值，你自己则恢复10点生命值"
+  },
+  "vendetta/minorPerks/assets/perks/vendetta_minor_01_extra-edge.webp": {
+    "name": "充盈剑气",
+    "description": "锋锐剑气消耗的能量降低25%"
+  },
+  "vendetta/minorPerks/assets/perks/vendetta_minor_02_raging-storm.webp": {
+    "name": "狂怒风暴",
+    "description": "旋风疾步的旋转时间更久，对大范围额外攻击3次，造成30点伤害"
+  },
+  "vendetta/majorPerks/assets/perks/vendetta_major_01_siphoning-strike.webp": {
+    "name": "虹吸斩击",
+    "description": "劈头斩击时获得40%的生命窃取效果"
+  },
+  "vendetta/majorPerks/assets/perks/vendetta_major_02_relentless.webp": {
+    "name": "无情君威",
+    "description": "猛攻可额外叠加3层，每层叠加会使攻击速度提高5%，移动速度提高3%"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_01_rampant-onslaught.webp": {
+    "name": "浓烈战意",
+    "description": "每2次击杀后，猛攻叠加上限提高1层，最多3层"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_02_undying-fury.webp": {
+    "name": "无尽之战",
+    "description": "在你即将死亡时，改为受阻且无法受到队友治疗，同时获得等同你最大生命值的持续衰退过量生命值，并加倍你的猛攻堆叠层数与生命窃取效果 （90秒冷却时间）"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_03_skycut.webp": {
+    "name": "劈天利刃",
+    "description": "使用飞空斩击后，你的下一次劈头斩击会在你落地时发射一发75%伤害的锋锐剑气"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_04_overloaded-strike.webp": {
+    "name": "巨力劈斩",
+    "description": "使用飞空斩击后，下一次空中劈头斩击会引导一次等级1的斩地巨剑，伤害提高25%"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_05_defiance-core.webp": {
+    "name": "反抗核心",
+    "description": "招架姿态现在也会在格挡时恢复能量，速度为75% 每发射一发锋锐剑气，旋风疾步和飞空斩击的冷却时间就缩短0.5秒"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_06_riposte.webp": {
+    "name": "借势反击",
+    "description": "格挡伤害后，移除招架姿态的移动速度降低效果。下一次挥剑改为劈头斩击"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_07_cyclone-charge.webp": {
+    "name": "龙卷迅步",
+    "description": "旋风疾步可额外旋转3次，造成75%点伤害"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_08_double-dash.webp": {
+    "name": "连环疾步",
+    "description": "旋风疾步结束后，在3秒内可重新启动并造成75%伤害"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_09_exalted-empress.webp": {
+    "name": "崇高女皇",
+    "description": "使用飞空斩击后，劈头斩击与斩地巨剑伤害量的30%会转换成过量生命值，最多200点"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_10_cataclisma.webp": {
+    "name": "灾厄来袭",
+    "description": "锋锐剑气和飞空斩击命中敌人时会爆炸，对4米内的敌人造成30点伤害"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_11_furious-friction.webp": {
+    "name": "怒意激荡",
+    "description": "招架姿态的能量恢复速度提高25% 使用锋锐剑气造成伤害时，额外获得50%，持续3秒"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_12_apex-bloodlust.webp": {
+    "name": "飞空英姿",
+    "description": "你每拥有一层猛攻，就获得4%生命窃取，且技能冷却速度提高3%"
+  },
+  "venture/minorPerks/assets/perks/venture_minor_01_deep-burrow.webp": {
+    "name": "深岩掘地",
+    "description": "在钻地期间，钻头突刺的距离提高75%"
+  },
+  "venture/minorPerks/assets/perks/venture_minor_02_excavation-exhilaration.webp": {
+    "name": "轰轰钻机汹汹来袭",
+    "description": "在地壳震击期间，冷却速度提高300%"
+  },
+  "venture/majorPerks/assets/perks/venture_major_01_smart-extender.webp": {
+    "name": "智能延展器",
+    "description": "使用E强化智能挖掘钻，提高抛射物最大射程100%，持续4秒"
+  },
+  "venture/majorPerks/assets/perks/venture_major_02_covered-in-dirt.webp": {
+    "name": "尘土满身",
+    "description": "使用猛击造成伤害后，最多赋予40点探险家的决心护盾值"
+  },
+  "widowmaker/minorPerks/assets/perks/widowmaker_minor_01_scoped-efficiency.webp": {
+    "name": "高效开镜",
+    "description": "狙击会消耗3发子弹，而非5发"
+  },
+  "widowmaker/minorPerks/assets/perks/widowmaker_minor_02_sniper-s-instinct.webp": {
+    "name": "狙击手的直觉",
+    "description": "使用抓钩后，2秒内狙击的蓄力速度提高100%"
+  },
+  "widowmaker/majorPerks/assets/perks/widowmaker_major_01_seeker-mine.webp": {
+    "name": "寻敌诡雷",
+    "description": "剧毒诡雷会对10米内的敌人发射毒飞镖，并在触发后维持启动状态"
+  },
+  "widowmaker/majorPerks/assets/perks/widowmaker_major_02_widow-s-bite.webp": {
+    "name": "黑百合之噬",
+    "description": "狙击可以蓄力至125%，完全蓄力可穿透敌人"
+  },
+  "ana/minorPerks/assets/perks/ana_minor_01_ae02fae670005f98.png": {
+    "name": "局部麻醉剂",
+    "description": "麻醉镖命中时会爆炸，使敌人缓速并在3秒内造成45点伤害"
+  },
+  "ana/minorPerks/assets/perks/ana_minor_02_speed-serum.webp": {
+    "name": "加速血清",
+    "description": "纳米激素会使安娜以及其目标的移动速度提高30%"
+  },
+  "ana/majorPerks/assets/perks/ana_major_01_biotic-bounce.webp": {
+    "name": "弹跳手雷",
+    "description": "爆炸后，生物手雷会弹跳并再爆炸一次，造成60点伤害与治疗"
+  },
+  "ana/majorPerks/assets/perks/ana_major_02_headhunter.webp": {
+    "name": "猎头精英",
+    "description": "生物步枪可以爆击敌人"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_01_no-scope-needed.webp": {
+    "name": "无需开镜",
+    "description": "以生物步枪非狙击模式命中时，攻击速度提高10%，持续2秒，最多叠加3次"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_02_pinpoint-prescription.webp": {
+    "name": "精确处方",
+    "description": "生物步枪可以对队友和敌人爆击"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_03_dream-field.webp": {
+    "name": "美妙幻梦",
+    "description": "麻醉镖命中时会治疗5米内的队友，每1秒恢复你最大生命值20%的生命值，持续5秒"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_04_comfy-cloud.webp": {
+    "name": "舒睡云雾",
+    "description": "麻醉镖在接触时会爆炸，命中3米内的目标，但睡眠持续时间缩短50%"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_05_home-remedy.webp": {
+    "name": "居家药饮",
+    "description": "+30%生物手雷半径范围 在生物手雷的效果期间内，生物手雷可给予过量生命值，数值等同你最大生命值的30%"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_06_venomous.webp": {
+    "name": "毒性药剂",
+    "description": "生物手雷会在2秒内对正在受影响的敌人额外造成75点伤害"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_07_my-turn.webp": {
+    "name": "轮到我了",
+    "description": "施放纳米激素也会强化安娜，持续时间为100%"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_08_our-turn.webp": {
+    "name": "轮到我们了",
+    "description": "施放纳米激素也会影响视线内的其他队友，但对其他队友的持续时间缩短25%"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_09_artsy-dartsy.webp": {
+    "name": "一镖绝尘",
+    "description": "开镜时可发射麻醉镖，其弹道速度提高300%，基础伤害提高至75点。开镜发射的麻醉镖命中后，其冷却时间缩短5秒。"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_10_fountain-of-soothe.webp": {
+    "name": "抚慰之泉",
+    "description": "麻醉镖会生成一颗效果50%的生物手雷"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_11_nanonade.webp": {
+    "name": "纳米手雷",
+    "description": "生物手雷会对所有命中的队友施加25%效果的纳米激素，持续1.5秒"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_12_falconer.webp": {
+    "name": "驯鹰高手",
+    "description": "纳米激素也会使攻击速度提高50%，并给予10%终极技能充能"
+  },
+  "baptiste/minorPerks/assets/perks/baptiste_minor_01_expanded-field.webp": {
+    "name": "广域力场",
+    "description": "维生力场半径范围扩大30%"
+  },
+  "baptiste/minorPerks/assets/perks/baptiste_minor_02_assault-burst.webp": {
+    "name": "强攻冲击",
+    "description": "愈合冲击会使巴帝斯特的攻击速度提高20%，持续3秒"
+  },
+  "baptiste/majorPerks/assets/perks/baptiste_major_01_automated-healing.webp": {
+    "name": "自动治疗",
+    "description": "使用任意技能时会触发巴帝斯特的肩上炮塔，最多会定期朝队友发射3发弹药，每发恢复40点生命值"
+  },
+  "baptiste/majorPerks/assets/perks/baptiste_major_02_rocket-boots.webp": {
+    "name": "火箭战靴",
+    "description": "使用动力战靴位于空中时，使用空白键以水平冲刺"
+  },
+  "brigitte/minorPerks/assets/perks/brigitte_minor_01_combat-medic.webp": {
+    "name": "战地医疗兵",
+    "description": "对敌人进行近战攻击会使恢复包的冷却时间缩短0.75秒"
+  },
+  "brigitte/minorPerks/assets/perks/brigitte_minor_02_morale-boost.webp": {
+    "name": "士气高昂",
+    "description": "使用流星飞锤来启动鼓舞士气效果时，鼓舞士气的持续时间延长3秒"
+  },
+  "brigitte/majorPerks/assets/perks/brigitte_major_01_inspiring-strike.webp": {
+    "name": "鼓舞盾击",
+    "description": "能量盾击可使移动速度提高30%，持续2秒。以能量盾击触发鼓舞士气时会立即治疗"
+  },
+  "brigitte/majorPerks/assets/perks/brigitte_major_02_whiplash.webp": {
+    "name": "流星重鞭",
+    "description": "流星飞锤的击退效果可将敌人打到墙壁上，额外造成60点伤害"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_01_whirlwhip.webp": {
+    "name": "横扫飞锤",
+    "description": "使用能量盾击或流星飞锤后，你下一次挥舞火箭连枷会额外造成25%伤害，且命中5米范围内的所有敌人"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_02_righteous-cleave.webp": {
+    "name": "正义顺劈",
+    "description": "使用能量盾击或流星飞锤后，你下次挥舞火箭连枷攻击可为10米内的队友恢复生命值，数值等同造成伤害的125%"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_03_burst-aid.webp": {
+    "name": "全力助阵",
+    "description": "技能：使用装填子弹会消耗1次恢复包使用次数，恢复最大生命值20%的生命值，且获得50%爆发移动速度 （3秒冷却时间）"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_04_optimizer.webp": {
+    "name": "愈疗愈善",
+    "description": "每有一个正在生效的恢复包，恢复包的治疗量提高10%，并使你每1秒恢复相当于最大生命值4%的生命值。"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_05_packstacker.webp": {
+    "name": "愈战愈久",
+    "description": "恢复包持续时间延长25%。造成技能伤害可使所有作用中的恢复包持续时间延长1秒"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_06_maces-to-faces.webp": {
+    "name": "重锤出击",
+    "description": "流星飞锤大小增加1米，且可以命中多个敌人。流星飞锤触发的鼓舞士气持续时间延长1秒"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_07_god-ray.webp": {
+    "name": "穿云圣光",
+    "description": "对10米外的目标造成技能伤害会使其燃烧，技能每飞行1米，就额外造成5%伤害"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_08_sk-ldkastning.webp": {
+    "name": "瑞典飞盾",
+    "description": "使用能量盾击后，下一次挥动火箭连枷会射出回力盾牌，造成40%能量盾击伤害"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_09_lindholm-wall.webp": {
+    "name": "林德霍姆铁壁",
+    "description": "屏障护盾大小增加60%，且屏障护盾生命值提高100%。能量盾击可以命中多个敌人"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_10_mender-bender.webp": {
+    "name": "愈疗重击",
+    "description": "使用能量盾击后，恢复33%屏障护盾生命值并触发鼓舞士气"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_11_aura-farming.webp": {
+    "name": "光环迸发",
+    "description": "技能触发鼓舞士气时，所有受到影响的英雄获得等同于你最大生命值4%的过量生命值，持续5秒"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_12_consecrated-ground.webp": {
+    "name": "圣洁之地",
+    "description": "+25%初始终极技能充能 在集结号令效果期间，每1.5秒会触发鼓舞士气，技能冷却速度提高25%"
+  },
+  "illari/minorPerks/assets/perks/illari_minor_01_rapid-construction.webp": {
+    "name": "快速建造",
+    "description": "治疗光塔建造速度提高300%，且其冷却时间缩短2秒"
+  },
+  "illari/minorPerks/assets/perks/illari_minor_02_summer-solstice.webp": {
+    "name": "夏至骄阳",
+    "description": "桎梏灼日会使伊拉里的飞空及攻击速度提高20%，并使飞空持续时间延长3秒"
+  },
+  "illari/majorPerks/assets/perks/illari_major_01_solar-flare.webp": {
+    "name": "太阳耀斑",
+    "description": "使用阳焰步枪的治疗光束时按下，治疗伊拉里面前的所有队友100点生命值"
+  },
+  "illari/majorPerks/assets/perks/illari_major_02_sunburn.webp": {
+    "name": "烈日燎灼",
+    "description": "烈日冲击会点燃敌人，在3秒内额外造成50点伤害"
+  },
+  "jetpack-cat/minorPerks/assets/perks/jetpack-cat_minor_01_ulterior-motive.webp": {
+    "name": "别有用心",
+    "description": "恢复燃料，其数值为生物猫爪弹治疗量的15%"
+  },
+  "jetpack-cat/minorPerks/assets/perks/jetpack-cat_minor_02_transport-shielding.webp": {
+    "name": "带盾运输",
+    "description": "承载另一名英雄时，额外获得最多50点护盾值"
+  },
+  "jetpack-cat/majorPerks/assets/perks/jetpack-cat_major_01_7b90c625a71b1ab6.png": {
+    "name": "完美呼噜噜",
+    "description": "呼噜噜每次脉冲会发出3波"
+  },
+  "jetpack-cat/majorPerks/assets/perks/jetpack-cat_major_02_claws-out.webp": {
+    "name": "嗷呜一爪",
+    "description": "每6秒强化快速近战攻击，对敌人造成40点伤害并使其暂时缓速30%，持续1秒"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_01_territorial.webp": {
+    "name": "地盘意识",
+    "description": "位于你呼噜噜范围中的敌人会受到伤害，数值等同于治疗量的20%"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_02_purr-sistence.webp": {
+    "name": "呼噜噜坚持",
+    "description": "呼噜噜目前每影响一名队友或敌人，呼噜噜持续时间就延长10%，最多延长50%。治疗脉冲次数每4次脉冲后会重置"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_03_battle-fur-mation.webp": {
+    "name": "战斗毛阵型",
+    "description": "救生索可连结至1名额外队友"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_04_tow-beans.webp": {
+    "name": "牵引肉球",
+    "description": "当你从救生索或猫猫劫释放目标时，获得20%燃料 每造成10点技能伤害就恢复1%燃料"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_05_frenzy.webp": {
+    "name": "战斗狂热",
+    "description": "技能：你的下一次快速近战攻击会缓速，并在3秒内造成40点伤害，同时使快速近战攻击的攻击速度提高100%，持续1秒 （8秒冷却时间）"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_06_zoomies.webp": {
+    "name": "暴冲",
+    "description": "启动咻咻飞0.5秒后，下次与敌人碰撞时会爆炸，根据移动距离造成最多120点伤害，并最多恢复40%燃料 （1.5秒冷却时间）"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_07_lindholm-inspiration.webp": {
+    "name": "林霍姆式激励",
+    "description": "当呼噜噜结束时，位于呼噜噜半径范围内的所有其他队友获得过量生命值，数值等同于在呼噜噜作用期间造成伤害量的30%，自己也会获得10%，持续3秒"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_08_tomcat-reserves.webp": {
+    "name": "雄猫式战斗机储备",
+    "description": "在咻咻飞启动期间，呼噜噜冷却速度提高40%，且所有其他技能冷却速度提高80%"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_09_ambidex-fur-ous.webp": {
+    "name": "左右开掌",
+    "description": "在呼噜噜启动期间，两支枪会同时发射。额外射击具有35%效力"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_10_bell-bomb.webp": {
+    "name": "铃铛炸弹",
+    "description": "技能：救生索连结一颗会爆炸的玩具球，击中时会爆炸，最高造成120点伤害 （6秒冷却时间）"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_11_scratch-ageddon.webp": {
+    "name": "抓抓末日",
+    "description": "+25%初始终极技能充能 使用猫猫劫撞击地面时会抓伤所有附近敌人，使其缓速并在3秒内造成150点伤害"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_12_bouncing-biscuits.webp": {
+    "name": "弹跳饼干",
+    "description": "以生物猫爪弹命中队友时，会以50%效力弹跳至15米内的1名附近队友身上"
+  },
+  "juno/minorPerks/assets/perks/juno_minor_01_familiar-vitals.webp": {
+    "name": "急救优先",
+    "description": "脉冲星飞雷的队友锁定时间缩短35%"
+  },
+  "juno/minorPerks/assets/perks/juno_minor_02_locked-on.webp": {
+    "name": "锁定打击",
+    "description": "脉冲星飞雷每命中一名敌人，冷却时间就缩短1秒"
+  },
+  "juno/majorPerks/assets/perks/juno_major_01_lift-off.webp": {
+    "name": "飞上新高",
+    "description": "火星套靴现在可以三连跳"
+  },
+  "juno/majorPerks/assets/perks/juno_major_02_faster-blaster.webp": {
+    "name": "高速冲击枪",
+    "description": "在滑翔推进启动期间，医疗冲击枪可连续射击"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_01_medimaster.webp": {
+    "name": "医疗冲击枪大师",
+    "description": "医疗冲击枪爆击伤害提高50%，且可对队友造成爆击 爆击时，超能环域冷却时间缩短0.2秒"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_02_stinger.webp": {
+    "name": "钉刺",
+    "description": "医疗冲击枪会在1秒内对敌人额外造成10点伤害（此效果无法叠加）"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_03_medicinal-missiles.webp": {
+    "name": "医疗飞弹",
+    "description": "脉冲星飞雷命中队友时会使其受到的治疗效果提高50%，持续3秒"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_04_pulsar-plus.webp": {
+    "name": "脉冲星强化",
+    "description": "脉冲星飞雷额外获得1次使用次数"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_05_torpedo-glide.webp": {
+    "name": "飞雷滑翔",
+    "description": "在滑翔推进期间，你每造成75点武器伤害或100点武器治疗，就会使脉冲星飞雷冷却时间缩短1秒"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_06_blink-boosts.webp": {
+    "name": "闪现推进",
+    "description": "滑翔推进改为可使用3次的短时间加速，持续时间缩短75%，冷却时间缩短30%"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_07_hyper-healer.webp": {
+    "name": "超能幻愈",
+    "description": "受到超能环域影响的队友获得85点过量生命值"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_08_stellar-focus.webp": {
+    "name": "众星焦点",
+    "description": "滑翔推进或滞空时，造成伤害或治疗所获得的终极技能充能提高75% 轨道射线现在会跟着你，持续时间延长50%"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_09_pulstar-destroyers.webp": {
+    "name": "脉冲星毁灭者",
+    "description": "脉冲星飞雷命中时会爆炸，造成20点治疗或伤害"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_10_fission-chamber.webp": {
+    "name": "裂变枪膛",
+    "description": "受到超能环域的影响时，医疗冲击枪可以连续发射"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_11_heal-formation.webp": {
+    "name": "治疗阵型",
+    "description": "超能环域影响的队友受到治疗，治疗量等同你造成伤害的40%"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_12_marswalking.webp": {
+    "name": "火星漫步",
+    "description": "超能环域向侧面部署，使你的跳跃高度提高250% 队友通过超能环域时，其冷却时间缩短1秒"
+  },
+  "kiriko/minorPerks/assets/perks/kiriko_minor_01_urgent-care.webp": {
+    "name": "救死急符",
+    "description": "“符”追踪生命值低于一半的盟友时，弹道速度提高50%。"
+  },
+  "kiriko/minorPerks/assets/perks/kiriko_minor_02_fortune-teller.webp": {
+    "name": "灵利卜师",
+    "description": "“锥”命中时会对你面前的队友发射2个“符”"
+  },
+  "kiriko/majorPerks/assets/perks/kiriko_major_01_ready-step.webp": {
+    "name": "备战瞬步",
+    "description": "“瞬”会使雾子的攻击与装填子弹速度提高40%，持续3秒"
+  },
+  "kiriko/majorPerks/assets/perks/kiriko_major_02_foxtrot.webp": {
+    "name": "狐步漫舞",
+    "description": "“铃”会使队友的移动速度提高30%，持续4秒"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_01_foxy-fireworks.webp": {
+    "name": "狡狐烟花",
+    "description": "使用技能或小工具后，你接下来丢出的5个“锥”会在接触时爆炸，对附近敌人造成20点伤害"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_02_keen-kunai.webp": {
+    "name": "锋锐苦无",
+    "description": "“锥”爆击时会使技能冷却时间缩短25%，并返还3发子弹"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_03_good-fortune.webp": {
+    "name": "好运",
+    "description": "“锥”命中时会对你面前的一名队友发射3发“符”"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_04_leaf-on-the-wind.webp": {
+    "name": "叶随风舞",
+    "description": "“符”会弹跳至其他队友最多2次，效果为一般的30%"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_05_self-care.webp": {
+    "name": "自力更生",
+    "description": "使用“符”时，每丢出一个“符”，就恢复自己最大生命值2%的生命值"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_06_supported-shooting.webp": {
+    "name": "符助火力",
+    "description": "+100%“符”追踪半径范围 当“符”治疗队友时，可使其攻击速度提高20%，持续3秒"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_07_fleet-foot.webp": {
+    "name": "无羁健步",
+    "description": "“瞬”可在没有目标时朝指定方向使用。无目标使用时，施放范围缩短50%，冷却时间缩短20%。"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_08_clone-conjuration.webp": {
+    "name": "分身术",
+    "description": "使用“瞬”后，产生自己的分身，持续4秒。分身的伤害和治疗降低65%"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_09_cleansing-charge.webp": {
+    "name": "净化充能",
+    "description": "使用“铃”净化负面效果时，每净化一名英雄可获得5%终极技能充能"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_10_donut-delivery.webp": {
+    "name": "甜甜圈外送",
+    "description": "“瞬”会在2秒内为附近队友恢复80点生命值"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_11_talisman-of-life.webp": {
+    "name": "双响鸣铃",
+    "description": "“铃”会给予80点过量生命值，持续5秒。每影响一名队友，“瞬”冷却时间缩短1秒"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_12_our-bikes.webp": {
+    "name": "路口护卫",
+    "description": "使用“狐”后，重置所有其他技能的冷却时间 受到“狐”影响的队友，每1秒恢复80点生命值"
+  },
+  "lifeweaver/minorPerks/assets/perks/lifeweaver_minor_01_petal-protection.webp": {
+    "name": "守护花瓣",
+    "description": "站上花瓣平台时，队友每秒恢复20点生命值"
+  },
+  "lifeweaver/minorPerks/assets/perks/lifeweaver_minor_02_dashing-escape.webp": {
+    "name": "疾行脱身",
+    "description": "回春疾行的距离提高30%"
+  },
+  "lifeweaver/majorPerks/assets/perks/lifeweaver_major_01_sow-the-seed.webp": {
+    "name": "愈疗播种",
+    "description": "愈疗灵花后进行快速近战攻击会投掷一个种子。其他队友捡起种子即可获得过量生命值并提高移动速度"
+  },
+  "lifeweaver/majorPerks/assets/perks/lifeweaver_major_02_superbloom.webp": {
+    "name": "超然盛放",
+    "description": "在2.5秒内刺进足够数量的荆棘后，荆棘会爆炸，造成40点额外伤害"
+  },
+  "lucio/minorPerks/assets/perks/lucio_minor_01_soundwave-rider.webp": {
+    "name": "音波滑手",
+    "description": "滑墙会强化你下一次的音波，使其击退距离提高25%，伤害提高50%"
+  },
+  "lucio/minorPerks/assets/perks/lucio_minor_02_beat-drop.webp": {
+    "name": "来点节拍",
+    "description": "在施放音障的4秒内启用强音"
+  },
+  "lucio/majorPerks/assets/perks/lucio_major_01_noise-violation.webp": {
+    "name": "违规噪音",
+    "description": "在强音期间，切歌的范围提高150%"
+  },
+  "lucio/majorPerks/assets/perks/lucio_major_02_accelerando.webp": {
+    "name": "急速乐章",
+    "description": "加速之歌生效时，攻击速度提高15%；“强音”期间，该加成变为三倍。"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_01_premium-streaming.webp": {
+    "name": "炸场爆音",
+    "description": "+50%抛射物移动速度 切歌范围内每有一名其他队友，攻击速度提高6%，并治疗队友，数值等同于造成伤害的30%。此加成在强音时加倍"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_02_mixtape.webp": {
+    "name": "串烧磁带",
+    "description": "切换至治疗之歌时，切歌会恢复生命值，先前每持续1秒加速之歌，就会恢复切歌治疗量的65%"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_03_signature-shift.webp": {
+    "name": "拍号变换",
+    "description": "在强音启动期间，音速扩音器可以连续开火，且抛射物大小提高80%"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_04_fast-forward.webp": {
+    "name": "加速快进",
+    "description": "依据你的目前移动速度和动量提高伤害和治疗，最多提高30%"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_05_radio-edit.webp": {
+    "name": "精剪曲目",
+    "description": "使用强音后，触发过量生命值减少80%的音障"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_06_vivace.webp": {
+    "name": "活板演奏",
+    "description": "在滑墙期间或造成武器伤害时，每0.5秒移动速度提高1%，持续5秒，最多可叠加30次"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_07_megaphone.webp": {
+    "name": "大喇叭",
+    "description": "在强音效果期间，切歌半径范围提高150%，造成武器伤害会使强音持续时间延长0.25秒，最多延长3秒"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_08_crowd-pleaser.webp": {
+    "name": "取悦观众",
+    "description": "使用音波后，使所有受切歌影响的队友恢复生命值，数值等同音波伤害量的40%。此治疗量在强音启动期间加倍"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_09_rhythm-rail.webp": {
+    "name": "蹦起来",
+    "description": "滑墙3秒会为你下一次的音波充能，使其击退距离提高25%，伤害提高100%"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_10_reverb.webp": {
+    "name": "加点混响",
+    "description": "使用音波后，在接下来的3秒内可以再次使用音波，但效果降低50%"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_minor_02_beat-drop.webp": {
+    "name": "来个Beat",
+    "description": "使用音障落地时会爆炸，造成75点伤害，且此伤害可以造成300%爆击伤害。如果你使用了终极技能充能，则音障的伤害加倍"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_12_hip-hop.webp": {
+    "name": "壁听轻曲",
+    "description": "滑墙后，在空中时可额外跳跃一次。在滑墙期间或在空中时，技能冷却速度提高10%"
+  },
+  "mercy/minorPerks/assets/perks/mercy_minor_01_angelic-resurrection.webp": {
+    "name": "天使重生",
+    "description": "慈悲施放重生后会获得100点过量生命值"
+  },
+  "mercy/minorPerks/assets/perks/mercy_minor_02_winged-reach.webp": {
+    "name": "展翅",
+    "description": "守护天使的距离提高30%"
+  },
+  "mercy/majorPerks/assets/perks/mercy_major_01_chain-boost.webp": {
+    "name": "连锁强化",
+    "description": "天使之杖的增伤光束效果提高5%，且可连结至附近的第二个队友"
+  },
+  "mercy/majorPerks/assets/perks/mercy_major_02_double-dose.webp": {
+    "name": "双倍剂量",
+    "description": "可额外使用一次快速治疗，但基础治疗量降低10点"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_01_threads-of-fate.webp": {
+    "name": "命运丝线",
+    "description": "天使之杖也会连接至你的上一个目标，持续3秒，效力为30%"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_02_battle-medic.webp": {
+    "name": "战斗医师",
+    "description": "切换为天使冲击枪后，攻击速度提高20%，获得20%武器生命窃取，每连结队友1秒，此加成就持续2秒，最多20秒"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_03_renaissance.webp": {
+    "name": "复兴之翼",
+    "description": "成功使用重生后会启动女武神，持续5秒"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_04_equivalent-exchange.webp": {
+    "name": "等价交换",
+    "description": "你有3次重生使用次数，施放时间缩短33%，但不再重置冷却时间 造成750点天使冲击枪伤害会恢复1次使用次数"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_05_the-whambulance.webp": {
+    "name": "嘤嘤救护车",
+    "description": "当守护天使结束时，你每移动1米，就为目标治疗4点生命值"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_major_02_double-dose.webp": {
+    "name": "双倍剂量",
+    "description": "快速治疗获得一次额外充能。激活女武神时，恢复快速治疗的一次充能。"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_07_serenity.webp": {
+    "name": "平心静气",
+    "description": "共鸣恢复治疗量提高10%，治疗生命值全满的队友时仍会恢复你的生命值 天使之杖最多可过量生命值50点"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_08_distortion.webp": {
+    "name": "扭曲光束",
+    "description": "使用快速治疗时，给予目标过量生命值，治疗量等同于你最大生命值的25%，持续2秒，并击退目标周围5米的敌人"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_09_first-responder.webp": {
+    "name": "紧急救援",
+    "description": "当你重生队友时，双方都会获得250点过量生命值，持续6秒"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_10_angelic-acrobatics.webp": {
+    "name": "紧急诊疗",
+    "description": "+15%守护天使起飞速度 守护天使会在你跳跃或蹲下时进入冷却期间"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_11_supply-surge.webp": {
+    "name": "疾速驰援",
+    "description": "快速治疗赋予20%移动速度、100%冷却速度提高，并使你和目标获得20%生命窃取，持续2秒"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_12_tethered-tourniquet.webp": {
+    "name": "牵绊止血带",
+    "description": "切换为天使冲击枪后，天使之杖每连结队友1秒，就会以100%的效力自动治疗队友2秒，最多20秒"
+  },
+  "mizuki/minorPerks/assets/perks/mizuki_minor_01_wellspring.webp": {
+    "name": "灵气奔涌",
+    "description": "安魂灵气产生量提高25%"
+  },
+  "mizuki/minorPerks/assets/perks/mizuki_minor_02_exposed-soul.webp": {
+    "name": "魂中破绽",
+    "description": "以缚魂锁链命中敌人后，你对其造成的伤害提高30%，持续2秒"
+  },
+  "mizuki/majorPerks/assets/perks/mizuki_major_01_resonant-return.webp": {
+    "name": "共鸣飞返",
+    "description": "疗魂斗笠会额外弹跳一次。每次弹跳会提高10点治疗量"
+  },
+  "mizuki/majorPerks/assets/perks/mizuki_major_02_quickstep.webp": {
+    "name": "飞魂迅步",
+    "description": "在替魂纸人启动期间，在安魂灵气范围内的队友移动速度提高20%"
+  },
+  "moira/minorPerks/assets/perks/moira_minor_01_destruction-s-divide.webp": {
+    "name": "毁灭分界",
+    "description": "聚合射线可切换为纯治疗或纯伤害，效果提高30%"
+  },
+  "moira/minorPerks/assets/perks/moira_minor_02_ethical-nourishment.webp": {
+    "name": "合德滋养",
+    "description": "生化之球的前30点治疗量会立即治疗遇到的每一位队友"
+  },
+  "moira/majorPerks/assets/perks/moira_major_01_reversal.webp": {
+    "name": "魔球逆动",
+    "description": "重新启动生化之球会使其移动方向反转"
+  },
+  "moira/majorPerks/assets/perks/moira_major_02_phantom-step.webp": {
+    "name": "幽影幻步",
+    "description": "消散持续时间延长0.5秒并使跳跃高度提高50%"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_01_necrotic-orb.webp": {
+    "name": "躯体解构",
+    "description": "技能：使用装填子弹会射出一颗球体，造成最多35点伤害，命中敌人时使其造成的伤害降低50%，持续3秒 （8秒冷却时间）"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_02_ethereal-excision.webp": {
+    "name": "空灵切除术",
+    "description": "对受到球体影响的目标使用生化之触或聚合射线，会造成20%爆击伤害或治疗"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_03_chain-grasp.webp": {
+    "name": "连锁之触",
+    "description": "使用技能或小工具后，生化之触次要攻击会额外连结至2名10米内的敌人，持续2秒"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_04_cross-orbal.webp": {
+    "name": "相变魔球",
+    "description": "生化之球会额外发射一颗另一类型的生化之球，容量降低60%"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_05_multiball.webp": {
+    "name": "多重魔球",
+    "description": "生化之球会发射2颗额外的所选球体，效果降低85%"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_06_phantasm.webp": {
+    "name": "消散幻影",
+    "description": "使用消散时，生成一颗上次选择的生化之球的静止复制体，持续时间缩短50%且容量降低50%"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_07_precarious-potency.webp": {
+    "name": "不稳效能",
+    "description": "受生化之触治疗的队友，会在5秒内额外恢复生化之触25%的治疗量"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_08_voidhoppers.webp": {
+    "name": "共赴虚空",
+    "description": "在消散期间，穿过目标会获得等同于你最大生命值10%的过量生命值。穿过队友也会赋予其过量生命值，并使其短暂消散"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_09_remote-reciprocity.webp": {
+    "name": "为你强化",
+    "description": "提供300点生化之触治疗后，获得25%生化之触次要攻击范围，且造成的伤害提高15%，持续5秒"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_10_orbsplosion.webp": {
+    "name": "择优而溢",
+    "description": "再次施放生化之球会使所有存在的生化之球爆炸，最多造成生化之球的最大容量45%的治疗或30%的伤害"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_11_spectral-beam.webp": {
+    "name": "科学灭活法",
+    "description": "在消散期间穿过敌人时，施展效用100%的聚合射线，持续1.25秒。每额外穿过一名敌人，持续时间延长0.75秒"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_12_destruction-s-divide.webp": {
+    "name": "毁灭分界",
+    "description": "+25%终极技能消耗减免 聚合射线可切换为纯治疗或纯伤害，效果提高30%"
+  },
+  "wuyang/minorPerks/assets/perks/wuyang_minor_01_overflow.webp": {
+    "name": "水满则溢",
+    "description": "在飞流步效果期间，获得10发子弹和50%治疗资源"
+  },
+  "wuyang/minorPerks/assets/perks/wuyang_minor_02_balance.webp": {
+    "name": "阴阳平衡",
+    "description": "以水珠造成伤害时，养神泉的被动治疗量提高30%，持续2秒"
+  },
+  "wuyang/majorPerks/assets/perks/wuyang_major_01_ebb-and-flow.webp": {
+    "name": "潮涨潮落",
+    "description": "翻江浪回溯至起始位置"
+  },
+  "wuyang/majorPerks/assets/perks/wuyang_major_02_falling-rain.webp": {
+    "name": "暴雨倾盆",
+    "description": "同时控制3颗水珠，它们造成的伤害降低60%，强化爆炸半径范围降低25%"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_01_undertow.webp": {
+    "name": "逆流奔涌",
+    "description": "每次水珠命中时，获得10%养神泉能量且技能冷却时间缩短0.5秒"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_02_ripple-sense.webp": {
+    "name": "浪涌枪刺",
+    "description": "强化水珠的移动更容易控制，且爆炸半径范围提高35%。每隔5秒，你的下一个水珠会使击中处8米内的所有敌人现身，持续5秒"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_03_paindrops.webp": {
+    "name": "痛雨倾盆",
+    "description": "使用技能或小工具后，你接下来3颗水珠会额外发射2颗水珠，各自造成30%伤害"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_04_flow-state.webp": {
+    "name": "心潮澎湃",
+    "description": "在飞流步启动期间，每造成50点伤害或75点治疗，飞流步持续时间就延长1秒，最多延长5秒"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_05_bifurcation.webp": {
+    "name": "手覆江翻",
+    "description": "使用技能后，主动养神泉会连接至上一个目标并以100%效果提供治疗，持续5秒。你可以额外施放一个被动养神泉"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_06_tidal-save.webp": {
+    "name": "浪翻乾坤",
+    "description": "对于拥有被动养神泉的队友，翻江浪可在4秒内额外恢复75%的治疗量，且每命中一个目标，就恢复15%养神泉能量"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_07_streamline.webp": {
+    "name": "汇流成泉",
+    "description": "使用飞流步时，对视线内的所有其他队友放置被动养神泉，其治疗效果降低25%"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_08_puddle-stomp.webp": {
+    "name": "水坑重踏",
+    "description": "在飞流步启动期间，跳跃落地后，每掉落1秒即可使6米内的所有队友恢复75点生命值"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_09_splash-strike.webp": {
+    "name": "飞流劈棍",
+    "description": "在飞流步期间，在空中使用快速近战攻击会在你身旁制造出短暂的翻江浪，效果为原先的75% （8秒冷却时间）"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_10_waveshatter.webp": {
+    "name": "风起浪涌",
+    "description": "翻江浪在近距离能对敌人造成爆击，并依据向下移动的时间最多加宽150%，效果提高75%"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_11_current-confluence.webp": {
+    "name": "涌泉相报",
+    "description": "+25%养神泉持续时间 受到被动养神泉或翻江浪治疗量提高效果影响的队友会恢复生命值，数值等同于你造成伤害的30%"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_major_01_ebb-and-flow.webp": {
+    "name": "潮起潮落",
+    "description": "翻江浪回溯至起始位置，造成50%伤害"
+  },
+  "zenyatta/minorPerks/assets/perks/zenyatta_minor_01_discordant-repair.webp": {
+    "name": "乱中求存",
+    "description": "禅雅塔对带有“乱”的敌人获得15%生命窃取"
+  },
+  "zenyatta/minorPerks/assets/perks/zenyatta_minor_02_ascendance.webp": {
+    "name": "悬空参禅",
+    "description": "启动并按住二连跳即可滞空最多3秒"
+  },
+  "zenyatta/majorPerks/assets/perks/zenyatta_major_01_focused-destruction.webp": {
+    "name": "凝神寂灭",
+    "description": "次要攻击蓄力速度提高20%，而且可以额外储存1颗“灭”"
+  },
+  "zenyatta/majorPerks/assets/perks/zenyatta_major_02_dual-harmony.webp": {
+    "name": "双音谐奏",
+    "description": "获得第2颗“谐”，但两颗球的治疗效果均为原本的70%。"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_01_flying-kick.webp": {
+    "name": "金刚飞蹬",
+    "description": "技能：在空中时，快速近战攻击变成冲刺飞踢，造成25%额外伤害。如果目标撞上墙壁，则会使其昏迷，并造成40点伤害 （5秒冷却时间）"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_02_it-s-orbin--time.webp": {
+    "name": "法球群起",
+    "description": "“灭”次要攻击的蓄力上限额外增加3颗"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_03_enlightenment.webp": {
+    "name": "觉悟之念",
+    "description": "“谐”影响的队友会受到治疗，治疗量等同于你造成伤害的30%"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_major_02_dual-harmony.webp": {
+    "name": "双重和谐",
+    "description": "获得第2颗“谐”，但两颗球的治疗量均降低35%。"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_05_gotta-have-faith.webp": {
+    "name": "信念长存",
+    "description": "在“谐”回归自身前，“谐”目标可以超出你视线范围的时间延长10秒"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_06_inner-peace.webp": {
+    "name": "静心之道",
+    "description": "获得一颗总是附在自己身上的“谐”。其效果降低80%"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_07_discord-inferno.webp": {
+    "name": "破乱无间",
+    "description": "对“乱”影响的目标造成爆击时，“灭”会爆炸并造成50点伤害"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_08_discord-fever.webp": {
+    "name": "纷乱秽热",
+    "description": "“乱”附在目标身上时，目标在5秒内受到50点伤害"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_09_instant-karma.webp": {
+    "name": "现世现报",
+    "description": "“乱”的目标对你造成伤害时，在2秒内治疗生命值，数值等同于该伤害量的25%"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_10_circle-of-strife.webp": {
+    "name": "纷争之环",
+    "description": "使用“圣”时，对范围内所有敌人施加“乱”"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_11_soul-control.webp": {
+    "name": "神识随心",
+    "description": "“圣”可以提早取消，最高可省下65%终极技能充能"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_12_sharpened-focus.webp": {
+    "name": "救赎相随",
+    "description": "“灭”次要攻击的蓄力速度提高20%。在蓄力期间，每蓄力一颗圆珠，移动速度就提高5%，并获得等同最大生命值5%的过量生命值"
+  },
+  "dva/minorPerks/assets/perks/dva_minor_01_bunny-power.webp": {
+    "name": "小兔之力",
+    "description": "使用紧急逃生会获得75点暂时性的过量生命值，呼叫机甲的伤害半径范围提高50%"
+  },
+  "dva/minorPerks/assets/perks/dva_minor_02_extended-boosters.webp": {
+    "name": "延时推进器",
+    "description": "推进器命中敌人时，所造成的伤害提高40%，且持续时间延长0.5秒"
+  },
+  "dva/majorPerks/assets/perks/dva_major_01_shield-system.webp": {
+    "name": "护盾系统",
+    "description": "将100点生命值转换为护盾。防御矩阵会恢复护盾，数值等同其伤害吸收量的25%"
+  },
+  "dva/majorPerks/assets/perks/dva_major_02_precision-fusion.webp": {
+    "name": "精准聚变",
+    "description": "按下R使聚变机炮的弹道扩散降低75%，持续3秒"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_01_focused-fusion.webp": {
+    "name": "聚焦聚变",
+    "description": "聚变机炮的散布缩小50%，伤害衰减距离增加20米。对8米外的敌人造成武器伤害时，防御矩阵的恢复速度提高33%。"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_02_legendary-loadout.webp": {
+    "name": "传奇配置",
+    "description": "微型飞弹替换为6枚重型火箭，爆炸伤害提高375%，且半径范围提高100%"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_03_overstocked.webp": {
+    "name": "过饱和火力",
+    "description": "可以额外使用1次微型飞弹"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_04_countermeasures.webp": {
+    "name": "反制措施",
+    "description": "使用防御矩阵减免150点伤害后，自动发射3发微型飞弹"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_05_ignition-burst.webp": {
+    "name": "引火爆发",
+    "description": "推进器会击退并燃烧敌人，在2秒内造成40点伤害"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_06_meka-punch.webp": {
+    "name": "机甲重拳",
+    "description": "在推进器期间，快速近战攻击的攻击速度提高50% 快速近战攻击击杀时会重置推进器的冷却时间"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_07_tokki-slam.webp": {
+    "name": "小兔重砸",
+    "description": "在推进器期间，使用蹲下撞击地面，造成等同于装甲值和护盾值上限15%的伤害，并击飞命中的敌人"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_08_facetanking.webp": {
+    "name": "脸接伤害",
+    "description": "使用防御矩阵抵挡150点伤害时，为自己恢复相当于该伤害15%的生命值，并为6米内的所有其他盟友恢复相当于该伤害25%的生命值。"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_09_stat-boost.webp": {
+    "name": "速效推进",
+    "description": "推进器造成伤害时，其持续时间延长0.5秒，恢复5%的防御矩阵能量，并恢复相当于最大生命值5%的生命值。"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_10_7ac621d3abe95810.png": {
+    "name": "特快引爆",
+    "description": "自毁的爆炸速度加快25%，终极技能充能消耗降低60%，但伤害降低75%，且引爆后仅获得75%的终极技能充能。"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_12_multi-task-mod.webp": {
+    "name": "广域矩阵",
+    "description": "现在可以一边使用防御矩阵一边发射聚变机炮"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_12_df1b48ee1dca0920.png": {
+    "name": "团队防护",
+    "description": "呼叫机甲的作用半径扩大50%。弹射或重新进入机甲时，为附近所有盟友提供相当于你最大生命值20%的过量生命值，持续5秒。"
+  },
+  "domina/minorPerks/assets/perks/domina_minor_01_efficient-design.webp": {
+    "name": "高效设计",
+    "description": "使用屏障阵列后，恢复50点护盾，并启动生命值再生被动技能"
+  },
+  "domina/minorPerks/assets/perks/domina_minor_02_extended-power.webp": {
+    "name": "权力扩张",
+    "description": "光子马格南的攻击范围提高20%"
+  },
+  "domina/majorPerks/assets/perks/domina_major_01_disruptive-detonation.webp": {
+    "name": "扰动爆破",
+    "description": "被爆能水晶的爆炸命中的敌人移动速度降低30%，持续2秒"
+  },
+  "domina/majorPerks/assets/perks/domina_major_02_corporate-retreat.webp": {
+    "name": "员工旅游",
+    "description": "在屏障阵列存在期间，可以将屏障移动到其他位置一次"
+  },
+  "doomfist/minorPerks/assets/perks/doomfist_minor_01_one-two.webp": {
+    "name": "左右开攻",
+    "description": "火箭重拳将敌人击飞至墙壁时，会填满手炮的弹匣，并超量装填2发子弹"
+  },
+  "doomfist/minorPerks/assets/perks/doomfist_minor_02_survival-of-the-fittest.webp": {
+    "name": "优胜劣汰",
+    "description": "击杀敌人时，最佳防御会赋予25点过量生命值，且其过量生命值上限提高50点"
+  },
+  "doomfist/majorPerks/assets/perks/doomfist_major_01_aftershock.webp": {
+    "name": "地震余波",
+    "description": "被裂地重拳命中的敌人移动速度降低40%，持续2秒"
+  },
+  "doomfist/majorPerks/assets/perks/doomfist_major_02_power-matrix.webp": {
+    "name": "悍猛矩阵",
+    "description": "悍猛格挡能在启用后的0.8秒内吸收抛射物"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_01_rising-uppercut.webp": {
+    "name": "上勾重拳",
+    "description": "技能：你的下一次快速近战攻击变成天钩拳，额外造成20点伤害 （10秒冷却时间）"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_02_jab-cross.webp": {
+    "name": "刺直连击",
+    "description": "使用技能后，攻击速度提高75%，快速近战攻击范围提高1米，持续0.75秒"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_03_the-bestest-defense.webp": {
+    "name": "极佳防守",
+    "description": "快速近战攻击命中时，以及手炮爆击时，触发效力为50%的最佳防御"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_04_slam-wham.webp": {
+    "name": "裂地猛砸",
+    "description": "依据你在空中的时间，裂地重拳伤害最多提高75%，范围最多提高50%"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_05_overpowered.webp": {
+    "name": "超强重拳",
+    "description": "使用悍猛格挡阻挡150%点以上的伤害时，火箭重拳可进一步充能，其伤害提高50%，且范围提高50%"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_06_jetforce-jab.webp": {
+    "name": "破空刺拳",
+    "description": "火箭重拳可以穿透多名敌人，并额外造成20%燃烧伤害，持续3秒"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_07_boomfist.webp": {
+    "name": "狂轰铁拳",
+    "description": "使用火箭重拳命中多名敌人时，每额外命中一个敌人，便获得5%终极技能充能，并使悍猛格挡冷却时间缩短0.5秒"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_08_asteroid-smash.webp": {
+    "name": "惊天动地",
+    "description": "技能：在空中蹲下时会触发迷你毁天灭地，将敌人往下拉，并根据移动的距离最高造成150点伤害 （8秒冷却时间）"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_09_aftershock.webp": {
+    "name": "地震余波",
+    "description": "裂地重拳的震波会在1.5秒延迟后再次产生，造成40%伤害"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_10_seismic-rally.webp": {
+    "name": "裂地集结",
+    "description": "每使用裂地重拳跳跃1秒，给予视线内所有队友过量生命值，数值等同你的最大生命值的5%，持续3秒"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_11_block-party.webp": {
+    "name": "格挡派对",
+    "description": "在悍猛格挡启动期间，每1秒为自己恢复最大生命值的8%，并为8米内的所有其他队友恢复最大生命值的20%"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_12_helping-hand.webp": {
+    "name": "伸出援守",
+    "description": "最佳防御会给予额外过量生命值，数值等同过量生命值上限的10%。每当给予自己过量生命值时，距离最近的队友也会获得25%"
+  },
+  "hazard/minorPerks/assets/perks/hazard_minor_01_reconstitution.webp": {
+    "name": "重组",
+    "description": "尖刺墙命中敌人时，会使尖刺护体超量填充25%额外能量"
+  },
+  "hazard/minorPerks/assets/perks/hazard_minor_02_anarchic-zeal.webp": {
+    "name": "激进狂热",
+    "description": "尖刺护体的尖刺获得40%的生命窃取效果"
+  },
+  "hazard/majorPerks/assets/perks/hazard_major_01_deep-leap.webp": {
+    "name": "强劲跳跃",
+    "description": "狂跃的距离提高20%"
+  },
+  "hazard/majorPerks/assets/perks/hazard_major_02_explosive-impalements.webp": {
+    "name": "爆炸穿刺",
+    "description": "骨刺命中后会以尖刺标记目标。快速近战攻击与狂跃的劈砍会引爆尖刺，造成30点爆炸伤害"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_01_bonerot.webp": {
+    "name": "骨腐弹",
+    "description": "造成6次武器伤害后会以尖刺标记目标。快速近战攻击与狂跃的劈砍会引爆尖刺，造成60点伤害"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_02_barbed-shot.webp": {
+    "name": "倒刺射击",
+    "description": "骨刺射击时也会对命中的目标发射2发尖刺护体尖刺，造成8点伤害"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_03_needle-storm.webp": {
+    "name": "钢针风暴",
+    "description": "尖刺护体现在会朝灾害前方的所有敌人发射尖刺"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_04_twin-fang.webp": {
+    "name": "双生利齿",
+    "description": "骨刺的每第3次射击会额外发射一发不消耗弹药的子弹，造成75%的伤害。"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_05_woof-woof.webp": {
+    "name": "汪汪！",
+    "description": "使用狂跃后，尖刺护体的范围提高50%，持续3秒"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_06_bunny-hop.webp": {
+    "name": "兔子跳",
+    "description": "使用狂跃时若未使用劈砍，则会返还狂跃和尖刺墙2秒的冷却时间，并赋予附近队友过量生命值，数值等同于你最大生命值的10%，持续3秒"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_07_slasher.webp": {
+    "name": "穿刺猛劈",
+    "description": "狂跃劈砍会射出一发穿透抛射物，造成80点伤害，但7米内的敌人不受影响"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_08_off-the-wall.webp": {
+    "name": "墙立猛推",
+    "description": "在尖刺墙生成时，于1.5秒后击退8米内的敌人，造成40点伤害"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_09_juiced.webp": {
+    "name": "劲爽上头",
+    "description": "在尖刺墙生成时，在3秒内为8米内的所有队友恢复你最大生命值20%的生命值"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_10_fortress.webp": {
+    "name": "尖刺要塞",
+    "description": "尖刺墙尺寸提高35% 尖刺墙在击退敌人时额外造成25点伤害"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_11_bringin--the-pain.webp": {
+    "name": "痛如雨下",
+    "description": "千针雨消耗的终极技能充能降低20% 使用千针雨后，立即重置所有冷却时间并获得25%冷却时间缩短，持续10秒"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_12_boomslang-s-blaster.webp": {
+    "name": "碰我试试",
+    "description": "技能：在尖刺护体期间使用快速近战攻击，会立即向目标发射5发尖刺 （10秒冷却时间）"
+  },
+  "junker-queen/minorPerks/assets/perks/junker-queen_minor_01_rampant-charge.webp": {
+    "name": "轰翻爆冲",
+    "description": "使用轰翻天时获得免疫控场效果，并使所有冷却时间缩短6秒"
+  },
+  "junker-queen/minorPerks/assets/perks/junker-queen_minor_02_battle-shout.webp": {
+    "name": "战斗怒吼",
+    "description": "命令怒吼会填满散弹枪的弹匣，并使队友装填子弹的速度提高50%"
+  },
+  "junker-queen/majorPerks/assets/perks/junker-queen_major_01_willy-willy.webp": {
+    "name": "飞沙利刃",
+    "description": "召回锯齿利刃时，其半径范围提高100%，且会额外造成30点击中伤害"
+  },
+  "junker-queen/majorPerks/assets/perks/junker-queen_major_02_savage-satiation.webp": {
+    "name": "凶残狂噬",
+    "description": "血斩的冲击伤害会获得100%的生命窃取效果"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_01_thrill-of-battle.webp": {
+    "name": "战斗渴望",
+    "description": "狂血奔涌也会治疗距离12米内的队友，数值为你受到的治疗量的100%"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_02_royal-bullets.webp": {
+    "name": "皇家子弹",
+    "description": "散弹枪爆击时会施加创伤，在2秒内造成20点伤害"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_03_twist-the-knife.webp": {
+    "name": "旧创新伤",
+    "description": "散弹枪爆击会使目标的所有创伤持续时间延长2秒"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_04_blade-parade.webp": {
+    "name": "耀武利刃",
+    "description": "按住锯齿利刃可以蓄力，使其伤害最多提高至75%，抛射物移动速度最多提高至200%"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_05_cut--em--gracie.webp": {
+    "name": "使劲切，格雷西！",
+    "description": "锯齿利刃每命中一名敌人，其冷却时间就缩短1秒 召回锯齿利刃时，其半径范围提高100%，且会造成30点击中伤害"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_06_merciless-magnetism.webp": {
+    "name": "无情磁力",
+    "description": "锯齿利刃可爆击并造成50%额外伤害 锯齿利刃的拉扯力提高50%。锯齿利刃爆击时此加成加倍"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_07_soaring-stone.webp": {
+    "name": "死痛一跃",
+    "description": "若在血斩的施放时间内跳跃，则会变成跳跃攻击"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_08_chop-chop.webp": {
+    "name": "一斩再斩",
+    "description": "可额外使用一次血斩，但每命中一个敌人所造成的冷却时间缩短变为1秒"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_09_reckoner-s-roar.webp": {
+    "name": "清算咆哮",
+    "description": "使用命令怒吼会使距离10米内的敌人创伤， 在3秒内造成30点伤害"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_10_let-s-go-win.webp": {
+    "name": "一起赢",
+    "description": "击杀会使锯齿利刃和命令怒吼的冷却时间缩短50%"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_11_bloodcrazed.webp": {
+    "name": "为血而狂",
+    "description": "轰翻天和血斩每命中一名敌人，就会给予等同最大生命值15%的过量生命值，最多45%"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_12_bow-down.webp": {
+    "name": "给我跪下",
+    "description": "在施放轰翻天时，免疫控场效果并重置所有技能冷却时间。轰翻天会击倒被命中的敌人，持续1.5秒"
+  },
+  "mauga/minorPerks/assets/perks/mauga_minor_01_kinetic-bandolier.webp": {
+    "name": "动力弹带",
+    "description": "在蛮力冲撞冲锋期间的第一秒，最多装填150发子弹"
+  },
+  "mauga/minorPerks/assets/perks/mauga_minor_02_pyromaniac.webp": {
+    "name": "纵情燃烧",
+    "description": "以燃焰机关枪点燃敌人可获得50点过量生命值"
+  },
+  "mauga/majorPerks/assets/perks/mauga_major_01_firewalker.webp": {
+    "name": "烈火奔踏",
+    "description": "蛮力冲撞会点燃命中的敌人"
+  },
+  "mauga/majorPerks/assets/perks/mauga_major_02_combat-fuel.webp": {
+    "name": "战斗燃料",
+    "description": "爆击后，莫加下次使用心脏过载所获得的暂时过量生命值会提高4点，最多150点过量生命值"
+  },
+  "orisa/minorPerks/assets/perks/orisa_minor_01_defense-protocol.webp": {
+    "name": "防御协议",
+    "description": "为撼地猛刺蓄力时，每秒恢复100点生命值"
+  },
+  "orisa/minorPerks/assets/perks/orisa_minor_02_mobile-fortification.webp": {
+    "name": "机动强固",
+    "description": "在强固防御启动期间，欧瑞莎不会降低移动速度，也不会产生热能"
+  },
+  "orisa/majorPerks/assets/perks/orisa_major_01_bcfd342643f783df.png": {
+    "name": "重型标枪",
+    "description": "能量标枪的击退距离提高25%，并且其撞墙伤害提高15点"
+  },
+  "orisa/majorPerks/assets/perks/orisa_major_02_protective-barrier.webp": {
+    "name": "防护屏障",
+    "description": "将标枪旋击改为发射屏障"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_01_scorched-earth.webp": {
+    "name": "燎地灼火",
+    "description": "过热时，对6米内的敌人施加燃烧效果，在4秒内造成伤害，数值等同于你最大生命值的20%"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_02_shield-divergence.webp": {
+    "name": "屏障拆分",
+    "description": "过热时，在前方部署一个拥有500点生命值的屏障"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_03_advanced-throwbotics.webp": {
+    "name": "高级投掷机器人",
+    "description": "当你使用标枪旋击时，发射一支伤害为75%的能量标枪"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_04_spynstem-update.webp": {
+    "name": "旋击系统更新",
+    "description": "标枪旋击会招架抛射物，且反弹造成伤害的20%会转换成终极技能充能"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_06_lassoed.webp": {
+    "name": "捕获套索",
+    "description": "能量标枪命中时会拉近4米内的敌人。每拉近一名敌人，获得3%终极技能充能"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_07_critical-charger.webp": {
+    "name": "返厂重置",
+    "description": "能量标枪可以爆击，造成100%额外伤害 可以为能量标枪充能，使抛射物移动速度最多提高200%，完全充能时会穿透敌人"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_08_hooves-of-steel.webp": {
+    "name": "钢铁战蹄",
+    "description": "在强固防御结束后获得护盾，数值等同于在强固防御期间造成武器伤害的60%，最多200点。在下一次使用强固防御时重置"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_09_restortify.webp": {
+    "name": "强固恢复",
+    "description": "在强固防御效果期间，每秒恢复最大生命值的5%"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_10_centripetal-charge.webp": {
+    "name": "向心充能",
+    "description": "25%终极技能消耗减免 使用撼地猛刺后，重置技能冷却时间"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_11_supercharger.webp": {
+    "name": "超充能器",
+    "description": "使用撼地猛刺时，掉落一个增压强化装置，使附近队友的伤害提高25%，持续15秒"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_11_c34242dfd6b9bda4.png": {
+    "name": "与我同行",
+    "description": "依据你的热能提高武器强度，最多提高30%"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_12_oladele-copter-blades.webp": {
+    "name": "烫手旋击",
+    "description": "使用标枪旋击和撼地猛刺时可自由飞行，移动速度提高20%，但撼地猛刺造成的伤害降低50%"
+  },
+  "ramattra/minorPerks/assets/perks/ramattra_minor_01_relentless-form.webp": {
+    "name": "铁血形态",
+    "description": "在天罚形态启动期间，击杀可使持续时间延长2秒，在“诛”期间获得的天罚形态持续时间减半"
+  },
+  "ramattra/minorPerks/assets/perks/ramattra_minor_02_prolonged-barrier.webp": {
+    "name": "持久屏障",
+    "description": "虚空屏障的持续时间及大小提高25%"
+  },
+  "ramattra/majorPerks/assets/perks/ramattra_major_01_void-surge.webp": {
+    "name": "虚空涌动",
+    "description": "虚空加速器连续射击时，定期额外发射一波6枚抛射物"
+  },
+  "ramattra/majorPerks/assets/perks/ramattra_major_02_nanite-repair.webp": {
+    "name": "纳米修复",
+    "description": "位于吞噬漩涡内时，拉玛塔每秒恢复100点生命值"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_major_01_void-surge.webp": {
+    "name": "虚空涌动",
+    "description": "虚空加速器连续射击时，定期额外发射一波6枚抛射物"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_02_void-blight.webp": {
+    "name": "虚空浸蚀",
+    "description": "虚空加速器的奈米机器人会感染敌人，造成100点伤害后会爆炸并造成30点伤害"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_03_recursion-relay.webp": {
+    "name": "递回中继系统",
+    "description": "+25%虚空屏障尺寸 穿过虚空屏障的虚空加速器抛射物和猛拳伤害提高15%"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_04_ramparts.webp": {
+    "name": "城墙",
+    "description": "可额外使用一次虚空屏障"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_05_second-phase.webp": {
+    "name": "第二阶段",
+    "description": "启动天罚形态时，吞噬漩涡冷却时间缩短75%"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_06_final-form.webp": {
+    "name": "最终型态",
+    "description": "在天罚形态期间，位于吞噬漩涡内时，你每秒恢复50点生命值"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_07_breakout.webp": {
+    "name": "突破",
+    "description": "以天罚形态格挡时，使用猛拳会使出冲刺拳击 （4秒冷却时间）"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_08_retaliation.webp": {
+    "name": "报复",
+    "description": "放开格挡会造成伤害，伤害量等同伤害减免量的100%，可对6米内的敌人造成最多150点伤害"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_09_conversion-protocol.webp": {
+    "name": "转换协定",
+    "description": "格挡会在3秒内治疗你，治疗量为伤害减免量的25%"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_10_insatiable-spiral.webp": {
+    "name": "无厌螺旋",
+    "description": "+50%吞噬漩涡半径范围 +15%吞噬漩涡伤害"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_11_ravaging-vortex.webp": {
+    "name": "蹂躏漩涡",
+    "description": "吞噬漩涡引爆后会造成25点伤害，每命中一名敌人就获得2%终极技能充能"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_12_dreadknight.webp": {
+    "name": "惊惧骑士",
+    "description": "+50%“诛”伤害 +1秒“诛”持续时间"
+  },
+  "reinhardt/minorPerks/assets/perks/reinhardt_minor_01_crusader-s-fire.webp": {
+    "name": "十字军的烈焰",
+    "description": "击昏一名敌人时，返还一次烈焰打击使用次数，最多可额外充填3次"
+  },
+  "reinhardt/minorPerks/assets/perks/reinhardt_minor_02_crusader-s-resolve.webp": {
+    "name": "十字军的决心",
+    "description": "使用屏障力场时，你的生命值再生被动技能的触发时间会提早75%"
+  },
+  "reinhardt/majorPerks/assets/perks/reinhardt_major_01_shield-slam.webp": {
+    "name": "盾牌猛击",
+    "description": "在屏障力场期间，使用来伤害并击退敌人"
+  },
+  "reinhardt/majorPerks/assets/perks/reinhardt_major_02_ignited-fury.webp": {
+    "name": "盛燃怒火",
+    "description": "烈焰打击每命中一名敌人，就使你的攻击速度提高25%，持续2秒"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_01_to-me--my-friends.webp": {
+    "name": "来我身旁！",
+    "description": "屏障力场生效时，5米内的盟友每1秒恢复相当于你最大生命值3%的生命值。"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_02_crusader-slam.webp": {
+    "name": "增幅屏障",
+    "description": "技能：在屏障力场启动期间，使用主要攻击造成近战伤害，伤害等同屏障力场生命值的5% （8秒冷却时间）"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_03_iron-drift.webp": {
+    "name": "开路先锋",
+    "description": "+200%冲锋持续时间 冲锋可以撞到多名敌人，且按住后退即可减速"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_04_shield-stampede.webp": {
+    "name": "持盾奔袭",
+    "description": "+50%冲锋击退效果 在冲锋期间，自动部署屏障力场"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_05_barrier-reconstruction.webp": {
+    "name": "屏障重构",
+    "description": "造成近战伤害或烈焰打击伤害时，恢复屏障力场的生命值，数值等同于屏障力场生命值的15%"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_06_vroom-boom-boom.webp": {
+    "name": "爆烈冲撞",
+    "description": "在冲锋期间，与墙壁碰撞会触发爆炸，造成冲锋钉墙伤害的30%"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_07_impact-burst.webp": {
+    "name": "爆炸轰击",
+    "description": "烈焰打击首次命中敌人会触发爆炸，对3米半径范围内其他敌人造成烈焰打击30%的伤害"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_08_magma-strike.webp": {
+    "name": "熔岩打击",
+    "description": "每两次烈焰打击会留下一道持续2秒的熔岩，能燃烧敌人并造成烈焰打击50%的伤害"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_09_blazing-blitz.webp": {
+    "name": "烈焰闪击",
+    "description": "+25%初始终极技能充能 使用裂地猛击后，每次挥舞火箭重锤都会发射烈焰打击，持续5秒"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_10_smashing.webp": {
+    "name": "统统砸扁！",
+    "description": "使用火箭重锤造成伤害时，移动速度提高1%并获得3%武器生命窃取，持续2秒，最多可叠加10次"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_11_feeling-the-burn.webp": {
+    "name": "热血沸腾",
+    "description": "每挥舞3次火箭重锤就会施加燃烧， 在2秒内造成火箭重锤30%的伤害"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_12_infusion-generator.webp": {
+    "name": "力场能量生成器",
+    "description": "提高屏障力场生命值，数值等同于你过量生命值上限的250%"
+  },
+  "roadhog/minorPerks/assets/perks/roadhog_minor_01_scrap-hook.webp": {
+    "name": "废料链钩",
+    "description": "链钩命中敌人时，装填4发子弹"
+  },
+  "roadhog/minorPerks/assets/perks/roadhog_minor_02_4b0364924157ffcb.png": {
+    "name": "过来，小猪仔",
+    "description": "鸡飞狗跳期间，链钩的冷却时间缩短80%"
+  },
+  "roadhog/majorPerks/assets/perks/roadhog_major_01_hogdrogen-exposure.webp": {
+    "name": "氢气暴露",
+    "description": "呼吸器也会治疗附近的队友，数值等同其治疗量的50%"
+  },
+  "roadhog/majorPerks/assets/perks/roadhog_major_02_d9dcccfe7fb8e200.png": {
+    "name": "有毒废弃物",
+    "description": "在废品压缩器启动期间，拦路猪前方敌人的移动速度降低30%，且每秒受到20点伤害"
+  },
+  "sigma/minorPerks/assets/perks/sigma_minor_01_kinetic-cycle.webp": {
+    "name": "动能循环",
+    "description": "使用动能俘获吸收抛射物时，也会缩短质量吸附的冷却时间"
+  },
+  "sigma/minorPerks/assets/perks/sigma_minor_02_hyper-regeneration.webp": {
+    "name": "超能恢复",
+    "description": "恢复实验屏障的生命值，数值等同超能之球30%的伤害"
+  },
+  "sigma/majorPerks/assets/perks/sigma_major_01_hyper-strike.webp": {
+    "name": "超能打击",
+    "description": "使用超能之球直接命中敌人5次后，下一次快速近战攻击命中敌人时，会使敌人飘浮并击退敌人"
+  },
+  "sigma/majorPerks/assets/perks/sigma_major_02_levitation.webp": {
+    "name": "空间漂浮",
+    "description": "启动并按住二连跳即可短暂地向上飘浮"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_01_zero-gravity.webp": {
+    "name": "零重力",
+    "description": "使用技能或小工具后获得飞行能力，持续2.5秒"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_02_trinisphere.webp": {
+    "name": "三球一体",
+    "description": "你的主要攻击会射出第三颗超能之球，此球体造成50%伤害"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_03_symphonic-syzygy.webp": {
+    "name": "交响朔望",
+    "description": "动能俘获结束时，每吸收50点伤害，攻击速度就会提高10%，持续4秒，最多可叠加4次"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_04_event-horizon.webp": {
+    "name": "事件视界",
+    "description": "动能俘获吸收的伤害会赋予视线范围内的队友过量生命值，并恢复实验屏障的生命值。多余的数量转化为过量生命值"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_05_philharmonic-fortitude.webp": {
+    "name": "爱乐之韧",
+    "description": "实验屏障最大生命值提高25%。屏障可持续恢复生命值，但在部署时恢复速度减慢50%"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_06_orbital-barrier.webp": {
+    "name": "轨道屏障",
+    "description": "获得一道围着你转的迷你实验屏障。该屏障的生命值降低50%"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_07_singularity.webp": {
+    "name": "奇点",
+    "description": "质量吸附的溅射伤害提高75%，并将敌人拉向爆炸中心 质量吸附直接命中时，其冷却时间缩短35%"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_08_hyperloop.webp": {
+    "name": "超能循环",
+    "description": "超能之球直接命中时，质量吸附的冷却时间缩短0.8秒"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_09_maestro.webp": {
+    "name": "音乐大师",
+    "description": "50%终极技能消耗减免 引力乱流半径范围降低35%。如果没有敌人受到影响，则返还50%终极技能充能"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_10_apogee-alignment.webp": {
+    "name": "极点连珠",
+    "description": "使用技能时，产生2颗围着你转的超能之球，造成75%伤害"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_11_astrophysical.webp": {
+    "name": "天体物理",
+    "description": "技能：快速近战攻击会使命中的敌人飘浮1秒 （10秒冷却时间）"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_12_mass-driver.webp": {
+    "name": "质量投射器",
+    "description": "质量吸附的抛射物穿过实验屏障后，抛射物移动速度提高300%，造成的伤害提高25%，并使实验屏障恢复150点生命值"
+  },
+  "winston/minorPerks/assets/perks/winston_minor_01_electric-charge.webp": {
+    "name": "电能快充",
+    "description": "温斯顿的特斯拉炮主要攻击每对一名敌人造成伤害，其移动速度就提高10%，最多30%"
+  },
+  "winston/minorPerks/assets/perks/winston_minor_02_heavy-landing.webp": {
+    "name": "天降巨猩",
+    "description": "使用原始暴怒时，喷射背包在空中的伤害及范围最多会提高75%"
+  },
+  "winston/majorPerks/assets/perks/winston_major_01_chain-lightning.webp": {
+    "name": "连锁闪电",
+    "description": "完全充能的次要攻击命中敌人时，最多会额外弹射至2个目标"
+  },
+  "winston/majorPerks/assets/perks/winston_major_02_revitalizing-barrier.webp": {
+    "name": "复苏屏障",
+    "description": "在屏障发射器内的队友每秒恢复35点生命值"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_01_circuit-breaker.webp": {
+    "name": "断路装置",
+    "description": "电击伤害的10%会转化为过量生命值，最高100点"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_02_electro-cluster.webp": {
+    "name": "聚合电击",
+    "description": "+15%特斯拉炮主要攻击最大范围 特斯拉炮每命中一个敌人，主要攻击造成的伤害就提高2%"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_03_lightning-rod.webp": {
+    "name": "引雷神针",
+    "description": "特斯拉炮完全蓄力的次要攻击命中时会弹跳至8米范围内的所有其他敌人，造成75%伤害"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_04_volatile-volt.webp": {
+    "name": "高压磁暴",
+    "description": "特斯拉炮的次要攻击可以爆击，造成250%伤害"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_05_primal-punch.webp": {
+    "name": "原始重拳",
+    "description": "近战、喷射背包或特斯拉炮次要攻击击杀会重置喷射背包的冷却时间 每拥有25点装甲值，近战的伤害就提高3%"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_06_moon-landing.webp": {
+    "name": "月球着陆",
+    "description": "喷射背包落地时每对一个敌人造成伤害，恢复最大生命值7%的生命值"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_07_lunar-leap.webp": {
+    "name": "大步登月",
+    "description": "喷射背包落地时每对一个敌人造成伤害，就额外获得3%终极技能充能。使用喷射背包时，每1秒获得等同最大生命值5%的过量生命值，最高100点"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_08_pocket-projector.webp": {
+    "name": "随身屏障",
+    "description": "启动屏障发射器时，温斯顿身上会额外搭建小型屏障发射器，其拥有10%生命值"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_09_tesla-field.webp": {
+    "name": "特斯拉力场",
+    "description": "位于屏障发射器中的敌人每1秒受到40点电击伤害"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_10_surge-protector.webp": {
+    "name": "电涌防护",
+    "description": "位于屏障发射器中的队友每1秒治疗30点生命值"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_11_primal-slam.webp": {
+    "name": "原始猛撞",
+    "description": "使用喷射背包时，按下跳跃以快速砸向你准星的方向。在原始暴怒效果期间，猛砸速度提高50%"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_12_lucheng-launchers.webp": {
+    "name": "皮糙肉厚",
+    "description": "喷射背包的伤害变成电击伤害，并且在空中时最多可以提高75%。在原始暴怒效果期间，此伤害加倍"
+  },
+  "wrecking-ball/minorPerks/assets/perks/wrecking-ball_minor_01_steamroller.webp": {
+    "name": "重装压路机",
+    "description": "在动力铁球时，对肉盾造成的伤害提高100%"
+  },
+  "wrecking-ball/minorPerks/assets/perks/wrecking-ball_minor_02_multi-ball.webp": {
+    "name": "多重地雷",
+    "description": "使用地雷禁区后5秒内按下Q，即可额外部署7个地雷"
+  },
+  "wrecking-ball/majorPerks/assets/perks/wrecking-ball_major_01_hang-time.webp": {
+    "name": "滞空时间",
+    "description": "重力坠击落地前的时间延长了，可以在空中改变方向，且最多额外造成50%的伤害"
+  },
+  "wrecking-ball/majorPerks/assets/perks/wrecking-ball_major_02_adaptive-barrier.webp": {
+    "name": "感应屏障",
+    "description": "启动感应护盾时，会产生持续1秒的屏障"
+  },
+  "zarya/minorPerks/assets/perks/zarya_minor_01_jump-ups.webp": {
+    "name": "弹跳训练",
+    "description": "次要攻击的自我击退距离提高75%"
+  },
+  "zarya/minorPerks/assets/perks/zarya_minor_02_spotter.webp": {
+    "name": "前线哨兵",
+    "description": "投射屏障可启动队友生命值再生技能，并使其移动速度提高20%"
+  },
+  "zarya/majorPerks/assets/perks/zarya_major_01_extra-oomph.webp": {
+    "name": "能量加码",
+    "description": "在屏障效果期间，以粒子炮光束造成伤害会产生能量转换"
+  },
+  "zarya/majorPerks/assets/perks/zarya_major_02_energy-lance.webp": {
+    "name": "能量长枪",
+    "description": "粒子炮光束会穿透敌人"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_01_charged-link.webp": {
+    "name": "穿刺激光",
+    "description": "粒子炮的次要攻击命中会使你获得2点能量转换，粒子炮的主要攻击范围提高20%，持续3秒"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_02_pre-workout.webp": {
+    "name": "健身补剂",
+    "description": "获得等同于能量转换15%的武器生命窃取和技能生命窃取效果"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_03_no-limits.webp": {
+    "name": "突破极限",
+    "description": "能量转换上限提高至150点。超过100点能量转换时，能量转换会持续衰退，衰退速度提高150%"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_04_particle-accelerator.webp": {
+    "name": "粒子加速器",
+    "description": "粒子炮次要攻击的攻击速度提高20%。使用技能后，此加成效果变成五倍，持续5秒"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_05_volskaya-vortex.webp": {
+    "name": "沃斯卡娅漩涡",
+    "description": "施放屏障后，粒子炮的下一次次要攻击会生成缓速漩涡，在2秒内造成60点伤害"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_06_lifelift.webp": {
+    "name": "生命挺举",
+    "description": "+50%粒子屏障尺寸 屏障生命值提高，数值等同于物品提供的过量生命值上限的50%"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_07_barrier-benefits.webp": {
+    "name": "屏障增益",
+    "description": "屏障消失时会给予目标过量生命值，数值等同于屏障剩余生命值的100%，持续2秒"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_08_major-flex.webp": {
+    "name": "充分拉伸",
+    "description": "屏障会击退5米内的敌人，每1秒对其造成25点伤害，伤害会随能量转换提高"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_09_containment-shield.webp": {
+    "name": "抑伤护盾",
+    "description": "屏障会治疗目标，每1秒治疗量等同你最大生命值的5%，并在使用期间使移动速度提高20%"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_10_here-to-spot-you.webp": {
+    "name": "前来相助",
+    "description": "+20%投射屏障范围 投射屏障会将你拉向目标队友，使你在3秒内恢复最大生命值30%的生命值"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_11_fission-field.webp": {
+    "name": "裂变力场",
+    "description": "投射屏障也会施加在10米内的1名额外队友身上，但获得的能量转换上限降低25%，且持续时间缩短20%"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_12_graviton-anomaly.webp": {
+    "name": "重力异常",
+    "description": "+25%终极技能消耗减免 重力喷涌基础伤害提高至30点，且会随能量转换提高，但持续时间缩短25%"
+  },
+  "dmon/minorPerks/assets/perks/dmon_minor_01_a49a4aa586ec9a0f.png": {
+    "name": "巨兽觉醒",
+    "description": "等离子剑命中敌人时，强力屏障会恢复40点生命值"
+  },
+  "dmon/minorPerks/assets/perks/dmon_minor_02_8d2f97ae5a2dc9b1.png": {
+    "name": "MEKA出击",
+    "description": "强力屏障展开期间，助推器燃料消耗降低30%"
+  },
+  "dmon/majorPerks/assets/perks/dmon_major_01_b87f463706a6816a.png": {
+    "name": "强袭打击",
+    "description": "突进刺击获得150%的生命窃取效果"
+  },
+  "dmon/majorPerks/assets/perks/dmon_major_02_46d8466d7de4b04d.png": {
+    "name": "专注热核炮",
+    "description": "聚变连发枪威力提升，没有弹道扩散，但射击速度较慢"
+  },
+  "doctrine/minorPerks/assets/perks/doctrine_minor_01_65d3986853fa5e6f.png": {
+    "name": "救赎恩典恩典",
+    "description": "使用焕生无人机时治疗40点生命值"
+  },
+  "doctrine/minorPerks/assets/perks/doctrine_minor_02_32ffd184fd6bf247.png": {
+    "name": "赭红虹吸",
+    "description": "使用灌注永生权杖造成伤害时，50%伤害会转为治疗"
+  },
+  "doctrine/majorPerks/assets/perks/doctrine_major_01_d4231c031993e68b.png": {
+    "name": "输血",
+    "description": "造成伤害和治疗时，缩短灌注的冷却时间"
+  },
+  "doctrine/majorPerks/assets/perks/doctrine_major_02_1f60c2577f3709fe.png": {
+    "name": "生命的代价",
+    "description": "牺牲25点最大生命值。永生权杖治疗量提高20%"
+  }
+}

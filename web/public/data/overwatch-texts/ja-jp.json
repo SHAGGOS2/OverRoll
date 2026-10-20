@@ -1,0 +1,2450 @@
+{
+  "anran/minorPerks/assets/perks/anran_minor_01_smoulder.webp": {
+    "name": "燻火",
+    "description": "敵の炎上が1.5秒長く続く"
+  },
+  "anran/minorPerks/assets/perks/anran_minor_02_heat-shield.webp": {
+    "name": "炎鎧",
+    "description": "アルティメット発動時と、同アビリティで炎上した敵が1人カウントされるごとに、50の追加ライフを得る"
+  },
+  "anran/majorPerks/assets/perks/anran_major_01_short-fuse.webp": {
+    "name": "怒火",
+    "description": "〈怒炎衝〉が敵にヒットすると、同アビリティのクールダウンが1.5秒減る"
+  },
+  "anran/majorPerks/assets/perks/anran_major_02_hungering-blaze.webp": {
+    "name": "烈火",
+    "description": "〈熠閃舞〉の連続ヒットで得られる回復量が25増える"
+  },
+  "ashe/minorPerks/assets/perks/ashe_minor_01_remote-detonator.webp": {
+    "name": "遠隔起爆",
+    "description": "〈ダイナマイト〉の使用後にもう一度Eを押すと、投げた爆弾が0.5秒後に爆発する"
+  },
+  "ashe/minorPerks/assets/perks/ashe_minor_02_double-barreled.webp": {
+    "name": "ダブルバレル",
+    "description": "〈コーチ・ガン〉で敵をノックバックしてから2秒間、同アビリティをもう一度使用できる"
+  },
+  "ashe/majorPerks/assets/perks/ashe_major_01_viper-s-sting.webp": {
+    "name": "毒蛇の一撃",
+    "description": "スコープ射撃を同じターゲットに2連続で当てると、その相手に25の追加ダメージを与える"
+  },
+  "ashe/majorPerks/assets/perks/ashe_major_02_airburst.webp": {
+    "name": "エア・バースト",
+    "description": "〈ダイナマイト〉の空中での爆発半径が40%広がる。また、投擲した際に弾が6発回復する"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_01_reload-therapy.webp": {
+    "name": "リロード・セラピー",
+    "description": "弾をリロードまたは回復すると、ライフの5%分回復する"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_02_fire-at-my-fingertips.webp": {
+    "name": "火傷だけじゃ済まさない",
+    "description": "炎上中の敵に〈ザ・ヴァイパー〉でダメージを与えると、弾薬が1発回復する"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_03_my-business--my-rules.webp": {
+    "name": "命が惜しいなら、あたいに従いな",
+    "description": "炎上中の敵に〈ザ・ヴァイパー〉でダメージを与えると、自身の全アビリティのクールダウンが10%短くなる"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_04_what-in-tarnation.webp": {
+    "name": "ショット＆ローデッド",
+    "description": "〈コーチ・ガン〉でアッシュ自身が宙に浮かぶと、それから3秒間、〈テイク・エイム〉の攻撃速度が20%上がり、落下速度が遅くなる。また、〈コーチ・ガン〉でダメージを与えられなかった場合、クールダウンが3秒短くなる"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_05_calamity.webp": {
+    "name": "カラミティ",
+    "description": "〈コーチ・ガン〉を使うと、弾薬が最大弾薬数の25%分回復する。回復した弾には、3秒間かけて40の炎上ダメージを与える効果がある"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_06_double-barreled.webp": {
+    "name": "エクストラ・バレル",
+    "description": "〈コーチ・ガン〉のチャージが1回増える"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_07_slow-burn.webp": {
+    "name": "クリティカル・バーニング",
+    "description": "スコープ射撃でクリティカル・ショットを当てた敵が炎上し、3秒かけて20%の継続ダメージが発生する"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_08_controlled-boom.webp": {
+    "name": "起爆デバイス",
+    "description": "〈ダイナマイト〉の投擲後に同アビリティを再入力すると、〈ダイナマイト〉が0.5秒後に爆発する。〈ダイナマイト〉が空中で爆発した場合、炎上の持続時間が1秒伸びる"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_09_out-with-a-bang.webp": {
+    "name": "派手に散りな",
+    "description": "〈ダイナマイト〉の爆発時、ダメージが50%下がった粘着性の爆発物を3つ展開する"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_10_bob-jr.webp": {
+    "name": "B.O.Bジュニア",
+    "description": "〈B.O.B〉の発動コストが60%減る。ただし、〈B.O.B〉のライフが減り、攻撃速度が20%下がるうえ、サイズも大幅に小さくなる"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_11_stacked-sticks.webp": {
+    "name": "スタック・スティック",
+    "description": "〈ダイナマイト〉の効果範囲が40%広がると同時に、同アビリティの炎上ダメージの速度が40%上がる"
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_12_pinbob.webp": {
+    "name": "執事突撃！",
+    "description": "アビリティ: 〈B.O.B〉の突進が終了した後にアルティメットを再入力すると、〈B.O.B〉が再び突進する（クールダウン: 3秒）­ アルティメット中にキルを達成するたびに、〈B.O.B〉の滞在時間が2秒長くなるほか、突進のクールダウンがリセットされる"
+  },
+  "bastion/minorPerks/assets/perks/bastion_minor_01_smart-bomb.webp": {
+    "name": "スマート・ボム",
+    "description": "〈A-36タクティカル・グレネード〉を自分に当てた際のノックバックが25%増加する。また、同アビリティのダメージを受けなくなる"
+  },
+  "bastion/minorPerks/assets/perks/bastion_minor_02_configuration-reload.webp": {
+    "name": "変形リロード",
+    "description": "モードを切り替えると、〈A-36タクティカル・グレネード〉のクールダウンが4秒減る"
+  },
+  "bastion/majorPerks/assets/perks/bastion_major_01_lindholm-explosives.webp": {
+    "name": "リンドホルム製爆薬",
+    "description": "〈強襲モード〉の攻撃手段が、ガトリング砲から連射速度の遅い炸裂弾に変わる"
+  },
+  "bastion/majorPerks/assets/perks/bastion_major_02_self-repair.webp": {
+    "name": "自己修復",
+    "description": "Eを押すと、素早く自己回復する"
+  },
+  "cassidy/minorPerks/assets/perks/cassidy_minor_01_bang-bang.webp": {
+    "name": "バン・バン",
+    "description": "投擲距離がより長い2発目の〈フラッシュバン〉を投げる。ただし、ダメージは2発とも40%減る"
+  },
+  "cassidy/minorPerks/assets/perks/cassidy_minor_02_b0d48ad9c8bdf1ce.png": {
+    "name": "タンブルウィード",
+    "description": "〈コンバット・ロール〉発動後、キャスディ自身の移動速度が60%上昇する。このブーストは1.5秒かけて減衰する"
+  },
+  "cassidy/majorPerks/assets/perks/cassidy_major_01_rollin--round-up.webp": {
+    "name": "ロール＆ヒール",
+    "description": "〈コンバット・ロール〉で弾を1発リロードするごとに、ライフが15回復する"
+  },
+  "cassidy/majorPerks/assets/perks/cassidy_major_02_silver-bullet.webp": {
+    "name": "シルバー・バレット",
+    "description": "〈ピースキーパー〉のサブ攻撃が、出血を与える貫通攻撃に置き換わる。そのクールダウンは〈コンバット・ロール〉か〈デッド・アイ〉を使用するとリセットされる"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_01_quick-draw.webp": {
+    "name": "クイック・ドロー",
+    "description": "〈コンバット・ロール〉後、〈ピースキーパー〉がオートエイムになる。オートエイムの範囲は15メートル。〈コンバット・ロール〉のクールダウン中1発に限られる"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_02_gunslinger-grit.webp": {
+    "name": "ローリング・ガンスリンガー",
+    "description": "弾がリロードまたは回復で1発復活するごとに、ライフの2.5%分回復する"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_03_bullseye.webp": {
+    "name": "ブルズアイ",
+    "description": "〈フラッシュバン〉の命中またはクリティカル・ヒットの達成で、〈コンバット・ロール〉のクールダウンが2秒短くなる"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_04_think-flasht.webp": {
+    "name": "シンク・フラッシュ",
+    "description": "〈コンバット・ロール〉の開始地点に〈フラッシュバン〉を設置する。­ 〈フラッシュバン〉の妨害時間が25%伸びる"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_05_easy-rider.webp": {
+    "name": "イージー・ライダー",
+    "description": "〈フラッシュバン〉でダメージを与えたばかりの敵をキルすると、アルティメット・チャージを20%得る。〈デッド・アイ〉の発動中、100の追加ライフと、25%の移動速度ボーナスを得る"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_06_it-s-twelve-o-clock-somewhere.webp": {
+    "name": "俺は早いぜ",
+    "description": "〈デッド・アイ〉で敵を1人キルするたびに、アルティメット・チャージを25%得る。同アビリティでキルを達成できなかった場合、アルティメット・チャージが33%回復する"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_07_dead-man-walkin.webp": {
+    "name": "デッドマン・ウォーキング",
+    "description": "ライフが30%を下回る敵の頭がマークされ、その敵に対するヘッドショットの当たり判定が大きくなる。マークされた敵にクリティカル・ヒットが命中すると、武器に50%のライフ吸収効果が付く"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_08_barrage-blastin.webp": {
+    "name": "ファニング・ラッシュ",
+    "description": "〈ファニング撃ち〉中に弾切れになっても、弾が即時リロードされ、〈ファニング撃ち〉を続行できる。このリロードは1回の〈ファニング撃ち〉につき1度だけ発動する。またこのリロード後、弾のダメージは60%減る"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_major_02_silver-bullet.webp": {
+    "name": "シルバー・バレット",
+    "description": "〈ファニング撃ち〉が、貫通弾を1発発射できるアビリティへと置き換わる。貫通弾を当てた敵には2.5秒かけて50の継続ダメージを追加で与えられる。このアビリティのクールダウンは別のアビリティまたはガジェットを使うとリセットされる"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_10_buck-wild.webp": {
+    "name": "バック・ワイルド",
+    "description": "〈ピースキーパー〉でダメージを与えてから5秒間、移動速度が1%上がる。最大15回蓄積。最大まで蓄積すると、受けるダメージが10%減る"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_11_barrel-roll.webp": {
+    "name": "バレル・ロール",
+    "description": "〈コンバット・ロール〉の距離が50%伸び、敵に65のダメージを与える"
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_12_hot-potato.webp": {
+    "name": "マグネティック・バン",
+    "description": "〈フラッシュバン〉が磁気を帯びると同時に、投擲距離が125%伸びる"
+  },
+  "echo/minorPerks/assets/perks/echo_minor_01_63cadc2da0d3063b.png": {
+    "name": "空襲シークエンス",
+    "description": "〈フライト〉中、弾薬が無限になる"
+  },
+  "echo/minorPerks/assets/perks/echo_minor_02_partial-scan.webp": {
+    "name": "部分スキャン",
+    "description": "アルティメット・チャージ30%から〈コピー〉を発動できる"
+  },
+  "echo/majorPerks/assets/perks/echo_major_01_full-salvo.webp": {
+    "name": "一斉発射",
+    "description": "〈スティッキー・ボム〉の弾数が2発増える"
+  },
+  "echo/majorPerks/assets/perks/echo_minor_01_focused-rush.webp": {
+    "name": "フォーカス・ラッシュ",
+    "description": "〈フォーカス・ビーム〉の射程が8メートル伸び、同アビリティ発動中の移動速度も25%上がる"
+  },
+  "emre/minorPerks/assets/perks/emre_minor_01_suppressive-security.webp": {
+    "name": "敵性対象、抑制",
+    "description": "〈オーバーライド・プロトコル〉のライト・ショットで敵の移動速度を1.5秒間、30%遅くできる"
+  },
+  "emre/minorPerks/assets/perks/emre_minor_02_enhanced-agility.webp": {
+    "name": "俊敏性強化",
+    "description": "〈サイフォン・ブラスター〉の発動中、射撃していない間に限り、移動速度が20%上がる"
+  },
+  "emre/majorPerks/assets/perks/emre_major_01_heat-sink.webp": {
+    "name": "放熱バレル",
+    "description": "〈サイフォン・ブラスター〉が直撃すると、同アビリティの熱量が60%減り、持続時間が0.1秒伸びる"
+  },
+  "emre/majorPerks/assets/perks/emre_major_02_cyber-adhesion.webp": {
+    "name": "スティッキー・フラグ",
+    "description": "〈サイバー・フラグ〉が投擲先に吸着する。敵に付着すると、その敵に対する同アビリティのダメージが40増える"
+  },
+  "freja/minorPerks/assets/perks/freja_minor_01_relentless-barrage.webp": {
+    "name": "矢の雨",
+    "description": "〈テイク・エイム〉の矢を敵に直撃させると、連射用の矢が5本回復する"
+  },
+  "freja/minorPerks/assets/perks/freja_minor_02_momentum-boost.webp": {
+    "name": "ダッシュ・ブースト",
+    "description": "〈クイック・ダッシュ〉の距離が20%伸びる"
+  },
+  "freja/majorPerks/assets/perks/freja_major_01_aerial-recovery.webp": {
+    "name": "エアリアル・リカバリー",
+    "description": "〈アップドラフト〉の使用後、着地するまでライフが毎秒30回復する"
+  },
+  "freja/majorPerks/assets/perks/freja_major_02_rising-winds.webp": {
+    "name": "ライジング・ウィンド",
+    "description": "〈アップドラフト〉のチャージ数が1増える"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_01_seismic-shot.webp": {
+    "name": "サイズミック・ショット",
+    "description": "〈テイク・エイム〉の爆発範囲が50%広がる。矢が刺さった場合、効果は2倍になる"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_02_seekerpoint.webp": {
+    "name": "シーカーポイント",
+    "description": "〈テイク・エイム〉の矢が敵に刺さると、その敵に対してダメージが66%少ないクロスボウの矢を自動で3発、追加で発射する"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_03_redux.webp": {
+    "name": "リバイバル",
+    "description": "〈テイク・エイム〉の矢、または〈ボーラ・ショット〉がヒットしたターゲットに〈リバースドロー・クロスボウ〉を当てると、アビリティのクールダウンが5%短くなり、弾薬が1回復する"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_04_cyclone.webp": {
+    "name": "サイクロン",
+    "description": "〈アップドラフト〉使用時、照準に向かって〈テイク・エイム〉の矢を1本発射する­ この矢の爆発ダメージは通常よりも25%少ない"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_05_peak-performance.webp": {
+    "name": "ピーク・パフォーマンス",
+    "description": "+20%〈アップドラフト〉高度­ 〈リバースドロー・クロスボウ〉発射中の降下速度が80%下がる­ 滞空中、移動速度が20%上がる"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_06_deep-pockets.webp": {
+    "name": "ディープ・ポケット",
+    "description": "いずれかのアビリティを使用すると、弾薬が最大弾薬数の30%分回復する"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_07_volley---deux.webp": {
+    "name": "ボレー・アドゥ",
+    "description": "〈リバースドロー・クロスボウ〉を3発撃つごとに、ダメージが60%少ない矢が2本、扇状に追加で放たれる"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_08_forager.webp": {
+    "name": "自給自足",
+    "description": "〈クイック・ダッシュ〉の使用後2秒間、〈リバースドロー・クロスボウ〉のヒットが、ライフ最大値の4%分自身を回復させる"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_09_lille-f-lde.webp": {
+    "name": "リトル・トラップ",
+    "description": "〈アップドラフト〉の使用後、次に空中で放つ〈テイク・エイム〉のショットが、ミニ〈ボーラ・ショット〉になる。このボーラに引き寄せる力はなく、その効果も40%低い"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_10_mighty-gust.webp": {
+    "name": "強烈なる突風",
+    "description": "〈アップドラフト〉を使うと、突風を照準に向けて放ち、敵をノックバックして60ダメージを与える"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_11_so-cooked.webp": {
+    "name": "鎧袖一触",
+    "description": "〈ボーラ・ショット〉の範囲内のダメージが20%増え、2秒間持続する­ 〈ボーラ・ショット〉のキル数が〈バウンティ・ハンティング〉にカウントされる"
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_12_thread-the-needle.webp": {
+    "name": "精密射撃",
+    "description": "〈テイク・エイム〉の矢が1人分貫通するようになる。追加爆発のダメージは通常よりも66%少ない"
+  },
+  "genji/minorPerks/assets/perks/genji_minor_01_swift-cuts.webp": {
+    "name": "旋風刃",
+    "description": "クイック近接攻撃が敵にヒットすると、〈風斬り〉のクールダウンが3秒短くなる"
+  },
+  "genji/minorPerks/assets/perks/genji_minor_02_dragon-s-thirst.webp": {
+    "name": "龍の飢え",
+    "description": "〈龍撃剣〉に30%のライフ吸収効果が付与される"
+  },
+  "genji/majorPerks/assets/perks/genji_major_01_blade-twisting.webp": {
+    "name": "旋風剣",
+    "description": "ライフが半分未満の敵に〈風斬り〉を命中させると、25の継続ダメージを追加で与える"
+  },
+  "genji/majorPerks/assets/perks/genji_major_02_meditation.webp": {
+    "name": "無心",
+    "description": "〈木の葉返し〉の発動中、ライフが毎秒50回復する"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_01_sacred-shuriken.webp": {
+    "name": "神手裏剣",
+    "description": "+50%〈手裏剣〉（メイン攻撃）­ 弾速一度に投げる〈手裏剣〉（メイン攻撃）の枚数が2増える。〈手裏剣〉1回あたりの消費枚数は変わらない"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_02_hanamura-healing.webp": {
+    "name": "ハナムラ・ヒーリング",
+    "description": "クリティカル・ヒットまたは〈風斬り〉を当てると、与えたダメージの25%分、追加ライフを得る"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_03_cybernetic-speed.webp": {
+    "name": "サイバネティック・スピード",
+    "description": "〈手裏剣〉でダメージを与えてから3秒間、同アビリティの攻撃速度が3%上がる。最大15回蓄積"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_04_wyrm-s-maw.webp": {
+    "name": "龍のあぎと",
+    "description": "〈手裏剣〉でダメージを与えると、次に繰り出す〈風斬り〉のダメージが10%、射程が5%アップする（5回まで蓄積）"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_05_iaido-strike.webp": {
+    "name": "居合斬り",
+    "description": "〈木の葉返し〉の終了後、効果が75%の〈龍撃剣〉を1回振るう"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_06_hidden-blade.webp": {
+    "name": "仕込み刀",
+    "description": "近接攻撃に60%のライフ吸収効果が付き、クイック近接攻撃のダメージが15増える"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_07_forged-under-fire.webp": {
+    "name": "堅忍不抜",
+    "description": "〈木の葉返し〉の発動中、跳ね返したダメージの100%分回復する"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_08_laceration.webp": {
+    "name": "刀の傷",
+    "description": "〈風斬り〉に継続ダメージが付く。ダメージ量は3秒間に30%­ 〈風斬り〉で別のターゲット1人にダメージを与えるごとに、同アビリティのクールダウンが2.5秒短くなる"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_09_deflect-o-bot.webp": {
+    "name": "ハジキロボ",
+    "description": "+200%跳ね返した弾の速度­ 弾を敵へと自動的に跳ね返せるようになる。また、〈木の葉返し〉を発動してから0.3秒間、跳ね返した弾に50%のクリティカル・ダメージのボーナスが付く"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_10_hashimoto-s-bane.webp": {
+    "name": "虎狩り",
+    "description": "いずれかのアビリティ使用後、最初のサブ攻撃で追加の〈手裏剣〉を2枚投げる。追加の手裏剣にはホーミング機能があるが、与えるダメージは50%少ない"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_11_dragon-s-breath.webp": {
+    "name": "龍神の吐息",
+    "description": "〈龍撃剣〉を振るうごとに、〈龍撃剣〉100%分のダメージと貫通力のある大きな投射物が射出される。この投射物を空中の敵に当てると、そのダメージは25%増える"
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_12_spirit-of-sojiro.webp": {
+    "name": "宗次郎の精神",
+    "description": "+1秒〈木の葉返し〉持続時間­ 〈木の葉返し〉で前後両方の攻撃を跳ね返せるようになる"
+  },
+  "hanzo/minorPerks/assets/perks/hanzo_minor_01_sonic-disruption.webp": {
+    "name": "無明長矢",
+    "description": "〈鳴響矢水〉の矢付近のライフ・パックを30秒間ハックする"
+  },
+  "hanzo/minorPerks/assets/perks/hanzo_minor_02_dragon-fury.webp": {
+    "name": "龍の怒り",
+    "description": "メイン攻撃を命中させてから1.5秒間、攻撃速度が20%上がる"
+  },
+  "hanzo/majorPerks/assets/perks/hanzo_major_01_frost-arrow.webp": {
+    "name": "氷結矢",
+    "description": "Rを押すことで爆発する氷結矢を構える。敵に当てると2秒間、その敵の移動速度が35%下がる"
+  },
+  "hanzo/majorPerks/assets/perks/hanzo_major_02_scatter-arrows.webp": {
+    "name": "矢散五裂",
+    "description": "最初の跳弾時、〈電光石火〉が5発に分裂する。分裂した矢は33%のダメージを与え、追加で1回跳弾する"
+  },
+  "junkrat/minorPerks/assets/perks/junkrat_minor_01_nitro-boost.webp": {
+    "name": "ニトロ・ブースト",
+    "description": "〈RIPタイヤ〉発動中にShift (左)を使用すると、タイヤが一時的に加速する。加速時、ダメージは50%減る"
+  },
+  "junkrat/minorPerks/assets/perks/junkrat_minor_02_bomb-voyage.webp": {
+    "name": "ボン・ボヤージュ！",
+    "description": "〈コンカッション・マイン〉を利用して飛び上がると3秒間、攻撃速度が35%上がる"
+  },
+  "junkrat/majorPerks/assets/perks/junkrat_major_01_mine-recycling.webp": {
+    "name": "地雷再利用",
+    "description": "〈コンカッション・マイン〉で敵をキルすると、同アビリティのチャージ数が1回復する"
+  },
+  "junkrat/majorPerks/assets/perks/junkrat_major_02_frag-cannon.webp": {
+    "name": "フラグ・キャノン",
+    "description": "〈フラグ・ランチャー〉の弾速が25%上がる"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_01_frags-for-days.webp": {
+    "name": "ジェイミソンの気まぐれフラグ",
+    "description": "〈フラグ・ランチャー〉から25%の確率で、ダメージが66%少ない追加の弾を1発発射する"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_02_big-bang.webp": {
+    "name": "ビッグバン",
+    "description": "バウンドした〈フラグ・ランチャー〉の弾が33%巨大化する"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_03_soot-shaker.webp": {
+    "name": "煤だらけのファイター",
+    "description": "〈コンカッション・マイン〉を起爆すると1.5秒間、攻撃速度が15%上がり、弾薬が20%回復する"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_04_bango.webp": {
+    "name": "ファイア・フラグ",
+    "description": "〈フラグ・ランチャー〉の弾がバウンドなしで直撃した敵を炎上させ、2秒間かけて追加の継続ダメージを20%与える"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_05_double-trouble.webp": {
+    "name": "ダブル・トラブル",
+    "description": "〈スティール・トラップ〉のチャージが1増える"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_06_trap-ii--esquire.webp": {
+    "name": "トラップ・イン・ザ・ボム",
+    "description": "〈コンカッション・マイン〉を起爆すると、ミニ〈スティール・トラップ〉が出現する。ミニ〈スティール・トラップ〉は敵の移動を封じる効果の代わりに移動速度を遅くする効果を持ち、最大5個設置できる"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_07_hop-boom.webp": {
+    "name": "ホップ！ステップ！",
+    "description": "〈コンカッション・マイン〉を使ってジャンプすると、着地地点で効果が20%低い〈コンカッション・マイン〉が起爆する"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_08_slapnel.webp": {
+    "name": "爆裂パンチ",
+    "description": "アビリティ: クイック近接攻撃を繰り出すと、20%ダメージの〈コンカッション・マイン〉の爆風が発生する。爆風にはジャンクラット自身を打ち上げつつターゲットをノックバックさせる効果がある­ （クールダウン: 8秒）"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_09_rainin--lead.webp": {
+    "name": "ボムボム・レイン",
+    "description": "+25%〈トータル・メイヘム〉爆発範囲­ 自身を吹き飛ばして空中にいる間、ダメージが25%少ない〈トータル・メイヘム〉の爆弾が0.35秒ごとに1個落ちる"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_10_rip-roll.webp": {
+    "name": "RIPロール",
+    "description": "+20%アルティメット・コスト減少率­ アルティメットの発動中、〈RIPタイヤ〉の中に入り、タイヤが破壊されるか起爆すると、飛び出して〈トータル・メイヘム〉を発動する"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_11_successful-heist.webp": {
+    "name": "爆破三昧",
+    "description": "〈コンカッション・マイン〉の爆発にターゲットが1人当たるごとに、同アビリティのクールダウンが0.5秒短くなる"
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_12_zip-grease.webp": {
+    "name": "デトネーション・ブースト",
+    "description": "〈コンカッション・マイン〉を起爆すると、次に発射する〈フラグ・ランチャー〉1発の弾速が200%上がり、その弾の空中の敵に対するダメージも25%増える"
+  },
+  "mei/minorPerks/assets/perks/mei_minor_01_skating-rink.webp": {
+    "name": "スケート・リンク",
+    "description": "〈ブリザード〉範囲内にいる味方の移動速度が25%上がり、そのライフも毎秒50回復する"
+  },
+  "mei/minorPerks/assets/perks/mei_minor_02_glacial-propulsion.webp": {
+    "name": "アイシクル・ジャンプ",
+    "description": "その場でジャンプを2回すると、足元に小さな氷柱が1本生えて、その勢いで飛び上がる"
+  },
+  "mei/majorPerks/assets/perks/mei_major_01_deep-freeze.webp": {
+    "name": "ディープ・フリーズ",
+    "description": "メイン攻撃を敵に当て続けると、その敵が短時間、凍結する"
+  },
+  "mei/majorPerks/assets/perks/mei_major_02_cryo-storm.webp": {
+    "name": "クリオストーム",
+    "description": "〈クリオフリーズ〉で付近の敵の動きを遅くし、毎秒70ダメージを与える"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_01_permafrost.webp": {
+    "name": "永久凍土",
+    "description": "アビリティ・パワー1%ごとに、ライフ最大値が0.5増える"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_02_slowball.webp": {
+    "name": "スノーボール",
+    "description": "アビリティまたはガジェットの使用後に放つ〈アイシクル〉2発が雪玉に変わる。雪玉の弾速は200%で、敵に命中すると、その敵の動きが30%遅くなる"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_03_extendothermics.webp": {
+    "name": "エクステンド・サーミクス",
+    "description": "〈凍結ブラスター〉（メイン攻撃）の射程が6メートル長くなる"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_04_frost-armor.webp": {
+    "name": "フロスト・アーマー",
+    "description": "〈凍結ブラスター〉のメイン攻撃で与えたダメージの3%分のアーマーをラウンド終了時まで得る­ 最大100獲得"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_05_snowball-flight.webp": {
+    "name": "スノーボール・フライト",
+    "description": "アビリティ: 空中でジャンプすると、大きな〈アイス・ウォール〉の柱が足元に形成される （クールダウン: 12秒）"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_06_twice-as-ice.webp": {
+    "name": "ダブル・アイス",
+    "description": "〈クリオフリーズ〉を使うと、次に使う〈アイス・ウォール〉のクールダウンがリセットされる"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_07_iceberg.webp": {
+    "name": "氷山",
+    "description": "〈アイス・ウォール〉の展開時に、敵の移動速度を遅くする小規模な〈ブリザード〉が発生する"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_08_cryclone.webp": {
+    "name": "サイクロン",
+    "description": "〈クリオフリーズ〉の展開時に、敵の移動速度を遅くする小規模な〈ブリザード〉が発生する"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_09_coulder.webp": {
+    "name": "コールダー",
+    "description": "〈クリオフリーズ〉の氷の塊が転がる雪玉に変わり、敵に体当たりすると、20のダメージとノックバックが発生する"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_10_frost-nova.webp": {
+    "name": "フロスト・ノヴァ",
+    "description": "〈クリオフリーズ〉の終了と同時に付近の敵をノックバックし、ダメージを60与える"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_11_frosting.webp": {
+    "name": "アイシング",
+    "description": "〈ブリザード〉内の味方が毎秒、メイ自身のライフ最大値の8%分回復する"
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_12_deep-chills.webp": {
+    "name": "ディープ・チル",
+    "description": "〈凍結ブラスター〉のメイン攻撃を敵に当て続けると、その敵が0.65秒間凍結する"
+  },
+  "pharah/minorPerks/assets/perks/pharah_minor_01_concussive-force.webp": {
+    "name": "コンカッシブ・フォース",
+    "description": "〈コンカッシブ・ブラスト〉の爆発ダメージが最大30増える"
+  },
+  "pharah/minorPerks/assets/perks/pharah_minor_02_helix-shields.webp": {
+    "name": "ヘリックス・シールド",
+    "description": "ライフを125、シールドに変換する。〈ロケット・ランチャー〉が直撃すると、シールドは自動で徐々に回復する"
+  },
+  "pharah/majorPerks/assets/perks/pharah_major_01_fuel-stores.webp": {
+    "name": "燃料補給",
+    "description": "〈ジェット・ダッシュ〉を使用すると、燃料が50%回復する。最大燃料値の余剰が100%増加する"
+  },
+  "pharah/majorPerks/assets/perks/pharah_major_02_rocket-salvo.webp": {
+    "name": "ランチャー・ユニット",
+    "description": "移動アビリティの使用後にメイン攻撃を放つと、2発の小型ロケット弾がらせん状に同時発射される。小型ロケット弾の1発あたりのダメージは30"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_01_evasive-maneuvers.webp": {
+    "name": "回避機動",
+    "description": "〈ジャンプ・ジェット〉の使用後、〈コンカッシブ・ブラスト〉に追尾機能が付く。直撃すると、敵の移動が1.5秒間妨害される"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_02_carpet-bomb.webp": {
+    "name": "カーペット・ボム",
+    "description": "+40%〈バレッジ〉移動速度­ 〈バレッジ〉の持続時間が50%延びる"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_03_cyclic-salvo.webp": {
+    "name": "発射効率アップ",
+    "description": "〈ロケット・ランチャー〉の直撃で、燃料を10得るほか、クールダウンが1秒減る"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_04_blitz-barrage.webp": {
+    "name": "電撃砲火",
+    "description": "+40%〈バレッジ〉移動速度­ 〈ジェット・ダッシュ〉の使用後、小型ロケット弾が75%少ない〈バレッジ〉を放つ"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_05_fuel-depot.webp": {
+    "name": "予備タンク接続",
+    "description": "〈ロケット・ランチャー〉が直撃すると、燃料の最大値が2増える。効果は永続的で、最大25回蓄積"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_06_nosedive.webp": {
+    "name": "ノーズダイブ",
+    "description": "アビリティ:空中でしゃがむと、地面に向かってダッシュし、燃料が50%回復する­ （クールダウン: 6秒）"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_07_heat-seekers.webp": {
+    "name": "赤外線誘導弾",
+    "description": "〈ジェット・ダッシュ〉の使用後、次のメイン攻撃を敵にロックオンしながら撃てる"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_08_launch-vector.webp": {
+    "name": "ブラスト＆ロックオン",
+    "description": "〈コンカッシブ・ブラスト〉で敵をノックバックさせると、その敵に向かって追尾式の小型ロケット弾が3発放たれる"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_09_speed-kills.webp": {
+    "name": "スピード・キル",
+    "description": "武器ダメージを与えてから3秒間、移動速度が5%、攻撃速度が3%上がる。最大6回、直撃で2倍蓄積"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_10_triple-volley.webp": {
+    "name": "トリプル・ボレー",
+    "description": "アビリティまたはガジェットの使用後、次のメイン攻撃時にロケット弾が3発放たれる。ロケット弾には1発ごとに40%のダメージがある"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_11_recursion-battery.webp": {
+    "name": "回生システム",
+    "description": "小型ロケット弾に25%のライフ吸収（アビリティ）が付与される"
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_12_extra-charge.webp": {
+    "name": "エクストラ・チャージ",
+    "description": "〈コンカッシブ・ブラスト〉のチャージ数が1増える"
+  },
+  "reaper/minorPerks/assets/perks/reaper_minor_01_soul-reaving.webp": {
+    "name": "霊魂奪取",
+    "description": "ライフが50回復する〈ソウル・グローブ〉を、倒れた敵から回収する"
+  },
+  "reaper/minorPerks/assets/perks/reaper_minor_02_lingering-wraith.webp": {
+    "name": "銀光の死霊",
+    "description": "〈レイス・フォーム〉の解除後2秒間、移動速度が30%上がる"
+  },
+  "reaper/majorPerks/assets/perks/reaper_major_01_shadow-blink.webp": {
+    "name": "瞬く影",
+    "description": "〈シャドウ・ステップ〉の発動時間とクールダウンが25%短くなるが、テレポートの範囲も25%狭くなる"
+  },
+  "reaper/majorPerks/assets/perks/reaper_major_02_trigger-finger.webp": {
+    "name": "トリガー・フィンガー",
+    "description": "アビリティを使うかリロードすると、〈恐怖の引き金〉のクールダウンがリセットされる"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_01_revolving-ruin.webp": {
+    "name": "破滅の輪舞",
+    "description": "近距離（7メートル）の敵に〈ヘルファイア・ショットガン〉を当てると1秒間、攻撃速度が5%上がる。最大10回蓄積"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_02_shrouded-shrapnel.webp": {
+    "name": "亡霊の装弾",
+    "description": "〈レイス・フォーム〉を使用すると、次のマガジン内の弾1発ごとのペレット数が25%増え、拡散率が50%上がる"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_03_death-step.webp": {
+    "name": "デス・ステップ",
+    "description": "〈シャドウ・ステップ〉使用後1.5秒間、ダメージが50%少ない〈デス・ブロッサム〉を発動する"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_04_strangle-step.webp": {
+    "name": "搾取の舞",
+    "description": "+15%〈シャドウ・ステップ〉発動スピード­ 〈シャドウ・ステップ〉の使用後3秒間、ライフ吸収量が2倍になる"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_05_spirited-to-slay.webp": {
+    "name": "こみ上げる衝動",
+    "description": "敵をキルすると、〈レイス・フォーム〉のクールダウンが50%、〈シャドウ・ステップ〉のクールダウンが100%短くなる"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_06_bloodletters.webp": {
+    "name": "魔の手",
+    "description": "空中にいる敵または8メートル以上離れた敵に〈恐怖の引き金〉を当てると、30の継続ダメージが3秒かけて発生する"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_07_wraith-renewal.webp": {
+    "name": "死霊復活",
+    "description": "〈レイス・フォーム〉の使用中、毎秒ライフが7%回復する。ライフが50%を下回っている場合、回復量は2倍になる"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_08_hellshroud.webp": {
+    "name": "業火",
+    "description": "〈レイス・フォーム〉中に敵を通過すると、その相手を自身のライフ最大値の20%分炎上させ、移動速度と攻撃速度が2秒間、20%下がる"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_09_wall-of-life-and-death.webp": {
+    "name": "生死の境界線",
+    "description": "〈レイス・フォーム〉中、自身のサイズが50%大きくなり、向かってくる投射物をブロックできるようになる。またこの際、6メートル以内の味方が1秒ごとに35回復する"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_10_harvest-fest.webp": {
+    "name": "精魂収穫",
+    "description": "〈ヘルファイア・ショットガン〉を敵に当てると、20%の確率でソウル・グローブが出現する。ソウル・グローブを拾うと、ライフが15%、弾薬が15%回復し、移動速度が3秒間、15%上がる"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_major_02_trigger-finger.webp": {
+    "name": "トリガー・フィンガー",
+    "description": "アビリティまたはガジェットを使うかリロードすると、〈恐怖の引き金〉のクールダウンがリセットされる"
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_12_wretched-wings.webp": {
+    "name": "亡霊の翼",
+    "description": "〈レイス・フォーム〉の使用中、飛行できるようになる­ 空中でジャンプを押すと、滑空する"
+  },
+  "shion/minorPerks/assets/perks/shion_minor_01_2785c741990d138c.png": {
+    "name": "生存本能",
+    "description": "〈回避〉で得られる追加ライフの持続時間が1秒長くなる"
+  },
+  "shion/minorPerks/assets/perks/shion_minor_02_x-machina.webp": {
+    "name": "極刑",
+    "description": "ライフが半分を下回る敵への〈罰〉のダメージが20%増える"
+  },
+  "shion/majorPerks/assets/perks/shion_major_01_refuel.webp": {
+    "name": "燃料チャージ",
+    "description": "〈凶走〉発動時にライフが50回復し、その後アビリティを維持している間、1秒ごとに20回復する"
+  },
+  "shion/majorPerks/assets/perks/shion_major_02_faces-of-death.webp": {
+    "name": "死の怨念",
+    "description": "その他ダメージヒーローのサブロール（リコン、スペシャリスト、シャープシューター）のパッシブを得る"
+  },
+  "sierra/minorPerks/assets/perks/sierra_minor_01_full-flight.webp": {
+    "name": "フル・フライト",
+    "description": "〈アンカー・ドローン〉の飛行距離とグラップルの範囲が25%アップする"
+  },
+  "sierra/minorPerks/assets/perks/sierra_minor_02_tight-grip.webp": {
+    "name": "タイト・グリップ",
+    "description": "〈ヘリックス・ライフル〉の拡散が70%早く狭まる。拡散の拡大も30%遅くなる"
+  },
+  "sierra/majorPerks/assets/perks/sierra_major_01_medi-drone.webp": {
+    "name": "メディドローン",
+    "description": "〈アンカー・ドローン〉をグラップルすると、自己回復可能なライフ・パックが1個手に入る"
+  },
+  "sierra/majorPerks/assets/perks/sierra_major_02_locked-in.webp": {
+    "name": "ロック・イン",
+    "description": "〈トラッキング・ショット〉を敵に当ててから2秒間、シエラ自身の攻撃速度が20%上がる"
+  },
+  "sojourn/minorPerks/assets/perks/sojourn_minor_01_overcharged.webp": {
+    "name": "オーバーチャージ",
+    "description": "〈オーバークロック〉の発動中、〈レールガン〉の最大エネルギーが50増える"
+  },
+  "sojourn/minorPerks/assets/perks/sojourn_minor_02_deceleration-field.webp": {
+    "name": "減速フィールド",
+    "description": "〈ディスラプター・ショット〉にヒットした敵の移動速度が25%下がる"
+  },
+  "sojourn/majorPerks/assets/perks/sojourn_major_01_friction-generators.webp": {
+    "name": "熱エネルギー変換",
+    "description": "〈パワー・スライド〉中、エネルギーを最大で75生成する"
+  },
+  "sojourn/majorPerks/assets/perks/sojourn_major_02_dual-thrusters.webp": {
+    "name": "デュアル・スラスター",
+    "description": "〈パワー・スライド〉をもう1回連続で使用できる。ただし、スライド時のジャンプ高は下がる"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_01_unconventional-tactics.webp": {
+    "name": "非正規戦闘術",
+    "description": "〈パワー・スライド〉開始時とスライド・ジャンプ時に、小型の〈ディスラプター・ショット〉を展開する"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_02_commotion-cycle.webp": {
+    "name": "エナジー・サイクル",
+    "description": "〈チャージ・ショット〉でダメージを与えると、そのチャージ消費量に応じてアビリティのクールダウンが最大35%短くなる"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_03_experimental-tech.webp": {
+    "name": "試作型モジュール",
+    "description": "〈ディスラプター・ショット〉の範囲内にいる敵の移動速度が25%下がり、アビリティで与えたダメージの50%分、〈レールガン〉のチャージを得る"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_04_overcharge.webp": {
+    "name": "スーパー・キャパシター",
+    "description": "〈レールガン〉の最大エネルギー量が150にまで増える。最大チャージ時の攻撃やアビリティ使用による消費エネルギー量は100のまま"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_05_fine-tuned-thrusters.webp": {
+    "name": "フルカスタム・スラスター",
+    "description": "+1秒〈パワー・スライド〉持続時間­ 敵をキルすると、〈パワー・スライド〉のクールダウンがリセットされる"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_06_drill-kick.webp": {
+    "name": "ドリル・キック",
+    "description": "+50%〈パワー・スライド〉移動速度­ 〈パワー・スライド〉中、受けるダメージが25%減るほか、周囲の敵に75ダメージを与える"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_07_hard-stuck.webp": {
+    "name": "ハード・スタック",
+    "description": "〈ディスラプター・ショット〉が敵に吸着するが、その際のダメージは25%減る"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_08_enhanced-targeting-system.webp": {
+    "name": "自動照準システム",
+    "description": "〈オーバークロック〉中、〈レールガン〉（メイン攻撃）にオートエイム機能が付く"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_09_dynamic-dispatch.webp": {
+    "name": "ダイナミック・ショット",
+    "description": "〈パワー・スライド〉とスライド・ジャンプ中、チャージ・ショットの弾サイズが50%大きくなるほか、攻撃速度が35%上がり、武器に35%のライフ吸収効果が付く"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_10_aftershock.webp": {
+    "name": "アフターショック",
+    "description": "フル・チャージの〈チャージ・ショット〉を撃つか、同アビリティでクリティカル・ヒットを達成すると弾が炸裂し、ヒットしたターゲット周囲の敵に50%のダメージを与えることができる"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_11_zoom-zoom-zoom.webp": {
+    "name": "REブースト",
+    "description": "〈パワー・スライド〉のチャージ数が1増える"
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_12_conductor-chase.webp": {
+    "name": "チェイス＆チャージ",
+    "description": "〈パワー・スライド〉とスライド・ジャンプ中、〈レールガン〉のチャージが毎秒10%増えると同時に、弾薬が毎秒、最大弾薬数の50%分回復する。また、〈レールガン〉のチャージの減衰速度が75%下がる"
+  },
+  "soldier-76/minorPerks/assets/perks/soldier-76_minor_01_helix-propulsion.webp": {
+    "name": "ヘリックス・ブースト",
+    "description": "〈ヘリックス・ロケット〉の弾速が50%上がる"
+  },
+  "soldier-76/minorPerks/assets/perks/soldier-76_minor_02_tactical-salvo.webp": {
+    "name": "戦術的掃射",
+    "description": "〈タクティカル・バイザー〉使用中、〈ヘリックス・ロケット〉のクールダウンが80%短くなると同時に、同アビリティを〈ヘビー・パルス・ライフル〉の射撃を遮ることなく発射できるようになる"
+  },
+  "soldier-76/majorPerks/assets/perks/soldier-76_major_01_full-stride.webp": {
+    "name": "フル・ストライド",
+    "description": "〈スプリント〉中、移動速度のボーナスが2秒かけて25%増える"
+  },
+  "soldier-76/majorPerks/assets/perks/soldier-76_major_02_stim-pack.webp": {
+    "name": "スティム・パック",
+    "description": "〈バイオティック・フィールド〉の代わりに〈スティム・パック〉を使用する。使用すると、ライフが毎秒30回復し、攻撃速度が5秒間20%上がる"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_01_super-visor.webp": {
+    "name": "スーパー・バイザー",
+    "description": "〈ヘリックス・ロケット〉の使用後0.5秒間、〈タクティカル・バイザー〉が発動する"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_02_peripheral-pulse.webp": {
+    "name": "ダブル・パルス",
+    "description": "〈タクティカル・バイザー〉の発動中、もう1人の敵に〈パルス・ライフル〉をロックオンして撃てる。ただし、追加ターゲットへのダメージは50%少ない"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_03_run-and-gun.webp": {
+    "name": "ラン＆ガン",
+    "description": "〈スプリント〉しながら〈パルス・ライフル〉やアビリティを使えるようになる­ また〈スプリント〉中にダメージを与えると、それから5秒間、1%の〈スプリント〉移動速度ボーナスとライフ吸収能力を得る。最大25%蓄積"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_04_chaingun.webp": {
+    "name": "チェイン・ガン",
+    "description": "〈パルス・ライフル〉を連続で撃つと、1発ごとに武器パワーが0.5%増える。100回まで蓄積"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_05_double-helix.webp": {
+    "name": "ダブル・ヘリックス",
+    "description": "〈ヘリックス・ロケット〉をもう1発発射する。2発目にはホーミング機能が付いているが、与えるダメージは70%少ない"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_06_cratered.webp": {
+    "name": "クレーテッド",
+    "description": "〈ヘリックス・ロケット〉の爆風の範囲が40%広がり、爆発ダメージが15%増える"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_07_hunker-down.webp": {
+    "name": "ハンカー・ダウン",
+    "description": "〈ヘリックス・ロケット〉でダメージを与えると、持続時間が50%短く効果が50%下がった〈バイオティック・フィールド〉をその場に展開する"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_08_aura-cloud.webp": {
+    "name": "オーラ・クラウド",
+    "description": "+40%〈バイオティック・フィールド〉効果範囲­ 〈バイオティック・フィールド〉内の敵に、その回復量100%分のダメージを与える"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_09_on-me.webp": {
+    "name": "俺に続け！",
+    "description": "〈バイオティック・フィールド〉が自分の動きにあわせて移動するようになる"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_10_track-and-field.webp": {
+    "name": "トラック・アンド・フィールド",
+    "description": "〈スプリント〉中、1秒ごとに弾薬が最大弾薬数の15%分回復し、アビリティのクールダウンも75%短くなる"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_11_frontliners.webp": {
+    "name": "前線兵",
+    "description": "〈バイオティック・フィールド〉展開時にフィールド内にいた味方に対して2秒間、ソルジャー76自身の最大ライフ値25%分の追加ライフを与える"
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_12_biotic-bullseye.webp": {
+    "name": "バイオティック・ブルズアイ",
+    "description": "〈バイオティック・フィールド〉の範囲内にいる間、得られるアルティメット・チャージが50%増え、クリティカル・ヒットするごとに弾薬が最大弾薬数の20%分回復し、同アビリティの持続時間が0.5秒長くなる。最大5秒延長"
+  },
+  "sombra/minorPerks/assets/perks/sombra_minor_01_34e108b70ea2d33e.png": {
+    "name": "ライフ・ハック",
+    "description": "〈EMP〉発動時、付近の味方全員に〈ホットフィクス〉が付与される"
+  },
+  "sombra/minorPerks/assets/perks/sombra_minor_02_ctrl-alt-esc.webp": {
+    "name": "Ctrl+Alt+Esc",
+    "description": "ライフが半分未満の間〈トランズロケーター〉でテレポートすると、パッシブの自己回復が始まる"
+  },
+  "sombra/majorPerks/assets/perks/sombra_major_01_87fec003fc9753ad.png": {
+    "name": "データ・パケット",
+    "description": "〈ホットフィクス〉でライフ・パックをハックすると、同アビリティのメインのクールダウンが4秒短くなる"
+  },
+  "sombra/majorPerks/assets/perks/sombra_major_02_28a09178c65bff6e.png": {
+    "name": "サイバーセキュリティ",
+    "description": "ライフが半分未満の味方に対する〈サイバースペース〉の回復量が2倍になる"
+  },
+  "symmetra/minorPerks/assets/perks/symmetra_minor_01_sentry-capacity.webp": {
+    "name": "セントリー増強",
+    "description": "〈セントリー・タレット〉をもう1個追加で使用できる"
+  },
+  "symmetra/minorPerks/assets/perks/symmetra_minor_02_perfect-alignment.webp": {
+    "name": "秩序と調和",
+    "description": "〈フォトン・プロジェクター〉のメイン攻撃の射程が20%伸びる"
+  },
+  "symmetra/majorPerks/assets/perks/symmetra_major_01_hovering-barrier.webp": {
+    "name": "ホバリング・バリア",
+    "description": "任意で、前方へと移動するバリアを〈テレポーター〉の代わりに生成できる。Eをもう一度押すことで、バリアの移動が遅くなる"
+  },
+  "symmetra/majorPerks/assets/perks/symmetra_major_02_shield-battery.webp": {
+    "name": "シールド・バッテリー",
+    "description": "〈テレポーター〉の半径10メートル以内にいる間、シンメトラ自身のシールドが毎秒20回復する"
+  },
+  "torbjorn/minorPerks/assets/perks/torbjorn_minor_01_hammer-time.webp": {
+    "name": "ハンマー・タイム",
+    "description": "〈フォージ・ハンマー〉装備中の移動速度が20%上がる"
+  },
+  "torbjorn/minorPerks/assets/perks/torbjorn_minor_02_pre-heated.webp": {
+    "name": "マグマ・ヒート",
+    "description": "〈モルテン・コア〉で〈オーバーロード〉が発動する"
+  },
+  "torbjorn/majorPerks/assets/perks/torbjorn_major_01_5f3ae1fcd2f9a78a.png": {
+    "name": "アンカー・ボルト",
+    "description": "〈タレット設置〉の投擲距離が25%伸びる。タレットを壁や天井に設置できるようになる"
+  },
+  "torbjorn/majorPerks/assets/perks/torbjorn_major_02_overloaded-turret.webp": {
+    "name": "タレット・オーバーロード",
+    "description": "〈オーバーロード〉を発動すると、タレットが5秒間アップグレードされ、ライフとダメージが増える"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_01_all-grown-up.webp": {
+    "name": "我が子の力",
+    "description": "〈オーバーロード〉中、タレットが1レベルアップグレードされる。最大レベル3まで上昇"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_02_swedish-sauna.webp": {
+    "name": "スウェーデン式サウナ",
+    "description": "〈モルテン・コア〉のマグマの上にいる味方（自身を含む）が、1秒ごとに同アビリティのダメージの50%分回復する"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_03_magmini.webp": {
+    "name": "プチ・マグマ",
+    "description": "〈オーバーロード〉を使用すると、ダメージと持続時間が66%ダウンした〈モルテン・コア〉を2発得る"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_04_come-get-yer-armor.webp": {
+    "name": "アーマーを持ってけ！",
+    "description": "〈オーバーロード〉を使用すると、自身のライフ最大値15%分のアーマーを付与できるアーマー・パックを2個投げる。パックは蓄積しない"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_05_let-off-some-steam.webp": {
+    "name": "蒸気管バイパス",
+    "description": "〈オーバーロード〉を発動していない間、武器でダメージか回復を与えるたびに、同アビリティのクールダウンが8%短くなる"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_06_forged-in-fire.webp": {
+    "name": "焔の槌",
+    "description": "〈オーバーロード〉中に〈フォージ・ハンマー〉を振ると爆風が起こり、周囲3メートルにライフ最大値10%分のボーナス・ダメージが及ぶ"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_07_dwarlord.webp": {
+    "name": "ドワーフの戦神",
+    "description": "〈オーバーロード〉を使用すると、5メートル以内のすべての味方に〈オーバーロード〉50%分の追加ライフと10%の攻撃速度上昇ボーナスが付く"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_08_riveting.webp": {
+    "name": "ダブル・リベット",
+    "description": "〈リベット・ガン〉を5発撃つごとに、メイン攻撃とサブ攻撃を同時発射する。ただし、追加射撃分のダメージは通常より10%少ない"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_09_blacksmith.webp": {
+    "name": "ブラックスミス",
+    "description": "〈フォージ・ハンマー〉を味方に当てると、同アビリティのダメージの100%分、対象が回復する"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_10_hammer-throw.webp": {
+    "name": "ハンマー投げ",
+    "description": "アビリティ: 〈フォージ・ハンマー〉の装備中にサブ攻撃を入力すると、ハンマーを投げ飛ばせる。タレットまたは味方に当てた際の効果は通常の200%­ （クールダウン: 2秒）"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_11_turriplets.webp": {
+    "name": "タレット3兄弟",
+    "description": "タレットを3台まで同時に展開できるようになる。タレットの初期レベルはレベル1で、50%のライフと65%の攻撃速度を持つ。〈フォージ・ハンマー〉を当てることで、最大24秒間、一時的にアップグレード可能"
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_12_clocked.webp": {
+    "name": "追撃マーカー",
+    "description": "タレットでダメージを与えた敵を8秒間マークする。マークされた敵に武器を撃つと、ライフを25%吸収できるほか、15%のボーナス・ダメージを与えられる"
+  },
+  "tracer/minorPerks/assets/perks/tracer_minor_01_abd0ec9faa55dabc.png": {
+    "name": "ファスト・リジェネレーション",
+    "description": "自己回復のパッシブが100%早く発動するようになる"
+  },
+  "tracer/minorPerks/assets/perks/tracer_minor_02_kinetic-reload.webp": {
+    "name": "キネティック・リロード",
+    "description": "近接攻撃がヒットすると弾薬が12回復する"
+  },
+  "tracer/majorPerks/assets/perks/tracer_major_01_blink-packs.webp": {
+    "name": "ブリンク・パック",
+    "description": "ライフ・パックを拾うと、〈ブリンク〉のストックが1つ回復する"
+  },
+  "tracer/majorPerks/assets/perks/tracer_major_02_quantum-entanglement.webp": {
+    "name": "エンタングルメント",
+    "description": "〈リコール〉を発動すると、追加ライフを50、弾薬を20発得る。それらは時間とともに減少する"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_01_flash-fist.webp": {
+    "name": "閃光パンチ",
+    "description": "〈ブリンク〉使用後1秒間、次のクイック近接攻撃にアビリティ・パワーが適用され、追加のダメージ25を与えて敵をノックバックする"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_02_quantum-clip.webp": {
+    "name": "クォンタム・リロード",
+    "description": "リロード中に〈ブリンク〉を使用すると、次にリロードするまで最大弾薬数が25%増え、武器に10%のライフ吸収効果が付く"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_03_auto-recall.webp": {
+    "name": "オート・リコール",
+    "description": "各ラウンドにつき1回、自身がキルされたとき、無償で〈リコール〉を使用する­ アルティメット・チャージを消費することで〈リコール〉のクールダウンが50%短くなる"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_04_timelapse.webp": {
+    "name": "タイムラプス",
+    "description": "弾を外すことなく、同一の敵に連続で2発当てると、追加の継続ダメージを2秒かけて2与える"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_05_get-stuffed.webp": {
+    "name": "ちょっと失礼！",
+    "description": "クイック近接攻撃がヒットすると、アルティメット・チャージを5%獲得し、〈リコール〉のクールダウンも2秒短くなる"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_06_quantum-reload.webp": {
+    "name": "時空リロード",
+    "description": "〈リコール〉後、最大弾薬数100%分の弾薬を得る。この弾薬は時間とともに減少する"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_07_blink-hop.webp": {
+    "name": "ブリンク・ジャンプ",
+    "description": "〈ブリンク〉の移動距離が3メートル長くなる­ 空中で〈ブリンク〉を使用すると、1回空中ジャンプでき、同アビリティのクールダウンも0.2秒短くなる"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_08_temportal.webp": {
+    "name": "ポータル・リコール",
+    "description": "〈リコール〉すると、ポータルが8秒間その場に残る。このポータルとインタラクトした味方は1回限り、1秒前に戻れる（最大3人までインタラクト可能）"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_09_impulsive.webp": {
+    "name": "ポケット・ボム",
+    "description": "〈リコール〉の使用時に〈パルス・ボム〉を1個投げる。このボムは50%早く起爆するが、ダメージが70%少ない"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_10_alternate-ending.webp": {
+    "name": "時系列修正",
+    "description": "〈リコール〉を使用すると、6メートル以内の味方がそれぞれ過去3秒間に受けたダメージの100%分回復する"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_11_bullet-time.webp": {
+    "name": "バレット・タイム",
+    "description": "〈リコール〉の使用時、投射物の速度が95%、敵の移動速度が20%下がるフィールドを一時的に展開する­ また4秒間、ヒットスキャンから受けるダメージが25%減る"
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_12_chrono-stabilizer.webp": {
+    "name": "時空回復",
+    "description": "〈ブリンク〉使用後、6メートル以内にいる味方が40、自身が10回復する"
+  },
+  "vendetta/minorPerks/assets/perks/vendetta_minor_01_extra-edge.webp": {
+    "name": "エクストラ・ウェーブ",
+    "description": "〈ブレード・ウェーブ〉のエネルギー消費量が25%減る"
+  },
+  "vendetta/minorPerks/assets/perks/vendetta_minor_02_raging-storm.webp": {
+    "name": "レイジング・ストーム",
+    "description": "〈ワールウィンド〉の回転斬りが続き、広範囲に30のダメージをさらに3回与える"
+  },
+  "vendetta/majorPerks/assets/perks/vendetta_major_01_siphoning-strike.webp": {
+    "name": "捕食者の牙",
+    "description": "縦斬りに40%のライフ吸収効果が付与される"
+  },
+  "vendetta/majorPerks/assets/perks/vendetta_major_02_relentless.webp": {
+    "name": "虎狼の心",
+    "description": "〈猛狼〉の蓄積数が3つ増え、蓄積するごとに攻撃速度が5%、移動速度が3%上がる"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_01_rampant-onslaught.webp": {
+    "name": "飢えし狼",
+    "description": "〈猛狼〉の最大蓄積数が、2キルごとに1増える。最大3"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_02_undying-fury.webp": {
+    "name": "潰えぬ怒り",
+    "description": "ライフが0になった際、デスせずに移動妨害と回復阻害を受けた状態でフィールドに留まり、自身の最大ライフ分の追加ライフを得る。ただし、この追加ライフは時間とともに減少する。またこの際、〈猛狼〉の蓄積数とライフ吸収効果は2倍になる­ （クールダウン: 90秒）"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_03_skycut.webp": {
+    "name": "斬撃波",
+    "description": "〈ソアリング・スライス〉使用後、次に縦斬りを命中させた際、75%ダメージの〈ブレード・ウェーブ〉が放たれる"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_04_overloaded-strike.webp": {
+    "name": "オーバーロード・ストライク",
+    "description": "〈ソアリング・スライス〉後に空中で縦斬りをホールドすると、縦斬りがレベル1の〈サンダリング・ブレード〉へと変わり、ダメージが25%増える"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_05_defiance-core.webp": {
+    "name": "ハードライト・ブースター",
+    "description": "〈ウォーディング・スタンス〉のエネルギーがブロック中も75%の速度で回復するようになる­ 〈ブレード・ウェーブ〉を放つたびに、〈ワールウィンド〉と〈ソアリング・スライス〉のクールダウンが0.5秒減る"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_06_riposte.webp": {
+    "name": "狼の眼差し",
+    "description": "ダメージのブロック後、〈ウォーディング・スタンス〉の移動速度ペナルティが消え、次に繰り出す斬撃が縦斬りになる"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_07_cyclone-charge.webp": {
+    "name": "タイフーン・チャージ",
+    "description": "〈ワールウィンド〉のスピンが3回増える。ダメージは75%"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_08_double-dash.webp": {
+    "name": "ダブル・ダッシュ",
+    "description": "〈ワールウィンド〉の完了から3秒以内に、同アビリティを再発動できるようになる。その際のダメージは75%"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_09_exalted-empress.webp": {
+    "name": "搾取",
+    "description": "〈ソアリング・スライス〉、縦斬り、〈サンダリング・ブレード〉使用時に与えたダメージの30%が追加ライフへと変換される。最大200獲得"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_10_cataclisma.webp": {
+    "name": "大地の剣",
+    "description": "〈ブレード・ウェーブ〉と〈ソアリング・スライス〉が敵にヒットした際に30の爆発ダメージが発生する。爆発範囲は4メートル"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_11_furious-friction.webp": {
+    "name": "強化ウェーブ",
+    "description": "〈ウォーディング・スタンス〉のエネルギーの回復率が25%上がる­ 〈ブレード・ウェーブ〉でダメージを与えると、その後3秒間、エネルギーの回復率がさらに50%上がる"
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_12_apex-bloodlust.webp": {
+    "name": "血への渇望",
+    "description": "〈猛狼〉が1つ蓄積するごとに、4%のライフ吸収能力を獲得し、アビリティのクールダウンも3%早くなる"
+  },
+  "venture/minorPerks/assets/perks/venture_minor_01_deep-burrow.webp": {
+    "name": "深度掘削",
+    "description": "地中にいる間、〈ドリル・ダッシュ〉の距離が75%伸びる"
+  },
+  "venture/minorPerks/assets/perks/venture_minor_02_excavation-exhilaration.webp": {
+    "name": "世紀の大発掘",
+    "description": "〈テクトニック・ショック〉の発動中、クールダウンの速度が300%上昇する"
+  },
+  "venture/majorPerks/assets/perks/venture_major_01_smart-extender.webp": {
+    "name": "スマート・エクステンダー",
+    "description": "Eで〈スマート・エクスカベーター〉が強化され、4秒間、投射物の最大射程距離が100%伸びる"
+  },
+  "venture/majorPerks/assets/perks/venture_major_02_covered-in-dirt.webp": {
+    "name": "土の鎧",
+    "description": "〈クラバー〉でダメージを与えると、〈探検家の決意〉のシールドを最大40得る"
+  },
+  "widowmaker/minorPerks/assets/perks/widowmaker_minor_01_scoped-efficiency.webp": {
+    "name": "狙撃効率向上",
+    "description": "スコープ射撃時の消費弾薬数が、5発から3発に減少する"
+  },
+  "widowmaker/minorPerks/assets/perks/widowmaker_minor_02_sniper-s-instinct.webp": {
+    "name": "スナイパーの本能",
+    "description": "〈グラップリング・フック〉使用後2秒間、スコープ射撃のチャージ速度が100%上がる"
+  },
+  "widowmaker/majorPerks/assets/perks/widowmaker_major_01_seeker-mine.webp": {
+    "name": "シーカー・マイン",
+    "description": "〈ヴェノム・マイン〉が10メートル以内の敵に毒の針を放つ。また、一度トラップが発動しても展開し続ける"
+  },
+  "widowmaker/majorPerks/assets/perks/widowmaker_major_02_widow-s-bite.webp": {
+    "name": "蜘蛛の毒牙",
+    "description": "スコープ射撃の最大チャージ率が125%まで上がり、フルチャージ時に弾が敵を貫通するようになる"
+  },
+  "ana/minorPerks/assets/perks/ana_minor_01_ae02fae670005f98.png": {
+    "name": "麻酔ガス",
+    "description": "〈スリープ・ダーツ〉が着弾時に爆発するようになる。この爆発には敵の移動速度を下げ、45の継続ダメージを3秒かけて与える効果がある"
+  },
+  "ana/minorPerks/assets/perks/ana_minor_02_speed-serum.webp": {
+    "name": "スピード・セラム",
+    "description": "〈ナノ・ブースト〉を使用すると、ターゲットとアナ自身の移動速度が30%上がる"
+  },
+  "ana/majorPerks/assets/perks/ana_major_01_biotic-bounce.webp": {
+    "name": "バイオティック・バウンス",
+    "description": "〈バイオティック・グレネード〉が一度爆発した後に跳弾し、また爆発する。2回目の爆発によるダメージと回復量は60になる"
+  },
+  "ana/majorPerks/assets/perks/ana_major_02_headhunter.webp": {
+    "name": "ヘッド・ハンティング",
+    "description": "〈バイオティック・ライフル〉でクリティカル攻撃を繰り出せる"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_01_no-scope-needed.webp": {
+    "name": "スコープなんて飾り",
+    "description": "〈バイオティック・ライフル〉（スコープなし）のヒット後2秒間、攻撃速度が10%上がる。最大3回蓄積"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_02_pinpoint-prescription.webp": {
+    "name": "ピンポイント処方",
+    "description": "〈バイオティック・ライフル〉で敵と味方の両方にクリティカル・ヒットできる"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_03_dream-field.webp": {
+    "name": "ドリーム・フィールド",
+    "description": "〈スリープ・ダーツ〉の着弾地点から5メートル以内にいる味方が継続回復する。1秒ごとの回復量はアナ自身のライフ最大値の20%。回復の持続時間は5秒"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_04_comfy-cloud.webp": {
+    "name": "催眠ガス",
+    "description": "〈スリープ・ダーツ〉が着弾時に爆発し、周囲3メートル以内の敵にも当たる。ただし、スリープの持続時間は50%短い"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_05_home-remedy.webp": {
+    "name": "家伝薬",
+    "description": "+30%〈バイオティック・グレネード〉範囲­ 〈バイオティック・グレネード〉の持続時間分、自身の最大ライフ30%分の追加ライフが付与される"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_06_venomous.webp": {
+    "name": "ヴェノム",
+    "description": "〈バイオティック・グレネード〉が当たった敵に、75の追加継続ダメージを2秒間与える"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_07_my-turn.webp": {
+    "name": "私の番",
+    "description": "〈ナノ・ブースト〉の効果が、通常の100%の持続時間で、自身にも表れる"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_08_our-turn.webp": {
+    "name": "我らの番",
+    "description": "〈ナノ・ブースト〉の効果が、射線内にいる他の味方にも及ぶ。ただし、その持続時間は25%短い"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_09_artsy-dartsy.webp": {
+    "name": "芸術的狙撃",
+    "description": "スコープを覗きながら〈スリープ・ダーツ〉を撃てるようになる。この際、ダーツの弾速は300%上がり、基礎ダメージは75増える。命中させると、同アビリティのクールダウンが5秒短くなる"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_10_fountain-of-soothe.webp": {
+    "name": "イシスの涙",
+    "description": "〈スリープ・ダーツ〉に〈バイオティック・グレネード〉の効果が追加される。効果は通常の50%"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_11_nanonade.webp": {
+    "name": "ナノ・グレネード",
+    "description": "〈バイオティック・グレネード〉の効果を受けたすべての味方（自身を含む）が1.5秒間、〈ナノ・ブースト〉状態になる。ブーストの効果は通常の25%"
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_12_falconer.webp": {
+    "name": "鷹匠",
+    "description": "〈ナノ・ブースト〉に、攻撃速度50%上昇と、アルティメット・チャージ10%増加の効果が追加される"
+  },
+  "baptiste/minorPerks/assets/perks/baptiste_minor_01_expanded-field.webp": {
+    "name": "拡張フィールド",
+    "description": "〈イモータリティ・フィールド〉の範囲が30%広がる"
+  },
+  "baptiste/minorPerks/assets/perks/baptiste_minor_02_assault-burst.webp": {
+    "name": "アサルト・バースト",
+    "description": "〈リジェネ・バースト〉を発動してから3秒間、バティストの攻撃速度が20%上がる"
+  },
+  "baptiste/majorPerks/assets/perks/baptiste_major_01_automated-healing.webp": {
+    "name": "自動回復",
+    "description": "アビリティを使用すると、ライフを40回復する回復弾が最大3発、肩のタレットから味方に向けて一定間隔で発射される"
+  },
+  "baptiste/majorPerks/assets/perks/baptiste_major_02_rocket-boots.webp": {
+    "name": "ロケット・ブーツ",
+    "description": "〈エグゾブーツ〉でジャンプしている間にSpaceを使うと、水平方向にダッシュする"
+  },
+  "brigitte/minorPerks/assets/perks/brigitte_minor_01_combat-medic.webp": {
+    "name": "コンバット・メディック",
+    "description": "近接攻撃が敵にヒットするたびに〈リペア・パック〉のクールダウンが0.75秒短くなる"
+  },
+  "brigitte/minorPerks/assets/perks/brigitte_minor_02_morale-boost.webp": {
+    "name": "士気向上",
+    "description": "〈ウィップ・ショット〉で発動した〈インスパイア〉の持続時間が3秒伸びる"
+  },
+  "brigitte/majorPerks/assets/perks/brigitte_major_01_inspiring-strike.webp": {
+    "name": "奮起の一撃",
+    "description": "〈シールド・バッシュ〉を使用すると2秒間、移動速度が30%上がる。また、同アビリティで発動した〈インスパイア〉の回復が即時に適用される"
+  },
+  "brigitte/majorPerks/assets/perks/brigitte_major_02_whiplash.webp": {
+    "name": "ウィップラッシュ",
+    "description": "〈ウィップ・ショット〉のノックバックで敵を壁に打ちつけることができる。打ちつけ攻撃には60のダメージがある"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_01_whirlwhip.webp": {
+    "name": "ワールウィップ",
+    "description": "〈シールド・バッシュ〉または〈ウィップ・ショット〉後に繰り出す〈ロケット・フレイル〉が5メートル以内のすべての敵にヒットするようになる。その際のダメージも25%増える"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_02_righteous-cleave.webp": {
+    "name": "義烈の猛撃",
+    "description": "〈シールド・バッシュ〉または〈ウィップ・ショット〉の使用後に〈ロケット・フレイル〉でダメージを与えると、10メートル以内の味方がそのダメージの125%分回復する"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_03_burst-aid.webp": {
+    "name": "バースト・エイド",
+    "description": "アビリティ: リロードで〈リペア・パック〉のチャージを1つ消費して、ライフ最大値の20%分回復する。移動速度も50%上がる­ （クールダウン: 3秒）"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_04_optimizer.webp": {
+    "name": "オプティマイザー",
+    "description": "〈リペア・パック〉を発動するたびに〈リペア・パック〉の回復量が10%増え、ブリギッテ自身も1秒ごとにライフ最大値の4%分回復する"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_05_packstacker.webp": {
+    "name": "大増量パック",
+    "description": "〈リペア・パック〉の持続時間が25%伸びる。アビリティでダメージを与えると、発動中のすべての〈リペア・パック〉の持続時間が1秒伸びる"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_06_maces-to-faces.webp": {
+    "name": "顔にメイス！",
+    "description": "〈ウィップ・ショット〉のサイズが1メートル大きくなり、複数の敵にヒットする。〈ウィップ・ショット〉で発動した〈インスパイア〉の持続時間が1秒伸びる"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_07_god-ray.webp": {
+    "name": "戦神の後光",
+    "description": "10メートル以上離れたターゲットにアビリティでダメージを与えると、その相手が炎上し、着弾までの距離1メートルごとに5%の追加ダメージが発生する"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_08_sk-ldkastning.webp": {
+    "name": "シールド・スロー",
+    "description": "〈シールド・バッシュ〉使用後に〈ロケット・フレイル〉を使うと、シールドをブーメランのように飛ばして、〈シールド・バッシュ〉40%分のダメージを与える"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_09_lindholm-wall.webp": {
+    "name": "鉄壁のリンドホルム",
+    "description": "〈バリア・シールド〉のサイズが60%大きくなり、〈バリア・シールド〉のライフが100%増える。〈シールド・バッシュ〉が複数の敵にヒットする"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_10_mender-bender.webp": {
+    "name": "勇気の盾",
+    "description": "〈シールド・バッシュ〉の使用後、〈バリア・シールド〉のライフが33%回復し、〈インスパイア〉が発動する"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_11_aura-farming.webp": {
+    "name": "みんな、胸を張って",
+    "description": "アビリティで〈インスパイア〉が発動すると、その効果を受けたすべてのヒーローが自身のライフ最大値4%分の追加ライフを5秒間得る"
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_12_consecrated-ground.webp": {
+    "name": "聖域",
+    "description": "+25%アルティメット・チャージ率（開始時）­ 〈ラリー〉の発動中、1.5秒ごとに〈インスパイア〉が発動し、クールダウンが25%短くなる"
+  },
+  "illari/minorPerks/assets/perks/illari_minor_01_rapid-construction.webp": {
+    "name": "急速展開",
+    "description": "〈ヒーリング・パイロン〉の設置速度が300%上昇する。パイロンのクールダウンも2秒縮まる"
+  },
+  "illari/minorPerks/assets/perks/illari_minor_02_summer-solstice.webp": {
+    "name": "サマー・ソルスティス",
+    "description": "〈キャプティブ・サン〉発動中の飛行速度と攻撃速度が20%上昇し、飛行時間も3秒伸びる"
+  },
+  "illari/majorPerks/assets/perks/illari_major_01_solar-flare.webp": {
+    "name": "ソーラー・フレア",
+    "description": "〈ソーラー・ライフル〉で回復している間にを押すと、前方にいるすべての味方が100回復する"
+  },
+  "illari/majorPerks/assets/perks/illari_major_02_sunburn.webp": {
+    "name": "サンバーン",
+    "description": "〈アウトバースト〉に炎上効果が備わり、3秒間に50ダメージを追加で与える"
+  },
+  "jetpack-cat/minorPerks/assets/perks/jetpack-cat_minor_01_ulterior-motive.webp": {
+    "name": "空中給油",
+    "description": "〈バイオティック・パウショット〉で与えた回復の15%分、燃料が回復する"
+  },
+  "jetpack-cat/minorPerks/assets/perks/jetpack-cat_minor_02_transport-shielding.webp": {
+    "name": "運搬シールド",
+    "description": "他のヒーローを運搬している間、追加のシールドを最大50まで得る"
+  },
+  "jetpack-cat/majorPerks/assets/perks/jetpack-cat_major_01_7b90c625a71b1ab6.png": {
+    "name": "ゴロゴロゴロ",
+    "description": "〈ゴロゴロ〉の各パルスの数が3つになる"
+  },
+  "jetpack-cat/majorPerks/assets/perks/jetpack-cat_major_02_claws-out.webp": {
+    "name": "ひっかき攻撃",
+    "description": "クイック近接攻撃が6秒ごとに強化される。この強化には、裂傷（40ダメージ）の効果と、移動速度を1秒間、30%下げる効果がある"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_01_territorial.webp": {
+    "name": "ナワバリ",
+    "description": "〈ゴロゴロ〉の効果範囲内の敵に、回復量20%分のダメージを与える"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_02_purr-sistence.webp": {
+    "name": "ゴロゴロ大独唱",
+    "description": "自分以外の味方または敵1人が〈ゴロゴロ〉の効果を受けるごとに、同アビリティの持続時間が10%延びる（最大50%延長）。回復パルスの展開数は4回ごとにリセットされる"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_03_battle-fur-mation.webp": {
+    "name": "戦闘隊形・猫の手",
+    "description": "〈ライフライン〉をもう1人の味方に繋ぐことができる"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_04_tow-beans.webp": {
+    "name": "肉球スタンプ",
+    "description": "〈ライフライン〉または〈キャットナッパー〉に繋がれたヒーローをリリースした際、燃料が20%回復する­ また、ダメージを10与えるごとに燃料が1%回復する"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_05_frenzy.webp": {
+    "name": "凶事の猫爪",
+    "description": "アビリティ: クイック近接攻撃が最初に当たった敵に3秒間、移動速度低下の状態異常と40の継続ダメージを与える。またクイック近接攻撃の攻撃速度が1秒間、100%上がる­ （クールダウン: 8秒）"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_06_zoomies.webp": {
+    "name": "爆走フライト",
+    "description": "〈ワイルド・フライト〉を0.5秒以上維持して敵に体当たりすると、最大120ダメージの爆発が発生すると同時に、それまでのダッシュ距離に応じて燃料が最大40%回復する­ （クールダウン: 1.5秒）"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_07_lindholm-inspiration.webp": {
+    "name": "にゃんスパイア",
+    "description": "〈ゴロゴロ〉発動後3秒間、〈ゴロゴロ〉中に与えたダメージ30%分の追加ライフを〈ゴロゴロ〉の効果範囲内のすべての味方に与え、自身も10%分の追加ライフを得る"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_08_tomcat-reserves.webp": {
+    "name": "ゴロ・ダッシュ",
+    "description": "〈ワイルド・フライト〉発動中、〈ゴロゴロ〉のクールダウンが40%、他のすべてのアビリティのクールダウンが80%短くなる"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_09_ambidex-fur-ous.webp": {
+    "name": "ダブル・パウショット",
+    "description": "〈ゴロゴロ〉発動中、両方の銃で射撃する。ただしボーナス・ショットの性能は35%に抑えられる"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_10_bell-bomb.webp": {
+    "name": "トイ・ボム",
+    "description": "アビリティ: 〈ライフライン〉に、爆発するおもちゃのボールが付く。ボールが直撃した際のダメージは最大120­ （クールダウン: 6秒）"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_11_scratch-ageddon.webp": {
+    "name": "にゃルマゲドン",
+    "description": "+25%アルティメット・チャージ率（開始時）­ 〈キャットナッパー〉による突撃後3秒間、衝突地点付近にいるすべての敵に移動速度低下の状態異常と150の継続ダメージを与える"
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_12_bouncing-biscuits.webp": {
+    "name": "バウンシング・ショット",
+    "description": "〈バイオティック・パウショット〉を味方に当てると、周囲15メートル以内の味方1人に向かってその弾が跳ね返る。ただし跳弾後、その弾の回復量は50%に抑えられる"
+  },
+  "juno/minorPerks/assets/perks/juno_minor_01_familiar-vitals.webp": {
+    "name": "ファミリアー・バイタル",
+    "description": "〈パルサー・トーピード〉の味方へのロックオン速度が35%上昇する"
+  },
+  "juno/minorPerks/assets/perks/juno_minor_02_locked-on.webp": {
+    "name": "ロックオン",
+    "description": "〈パルサー・トーピード〉が敵にヒットするたびに、同アビリティのクールダウンが1秒短くなる"
+  },
+  "juno/majorPerks/assets/perks/juno_major_01_lift-off.webp": {
+    "name": "リフト・オフ",
+    "description": "〈マーシャン・オーバーブーツ〉で3段ジャンプが可能になる"
+  },
+  "juno/majorPerks/assets/perks/juno_major_02_faster-blaster.webp": {
+    "name": "スピード・ブラスター",
+    "description": "〈グライド・ブースト〉使用中、〈メディブラスター〉を連続で発射する"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_01_medimaster.webp": {
+    "name": "メディマスター",
+    "description": "〈メディブラスター〉のクリティカル・ダメージが50%増え、味方へのクリティカル判定が付く­ クリティカル・ヒットを達成すると、〈ハイパー・リング〉のクールダウンが0.2秒短くなる"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_02_stinger.webp": {
+    "name": "スティンガー",
+    "description": "〈メディブラスター〉がヒットした敵に1秒間かけて、追加で10の継続ダメージを与える（蓄積はしない）"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_03_medicinal-missiles.webp": {
+    "name": "メディミサイル",
+    "description": "〈パルサー・トーピード〉を当てた味方の受ける回復量が3秒間、50%増える"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_04_pulsar-plus.webp": {
+    "name": "パルサー・プラス",
+    "description": "〈パルサー・トーピード〉のチャージが1回増える"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_05_torpedo-glide.webp": {
+    "name": "トーピード・グライド",
+    "description": "〈グライド・ブースト〉の使用中、武器で75ダメージまたは100回復を与えるたびに〈パルサー・トーピード〉のクールダウンが1秒短くなる"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_06_blink-boosts.webp": {
+    "name": "ブリンク・ブースター",
+    "description": "〈グライド・ブースト〉のチャージ数が3になり、クールダウンが30%短くなる。ただし持続時間は75%短くなる"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_07_hyper-healer.webp": {
+    "name": "ハイパー・ヒーラー",
+    "description": "〈ハイパー・リング〉の効果を受けた味方に追加ライフを85与える"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_08_stellar-focus.webp": {
+    "name": "一番星",
+    "description": "〈グライド・ブースト〉使用中またはホバリング中、与えたダメージまたは回復から得られるアルティメット・チャージが75%増える­ また、〈オービタル・レイ〉がジュノを追尾するようになり、持続時間が50%長くなる"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_09_pulstar-destroyers.webp": {
+    "name": "パルサー・デストロイヤー",
+    "description": "〈パルサー・トーピード〉が着弾時に爆発し、20の回復またはダメージが発生する"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_10_fission-chamber.webp": {
+    "name": "ハイパー・ショット",
+    "description": "〈ハイパー・リング〉の効果を受けている間、〈メディブラスター〉がフルオートになる"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_11_heal-formation.webp": {
+    "name": "ヒーリング・フォーメーション",
+    "description": "与えたダメージの40%分、〈ハイパー・リング〉の効果を受けている味方が回復する"
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_12_marswalking.webp": {
+    "name": "マーズ・ジャンプ",
+    "description": "〈ハイパー・リング〉が水平に展開される。このリングをくぐると、ジュノ自身のジャンプ高が250%上がる­ 味方1人が〈ハイパー・リング〉をくぐると、同アビリティのクールダウンが1秒短くなる"
+  },
+  "kiriko/minorPerks/assets/perks/kiriko_minor_01_urgent-care.webp": {
+    "name": "神速快気",
+    "description": "〈快気の御札〉でライフが半分未満の味方を対象にすると、お札の飛翔速度が50%上がる"
+  },
+  "kiriko/minorPerks/assets/perks/kiriko_minor_02_fortune-teller.webp": {
+    "name": "巫女の占い",
+    "description": "〈クナイ〉が敵にヒットするたびに、正面の味方1人に向かって〈快気の御札〉を2枚放つ"
+  },
+  "kiriko/majorPerks/assets/perks/kiriko_major_01_ready-step.webp": {
+    "name": "二の手の構え",
+    "description": "〈神出鬼没〉を使用すると3秒間、自身の攻撃速度とリロード速度が40%上がる"
+  },
+  "kiriko/majorPerks/assets/perks/kiriko_major_02_foxtrot.webp": {
+    "name": "狐火",
+    "description": "〈鈴のご加護〉を使用すると4秒間、その効果を受けた味方の移動速度が30%上がる"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_01_foxy-fireworks.webp": {
+    "name": "狐火の刃",
+    "description": "アビリティまたはガジェット使用後に投げる〈クナイ〉の最初の5本が命中時に爆発し、付近の敵に20のダメージを与える"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_02_keen-kunai.webp": {
+    "name": "鋭利なクナイ",
+    "description": "〈クナイ〉がクリティカル・ヒットすると、アビリティのクールダウンが25%短くなり、クナイが3本回復する"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_03_good-fortune.webp": {
+    "name": "幸運",
+    "description": "〈クナイ〉が敵にヒットするたびに、〈快気の御札〉が正面の味方1人に向かって3枚飛ぶ"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_04_leaf-on-the-wind.webp": {
+    "name": "木の葉の舞",
+    "description": "〈快気の御札〉が別の味方のもとへ最大2回跳ね返る。その際の回復量は30%になる"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_05_self-care.webp": {
+    "name": "自己快気",
+    "description": "〈快気の御札〉を1枚飛ばすごとに、ライフ最大値の2%分、自己回復する"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_06_supported-shooting.webp": {
+    "name": "武者の御札",
+    "description": "+100%〈快気の御札〉追尾範囲­ 〈快気の御札〉で回復した味方の攻撃速度が3秒間、20%上がる"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_07_fleet-foot.webp": {
+    "name": "俊足",
+    "description": "〈神出鬼没〉をターゲットへのロックオンなしで、進行方向に繰り出せる。ロックオンなしで使用すると、移動距離は50%、クールダウンは20%短くなる"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_08_clone-conjuration.webp": {
+    "name": "分身の魔法",
+    "description": "〈神出鬼没〉の使用後、与えるダメージと回復量が65%少ない自分の分身を4秒間展開する"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_09_cleansing-charge.webp": {
+    "name": "浄化チャージ",
+    "description": "〈鈴のご加護〉で味方1人の状態異常を解除するごとに、アルティメット・チャージを5%得る"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_10_donut-delivery.webp": {
+    "name": "ドーナツ便",
+    "description": "〈神出鬼没〉を使用すると、2秒間かけて付近の味方のライフを80回復する"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_11_talisman-of-life.webp": {
+    "name": "生命の御守",
+    "description": "〈鈴のご加護〉で5秒間、追加ライフを80与えられるようになる。効果を受けた味方1人ごとに〈神出鬼没〉のクールダウンが1秒短くなる"
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_12_our-bikes.webp": {
+    "name": "サイクリスト・トレイル",
+    "description": "〈狐走り〉使用後、他のすべてのアビリティのクールダウンがリセットされる­ 〈狐走り〉の足跡を辿った味方のライフが毎秒80回復する"
+  },
+  "lifeweaver/minorPerks/assets/perks/lifeweaver_minor_01_petal-protection.webp": {
+    "name": "癒しの花弁",
+    "description": "〈ペタル・プラットフォーム〉に立っている間、自身を含む味方のライフが毎秒20回復する"
+  },
+  "lifeweaver/minorPerks/assets/perks/lifeweaver_minor_02_dashing-escape.webp": {
+    "name": "追い風",
+    "description": "〈若返りの風〉の距離が30%伸びる"
+  },
+  "lifeweaver/majorPerks/assets/perks/lifeweaver_major_01_sow-the-seed.webp": {
+    "name": "活力の種",
+    "description": "〈ヒーリング・ブロッサム〉発動中にクイック近接攻撃を繰り出すと、種を前方に放つ。この種を拾った味方は追加ライフと移動速度のボーナスを得る"
+  },
+  "lifeweaver/majorPerks/assets/perks/lifeweaver_major_02_superbloom.webp": {
+    "name": "スーパーブルーム",
+    "description": "一定数の棘を2.5秒以内に同一の敵へ当てると、棘が爆発して40の追加ダメージを与える"
+  },
+  "lucio/minorPerks/assets/perks/lucio_minor_01_soundwave-rider.webp": {
+    "name": "サウンドウェーブ・ライダー",
+    "description": "〈ウォール・ライド〉で移動すると次の〈サウンドウェーブ〉のノックバックが25%、ダメージが50%アップする"
+  },
+  "lucio/minorPerks/assets/perks/lucio_minor_02_beat-drop.webp": {
+    "name": "ビート・ドロップ",
+    "description": "〈サウンド・バリア〉の発動後4秒間、〈アンプ・イット・アップ〉が有効になる"
+  },
+  "lucio/majorPerks/assets/perks/lucio_major_01_noise-violation.webp": {
+    "name": "メイク・サム・ノイズ",
+    "description": "〈アンプ・イット・アップ〉の発動中、〈クロスフェード〉の範囲が150%拡大する"
+  },
+  "lucio/majorPerks/assets/perks/lucio_major_02_accelerando.webp": {
+    "name": "アッチェレランド",
+    "description": "〈スピード・ブースト〉中のルシオ自身の攻撃速度が15%上がる。このボーナスは〈アンプ・イット・アップ〉中、3倍に増える"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_01_premium-streaming.webp": {
+    "name": "プレミアム配信",
+    "description": "+50%弾速­ 〈クロスフェード〉の効果範囲内にいる自分以外の味方1人ごとに攻撃速度が6%上がり、その味方を与えたダメージの30%分回復する（〈アンプ・イット・アップ〉中は効果が2倍）"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_02_mixtape.webp": {
+    "name": "ミックス・テープ",
+    "description": "〈ヒーリング・ブースト〉に切り替えた際、〈スピード・ブースト〉が持続した時間に応じてバースト回復が発生する。1秒当たりの回復量は、〈ヒーリング・ブースト〉の毎秒の回復量65%に相当する"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_03_signature-shift.webp": {
+    "name": "シグネチャー・シフト",
+    "description": "〈アンプ・イット・アップ〉の発動中、〈ソニック・アンプリファイア〉がフルオート射撃になり、弾のサイズが80%大きくなる"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_04_fast-forward.webp": {
+    "name": "早送り",
+    "description": "移動速度と動きの勢いに応じてダメージと回復量が最大30%まで増える"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_05_radio-edit.webp": {
+    "name": "ラジオ・エディット",
+    "description": "〈アンプ・イット・アップ〉の使用後、追加ライフの量が80%少ない〈サウンド・バリア〉が発動する"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_06_vivace.webp": {
+    "name": "ヴィヴァーチェ",
+    "description": "〈ウォール・ライド〉を0.5秒継続するごとに、または武器ダメージを与えるごとに、移動速度が1%上がる。効果は5秒間持続し、最大30回まで累積"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_07_megaphone.webp": {
+    "name": "メガホン",
+    "description": "〈アンプ・イット・アップ〉の使用中、〈クロスフェード〉の範囲が150%広がる。また、武器でダメージを与えると、〈アンプ・イット・アップ〉の持続時間が0.25秒長くなる（最大3秒）"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_08_crowd-pleaser.webp": {
+    "name": "ファン・サービス",
+    "description": "〈サウンドウェーブ〉を使用すると、〈クロスフェード〉の効果を受けている味方全員のライフが〈サウンドウェーブ〉のダメージ40%分回復する。〈アンプ・イット・アップ〉の使用中、この回復量は倍増する"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_09_rhythm-rail.webp": {
+    "name": "リズム・レール",
+    "description": "〈ウォール・ライド〉で3秒間移動すると、次に発射する〈サウンドウェーブ〉のノックバックが25%、そのダメージも100%アップする"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_10_reverb.webp": {
+    "name": "リバーブ",
+    "description": "〈サウンドウェーブ〉の使用後3秒間、同アビリティを通常よりも50%低いダメージでもう一度使える"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_minor_02_beat-drop.webp": {
+    "name": "ビート・ドロップ",
+    "description": "〈サウンド・バリア〉の着地に75の爆発ダメージとクリティカル判定が付く。クリティカル時のダメージは300%。アルティメット・チャージを消費すると、同アビリティのダメージが2倍になる"
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_12_hip-hop.webp": {
+    "name": "ヒップ・ホップ",
+    "description": "〈ウォール・ライド〉後、空中でもう1回ジャンプを繰り出せる。〈ウォール・ライド〉中または空中にいる間、アビリティのクールダウンは10%短くなる"
+  },
+  "mercy/minorPerks/assets/perks/mercy_minor_01_angelic-resurrection.webp": {
+    "name": "エンジェリック・リザレクション",
+    "description": "〈リザレクト〉の発動後、マーシー自身が追加ライフを100得る"
+  },
+  "mercy/minorPerks/assets/perks/mercy_minor_02_winged-reach.webp": {
+    "name": "天使の翼",
+    "description": "〈ガーディアン・エンジェル〉の射程が30%伸びる"
+  },
+  "mercy/majorPerks/assets/perks/mercy_major_01_chain-boost.webp": {
+    "name": "チェイン・ブースト",
+    "description": "〈カデュケウス・スタッフ〉のダメージ・ブーストが5%増えるほか、同ビームが付近にいるもう1人の味方にもリンクするようになる"
+  },
+  "mercy/majorPerks/assets/perks/mercy_major_02_double-dose.webp": {
+    "name": "ダブル・ドーズ",
+    "description": "〈フラッシュ・ヒール〉のチャージ数が1増える。ただし、基本回復量は10減る"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_01_threads-of-fate.webp": {
+    "name": "運命の糸",
+    "description": "〈カデュケウス・スタッフ〉を直前に繋げていた相手へ、同アビリティが3秒間リンクする。ただし性能は30%に抑えられる"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_02_battle-medic.webp": {
+    "name": "バトル・メディック",
+    "description": "〈カデュケウス・ブラスター〉に切り替えると、〈カデュケウス・スタッフ〉を他のヒーローに繋いでいた秒数分、最大20秒間、攻撃速度が20%上がるほか、同武器に20%のライフ吸収能力が付く"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_03_renaissance.webp": {
+    "name": "ルネッサンス",
+    "description": "〈リザレクト〉の使用に成功すると、〈ヴァルキリー〉を5秒間発動する"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_04_equivalent-exchange.webp": {
+    "name": "対価と報酬",
+    "description": "〈リザレクト〉のチャージ数が3増え、発動にかかる時間が33%縮まる。ただし、チャージ数が自動で回復することはない­ 〈カデュケウス・ブラスター〉でダメージを750与えると、チャージ数が1回復する"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_05_the-whambulance.webp": {
+    "name": "空飛ぶお医者様",
+    "description": "〈ガーディアン・エンジェル〉の発動終了時、移動した距離1メートルごとに対象のライフを4回復する"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_major_02_double-dose.webp": {
+    "name": "ダブル・ドーズ",
+    "description": "〈フラッシュ・ヒール〉のチャージ数が1つ増える。〈ヴァルキリー〉発動時、〈フラッシュ・ヒール〉のチャージ数が1回復する"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_07_serenity.webp": {
+    "name": "セレニティ",
+    "description": "〈シンパセティック・リカバリー〉の回復量が10%増え、ライフがフルの味方を回復しても自己回復の効果を得る­ 〈カデュケウス・スタッフ〉で最大50の追加ライフを付与できる"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_08_distortion.webp": {
+    "name": "ディストーション",
+    "description": "〈フラッシュ・ヒール〉の使用後2秒間、自身の最大ライフ25%分の追加ライフがターゲットに付与され、ターゲットの周囲5メートルにいる敵がノックバックする"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_09_first-responder.webp": {
+    "name": "ファースト・レスポンダー",
+    "description": "〈リザレクト〉で蘇生した味方とマーシーの両方が6秒間、追加ライフを250得る"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_10_angelic-acrobatics.webp": {
+    "name": "天使の舞",
+    "description": "+15%〈ガーディアン・エンジェル〉発進速度­ 〈ガーディアン・エンジェル〉のクールダウンが、ジャンプするかしゃがむとすぐに始まる"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_11_supply-surge.webp": {
+    "name": "波状支援",
+    "description": "〈フラッシュ・ヒール〉で移動速度が20%、クールダウンの回復速度が100%上がり、自身とターゲットに2秒間、20%のライフ吸収効果が付く"
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_12_tethered-tourniquet.webp": {
+    "name": "血止めの連帯",
+    "description": "〈カデュケウス・ブラスター〉に切り替えると、それまで〈カデュケウス・スタッフ〉と繋がっていた味方がそのリンク時間分、その後も自動的に回復する。回復量は毎秒100%、持続時間はリンク時間1秒につき2秒、最大20秒持続"
+  },
+  "mizuki/minorPerks/assets/perks/mizuki_minor_01_wellspring.webp": {
+    "name": "溢れる泉",
+    "description": "〈癒しの波動〉の生成量が25%増える"
+  },
+  "mizuki/minorPerks/assets/perks/mizuki_minor_02_exposed-soul.webp": {
+    "name": "露魂",
+    "description": "〈呪縛〉を当てた敵に対するミズキのダメージが2秒間、30%増える"
+  },
+  "mizuki/majorPerks/assets/perks/mizuki_major_01_resonant-return.webp": {
+    "name": "快気の共鳴",
+    "description": "〈快気の笠〉がさらに1回バウンドする。また、同アビリティの回復量がバウンドするごとに10増える"
+  },
+  "mizuki/majorPerks/assets/perks/mizuki_major_02_quickstep.webp": {
+    "name": "変幻出没",
+    "description": "〈形代〉発動中、〈癒しの波動〉内の味方の移動速度が20%上がる"
+  },
+  "moira/minorPerks/assets/perks/moira_minor_01_destruction-s-divide.webp": {
+    "name": "一極集中",
+    "description": "〈コアレッセンス〉のビームが回復のみとダメージのみの切り替え式になり、効果が30%上がる"
+  },
+  "moira/minorPerks/assets/perks/moira_minor_02_ethical-nourishment.webp": {
+    "name": "高濃度注入",
+    "description": "〈バイオティック・オーブ〉と干渉した味方は、最初の回復量30が即時に回復する（自身を含む）"
+  },
+  "moira/majorPerks/assets/perks/moira_major_01_reversal.webp": {
+    "name": "リバーサル",
+    "description": "〈バイオティック・オーブ〉を再発動すると移動方向が逆転する"
+  },
+  "moira/majorPerks/assets/perks/moira_major_02_phantom-step.webp": {
+    "name": "ファントム・ステップ",
+    "description": "〈フェード〉の持続時間が0.5秒伸び、発動中は50%高くジャンプできる"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_01_necrotic-orb.webp": {
+    "name": "ネクロティック・オーブ",
+    "description": "アビリティ: リロードを押すと、3秒持続する〈オーブ〉を1個射出する。このオーブのダメージは最大35。敵から受けたダメージを50%減らす効果もある­ （クールダウン: 8秒）"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_02_ethereal-excision.webp": {
+    "name": "極点集中",
+    "description": "〈バイオティック・オーブ〉と干渉したターゲットに〈バイオティック・グラスプ〉または〈コアレッセンス〉を使うと、20%のクリティカル・ダメージまたは追加回復が発生する"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_03_chain-grasp.webp": {
+    "name": "チェイン・グラスプ",
+    "description": "アビリティまたはガジェットの使用後2秒間、〈バイオティック・グラスプ〉（サブ攻撃）が10メートル以内の2人の敵に追加でリンクする"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_04_cross-orbal.webp": {
+    "name": "クロス・オーバル",
+    "description": "〈バイオティック・オーブ〉の発射時、選択しなかった方のオーブも射出する。ただし、追加のオーブのエネルギー量は60%少ない"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_05_multiball.webp": {
+    "name": "マルチボール",
+    "description": "選択した〈バイオティック・オーブ〉を2個追加で発射する。追加オーブの性能は85%低い"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_06_phantasm.webp": {
+    "name": "幻影",
+    "description": "〈フェード〉の使用時、最後に選んだ〈バイオティック・オーブ〉をその場に設置する。ただし、持続時間は50%短く、エネルギー量は50%少ない"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_07_precarious-potency.webp": {
+    "name": "不安定な潜在能力",
+    "description": "〈バイオティック・グラスプ〉で回復した味方を5秒間かけて、追加で回復する。回復量は〈バイオティック・グラスプ〉の25%に相当する"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_08_voidhoppers.webp": {
+    "name": "虚無の住人たち",
+    "description": "〈フェード〉の使用中にターゲットを通過すると、ライフ最大値10%分の追加ライフを得る。味方を通過すると、その味方に同じ量の追加ライフとフェーズ効果を短時間付与する"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_09_remote-reciprocity.webp": {
+    "name": "相互作用",
+    "description": "〈バイオティック・グラスプ〉で300回復すると5秒間、サブ攻撃の射程が25%、ダメージが15%アップする"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_10_orbsplosion.webp": {
+    "name": "オーブ・エクスプロージョン",
+    "description": "〈バイオティック・オーブ〉を再発動すると、展開中のオーブがすべて爆発し、オーブの最大エネルギー量のうち最大45%の回復または最大30%のダメージを与える"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_11_spectral-beam.webp": {
+    "name": "影の一閃",
+    "description": "〈フェード〉中に敵を通過すると、〈コアレッセンス〉が1.25秒間発動する。効果は100%。持続時間は、別の敵をさらに通過するごとに0.75秒長くなる"
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_12_destruction-s-divide.webp": {
+    "name": "一極集中",
+    "description": "+25%アルティメット・コスト減少率­ 〈コアレッセンス〉のビームが、回復のみ/ダメージのみの切り替え式になり、効果が30%上がる"
+  },
+  "wuyang/minorPerks/assets/perks/wuyang_minor_01_overflow.webp": {
+    "name": "氾濫",
+    "description": "〈飛流歩〉使用時に弾薬を10、回復リソースを50%得る"
+  },
+  "wuyang/minorPerks/assets/perks/wuyang_minor_02_balance.webp": {
+    "name": "均衡",
+    "description": "水球でダメージを与えると2秒間、〈養神泉〉の自動回復量が30%増える"
+  },
+  "wuyang/majorPerks/assets/perks/wuyang_major_01_ebb-and-flow.webp": {
+    "name": "引潮",
+    "description": "〈守衛波浪〉が起点へと引き返すようになる"
+  },
+  "wuyang/majorPerks/assets/perks/wuyang_major_02_falling-rain.webp": {
+    "name": "降雨",
+    "description": "与えるダメージが60%低く、強化時の爆発範囲が25%小さい水球を3つ同時に操作できる"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_01_undertow.webp": {
+    "name": "循環",
+    "description": "〈玄武之杖〉の水球が命中するごとに、〈養神泉〉のリソースを10%獲得し、クールダウンも0.5秒短くなる"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_02_ripple-sense.webp": {
+    "name": "波紋の目",
+    "description": "〈玄武之杖〉の水球（強化時）の操作性が向上し、爆発範囲が35%広がる。また、水球の着弾地点8メートル以内にいる敵の位置が5秒間わかるようになる。この可視化機能は5秒ごとに、次の水球へと付与される"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_03_paindrops.webp": {
+    "name": "霧雨",
+    "description": "いずれかのアビリティかガジェットの使用後、最初の3回は〈玄武之杖〉で放つ水球が2つ増える。追加の水球1つごとのダメージは30%"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_04_flow-state.webp": {
+    "name": "白波",
+    "description": "〈飛流歩〉の発動中、50ダメージか75回復を与えるごとに〈飛流歩〉の持続時間が1秒長くなる。最大5秒"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_05_bifurcation.webp": {
+    "name": "恵みの水",
+    "description": "アビリティの使用後5秒間、〈養神泉〉のリソース回復が直前のターゲットに追加で付与される。追加ターゲットに対する回復量は通常の100%。また、〈養神泉〉（自動回復）をもう1人のターゲットに付与できるようになる"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_06_tidal-save.webp": {
+    "name": "守の波頭",
+    "description": "〈養神泉〉（自動回復）を付与している味方に〈守衛波浪〉を当てると、その味方が4秒かけて75%さらに回復する。また、当てた味方1人ごとに〈養神泉〉のリソースも15%回復する"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_07_streamline.webp": {
+    "name": "癒しの波動",
+    "description": "〈飛流歩〉の発動中、回復量が25%少ない〈養神泉〉（自動回復）を射線上にいるのすべての味方（自分以外）に付与する"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_08_puddle-stomp.webp": {
+    "name": "癒しの水沫",
+    "description": "〈飛流歩〉の発動中にジャンプから着地すると、6メートル以内の味方が回復する。回復は連続降下時間が1秒カウントされるごとに75発生する"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_09_splash-strike.webp": {
+    "name": "波浪拳",
+    "description": "〈飛流歩〉で空中にいる間にクイック近接攻撃を繰り出すと、効果が75%の短い〈守衛波浪〉がウーヤンを基点に発生する­ （クールダウン: 8秒）"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_10_waveshatter.webp": {
+    "name": "爆波",
+    "description": "〈守衛波浪〉にクリティカル判定が付く。この判定は同アビリティの基点近くにいる敵に限られる。また、波の移動時間に応じて、〈守衛波浪〉の幅が最大150%広がり、その効果も最大75%増える"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_11_current-confluence.webp": {
+    "name": "陰陽の調和",
+    "description": "+25%〈養神泉〉持続時間­ 〈養神泉〉（自動回復）または〈守衛波浪〉の影響下にある味方が、ウーヤン自身の与えたダメージの30%分回復する"
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_major_01_ebb-and-flow.webp": {
+    "name": "引潮",
+    "description": "〈守衛波浪〉が、50%のダメージ量で開始地点へと引き返す"
+  },
+  "zenyatta/minorPerks/assets/perks/zenyatta_minor_01_discordant-repair.webp": {
+    "name": "生気を司りし者",
+    "description": "〈不和のオーブ〉を付与した敵のライフを15%吸収できる"
+  },
+  "zenyatta/minorPerks/assets/perks/zenyatta_minor_02_ascendance.webp": {
+    "name": "沖天",
+    "description": "ジャンプした後、もう一度ジャンプを長押しすると、最大3秒間ホバリングする"
+  },
+  "zenyatta/majorPerks/assets/perks/zenyatta_major_01_focused-destruction.webp": {
+    "name": "集中破壊",
+    "description": "サブ攻撃のチャージ時間が20%早くなり、〈破壊のオーブ〉が追加で1つ増える"
+  },
+  "zenyatta/majorPerks/assets/perks/zenyatta_major_02_dual-harmony.webp": {
+    "name": "二重の調和",
+    "description": "〈調和のオーブ〉をもう1つ付与できるが、それぞれの回復量は70%に下がる"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_01_flying-kick.webp": {
+    "name": "旋風脚",
+    "description": "アビリティ: 空中にいる間、クイック近接攻撃が25%のボーナス・ダメージ付きのダッシュ・キックになる。このキックで敵を壁に叩きつけると、スタン効果と40ダメージを与えられる­ （クールダウン: 5秒）"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_02_it-s-orbin--time.webp": {
+    "name": "破壊のマントラ",
+    "description": "〈破壊のオーブ〉（サブ攻撃）の最大チャージ数が3増える"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_03_enlightenment.webp": {
+    "name": "還流",
+    "description": "与えたダメージの30%分、〈調和のオーブ〉を付与されている味方のライフが回復する"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_major_02_dual-harmony.webp": {
+    "name": "二重の調和",
+    "description": "〈調和のオーブ〉をもう1つ付与できるが、それぞれの回復量は35%下がる"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_05_gotta-have-faith.webp": {
+    "name": "信ずるものに力を",
+    "description": "〈調和のオーブ〉を付与したターゲットへの射線が切れてからオーブが外れるまでの時間が10秒長くなる"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_06_inner-peace.webp": {
+    "name": "内なる平穏",
+    "description": "自身に〈調和のオーブ〉が1つ永続的に付与される。その効果は80%下がる"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_07_discord-inferno.webp": {
+    "name": "不和と業",
+    "description": "〈不和のオーブ〉を付与しているターゲットにクリティカル・ヒットを与えると、当てた〈破壊のオーブ〉が爆発し、50ダメージを与える"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_08_discord-fever.webp": {
+    "name": "蝕む邪念",
+    "description": "〈不和のオーブ〉をターゲットに付与すると、その相手に5秒間かけて50の継続ダメージを与える"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_09_instant-karma.webp": {
+    "name": "巡る因果",
+    "description": "〈不和のオーブ〉を付与しているターゲットからダメージを受けると、そのダメージの25%分の継続回復が2秒間かけて発生する"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_10_circle-of-strife.webp": {
+    "name": "邪念の輪",
+    "description": "〈心頭滅却〉の発動中、範囲内の敵全員に〈不和のオーブ〉を付与する"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_11_soul-control.webp": {
+    "name": "没我の舵",
+    "description": "〈心頭滅却〉を途中でキャンセルしてアルティメット・チャージを最大で65%節約できる"
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_12_sharpened-focus.webp": {
+    "name": "研ぎ澄まされる感性",
+    "description": "〈破壊のオーブ〉（サブ攻撃）のチャージ速度が20%上がる。チャージ中、オーブを1個チャージするごとに5%の移動速度ボーナスと、最大ライフ値5%分の追加ライフを得る"
+  },
+  "dva/minorPerks/assets/perks/dva_minor_01_bunny-power.webp": {
+    "name": "バニー・パワー",
+    "description": "〈緊急脱出！〉後、一時的に75の追加ライフを得る。〈メック召喚〉のダメージ範囲が50%広がる"
+  },
+  "dva/minorPerks/assets/perks/dva_minor_02_extended-boosters.webp": {
+    "name": "延長ブースター",
+    "description": "〈ブースター〉の体当たりダメージが40%増加する。また、〈ブースター〉の体当たりに成功すると、同アビリティの持続時間が0.5秒長くなる"
+  },
+  "dva/majorPerks/assets/perks/dva_major_01_shield-system.webp": {
+    "name": "シールド・システム",
+    "description": "100のライフをシールドに変換する。〈ディフェンス・マトリックス〉で吸収したダメージの25%分、シールドが回復する"
+  },
+  "dva/majorPerks/assets/perks/dva_major_02_precision-fusion.webp": {
+    "name": "フュージョン・エイム",
+    "description": "Rを押すことで〈フュージョン・キャノン〉の弾の拡散が3秒間、75%抑えられる"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_01_focused-fusion.webp": {
+    "name": "チョーク交換",
+    "description": "〈フュージョン・キャノン〉の拡散率が50%減り、減衰距離が20メートル長くなる。8メートル以上離れた敵に武器ダメージを与えると、〈ディフェンス・マトリックス〉のリカバリー速度が33%上がる"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_02_legendary-loadout.webp": {
+    "name": "レジェンダリー・ロードアウト",
+    "description": "〈マイクロ・ミサイル〉がヘビー・ロケット6発に置き換わる。ヘビー・ロケットの爆風ダメージは375%多く、爆風の範囲も100%広い"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_03_overstocked.webp": {
+    "name": "オーバーストック",
+    "description": "〈マイクロ・ミサイル〉のチャージが1回増える"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_04_countermeasures.webp": {
+    "name": "自動カウンター・システム",
+    "description": "〈ディフェンス・マトリックス〉でダメージを150軽減するたびに、〈マイクロ・ミサイル〉が3発、自動で発射される"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_05_ignition-burst.webp": {
+    "name": "イグニッション・バースト",
+    "description": "〈ブースター〉でダメージを与えた敵が炎上し、2秒かけて40の継続ダメージが発生する"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_06_meka-punch.webp": {
+    "name": "MEKAパンチ",
+    "description": "〈ブースター〉の使用中に繰り出すクイック近接攻撃の攻撃速度が50%上がる­ クイック近接攻撃か〈ブースター〉でキルすると、〈ブースター〉のクールダウンがリセットされる"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_07_tokki-slam.webp": {
+    "name": "トッキ・スラム",
+    "description": "〈ブースター〉の使用中にしゃがむと、地面に向かってスラム攻撃を繰り出せる。スラム攻撃には、ライフ最大値15%分のダメージと、敵を上方向にノックバックする効果がある"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_08_facetanking.webp": {
+    "name": "メディカル・マトリックス",
+    "description": "〈ディフェンス・マトリックス〉で150ダメージを軽減すると、自身がそのダメージの15%分回復し、6メートル以内のすべての味方もそのダメージの25%分回復する"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_09_stat-boost.webp": {
+    "name": "スタッツ・ブースト",
+    "description": "〈ブースター〉でダメージを与えると、同アビリティの持続時間が0.5秒延びるほか、〈ディフェンス・マトリックス〉のエネルギーが5%回復し、ライフ最大値も5%分回復する"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_10_7ac621d3abe95810.png": {
+    "name": "MEKAイジェクター",
+    "description": "〈自爆〉の爆発までの時間が25%早まり、アルティメット・チャージ消費量が60%減る。代わりに、与えられるダメージが75%減り、起爆後に得られるアルティメット・チャージも75%になる"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_12_multi-task-mod.webp": {
+    "name": "マルチ・タスクMod",
+    "description": "〈フュージョン・キャノン〉を〈ディフェンス・マトリックス〉の展開中に撃てる"
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_12_df1b48ee1dca0920.png": {
+    "name": "MEKA脱出シールド",
+    "description": "+50%〈メック召喚〉効果範囲­ メックを脱出または召喚してから5秒間、自身のライフ最大値20%分の追加ライフが付近の味方全員に付与される"
+  },
+  "domina/minorPerks/assets/perks/domina_minor_01_efficient-design.webp": {
+    "name": "効率的デザイン",
+    "description": "〈バリア・アレイ〉使用時にシールドが50回復し、自己回復のパッシブが発動する"
+  },
+  "domina/minorPerks/assets/perks/domina_minor_02_extended-power.webp": {
+    "name": "マグナム・ブースター",
+    "description": "〈フォトン・マグナム〉の射程が20%伸びる"
+  },
+  "domina/majorPerks/assets/perks/domina_major_01_disruptive-detonation.webp": {
+    "name": "ディスラプティブ・デトネーション",
+    "description": "〈クリスタル・チャージ〉の爆発に当たった敵の移動速度が2秒間、30%下がる"
+  },
+  "domina/majorPerks/assets/perks/domina_major_02_corporate-retreat.webp": {
+    "name": "バリア移動",
+    "description": "〈バリア・アレイ〉を展開中に一度だけ移動できるようになる"
+  },
+  "doomfist/minorPerks/assets/perks/doomfist_minor_01_one-two.webp": {
+    "name": "ワン・ツー",
+    "description": "〈ロケット・パンチ〉で敵を壁に叩きつけると、〈ハンド・キャノン〉が全弾+2発追加でリロードされる"
+  },
+  "doomfist/minorPerks/assets/perks/doomfist_minor_02_survival-of-the-fittest.webp": {
+    "name": "適者生存",
+    "description": "敵をキルすると、〈攻撃は最大の防御なり〉により25の追加ライフを得る。また、得られる追加ライフの最大値が50増える"
+  },
+  "doomfist/majorPerks/assets/perks/doomfist_major_01_aftershock.webp": {
+    "name": "アフターショック",
+    "description": "〈サイズミック・スラム〉がヒットした敵の移動速度が2秒間、40%下がる"
+  },
+  "doomfist/majorPerks/assets/perks/doomfist_major_02_power-matrix.webp": {
+    "name": "パワー・マトリックス",
+    "description": "〈パワー・ブロック〉の発動後0.8秒間、投射物を吸収できる"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_01_rising-uppercut.webp": {
+    "name": "ライジング・アッパーカット",
+    "description": "アビリティ: 次に繰り出すクイック近接攻撃が〈ライジング・アッパーカット〉になり、ダメージが20増える­ （クールダウン: 10秒）"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_02_jab-cross.webp": {
+    "name": "ジャブ＆クロス",
+    "description": "アビリティの使用後0.75秒間、攻撃速度が75%上がり、クイック近接攻撃のリーチも1メートル長くなる"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_03_the-bestest-defense.webp": {
+    "name": "攻撃は最大にして最強の防御なり",
+    "description": "クイック近接による攻撃または〈ハンド・キャノン〉のクリティカル・ヒットを達成すると、〈攻撃は最大の防御なり〉が50%の効果で発動する"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_04_slam-wham.webp": {
+    "name": "パワー・スラム",
+    "description": "滞空時間に応じて、〈サイズミック・スラム〉のダメージが最大75%、効果範囲が最大50%までアップする"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_05_overpowered.webp": {
+    "name": "オーバーパワー",
+    "description": "〈パワー・ブロック〉で150%以上のダメージを防ぐと〈ロケット・パンチ〉がさらに強化され、パンチのダメージが50%、効果範囲が50%アップする"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_06_jetforce-jab.webp": {
+    "name": "ジェット・ストレート",
+    "description": "〈ロケット・パンチ〉が複数の敵を貫通する。また、パンチに当たった敵が3秒間炎上し、20%の追加ダメージが発生する"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_07_boomfist.webp": {
+    "name": "金色の剛腕",
+    "description": "〈ロケット・パンチ〉が別の敵に追加でヒットするたびに、アルティメット・チャージが5%増え、〈パワー・ブロック〉のクールダウンが0.5秒短くなる"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_08_asteroid-smash.webp": {
+    "name": "アステロイド・スマッシュ",
+    "description": "アビリティ: 空中でしゃがむと、ミニ〈メテオ・ストライク〉が発動し、敵は下向きに引っ張られる。そのダメージは移動距離に応じて150まで増える­ （クールダウン: 8秒）"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_09_aftershock.webp": {
+    "name": "アフターショック",
+    "description": "〈サイズミック・スラム〉の衝撃波が発生してから1.5秒後、2度目の衝撃波が40%のダメージでふたたび発生する"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_10_seismic-rally.webp": {
+    "name": "サイズミック・ラリー",
+    "description": "〈サイズミック・スラム〉の滞空時間が1秒カウントされるごとに、自身のライフ最大値5%分の追加ライフが視界内の味方全員に3秒間付与される"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_11_block-party.webp": {
+    "name": "ヒーリング・ブロック",
+    "description": "〈パワー・ブロック〉中、自身と8メートル以内のすべての味方が毎秒回復する。自身の1秒あたりの回復量はライフ最大値の8%。味方の1秒あたりの回復量はライフ最大値の20%"
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_12_helping-hand.webp": {
+    "name": "救いの手",
+    "description": "〈攻撃は最大の防御なり〉が発動すると、ライフ最大値ボーナス10%分の追加ライフをさらに得る。また、追加ライフを自力で獲得した際、その25%分が最も近くにいた味方に付与される"
+  },
+  "hazard/minorPerks/assets/perks/hazard_minor_01_reconstitution.webp": {
+    "name": "再結合",
+    "description": "〈ジャギー・ウォール〉がヒットすると、〈スパイク・ガード〉のボーナス・エネルギーを25%得る"
+  },
+  "hazard/minorPerks/assets/perks/hazard_minor_02_anarchic-zeal.webp": {
+    "name": "アナーキスト・レイジ",
+    "description": "〈スパイク・ガード〉の棘に40%のライフ吸収効果が付与される"
+  },
+  "hazard/majorPerks/assets/perks/hazard_major_01_deep-leap.webp": {
+    "name": "ディープ・リープ",
+    "description": "〈バイオレント・リープ〉の距離が20%伸びる"
+  },
+  "hazard/majorPerks/assets/perks/hazard_major_02_explosive-impalements.webp": {
+    "name": "棘爆弾",
+    "description": "〈ボーン・スティング〉のヒットで棘を敵に突き刺し、その敵にクイック近接攻撃か〈バイオレント・リープ〉の切り裂き攻撃を当てると、棘の爆発でダメージを30与える"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_01_bonerot.webp": {
+    "name": "レイジング・スティング",
+    "description": "武器ダメージを6回与えた敵に棘を突き刺す。その敵にクイック近接攻撃か〈バイオレント・リープ〉のスラッシュ攻撃を当てると棘が爆発し、60のダメージ・ボーナスが発生する"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_02_barbed-shot.webp": {
+    "name": "クルール・ショット",
+    "description": "〈ボーン・スティング〉が命中した敵に対し、8ダメージの〈スパイク・ガード〉のスパイクを2本放つ"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_03_needle-storm.webp": {
+    "name": "ニードル・ストーム",
+    "description": "前方にいるすべての敵が〈スパイク・ガード〉の攻撃対象になる"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_04_twin-fang.webp": {
+    "name": "ツイン・ファング",
+    "description": "〈ボーン・スティング〉を3発撃つごとに、75%ダメージの追加ショットが1発放たれる。弾の追加消費はない"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_05_woof-woof.webp": {
+    "name": "ワンワン！",
+    "description": "〈バイオレント・リープ〉の使用後3秒間、〈スパイク・ガード〉の射程が50%増える"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_06_bunny-hop.webp": {
+    "name": "バニー・ホップ",
+    "description": "〈バイオレント・リープ〉をスラッシュ攻撃なしで使うと、同アビリティと〈ジャギー・ウォール〉のクールダウンが2秒短くなる。また付近の味方に3秒間、ライフ最大値10%分の追加ライフを付与する"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_07_slasher.webp": {
+    "name": "スラッシュ・ショット",
+    "description": "〈バイオレント・リープ〉のスラッシュ攻撃を繰り出すと、80ダメージの貫通弾を1発発射する。ただし、7メートル以内の敵は無視される"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_08_off-the-wall.webp": {
+    "name": "オフ・ザ・ウォール",
+    "description": "〈ジャギー・ウォール〉の周囲8メートル以内にいる敵が、壁の展開から1.5秒後、40ダメージを受けてノックバックする"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_09_juiced.webp": {
+    "name": "バナジウム・ウォーター",
+    "description": "〈ジャギー・ウォール〉展開時、その周囲8メートル以内の味方全員（自身を含む）が3秒かけてハザード自身のライフ最大値の20%分回復する"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_10_fortress.webp": {
+    "name": "鋼鉄の壁",
+    "description": "〈ジャギー・ウォール〉が35%大きくなる­ 〈ジャギー・ウォール〉のノックバック・ダメージが25増える"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_11_bringin--the-pain.webp": {
+    "name": "レイン・アゲイン",
+    "description": "〈ヘヴィ・レイン〉のコストが20%下がる­ 〈ヘヴィ・レイン〉を使用すると、すべてのクールダウンがリセットされ、その後10秒間、クールダウンが25%短くなる"
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_12_boomslang-s-blaster.webp": {
+    "name": "ブームスラング・ブラスター",
+    "description": "アビリティ: 〈スパイク・ガード〉中にクイック近接攻撃すると、ターゲットに対して即座にスパイクを5本放つ­ （クールダウン: 10秒）"
+  },
+  "junker-queen/minorPerks/assets/perks/junker-queen_minor_01_rampant-charge.webp": {
+    "name": "ランペイジ・チャージ",
+    "description": "〈ランペイジ〉を発動すると移動妨害不可の状態になり、全アビリティのクールダウンが6秒短くなる"
+  },
+  "junker-queen/minorPerks/assets/perks/junker-queen_minor_02_battle-shout.webp": {
+    "name": "バトル・シャウト",
+    "description": "〈コマンディング・シャウト〉を発動すると、〈スキャッターガン〉の弾薬がすべて回復し、味方のリロード速度も50%上昇する"
+  },
+  "junker-queen/majorPerks/assets/perks/junker-queen_major_01_willy-willy.webp": {
+    "name": "ハリケーン・ブレード",
+    "description": "〈ギザギザブレード〉の回収時、ナイフの攻撃範囲が100%広がり、その直撃ダメージも30増える"
+  },
+  "junker-queen/majorPerks/assets/perks/junker-queen_major_02_savage-satiation.webp": {
+    "name": "戦士の充足",
+    "description": "〈カーネイジ〉の直撃ダメージの100%分、ライフを吸収する"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_01_thrill-of-battle.webp": {
+    "name": "闘いのスリル",
+    "description": "〈アドレナリンラッシュ〉が12メートル以内の味方も、ジャンカー・クイーンの回復量100%分、回復する"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_02_royal-bullets.webp": {
+    "name": "統率者の一撃",
+    "description": "〈スキャッターガン〉がクリティカル・ヒットした敵に傷を与え、2秒間かけて20の継続ダメージを与える"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_03_twist-the-knife.webp": {
+    "name": "ナイフ・ツイスト",
+    "description": "傷が付いている敵に〈スキャッターガン〉がクリティカル・ヒットすると、その敵の傷の持続時間が2秒長くなる"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_04_blade-parade.webp": {
+    "name": "ブレード・パレード",
+    "description": "〈ギザギザブレード〉を長押しでチャージできるようになる。チャージすると、ダメージが最大75%、弾速が最大200%アップする"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_05_cut--em--gracie.webp": {
+    "name": "グレーシー、切り刻め！",
+    "description": "〈ギザギザブレード〉が敵にヒットするたびに、同アビリティのクールダウンが1秒短くなる­ 〈ギザギザブレード〉の回収時、ナイフの攻撃範囲が100%広がり、30の直撃ダメージを与える"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_06_merciless-magnetism.webp": {
+    "name": "慈悲なき刃",
+    "description": "〈ギザギザブレード〉がクリティカル・ヒットすると、50%の追加ダメージが発生する­ 〈ギザギザブレード〉の引き込み力が50%上がる。同アビリティがクリティカル・ヒットすると、引き込み力は2倍になる"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_07_soaring-stone.webp": {
+    "name": "ソアリング・アックス",
+    "description": "〈カーネイジ〉の入力から攻撃までの間にジャンプすると、ダイビング攻撃になる"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_08_chop-chop.webp": {
+    "name": "ダブル・スラッシュ",
+    "description": "〈カーネイジ〉のチャージが1回増える。ただし、ヒット時のクールダウンの短縮時間は1秒に縮まる"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_09_reckoner-s-roar.webp": {
+    "name": "覇者の咆哮",
+    "description": "〈コマンディング・シャウト〉で10メートル以内の敵に傷を付け、3秒間かけて30の継続ダメージを与える"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_10_let-s-go-win.webp": {
+    "name": "勝利あるのみ",
+    "description": "敵をキルすると、〈ギザギザブレード〉と〈コマンディング・シャウト〉のクールダウンが50%短くなる"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_11_bloodcrazed.webp": {
+    "name": "血の歓喜",
+    "description": "〈ランペイジ〉または〈カーネイジ〉がヒットするたび、ライフ最大値15%分の追加ライフを得る。最大45%獲得"
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_12_bow-down.webp": {
+    "name": "女王にひれ伏せ",
+    "description": "〈ランペイジ〉の発動時、妨害不可の状態となり、各アビリティのクールダウンもリセットされる。また、〈ランペイジ〉に当たった敵が1.5秒間ノックダウンする"
+  },
+  "mauga/minorPerks/assets/perks/mauga_minor_01_kinetic-bandolier.webp": {
+    "name": "キネティック・バンドリア",
+    "description": "〈オーバーラン〉の突進開始後1秒間、弾薬が最大150回復する"
+  },
+  "mauga/minorPerks/assets/perks/mauga_minor_02_pyromaniac.webp": {
+    "name": "灼熱のサモア魂",
+    "description": "〈焼夷チェーンガン〉で敵を炎上させるごとに追加ライフを50得る"
+  },
+  "mauga/majorPerks/assets/perks/mauga_major_01_firewalker.webp": {
+    "name": "炎のタックル",
+    "description": "〈オーバーラン〉でヒットした敵を炎上させる"
+  },
+  "mauga/majorPerks/assets/perks/mauga_major_02_combat-fuel.webp": {
+    "name": "みなぎる血",
+    "description": "クリティカル・ヒットを与えると、次に〈カーディアック・オーバードライブ〉を使用した時に一時的な追加ライフを得る（1ヒットにつき4ライフ、最大150まで。自身のみが獲得）"
+  },
+  "orisa/minorPerks/assets/perks/orisa_minor_01_defense-protocol.webp": {
+    "name": "ディフェンス・プロトコル",
+    "description": "〈テラ・サージ〉のチャージ中、ライフが毎秒100回復する"
+  },
+  "orisa/minorPerks/assets/perks/orisa_minor_02_mobile-fortification.webp": {
+    "name": "移動要塞",
+    "description": "〈フォーティファイ〉の発動中の移動速度低下と熱の生成がなくなる"
+  },
+  "orisa/majorPerks/assets/perks/orisa_major_01_bcfd342643f783df.png": {
+    "name": "ヘビー・ジャベリン",
+    "description": "〈エネルギー・ジャベリン〉で与えられるノックバックが25%増える。壁に打ち付けた際のダメージも15増える"
+  },
+  "orisa/majorPerks/assets/perks/orisa_major_02_protective-barrier.webp": {
+    "name": "プロテクティブ・バリア",
+    "description": "〈ジャベリン・スピン〉の代わりにバリアを繰り出す"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_01_scorched-earth.webp": {
+    "name": "焦土",
+    "description": "オーバーヒート時、6メートル以内にいる敵を炎上させ、4秒間かけて自身の最大ライフ値20%分の継続ダメージを与える"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_02_shield-divergence.webp": {
+    "name": "シールド・プロジェクション",
+    "description": "オーバーヒート時に、ライフが500のバリアを前方に展開する"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_03_advanced-throwbotics.webp": {
+    "name": "アドバンスト・スローボティクス",
+    "description": "〈ジャベリン・スピン〉使用時に、ダメージが75%の〈エネルギー・ジャベリン〉を投げる"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_04_spynstem-update.webp": {
+    "name": "スピン吸収",
+    "description": "〈ジャベリン・スピン〉で弾をはじき返し、与えたダメージの20%分、アルティメット・チャージを得る"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_06_lassoed.webp": {
+    "name": "ジャベリン・キャプチャー",
+    "description": "〈エネルギー・ジャベリン〉の着弾時、着弾地点の周囲4メートル以内にいる敵がジャベリンへと引き寄せられる。引き寄せられた敵1人につき3%のアルティメット・チャージを得る"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_07_critical-charger.webp": {
+    "name": "クリティカル・チャージャー",
+    "description": "〈エネルギー・ジャベリン〉にクリティカル判定が付く。クリティカル・ヒット時の追加ダメージの量は100%­ また、〈エネルギー・ジャベリン〉をチャージできるようになる。チャージすると、弾速が200%まで上がり、最大値までチャージすると、ジャベリンが敵を貫通する"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_08_hooves-of-steel.webp": {
+    "name": "鋼鉄の蹄",
+    "description": "〈フォーティファイ〉の終了後、使用中に与えた武器ダメージ60%分のシールドを最大200得る。シールドは、〈フォーティファイ〉を再び使うとリセットされる"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_09_restortify.webp": {
+    "name": "リジェネ・フォーティファイ",
+    "description": "〈フォーティファイ〉中、ライフ最大値の5%分毎秒回復する"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_10_centripetal-charge.webp": {
+    "name": "向心力アップ",
+    "description": "アルティメットのコストが25%減る­ 〈テラ・サージ〉を使うと、アビリティのクールダウンがリセットされる"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_11_supercharger.webp": {
+    "name": "スーパーチャージャー",
+    "description": "〈テラ・サージ〉使用時に〈スーパーチャージャー〉を設置し、15秒間、付近の味方が与えるダメージを25%増やす"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_11_c34242dfd6b9bda4.png": {
+    "name": "ヒート・ショット",
+    "description": "熱量に応じて武器ダメージが最大30%増える"
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_12_oladele-copter-blades.webp": {
+    "name": "ヘリコプター・ブレード",
+    "description": "〈ジャベリン・スピン〉または〈テラ・サージ〉の使用中、飛行できるようになり、移動速度が20%上がる。ただし、〈テラ・サージ〉のダメージは50%減る"
+  },
+  "ramattra/minorPerks/assets/perks/ramattra_minor_01_relentless-form.webp": {
+    "name": "無慈悲たる覚悟",
+    "description": "〈ネメシス・フォーム〉の間、敵をキルするごとに同アビリティの持続時間が2秒、〈アナイアレーション〉中はその半分延びる"
+  },
+  "ramattra/minorPerks/assets/perks/ramattra_minor_02_prolonged-barrier.webp": {
+    "name": "ロング・バリア",
+    "description": "〈ヴォイド・バリア〉の持続時間とサイズが25%増える"
+  },
+  "ramattra/majorPerks/assets/perks/ramattra_major_01_void-surge.webp": {
+    "name": "ヴォイド・サージ",
+    "description": "〈ヴォイド・アクセラレーター〉の連射中、さらに6発の投射物を一定間隔でバースト発射する"
+  },
+  "ramattra/majorPerks/assets/perks/ramattra_major_02_nanite-repair.webp": {
+    "name": "ナノ・リペア",
+    "description": "〈貪欲な渦〉の中にいる間、自身のライフが毎秒100回復する"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_major_01_void-surge.webp": {
+    "name": "ヴォイド・サージ",
+    "description": "〈ヴォイド・アクセラレーター〉の連射中、さらに6発の投射物を一定間隔でバースト発射する"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_02_void-blight.webp": {
+    "name": "連鎖破壊",
+    "description": "〈ヴォイド・アクセラレーター〉がヒットした敵に100ダメージを与えると、その敵が爆発する。爆発ダメージは30"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_03_recursion-relay.webp": {
+    "name": "ヴォイド・アンプリファイア",
+    "description": "+25%〈ヴォイド・バリア〉サイズ­ 〈ヴォイド・アクセラレーター〉または〈パメル〉を〈ヴォイド・バリア〉越しに放つと、その弾または衝撃波のダメージが15%増える"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_04_ramparts.webp": {
+    "name": "双璧",
+    "description": "〈ヴォイド・バリア〉のチャージ数が1増える"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_05_second-phase.webp": {
+    "name": "セカンド・フェーズ",
+    "description": "〈ネメシス・フォーム〉を発動すると、〈貪欲な渦〉のクールダウンが75%短くなる"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_06_final-form.webp": {
+    "name": "ナノ・リペア",
+    "description": "〈貪欲な渦〉の中にいる間、ラマットラ自身のライフが毎秒50回復する。この効果は〈ネメシス・フォーム〉中に限定される"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_07_breakout.webp": {
+    "name": "咆哮搏撃",
+    "description": "〈ネメシス・フォーム〉中、〈ブロック〉しながら〈パメル〉を放つと、ダッシュ・パンチを繰り出す­ （クールダウン: 4秒）"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_08_retaliation.webp": {
+    "name": "報復の波動",
+    "description": "〈ブロック〉解除時、周囲6メートル以内の敵に、同アビリティで軽減したダメージ100%分のダメージを与える。与えられる最大ダメージは150"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_09_conversion-protocol.webp": {
+    "name": "ヒール変換",
+    "description": "〈ブロック〉で軽減したダメージの25%分、ラマットラ自身が3秒かけて回復する"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_10_insatiable-spiral.webp": {
+    "name": "巨大渦",
+    "description": "+50%〈貪欲な渦〉効果範囲­ +15%〈貪欲な渦〉ダメージ"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_11_ravaging-vortex.webp": {
+    "name": "破滅の前触れ",
+    "description": "〈貪欲な渦〉の炸裂時、渦にヒットした敵に25のダメージを与える。また敵1人が渦の炸裂にヒットするごとに2%のアルティメット・チャージを得る"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_12_dreadknight.webp": {
+    "name": "苦悶",
+    "description": "+50%〈アナイアレーション〉ダメージ­ +1秒〈アナイアレーション〉持続時間"
+  },
+  "reinhardt/minorPerks/assets/perks/reinhardt_minor_01_crusader-s-fire.webp": {
+    "name": "クルセイダーの焔",
+    "description": "敵をスタンさせると、〈ファイア・ストライク〉のチャージが1つ回復する（最大3回分チャージ可能）"
+  },
+  "reinhardt/minorPerks/assets/perks/reinhardt_minor_02_crusader-s-resolve.webp": {
+    "name": "クルセイダーの覚悟",
+    "description": "〈バリア・フィールド〉の展開中、ライフ回復のパッシブが75%早く発動する"
+  },
+  "reinhardt/majorPerks/assets/perks/reinhardt_major_01_shield-slam.webp": {
+    "name": "シールド・スラム",
+    "description": "〈バリア・フィールド〉の展開中にを使用すると、ノックバック攻撃を繰り出す"
+  },
+  "reinhardt/majorPerks/assets/perks/reinhardt_major_02_ignited-fury.webp": {
+    "name": "燃え上がる憤怒",
+    "description": "〈ファイア・ストライク〉が敵1人にヒットするごとに2秒間、攻撃速度が25%上がる"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_01_to-me--my-friends.webp": {
+    "name": "我が輩のもとへ！",
+    "description": "〈バリア・フィールド〉の展開中、­ 5メートル以内の味方のライフが毎秒、ラインハルトのライフ最大値の3%分回復する"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_02_crusader-slam.webp": {
+    "name": "クルセイダー・スラム",
+    "description": "アビリティ: 〈バリア・フィールド〉の展開中にメイン攻撃を使うと、〈バリア・フィールド〉のライフ5%分の近接ダメージが発生する­ （クールダウン: 8秒）"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_03_iron-drift.webp": {
+    "name": "アイアン・ドリフト",
+    "description": "+200%〈チャージ〉持続時間­ 〈チャージ〉で複数の敵を壁に叩きつけられるようになる。また、発動中に後進を入力することで〈チャージ〉の移動速度を下げることができる"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_04_shield-stampede.webp": {
+    "name": "シールド・チャージ",
+    "description": "+50% 〈チャージ〉ノックバック・パワー­ 〈チャージ〉中、〈バリア・フィールド〉が自動で展開する"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_05_barrier-reconstruction.webp": {
+    "name": "バリア再生",
+    "description": "近接攻撃または〈ファイア・ストライク〉で敵にダメージを与えると、〈バリア・フィールド〉のライフが、バリアのライフ15%分回復する"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_06_vroom-boom-boom.webp": {
+    "name": "ブーン・ブン・ブン",
+    "description": "〈チャージ〉で壁に当たると爆発し、〈チャージ〉による叩きつけの30%分のダメージを与える"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_07_impact-burst.webp": {
+    "name": "バースト・インパクト",
+    "description": "〈ファイア・ストライク〉が最初に敵にヒットした際に爆発し、同アビリティの30%分のダメージを周囲3メートル以内の敵に与える"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_08_magma-strike.webp": {
+    "name": "マグマ・ストライク",
+    "description": "2発目の〈ファイア・ストライク〉を発射するたびに、その軌道に沿ってマグマが広がる。マグマの持続時間は2秒。マグマで与えられる炎上ダメージは、〈ファイア・ストライク〉の50%分"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_09_blazing-blitz.webp": {
+    "name": "ブレイジング・ストライク",
+    "description": "+25%アルティメット・チャージ（開始時）­ 〈アース・シャター〉の発動後5秒間、〈ロケット・ハンマー〉のスイングで〈ファイア・ストライク〉を繰り出せる"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_10_smashing.webp": {
+    "name": "このカボチャ頭が！",
+    "description": "〈ロケット・ハンマー〉でダメージを与えると、2秒間移動速度が1%上がり、武器に3%のライフ吸収効果が付く。最大10回蓄積"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_11_feeling-the-burn.webp": {
+    "name": "真っ赤に燃える！",
+    "description": "〈ロケット・ハンマー〉を3回振るうごとに炎上効果が付き、追加で2秒間かけて〈ロケット・ハンマー〉の30%の継続ダメージを与える"
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_12_infusion-generator.webp": {
+    "name": "バイタル・ジェネレーター",
+    "description": "〈バリア・フィールド〉のライフが、ライフ最大値ボーナスの250%分増える"
+  },
+  "roadhog/minorPerks/assets/perks/roadhog_minor_01_scrap-hook.webp": {
+    "name": "スクラップ・フック",
+    "description": "〈チェイン・フック〉が命中すると、弾が4発リロードされる"
+  },
+  "roadhog/minorPerks/assets/perks/roadhog_minor_02_4b0364924157ffcb.png": {
+    "name": "こっちだ、子ブタちゃん",
+    "description": "〈ホール・ホッグ〉発動中、〈チェイン・フック〉のクールダウンが80%短くなる"
+  },
+  "roadhog/majorPerks/assets/perks/roadhog_major_01_hogdrogen-exposure.webp": {
+    "name": "シェア・ザ・ブリーザー",
+    "description": "〈テイク・ア・ブリーザー〉の使用時、付近の味方も自分の回復量の50%分回復する"
+  },
+  "roadhog/majorPerks/assets/perks/roadhog_major_02_d9dcccfe7fb8e200.png": {
+    "name": "有毒排気ガス",
+    "description": "〈トラッシュ・コンパクター〉発動中、正面にいる敵に30%の移動速度低下の効果と、毎秒20の継続ダメージを与えられるようになる"
+  },
+  "sigma/minorPerks/assets/perks/sigma_minor_01_kinetic-cycle.webp": {
+    "name": "運動量変換",
+    "description": "〈キネティック・グラスプ〉で弾を吸収すると、〈アクリーション〉のクールダウンも減る"
+  },
+  "sigma/minorPerks/assets/perks/sigma_minor_02_hyper-regeneration.webp": {
+    "name": "ハイパー・リジェネーション",
+    "description": "〈ハイパースフィア〉で与えたダメージの30%分、〈エクスペリメンタル・バリア〉のライフが回復する"
+  },
+  "sigma/majorPerks/assets/perks/sigma_major_01_hyper-strike.webp": {
+    "name": "ハイパー・ストライク",
+    "description": "〈ハイパースフィア〉を5回直撃させると、次にクイック近接攻撃が命中した相手を空中へと吹き飛ばす"
+  },
+  "sigma/majorPerks/assets/perks/sigma_major_02_levitation.webp": {
+    "name": "レヴィテーション",
+    "description": "ジャンプした後、もう一度ジャンプを長押しすると、わずかな時間上昇する"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_01_zero-gravity.webp": {
+    "name": "ゼロ・グラビティ",
+    "description": "いずれかのアビリティまたはガジェットの使用後2.5秒間、飛行能力を得る"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_02_trinisphere.webp": {
+    "name": "トリニスフィア",
+    "description": "〈ハイパースフィア〉に、50%ダメージの3つ目の球が追加される"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_03_symphonic-syzygy.webp": {
+    "name": "オービタル・シンフォニー",
+    "description": "〈キネティック・グラスプ〉終了時、吸収したダメージ50ごとに4秒間、攻撃速度が10%上がる。最大4回蓄積"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_04_event-horizon.webp": {
+    "name": "キネティック・リペア",
+    "description": "〈キネティック・グラスプ〉でダメージを吸収すると、視界内の味方に追加ライフが付き、〈エクスペリメンタル・バリア〉のライフも回復する。回復の余剰分は追加ライフに変換される"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_05_philharmonic-fortitude.webp": {
+    "name": "フィルハーモニー",
+    "description": "〈エクスペリメンタル・バリア〉の最大ライフが25%増え、継続的にバリアのライフが回復するが、バリア展開中の移動速度が50%下がる"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_06_orbital-barrier.webp": {
+    "name": "オービタル・バリア",
+    "description": "自身の周囲を回る小型の〈エクスペリメンタル・バリア〉を1つ得る。このバリアのライフは通常のバリアより50%少ない"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_07_singularity.webp": {
+    "name": "シンギュラリティ",
+    "description": "〈アクリーション〉の爆発ダメージが75%増え、爆発の中心に敵が引き寄せられる­ 直撃すると、〈アクリーション〉のクールダウンが35%短くなる"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_08_hyperloop.webp": {
+    "name": "ハイパーループ",
+    "description": "〈ハイパースフィア〉が直撃すると、〈アクリーション〉のクールダウンが0.8秒短くなる"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_09_maestro.webp": {
+    "name": "重力のマエストロ",
+    "description": "アルティメット・コストが50%減る­ 〈グラビティ・フラックス〉の範囲が35%狭まるが、敵にヒットしなかった場合、アルティメット・チャージが50%回復する"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_10_apogee-alignment.webp": {
+    "name": "オービタル・スフィア",
+    "description": "いずれかのアビリティを使用すると、自身の周囲を回る〈ハイパースフィア〉が2個生成される。ダメージは75%"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_11_astrophysical.webp": {
+    "name": "天体物理の力",
+    "description": "アビリティ: クイック近接攻撃をヒットさせた敵が1秒間空中に浮く­ （クールダウン: 10秒）"
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_12_mass-driver.webp": {
+    "name": "マス・ドライバー",
+    "description": "〈エクスペリメンタル・バリア〉を通過した〈アクリーション〉の弾速が300%、ダメージが25%アップする。通過時、〈エクスペリメンタル・バリア〉のライフも150回復する"
+  },
+  "winston/minorPerks/assets/perks/winston_minor_01_electric-charge.webp": {
+    "name": "エレクトリック・チャージ",
+    "description": "〈テスラ・キャノン〉のメイン攻撃でダメージを与えた敵1人につき、移動速度が10%増える（最大30%）"
+  },
+  "winston/minorPerks/assets/perks/winston_minor_02_heavy-landing.webp": {
+    "name": "ヘビー・ランディング",
+    "description": "〈プライマル・レイジ〉の発動中、〈ジャンプ・パック〉のダメージと攻撃範囲が、滞空時間に応じて最大75%上がる"
+  },
+  "winston/majorPerks/assets/perks/winston_major_01_chain-lightning.webp": {
+    "name": "チェイン・ライトニング",
+    "description": "サブ攻撃をフルチャージすると、電撃がさらに最大2人の敵へと伝播する"
+  },
+  "winston/majorPerks/assets/perks/winston_major_02_revitalizing-barrier.webp": {
+    "name": "回復バリア",
+    "description": "〈バリア・プロジェクター〉内にいる味方のライフが毎秒35回復する（自身を含む）"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_01_circuit-breaker.webp": {
+    "name": "サーキット・ブレイカー",
+    "description": "電撃ダメージ10%分の追加ライフを得る。最大100獲得"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_02_electro-cluster.webp": {
+    "name": "流量強化",
+    "description": "+15%〈テスラ・キャノン〉メイン攻撃最大射程­ 〈テスラ・キャノン〉のメイン攻撃が敵1人にヒットするごとに、同アビリティのダメージが2%増える"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_03_lightning-rod.webp": {
+    "name": "ライトニング・ロッド",
+    "description": "〈テスラ・キャノン〉のフルチャージしたサブ攻撃がヒットすると、8メートル以内にいる他のすべての敵に電撃が連鎖する。連鎖した電撃のダメージは通常の75%"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_04_volatile-volt.webp": {
+    "name": "激烈ボルト",
+    "description": "〈テスラ・キャノン〉のサブ攻撃にクリティカル判定が付く。クリティカル・ヒット時のダメージは250%"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_05_primal-punch.webp": {
+    "name": "プリーモ・パンチ",
+    "description": "近接攻撃、〈ジャンプ・パック〉、または〈テスラ・キャノン〉のサブ攻撃で敵をキルすると、〈ジャンプ・パック〉のクールダウンがリセットされる­ アーマー25につき、近接攻撃のダメージが3%増える"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_06_moon-landing.webp": {
+    "name": "月面着陸",
+    "description": "〈ジャンプ・パック〉の着地で敵1人がダメージを受けるたびに、ライフ最大値の7%分回復する"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_07_lunar-leap.webp": {
+    "name": "大きな飛躍",
+    "description": "〈ジャンプ・パック〉の着地でダメージを受けた敵1人につき、追加で3%のアルティメット・チャージを得る。〈ジャンプ・パック〉使用中、1秒ごとにライフ最大値の5%分の追加ライフを得る。最大100"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_08_pocket-projector.webp": {
+    "name": "ポケット・プロジェクター",
+    "description": "〈バリア・プロジェクター〉を展開すると、ライフ10%のミニ〈バリア・プロジェクター〉を自身に装着する"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_09_tesla-field.webp": {
+    "name": "テスラ・フィールド",
+    "description": "〈バリア・プロジェクター〉の範囲内にいる敵に、毎秒40の電撃ダメージを与える"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_10_surge-protector.webp": {
+    "name": "サージ・プロテクター",
+    "description": "〈バリア・プロジェクター〉内にいる味方のライフが毎秒30回復する"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_11_primal-slam.webp": {
+    "name": "轟力落",
+    "description": "〈ジャンプ・パック〉で滞空中にジャンプすると、照準に向けて素早く叩きつけ攻撃を繰り出す。〈プライマル・レイジ〉発動中、叩きつける速度は50%上がる"
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_12_lucheng-launchers.webp": {
+    "name": "ルーチェン製ランチャー",
+    "description": "〈ジャンプ・パック〉のダメージが電撃になり、滞空中に最大75%増える。〈プライマル・レイジ〉中、この効果は2倍になる"
+  },
+  "wrecking-ball/minorPerks/assets/perks/wrecking-ball_minor_01_steamroller.webp": {
+    "name": "スチームローラー",
+    "description": "タンクに対する転がり攻撃のダメージが100%増える"
+  },
+  "wrecking-ball/minorPerks/assets/perks/wrecking-ball_minor_02_multi-ball.webp": {
+    "name": "マルチ・ボール",
+    "description": "〈マインフィールド〉を使用してから5秒以内にQを押すと、地雷をさらに7個設置できる"
+  },
+  "wrecking-ball/majorPerks/assets/perks/wrecking-ball_major_01_hang-time.webp": {
+    "name": "ハング・タイム",
+    "description": "〈パイルドライバー〉の滞空時間が伸び、空中で姿勢をコントロールできるようになる。ダメージも50%増える"
+  },
+  "wrecking-ball/majorPerks/assets/perks/wrecking-ball_major_02_adaptive-barrier.webp": {
+    "name": "アダプティブ・バリア",
+    "description": "〈アダプティブ・シールド〉発動時にバリアを1秒間得る"
+  },
+  "zarya/minorPerks/assets/perks/zarya_minor_01_jump-ups.webp": {
+    "name": "ジャンプ・アップ",
+    "description": "サブ攻撃で受ける自分へのノックバックが75%増える"
+  },
+  "zarya/minorPerks/assets/perks/zarya_minor_02_spotter.webp": {
+    "name": "スポッター",
+    "description": "〈バリア・ショット〉を付与した味方の自己回復が即座に始まり、移動速度が20%上昇する"
+  },
+  "zarya/majorPerks/assets/perks/zarya_major_01_extra-oomph.webp": {
+    "name": "エクストラ・エネルギー",
+    "description": "バリア展開中に〈パーティクル・キャノン〉のビームでダメージを与えると、エネルギーが生成される"
+  },
+  "zarya/majorPerks/assets/perks/zarya_major_02_energy-lance.webp": {
+    "name": "エネルギー・ランス",
+    "description": "〈パーティクル・キャノン〉のビームが敵を貫通する"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_01_charged-link.webp": {
+    "name": "ブラスト・チャージ",
+    "description": "〈パーティクル・キャノン〉（サブ攻撃）を当てると、エネルギーが2増え、〈パーティクル・キャノン〉（メイン攻撃）の射程がそのヒットから3秒間、20%長くなる"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_02_pre-workout.webp": {
+    "name": "プレ・ワークアウト",
+    "description": "武器とアビリティに、エネルギーの15%に相当するライフ吸収能力が付く"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_03_no-limits.webp": {
+    "name": "リミット・ブレイカー",
+    "description": "エネルギーの最大値が150まで増える。エネルギーの残量が100より高い時は常に、エネルギーが150%速い速度で減少する"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_04_particle-accelerator.webp": {
+    "name": "パーティクル・アクセラレーター",
+    "description": "〈パーティクル・キャノン〉（サブ攻撃）の攻撃速度が20%上がる。このボーナスはいずれかのアビリティを使用してから5秒間、5倍になる"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_05_volskaya-vortex.webp": {
+    "name": "ヴォルスカヤ・ヴォルテックス",
+    "description": "バリア展開後、最初の〈パーティクル・キャノン〉（サブ攻撃）で、相手の動きを遅くする渦を発生させ、2秒間かけて60の継続ダメージを与える"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_06_lifelift.webp": {
+    "name": "ライフ・リフト",
+    "description": "+50%〈パーティクル・バリア〉サイズ­ 〈バリア〉のライフが、アイテムから得たライフ最大値ボーナスの50%分増える"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_07_barrier-benefits.webp": {
+    "name": "バリア・ベネフィット",
+    "description": "〈バリア〉の持続時間が終わると2秒間、残りの〈バリア〉のライフ100%分の追加ライフをターゲットに与える"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_08_major-flex.webp": {
+    "name": "大胸筋",
+    "description": "バリアの周囲5メートル以内にいる敵を毎秒ノックバック攻撃する。ダメージは25で、エネルギーに応じて増加"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_09_containment-shield.webp": {
+    "name": "バイオティック・シールド",
+    "description": "〈バリア〉で対象のライフが毎秒ザリアのライフ最大値の5%分回復し、有効な間は移動速度が20%上がる"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_10_here-to-spot-you.webp": {
+    "name": "あたしが見守っている",
+    "description": "+20%〈バリア・ショット〉射程­ 〈バリア・ショット〉を与えた相手の元へと引っ張られ、3秒間かけてライフ最大値の30%分回復する"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_11_fission-field.webp": {
+    "name": "核分裂フィールド",
+    "description": "〈バリア・ショット〉が10メートル以内にいるもう1人の味方の周囲にも発生する。ただし、得られるエネルギーの最大量は25%少なくなり、持続時間も20%短くなる"
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_12_graviton-anomaly.webp": {
+    "name": "グラビトン・アノマリー",
+    "description": "+25%アルティメット・コスト減少率­ 〈グラビトン・サージ〉の基礎ダメージが30に増える。ダメージもエネルギーに応じて増えるが、持続時間は25%短くなる"
+  },
+  "dmon/minorPerks/assets/perks/dmon_minor_01_a49a4aa586ec9a0f.png": {
+    "name": "野獣",
+    "description": "〈プラズマ・セイバー〉を当てると、〈パワー・バリア〉のライフが40回復する"
+  },
+  "dmon/minorPerks/assets/perks/dmon_minor_02_8d2f97ae5a2dc9b1.png": {
+    "name": "モビリティ強化",
+    "description": "〈パワー・バリア〉を構えている間、〈ジェット・ドライブ〉の燃料消費量が30%減る"
+  },
+  "dmon/majorPerks/assets/perks/dmon_major_01_b87f463706a6816a.png": {
+    "name": "オーバーストライク",
+    "description": "〈サージング・ストライク〉に150%のライフ吸収効果が付く"
+  },
+  "dmon/majorPerks/assets/perks/dmon_major_02_46d8466d7de4b04d.png": {
+    "name": "ヘビー・フュージョン",
+    "description": "〈フュージョン・リピーター〉の弾が強力になり、射撃時の拡散もなくなる。ただし、連射速度は下がる"
+  },
+  "doctrine/minorPerks/assets/perks/doctrine_minor_01_65d3986853fa5e6f.png": {
+    "name": "セービング・グレース",
+    "description": "〈ヴァイタル・ドローン〉を付与されたターゲットのライフが40即時回復する"
+  },
+  "doctrine/minorPerks/assets/perks/doctrine_minor_02_32ffd184fd6bf247.png": {
+    "name": "ブラッド・ドレイン",
+    "description": "〈エターナル・ステッキ〉で与えたダメージの50%分回復する"
+  },
+  "doctrine/majorPerks/assets/perks/doctrine_major_01_d4231c031993e68b.png": {
+    "name": "トランスフュージョン",
+    "description": "ダメージまたは回復を与えると、〈強化〉のクールダウンが減る"
+  },
+  "doctrine/majorPerks/assets/perks/doctrine_major_02_1f60c2577f3709fe.png": {
+    "name": "生命の代償",
+    "description": "最大ライフが25減る代わりに〈エターナル・ステッキ〉の回復量が20%増える"
+  }
+}

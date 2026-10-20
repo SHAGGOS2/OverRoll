@@ -1,0 +1,2450 @@
+{
+  "anran/minorPerks/assets/perks/anran_minor_01_smoulder.webp": {
+    "name": "Smoulder",
+    "description": "Ignited enemies burn 1.5 seconds longer."
+  },
+  "anran/minorPerks/assets/perks/anran_minor_02_heat-shield.webp": {
+    "name": "Heat Shield",
+    "description": "Gain 50 overhealth when you use your Ultimate and for each enemy ignited by it."
+  },
+  "anran/majorPerks/assets/perks/anran_major_01_short-fuse.webp": {
+    "name": "Short Fuse",
+    "description": "Impacting an enemy with Inferno Rush reduces its cooldown by 1.5 seconds."
+  },
+  "anran/majorPerks/assets/perks/anran_major_02_hungering-blaze.webp": {
+    "name": "Hungering Blaze",
+    "description": "Increase the healing of Dancing Blaze's subsequent strikes by 25."
+  },
+  "ashe/minorPerks/assets/perks/ashe_minor_01_remote-detonator.webp": {
+    "name": "Remote Detonator",
+    "description": "After using Dynamite, pressing E again causes it to detonate after a 0.5 second delay."
+  },
+  "ashe/minorPerks/assets/perks/ashe_minor_02_double-barreled.webp": {
+    "name": "Double-Barreled",
+    "description": "Knocking an enemy back with Coach Gun allows you use it one extra time within 2 seconds."
+  },
+  "ashe/majorPerks/assets/perks/ashe_major_01_viper-s-sting.webp": {
+    "name": "Viper's Sting",
+    "description": "Hitting 2 consecutive scoped shots on a target deals 25 extra damage."
+  },
+  "ashe/majorPerks/assets/perks/ashe_major_02_airburst.webp": {
+    "name": "Airburst",
+    "description": "Dynamite has a 40% increased detonation radius while airborne and refunds 6 ammo when thrown."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_01_reload-therapy.webp": {
+    "name": "Reload Therapy",
+    "description": "When you reload or restore ammo, heal 5% of your Life."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_02_fire-at-my-fingertips.webp": {
+    "name": "Fire at My Fingertips",
+    "description": "When you deal damage to a Burning enemy with The Viper, restore 1 ammo."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_03_my-business--my-rules.webp": {
+    "name": "My Business, My Rules",
+    "description": "When you deal damage to a Burning enemy with The Viper, reduce the cooldown of your abilities by 10%."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_04_what-in-tarnation.webp": {
+    "name": "What in Tarnation!?",
+    "description": "For 3s after Coach Gun knocks you airborne, Take Aim grants 20% Attack Speed and slows fall speed. If Coach Gun doesn't deal any damage, refund 3s of its cooldown."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_05_calamity.webp": {
+    "name": "Calamity",
+    "description": "Using Coach Gun restores Ammo equal to 25% of your Max Ammo. The restored shots apply Burning, dealing 40 damage over 3s."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_06_double-barreled.webp": {
+    "name": "Double Barreled",
+    "description": "Coach Gun gains an additional charge."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_07_slow-burn.webp": {
+    "name": "Slow Burn",
+    "description": "While scoped, Critical Damage Burns enemies for 20% extra damage over 3s."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_08_controlled-boom.webp": {
+    "name": "Controlled Boom",
+    "description": "After throwing Dynamite, reactivating the ability causes it to explode after a 0.5s delay. Dynamites that explode mid-air burn for 1s longer."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_09_out-with-a-bang.webp": {
+    "name": "Out with a Bang",
+    "description": "When Dynamite explodes, it spawns 3 sticky explosives that deal 50% reduced damage."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_10_bob-jr.webp": {
+    "name": "B.O.B. Jr.",
+    "description": "B.O.B. costs 60% reduced Ultimate Charge but has reduced Life, 20% reduced Attack Speed, and is significantly smaller."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_11_stacked-sticks.webp": {
+    "name": "Stacked Sticks",
+    "description": "Dynamite has 40% increased Blast Radius and burns 40% faster."
+  },
+  "ashe/stadiumPowers/assets/perks/ashe_stadium_12_pinbob.webp": {
+    "name": "PinB.O.B.",
+    "description": "Ability: After B.O.B. charges, reactivate Ultimate to charge again. (3s Cooldown).­ Eliminations reset the cooldown and add 2s B.O.B. duration."
+  },
+  "bastion/minorPerks/assets/perks/bastion_minor_01_smart-bomb.webp": {
+    "name": "Smart Bomb",
+    "description": "A-36 Tactical Grenade's self-knockback is increased by 25% and no longer damages you."
+  },
+  "bastion/minorPerks/assets/perks/bastion_minor_02_configuration-reload.webp": {
+    "name": "Configuration Reload",
+    "description": "Reduce the cooldown of A-36 Tactical Grenade by 4 seconds when changing configurations."
+  },
+  "bastion/majorPerks/assets/perks/bastion_major_01_lindholm-explosives.webp": {
+    "name": "Lindholm Explosives",
+    "description": "Configuration: Assault's weapon slowly fires explosive shells instead of a rotary cannon."
+  },
+  "bastion/majorPerks/assets/perks/bastion_major_02_self-repair.webp": {
+    "name": "Self-Repair",
+    "description": "Press E to rapidly heal yourself."
+  },
+  "cassidy/minorPerks/assets/perks/cassidy_minor_01_bang-bang.webp": {
+    "name": "Bang Bang",
+    "description": "Cassidy throws a second Flashbang that travels farther, but both Flashbangs deal 40% reduced damage."
+  },
+  "cassidy/minorPerks/assets/perks/cassidy_minor_02_b0d48ad9c8bdf1ce.png": {
+    "name": "Giddy Up",
+    "description": "After using Combat Roll, Cassidy gains a 60% movement speed boost that decays over 1.5 seconds."
+  },
+  "cassidy/majorPerks/assets/perks/cassidy_major_01_rollin--round-up.webp": {
+    "name": "Rollin' Round-Up",
+    "description": "Combat Roll also heals 15 health for each bullet reloaded."
+  },
+  "cassidy/majorPerks/assets/perks/cassidy_major_02_silver-bullet.webp": {
+    "name": "Silver Bullet",
+    "description": "Peacekeeper's secondary fire is replaced with a piercing shot that inflicts bleeding. Combat Roll and Deadeye reset its cooldown."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_01_quick-draw.webp": {
+    "name": "Quick Draw",
+    "description": "After using Combat Roll, Peacekeeper's next shot can auto-aim within 15m while under cooldown."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_02_gunslinger-grit.webp": {
+    "name": "Gunslinger Grit",
+    "description": "When you reload or restore ammo, heal 2.5% of your Life for every ammo restored."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_03_bullseye.webp": {
+    "name": "Bullseye",
+    "description": "Flashbang hits and Critical hits reduces Combat Roll's cooldown by 2s."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_04_think-flasht.webp": {
+    "name": "Think Flasht",
+    "description": "When you start a Combat Roll, leave a Flashbang behind.­ Flashbang's hinder duration is increased by 25%."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_05_easy-rider.webp": {
+    "name": "Easy Rider",
+    "description": "Eliminating an enemy recently damaged by Flashbang grants 20% Ultimate Charge. While using Deadeye, gain 100 Overhealth and 25% Move Speed."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_06_it-s-twelve-o-clock-somewhere.webp": {
+    "name": "It's Twelve O'Clock Somewhere...",
+    "description": "Deadeye eliminations grant 25% Ultimate Charge each. If you get no eliminations with Deadeye, refund 33% Ultimate Charge."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_07_dead-man-walkin.webp": {
+    "name": "Dead Man Walkin'",
+    "description": "Enemies below 30% Health have their heads marked. Marked heads are larger and Critical Hits on marked enemies have 50% Weapon Lifesteal."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_08_barrage-blastin.webp": {
+    "name": "Barrage Blastin'",
+    "description": "The first time you run out of Ammo while Fan the Hammer is active, immediately reload and continue firing at 60% reduced damage."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_major_02_silver-bullet.webp": {
+    "name": "Silver Bullet",
+    "description": "Fan the Hammer is replaced with Ability: Fire a piercing Peacekeeper shot that deals 50 bonus damage over 2.5s. Cooldown is reset when using an ability or Gadget."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_10_buck-wild.webp": {
+    "name": "Buck Wild",
+    "description": "Dealing damage with Peacekeeper grants 1% Move Speed for 5s, stacking up to 15 times. At max stacks, gain 10% Damage Reduction."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_11_barrel-roll.webp": {
+    "name": "Barrel Roll",
+    "description": "Combat Roll takes you 50% further and deals 65 damage to enemies."
+  },
+  "cassidy/stadiumPowers/assets/perks/cassidy_stadium_12_hot-potato.webp": {
+    "name": "Hot Potato",
+    "description": "Flashbang becomes magnetic and has 125% increased throw distance."
+  },
+  "echo/minorPerks/assets/perks/echo_minor_01_63cadc2da0d3063b.png": {
+    "name": "Aerial Munitions",
+    "description": "Echo has infinite ammo during Flight."
+  },
+  "echo/minorPerks/assets/perks/echo_minor_02_partial-scan.webp": {
+    "name": "Partial Scan",
+    "description": "Duplicate starts with 30% of its ultimate charge."
+  },
+  "echo/majorPerks/assets/perks/echo_major_01_full-salvo.webp": {
+    "name": "Full Salvo",
+    "description": "Sticky Bombs fires 2 additional projectiles."
+  },
+  "echo/majorPerks/assets/perks/echo_minor_01_focused-rush.webp": {
+    "name": "Focused Rush",
+    "description": "Focusing Beam's range is increased by 8 meters and movement speed is increased by 25% when active."
+  },
+  "emre/minorPerks/assets/perks/emre_minor_01_suppressive-security.webp": {
+    "name": "Suppressive Security",
+    "description": "Override Protocol’s light rounds slow enemies by 30% for 1.5 seconds."
+  },
+  "emre/minorPerks/assets/perks/emre_minor_02_enhanced-agility.webp": {
+    "name": "Enhanced Agility",
+    "description": "Siphon Blaster’s movement speed bonus is increased by 20% while not firing."
+  },
+  "emre/majorPerks/assets/perks/emre_major_01_heat-sink.webp": {
+    "name": "Heat Sink",
+    "description": "Direct hits with Siphon Blaster refunds 60% heat and increase its duration by 0.1 seconds."
+  },
+  "emre/majorPerks/assets/perks/emre_major_02_cyber-adhesion.webp": {
+    "name": "Cyber Adhesion",
+    "description": "Cyber Frag now sticks on contact, dealing 40 extra damage to stuck enemies."
+  },
+  "freja/minorPerks/assets/perks/freja_minor_01_relentless-barrage.webp": {
+    "name": "Relentless Barrage",
+    "description": "Direct hits with Take Aim refund 5 automatic bolt ammo."
+  },
+  "freja/minorPerks/assets/perks/freja_minor_02_momentum-boost.webp": {
+    "name": "Momentum Boost",
+    "description": "Quick Dash distance is increased by 20%."
+  },
+  "freja/majorPerks/assets/perks/freja_major_01_aerial-recovery.webp": {
+    "name": "Aerial Recovery",
+    "description": "After using Updraft, heal for 30 health per second until Freja touches the ground."
+  },
+  "freja/majorPerks/assets/perks/freja_major_02_rising-winds.webp": {
+    "name": "Rising Winds",
+    "description": "Updraft gains an additional charge."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_01_seismic-shot.webp": {
+    "name": "Seismic Shot",
+    "description": "Take Aim explosion radius is increased by 50%. Double this if the bolt is stuck to a target."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_02_seekerpoint.webp": {
+    "name": "Seekerpoint",
+    "description": "When Take Aim bolt sticks an enemy, automatically fire 3 additional crossbow shots at them that deal 66% reduced damage."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_03_redux.webp": {
+    "name": "Redux",
+    "description": "Revdraw Crossbow hits against targets stuck by a Take Aim bolt or Bola Shot reduce the cooldown of your abilities by 5% and refunds 1 ammo."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_04_cyclone.webp": {
+    "name": "Cyclone",
+    "description": "When you use Updraft, fire a ­ Take Aim bolt that deals 25% reduced explosion damage at your crosshair."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_05_peak-performance.webp": {
+    "name": "Peak Performance",
+    "description": "+20% Updraft Height­ While firing Revdraw Crossbow, your fall speed is decreased by 80%.­ While Airborne, gain 20% increased Move Speed."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_06_deep-pockets.webp": {
+    "name": "Deep Pockets",
+    "description": "When you use an ability, restore 30% of your Max Ammo."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_07_volley---deux.webp": {
+    "name": "Volley à Deux",
+    "description": "Every 3rd Revdraw Crossbow shot fires an additional 2 bolts in a spread that deal 60% reduced damage."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_08_forager.webp": {
+    "name": "Forager",
+    "description": "For 2s after using Quick Dash, Revdraw Crossbow hits heal you for 4% of your Max Life."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_09_lille-f-lde.webp": {
+    "name": "Lille Fælde",
+    "description": "After using Updraft, your next Take Aim while airborne instead fires a mini Bola Shot that no longer pulls and has 40% reduced effectiveness."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_10_mighty-gust.webp": {
+    "name": "Mighty Gust",
+    "description": "Updraft launches a wind blast towards your crosshair, knocking back enemies and dealing 60 damage."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_11_so-cooked.webp": {
+    "name": "So Cooked",
+    "description": "Bola Shot's damaging zone deals 20% more damage and lingers for 2s.­ Bola Shot eliminations count towards Bounty Hunting."
+  },
+  "freja/stadiumPowers/assets/perks/freja_stadium_12_thread-the-needle.webp": {
+    "name": "Thread The Needle",
+    "description": "Take Aim bolts pierces the first enemy hit. Additional explosions deal 66% reduced damage."
+  },
+  "genji/minorPerks/assets/perks/genji_minor_01_swift-cuts.webp": {
+    "name": "Swift Cuts",
+    "description": "Quick Melee reduces the cooldown of Swift Strike by 3 seconds."
+  },
+  "genji/minorPerks/assets/perks/genji_minor_02_dragon-s-thirst.webp": {
+    "name": "Dragon's Thirst",
+    "description": "Dragonblade swings gain 30% lifesteal."
+  },
+  "genji/majorPerks/assets/perks/genji_major_01_blade-twisting.webp": {
+    "name": "Blade Twisting",
+    "description": "Swift Strike deals 25 additional damage over time if the enemy is below half health."
+  },
+  "genji/majorPerks/assets/perks/genji_major_02_meditation.webp": {
+    "name": "Meditation",
+    "description": "Regenerate 50 health per second while Deflect is active."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_01_sacred-shuriken.webp": {
+    "name": "Sacred Shuriken",
+    "description": "+50% Shuriken Primary Fire Projectile Speed­ Shuriken's primary fire throws 2 additional Shuriken that don't consume any ammo."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_02_hanamura-healing.webp": {
+    "name": "Hanamura Healing",
+    "description": "Critical hits and Swift Strike grant Overhealth equal to 25% of their damage dealt."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_03_cybernetic-speed.webp": {
+    "name": "Cybernetic Speed",
+    "description": "Dealing damage with Shuriken grants 3% Shuriken Attack Speed for 3s, stacking up to 15 times."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_04_wyrm-s-maw.webp": {
+    "name": "Wyrm's Maw",
+    "description": "After dealing Shuriken damage, your next Swift Strike gains 10% damage and 5% range, stacking up to 5 times."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_05_iaido-strike.webp": {
+    "name": "Iaido Strike",
+    "description": "After Deflect ends, quickly swing your Dragonblade once with 75% effectiveness."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_06_hidden-blade.webp": {
+    "name": "Hidden Blade",
+    "description": "Gain 60% Melee Lifesteal and increase Quick Melee damage by 15."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_07_forged-under-fire.webp": {
+    "name": "Forged Under Fire",
+    "description": "While Deflect is active, heal for 100% of the damage it prevents."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_08_laceration.webp": {
+    "name": "Laceration",
+    "description": "Swift Strike deals 30% additional damage over 3s.­ For each enemy Swift Strike damages beyond the initial target, reduce Swift Strike cooldown by 2.5s."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_09_deflect-o-bot.webp": {
+    "name": "Deflect-o-Bot",
+    "description": "+200% Deflected Projectile Speed.­ Automatically deflect projectiles towards enemies. During the first 0.3s of Deflect, deflected hits will deal 50% bonus critical damage."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_10_hashimoto-s-bane.webp": {
+    "name": "Hashimoto's Bane",
+    "description": "After using an ability, your next secondary fire throws 2 extra Shuriken that seek enemies but deal 50% less damage."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_11_dragon-s-breath.webp": {
+    "name": "Dragon's Breath",
+    "description": "Dragonblade swings launch a large piercing projectile that deals 100% of Dragonblade's damage and deals 25% increasd damage to Airborne enemies."
+  },
+  "genji/stadiumPowers/assets/perks/genji_stadium_12_spirit-of-sojiro.webp": {
+    "name": "Spirit of Sojiro",
+    "description": "+1s Deflect Duration­ Deflect now deflects attacks from both sides."
+  },
+  "hanzo/minorPerks/assets/perks/hanzo_minor_01_sonic-disruption.webp": {
+    "name": "Sonic Disruption",
+    "description": "Sonic Arrow hacks nearby Health Packs for 30 seconds."
+  },
+  "hanzo/minorPerks/assets/perks/hanzo_minor_02_dragon-fury.webp": {
+    "name": "Dragon Fury",
+    "description": "After hitting an enemy with Primary Fire, gain 20% attack speed for 1.5 seconds."
+  },
+  "hanzo/majorPerks/assets/perks/hanzo_major_01_frost-arrow.webp": {
+    "name": "Frost Arrow",
+    "description": "Press R to ready an explosive frost arrow, slowing enemies hit by 35% for 2 seconds."
+  },
+  "hanzo/majorPerks/assets/perks/hanzo_major_02_scatter-arrows.webp": {
+    "name": "Scatter Arrows",
+    "description": "On first ricochet, Storm Arrows split into 5 shots dealing 33% damage and bounce 1 extra time."
+  },
+  "junkrat/minorPerks/assets/perks/junkrat_minor_01_nitro-boost.webp": {
+    "name": "Nitro Boost",
+    "description": "During RIP-Tire, use LSHIFT to gain a quick boost of speed. Doing so reduces RIP-Tire's damage by 50%."
+  },
+  "junkrat/minorPerks/assets/perks/junkrat_minor_02_bomb-voyage.webp": {
+    "name": "Bomb Voyage",
+    "description": "After launching with Concussion Mine, Junkrat gains 35% increased attack speed for 3 seconds."
+  },
+  "junkrat/majorPerks/assets/perks/junkrat_major_01_mine-recycling.webp": {
+    "name": "Mine Recycling",
+    "description": "Eliminations with Concussion Mine restore one charge."
+  },
+  "junkrat/majorPerks/assets/perks/junkrat_major_02_frag-cannon.webp": {
+    "name": "Frag Cannon",
+    "description": "Frag Launcher's projectile speed is increased by 25%."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_01_frags-for-days.webp": {
+    "name": "Frags For Days",
+    "description": "Frag Launcher has a 25% chance to shoot an additional projectile that deals 66% reduced damage."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_02_big-bang.webp": {
+    "name": "Big Bang",
+    "description": "When a Frag Launcher shot bounces, increase its projectile size by 33%."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_03_soot-shaker.webp": {
+    "name": "Soot Shaker",
+    "description": "After detonating Concussion Mine, gain 15% increased Attack Speed for 1.5s and restore 20% Max Ammo."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_04_bango.webp": {
+    "name": "Bango!",
+    "description": "Frag Launcher Direct Hits without bouncing Burn for 20% additional damage over 2s."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_05_double-trouble.webp": {
+    "name": "Double Trouble",
+    "description": "Gain 1 additional charge of Steel Trap."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_06_trap-ii--esquire.webp": {
+    "name": "Trap II, Esquire",
+    "description": "Detonating a Concussion Mine spawns a mini Steel Trap that slows instead of immobilizing. You can spawn up to 5 mini Steel Traps."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_07_hop-boom.webp": {
+    "name": "Hop Boom",
+    "description": "After launching yourself with Concussion Mine, detonate a Concussion Mine wherever you land with 20% reduced effectiveness."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_08_slapnel.webp": {
+    "name": "Slapnel",
+    "description": "Ability: Quick Melee detonates a Concussion Mine dealing 20% damage, launching you and knocking targets back.­ (8s Cooldown)."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_09_rainin--lead.webp": {
+    "name": "Rainin' Lead",
+    "description": "+25% Total Mayhem Explosion Radius.­ After launching yourself, drop 1 Total Mayhem bomb with 25% reduced damage every 0.35s while airborne."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_10_rip-roll.webp": {
+    "name": "Rip Roll",
+    "description": "+20% Ultimate Cost Reduction.­ During your ultimate, enter your Rip Tire. Launch out and trigger Total Mayhem when it is destroyed or detonated."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_11_successful-heist.webp": {
+    "name": "Successful Heist",
+    "description": "For each target hit by Concussion Mine detonation, reduce Concussion Mine's cooldown by 0.5s."
+  },
+  "junkrat/stadiumPowers/assets/perks/junkrat_stadium_12_zip-grease.webp": {
+    "name": "Zip Grease",
+    "description": "After detonating Concussion Mine, your next Frag Launcher shot gains 200% Projectile Speed and deal 25% increased damage to Airborne enemies."
+  },
+  "mei/minorPerks/assets/perks/mei_minor_01_skating-rink.webp": {
+    "name": "Skating Rink",
+    "description": "Allies within Blizzard gain 25% increased movement speed and heal for 50 health per second."
+  },
+  "mei/minorPerks/assets/perks/mei_minor_02_glacial-propulsion.webp": {
+    "name": "Glacial Propulsion",
+    "description": "Double jumping creates a small ice pillar that launches Mei into the air."
+  },
+  "mei/majorPerks/assets/perks/mei_major_01_deep-freeze.webp": {
+    "name": "Deep Freeze",
+    "description": "Continuously hitting enemies with primary fire freezes them for a short time."
+  },
+  "mei/majorPerks/assets/perks/mei_major_02_cryo-storm.webp": {
+    "name": "Cryo-Storm",
+    "description": "Cryo-Freeze slows and deals 70 damage per second to nearby enemies."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_01_permafrost.webp": {
+    "name": "Permafrost",
+    "description": "For every 1% of your Ability Power, gain 0.5 increased Max Life."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_02_slowball.webp": {
+    "name": "Slowball",
+    "description": "After using an ability or Gadget, your next 2 Icicle shots fire a snowball with 200% projectile speed that applies 30% slow on hit."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_03_extendothermics.webp": {
+    "name": "Extendothermics",
+    "description": "Endothermic Blaster's primary fire range is increased by 6m."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_04_frost-armor.webp": {
+    "name": "Frost Armor",
+    "description": "Gain Armor equal to 3% of the damage you deal with ­ Endothermic Blaster's primary fire, up to 100, until the end of the round."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_05_snowball-flight.webp": {
+    "name": "Snowball Flight",
+    "description": "Ability: Jumping while mid-air creates a large Ice Wall pillar under you. (12s Cooldown)."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_06_twice-as-ice.webp": {
+    "name": "Twice As Ice",
+    "description": "When you use Cryo-Freeze, reset the next cooldown of Ice Wall."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_07_iceberg.webp": {
+    "name": "Iceberg",
+    "description": "Ice Wall spawns a mini Blizzard that slows enemies."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_08_cryclone.webp": {
+    "name": "Cryclone",
+    "description": "Cryo-Freeze spawns a mini Blizzard that slows enemies."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_09_coulder.webp": {
+    "name": "Coulder",
+    "description": "Cryo-Freeze now encases you in a rolling iceball that can knock back enemies and deal 20 damage."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_10_frost-nova.webp": {
+    "name": "Frost Nova",
+    "description": "When Cryo-Freeze ends, knock back nearby enemies, dealing 60 damage."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_11_frosting.webp": {
+    "name": "Frosting",
+    "description": "Allies within Blizzard heal for 8% of your Max Life every 1s."
+  },
+  "mei/stadiumPowers/assets/perks/mei_stadium_12_deep-chills.webp": {
+    "name": "Deep Chills",
+    "description": "Continuously hitting an enemy with Endothermic Blaster's primary fire will Freeze them for 0.65s."
+  },
+  "pharah/minorPerks/assets/perks/pharah_minor_01_concussive-force.webp": {
+    "name": "Concussive Force",
+    "description": "Concussive Blast deals up to 30 explosion damage."
+  },
+  "pharah/minorPerks/assets/perks/pharah_minor_02_helix-shields.webp": {
+    "name": "Helix Shields",
+    "description": "Convert 125 health to shields. Direct hits with the Rocket Launcher triggers passive shield regeneration."
+  },
+  "pharah/majorPerks/assets/perks/pharah_major_01_fuel-stores.webp": {
+    "name": "Fuel Stores",
+    "description": "Jet Dash grants 50% fuel. Maximum overfuel is increased by 100%."
+  },
+  "pharah/majorPerks/assets/perks/pharah_major_02_rocket-salvo.webp": {
+    "name": "Rocket Salvo",
+    "description": "After using a movement ability, your next primary fire also shoots two spiraling mini-rockets, each exploding for 30 damage."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_01_evasive-maneuvers.webp": {
+    "name": "Evasive Maneuvers",
+    "description": "After using Jump Jet, Concussive Blast gains homing and hinders enemies for 1.5s on direct hit."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_02_carpet-bomb.webp": {
+    "name": "Carpet Bomb",
+    "description": "+40% Barrage Move Speed.­ Barrage has 50% increased duration."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_03_cyclic-salvo.webp": {
+    "name": "Cyclic Salvo",
+    "description": "Rocket Launcher direct hits grant 10 fuel and reduce your cooldowns by 1s."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_04_blitz-barrage.webp": {
+    "name": "Blitz Barrage",
+    "description": "+40% Barrage Move Speed.­ After using Jet Dash, fire a Barrage with 75% fewer Mini-Rockets."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_05_fuel-depot.webp": {
+    "name": "Fuel Depot",
+    "description": "Rocket Launcher direct hits permanently increase your maximum fuel by 2, stacking up to 25 times."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_06_nosedive.webp": {
+    "name": "Nosedive",
+    "description": "Ability: While Airborne, use Crouch to dash towards the ground and restore 50% fuel. ­ (6s Cooldown)."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_07_heat-seekers.webp": {
+    "name": "Heat Seekers",
+    "description": "After using Jet Dash, your next Primary Fire locks onto enemies."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_08_launch-vector.webp": {
+    "name": "Launch Vector",
+    "description": "Whenever you knockback an enemy with Concussive Blast, fire 3 homing Mini-Rockets at them."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_09_speed-kills.webp": {
+    "name": "Speed Kills",
+    "description": "Dealing Weapon Damage grants 5% Move Speed and 3% Attack Speed for 3s, stacking up to 6 times. Direct hits grant double stacks."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_10_triple-volley.webp": {
+    "name": "Triple Volley",
+    "description": "After using an ability or Gadget, your next Primary Fire fires 3 rockets that each deal 40% damage."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_11_recursion-battery.webp": {
+    "name": "Recursion Battery",
+    "description": "Mini-Rockets gain 25% Ability Lifesteal."
+  },
+  "pharah/stadiumPowers/assets/perks/pharah_stadium_12_extra-charge.webp": {
+    "name": "Extra Charge",
+    "description": "Concussive Blast gains 1 extra charge."
+  },
+  "reaper/minorPerks/assets/perks/reaper_minor_01_soul-reaving.webp": {
+    "name": "Soul Reaving",
+    "description": "Collect Soul Globes from dead enemies to restore 50 health."
+  },
+  "reaper/minorPerks/assets/perks/reaper_minor_02_lingering-wraith.webp": {
+    "name": "Lingering Wraith",
+    "description": "Leaving Wraith Form grants 30% movement speed for 2 seconds."
+  },
+  "reaper/majorPerks/assets/perks/reaper_major_01_shadow-blink.webp": {
+    "name": "Shadow Blink",
+    "description": "Shadow Step's cast time and cooldown are 25% faster, but the range is reduced by 25%."
+  },
+  "reaper/majorPerks/assets/perks/reaper_major_02_trigger-finger.webp": {
+    "name": "Trigger Finger",
+    "description": "Refresh Dire Triggers' cooldown whenever using an ability or reloading."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_01_revolving-ruin.webp": {
+    "name": "Revolving Ruin",
+    "description": "Close-range (7m) Hellfire Shotgun hits grant 5% Attack Speed for 1s, stacking up to 10 times."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_02_shrouded-shrapnel.webp": {
+    "name": "Shrouded Shrapnel",
+    "description": "Using Wraith Form increases the number of pellets per shot in your next magazine by 25% and its spread by 50%."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_03_death-step.webp": {
+    "name": "Death Step",
+    "description": "After using Shadow Step, cast Death Blossom for 1.5s with 50% reduced damage."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_04_strangle-step.webp": {
+    "name": "Strangle Step",
+    "description": "+15% Shadow Step Cast Speed.­ After using Shadow Step, double your Lifesteal for 3s."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_05_spirited-to-slay.webp": {
+    "name": "Spirited To Slay",
+    "description": "Eliminations reduce the cooldown­ of Wraith Form by 50% and Shadow Step by 100%."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_06_bloodletters.webp": {
+    "name": "Bloodletters",
+    "description": "Dire Trigger deals 30 additional damage over 3s to Airborne enemies and to enemies beyond 8m."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_07_wraith-renewal.webp": {
+    "name": "Wraith Renewal",
+    "description": "While in Wraith Form, restore 7% of your Life every second. Double this while below 50% Life."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_08_hellshroud.webp": {
+    "name": "Hellshroud",
+    "description": "While in Wraith Form, passing through enemies Burns them for 20% of your Max Life and slows their Move Speed and Attack Speed by 20% for 2s."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_09_wall-of-life-and-death.webp": {
+    "name": "Wall of Life and Death",
+    "description": "While in Wraith Form, become 50% larger and block incoming projectiles while healing all other allies within 6m for 35 every 1s."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_10_harvest-fest.webp": {
+    "name": "Harvest Fest",
+    "description": "Hellfire Shotgun hits have a 20% chance to spawn a Soul Globe. When picked up, restore 15% Life, 15% Ammo, and gain 15% Move Speed for 3s."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_major_02_trigger-finger.webp": {
+    "name": "Trigger Finger",
+    "description": "After using an ability or Gadget or reloading, refresh Dire Triggers cooldown."
+  },
+  "reaper/stadiumPowers/assets/perks/reaper_stadium_12_wretched-wings.webp": {
+    "name": "Wretched Wings",
+    "description": "While using Wraith Form, gain the ability to fly.­ While airborne, Jump to glide."
+  },
+  "shion/minorPerks/assets/perks/shion_minor_01_2785c741990d138c.png": {
+    "name": "Survival Instinct",
+    "description": "Evade's overhealth duration is increased by 1 second."
+  },
+  "shion/minorPerks/assets/perks/shion_minor_02_x-machina.webp": {
+    "name": "X Machina",
+    "description": "Execution does 20% more damage to enemies below half health."
+  },
+  "shion/majorPerks/assets/perks/shion_major_01_refuel.webp": {
+    "name": "Refuel",
+    "description": "Joyride instantly restores 50 health and regenerates 20 health per second while active."
+  },
+  "shion/majorPerks/assets/perks/shion_major_02_faces-of-death.webp": {
+    "name": "Faces of Death",
+    "description": "Gain all other Damage subrole passives (Recon, Specialist, and Sharpshooter)."
+  },
+  "sierra/minorPerks/assets/perks/sierra_minor_01_full-flight.webp": {
+    "name": "Full Flight",
+    "description": "Increase Anchor Drone flight and grapple ranges by 25%."
+  },
+  "sierra/minorPerks/assets/perks/sierra_minor_02_tight-grip.webp": {
+    "name": "Tight Grip",
+    "description": "Helix Rifle's bullet spread tightens 70% faster and widens 30% slower."
+  },
+  "sierra/majorPerks/assets/perks/sierra_major_01_medi-drone.webp": {
+    "name": "Medi-Drone",
+    "description": "Anchor Drones hold a medkit that can heal Sierra."
+  },
+  "sierra/majorPerks/assets/perks/sierra_major_02_locked-in.webp": {
+    "name": "Locked In",
+    "description": "Hitting an enemy with Tracking Shot increases your attack speed by 20% for 2 seconds."
+  },
+  "sojourn/minorPerks/assets/perks/sojourn_minor_01_overcharged.webp": {
+    "name": "Overcharged",
+    "description": "Railgun's maximum energy is increased by 50 while Overclock is active."
+  },
+  "sojourn/minorPerks/assets/perks/sojourn_minor_02_deceleration-field.webp": {
+    "name": "Deceleration Field",
+    "description": "Enemies hit by Disruptor Shot are slowed by 25%."
+  },
+  "sojourn/majorPerks/assets/perks/sojourn_major_01_friction-generators.webp": {
+    "name": "Friction Generators",
+    "description": "Power Slide generates up to 75 energy."
+  },
+  "sojourn/majorPerks/assets/perks/sojourn_major_02_dual-thrusters.webp": {
+    "name": "Dual Thrusters",
+    "description": "Power Slide gains an additional charge and its jump height shifts to lateral movement."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_01_unconventional-tactics.webp": {
+    "name": "Unconventional Tactics",
+    "description": "Power Slide spawns a mini Disruptor Shot when you start sliding and when you jump out of Power Slide."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_02_commotion-cycle.webp": {
+    "name": "Commotion Cycle",
+    "description": "Dealing damage with Charged Shot refunds up to 35% of your ability cooldowns, based on the Railgun Charge spent."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_03_experimental-tech.webp": {
+    "name": "Experimental Tech",
+    "description": "Disruptor Shot slows enemies within its area for 25%. Gain Railgun Charge equal to 50% of ability damage dealt."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_04_overcharge.webp": {
+    "name": "Overcharge",
+    "description": "Maximum Railgun Charge increased to 150. Fully-charged attacks and abilities still only consume up to 100 Charge."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_05_fine-tuned-thrusters.webp": {
+    "name": "Fine-Tuned Thrusters",
+    "description": "+1s Power Slide Duration.­ Eliminations reset Power Slide cooldown."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_06_drill-kick.webp": {
+    "name": "Drill Kick",
+    "description": "+50% Power Slide Speed.­ During Power Slide, gain 25% Damage Reduction and deal 75 damage to nearby enemies."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_07_hard-stuck.webp": {
+    "name": "Hard Stuck",
+    "description": "Disruptor Shot can stick to enemies. Stuck Disruptor Shots deal 25% less damage."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_08_enhanced-targeting-system.webp": {
+    "name": "Enhanced Targeting System",
+    "description": "During Overclock, Railgun's Primary Fire auto-aims at enemies."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_09_dynamic-dispatch.webp": {
+    "name": "Dynamic Dispatch",
+    "description": "During Power Slide and the jump after, gain 50% Charged Shot projectile size, 35% Attack Speed, and 35% Weapon Lifesteal."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_10_aftershock.webp": {
+    "name": "Aftershock",
+    "description": "Fully-charged Charged Shot or Charged Shot critical hits trigger an explosion, dealing 50% damage to other nearby enemies."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_11_zoom-zoom-zoom.webp": {
+    "name": "Zoom Zoom Zoom",
+    "description": "Gain an additional Power Slide charge."
+  },
+  "sojourn/stadiumPowers/assets/perks/sojourn_stadium_12_conductor-chase.webp": {
+    "name": "Conductor Chase",
+    "description": "During Power Slide and the jump after, gain 10% Railgun Charge and restore 50% of your Max Ammo every 1s. Railgun Charge decays 75% slower."
+  },
+  "soldier-76/minorPerks/assets/perks/soldier-76_minor_01_helix-propulsion.webp": {
+    "name": "Helix Propulsion",
+    "description": "Helix Rockets' projectile speed is increased by 50%."
+  },
+  "soldier-76/minorPerks/assets/perks/soldier-76_minor_02_tactical-salvo.webp": {
+    "name": "Tactical Salvo",
+    "description": "During Tactical Visor, Helix Rockets' cooldown is reduced by 80% and no longer interrupts firing Heavy Pulse Rifle."
+  },
+  "soldier-76/majorPerks/assets/perks/soldier-76_major_01_full-stride.webp": {
+    "name": "Full Stride",
+    "description": "Sprint's movement speed bonus gradually increases by an additional 25% over 2 seconds."
+  },
+  "soldier-76/majorPerks/assets/perks/soldier-76_major_02_stim-pack.webp": {
+    "name": "Stim Pack",
+    "description": "Stim Pack replaces Biotic Field. On use, Soldier: 76 heals for 30 health per second and gains 20% increased attack speed for 5 seconds."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_01_super-visor.webp": {
+    "name": "Super Visor",
+    "description": "After using Helix Rocket, activate Tactical Visor for 0.5s."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_02_peripheral-pulse.webp": {
+    "name": "Peripheral Pulse",
+    "description": "During Tactical Visor, Pulse Rifle auto-aims at 1 additional enemy, dealing 50% reduced damage."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_03_run-and-gun.webp": {
+    "name": "Run and Gun",
+    "description": "Shooting Pulse Rifle and using abilties doesn't interrupt Sprint. ­ Dealing damage during Sprint grants 1% Sprint Move Speed and Lifesteal for 5s, up to 25%."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_04_chaingun.webp": {
+    "name": "Chaingun",
+    "description": "While continuously shooting Pulse Rifle, each shot grants 0.5% Weapon Power, stacking up to 100 times."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_05_double-helix.webp": {
+    "name": "Double Helix",
+    "description": "Helix Rocket fires a second homing Helix Rocket that deals 70% reduced damage."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_06_cratered.webp": {
+    "name": "Cratered",
+    "description": "Increase Helix Rocket explosion radius by 40% and explosion damage by 15%."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_07_hunker-down.webp": {
+    "name": "Hunker Down",
+    "description": "When Helix Rocket deals damage, create a Biotic Field with 50% reduced duration and 50% reduced effectiveness at your position."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_08_aura-cloud.webp": {
+    "name": "Aura Cloud",
+    "description": "+40% Biotic Field Radius.­ Enemies within your Biotic Field take damage equal to 100% of its healing."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_09_on-me.webp": {
+    "name": "On Me!",
+    "description": "Biotic Field moves with you."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_10_track-and-field.webp": {
+    "name": "Track and Field",
+    "description": "During Sprint, abilities refresh 75% faster and you restore 15% Max Ammo every 1s."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_11_frontliners.webp": {
+    "name": "Frontliners",
+    "description": "Allies in range of your Biotic Field when it spawns gain Overhealth equal to 25% of your max Life for 2s."
+  },
+  "soldier-76/stadiumPowers/assets/perks/soldier-76_stadium_12_biotic-bullseye.webp": {
+    "name": "Biotic Bullseye",
+    "description": "While in Biotic Field, gain 50% more Ultimate Charge and critical hits restore 20% Max Ammo and extend the duration of Biotic Field by 0.5s, up to 5s."
+  },
+  "sombra/minorPerks/assets/perks/sombra_minor_01_34e108b70ea2d33e.png": {
+    "name": "Life Hack",
+    "description": "EMP applies Hotfix to all nearby allies."
+  },
+  "sombra/minorPerks/assets/perks/sombra_minor_02_ctrl-alt-esc.webp": {
+    "name": "CTRL ALT ESC",
+    "description": "Teleporting with Translocator while below half health initiates passive health regeneration."
+  },
+  "sombra/majorPerks/assets/perks/sombra_major_01_87fec003fc9753ad.png": {
+    "name": "Data Packet",
+    "description": "Hacking health packs with Hotfix reduces its main cooldown by 4 seconds."
+  },
+  "sombra/majorPerks/assets/perks/sombra_major_02_28a09178c65bff6e.png": {
+    "name": "Cybersecurity",
+    "description": "Cyberspace's healing is doubled on allies below half health."
+  },
+  "symmetra/minorPerks/assets/perks/symmetra_minor_01_sentry-capacity.webp": {
+    "name": "Sentry Capacity",
+    "description": "Sentry Turret gains an additional charge."
+  },
+  "symmetra/minorPerks/assets/perks/symmetra_minor_02_perfect-alignment.webp": {
+    "name": "Perfect Alignment",
+    "description": "Increase the range of Photon Projector's primary fire by 20%."
+  },
+  "symmetra/majorPerks/assets/perks/symmetra_major_01_hovering-barrier.webp": {
+    "name": "Hovering Barrier",
+    "description": "Teleporter gains the option to create a forward moving barrier instead. Pressing E again slows down the barrier's movement."
+  },
+  "symmetra/majorPerks/assets/perks/symmetra_major_02_shield-battery.webp": {
+    "name": "Shield Battery",
+    "description": "Symmetra regenerates 20 shields per second while within 10 meters of her teleporter."
+  },
+  "torbjorn/minorPerks/assets/perks/torbjorn_minor_01_hammer-time.webp": {
+    "name": "Hammer Time",
+    "description": "Move 20% faster while Forge Hammer is equipped."
+  },
+  "torbjorn/minorPerks/assets/perks/torbjorn_minor_02_pre-heated.webp": {
+    "name": "Pre-Heated",
+    "description": "Molten Core activates Overload."
+  },
+  "torbjorn/majorPerks/assets/perks/torbjorn_major_01_5f3ae1fcd2f9a78a.png": {
+    "name": "Anchor Bolts",
+    "description": "Deploy Turret's throw range is increased by 25% and it can now attach to walls and ceilings."
+  },
+  "torbjorn/majorPerks/assets/perks/torbjorn_major_02_overloaded-turret.webp": {
+    "name": "Overloaded Turret",
+    "description": "Overload upgrades your Turret for 5 seconds, increasing its health and damage."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_01_all-grown-up.webp": {
+    "name": "All Grown Up",
+    "description": "While Overload is active, Turrets are upgraded 1 Level to a maximum of Level 3."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_02_swedish-sauna.webp": {
+    "name": "Swedish Sauna",
+    "description": "Molten Core heals allied heroes within it for 50% of Molten Core Damage every 1s."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_03_magmini.webp": {
+    "name": "Magmini",
+    "description": "When you use Overload, gain 2 Ammo of Molten Core with 66% reduced damage and duration."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_04_come-get-yer-armor.webp": {
+    "name": "Come Get Yer Armor",
+    "description": "When you use Overload, throw 2 Armor Packs that grant Armor equal to 15% of your Max Life. Armor Packs do not stack."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_05_let-off-some-steam.webp": {
+    "name": "Let Off Some Steam",
+    "description": "While Overload is not active, Weapon Damage and Weapon Healing reduces Overload Cooldown by 8%."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_06_forged-in-fire.webp": {
+    "name": "Forged In Fire",
+    "description": "While Overload is active, every Forge Hammer swing explodes, dealing bonus damage equal to 10% of your Max Life in a 3m radius."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_07_dwarlord.webp": {
+    "name": "Dwarlord",
+    "description": "Overload grants all allies within 5m Overhealth equal to 50% of Overload Overhealth and 10% Attack Speed."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_08_riveting.webp": {
+    "name": "Riveting",
+    "description": "Every 5th Rivet Gun shot shoots both your Primary Fire and Secondary Fire. The bonus shot deals 10% reduced damage."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_09_blacksmith.webp": {
+    "name": "Blacksmith",
+    "description": "Hitting an ally with Forge Hammer heals them for 100% of ­ Forge Hammer damage."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_10_hammer-throw.webp": {
+    "name": "Hammer Throw",
+    "description": "Ability: While Forge Hammer is equipped, use Secondary Fire to throw it. It has 200% effectiveness on Turrets and allies.­ (2s Cooldown)."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_11_turriplets.webp": {
+    "name": "Turriplets",
+    "description": "You can have 3 Turrets active. They start at Level 1, have 50% Health and 65% Attack Speed, and can be upgraded temporarily with Forge Hammer hits for up to 24s."
+  },
+  "torbjorn/stadiumPowers/assets/perks/torbjorn_stadium_12_clocked.webp": {
+    "name": "Clocked",
+    "description": "Turret damage marks enemies for 8s. Gain 25% Weapon Lifesteal and 15% increased Weapon Damage against marked enemies."
+  },
+  "tracer/minorPerks/assets/perks/tracer_minor_01_abd0ec9faa55dabc.png": {
+    "name": "Temporal Regen",
+    "description": "Passive health regeneration triggers 100% faster."
+  },
+  "tracer/minorPerks/assets/perks/tracer_minor_02_kinetic-reload.webp": {
+    "name": "Kinetic Reload",
+    "description": "Melee hits reload 12 ammo."
+  },
+  "tracer/majorPerks/assets/perks/tracer_major_01_blink-packs.webp": {
+    "name": "Blink Packs",
+    "description": "Health Packs restore 1 Blink charge."
+  },
+  "tracer/majorPerks/assets/perks/tracer_major_02_quantum-entanglement.webp": {
+    "name": "Quantum Entanglement",
+    "description": "Recall grants 50 overhealth and 20 ammo that decays over time."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_01_flash-fist.webp": {
+    "name": "Flash Fist",
+    "description": "For 1s after using Blink, your next Quick Melee is affected by Ability Power, deals 25 extra damage, and knocks enemies back."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_02_quantum-clip.webp": {
+    "name": "Quantum Clip",
+    "description": "If you use Blink while reloading,­ gain 25% Max Ammo and 10% Weapon Lifesteal until you reload."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_03_auto-recall.webp": {
+    "name": "Auto Recall",
+    "description": "Once per round, if you would die, instead use Recall for free.­ Spending your Ultimate Charge reduces Recall's cooldown by 50%."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_04_timelapse.webp": {
+    "name": "Timelapse",
+    "description": "Hitting 2 consecutive shots on the same target without missing deals 2 extra damage over 2s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_05_get-stuffed.webp": {
+    "name": "Get Stuffed!",
+    "description": "Quick Melee hits grant 5% Ultimate Charge and reduces Recall cooldown by 2s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_06_quantum-reload.webp": {
+    "name": "Quantum Reload",
+    "description": "After Recalling, gain Ammo equal to 100% Max Ammo that decays over time."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_07_blink-hop.webp": {
+    "name": "Blink Hop",
+    "description": "Blink teleports you 3m farther.­ If you use Blink while airborne, gain an air jump and reduce Blink cooldown by 0.2s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_08_temportal.webp": {
+    "name": "Temportal",
+    "description": "Recalling leaves behind a Temporal Portal for 8s. Up to 3 allies can Interact with it once to Recall back in time 1s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_09_impulsive.webp": {
+    "name": "Impulsive",
+    "description": "When you use Recall, throw a Pulse Bomb that detonates 50% faster but deals 70% less damage."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_10_alternate-ending.webp": {
+    "name": "Alternate Ending",
+    "description": "When you use Recall, heal allies within 6m for 100% of the damage they have taken in the last 3s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_11_bullet-time.webp": {
+    "name": "Bullet Time",
+    "description": "When you use Recall, drop a Temporal Field that slows projectiles by 95% and enemies for 20%.­ You take 25% less damage from Hitscan for 4s."
+  },
+  "tracer/stadiumPowers/assets/perks/tracer_stadium_12_chrono-stabilizer.webp": {
+    "name": "Chrono Stabilizer",
+    "description": "After you use Blink, heal allies within 6m for 40 and yourself for 10."
+  },
+  "vendetta/minorPerks/assets/perks/vendetta_minor_01_extra-edge.webp": {
+    "name": "Extra Edge",
+    "description": "Projected Edge costs 25% less energy."
+  },
+  "vendetta/minorPerks/assets/perks/vendetta_minor_02_raging-storm.webp": {
+    "name": "Raging Storm",
+    "description": "Whirlwind Dash continues to spin, hitting 3 more times for 30 damage in a wide area."
+  },
+  "vendetta/majorPerks/assets/perks/vendetta_major_01_siphoning-strike.webp": {
+    "name": "Siphoning Strike",
+    "description": "Overhead strikes gain 40% Lifesteal."
+  },
+  "vendetta/majorPerks/assets/perks/vendetta_major_02_relentless.webp": {
+    "name": "Relentless",
+    "description": "Onslaught can stack 3 more times, increasing attack speed by 5% and movement speed by 3% per stack."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_01_rampant-onslaught.webp": {
+    "name": "Rampant Onslaught",
+    "description": "Onslaught's maximum stacks are increased by 1 after every 2 eliminations, up to 3."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_02_undying-fury.webp": {
+    "name": "Undying Fury",
+    "description": "If you would die, instead become Hindered and prevent ally healing, gain decaying Overhealth equal to your Max Life, and double your Onslaught stacks and Lifesteal. ­ (90s Cooldown)."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_03_skycut.webp": {
+    "name": "Skycut",
+    "description": "After using Soaring Slice, your next Overhead Strike shoots a Projected Edge with 75% damage when landing."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_04_overloaded-strike.webp": {
+    "name": "Overloaded Strike",
+    "description": "After using Soaring Slice, your next Airborne Overhead Strike can channel a level 1 Sundering Blade with 25% increased damage."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_05_defiance-core.webp": {
+    "name": "Defiance Core",
+    "description": "Warding Stance energy regenerates now even while blocking at 75% rate.­ For every Projected Edge fired, reduce Whirlwind Dash and Soaring Slice cooldown by 0.5s."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_06_riposte.webp": {
+    "name": "Riposte",
+    "description": "After blocking damage, remove Warding Stance's Move Speed penalty. Your next swing becomes an Overhead Strike."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_07_cyclone-charge.webp": {
+    "name": "Cyclone Charge",
+    "description": "Whirlwind Dash can spin 3 additional times, dealing 75% damage."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_08_double-dash.webp": {
+    "name": "Double Dash",
+    "description": "After Whirlwind Dash is finished, it can be reactivated within 3s for 75% damage."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_09_exalted-empress.webp": {
+    "name": "Exalted Empress",
+    "description": "After using Soaring Slice, Overhead Strike and Sundering Blade give 30% of damage as Overhealth, up to 200."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_10_cataclisma.webp": {
+    "name": "Cataclisma",
+    "description": "Projected Edge and Soaring Slice explode on enemy hit, dealing 30 damage to enemies within 4m."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_11_furious-friction.webp": {
+    "name": "Furious Friction",
+    "description": "Warding Stance has 25% increased energy regeneration rate. ­ When you deal damage with Projected Edge gain an additional 50% for 3s."
+  },
+  "vendetta/stadiumPowers/assets/perks/vendetta_stadium_12_apex-bloodlust.webp": {
+    "name": "Apex Bloodlust",
+    "description": "Gain 4% Lifesteal and your abilities refresh 3% faster for each Onslaught stack you have."
+  },
+  "venture/minorPerks/assets/perks/venture_minor_01_deep-burrow.webp": {
+    "name": "Deep Burrow",
+    "description": "Drill Dash distance is 75% longer while burrowed."
+  },
+  "venture/minorPerks/assets/perks/venture_minor_02_excavation-exhilaration.webp": {
+    "name": "Excavation Exhilaration",
+    "description": "While Tectonic Shock is active, cooldowns refresh 300% faster."
+  },
+  "venture/majorPerks/assets/perks/venture_major_01_smart-extender.webp": {
+    "name": "SMART Extender",
+    "description": "Empower SMART Excavator with E to increase its maximum projectile range by 100% for 4 seconds."
+  },
+  "venture/majorPerks/assets/perks/venture_major_02_covered-in-dirt.webp": {
+    "name": "Covered In Dirt",
+    "description": "Dealing damage with Clobber grants up to 40 Explorer's Resolve shields."
+  },
+  "widowmaker/minorPerks/assets/perks/widowmaker_minor_01_scoped-efficiency.webp": {
+    "name": "Scoped Efficiency",
+    "description": "Scoped shots cost 3 ammo instead of 5."
+  },
+  "widowmaker/minorPerks/assets/perks/widowmaker_minor_02_sniper-s-instinct.webp": {
+    "name": "Sniper's Instinct",
+    "description": "Scoped shots charge 100% faster for 2 seconds after using Grappling Hook."
+  },
+  "widowmaker/majorPerks/assets/perks/widowmaker_major_01_seeker-mine.webp": {
+    "name": "Seeker Mine",
+    "description": "Venom Mine now fires poison darts at enemies within 10 meters and remains active after triggered."
+  },
+  "widowmaker/majorPerks/assets/perks/widowmaker_major_02_widow-s-bite.webp": {
+    "name": "Widow's Bite",
+    "description": "Scoped shots can charge up to 125%, piercing enemies when fully charged."
+  },
+  "ana/minorPerks/assets/perks/ana_minor_01_ae02fae670005f98.png": {
+    "name": "Local Anesthetic",
+    "description": "Sleep dart explodes on impact, slowing enemies and dealing 45 damage over 3 seconds."
+  },
+  "ana/minorPerks/assets/perks/ana_minor_02_speed-serum.webp": {
+    "name": "Speed Serum",
+    "description": "Nano Boost grants a 30% movement speed boost to both Ana and her target."
+  },
+  "ana/majorPerks/assets/perks/ana_major_01_biotic-bounce.webp": {
+    "name": "Biotic Bounce",
+    "description": "After exploding, Biotic Grenade bounces and explodes again for 60 damage and healing."
+  },
+  "ana/majorPerks/assets/perks/ana_major_02_headhunter.webp": {
+    "name": "Headhunter",
+    "description": "Biotic Rifle can crit enemies."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_01_no-scope-needed.webp": {
+    "name": "No Scope Needed",
+    "description": "Landing unscoped shots with Biotic Rifle grants 10% Attack Speed for 2s, stacking up to 3 times."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_02_pinpoint-prescription.webp": {
+    "name": "Pinpoint Prescription",
+    "description": "Biotic Rifle can now critically hit both allies and enemies."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_03_dream-field.webp": {
+    "name": "Dream Field",
+    "description": "Sleep Dart hits heal allies within 5m for 20% of your max Life every 1s for 5s."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_04_comfy-cloud.webp": {
+    "name": "Comfy Cloud",
+    "description": "Sleep Dart explodes on contact, hitting targets within 3m, but Sleep has a 50% reduced duration."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_05_home-remedy.webp": {
+    "name": "Home Remedy",
+    "description": "+30% Biotic Grenade Radius.­ Biotic Grenade grants Overhealth equal to 30% of your Max Life for Biotic Grenade's duration."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_06_venomous.webp": {
+    "name": "Venomous",
+    "description": "Biotic Grenade deals an additional 75 damage over 2s to enemies affected."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_07_my-turn.webp": {
+    "name": "My Turn",
+    "description": "Casting Nano Boost also applies to Ana for 100% of its duration."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_08_our-turn.webp": {
+    "name": "Our Turn",
+    "description": "Casting Nano Boost also affects other allies in your line of sight, but it has a 25% reduced duration on them."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_09_artsy-dartsy.webp": {
+    "name": "Artsy Dartsy",
+    "description": "While scoped, you can shoot Sleep Dart with 300% increased projectile speed and 75 base damage. Landing a scoped Sleep Dart reduces its cooldown by 5s."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_10_fountain-of-soothe.webp": {
+    "name": "Fountain of Soothe",
+    "description": "Sleep Dart spawns a Biotic Grenade with 50% effectiveness."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_11_nanonade.webp": {
+    "name": "NanoNade",
+    "description": "Biotic Grenade applies Nano Boost with 25% effectiveness to all allies hit for 1.5s."
+  },
+  "ana/stadiumPowers/assets/perks/ana_stadium_12_falconer.webp": {
+    "name": "Falconer",
+    "description": "Nano Boost also gives 50% increased Attack Speed and 10% Ultimate Charge."
+  },
+  "baptiste/minorPerks/assets/perks/baptiste_minor_01_expanded-field.webp": {
+    "name": "Expanded Field",
+    "description": "Immortality Field's radius is 30% bigger."
+  },
+  "baptiste/minorPerks/assets/perks/baptiste_minor_02_assault-burst.webp": {
+    "name": "Assault Burst",
+    "description": "Regenerative Burst now provides Baptiste with 20% increased attack speed for 3 seconds."
+  },
+  "baptiste/majorPerks/assets/perks/baptiste_major_01_automated-healing.webp": {
+    "name": "Automated Healing",
+    "description": "Using any ability triggers Baptiste's Shoulder Turret, periodically firing up to 3 shots at allies, each restoring 40 health."
+  },
+  "baptiste/majorPerks/assets/perks/baptiste_major_02_rocket-boots.webp": {
+    "name": "Rocket Boots",
+    "description": "While airborne from Exo Boots, use SPACE to dash horizontally."
+  },
+  "brigitte/minorPerks/assets/perks/brigitte_minor_01_combat-medic.webp": {
+    "name": "Combat Medic",
+    "description": "Melee attacks against enemies reduce the cooldown of Repair Pack by 0.75 seconds."
+  },
+  "brigitte/minorPerks/assets/perks/brigitte_minor_02_morale-boost.webp": {
+    "name": "Morale Boost",
+    "description": "Inspire lasts 3 seconds longer when activated by Whip Shot."
+  },
+  "brigitte/majorPerks/assets/perks/brigitte_major_01_inspiring-strike.webp": {
+    "name": "Inspiring Strike",
+    "description": "Shield Bash grants 30% increased movement speed for 2 seconds. Inspire's healing is instant when activated by Shield Bash."
+  },
+  "brigitte/majorPerks/assets/perks/brigitte_major_02_whiplash.webp": {
+    "name": "Whiplash",
+    "description": "Whip Shot's knockback can slam enemies into walls, dealing 60 extra damage."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_01_whirlwhip.webp": {
+    "name": "Whirlwhip",
+    "description": "After using Shield Bash or Whip Shot, your next Rocket Flail swing deals 25% bonus damage and hits all enemies around you within 5m."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_02_righteous-cleave.webp": {
+    "name": "Righteous Cleave",
+    "description": "After using Shield Bash or Whip Shot, your next damaging Rocket Flail swing heals allies within 10m for 125% of damage dealt."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_03_burst-aid.webp": {
+    "name": "Burst Aid",
+    "description": "Ability: Use Reload to consume 1 Repair Pack charge and heal 20% of Max Life and gain a burst of 50% Move Speed.­ (3s Cooldown)."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_04_optimizer.webp": {
+    "name": "Optimizer",
+    "description": "For each Repair Pack active, increase Repair Pack Healing by 10% and heal yourself for 4% of your Max Life every 1s."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_05_packstacker.webp": {
+    "name": "Packstacker",
+    "description": "Repair Pack duration is increased by 25%. Ability damage extends the duration of all active Repair Packs by 1s."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_06_maces-to-faces.webp": {
+    "name": "Maces to Faces",
+    "description": "Whip Shot's size is increased by 1m and can hit multiple enemies. Inspire lasts 1s longer when triggered by Whip Shot."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_07_god-ray.webp": {
+    "name": "God Ray",
+    "description": "Ability damage to targets over 10m away Burns them for 5% bonus damage for every 1m the ability travelled."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_08_sk-ldkastning.webp": {
+    "name": "Sköldkastning",
+    "description": "After using Shield Bash, your next Rocket Flail swing projects a Shield Boomerang that deals 40% Shield Bash damage."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_09_lindholm-wall.webp": {
+    "name": "Lindholm Wall",
+    "description": "Increase Barrier Shield size by 60% and Barrier Shield Health by 100%. Shield Bash can hit multiple enemies."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_10_mender-bender.webp": {
+    "name": "Mender Bender",
+    "description": "After using Shield Bash, heal 33% Barrier Shield Health and trigger Inspire."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_11_aura-farming.webp": {
+    "name": "Aura Farming",
+    "description": "When Inspire is triggered by an ability, all heroes affected by it gain Overhealth equal to 4% of your Max Life for 5s."
+  },
+  "brigitte/stadiumPowers/assets/perks/brigitte_stadium_12_consecrated-ground.webp": {
+    "name": "Consecrated Ground",
+    "description": "+25% Starting Ultimate Charge.­ While Rally is active, trigger Inspire every 1.5s and ability cooldowns refresh 25% faster."
+  },
+  "illari/minorPerks/assets/perks/illari_minor_01_rapid-construction.webp": {
+    "name": "Rapid Construction",
+    "description": "Healing Pylon builds 300% faster and its cooldown is reduced by 2 seconds."
+  },
+  "illari/minorPerks/assets/perks/illari_minor_02_summer-solstice.webp": {
+    "name": "Summer Solstice",
+    "description": "Captive Sun grants Illari 20% increased flight and attack speed, and extends her flight duration by 3 seconds."
+  },
+  "illari/majorPerks/assets/perks/illari_major_01_solar-flare.webp": {
+    "name": "Solar Flare",
+    "description": "Press while using Solar Rifle's healing beam to heal all allies in front of Illari for 100 healing."
+  },
+  "illari/majorPerks/assets/perks/illari_major_02_sunburn.webp": {
+    "name": "Sunburn",
+    "description": "Outburst ignites enemies, dealing an additional 50 damage over 3 seconds."
+  },
+  "jetpack-cat/minorPerks/assets/perks/jetpack-cat_minor_01_ulterior-motive.webp": {
+    "name": "Ulterior Motive",
+    "description": "15% of Biotic Pawjectiles healing recovers fuel."
+  },
+  "jetpack-cat/minorPerks/assets/perks/jetpack-cat_minor_02_transport-shielding.webp": {
+    "name": "Transport Shielding",
+    "description": "Gain up to 50 extra shield health while carrying another hero."
+  },
+  "jetpack-cat/majorPerks/assets/perks/jetpack-cat_major_01_7b90c625a71b1ab6.png": {
+    "name": "Purrfect Form",
+    "description": "Each pulse of Purr contains 3 waves."
+  },
+  "jetpack-cat/majorPerks/assets/perks/jetpack-cat_major_02_claws-out.webp": {
+    "name": "Claws Out",
+    "description": "Quick melee becomes empowered every 6 seconds, wounding enemies for 40 damage and slowing them by 30% for 1 second."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_01_territorial.webp": {
+    "name": "Territorial",
+    "description": "Enemies within your Purr take damage equal to 20% of its healing."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_02_purr-sistence.webp": {
+    "name": "Purr-sistence",
+    "description": "Purr persists 10% longer for each ally or enemy currently affected by Purr, up to 50%. Amount of healing pulses resets every 4 pulses."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_03_battle-fur-mation.webp": {
+    "name": "Battle Fur-mation",
+    "description": "Lifeline can tether to 1 additional ally."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_04_tow-beans.webp": {
+    "name": "Tow-Beans",
+    "description": "When you release a target from Lifeline or Catnapper, gain 20% fuel. ­ Restore 1% fuel for every 10 damage dealt."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_05_frenzy.webp": {
+    "name": "Frenzy",
+    "description": "Ability: Your next Quick Melee slows and deals 40 damage over 3s and increases Quick Melee Attack Speed by 100% for 1s. ­ (8s Cooldown)."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_06_zoomies.webp": {
+    "name": "Zoomies",
+    "description": "After activating Frenetic Flight for 0.5s, next time you collide with an enemy, explode for up to 120 damage and restore up to 40% fuel based on distance travelled. ­ (1.5s Cooldown)."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_07_lindholm-inspiration.webp": {
+    "name": "Lindholm Inspiration",
+    "description": "When Purr ends, all other allies within Purr's radius gain Overhealth equal to 30% of damage dealt during Purr and 10% to yourself for 3s."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_08_tomcat-reserves.webp": {
+    "name": "Tomcat Reserves",
+    "description": "While Frenetic Flight is active, Purr refreshes 40% faster and all other abilities refresh 80% faster."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_09_ambidex-fur-ous.webp": {
+    "name": "Ambidex-fur-ous",
+    "description": "While Purr is active, shoot both guns. The bonus shot has 35% effectiveness."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_10_bell-bomb.webp": {
+    "name": "Bell Bomb",
+    "description": "Ability: Lifeline tethers an explosive Toy Ball, that explodes for up to 120 damage on impact. ­ (6s Cooldown)."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_11_scratch-ageddon.webp": {
+    "name": "Scratch-ageddon",
+    "description": "+25% Starting Ultimate Charge.­ Catnapper scratches all nearby enemies on impact, slowing them and dealing 150 damage over 3s."
+  },
+  "jetpack-cat/stadiumPowers/assets/perks/jetpack-cat_stadium_12_bouncing-biscuits.webp": {
+    "name": "Bouncing Biscuits",
+    "description": "When hitting an ally with Biotic Pawjectiles, it bounces to 1 nearby ally within 15m at 50% effectiveness."
+  },
+  "juno/minorPerks/assets/perks/juno_minor_01_familiar-vitals.webp": {
+    "name": "Familiar Vitals",
+    "description": "Pulsar Torpedoes lock onto allies 35% faster."
+  },
+  "juno/minorPerks/assets/perks/juno_minor_02_locked-on.webp": {
+    "name": "Locked On",
+    "description": "Reduce the cooldown of Pulsar Torpedoes by 1 second for each enemy hit."
+  },
+  "juno/majorPerks/assets/perks/juno_major_01_lift-off.webp": {
+    "name": "Lift Off",
+    "description": "Martian Overboots can now triple jump."
+  },
+  "juno/majorPerks/assets/perks/juno_major_02_faster-blaster.webp": {
+    "name": "Faster Blaster",
+    "description": "While Glide Boost is active, Mediblaster fires continuously."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_01_medimaster.webp": {
+    "name": "MediMaster",
+    "description": "Mediblaster deals 50% increased Critical Damage and can crit allies. ­ Critical hits reduce Hyper Ring's cooldown by 0.2s."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_02_stinger.webp": {
+    "name": "Stinger",
+    "description": "Mediblaster deals an additional­ 10 damage to enemies over 1s. (Does not stack)."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_03_medicinal-missiles.webp": {
+    "name": "Medicinal Missiles",
+    "description": "Pulsar Torpedoes hits on allies cause them to receive 50% more healing for 3s."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_04_pulsar-plus.webp": {
+    "name": "Pulsar Plus",
+    "description": "Pulsar Torpedoes gains 1 additional charge."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_05_torpedo-glide.webp": {
+    "name": "Torpedo Glide",
+    "description": "During Glide Boost, every 75 Weapon Damage or every 100 Weapon Healing you deal reduces the cooldown of Pulsar Torpedoes by 1s."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_06_blink-boosts.webp": {
+    "name": "Blink Boosts",
+    "description": "Glide Boost becomes 3 short charges with 75% reduced duration and 30% reduced cooldown."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_07_hyper-healer.webp": {
+    "name": "Hyper Healer",
+    "description": "Allies affected by Hyper Ring gain 85 Overhealth."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_08_stellar-focus.webp": {
+    "name": "Stellar Focus",
+    "description": "While Glide Boosting or hovering, gain 75% more Ultimate Charge from Damage or Healing. ­ Orbital Ray now follows you and has 50% increased duration."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_09_pulstar-destroyers.webp": {
+    "name": "PulStar Destroyers",
+    "description": "Pulsar Torpedoes explode on hit, dealing 20 healing or damage."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_10_fission-chamber.webp": {
+    "name": "Fission Chamber",
+    "description": "While affected by Hyper Ring, Mediblaster fires continuously."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_11_heal-formation.webp": {
+    "name": "Heal Formation",
+    "description": "Allies affected by Hyper Ring are healed for 40% of the damage you do."
+  },
+  "juno/stadiumPowers/assets/perks/juno_stadium_12_marswalking.webp": {
+    "name": "Marswalking",
+    "description": "Hyper Ring deploys sideways and grants you 250% Jump Height.­ Reduce Hyper Ring's cooldown by 1s when an ally passes through it."
+  },
+  "kiriko/minorPerks/assets/perks/kiriko_minor_01_urgent-care.webp": {
+    "name": "Urgent Care",
+    "description": "Healing Ofuda projectile speed is increased by 50% when seeking allies below half health."
+  },
+  "kiriko/minorPerks/assets/perks/kiriko_minor_02_fortune-teller.webp": {
+    "name": "Fortune Teller",
+    "description": "Kunai hits launch 2 Healing Ofuda to an ally in front of you."
+  },
+  "kiriko/majorPerks/assets/perks/kiriko_major_01_ready-step.webp": {
+    "name": "Ready Step",
+    "description": "Swift Step grants Kiriko 40% increased attack and reload speed for 3 seconds."
+  },
+  "kiriko/majorPerks/assets/perks/kiriko_major_02_foxtrot.webp": {
+    "name": "Foxtrot",
+    "description": "Protection Suzu grants allies 30% increased movement speed for 4 seconds."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_01_foxy-fireworks.webp": {
+    "name": "Foxy Fireworks",
+    "description": "After using an ability or Gadget, your next 5 Kunai explode on contact, dealing 20 damage to nearby enemies."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_02_keen-kunai.webp": {
+    "name": "Keen Kunai",
+    "description": "Kunai critical hits decrease ability cooldowns by 25% and refund 3 ammo."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_03_good-fortune.webp": {
+    "name": "Good Fortune",
+    "description": "Kunai hits launch 3 Healing Ofuda to an ally in front of you."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_04_leaf-on-the-wind.webp": {
+    "name": "Leaf On The Wind",
+    "description": "Healing Ofuda bounces to another ally up to 2 times at 30% effectiveness."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_05_self-care.webp": {
+    "name": "Self-Care",
+    "description": "When you use Healing Ofuda, each Healing Ofuda thrown heals you for 2% of your max Life."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_06_supported-shooting.webp": {
+    "name": "Supported Shooting",
+    "description": "+100% Healing Ofuda Seek Radius­ When Healing Ofuda heals allies, grant them 20% increased Attack Speed for 3s."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_07_fleet-foot.webp": {
+    "name": "Fleet Foot",
+    "description": "Swift Step can be used directionally without a target. Range is reduced by 50% and cooldown is reduced by 20% when used without a target."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_08_clone-conjuration.webp": {
+    "name": "Clone Conjuration",
+    "description": "After using Swift Step, create a clone of yourself that lasts for 4s. Clone has 65% less damage and healing."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_09_cleansing-charge.webp": {
+    "name": "Cleansing Charge",
+    "description": "When you cleanse negative effects with Protection Suzu, gain 5% Ultimate Charge for each hero cleansed."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_10_donut-delivery.webp": {
+    "name": "Donut Delivery",
+    "description": "Swift Step heals nearby allies by 80 Life over 2s."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_11_talisman-of-life.webp": {
+    "name": "Talisman of Life",
+    "description": "Protection Suzu grants 80 Overhealth for 5s. For each ally affected, reduce Swift Step's cooldown by 1s."
+  },
+  "kiriko/stadiumPowers/assets/perks/kiriko_stadium_12_our-bikes.webp": {
+    "name": "Our Bikes",
+    "description": "After using Kitsune Rush, reset all other ability cooldowns. ­ Allies affected by Kitsune Rush are healed for 80 every 1s."
+  },
+  "lifeweaver/minorPerks/assets/perks/lifeweaver_minor_01_petal-protection.webp": {
+    "name": "Petal Protection",
+    "description": "Allies heal 20 health per second while standing on Petal Platform."
+  },
+  "lifeweaver/minorPerks/assets/perks/lifeweaver_minor_02_dashing-escape.webp": {
+    "name": "Dashing Escape",
+    "description": "Rejuvenating Dash's distance is increased by 30%."
+  },
+  "lifeweaver/majorPerks/assets/perks/lifeweaver_major_01_sow-the-seed.webp": {
+    "name": "Sow the Seed",
+    "description": "Quick Melee with Healing Blossom to throw a seed. Another ally can pick it up for overhealth and movement speed."
+  },
+  "lifeweaver/majorPerks/assets/perks/lifeweaver_major_02_superbloom.webp": {
+    "name": "Superbloom",
+    "description": "Thorns detonate for 40 extra damage when enough stick within 2.5 seconds."
+  },
+  "lucio/minorPerks/assets/perks/lucio_minor_01_soundwave-rider.webp": {
+    "name": "Soundwave Rider",
+    "description": "Wall Riding empowers your next Soundwave, increasing its knockback by 25% and damage by 50%."
+  },
+  "lucio/minorPerks/assets/perks/lucio_minor_02_beat-drop.webp": {
+    "name": "Beat Drop",
+    "description": "Amp It Up is active for 4 seconds after casting Sound Barrier."
+  },
+  "lucio/majorPerks/assets/perks/lucio_major_01_noise-violation.webp": {
+    "name": "Noise Violation",
+    "description": "Crossfade's range is increased by 150% while Amp It Up is active."
+  },
+  "lucio/majorPerks/assets/perks/lucio_major_02_accelerando.webp": {
+    "name": "Accelerando",
+    "description": "Gain 15% attack speed while Lucio's Speed Song is active, tripled during Amp It Up."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_01_premium-streaming.webp": {
+    "name": "Premium Streaming",
+    "description": "+50% Projectile Speed.­ Gain 6% Attack Speed for each other ally in Crossfade and heal them equal to 30% of damage dealt. This bonus is doubled during Amp It Up."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_02_mixtape.webp": {
+    "name": "Mixtape",
+    "description": "When switching to Healing Boost, Crossfade heals for 65% of Crossfade healing for every 1s Speed Boost was active."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_03_signature-shift.webp": {
+    "name": "Signature Shift",
+    "description": "While Amp It Up is active, ­ Sonic Amplifier fires continuously with 80% increased projectile size."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_04_fast-forward.webp": {
+    "name": "Fast Forward",
+    "description": "Gain up to 30% increased damage and healing based on your current Move Speed and momentum."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_05_radio-edit.webp": {
+    "name": "Radio Edit",
+    "description": "After using Amp It Up, trigger a Sound Barrier with 80% reduced Overhealth."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_06_vivace.webp": {
+    "name": "Vivace",
+    "description": "Every 0.5s you are Wallriding or whenever you deal Weapon Damage, gain 1% Move Speed for 5s, stacking up to 30 times."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_07_megaphone.webp": {
+    "name": "Megaphone",
+    "description": "While Amp It Up is active, Crossfade radius is increased by 150% and Weapon Damage increases Amp It Up duration by 0.25s, up to 3s."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_08_crowd-pleaser.webp": {
+    "name": "Crowd Pleaser",
+    "description": "After using Soundwave, heal all allies affected by Crossfade for 40% of Soundwave's damage. This healing is doubled while Amp It Up is active."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_09_rhythm-rail.webp": {
+    "name": "Rhythm Rail",
+    "description": "Wallriding for 3s charges your next Soundwave, increasing its knockback by 25% and damage by 100%."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_10_reverb.webp": {
+    "name": "Reverb",
+    "description": "After using Soundwave, for 3s you can use Soundwave again at 50% reduced effectiveness."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_minor_02_beat-drop.webp": {
+    "name": "Beat Drop",
+    "description": "Landing with Sound Barrier explodes for 75 damage and can crit for 300% damage. If you spend your Ultimate Charge, Sound Barrier damage is doubled."
+  },
+  "lucio/stadiumPowers/assets/perks/lucio_stadium_12_hip-hop.webp": {
+    "name": "Hip Hop",
+    "description": "After Wallriding, gain an additional jump while Airborne. While Wallriding or Airborne, abilities refresh 10% faster."
+  },
+  "mercy/minorPerks/assets/perks/mercy_minor_01_angelic-resurrection.webp": {
+    "name": "Angelic Resurrection",
+    "description": "Mercy gains 100 overhealth after casting Resurrect."
+  },
+  "mercy/minorPerks/assets/perks/mercy_minor_02_winged-reach.webp": {
+    "name": "Winged Reach",
+    "description": "Guardian Angel's range is increased by 30%."
+  },
+  "mercy/majorPerks/assets/perks/mercy_major_01_chain-boost.webp": {
+    "name": "Chain Boost",
+    "description": "Caduceus Staff's damage boost is increased by 5% and links to a second nearby ally."
+  },
+  "mercy/majorPerks/assets/perks/mercy_major_02_double-dose.webp": {
+    "name": "Double Dose",
+    "description": "Flash Heal gains an additional charge but its base healing is reduced by 10."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_01_threads-of-fate.webp": {
+    "name": "Threads of Fate",
+    "description": "Caduceus Staff chains to your previous target for 3s, at 30% effectiveness."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_02_battle-medic.webp": {
+    "name": "Battle Medic",
+    "description": "After swapping to Caduceus Blaster, gain 20% Attack Speed and gain 20% Weapon Lifesteal for 2s for every 1s you spent tethered, up to 20s."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_03_renaissance.webp": {
+    "name": "Renaissance",
+    "description": "After succesfully using Resurrect, activate Valkyrie for 5s."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_04_equivalent-exchange.webp": {
+    "name": "Equivalent Exchange",
+    "description": "You have 3 charges of Resurrect with 33% reduced cast time but their cooldowns no longer refresh. ­ Dealing 750 Caduceus Blaster damage restores 1 charge."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_05_the-whambulance.webp": {
+    "name": "The Whambulance",
+    "description": "When Guardian Angel ends, heal your target for 4 Life for every 1m you traveled."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_major_02_double-dose.webp": {
+    "name": "Double Dose",
+    "description": "Gain an extra charge of Flash Heal. When Valkyrie is activated, refresh a charge of Flash Heal."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_07_serenity.webp": {
+    "name": "Serenity",
+    "description": "Sympathetic Recovery heals for 10% more and heals you even while you are healing a full health ally. ­ Caduceus Staff can overheal up to 50."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_08_distortion.webp": {
+    "name": "Distortion",
+    "description": "When you use Flash Heal, grant the target Overhealth equal to 25% of your Max Life for 2s and knockback enemies 5m around the target."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_09_first-responder.webp": {
+    "name": "First Responder",
+    "description": "When you Resurrect an ally, you both gain 250 Overhealth for 6s."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_10_angelic-acrobatics.webp": {
+    "name": "Angelic Acrobatics",
+    "description": "+15% Guardian Angel Launch Speed.­ Guardian Angel's cooldown starts as soon as you jump or crouch."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_11_supply-surge.webp": {
+    "name": "Supply Surge",
+    "description": "Flash Heal grants 20% Move Speed, 100% increased cooldown refresh rate, and 20% Lifesteal to the target and you for 2s."
+  },
+  "mercy/stadiumPowers/assets/perks/mercy_stadium_12_tethered-tourniquet.webp": {
+    "name": "Tethered Tourniquet",
+    "description": "After swapping to Caduceus Blaster, Caduceus Staff automatically heals allies at 100% effectiveness for 2s for every 1s you spent tethered, up to 20s."
+  },
+  "mizuki/minorPerks/assets/perks/mizuki_minor_01_wellspring.webp": {
+    "name": "Wellspring",
+    "description": "Remedy Aura generation is increased by 25%."
+  },
+  "mizuki/minorPerks/assets/perks/mizuki_minor_02_exposed-soul.webp": {
+    "name": "Exposed Soul",
+    "description": "Hitting an enemy with Binding Chain increases your damage dealt to them by 30% for 2 seconds."
+  },
+  "mizuki/majorPerks/assets/perks/mizuki_major_01_resonant-return.webp": {
+    "name": "Resonant Return",
+    "description": "Healing Kasa bounces one additional time. Each bounce increases its healing by 10."
+  },
+  "mizuki/majorPerks/assets/perks/mizuki_major_02_quickstep.webp": {
+    "name": "Quickstep",
+    "description": "While Katashiro Return is active, allies within Remedy Aura gain 20% increased movement speed."
+  },
+  "moira/minorPerks/assets/perks/moira_minor_01_destruction-s-divide.webp": {
+    "name": "Destruction's Divide",
+    "description": "Coalescence can be toggled between pure healing or pure damage, with 30% greater effect."
+  },
+  "moira/minorPerks/assets/perks/moira_minor_02_ethical-nourishment.webp": {
+    "name": "Ethical Nourishment",
+    "description": "Biotic Orb's first 30 healing is instant on each ally it encounters."
+  },
+  "moira/majorPerks/assets/perks/moira_major_01_reversal.webp": {
+    "name": "Reversal",
+    "description": "Reactivating Biotic Orb reverses its direction."
+  },
+  "moira/majorPerks/assets/perks/moira_major_02_phantom-step.webp": {
+    "name": "Phantom Step",
+    "description": "Fade lasts 0.5 seconds longer and boosts jump height by 50%."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_01_necrotic-orb.webp": {
+    "name": "Necrotic Orb",
+    "description": "Ability: Use Reload to send out an Orb that deals up to 35 damage and reduces damage dealt by enemies hit by 50% for 3s.­ (8s Cooldown)."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_02_ethereal-excision.webp": {
+    "name": "Ethereal Excision",
+    "description": "Using Biotic Grasp or Coalescence on a target affected by an Orb deals 20% critical damage or healing."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_03_chain-grasp.webp": {
+    "name": "Chain Grasp",
+    "description": "After using an ability or Gadget, Biotic Grasp's secondary fire chains to 2 additional enemies within 10m for 2s."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_04_cross-orbal.webp": {
+    "name": "Cross-Orbal",
+    "description": "Biotic Orb launches an additional Biotic Orb of the other type with 60% reduced capacity."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_05_multiball.webp": {
+    "name": "Multiball",
+    "description": "Biotic Orb launches 2 additional orbs of the chosen type with 85% reduced effectiveness."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_06_phantasm.webp": {
+    "name": "Phantasm",
+    "description": "When you use Fade, spawn a stationary copy of the last selected Biotic Orb with 50% reduced duration and 50% reduced capacity."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_07_precarious-potency.webp": {
+    "name": "Precarious Potency",
+    "description": "Allies healed by your Biotic Grasp are healed for an additional 25% of Biotic Grasp's healing over 5s."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_08_voidhoppers.webp": {
+    "name": "Voidhoppers",
+    "description": "While using Fade, passing through a target grants you Overhealth equal to 10% of your Max Life. Passing through an ally also grants them the Overhealth and phases them briefly."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_09_remote-reciprocity.webp": {
+    "name": "Remote Reciprocity",
+    "description": "After doing 300 Biotic Grasp healing, gain 25% Biotic Grasp Secondary Fire range and deal 15% increased damage for 5s."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_10_orbsplosion.webp": {
+    "name": "Orbsplosion",
+    "description": "Recast Biotic Orb to explode all active Biotic Orbs, healing up to 45% or dealing damage up to 30% of the Biotic Orb's max capacity."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_11_spectral-beam.webp": {
+    "name": "Spectral Beam",
+    "description": "If you pass through an enemy during Fade, cast Coalescence for 1.25s at 100% effectiveness. For every additional enemy, cast for 0.75s longer."
+  },
+  "moira/stadiumPowers/assets/perks/moira_stadium_12_destruction-s-divide.webp": {
+    "name": "Destruction's Divide",
+    "description": "+25% Ultimate Cost Reduction.­ Coalescence can be toggled between pure healing or pure damage, with 30% greater effect."
+  },
+  "wuyang/minorPerks/assets/perks/wuyang_minor_01_overflow.webp": {
+    "name": "Overflow",
+    "description": "Gain 10 ammo and 50% healing resource when Rushing Torrent is activated."
+  },
+  "wuyang/minorPerks/assets/perks/wuyang_minor_02_balance.webp": {
+    "name": "Balance",
+    "description": "When you deal damage with water orbs, increase Restorative Stream's passive healing by 30% for 2 seconds."
+  },
+  "wuyang/majorPerks/assets/perks/wuyang_major_01_ebb-and-flow.webp": {
+    "name": "Ebb and Flow",
+    "description": "Guardian Wave rewinds to its starting location."
+  },
+  "wuyang/majorPerks/assets/perks/wuyang_major_02_falling-rain.webp": {
+    "name": "Falling Rain",
+    "description": "Simultaneously control 3 water orbs that deal 60% decreased damage and have 25% decreased empowered explosion radius."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_01_undertow.webp": {
+    "name": "Undertow",
+    "description": "For each Water Orb hit, gain 10% Restorative Stream Energy and reduce ability cooldowns by 0.5s."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_02_ripple-sense.webp": {
+    "name": "Ripple Sense",
+    "description": "Empowered Water Orb can be steered more freely and has 35% increased explosion radius. Every 5s, your next Water Orb will reveal all enemies within 8m on impact for 5s."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_03_paindrops.webp": {
+    "name": "Paindrops",
+    "description": "After using an ability or Gadget, your next 3 Water Orbs shoot 2 additional orbs that each deal 30% damage."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_04_flow-state.webp": {
+    "name": "Flow State",
+    "description": "While Rushing Torrent is active, every 50 damage or 75 healing dealt extends the duration of Rushing Torrent by 1s, up to 5s."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_05_bifurcation.webp": {
+    "name": "Bifurcation",
+    "description": "After using an ability, your Active Restorative Stream chains to the previous target with 100% healing for 5s. You can place an additional Passive Restorative Stream."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_06_tidal-save.webp": {
+    "name": "Tidal Save",
+    "description": "Guardian Wave heals allies with Passive Restorative Stream for an extra 75% over 4s and restores 15% Restorative Stream Energy for each target hit."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_07_streamline.webp": {
+    "name": "Streamline",
+    "description": "When you use Rushing Torrent, place Passive Restorative Stream on all other allies within line of sight with 25% reduced healing."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_08_puddle-stomp.webp": {
+    "name": "Puddle Stomp",
+    "description": "While Rushing Torrent is active, landing from a jump heals all allies within 6m for 75 for every 1s spent falling."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_09_splash-strike.webp": {
+    "name": "Splash Strike",
+    "description": "While Rushing Torrent is active, using Quick Melee while Airborne creates a short Guardian Wave with 75% effectiveness around you.­ (8s Cooldown)."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_10_waveshatter.webp": {
+    "name": "Waveshatter",
+    "description": "Guardian Wave can crit enemies at close ranges and gains up to 150% more width and 75% more effectiveness based on time spent travelling downwards."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_stadium_11_current-confluence.webp": {
+    "name": "Current Confluence",
+    "description": "+25% Restorative Stream Duration.­ Allies affected by Passive Restorative Stream or Guardian Wave's Increased Healing Effect are healed for 30% of damage you deal."
+  },
+  "wuyang/stadiumPowers/assets/perks/wuyang_major_01_ebb-and-flow.webp": {
+    "name": "Ebb and Flow",
+    "description": "Guardian Wave rewinds to its starting location with 50% damage."
+  },
+  "zenyatta/minorPerks/assets/perks/zenyatta_minor_01_discordant-repair.webp": {
+    "name": "Discordant Repair",
+    "description": "Zenyatta gains 15% lifesteal against enemies with Discord Orb."
+  },
+  "zenyatta/minorPerks/assets/perks/zenyatta_minor_02_ascendance.webp": {
+    "name": "Ascendance",
+    "description": "Activate and hold Double Jump to hover for up to 3 seconds."
+  },
+  "zenyatta/majorPerks/assets/perks/zenyatta_major_01_focused-destruction.webp": {
+    "name": "Focused Destruction",
+    "description": "Secondary Fire charges 20% faster and can store 1 extra Orb of Destruction."
+  },
+  "zenyatta/majorPerks/assets/perks/zenyatta_major_02_dual-harmony.webp": {
+    "name": "Dual Harmony",
+    "description": "Gain a 2nd Harmony Orb but they both heal for 70% effectiveness."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_01_flying-kick.webp": {
+    "name": "Flying Kick",
+    "description": "Ability: While airborne, Quick Melee becomes a dash kick that deals 25% bonus damage. It stuns and deals 40 damage if the target hits a wall.­ (5s Cooldown)."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_02_it-s-orbin--time.webp": {
+    "name": "It's Orbin' Time",
+    "description": "Orb of Destruction's secondary fire can charge up to 3 additional orbs."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_03_enlightenment.webp": {
+    "name": "Enlightenment",
+    "description": "Allies affected by Harmony Orb are healed for 30% of the damage you deal."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_major_02_dual-harmony.webp": {
+    "name": "Dual Harmony",
+    "description": "Gain a 2nd Harmony Orb but they both heal 35% less."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_05_gotta-have-faith.webp": {
+    "name": "Gotta Have Faith",
+    "description": "Harmony Orb targets can be out of your line of sight for 10s longer before Harmony Orb returns to you."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_06_inner-peace.webp": {
+    "name": "Inner Peace",
+    "description": "Gain a Harmony Orb that is always attached to you. It has 80% reduced effectiveness."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_07_discord-inferno.webp": {
+    "name": "Discord Inferno",
+    "description": "When you critically hit a target affected by your Discord Orb, the Orb of Destruction explodes, dealing­ 50 damage."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_08_discord-fever.webp": {
+    "name": "Discord Fever",
+    "description": "When Discord Orb is applied to a target, they take 50 damage over 5s."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_09_instant-karma.webp": {
+    "name": "Instant Karma",
+    "description": "When a target of your Discord Orb damages you, heal 25% of that damage over 2s."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_10_circle-of-strife.webp": {
+    "name": "Circle of Strife",
+    "description": "While using Transcendence, apply Discord Orb to all enemies within range."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_11_soul-control.webp": {
+    "name": "Soul Control",
+    "description": "Transcendence can be canceled early, saving up to 65% of your Ultimate Charge."
+  },
+  "zenyatta/stadiumPowers/assets/perks/zenyatta_stadium_12_sharpened-focus.webp": {
+    "name": "Sharpened Focus",
+    "description": "Orb of Destruction's Secondary Fire charges 20% faster. While charging, gain 5% Move Speed and Overhealth equal to 5% of your Max Life for every Orb charged."
+  },
+  "dva/minorPerks/assets/perks/dva_minor_01_bunny-power.webp": {
+    "name": "Bunny Power",
+    "description": "Eject grants 75 temporary overhealth and Call Mech’s damage radius is increased by 50%."
+  },
+  "dva/minorPerks/assets/perks/dva_minor_02_extended-boosters.webp": {
+    "name": "Extended Boosters",
+    "description": "Hitting an enemy with Boosters deals 40% increased damage and extends the duration by 0.5 seconds."
+  },
+  "dva/majorPerks/assets/perks/dva_major_01_shield-system.webp": {
+    "name": "Shield System",
+    "description": "Convert 100 health to shields. Defense Matrix restores shields based on 25% of its damage absorbed."
+  },
+  "dva/majorPerks/assets/perks/dva_major_02_precision-fusion.webp": {
+    "name": "Precision Fusion",
+    "description": "Press R to reduce Fusion Cannons' spread by 75% for 3 seconds."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_01_focused-fusion.webp": {
+    "name": "Focused Fusion",
+    "description": "Fusion Cannon's spread is reduced by 50% and 20m increased falloff range. When dealing Weapon damage to enemies beyond 8m, Defense Matrix recovers 33% faster."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_02_legendary-loadout.webp": {
+    "name": "Legendary Loadout",
+    "description": "Micro Missiles are replaced with­ 6 Heavy Rockets, which deal 375% more explosive damage and have 100% increased radius."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_03_overstocked.webp": {
+    "name": "Overstocked",
+    "description": "Gain 1 extra charge of Micro Missiles."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_04_countermeasures.webp": {
+    "name": "Countermeasures",
+    "description": "When you mitigate 150 damage with Defense Matrix, automatically fire 3 Micro Missiles."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_05_ignition-burst.webp": {
+    "name": "Ignition Burst",
+    "description": "Boosters damage Burn enemies for 40 damage over 2s."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_06_meka-punch.webp": {
+    "name": "MEKA Punch",
+    "description": "While using Boosters, Quick Melee has 50% more Attack Speed. ­ Quick Melee and Boosters eliminations reset the cooldown of Boosters."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_07_tokki-slam.webp": {
+    "name": "Tokki Slam",
+    "description": "During Boosters, use Crouch to slam the ground, dealing Boosters damage equal to 15% of your Max Life and knocking up enemies hit."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_08_facetanking.webp": {
+    "name": "Facetanking",
+    "description": "When you mitigate 150 damage with Defense Matrix, heal yourself for 15% of that damage and all other allies within 6m for 25% of that damage."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_09_stat-boost.webp": {
+    "name": "Stat Boost",
+    "description": "Boosters damage extends Boosters duration by 0.5s and restores 5% Defense Matrix energy and heal 5% Max Life."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_10_7ac621d3abe95810.png": {
+    "name": "MEKA Ejector",
+    "description": "Self-Destruct explodes 25% faster and costs 60% less Ultimate Charge but deals 75% reduced damage and only grants 75% Ultimate Charge after detonation."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_12_multi-task-mod.webp": {
+    "name": "Multi-Task Mod",
+    "description": "Fusion Cannons can now be fired while using Defense Matrix."
+  },
+  "dva/stadiumPowers/assets/perks/dva_stadium_12_df1b48ee1dca0920.png": {
+    "name": "MEKA Evac Shield",
+    "description": "+50% Call Mech Radius.­ When ejecting or re-entering your Mech, grant Overhealth equal to 20% of your Max Life to all nearby allies for 5s."
+  },
+  "domina/minorPerks/assets/perks/domina_minor_01_efficient-design.webp": {
+    "name": "Efficient Design",
+    "description": "After using Barrier Array, restore 50 shields and activate passive health regeneration."
+  },
+  "domina/minorPerks/assets/perks/domina_minor_02_extended-power.webp": {
+    "name": "Extended Power",
+    "description": "Increase the range of Photon Magnum by 20%."
+  },
+  "domina/majorPerks/assets/perks/domina_major_01_disruptive-detonation.webp": {
+    "name": "Disruptive Detonation",
+    "description": "Enemies hit by Crystal Charge's explosion are slowed by 30% for 2 seconds."
+  },
+  "domina/majorPerks/assets/perks/domina_major_02_corporate-retreat.webp": {
+    "name": "Corporate Retreat",
+    "description": "While Barrier Array is active, it can be moved one time to another location."
+  },
+  "doomfist/minorPerks/assets/perks/doomfist_minor_01_one-two.webp": {
+    "name": "One-Two",
+    "description": "Hitting an enemy into a wall with Rocket Punch reloads Hand Cannon and overfills ammo by 2."
+  },
+  "doomfist/minorPerks/assets/perks/doomfist_minor_02_survival-of-the-fittest.webp": {
+    "name": "Survival of the Fittest",
+    "description": "The Best Defense grants 25 overhealth from eliminations and its max overhealth is increased by 50."
+  },
+  "doomfist/majorPerks/assets/perks/doomfist_major_01_aftershock.webp": {
+    "name": "Aftershock",
+    "description": "Enemies hit by Seismic Slam are slowed by 40% for 2 seconds."
+  },
+  "doomfist/majorPerks/assets/perks/doomfist_major_02_power-matrix.webp": {
+    "name": "Power Matrix",
+    "description": "Power Block absorbs projectiles for the first 0.8 seconds of its duration."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_01_rising-uppercut.webp": {
+    "name": "Rising Uppercut",
+    "description": "Ability: Your next Quick Melee becomes a Rising Uppercut, dealing 20 extra damage.­ (10s Cooldown)."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_02_jab-cross.webp": {
+    "name": "Jab Cross",
+    "description": "After you use an ability, gain 75% Attack Speed and increase Quick Melee Range by 1m for 0.75s."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_03_the-bestest-defense.webp": {
+    "name": "The Bestest Defense",
+    "description": "Quick Melee hits and Hand Cannon critical hits trigger The Best Defense at 50% effectiveness."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_04_slam-wham.webp": {
+    "name": "Slam Wham",
+    "description": "Increase Seismic Slam's damage up to 75% and range up to 50% based on time airborne."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_05_overpowered.webp": {
+    "name": "Overpowered",
+    "description": "Rocket Punch can be further empowered when blocking 150% more damage with Power Block, granting 50% more damage and 50% more range."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_06_jetforce-jab.webp": {
+    "name": "Jetforce Jab",
+    "description": "Rocket Punch can go through multiple enemies and Burns them for 20% bonus damage over 3s."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_07_boomfist.webp": {
+    "name": "Boomfist",
+    "description": "Hitting multiple enemies with Rocket Punch grants 5% Ultimate Charge and reduces the cooldown of Power Block by 0.5s for each extra enemy hit."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_08_asteroid-smash.webp": {
+    "name": "Asteroid Smash",
+    "description": "Ability: Crouching while airborne will trigger a mini Meteor Strike, pulling down enemies and dealing up to 150 damage based on distance traveled.­ (8s Cooldown)."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_09_aftershock.webp": {
+    "name": "Aftershock",
+    "description": "Seismic Slam's shockwave repeats itself after a 1.5s delay, dealing 40% damage."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_10_seismic-rally.webp": {
+    "name": "Seismic Rally",
+    "description": "Every 1s while leaping with ­ Seismic Slam, grant Overhealth equal to 5% of your Max Life to all allies within line of sight for 3s."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_11_block-party.webp": {
+    "name": "Block Party",
+    "description": "While Power Block is active, heal yourself for 8% of Max Life and all other allies within 8m for 20% of Max Life every 1s."
+  },
+  "doomfist/stadiumPowers/assets/perks/doomfist_stadium_12_helping-hand.webp": {
+    "name": "Helping Hand",
+    "description": "The Best Defense grants bonus Overhealth equal to 10% of Bonus Max Life. Whenever you gain Overhealth from yourself, grant 25% to the nearest ally."
+  },
+  "hazard/minorPerks/assets/perks/hazard_minor_01_reconstitution.webp": {
+    "name": "Reconstitution",
+    "description": "Jagged Wall hits overfill Spike Guard with 25% additional energy."
+  },
+  "hazard/minorPerks/assets/perks/hazard_minor_02_anarchic-zeal.webp": {
+    "name": "Anarchic Zeal",
+    "description": "Spike Guard's spikes gain 40% Lifesteal."
+  },
+  "hazard/majorPerks/assets/perks/hazard_major_01_deep-leap.webp": {
+    "name": "Deep Leap",
+    "description": "Violent Leap's range is increased by 20%."
+  },
+  "hazard/majorPerks/assets/perks/hazard_major_02_explosive-impalements.webp": {
+    "name": "Explosive Impalements",
+    "description": "Bonespur hits mark targets with spikes. Quick Melee and Violent Leap's slash detonate them for 30 explosive damage."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_01_bonerot.webp": {
+    "name": "Bonerot",
+    "description": "Dealing 6 instances of Weapon Damage marks targets with spikes. Quick Melee and Violent Leap's slash detonates them for 60 damage."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_02_barbed-shot.webp": {
+    "name": "Barbed Shot",
+    "description": "Bonespur shots also fire 2 Spike Guard spikes at hit targets for 8 damage."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_03_needle-storm.webp": {
+    "name": "Needle Storm",
+    "description": "Spike Guard now fires at all enemies in front of Hazard."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_04_twin-fang.webp": {
+    "name": "Twin Fang",
+    "description": "Every 3rd shot of Bonespur fires a free second shot for 75% damage."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_05_woof-woof.webp": {
+    "name": "Woof Woof!",
+    "description": "After using Violent Leap, gain 50% Spike Guard Range for 3s."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_06_bunny-hop.webp": {
+    "name": "Bunny Hop",
+    "description": "Using Violent Leap without using Slash refunds 2s of cooldown for Violent Leap and Jagged Wall and grants nearby allies Overhealth equal to 10% of your Max Life for 3s."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_07_slasher.webp": {
+    "name": "Slasher",
+    "description": "Violent Leap's slash shoots a piercing projectile that deals 80 damage, ignoring enemies within 7m."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_08_off-the-wall.webp": {
+    "name": "Off The Wall",
+    "description": "When Jagged Wall is spawned, knock back enemies within 8m after 1.5s for 40 damage."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_09_juiced.webp": {
+    "name": "Juiced",
+    "description": "When Jagged Wall is spawned, heal all allies within 8m by 20% of your Max Life over 3s."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_10_fortress.webp": {
+    "name": "Fortress",
+    "description": "Jagged Wall becomes 35% larger.­ Jagged Wall knockback applies 25 additional damage."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_11_bringin--the-pain.webp": {
+    "name": "Bringin' the Pain",
+    "description": "Downpour costs 20% less Ultimate Charge.­ After using Downpour, immediately reset all cooldowns and gain 25% Cooldown Reduction for 10s."
+  },
+  "hazard/stadiumPowers/assets/perks/hazard_stadium_12_boomslang-s-blaster.webp": {
+    "name": "Boomslang's Blaster",
+    "description": "Ability: Use Quick Melee during ­ Spike Guard to immediately fire 5 spikes at targets. ­ (10s Cooldown)."
+  },
+  "junker-queen/minorPerks/assets/perks/junker-queen_minor_01_rampant-charge.webp": {
+    "name": "Rampant Charge",
+    "description": "Gain Unstoppable and reduce all cooldowns by 6 seconds when using Rampage."
+  },
+  "junker-queen/minorPerks/assets/perks/junker-queen_minor_02_battle-shout.webp": {
+    "name": "Battle Shout",
+    "description": "Commanding Shout fully reloads Scatter Gun and increases allied reload speed by 50%."
+  },
+  "junker-queen/majorPerks/assets/perks/junker-queen_major_01_willy-willy.webp": {
+    "name": "Willy-Willy",
+    "description": "When recalling Jagged Blade, its radius is increased by 100% and it deals 30 additional impact damage."
+  },
+  "junker-queen/majorPerks/assets/perks/junker-queen_major_02_savage-satiation.webp": {
+    "name": "Savage Satiation",
+    "description": "Carnage's impact damage gains 100% lifesteal."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_01_thrill-of-battle.webp": {
+    "name": "Thrill of Battle",
+    "description": "Adrenaline Rush also heals allies within 12m for 100% of the amount it heals you."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_02_royal-bullets.webp": {
+    "name": "Royal Bullets",
+    "description": "Scattergun critical hit applies Wound for 20 damage over 2s."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_03_twist-the-knife.webp": {
+    "name": "Twist The Knife",
+    "description": "Scattergun critical hits extend the duration of all Wounds on the target by 2s."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_04_blade-parade.webp": {
+    "name": "Blade Parade",
+    "description": "Holding Jagged Blade charges it, increasing its damage up to 75% and projectile speed up to 200%."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_05_cut--em--gracie.webp": {
+    "name": "Cut 'Em, Gracie!",
+    "description": "Each enemy hit by Jagged Blade reduces its cooldown by 1s.­ When recalling Jagged Blade, its radius is increased by 100% and deals 30 impact damage."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_06_merciless-magnetism.webp": {
+    "name": "Merciless Magnetism",
+    "description": "Jagged Blade can crit for 50% bonus damage.­ Jagged Blade's pull strength is increased by 50%. When Jagged Blade crits, this bonus is doubled."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_07_soaring-stone.webp": {
+    "name": "Soaring Stone",
+    "description": "Carnage becomes a leaping strike if you jump during its cast time."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_08_chop-chop.webp": {
+    "name": "Chop Chop",
+    "description": "Carnage gains an additional charge but its cooldown reduction per hit is reduced to 1s."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_09_reckoner-s-roar.webp": {
+    "name": "Reckoner's Roar",
+    "description": "Using Commanding Shout Wounds enemies within 10m­ for 30 damage over 3s."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_10_let-s-go-win.webp": {
+    "name": "Let's Go Win",
+    "description": "Elimination reduces the cooldown of Jagged Blade and Commanding Shout by 50%."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_11_bloodcrazed.webp": {
+    "name": "Bloodcrazed",
+    "description": "Rampage and Carnage gives 15% of Max Life as Overhealth per hit, up to 45%."
+  },
+  "junker-queen/stadiumPowers/assets/perks/junker-queen_stadium_12_bow-down.webp": {
+    "name": "Bow Down",
+    "description": "While casting Rampage, become Unstoppable and reset all ability cooldowns. Rampage knocks down enemies hit for 1.5s."
+  },
+  "mauga/minorPerks/assets/perks/mauga_minor_01_kinetic-bandolier.webp": {
+    "name": "Kinetic Bandolier",
+    "description": "Overrun reloads up to 150 ammo during the first second of charging."
+  },
+  "mauga/minorPerks/assets/perks/mauga_minor_02_pyromaniac.webp": {
+    "name": "Pyromaniac",
+    "description": "Igniting enemies with Incendiary Chaingun grants 50 overhealth."
+  },
+  "mauga/majorPerks/assets/perks/mauga_major_01_firewalker.webp": {
+    "name": "Firewalker",
+    "description": "Overrun ignites enemies hit."
+  },
+  "mauga/majorPerks/assets/perks/mauga_major_02_combat-fuel.webp": {
+    "name": "Combat Fuel",
+    "description": "Critical hits grant Mauga 4 temporary overhealth on Cardiac Overdrive's next use, up to 150 overhealth."
+  },
+  "orisa/minorPerks/assets/perks/orisa_minor_01_defense-protocol.webp": {
+    "name": "Defense Protocol",
+    "description": "Regenerate 100 health per second while charging Terra Surge."
+  },
+  "orisa/minorPerks/assets/perks/orisa_minor_02_mobile-fortification.webp": {
+    "name": "Mobile Fortification",
+    "description": "While Fortify is active, Orisa has no movement speed reduction and no heat generation."
+  },
+  "orisa/majorPerks/assets/perks/orisa_major_01_bcfd342643f783df.png": {
+    "name": "Heavy Javelin",
+    "description": "Energy Javelin's knockback is increased by 25% and its wall impact damage is increased by 15."
+  },
+  "orisa/majorPerks/assets/perks/orisa_major_02_protective-barrier.webp": {
+    "name": "Protective Barrier",
+    "description": "Convert Javelin Spin to instead launch a barrier."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_01_scorched-earth.webp": {
+    "name": "Scorched Earth",
+    "description": "When you Overheat, apply Burning to enemies within 6m, dealing damage equal to 20% of your max Life over 4s."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_02_shield-divergence.webp": {
+    "name": "Shield Divergence",
+    "description": "When you Overheat, deploy a Barrier with 500 Health in front."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_03_advanced-throwbotics.webp": {
+    "name": "Advanced Throwbotics",
+    "description": "When you use Javelin Spin, launch an Energy Javelin with 75% damage."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_04_spynstem-update.webp": {
+    "name": "Spynstem Update",
+    "description": "Javelin Spin now deflects projectiles and grants 20% of damage dealt from deflecting as Ultimate Charge."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_06_lassoed.webp": {
+    "name": "Lassoed",
+    "description": "On impact, Energy Javelin will pull enemies within 4m towards itself. Gain 3% Ultimate Charge for each enemy pulled."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_07_critical-charger.webp": {
+    "name": "Critical Charger",
+    "description": "Energy Javelin can crit for 100% bonus damage.­ Energy Javelin can be charged for up to 200% projectile speed and pierces enemies at full power."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_08_hooves-of-steel.webp": {
+    "name": "Hooves of Steel",
+    "description": "After Fortify ends, gain Shields equal to 60% of the Weapon Damage dealt during Fortify, up to 200. Resets when you next use Fortify."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_09_restortify.webp": {
+    "name": "Restortify",
+    "description": "While Fortify is active, heal for 5% of your max Life every second."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_10_centripetal-charge.webp": {
+    "name": "Centripetal Charge",
+    "description": "25% Ultimate Cost Reduction.­ After using Terra Surge, reset your ability cooldowns."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_11_supercharger.webp": {
+    "name": "Supercharger",
+    "description": "When you use Terra Surge, drop a Supercharger that increases the damage of nearby allies by 25% for 15s."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_11_c34242dfd6b9bda4.png": {
+    "name": "OR-15 Escalator",
+    "description": "Gain increased Weapon Damage based on your Heat, up to 30% Weapon Damage."
+  },
+  "orisa/stadiumPowers/assets/perks/orisa_stadium_12_oladele-copter-blades.webp": {
+    "name": "Oladele-copter Blades",
+    "description": "While using Javelin Spin and Terra Surge, gain free flight and 20% Move Speed, but Terra Surge deals 50% reduced damage."
+  },
+  "ramattra/minorPerks/assets/perks/ramattra_minor_01_relentless-form.webp": {
+    "name": "Relentless Form",
+    "description": "While Nemesis Form is active, eliminations extend the duration by 2 seconds. Half duration gained during Annihilation."
+  },
+  "ramattra/minorPerks/assets/perks/ramattra_minor_02_prolonged-barrier.webp": {
+    "name": "Prolonged Barrier",
+    "description": "Void Barrier's duration and size is increased by 25%."
+  },
+  "ramattra/majorPerks/assets/perks/ramattra_major_01_void-surge.webp": {
+    "name": "Void Surge",
+    "description": "Void Accelerator periodically releases a burst of 6 additional projectiles during continuous fire."
+  },
+  "ramattra/majorPerks/assets/perks/ramattra_major_02_nanite-repair.webp": {
+    "name": "Nanite Repair",
+    "description": "Ramattra is healed for 100 health per second while within Ravenous Vortex."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_major_01_void-surge.webp": {
+    "name": "Void Surge",
+    "description": "Void Accelerator periodically releases a burst of 6 additional projectiles during continuous fire."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_02_void-blight.webp": {
+    "name": "Void Blight",
+    "description": "Void Accelerator infects enemies with nanites which explode for 30 damage after dealing 100 damage."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_03_recursion-relay.webp": {
+    "name": "Recursion Relay",
+    "description": "+25% Void Barrier size.­ Void Accelerator projectile and Pummel that passes through the Void Barrier gain 15% increased damage."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_04_ramparts.webp": {
+    "name": "Ramparts",
+    "description": "Void Barrier gains an additional charge."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_05_second-phase.webp": {
+    "name": "Second Phase",
+    "description": "When Nemesis Form is activated, reduce the cooldown of Ravenous Vortex by 75%."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_06_final-form.webp": {
+    "name": "Final Form",
+    "description": "When Nemesis Form is active, you are healed for 50 per second while within Ravenous Vortex."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_07_breakout.webp": {
+    "name": "Breakout",
+    "description": "While blocking in Nemesis Form, use Pummel to perform a dashing punch. ­ (4s Cooldown)."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_08_retaliation.webp": {
+    "name": "Retaliation",
+    "description": "Releasing Block deals damage equal to 100% of the amount mitigated, up to 150 to enemies within 6m."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_09_conversion-protocol.webp": {
+    "name": "Conversion Protocol",
+    "description": "Block heals you for 25% of damage mitigated over 3s."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_10_insatiable-spiral.webp": {
+    "name": "Insatiable Spiral",
+    "description": "+50% Ravenous Vortex Radius­ +15% Ravenous Vortex Damage"
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_11_ravaging-vortex.webp": {
+    "name": "Ravaging Vortex",
+    "description": "When Ravenous Vortex is detonated, deal 25 damage and gain 2% Ultimate Charge per enemy hit."
+  },
+  "ramattra/stadiumPowers/assets/perks/ramattra_stadium_12_dreadknight.webp": {
+    "name": "Dreadknight",
+    "description": "+50% Annihilation Damage­ +1s Annihilation Duration"
+  },
+  "reinhardt/minorPerks/assets/perks/reinhardt_minor_01_crusader-s-fire.webp": {
+    "name": "Crusader's Fire",
+    "description": "Refund a charge of Fire Strike when you stun an enemy, overfilling up to 3."
+  },
+  "reinhardt/minorPerks/assets/perks/reinhardt_minor_02_crusader-s-resolve.webp": {
+    "name": "Crusader's Resolve",
+    "description": "While using Barrier Field, your passive health regeneration triggers 75% sooner."
+  },
+  "reinhardt/majorPerks/assets/perks/reinhardt_major_01_shield-slam.webp": {
+    "name": "Shield Slam",
+    "description": "While Barrier Field is active, use to damage and knockback enemies."
+  },
+  "reinhardt/majorPerks/assets/perks/reinhardt_major_02_ignited-fury.webp": {
+    "name": "Ignited Fury",
+    "description": "For each enemy you hit with Fire Strike, gain 2 seconds of 25% increased attack speed."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_01_to-me--my-friends.webp": {
+    "name": "To Me, My Friends!",
+    "description": "While Barrier Field is active,­ allies within 5m are healed equal to 3% of your Max Life every 1s."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_02_crusader-slam.webp": {
+    "name": "Crusader Slam",
+    "description": "Ability: While Barrier Field is active, use Primary Fire to deal Melee Damage equal to 5% of Barrier Field Health.­ (8s Cooldown)."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_03_iron-drift.webp": {
+    "name": "Iron Drift",
+    "description": "+200% Charge Duration.­ Charge can pin multiple enemies and can be slowed by holding backwards."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_04_shield-stampede.webp": {
+    "name": "Shield Stampede",
+    "description": "+50% Charge Knockback Power.­ During Charge, automatically deploy Barrier Field."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_05_barrier-reconstruction.webp": {
+    "name": "Barrier Reconstruction",
+    "description": "When you deal Melee damage or Fire Strike damage, restore health to Barrier Field equal to 15% of Barrier Field Health."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_06_vroom-boom-boom.webp": {
+    "name": "Vroom Boom Boom",
+    "description": "During Charge, colliding with a wall triggers an explosion that deals 30% of Charge's pin damage."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_07_impact-burst.webp": {
+    "name": "Impact Burst",
+    "description": "Fire Strike triggers an explosion the first time it hits an enemy, dealing 30% Fire Strike damage to other enemies in a 3m radius."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_08_magma-strike.webp": {
+    "name": "Magma Strike",
+    "description": "Every second Fire Strike leaves a trail of lava for 2s that Burns enemies for 50% of Fire Strike damage."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_09_blazing-blitz.webp": {
+    "name": "Blazing Blitz",
+    "description": "+25% Starting Ultimate Charge.­ After using Earthshatter, every Rocket Hammer swing launches a Fire Strike for 5s."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_10_smashing.webp": {
+    "name": "Smashing!",
+    "description": "When you deal damage with Rocket Hammer, gain 1% Move Speed and 3% Weapon Lifesteal for 2s, stacking up to 10 times."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_11_feeling-the-burn.webp": {
+    "name": "Feeling The Burn",
+    "description": "Every 3rd Rocket Hammer swing applies Burn, dealing 30% ­ Rocket Hammer damage over 2s."
+  },
+  "reinhardt/stadiumPowers/assets/perks/reinhardt_stadium_12_infusion-generator.webp": {
+    "name": "Infusion Generator",
+    "description": "Increase Barrier Field Health by 250% of your Bonus Max Life."
+  },
+  "roadhog/minorPerks/assets/perks/roadhog_minor_01_scrap-hook.webp": {
+    "name": "Scrap Hook",
+    "description": "Chain Hook hits reload 4 ammo."
+  },
+  "roadhog/minorPerks/assets/perks/roadhog_minor_02_4b0364924157ffcb.png": {
+    "name": "Here, Piggy Piggy",
+    "description": "During Whole Hog, Chain Hook's cooldown is reduced by 80%."
+  },
+  "roadhog/majorPerks/assets/perks/roadhog_major_01_hogdrogen-exposure.webp": {
+    "name": "Hogdrogen Exposure",
+    "description": "Take A Breather also heals nearby allies for 50% of its healing."
+  },
+  "roadhog/majorPerks/assets/perks/roadhog_major_02_d9dcccfe7fb8e200.png": {
+    "name": "Toxic Exhaust",
+    "description": "Enemies in front of Roadhog while Trash Compactor is active are slowed by 30% and take 20 damage per second."
+  },
+  "sigma/minorPerks/assets/perks/sigma_minor_01_kinetic-cycle.webp": {
+    "name": "Kinetic Cycle",
+    "description": "Absorbing projectiles with Kinetic Grasp also reduces Accretion's cooldown."
+  },
+  "sigma/minorPerks/assets/perks/sigma_minor_02_hyper-regeneration.webp": {
+    "name": "Hyper Regeneration",
+    "description": "30% of Hyperspheres' damage restores Experimental Barrier's health."
+  },
+  "sigma/majorPerks/assets/perks/sigma_major_01_hyper-strike.webp": {
+    "name": "Hyper Strike",
+    "description": "Every 5 direct hits with Hyperspheres, your next successful Quick Melee levitates and knocks away enemies."
+  },
+  "sigma/majorPerks/assets/perks/sigma_major_02_levitation.webp": {
+    "name": "Levitation",
+    "description": "Activate and hold Double Jump to briefly levitate upward."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_01_zero-gravity.webp": {
+    "name": "Zero Gravity",
+    "description": "When you use an ability or Gadget, gain the ability to fly for 2.5s."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_02_trinisphere.webp": {
+    "name": "Trinisphere",
+    "description": "Your primary fire launches a third Hypersphere that deals 50% damage."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_03_symphonic-syzygy.webp": {
+    "name": "Symphonic Syzygy",
+    "description": "When Kinetic Grasp ends, for every 50 damage absorbed gain 10% Attack Speed for 4s, stacking up to­ 4 times."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_04_event-horizon.webp": {
+    "name": "Event Horizon",
+    "description": "Damage absorbed by Kinetic Grasp grants Overhealth to visible allies and restores Experimental Barrier's health. Excess is converted to Overhealth."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_05_philharmonic-fortitude.webp": {
+    "name": "Philharmonic Fortitude",
+    "description": "Experimental Barrier has 25% increased Max Health. Barrier health regenerates constantly but 50% slower while deployed."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_06_orbital-barrier.webp": {
+    "name": "Orbital Barrier",
+    "description": "Get a mini Experimental Barrier that orbits around you. It has 50% reduced health."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_07_singularity.webp": {
+    "name": "Singularity",
+    "description": "Accretion splash damage is increased by 75% and enemies are pulled towards its explosion.­ Accretion's cooldown is reduced by 35% on direct hit."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_08_hyperloop.webp": {
+    "name": "Hyperloop",
+    "description": "Hyperspheres direct hits reduce the cooldown of Accretion by 0.8s."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_09_maestro.webp": {
+    "name": "Maestro",
+    "description": "50% Ultimate Cost Reduction.­ Gravitic Flux Radius is reduced­ by 35% and refunds 50% of Ultimate Charge if no enemies are affected."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_10_apogee-alignment.webp": {
+    "name": "Apogee Alignment",
+    "description": "When you use an ability, create 2 Hyperspheres that orbit around you that deals 75% damage."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_11_astrophysical.webp": {
+    "name": "Astrophysical",
+    "description": "Ability: Quick Melee causes enemies hit to levitate into the air for 1s.­ (10s Cooldown)."
+  },
+  "sigma/stadiumPowers/assets/perks/sigma_stadium_12_mass-driver.webp": {
+    "name": "Mass Driver",
+    "description": "Accretion projectiles that pass through Experimental Barrier gain 300% Projectile Speed, deal 25% increased damage, and restore 150 Experimental Barrier health."
+  },
+  "winston/minorPerks/assets/perks/winston_minor_01_electric-charge.webp": {
+    "name": "Electric Charge",
+    "description": "Winston gains 10% movement speed for each enemy he is damaging with Tesla Cannon's primary fire, up to 30%."
+  },
+  "winston/minorPerks/assets/perks/winston_minor_02_heavy-landing.webp": {
+    "name": "Heavy Landing",
+    "description": "During Primal Rage, Jump Pack's damage and area increase by up to 75% while airborne."
+  },
+  "winston/majorPerks/assets/perks/winston_major_01_chain-lightning.webp": {
+    "name": "Chain Lightning",
+    "description": "Fully charged Secondary Fire hits bounce to up to 2 additional targets."
+  },
+  "winston/majorPerks/assets/perks/winston_major_02_revitalizing-barrier.webp": {
+    "name": "Revitalizing Barrier",
+    "description": "Barrier Projector heals allies within it for 35 health per second."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_01_circuit-breaker.webp": {
+    "name": "Circuit Breaker",
+    "description": "Gain 10% of Electric damage as Overhealth, up to 100."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_02_electro-cluster.webp": {
+    "name": "Electro Cluster",
+    "description": "+15% Tesla Cannon Primary Fire Max Range.­ Tesla Cannon's Primary Fire deals 2% increased damage per enemy being hit."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_03_lightning-rod.webp": {
+    "name": "Lightning Rod",
+    "description": "Hits with Tesla Cannon's fully charged secondary fire bounce to all other enemies within 8m for 75% damage."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_04_volatile-volt.webp": {
+    "name": "Volatile Volt",
+    "description": "Tesla Cannon's Secondary Fire can critically hit for 250% damage."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_05_primal-punch.webp": {
+    "name": "Primal Punch",
+    "description": "Melee or Jump Pack or Tesla Cannon Secondary Fire eliminations reset Jump Pack cooldown.­ For every 25 Armor you have, gain 3% Melee damage."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_06_moon-landing.webp": {
+    "name": "Moon Landing",
+    "description": "Heal for 7% of Max Life per enemy damaged by Jump Pack's landing."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_07_lunar-leap.webp": {
+    "name": "Lunar Leap",
+    "description": "Gain 3% bonus Ultimate Charge per enemy damaged by Jump Pack's landing. While using Jump Pack, gain 5% of Max Life as Overhealth every 1s, up to 100."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_08_pocket-projector.webp": {
+    "name": "Pocket Projector",
+    "description": "Activating Barrier Projector attaches an additional, smaller Barrier Projector to Winston with 10% health."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_09_tesla-field.webp": {
+    "name": "Tesla Field",
+    "description": "Enemies within Barrier Projector take 40 Electric damage every 1s."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_10_surge-protector.webp": {
+    "name": "Surge Protector",
+    "description": "Allies within Barrier Projector are healed for 30 every 1s."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_11_primal-slam.webp": {
+    "name": "Primal Slam",
+    "description": "While using Jump Pack, press Jump to quickly slam toward your crosshair. During Primal Rage, slam speed is increased by 50%."
+  },
+  "winston/stadiumPowers/assets/perks/winston_stadium_12_lucheng-launchers.webp": {
+    "name": "Lucheng Launchers",
+    "description": "Jump Pack's damage becomes Electric and increases by up to 75% while airborne. During Primal Rage, this is doubled."
+  },
+  "wrecking-ball/minorPerks/assets/perks/wrecking-ball_minor_01_steamroller.webp": {
+    "name": "Steamroller",
+    "description": "Roll impacts deal 100% more damage to Tanks."
+  },
+  "wrecking-ball/minorPerks/assets/perks/wrecking-ball_minor_02_multi-ball.webp": {
+    "name": "Multi-Ball",
+    "description": "Press Q within 5 seconds after using Minefield to deploy 7 additional mines."
+  },
+  "wrecking-ball/majorPerks/assets/perks/wrecking-ball_major_01_hang-time.webp": {
+    "name": "Hang Time",
+    "description": "Piledriver winds up longer, gaining air control and dealing up to 50% more damage."
+  },
+  "wrecking-ball/majorPerks/assets/perks/wrecking-ball_major_02_adaptive-barrier.webp": {
+    "name": "Adaptive Barrier",
+    "description": "Adaptive Shield generates a 1 second barrier on activation."
+  },
+  "zarya/minorPerks/assets/perks/zarya_minor_01_jump-ups.webp": {
+    "name": "Jump-Ups",
+    "description": "Secondary Fire's self-knockback is increased by 75%."
+  },
+  "zarya/minorPerks/assets/perks/zarya_minor_02_spotter.webp": {
+    "name": "Spotter",
+    "description": "Projected Barrier activates ally health regeneration and increases their movement speed by 20%."
+  },
+  "zarya/majorPerks/assets/perks/zarya_major_01_extra-oomph.webp": {
+    "name": "Extra Oomph",
+    "description": "While a Barrier is active, dealing damage with Particle Cannon's beam generates energy."
+  },
+  "zarya/majorPerks/assets/perks/zarya_major_02_energy-lance.webp": {
+    "name": "Energy Lance",
+    "description": "Particle Cannon's beam pierces enemies."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_01_charged-link.webp": {
+    "name": "Charged Link",
+    "description": "Particle Cannon's Secondary Fire hits grant 2 Energy and increase Particle Cannon's Primary Fire range by 20% for 3s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_02_pre-workout.webp": {
+    "name": "Pre-Workout",
+    "description": "Gain Weapon Lifesteal and Ability Lifesteal equal to 15% of Energy."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_03_no-limits.webp": {
+    "name": "No Limits",
+    "description": "Maximum Energy increased to 150. Energy always decays above 100 Energy at a 150% faster rate."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_04_particle-accelerator.webp": {
+    "name": "Particle Accelerator",
+    "description": "Gain 20% Attack Speed for Particle Cannon's secondary fire. After using an ability, quintuple this bonus for 5s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_05_volskaya-vortex.webp": {
+    "name": "Volskaya Vortex",
+    "description": "After a Barrier is cast, Particle Cannon's next secondary fire spawns a slowing vortex that deals 60 damage over 2s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_06_lifelift.webp": {
+    "name": "Lifelift",
+    "description": "+50% Particle Barrier Size. ­ Increase Barrier Health by 50% of Bonus Max Life from Items."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_07_barrier-benefits.webp": {
+    "name": "Barrier Benefits",
+    "description": "When Barriers expire, grant Overhealth equal to 100% of remaining Barrier Health to the target for 2s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_08_major-flex.webp": {
+    "name": "Major Flex",
+    "description": "Barrier knocks back and deals 25 damage, increased by Energy, to enemies within 5m every 1s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_09_containment-shield.webp": {
+    "name": "Containment Shield",
+    "description": "Barrier heals the target for 5% of your Max Life every 1s and grants 20% Move Speed while active."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_10_here-to-spot-you.webp": {
+    "name": "Here To Spot You",
+    "description": "+20% Projected Barrier Range.­ Projected Barrier pulls you to the targeted ally and heals you for 30% of Max Life over 3s."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_11_fission-field.webp": {
+    "name": "Fission Field",
+    "description": "Projected Barrier also applies to 1 additional ally within 10m, but has 25% reduced maximum Energy gain and 20% reduced duration."
+  },
+  "zarya/stadiumPowers/assets/perks/zarya_stadium_12_graviton-anomaly.webp": {
+    "name": "Graviton Anomaly",
+    "description": "+25% Ultimate Cost Reduction­ Graviton Surge base damage is increased to 30 and increased by Energy, but has 25% reduced duration."
+  },
+  "dmon/minorPerks/assets/perks/dmon_minor_01_a49a4aa586ec9a0f.png": {
+    "name": "Beast Within",
+    "description": "Plasma Saber hits heal Power Barrier by 40 health."
+  },
+  "dmon/minorPerks/assets/perks/dmon_minor_02_8d2f97ae5a2dc9b1.png": {
+    "name": "MEKA Mobility",
+    "description": "While holding Power Barrier, Propulsors fuel cost is reduced by 30%."
+  },
+  "dmon/majorPerks/assets/perks/dmon_major_01_b87f463706a6816a.png": {
+    "name": "Overstrike",
+    "description": "Surging Strike gains 150% lifesteal."
+  },
+  "dmon/majorPerks/assets/perks/dmon_major_02_46d8466d7de4b04d.png": {
+    "name": "Focused Fusion",
+    "description": "Fusion Repeater fires stronger shots with no spread at a slower rate."
+  },
+  "doctrine/minorPerks/assets/perks/doctrine_minor_01_65d3986853fa5e6f.png": {
+    "name": "Saving Grace",
+    "description": "Invigorating Drones heal for 40 health when applied."
+  },
+  "doctrine/minorPerks/assets/perks/doctrine_minor_02_32ffd184fd6bf247.png": {
+    "name": "Sanguine Siphon",
+    "description": "Heal for 50% of damage dealt with Infused Eternal Scepter."
+  },
+  "doctrine/majorPerks/assets/perks/doctrine_major_01_d4231c031993e68b.png": {
+    "name": "Transfusion",
+    "description": "Reduce Infuse's cooldown from damage and healing dealt."
+  },
+  "doctrine/majorPerks/assets/perks/doctrine_major_02_1f60c2577f3709fe.png": {
+    "name": "Cost of Life",
+    "description": "Sacrifice 25 maximum health. Eternal Scepter healing is increased by 20%."
+  }
+}

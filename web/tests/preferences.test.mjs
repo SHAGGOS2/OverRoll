@@ -6,6 +6,7 @@ import vm from 'node:vm'
 import ts from 'typescript'
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
+import { translateUiText } from '../src/uiLocalization.ts'
 
 const source = fs.readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8')
 const tree = ts.createSourceFile('App.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
@@ -14,14 +15,14 @@ function visit(node) { if (ts.isFunctionDeclaration(node) && node.name?.text ===
 visit(tree)
 const code = ts.transpileModule(functionSource, { compilerOptions: { target: ts.ScriptTarget.ES2023, jsx: ts.JsxEmit.React } }).outputText
 function render(tab, overrides = {}) {
-  const changes = {}
+  const changes = { sounds: [] }
   const context = { gameCredits, React, Icon: () => null, t: (key) => key, settingsTab: tab,
     animationsEnabled: true, compactPerks: false, mobileCompactMode: true, lowPowerMode: false,
     soundEnabled: true, soundVolume: .42, hoverSounds: false, localePreference: 'auto',
     browserLocale: 'es-MX', activeLocale: 'es-MX', activeGame: 'deadlock',
     localeName: (locale) => locale, localeChoices: [{ id: 'es-MX', name: 'Español' }, { id: 'en-US', name: 'English' }],
     gameModules: [{ id: 'deadlock', name: 'Deadlock', catalogLabel: '43 héroes', icon: 'assets/game-icons/deadlock.png', available: true }],
-    asset: (path) => path, creditsSongUrl: () => 'https://example.com', playSound() {}, toggleRuleSound() {}, notify() {}, playConfirmTone() {},
+    asset: (path) => path, creditsSongUrl: () => 'https://example.com', playSound(kind) { changes.sounds.push(kind) }, toggleRuleSound(next) { changes.sounds.push(next ? 'toggleOn' : 'toggleOff') }, notify() {}, playConfirmTone() {},
     restoreRecommendedSettings() { changes.reset = true }, resetLocalData() { changes.clear = true },
     setSettingsTab: (value) => { changes.tab = value }, setLocalePreference: (value) => { changes.locale = value }, setSoundVolume: (value) => { changes.volume = value },
     toggleSounds: () => { changes.sound = true }, activateGame: (value) => { changes.game = value }, navigate: (value) => { changes.view = value },
@@ -38,7 +39,9 @@ test('new general settings retain working toggles and explicit reset actions', (
   const switches = rows.filter((el) => el.type === 'input' && el.props.type === 'checkbox')
   assert.equal(switches.length, 4)
   switches.forEach((el) => el.props.onChange({ target: { checked: !el.props.checked } }))
-  assert.deepEqual(changes, { AnimationsEnabled: false, CompactPerks: true, MobileCompactMode: false, LowPowerMode: true })
+  const { sounds, ...values } = changes
+  assert.deepEqual(values, { AnimationsEnabled: false, CompactPerks: true, MobileCompactMode: false, LowPowerMode: true })
+  assert.equal(sounds.length, 4)
   const buttons = rows.filter((el) => el.type === 'button')
   buttons.find((el) => React.Children.toArray(el.props.children).includes('Restablecer ajustes')).props.onClick()
   buttons.find((el) => React.Children.toArray(el.props.children).includes('Borrar datos guardados')).props.onClick()
@@ -70,4 +73,35 @@ test('settings tabs support keyboard navigation and language/game actions remain
   const games = render('catalogs'), gameButton = elements(games.element).find((el) => el.type === 'button' && el.props.className === 'selected')
   gameButton.props.onClick(); assert.equal(games.changes.game, 'deadlock')
   for (const tab of ['general', 'audio', 'language', 'catalogs', 'credits']) assert(renderToStaticMarkup(render(tab).element).length > 0)
+})
+
+test('each general setting, keyboard tab and volume commit provides sound feedback', () => {
+  const general = render('general')
+  const switches = elements(general.element).filter((element) => element.type === 'input' && element.props.type === 'checkbox')
+  assert.equal(switches.length, 4)
+  for (const control of switches) control.props.onChange({ target: { checked: !control.props.checked } })
+  assert.equal(general.changes.sounds.length, 4)
+  const tabs = elements(general.element).filter((element) => element.props.role === 'tab')
+  tabs[0].props.onKeyDown({ key: 'ArrowDown', preventDefault() {}, currentTarget: { parentElement: { querySelectorAll() { return tabs.map(() => ({ focus() {} })) } } } })
+  assert.equal(general.changes.sounds.at(-1), 'nav')
+  const audio = render('audio'), volume = elements(audio.element).find((element) => element.type === 'input' && element.props.type === 'range')
+  volume.props.onPointerUp(); volume.props.onKeyUp({ key: 'ArrowRight' })
+  assert.deepEqual(audio.changes.sounds, ['click', 'click'])
+})
+
+test('shared game configuration tabs translate and retain keyboard focus when changing sections', () => {
+  const sidebar = fs.readFileSync(new URL('../src/GameSidebar.tsx', import.meta.url), 'utf8')
+  const source = sidebar.slice(sidebar.indexOf('export default function')).replace('export default ', '')
+  const code = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2023, jsx: ts.JsxEmit.React } }).outputText
+  const Sidebar = vm.runInNewContext(`${code};GameSidebar`, { React, useId: () => 'configuration', translateUiText })
+  const selected = []
+  const element = Sidebar({ className: 'sidebar', locale: 'en-us', open: true, activeTab: 'squad', onToggle() {}, onTabChange: (tab) => selected.push(tab), children: null })
+  const html = renderToStaticMarkup(element)
+  assert.match(html, />Squad</); assert.match(html, />Rules</)
+  const tabs = elements(element).filter((element) => element.props.role === 'tab')
+  let focused
+  tabs[0].props.onKeyDown({ key: 'ArrowRight', preventDefault() {}, currentTarget: { parentElement: { querySelector: (selector) => ({ focus() { focused = selector } }) } } })
+  assert.equal(selected.at(-1), 'rules')
+  assert.equal(focused, '[data-tab="rules"]')
+  assert.equal(tabs[0].props.tabIndex, 0); assert.equal(tabs[1].props.tabIndex, -1)
 })

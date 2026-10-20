@@ -1,3 +1,6 @@
+import { useOverwatchText } from './useOverwatchText'
+import { readPerkText, selectedPerkGroup, type PerkGroup } from './overwatchText'
+import GameSidebar from './GameSidebar'
 import { gameCredits } from './gameCredits'
 import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
@@ -21,6 +24,7 @@ import './Preferences.css'
 import './InteractionPolish.css'
 import './SharedRoulette.css'
 import './Profiles.css'
+import './StandardGames.css'
 import { warmImageCache } from './imageCache'
 import { creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
 import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
@@ -62,7 +66,7 @@ type SoundKey =
 type ProfileBucket = 'main' | 'played' | 'practice' | 'avoid'
 type ProfileMode = 'classic' | 'allprofile' | 'lowprob' | 'practice' | 'played' | 'prefer' | 'main'
 type ProfileTab = 'heroes' | 'players' | 'mode'
-type MobileConfigTab = 'profile' | 'squad' | 'rules'
+type MobileConfigTab = 'squad' | 'rules'
 type SettingsTab = 'general' | 'audio' | 'catalogs' | 'language' | 'credits'
 type IconName =
   | 'refresh'
@@ -528,8 +532,6 @@ const DOCTRINE_RELEASE_AT = Date.parse('2026-10-05T00:00:00-06:00')
 const DOCTRINE_FALLBACK_PORTRAIT = 'assets/heroes/doctrine.png'
 const OVERFAST_DOCTRINE_URL = 'https://overfast-api.tekrop.fr/heroes/doctrine?locale=es-mx'
 
-
-
 function doctrineUnlocked(): boolean {
   return Date.now() >= DOCTRINE_RELEASE_AT
 }
@@ -917,6 +919,11 @@ function App() {
   const activeLocale: SupportedLocale = localePreference === 'auto' ? browserLocale : localePreference
   const t = (key: Parameters<typeof translate>[1]) => translate(activeLocale, key)
   const [imageExporting, saveImage] = useImageExport(notify, activeLocale, activeGame)
+  const overwatchText = useOverwatchText(activeLocale, baseUrl, activeGame === 'overwatch')
+  function perkText(hero: Hero, perk: Perk, group?: PerkGroup) {
+    return readPerkText(overwatchText.catalog, activeLocale, hero.key, group ?? selectedPerkGroup(hero, perk, stadium), perk) ?? { name: '…', description: '' }
+  }
+
 
   useEffect(() => {
     const handleLanguageChange = () => setBrowserLocale(detectBrowserLocale())
@@ -930,8 +937,6 @@ function App() {
     document.title = `OverRoll · ${translate(activeLocale, 'random_picker')}`
     window.localStorage.setItem('overroll.web.localePreference', JSON.stringify(localePreference))
   }, [activeLocale, localePreference])
-
-
 
   useEffect(() => {
     warmImageCache(tf2Classes.map((item) => asset(item.portrait)), 9)
@@ -1734,17 +1739,13 @@ function App() {
 
 
 
-
-
   async function generateTeamImage() {
     const colors: Record<Role, string> = { tank: '#4fc9ff', damage: '#ff5578', support: '#55e4ad' }
     await saveImage({ title: stadium ? 'Overwatch · Stadium' : 'Overwatch', accent: '#ffc84a', filename: 'overroll-overwatch-equipo', cards: players.map((player, index) => {
       const pick = picks[index], hero = pick?.hero, role = pick?.role ?? hero?.role
-      return { player: player.name, name: rolesOnly && role ? roleLabels[role] : hero?.name ?? 'Sin selección', role: role ? roleLabels[role] : 'Sin rol', color: role ? colors[role] : '#8197af', fit: rolesOnly ? 'contain' as const : 'cover' as const, portrait: rolesOnly && role ? asset('assets/roles/' + role + '.png') : hero ? asset(hero.portrait) : undefined, icon: role ? asset('assets/roles/' + role + '.png') : undefined, locked: pick?.locked, details: rolesOnly ? [] : (pick?.perks ?? []).slice(0, stadium ? 4 : 2).map((perk) => ({ label: perk.name, image: asset(perk.icon) })) }
+      return { player: player.name, name: rolesOnly && role ? roleLabels[role] : hero?.name ?? 'Sin selección', role: role ? roleLabels[role] : 'Sin rol', color: role ? colors[role] : '#8197af', fit: rolesOnly ? 'contain' as const : 'cover' as const, portrait: rolesOnly && role ? asset('assets/roles/' + role + '.png') : hero ? asset(hero.portrait) : undefined, icon: role ? asset('assets/roles/' + role + '.png') : undefined, locked: pick?.locked, details: rolesOnly ? [] : (pick?.perks ?? []).slice(0, stadium ? 4 : 2).map((perk) => ({ label: hero ? perkText(hero, perk).name : perk.name, image: asset(perk.icon) })) }
     }) })
   }
-
-
 
   function restoreRecommendedSettings() {
     setSoundEnabled(true)
@@ -1759,6 +1760,7 @@ function App() {
   }
 
   function resetLocalData() {
+    playSound('click')
     const confirmed = window.confirm(translateGameText(activeGame, activeLocale, 'Esto borrará perfiles, nombres, reglas, ruleta y configuración guardada en este navegador. ¿Continuar?'))
     if (!confirmed) return
 
@@ -1777,22 +1779,9 @@ function App() {
 
   function renderTf2Principal() {
     return (
-      <main className="workspace tf2-workspace">
-        <aside className={`sidebar tf2-sidebar ${mobileConfigOpen ? 'mobile-config-open' : 'mobile-config-closed'}`}>
-          <div className="sidebar-head">
-            <strong>Mercenarios</strong>
-            <span className="live-dot tf2-live"><span /> TF2</span>
-            <button type="button" className="mobile-config-toggle" onClick={() => { setMobileConfigOpen((value) => !value); playSound('tf2Click') }} aria-expanded={mobileConfigOpen}>
-              <Icon name={mobileConfigOpen ? 'close' : 'settings'} size={15} /><span>{mobileConfigOpen ? 'Ocultar' : 'Editar'}</span>
-            </button>
-          </div>
+      <main className="workspace tf2-workspace standard-game">
+        <GameSidebar className={`sidebar tf2-sidebar ${mobileConfigOpen ? 'mobile-config-open' : 'mobile-config-closed'}`} locale={activeLocale} open={mobileConfigOpen} activeTab={mobileConfigTab} onToggle={() => { setMobileConfigOpen((value) => !value); playSound('tf2Click') }} onTabChange={(tab) => { setMobileConfigTab(tab); playSound('tf2Click') }}>
 
-          {mobileConfigOpen && (
-            <div className="mobile-config-tabs tf2-mobile-tabs" role="tablist" aria-label="Apartados de TF2">
-              <button type="button" className={mobileConfigTab === 'squad' ? 'active' : ''} onClick={() => setMobileConfigTab('squad')} role="tab"><Icon name="users" size={14} /> Escuadra</button>
-              <button type="button" className={mobileConfigTab === 'rules' ? 'active' : ''} onClick={() => setMobileConfigTab('rules')} role="tab"><Icon name="settings" size={14} /> Reglas</button>
-            </div>
-          )}
 
           <section className={`side-panel squad-panel mobile-config-section ${mobileConfigTab === 'squad' ? 'mobile-active' : ''}`}>
             <div className="panel-title-row"><div><label>Escuadra</label></div><Icon name="users" size={17} /></div>
@@ -1810,12 +1799,13 @@ function App() {
               {tf2Players.map((player, index) => (
                 <div className="player-row tf2-player-row" key={player.id}>
                   <span className="number">{String(index + 1).padStart(2, '0')}</span>
-                  <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => tf2UpdatePlayerName(index, event.target.value)} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre TF2 ${index + 1}`} />
+                  <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => tf2UpdatePlayerName(index, event.target.value)} onFocus={() => playSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre TF2 ${index + 1}`} />
                   <select className="player-profile-inline" value={player.profileId} onChange={(event: ChangeEvent<HTMLSelectElement>) => tf2AssignPlayerProfile(index, event.target.value)} aria-label={`Perfil TF2 ${index + 1}`}>
                     <option value="">☆</option>{profiles.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
                   </select>
+                  <button type="button" className={`roster-inline-filter ${player.blocked.length ? 'active-filter' : ''}`} onClick={() => openTf2Filter(index)} aria-label={`Filtro de ${player.name}`}><Icon name="filter" size={14} />{player.blocked.length > 0 && <b>{player.blocked.length}</b>}</button>
                   <div className="tf2-group-buttons">
-                    {tf2Groups.map((group) => <button type="button" className={`tf2-group ${group} ${player.groups[group] ? 'active' : ''}`} onClick={() => tf2TogglePlayerGroup(index, group)} title={tf2GroupLabels[group]} aria-pressed={player.groups[group]} key={group}><span>{group === 'offense' ? 'OF' : group === 'defense' ? 'DE' : 'AP'}</span></button>)}
+                    {tf2Groups.map((group) => <button type="button" className={`tf2-group ${group} ${player.groups[group] ? 'active' : ''}`} onClick={() => tf2TogglePlayerGroup(index, group)} title={tf2GroupLabels[group]} aria-pressed={player.groups[group]} key={group}><span>{tf2GroupLabels[group]}</span></button>)}
                   </div>
                 </div>
               ))}
@@ -1827,19 +1817,16 @@ function App() {
             <button type="button" className={`toggle-row tf2-toggle ${tf2AvoidRepeated ? 'enabled' : ''}`} onClick={() => { const next = !tf2AvoidRepeated; setTf2AvoidRepeated(next); playSound('tf2Click') }} aria-pressed={tf2AvoidRepeated}>
               <span className="switch"><span /></span><span><b>Evitar clases repetidas</b></span>
             </button>
-            <div className="tf2-class-legend">
-              {tf2Groups.map((group) => <span className={group} key={group}><i />{tf2GroupLabels[group]}<small>{tf2Classes.filter((item) => item.group === group).map((item) => item.name).join(', ')}</small></span>)}
-            </div>
           </section>
 
           <div className="sidebar-footer">
             <div className="status-line tf2-status"><span className="status-icon"><Icon name="shield" size={15} /></span><span>{tf2Status}</span></div>
           </div>
-        </aside>
+        </GameSidebar>
 
         <section className="content tf2-content">
           <div className="content-topline tf2-topline">
-            <div className="game-identity"><div className="game-title-row"><h1>Team Fortress 2</h1><span className="web-badge tf2-badge">9 CLASES</span></div></div>
+            <div className="game-identity"><div className="game-title-row"><h1>Team Fortress 2</h1></div></div>
             <div className="topline-actions">
               <button type="button" className="generate-image-button tf2-image-button" onClick={generateTf2TeamImage} aria-busy={imageExporting} disabled={imageExporting || !tf2Picks.some((pick) => pick.mercenary)}><Icon name="download" size={17} /> Generar imagen</button>
               <div className="match-summary tf2-summary">
@@ -1864,15 +1851,15 @@ function App() {
                     <div className="portrait tf2-portrait">
                       <div className="portrait-grid" /><div className="portrait-fallback"><Icon name="gamepad" size={48} /></div>
                       {mercenary ? <img className="hero-image" src={asset(mercenary.portrait)} alt={mercenary.name} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} /> : <div className="portrait-loading"><span /><span /><span /></div>}
-                      <div className="portrait-vignette" /><div className="tf2-class-stamp" aria-hidden="true"><span>{mercenary ? tf2GroupLabels[mercenary.group] : 'TF2'}</span></div>
+                      <div className="portrait-vignette" />
                     </div>
-                    <div className="hero-info"><div className="hero-name-row"><h2>{mercenary?.name ?? 'Sin selección'}</h2><span className={`role-dot tf2-dot ${mercenary?.group ?? ''}`} /></div><div className={`hero-role tf2-role ${mercenary?.group ?? ''}`}>{mercenary && <img className="hero-role-icon" src={asset('assets/tf2/icons/' + mercenary.key.replace(/^tf2-/, '') + '.png')} alt="" aria-hidden="true" />}{mercenary ? tf2GroupLabels[mercenary.group] : 'Genera un equipo'}{mercenary && <><span>•</span>MERCENARIO</>}</div></div>
+                    <div className="hero-info"><div className="hero-name-row"><h2>{mercenary?.name ?? 'Sin selección'}</h2><span className={`role-dot tf2-dot ${mercenary?.group ?? ''}`} /></div><div className={`hero-role tf2-role ${mercenary?.group ?? ''}`}>{mercenary && <img className="hero-role-icon" src={asset('assets/tf2/icons/' + mercenary.key.replace(/^tf2-/, '') + '.png')} alt="" aria-hidden="true" />}{mercenary ? tf2GroupLabels[mercenary.group] : 'Genera un equipo'}</div></div>
                     <div className="card-actions tf2-card-actions">
                       <button type="button" onClick={() => rerollTf2(index)} disabled={!mercenary || pick?.locked || tf2RerollingIndex !== null} data-tooltip="Cambiar clase"><Icon name="reroll" size={18} /></button>
                       <button type="button" onClick={() => openTf2Filter(index)} className={player.blocked.length > 0 ? 'active-filter' : ''} data-tooltip="Filtro"><Icon name="filter" size={18} /></button>
                       <button type="button" onClick={() => toggleTf2Lock(index)} disabled={!mercenary} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
                     </div>
-                    <div className="loadout tf2-loadout"><div><small>{profile ? 'Perfil' : 'Selección'}</small><span>{profile ? <span translate="no">{profile.name}</span> : mercenary ? 'Catálogo oficial TF2' : 'Pendiente'}</span></div><span className="loadout-status"><Icon name="check" size={13} /></span></div>
+                    {profile && <div className="loadout"><div><small>Perfil</small><span translate="no">{profile.name}</span></div></div>}
                   </article>
                 )
               })}
@@ -1891,34 +1878,10 @@ function App() {
 
   function renderPrincipal() {
     return (
-      <main className="workspace">
-        <aside className={`sidebar ${mobileConfigOpen ? 'mobile-config-open' : 'mobile-config-closed'}`}>
-          <div className="sidebar-head">
-            <strong>Configuración</strong>
-            <span className="live-dot"><span /> LOCAL</span>
-            <button type="button" className="mobile-config-toggle" onClick={() => { setMobileConfigOpen((value) => !value); playSound('click') }} aria-expanded={mobileConfigOpen}>
-              <Icon name={mobileConfigOpen ? 'close' : 'settings'} size={15} />
-              <span>{mobileConfigOpen ? 'Ocultar' : 'Editar'}</span>
-            </button>
-          </div>
+      <main className="workspace overwatch-workspace standard-game">
+        <GameSidebar className={`sidebar ${mobileConfigOpen ? 'mobile-config-open' : 'mobile-config-closed'}`} locale={activeLocale} open={mobileConfigOpen} activeTab={mobileConfigTab} onToggle={() => { setMobileConfigOpen((value) => !value); playSound('click') }} onTabChange={(tab) => { setMobileConfigTab(tab); playSound('click') }}>
 
-          {mobileConfigOpen && (
-            <div className="mobile-config-tabs" role="tablist" aria-label="Apartados de configuración">
-              <button type="button" className={mobileConfigTab === 'profile' ? 'active' : ''} onClick={() => { setMobileConfigTab('profile'); playSound('click') }} role="tab" aria-selected={mobileConfigTab === 'profile'}><Icon name="profile" size={14} /> Perfil</button>
-              <button type="button" className={mobileConfigTab === 'squad' ? 'active' : ''} onClick={() => { setMobileConfigTab('squad'); playSound('click') }} role="tab" aria-selected={mobileConfigTab === 'squad'}><Icon name="users" size={14} /> Escuadra</button>
-              <button type="button" className={mobileConfigTab === 'rules' ? 'active' : ''} onClick={() => { setMobileConfigTab('rules'); playSound('click') }} role="tab" aria-selected={mobileConfigTab === 'rules'}><Icon name="settings" size={14} /> Reglas</button>
-            </div>
-          )}
 
-          <section className={`side-panel profile-panel mobile-config-section ${mobileConfigTab === 'profile' ? 'mobile-active' : ''}`}>
-            <div className="panel-title-row">
-              <div><label>Modo de perfiles</label></div>
-              <Icon name="profile" size={17} />
-            </div>
-            <select value={profileMode} title={profileModeInfo.description} onChange={(event: ChangeEvent<HTMLSelectElement>) => { setProfileMode(event.target.value as ProfileMode); playSound('profileSelect') }}>
-              {profileModes.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
-            </select>
-          </section>
 
           <section className={`side-panel squad-panel mobile-config-section ${mobileConfigTab === 'squad' ? 'mobile-active' : ''}`}>
             <div className="panel-title-row">
@@ -1948,7 +1911,7 @@ function App() {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => updatePlayerName(index, event.target.value)}
                     aria-label={`Nombre del jugador ${index + 1}`}
                     title={player.profileId ? 'El nombre lo controla el perfil asignado.' : PERSON_NAME_HINT}
-                    maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN}
+                    onFocus={() => playSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN}
                   />
                   <select
                     className="player-profile-inline"
@@ -1960,7 +1923,8 @@ function App() {
                     <option value="">☆</option>
                     {profiles.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
                   </select>
-                  {roles.map((role) => (
+                  <button type="button" className={`roster-inline-filter ${player.blocked.length ? 'active-filter' : ''}`} onClick={() => openFilter(index)} aria-label={`Filtro de ${player.name}`}><Icon name="filter" size={14} />{player.blocked.length > 0 && <b>{player.blocked.length}</b>}</button>
+                  <div className="player-role-choices">{roles.map((role) => (
                     <button
                       type="button"
                       className={`role ${role} ${player.roles[role] ? 'active' : ''}`}
@@ -1969,9 +1933,9 @@ function App() {
                       aria-pressed={player.roles[role]}
                       key={role}
                     >
-                      <img src={asset(`assets/roles/${role}.png`)} alt={roleLabels[role]} />
+                      <img src={asset(`assets/roles/${role}.png`)} alt="" /><span>{roleLabels[role]}</span>
                     </button>
-                  ))}
+                  ))}</div>
                 </div>
               ))}
             </div>
@@ -1983,6 +1947,7 @@ function App() {
               <Icon name="settings" size={17} />
             </div>
 
+            <label className="game-rule-select"><span>Modo de perfiles</span><select value={profileMode} onChange={(event: ChangeEvent<HTMLSelectElement>) => { setProfileMode(event.target.value as ProfileMode); playSound('profileSelect') }}>{profileModes.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</select></label>
             <button type="button" className={`toggle-row ${avoidRepeated ? 'enabled' : ''}`} onClick={() => { const next = !avoidRepeated; setAvoidRepeated(next); toggleRuleSound(next) }} aria-pressed={avoidRepeated}>
               <span className="switch"><span /></span><span><b>Evitar repetidos</b></span>
             </button>
@@ -1990,10 +1955,10 @@ function App() {
               <span className="switch"><span /></span><span><b>Composición de roles</b></span>
             </button>
             <button type="button" className={`toggle-row perks-toggle ${randomPerks ? 'enabled' : ''}`} onClick={toggleRandomPerks} aria-pressed={randomPerks}>
-              <span className="switch"><span /></span><span><b>Perks aleatorias</b><small>{stadium ? 'Cuatro poderes Stadium' : 'Una menor y una mayor'}</small></span>
+              <span className="switch"><span /></span><span><b>Perks aleatorias</b></span>
             </button>
             <button type="button" className={`toggle-row stadium-toggle ${stadium ? 'enabled' : ''}`} onClick={toggleStadium} aria-pressed={stadium}>
-              <span className="switch"><span /></span><span><b>Modo Stadium</b><small>Solo héroes compatibles</small></span>
+              <span className="switch"><span /></span><span><b>Modo Stadium</b></span>
             </button>
             <button type="button" className={`toggle-row ${rolesOnly ? 'enabled' : ''}`} onClick={() => { const next = !rolesOnly; setRolesOnly(next); toggleRuleSound(next) }} aria-pressed={rolesOnly}>
               <span className="switch"><span /></span><span><b>Solo rol</b></span>
@@ -2003,7 +1968,7 @@ function App() {
           <div className="sidebar-footer">
             <div className={`status-line ${loadError ? 'error' : ''}`}><span className="status-icon"><Icon name={loadError ? 'warning' : 'shield'} size={15} /></span><span>{status}</span></div>
           </div>
-        </aside>
+        </GameSidebar>
 
         <section className="content">
           <div className="content-topline">
@@ -2011,7 +1976,7 @@ function App() {
               <div className="game-title-row"><h1>Overwatch</h1></div>
             </div>
             <div className="topline-actions">
-              <button type="button" className="generate-image-button" onClick={generateTeamImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.hero || pick.role)}>
+              <button type="button" className="generate-image-button" onClick={generateTeamImage} aria-busy={imageExporting} disabled={imageExporting || (!rolesOnly && !overwatchText.ready && picks.some((pick) => pick.perks.length > 0)) || !picks.some((pick) => pick.hero || pick.role)}>
                 <Icon name="download" size={17} /> Generar imagen
               </button>
               <div className="match-summary">
@@ -2022,6 +1987,7 @@ function App() {
             </div>
           </div>
 
+          {overwatchText.error && <div className="content-locale-error" role="alert"><span>No se pudo cargar el idioma.</span><button type="button" onClick={() => { overwatchText.retry(); playSound('click') }}>Volver a intentar</button></div>}
           {loadError ? (
             <div className="error-state"><Icon name="warning" size={34} /><h2>No se pudo cargar el catálogo</h2><p>{loadError}</p><button type="button" onClick={() => window.location.reload()}>Volver a intentar</button></div>
           ) : (
@@ -2069,7 +2035,7 @@ function App() {
                       <div className="hero-info">
                         <div className="hero-name-row"><h2>{rolesOnly && visibleRole ? roleLabels[visibleRole] : hero?.name ?? 'Sin selección'}</h2><span className={`role-dot ${visibleRole ?? ''}`} /></div>
                         <div className={`hero-role ${visibleRole ?? ''}`}>
-                          {visibleRole ? roleLabels[visibleRole] : 'Genera un equipo'}
+                          {visibleRole && <img className="hero-role-icon" src={asset('assets/roles/' + visibleRole + '.png')} alt="" />}{visibleRole ? roleLabels[visibleRole] : 'Genera un equipo'}
                           {hero?.subrole && <><span>•</span>{subroleLabels[hero.subrole] ?? hero.subrole}</>}
                         </div>
                       </div>
@@ -2084,9 +2050,9 @@ function App() {
                       {!rolesOnly && hero && pick.perks.length > 0 && (
                         <div className={`card-perks ${stadium ? 'stadium' : 'quickplay'}`}>
                           {pick.perks.map((perk, perkIndex) => (
-                            <article className="card-perk" style={{ '--perk-delay': `${index * 55 + 230 + perkIndex * 75}ms` } as CSSProperties} key={`${perk.name}-${perkIndex}`} title={perk.description}>
+                            <article className="card-perk" style={{ '--perk-delay': `${index * 55 + 230 + perkIndex * 75}ms` } as CSSProperties} key={`${perk.name}-${perkIndex}`} title={perkText(hero, perk).description}>
                               {perk.icon ? <img src={asset(perk.icon)} alt="" loading="eager" decoding="async" /> : <Icon name="spark" size={20} />}
-                              <span><small>{stadium ? `PODER ${perkIndex + 1}` : hero.minorPerks.some((item) => item.name === perk.name) ? 'MENOR' : 'MAYOR'}</small><b>{perk.name}</b></span>
+                              <span><small>{stadium ? `PODER ${perkIndex + 1}` : hero.minorPerks.some((item) => item.name === perk.name) ? 'MENOR' : 'MAYOR'}</small><b translate="no" lang={activeLocale}>{perkText(hero, perk).name}</b></span>
                             </article>
                           ))}
                         </div>
@@ -2217,7 +2183,7 @@ function App() {
                 <>
                   <label className="profile-name-field">
                     <span>Nombre</span>
-                    <input value={currentProfile.name} onChange={(event: ChangeEvent<HTMLInputElement>) => renameCurrentProfile(event.target.value)} maxLength={PROFILE_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} />
+                    <input value={currentProfile.name} onChange={(event: ChangeEvent<HTMLInputElement>) => renameCurrentProfile(event.target.value)} onFocus={() => playSound('profileSelect')} maxLength={PROFILE_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} />
                   </label>
                   <div className="profiles-simple-count"><b>{markedHeroes}</b><span>de {totalHeroes || '—'} clasificados</span></div>
                   <div className="profiles-simple-actions">
@@ -2231,13 +2197,13 @@ function App() {
             {currentProfile && (
               <section className="profiles-simple-editor">
                 <nav className="profiles-simple-tabs" aria-label="Secciones del perfil" role="tablist">
-                  <button type="button" role="tab" tabIndex={profileTab === 'heroes' ? 0 : -1} id="profile-tab-heroes" aria-selected={profileTab === 'heroes'} aria-controls="profile-panel" className={profileTab === 'heroes' ? 'active' : ''} onClick={() => setProfileTab('heroes')} onKeyDown={(event) => { const tabs = ['heroes', 'players', 'mode'] as const; const index = tabs.indexOf(profileTab); const next = event.key === 'ArrowRight' ? tabs[(index + 1) % 3] : event.key === 'ArrowLeft' ? tabs[(index + 2) % 3] : event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[2] : null; if (next) { event.preventDefault(); setProfileTab(next); document.getElementById('profile-tab-' + next)?.focus() } } }>
+                  <button type="button" role="tab" tabIndex={profileTab === 'heroes' ? 0 : -1} id="profile-tab-heroes" aria-selected={profileTab === 'heroes'} aria-controls="profile-panel" className={profileTab === 'heroes' ? 'active' : ''} onClick={() => { setProfileTab('heroes'); playSound('nav') }} onKeyDown={(event) => { const tabs = ['heroes', 'players', 'mode'] as const; const index = tabs.indexOf(profileTab); const next = event.key === 'ArrowRight' ? tabs[(index + 1) % 3] : event.key === 'ArrowLeft' ? tabs[(index + 2) % 3] : event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[2] : null; if (next) { event.preventDefault(); setProfileTab(next); playSound('nav'); document.getElementById('profile-tab-' + next)?.focus() } } }>
                     <Icon name="gamepad" size={16} /> Héroes
                   </button>
-                  <button type="button" role="tab" tabIndex={profileTab === 'players' ? 0 : -1} id="profile-tab-players" aria-selected={profileTab === 'players'} aria-controls="profile-panel" className={profileTab === 'players' ? 'active' : ''} onClick={() => setProfileTab('players')} onKeyDown={(event) => { const tabs = ['heroes', 'players', 'mode'] as const; const index = tabs.indexOf(profileTab); const next = event.key === 'ArrowRight' ? tabs[(index + 1) % 3] : event.key === 'ArrowLeft' ? tabs[(index + 2) % 3] : event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[2] : null; if (next) { event.preventDefault(); setProfileTab(next); document.getElementById('profile-tab-' + next)?.focus() } } }>
+                  <button type="button" role="tab" tabIndex={profileTab === 'players' ? 0 : -1} id="profile-tab-players" aria-selected={profileTab === 'players'} aria-controls="profile-panel" className={profileTab === 'players' ? 'active' : ''} onClick={() => { setProfileTab('players'); playSound('nav') }} onKeyDown={(event) => { const tabs = ['heroes', 'players', 'mode'] as const; const index = tabs.indexOf(profileTab); const next = event.key === 'ArrowRight' ? tabs[(index + 1) % 3] : event.key === 'ArrowLeft' ? tabs[(index + 2) % 3] : event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[2] : null; if (next) { event.preventDefault(); setProfileTab(next); playSound('nav'); document.getElementById('profile-tab-' + next)?.focus() } } }>
                     <Icon name="users" size={16} /> Jugadores {assignedPlayers > 0 && <b>{assignedPlayers}</b>}
                   </button>
-                  <button type="button" role="tab" tabIndex={profileTab === 'mode' ? 0 : -1} id="profile-tab-mode" aria-selected={profileTab === 'mode'} aria-controls="profile-panel" className={profileTab === 'mode' ? 'active' : ''} onClick={() => setProfileTab('mode')} onKeyDown={(event) => { const tabs = ['heroes', 'players', 'mode'] as const; const index = tabs.indexOf(profileTab); const next = event.key === 'ArrowRight' ? tabs[(index + 1) % 3] : event.key === 'ArrowLeft' ? tabs[(index + 2) % 3] : event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[2] : null; if (next) { event.preventDefault(); setProfileTab(next); document.getElementById('profile-tab-' + next)?.focus() } } }>
+                  <button type="button" role="tab" tabIndex={profileTab === 'mode' ? 0 : -1} id="profile-tab-mode" aria-selected={profileTab === 'mode'} aria-controls="profile-panel" className={profileTab === 'mode' ? 'active' : ''} onClick={() => { setProfileTab('mode'); playSound('nav') }} onKeyDown={(event) => { const tabs = ['heroes', 'players', 'mode'] as const; const index = tabs.indexOf(profileTab); const next = event.key === 'ArrowRight' ? tabs[(index + 1) % 3] : event.key === 'ArrowLeft' ? tabs[(index + 2) % 3] : event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[2] : null; if (next) { event.preventDefault(); setProfileTab(next); playSound('nav'); document.getElementById('profile-tab-' + next)?.focus() } } }>
                     <Icon name="settings" size={16} /> Reglas
                   </button>
                 </nav>
@@ -2248,20 +2214,20 @@ function App() {
                     <div className="profiles-hero-toolbar">
                       <div className="profile-search">
                         <Icon name="filter" size={16} />
-                        <input value={profileSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setProfileSearch(event.target.value)} placeholder="Buscar héroe…" />
+                        <input value={profileSearch} onFocus={() => playSound('click')} onChange={(event: ChangeEvent<HTMLInputElement>) => setProfileSearch(event.target.value)} placeholder="Buscar héroe…" />
                       </div>
                       <div className="role-filter-tabs">
-                        <button type="button" className={profileRole === 'all' ? 'active' : ''} onClick={() => setProfileRole('all')}>Todos</button>
+                        <button type="button" className={profileRole === 'all' ? 'active' : ''} onClick={() => { setProfileRole('all'); playSound('click') }}>Todos</button>
                         {roles.map((role) => (
-                          <button type="button" className={`${role} ${profileRole === role ? 'active' : ''}`} onClick={() => setProfileRole(role)} key={role}>{roleLabels[role]}</button>
+                          <button type="button" className={`${role} ${profileRole === role ? 'active' : ''}`} onClick={() => { setProfileRole(role); playSound('click') }} key={role}>{roleLabels[role]}</button>
                         ))}
                       </div>
                     </div>
 
                     <div className="profiles-simple-hint">
                       <strong translate="no">Overwatch</strong>
-                      <select aria-label="Filtrar categoría" value={profileBucketFilter} onChange={(event) => setProfileBucketFilter(event.target.value as typeof profileBucketFilter)}><option value="all">Todos</option><option value="unmarked">Sin clasificar</option>{profileBuckets.map((bucket) => <option key={bucket} value={bucket}>{bucketLabels[bucket]}</option>)}</select>
-                      <div className="profile-bulk"><select aria-label="Clasificación" value={profileBulkBucket} onChange={(event) => setProfileBulkBucket(event.target.value as typeof profileBulkBucket)}><option value="">Sin clasificar</option>{profileBuckets.map((bucket) => <option key={bucket} value={bucket}>{bucketLabels[bucket]}</option>)}</select><button type="button" onClick={classifyVisible} disabled={!classifiedHeroes.length}>Aplicar a visibles</button></div>
+                      <select aria-label="Filtrar categoría" value={profileBucketFilter} onChange={(event) => { setProfileBucketFilter(event.target.value as typeof profileBucketFilter); playSound('profileSelect') }}><option value="all">Todos</option><option value="unmarked">Sin clasificar</option>{profileBuckets.map((bucket) => <option key={bucket} value={bucket}>{bucketLabels[bucket]}</option>)}</select>
+                      <div className="profile-bulk"><select aria-label="Clasificación" value={profileBulkBucket} onChange={(event) => { setProfileBulkBucket(event.target.value as typeof profileBulkBucket); playSound('profileSelect') }}><option value="">Sin clasificar</option>{profileBuckets.map((bucket) => <option key={bucket} value={bucket}>{bucketLabels[bucket]}</option>)}</select><button type="button" onClick={classifyVisible} disabled={!classifiedHeroes.length}>Aplicar a visibles</button></div>
                       {markedHeroes > 0 && <button type="button" onClick={clearCurrentProfile}><Icon name="reset" size={14} /> Reiniciar</button>}
                     </div>
 
@@ -2395,6 +2361,7 @@ function App() {
                   event.preventDefault()
                   const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + step + tabs.length) % tabs.length
                   setSettingsTab(tabs[next].id)
+                  playSound('nav')
                   event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[next]?.focus()
                 }}>
                 <Icon name={tab.icon} size={18} /><span>{tab.label}</span>
@@ -2420,7 +2387,7 @@ function App() {
                 {switchRow('Sonidos', soundEnabled, () => toggleSounds(), false, false)}
                 <label className={`preference-row preference-volume ${!soundEnabled ? 'disabled' : ''}`}>
                   <span>Volumen</span>
-                  <input type="range" min="0" max="1" step="0.05" value={soundVolume} disabled={!soundEnabled} onChange={(event) => setSoundVolume(Number(event.target.value))} onPointerUp={() => playSound('click')} />
+                  <input type="range" min="0" max="1" step="0.05" value={soundVolume} disabled={!soundEnabled} onChange={(event) => setSoundVolume(Number(event.target.value))} onPointerUp={() => playSound('click')} onKeyUp={(event) => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) playSound('click') }} />
                   <output>{Math.round(soundVolume * 100)}%</output>
                 </label>
                 {switchRow('Sonido al pasar el mouse', hoverSounds, setHoverSounds, !soundEnabled)}
@@ -2466,7 +2433,7 @@ function App() {
 
       <header className="topbar">
         <button type="button" className="brand" onMouseEnter={hoverSound} onClick={() => navigate('principal')} aria-label={t('nav_home')}>
-          <span className="brand-mark"><img src={`${baseUrl}app_icon.png`} alt="" /></span><span className="brand-copy"><strong>OverRoll</strong><small>{gameModules.find((game) => game.id === activeGame)?.name ?? t('random_picker')}</small></span>
+          <span className="brand-mark"><img src={`${baseUrl}app_icon.png`} alt="" /></span><span className="brand-copy"><strong>OverRoll</strong></span>
         </button>
         <nav aria-label="OverRoll">
           <button type="button" className={activeView === 'principal' ? 'nav-active' : ''} onMouseEnter={hoverSound} onClick={() => navigate('principal')}><Icon name="gamepad" size={16} /><span>{t('nav_home')}</span></button>
@@ -2525,7 +2492,7 @@ function App() {
                 {(selectedDetailPick?.perks ?? []).map((perk, index) => (
                   <article className="selected-perk-card" key={`selected-${perk.name}-${index}`}>
                     {perk.icon ? <img src={asset(perk.icon)} alt="" loading="lazy" /> : <Icon name="spark" size={24} />}
-                    <div><small>{stadium ? `PODER ${index + 1}` : selectedDetailHero.minorPerks.some((item) => item.name === perk.name) ? 'VENTAJA MENOR' : 'VENTAJA MAYOR'}</small><strong>{perk.name}</strong><p>{perk.description}</p></div>
+                    <div><small>{stadium ? `PODER ${index + 1}` : selectedDetailHero.minorPerks.some((item) => item.name === perk.name) ? 'VENTAJA MENOR' : 'VENTAJA MAYOR'}</small><strong translate="no" lang={activeLocale}>{perkText(selectedDetailHero, perk).name}</strong><p translate="no" lang={activeLocale}>{perkText(selectedDetailHero, perk).description}</p></div>
                   </article>
                 ))}
               </div>
@@ -2537,7 +2504,7 @@ function App() {
                   return (
                     <button type="button" className={`perk-card detailed selectable ${selected ? 'selected' : ''}`} onClick={() => toggleManualPerk(perk)} key={`${perk.name}-${index}`}>
                       {perk.icon ? <img src={asset(perk.icon)} alt="" loading="lazy" /> : <Icon name="spark" size={22} />}
-                      <div><span>{selected ? '✓' : String(index + 1).padStart(2, '0')}</span><strong>{perk.name}</strong><small>{stadium ? 'PODER STADIUM' : index < selectedDetailHero.minorPerks.length ? 'VENTAJA MENOR' : 'VENTAJA MAYOR'}</small><p>{perk.description}</p></div>
+                      <div><span>{selected ? '✓' : String(index + 1).padStart(2, '0')}</span><strong translate="no" lang={activeLocale}>{perkText(selectedDetailHero, perk).name}</strong><small>{stadium ? 'PODER STADIUM' : index < selectedDetailHero.minorPerks.length ? 'VENTAJA MENOR' : 'VENTAJA MAYOR'}</small><p translate="no" lang={activeLocale}>{perkText(selectedDetailHero, perk).description}</p></div>
                     </button>
                   )
                 })}
@@ -2555,10 +2522,10 @@ function App() {
             </header>
 
             <div className="filter-toolbar">
-              <div className="profile-search"><Icon name="filter" size={16} /><input value={filterSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setFilterSearch(event.target.value)} placeholder="Buscar héroe…" /></div>
+              <div className="profile-search"><Icon name="filter" size={16} /><input value={filterSearch} onFocus={() => playSound('click')} onChange={(event: ChangeEvent<HTMLInputElement>) => setFilterSearch(event.target.value)} placeholder="Buscar héroe…" /></div>
               <div className="role-filter-tabs">
-                <button type="button" className={filterRole === 'all' ? 'active' : ''} onClick={() => setFilterRole('all')}>Todos</button>
-                {roles.map((role) => <button type="button" className={`${role} ${filterRole === role ? 'active' : ''}`} onClick={() => setFilterRole(role)} key={role}>{roleLabels[role]}</button>)}
+                <button type="button" className={filterRole === 'all' ? 'active' : ''} onClick={() => { setFilterRole('all'); playSound('click') }}>Todos</button>
+                {roles.map((role) => <button type="button" className={`${role} ${filterRole === role ? 'active' : ''}`} onClick={() => { setFilterRole(role); playSound('click') }} key={role}>{roleLabels[role]}</button>)}
               </div>
               <button type="button" className="reset-classification" onClick={clearPlayerFilter}><Icon name="reset" size={15} /> Reiniciar</button>
             </div>
@@ -2589,7 +2556,7 @@ function App() {
       <AnimatedLayer open={Boolean(activeGame === 'tf2' && tf2FilterIndex !== null && tf2FilterPlayer)} enabled={animationsEnabled} onClose={closeTf2Filter} className="filter-layer tf2-filter-layer">{activeGame === 'tf2' && tf2FilterIndex !== null && tf2FilterPlayer && (<>
           <section className="filter-dialog tf2-filter-dialog" role="dialog" aria-modal="true" aria-label={`Filtro TF2 de ${tf2FilterPlayer.name}`}>
             <header className="filter-heading"><div><span className="eyebrow">Filtro individual · TF2</span><h2 translate="no">{tf2FilterPlayer.name || `Jugador${tf2FilterIndex + 1}`}</h2><p>{tf2Classes.length - tf2FilterPlayer.blocked.length} permitidas · {tf2FilterPlayer.blocked.length} bloqueadas</p></div><button type="button" onClick={closeTf2Filter} aria-label="Cerrar filtro"><Icon name="close" size={20} /></button></header>
-            <div className="filter-toolbar"><div className="profile-search"><Icon name="filter" size={16} /><input value={tf2FilterSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setTf2FilterSearch(event.target.value)} placeholder="Buscar clase…" /></div><div className="role-filter-tabs tf2-filter-tabs"><button type="button" className={tf2FilterGroup === 'all' ? 'active' : ''} onClick={() => setTf2FilterGroup('all')}>Todas</button>{tf2Groups.map((group) => <button type="button" className={`${group} ${tf2FilterGroup === group ? 'active' : ''}`} onClick={() => setTf2FilterGroup(group)} key={group}>{tf2GroupLabels[group]}</button>)}</div><button type="button" className="reset-classification" onClick={clearTf2Filter}><Icon name="reset" size={15} /> Reiniciar</button></div>
+            <div className="filter-toolbar"><div className="profile-search"><Icon name="filter" size={16} /><input value={tf2FilterSearch} onFocus={() => playSound('click')} onChange={(event: ChangeEvent<HTMLInputElement>) => setTf2FilterSearch(event.target.value)} placeholder="Buscar clase…" /></div><div className="role-filter-tabs tf2-filter-tabs"><button type="button" className={tf2FilterGroup === 'all' ? 'active' : ''} onClick={() => { setTf2FilterGroup('all'); playSound('click') }}>Todas</button>{tf2Groups.map((group) => <button type="button" className={`${group} ${tf2FilterGroup === group ? 'active' : ''}`} onClick={() => { setTf2FilterGroup(group); playSound('click') }} key={group}>{tf2GroupLabels[group]}</button>)}</div><button type="button" className="reset-classification" onClick={clearTf2Filter}><Icon name="reset" size={15} /> Reiniciar</button></div>
             <div className="filter-hero-grid tf2-filter-class-grid">{tf2VisibleFilterClasses.map((item) => { const blocked = tf2FilterPlayer.blocked.includes(item.key); return <button type="button" className={`filter-hero tf2-filter-class ${item.group} ${blocked ? 'blocked' : ''}`} onClick={() => toggleTf2BlockedClass(item.key)} aria-pressed={blocked} key={item.key}><img src={asset(item.portrait)} alt={item.name} /><span><strong>{item.name}</strong><small>{blocked ? 'BLOQUEADA' : tf2GroupLabels[item.group].toUpperCase()}</small></span><i>{blocked ? '×' : '✓'}</i></button> })}</div>
           </section>
         </>)}</AnimatedLayer>
