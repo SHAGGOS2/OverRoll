@@ -1,5 +1,6 @@
 import { downloadCanvasPng, loadExportImage } from './imageExport.ts'
 import type { PortraitFrame } from './portraitFrames.ts'
+import type { CardDesign } from './cardDesign.ts'
 
 export type ImageDetail = { label: string; image?: string }
 export type TeamImageCard = {
@@ -7,10 +8,14 @@ export type TeamImageCard = {
   portrait?: string; icon?: string; locked?: boolean; fit?: 'cover' | 'contain'; frame?: PortraitFrame
   details?: ImageDetail[]; alternatives?: ImageDetail[]
 }
-export type TeamImageOptions = { assetBase?: string; title: string; subtitle?: string; accent: string; filename: string; cards: TeamImageCard[] }
+export type TeamImageOptions = { assetBase?: string; title: string; subtitle?: string; accent: string; filename: string; cards: TeamImageCard[]; design?: CardDesign }
 let exporting = false
 
-export function teamImageLayout(count: number, detailCount: number, alternatives: boolean) {
+export function teamImageLayout(count: number, detailCount: number, alternatives: boolean, design: CardDesign = 'classic') {
+  if (design === 'bars') {
+    const columns = Math.max(1, count), cardWidth = 280, cardHeight = 620 + Math.max(0, Math.min(8, detailCount) - 2) * 36
+    return { columns, rows: 1, cardWidth, cardHeight, width: 96 + columns * cardWidth + (columns - 1) * 24, height: 222 + cardHeight + 80 }
+  }
   const columns = Math.min(3, Math.max(1, count))
   const rows = Math.ceil(count / columns)
   const cardWidth = 384
@@ -24,7 +29,7 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
   exporting = true
   let canvas: HTMLCanvasElement | undefined
   try {
-    const layout = teamImageLayout(options.cards.length, Math.max(0, ...options.cards.map((c) => c.details?.length ?? 0)), options.cards.some((c) => c.alternatives?.length))
+    const layout = teamImageLayout(options.cards.length, Math.max(0, ...options.cards.map((c) => c.details?.length ?? 0)), options.cards.some((c) => c.alternatives?.length), options.design)
     canvas = document.createElement('canvas')
     canvas.width = layout.width
     canvas.height = layout.height
@@ -60,7 +65,37 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
     text('OVERROLL', 48, 88, layout.width - 96, 26, options.accent, 900)
     text(options.title.toUpperCase(), 48, 142, layout.width - 96, 36, '#ffffff', 900, 24)
     text(options.subtitle ?? `${options.cards.length} ${options.cards.length === 1 ? 'jugador' : 'jugadores'}`, 48, 176, layout.width - 96, 16, '#a4b7cb', 500)
-    options.cards.forEach((card, index) => {
+    if (options.design === 'bars') options.cards.forEach((card, index) => {
+      const x = 48 + index * (layout.cardWidth + 24), y = 258, w = layout.cardWidth, h = layout.cardHeight - 36, slant = 52
+      const outline = () => { ctx.beginPath(); ctx.moveTo(x + slant, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w - slant, y + h); ctx.lineTo(x, y + h); ctx.closePath() }
+      text(String(index + 1).padStart(2, '0'), x + slant, y - 14, 25, 13, card.color, 800)
+      text(card.player, x + slant + 32, y - 14, w - slant - 38, 17, '#f4f7fc', 750, 12)
+      ctx.save(); outline(); ctx.clip()
+      const bg = ctx.createLinearGradient(0, y, 0, y + h); bg.addColorStop(0, '#20394e'); bg.addColorStop(1, '#091522')
+      ctx.fillStyle = bg; ctx.fillRect(x, y, w, h)
+      ctx.strokeStyle = '#a4bddb14'; ctx.lineWidth = 1
+      for (let line = 0; line < w; line += 26) { ctx.beginPath(); ctx.moveTo(x + line, y); ctx.lineTo(x + line, y + h); ctx.stroke() }
+      for (let line = 0; line < h; line += 26) { ctx.beginPath(); ctx.moveTo(x, y + line); ctx.lineTo(x + w, y + line); ctx.stroke() }
+      picture(card.portrait, x - 15, y + 98, w + 30, h - 98, card.fit === 'contain', card.frame)
+      const fade = ctx.createLinearGradient(0, y + h - 180, 0, y + h); fade.addColorStop(0, '#07121f00'); fade.addColorStop(.55, '#07121fee'); fade.addColorStop(1, '#07121f')
+      ctx.fillStyle = fade; ctx.fillRect(x, y + h - 180, w, 180)
+      ;(card.details ?? []).slice(0, 8).forEach((detail, i) => {
+        const dy = y + 16 + i * 38, dx = x + slant + 10 - i * 3
+        const cx = i % 2 ? dx + 14 : x + w - 32
+        ctx.fillStyle = '#0a1c2fee'; ctx.beginPath(); ctx.arc(cx, dy + 14, 15, 0, Math.PI * 2); ctx.fill()
+        ctx.strokeStyle = card.color; ctx.stroke()
+        picture(detail.image, cx - 11, dy + 3, 22, 22, true)
+        text(detail.label, i % 2 ? dx + 36 : dx, dy + 18, w - slant - 66, 11, '#edf5ff', 650, 9)
+      })
+      ctx.globalAlpha = .22; picture(card.icon, x + w - slant - 48, y + h - 160, 48, 48, true); ctx.globalAlpha = 1
+      text(card.name.toUpperCase(), x + 20, y + h - 66, w - slant - 24, 25, '#ffffff', 900, 16)
+      picture(card.icon, x + 20, y + h - 43, 17, 17, true)
+      text(card.role, x + 45, y + h - 29, w - slant - 48, 12, card.color, 650)
+      ctx.fillStyle = card.color; ctx.fillRect(x, y + h - 4, w, 4)
+      ctx.restore(); outline(); ctx.strokeStyle = card.locked ? '#ffcf6b' : card.color; ctx.lineWidth = card.locked ? 3 : 1; ctx.stroke()
+      if (card.locked) text('◆', x + w - 22, y - 14, 20, 14, '#ffcf6b')
+    })
+    else options.cards.forEach((card, index) => {
       const x = 48 + index % layout.columns * (layout.cardWidth + 24)
       const y = 222 + Math.floor(index / layout.columns) * (layout.cardHeight + 24)
       ctx.fillStyle = '#101e2e'; ctx.beginPath(); ctx.roundRect(x, y, layout.cardWidth, layout.cardHeight, 18); ctx.fill()

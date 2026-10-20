@@ -7,6 +7,9 @@ import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
 import { useImageExport } from './useImageExport'
 import { safeAssetUrl } from './imageExport.ts'
+import CardDesignOptions from './CardDesignOptions'
+import OverwatchBar from './OverwatchBar'
+import { normalizeCardDesign, TELEPORT_DURATION_MS, type CardDesign } from './cardDesign'
 import {
   useEffect,
   useMemo,
@@ -28,6 +31,7 @@ import './Profiles.css'
 import './StandardGames.css'
 import './AppHeader.css'
 import './GamePicker.css'
+import './OverwatchBars.css'
 import { warmImageCache } from './imageCache'
 import { creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
 import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
@@ -70,7 +74,7 @@ type ProfileBucket = 'main' | 'played' | 'practice' | 'avoid'
 type ProfileMode = 'classic' | 'allprofile' | 'lowprob' | 'practice' | 'played' | 'prefer' | 'main'
 type ProfileTab = 'heroes' | 'players' | 'mode'
 type MobileConfigTab = 'squad' | 'rules'
-type SettingsTab = 'general' | 'audio' | 'catalogs' | 'language' | 'credits'
+type SettingsTab = 'general' | 'card-design' | 'audio' | 'catalogs' | 'language' | 'credits'
 type IconName =
   | 'refresh'
   | 'reroll'
@@ -886,6 +890,8 @@ function App() {
   const [soundVolume, setSoundVolume] = useState(() => readStorage('overroll.web.soundVolume', 0.42))
   const [hoverSounds, setHoverSounds] = useState(() => readStorage('overroll.web.hoverSounds', false))
   const [animationsEnabled, setAnimationsEnabled] = useState(() => readStorage('overroll.web.animationsEnabled', true))
+  const [overwatchCardDesign, setOverwatchCardDesign] = useState<CardDesign>(() => normalizeCardDesign(readStorage<unknown>('overroll.web.overwatch.cardDesign', 'classic')))
+  const [systemReducedMotion, setSystemReducedMotion] = useState(() => Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches))
   const [compactPerks, setCompactPerks] = useState(() => readStorage('overroll.web.compactPerks', false))
   const [lowPowerMode, setLowPowerMode] = useState(() => readStorage('overroll.web.lowPowerMode', false))
   const [mobileCompactMode, setMobileCompactMode] = useState(() => readStorage('overroll.web.mobileCompactMode', true))
@@ -920,6 +926,7 @@ function App() {
   const [tf2FilterGroup, setTf2FilterGroup] = useState<'all' | Tf2Group>('all')
 
   const activeLocale: SupportedLocale = localePreference === 'auto' ? browserLocale : localePreference
+  const barMotion = animationsEnabled && !lowPowerMode && !systemReducedMotion
   const t = (key: Parameters<typeof translate>[1]) => translate(activeLocale, key)
   const [imageExporting, saveImage] = useImageExport(notify, activeLocale, activeGame)
   const overwatchText = useOverwatchText(activeLocale, baseUrl, activeGame === 'overwatch')
@@ -932,6 +939,14 @@ function App() {
     const handleLanguageChange = () => setBrowserLocale(detectBrowserLocale())
     window.addEventListener('languagechange', handleLanguageChange)
     return () => window.removeEventListener('languagechange', handleLanguageChange)
+  }, [])
+
+  useEffect(() => {
+    const media = window.matchMedia?.('(prefers-reduced-motion: reduce)')
+    if (!media) return
+    const changed = () => setSystemReducedMotion(media.matches)
+    media.addEventListener('change', changed)
+    return () => media.removeEventListener('change', changed)
   }, [])
 
   useEffect(() => {
@@ -1093,6 +1108,7 @@ function App() {
       window.localStorage.setItem('overroll.web.soundVolume', JSON.stringify(soundVolume))
       window.localStorage.setItem('overroll.web.hoverSounds', JSON.stringify(hoverSounds))
       window.localStorage.setItem('overroll.web.animationsEnabled', JSON.stringify(animationsEnabled))
+      window.localStorage.setItem('overroll.web.overwatch.cardDesign', JSON.stringify(overwatchCardDesign))
       window.localStorage.setItem('overroll.web.compactPerks', JSON.stringify(compactPerks))
       window.localStorage.setItem('overroll.web.lowPowerMode', JSON.stringify(lowPowerMode))
       window.localStorage.setItem('overroll.web.mobileCompactMode', JSON.stringify(mobileCompactMode))
@@ -1102,7 +1118,7 @@ function App() {
     }, 180)
 
     return () => window.clearTimeout(timeout)
-  }, [players, profiles, profileMode, currentProfileId, avoidRepeated, roleComposition, rolesOnly, randomPerks, stadium, soundEnabled, soundVolume, hoverSounds, animationsEnabled, compactPerks, lowPowerMode, mobileCompactMode, activeGame, tf2Players, tf2AvoidRepeated])
+  }, [players, profiles, profileMode, currentProfileId, avoidRepeated, roleComposition, rolesOnly, randomPerks, stadium, soundEnabled, soundVolume, hoverSounds, animationsEnabled, overwatchCardDesign, compactPerks, lowPowerMode, mobileCompactMode, activeGame, tf2Players, tf2AvoidRepeated])
 
   useEffect(() => {
     if (!toast) return undefined
@@ -1410,7 +1426,7 @@ function App() {
       setGenerating(false)
       setStatus(rolesOnly ? 'Composición de roles generada' : 'Equipo generado correctamente')
       playConfirmTone()
-    }, animationsEnabled ? 360 : 40)
+    }, overwatchCardDesign === 'bars' ? barMotion ? TELEPORT_DURATION_MS : 40 : animationsEnabled ? 360 : 40)
   }
 
   function reroll(index: number) {
@@ -1446,10 +1462,11 @@ function App() {
       setPicks((old) => old.map((pick, pickIndex) => (
         pickIndex === index ? { hero, locked: false, role: selectedRole ?? null, perks: rollPerks(hero, randomPerks, stadium) } : pick
       )))
-      setRerollingIndex(null)
+      if (overwatchCardDesign === 'bars' && barMotion) window.setTimeout(() => setRerollingIndex(null), TELEPORT_DURATION_MS)
+      else setRerollingIndex(null)
       setStatus(`Reroll de ${player.name || `Jugador${index + 1}`}`)
       if (!hero) notify('No hay otro héroe compatible con ese perfil y filtro.', 'warning')
-    }, animationsEnabled ? 280 : 30)
+    }, overwatchCardDesign === 'bars' ? 0 : animationsEnabled ? 280 : 30)
   }
 
   function toggleLock(index: number) {
@@ -1744,7 +1761,7 @@ function App() {
 
   async function generateTeamImage() {
     const colors: Record<Role, string> = { tank: '#4fc9ff', damage: '#ff5578', support: '#55e4ad' }
-    await saveImage({ title: stadium ? 'Overwatch · Stadium' : 'Overwatch', accent: '#ffc84a', filename: 'overroll-overwatch-equipo', cards: players.map((player, index) => {
+    await saveImage({ title: stadium ? 'Overwatch · Stadium' : 'Overwatch', accent: '#ffc84a', filename: 'overroll-overwatch-equipo', design: overwatchCardDesign, cards: players.map((player, index) => {
       const pick = picks[index], hero = pick?.hero, role = pick?.role ?? hero?.role
       return { player: player.name, name: rolesOnly && role ? roleLabels[role] : hero?.name ?? 'Sin selección', role: role ? roleLabels[role] : 'Sin rol', color: role ? colors[role] : '#8197af', fit: rolesOnly ? 'contain' as const : 'cover' as const, portrait: rolesOnly && role ? asset('assets/roles/' + role + '.png') : hero ? asset(hero.portrait) : undefined, icon: role ? asset('assets/roles/' + role + '.png') : undefined, locked: pick?.locked, details: rolesOnly ? [] : (pick?.perks ?? []).slice(0, stadium ? 4 : 2).map((perk) => ({ label: hero ? perkText(hero, perk).name : perk.name, image: asset(perk.icon) })) }
     }) })
@@ -1755,6 +1772,7 @@ function App() {
     setSoundVolume(0.42)
     setHoverSounds(false)
     setAnimationsEnabled(true)
+    setOverwatchCardDesign('classic')
     setCompactPerks(false)
     setLowPowerMode(false)
     setMobileCompactMode(true)
@@ -1997,7 +2015,7 @@ function App() {
           ) : (
             <div className="team-stage">
               <div className="stage-grid" />
-              <div className={`team-grid cards-${players.length}`} style={{ '--cards': players.length } as CSSProperties}>
+              <div className={`team-grid cards-${players.length}${overwatchCardDesign === 'bars' ? ' overwatch-bars' : ''}`} style={{ '--cards': players.length } as CSSProperties}>
                 {players.map((player, index) => {
                   const pick = picks[index]
                   const hero = pick?.hero
@@ -2007,6 +2025,22 @@ function App() {
                     : undefined
                   const generationClass = generationRevision % 2 === 0 ? 'generation-a' : 'generation-b'
                   const assignedProfile = profiles.find((item) => item.id === player.profileId)
+
+                  if (overwatchCardDesign === 'bars') return <OverwatchBar key={player.id}
+                    player={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name || localizedPlayerName(activeLocale, index + 1)}
+                    index={index} name={translateGameText('overwatch', activeLocale, rolesOnly && visibleRole ? roleLabels[visibleRole] : hero?.name ?? 'Sin selección')}
+                    role={translateGameText('overwatch', activeLocale, visibleRole ? roleLabels[visibleRole] : 'Genera un equipo')} roleId={visibleRole ?? undefined}
+                    roleIcon={visibleRole ? asset(`assets/roles/${visibleRole}.png`) : undefined}
+                    portrait={rolesOnly && visibleRole ? asset(`assets/roles/${visibleRole}.png`) : hero ? asset(hero.portrait) : ''}
+                    rolesOnly={rolesOnly} locked={Boolean(pick?.locked)} profile={assignedProfile?.name} blocked={player.blocked.length}
+                    perks={hero ? (pick?.perks ?? []).map((perk, i) => ({ ...perkText(hero, perk), icon: asset(perk.icon), tier: translateGameText('overwatch', activeLocale, stadium ? `PODER ${i + 1}` : hero.minorPerks.some((item) => item.name === perk.name) ? 'MENOR' : 'MAYOR') })) : []}
+                    revision={generationRevision} motion={barMotion} locale={activeLocale}
+                    actions={localizeUi(activeLocale, <>
+                      <button type="button" onClick={() => reroll(index)} disabled={!hero || pick?.locked || rolesOnly || generating || rerollingIndex !== null} data-tooltip="Reroll" aria-label={`Reroll de ${player.name}`}><Icon name="reroll" size={18} /></button>
+                      <button type="button" onClick={() => openFilter(index)} disabled={rolesOnly} data-tooltip="Filtro" aria-label={`Filtro de ${player.name}`} className={player.blocked.length > 0 ? 'active-filter' : ''}><Icon name="filter" size={18} /></button>
+                      <button type="button" onClick={() => openDetails(index)} disabled={!hero} data-tooltip="Perks y detalles" aria-label={`Detalles de ${hero?.name ?? 'héroe'}`}><Icon name="details" size={18} /></button>
+                      <button type="button" onClick={() => toggleLock(index)} disabled={!hero || rolesOnly || generating || rerollingIndex !== null} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'} aria-label={pick?.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
+                    </>, 'overwatch')} />
 
                   return (
                     <article className={`hero-card ${visibleRole ?? ''} ${generationClass} ${pick?.locked ? 'is-locked' : ''} ${rerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--delay': `${index * 55}ms` } as CSSProperties} key={player.id}>
@@ -2327,6 +2361,7 @@ function App() {
   function renderMore() {
     const tabs: Array<{ id: SettingsTab; label: string; icon: IconName }> = [
       { id: 'general', label: t('tab_general'), icon: 'settings' },
+      { id: 'card-design', label: 'Diseño de fichas', icon: 'details' },
       { id: 'audio', label: t('tab_audio'), icon: 'sound' },
       { id: 'language', label: t('tab_language'), icon: 'language' },
       { id: 'catalogs', label: t('tab_games'), icon: 'gamepad' },
@@ -2379,6 +2414,7 @@ function App() {
                 <button type="button" className="preferences-danger" onClick={resetLocalData}><Icon name="trash" size={16} />Borrar datos guardados</button>
               </footer>
             </>}
+            {settingsTab === 'card-design' && <CardDesignOptions value={overwatchCardDesign} locale={activeLocale} asset={asset} onChange={(value) => { setOverwatchCardDesign(value); playSound('click') }} />}
             {settingsTab === 'audio' && <>
               <div className="preferences-rows">
                 {switchRow('Sonidos', soundEnabled, () => toggleSounds(), false, false)}

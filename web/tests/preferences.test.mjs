@@ -16,7 +16,7 @@ visit(tree)
 const code = ts.transpileModule(functionSource, { compilerOptions: { target: ts.ScriptTarget.ES2023, jsx: ts.JsxEmit.React } }).outputText
 function render(tab, overrides = {}) {
   const changes = { sounds: [] }
-  const context = { gameCredits, React, Icon: () => null, t: (key) => key, settingsTab: tab,
+  const context = { gameCredits, React, Icon: () => null, CardDesignOptions: () => null, overwatchCardDesign: 'classic', setOverwatchCardDesign: (value) => { changes.design = value }, t: (key) => key, settingsTab: tab,
     animationsEnabled: true, compactPerks: false, mobileCompactMode: true, lowPowerMode: false,
     soundEnabled: true, soundVolume: .42, hoverSounds: false, localePreference: 'auto',
     browserLocale: 'es-MX', activeLocale: 'es-MX', activeGame: 'deadlock',
@@ -51,6 +51,15 @@ test('new general settings retain working toggles and explicit reset actions', (
   assert(!html.includes('Configuración independiente por módulo'))
 })
 
+test('card design selection is scoped to Overwatch, retains the chosen value and plays option feedback', () => {
+  const Design = () => null
+  const { element, changes } = render('card-design', { CardDesignOptions: Design, overwatchCardDesign: 'bars' })
+  const picker = elements(element).find((el) => el.type === Design)
+  assert.equal(picker.props.value, 'bars')
+  picker.props.onChange('classic')
+  assert.equal(changes.design, 'classic'); assert.deepEqual(changes.sounds, ['click'])
+})
+
 test('audio controls preserve master sound behavior, volume and disabled states', () => {
   const { element, changes } = render('audio'), controls = elements(element).filter((el) => el.type === 'input')
   controls.find((el) => el.props.type === 'checkbox').props.onChange({ target: { checked: false } })
@@ -63,11 +72,11 @@ test('audio controls preserve master sound behavior, volume and disabled states'
 
 test('settings tabs support keyboard navigation and language/game actions remain connected', () => {
   const { element, changes } = render('general'), tabs = elements(element).filter((el) => el.props.role === 'tab')
-  assert.equal(tabs.length, 5); assert.equal(tabs.filter((el) => el.props.tabIndex === 0).length, 1)
+  assert.equal(tabs.length, 6); assert.equal(tabs.filter((el) => el.props.tabIndex === 0).length, 1)
   let focused = -1
   const event = { key: 'End', preventDefault() {}, currentTarget: { parentElement: { querySelectorAll() { return tabs.map((_, i) => ({ focus() { focused = i } })) } } } }
   tabs[0].props.onKeyDown(event)
-  assert.equal(changes.tab, 'credits'); assert.equal(focused, 4)
+  assert.equal(changes.tab, 'credits'); assert.equal(focused, 5)
   const language = render('language'), select = elements(language.element).find((el) => el.type === 'select')
   select.props.onChange({ target: { value: 'en-US' } }); assert.equal(language.changes.locale, 'en-US')
   const games = render('catalogs'), gameButton = elements(games.element).find((el) => el.type === 'button' && el.props.className === 'selected')

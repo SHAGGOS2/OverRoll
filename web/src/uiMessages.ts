@@ -1,6 +1,9 @@
 import type { SupportedLocale } from './localization'
 const locales = ['en-us', 'de-de', 'fr-fr', 'pt-br', 'ja-jp', 'ko-kr', 'zh-cn'] as const
 const rows: Record<string, string[]> = {
+ 'Diseño de fichas': ['Card design','Kartendesign','Style des cartes','Design das fichas','カードデザイン','카드 디자인','卡片设计'],
+ 'Clásico': ['Classic','Klassisch','Classique','Clássico','クラシック','클래식','经典'],
+ 'Barras': ['Bars','Streifen','Bandes','Barras','ストリップ','스트립','条形'],
  'Cerrar': ['Close','Schließen','Fermer','Fechar','閉じる','닫기','关闭'],
  'Ruleta': ['Roulette','Glücksrad','Roulette','Roleta','ルーレット','룰렛','轮盘'],
  'Perfiles': ['Profiles','Profile','Profils','Perfis','プロフィール','프로필','档案'],
