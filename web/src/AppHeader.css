@@ -1,0 +1,130 @@
+.app .topbar {
+  height: 78px;
+  min-height: 78px;
+  padding: 10px 22px;
+  display: grid;
+  grid-template-columns: minmax(155px, 1fr) minmax(170px, 250px) auto;
+  gap: 22px;
+  align-items: center;
+  border-bottom: 1px solid #304257;
+  background: linear-gradient(105deg, #111d2d, #090f19 45%, #101c2a);
+  box-shadow: 0 5px 22px #0004;
+}
+.app .topbar::after {
+  left: 0;
+  right: auto;
+  bottom: -1px;
+  width: min(340px, 40%);
+  height: 2px;
+  opacity: 1;
+  background: linear-gradient(90deg, #f7cd6e, #f7cd6e55 55%, transparent);
+}
+.app .topbar .brand { width: max-content; gap: 11px; padding-right: 12px; }
+.app .topbar .brand-mark { width: 43px; height: 43px; }
+.app .topbar .brand-mark img { width: 42px; height: 42px; filter: drop-shadow(0 2px 7px #f1bd5638); }
+.app .topbar .brand-copy strong { color: #edf3f8; font-size: 24px; line-height: 1.1; letter-spacing: -.015em; }
+.app .topbar .brand-copy small { display: none; }
+.app .topbar .brand:focus-visible { outline: 2px solid #efc66c; outline-offset: 5px; border-radius: 5px; }
+.topbar-game-picker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  height: 48px;
+  padding: 6px 28px 6px 8px;
+  border: 1px solid #354a60;
+  border-radius: 9px;
+  background: linear-gradient(130deg, color-mix(in srgb, var(--active-accent) 8%, #142435), #102030);
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.topbar-game-picker:hover,
+.topbar-game-picker:focus-within { border-color: var(--active-accent); }
+.topbar-game-icon { width: 32px; height: 32px; flex: none; padding: 4px; border: 1px solid #ffffff12; border-radius: 6px; object-fit: contain; background: #06121e; }
+.topbar-game-picker label { display: grid; flex: 1; min-width: 0; gap: 1px; }
+.topbar-game-picker label > span { color: #8eabc1; font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
+.topbar-game-picker select { width: 100%; min-width: 0; padding: 1px 0; border: 0; outline: 0; color: #edf4f8; background: transparent; appearance: none; font-size: 12px; font-weight: 700; cursor: pointer; text-overflow: ellipsis; }
+.topbar-game-picker select option { color: #edf4f8; background: #102232; }
+.topbar-picker-chevron { position: absolute; right: 10px; top: 17px; color: var(--active-accent); pointer-events: none; }
+.app .topbar nav {
+  position: static;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-self: end;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #2d4257;
+  border-radius: 11px;
+  overflow: visible;
+  background: #07121d;
+  box-shadow: inset 0 1px 5px #0003;
+}
+.app .topbar nav button {
+  position: relative;
+  min-width: 99px;
+  min-height: 40px;
+  padding: 10px 13px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  clip-path: none;
+  background: transparent;
+  color: #8faabd;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .025em;
+  text-transform: none;
+  box-shadow: none;
+  transition: color 150ms ease, border-color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+.app .topbar nav button::before { display: none; }
+.app .topbar nav button span { display: block; }
+.app .topbar .topbar-nav-icon { flex: none; opacity: .85; }
+.app .topbar nav button:hover { transform: translateY(-1px); color: #e8f2f9; border-color: #324d65; background: #14293d; }
+.app .topbar nav button:active { transform: translateY(0); }
+.app .topbar nav .nav-active {
+  border-color: color-mix(in srgb, var(--active-accent) 64%, #496078);
+  color: #fff0c7;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--active-accent) 20%, #192d40), #183047);
+  box-shadow: inset 0 1px #ffffff12, 0 2px 8px #0002;
+}
+.app .topbar nav .nav-active::after { content: ''; position: absolute; bottom: 4px; left: 35%; right: 35%; height: 2px; border-radius: 2px; background: var(--active-accent); }
+.app .topbar nav .nav-active .topbar-nav-icon { color: var(--active-accent); opacity: 1; }
+.app .topbar nav button:focus-visible { outline: 2px solid var(--active-accent); outline-offset: 3px; }
+@media (max-width: 1100px) and (min-width: 861px) {
+  .app .topbar { padding-inline: 16px; gap: 12px; grid-template-columns: minmax(145px, 1fr) minmax(160px, 215px) auto; }
+  .app .topbar nav button { min-width: 84px; padding-inline: 10px; }
+}
+@media (max-width: 860px) and (min-width: 621px) {
+  .app .topbar { position: relative; height: auto; grid-template-columns: 1fr minmax(180px, 250px); gap: 10px; padding: 12px 16px; }
+  .app .topbar nav { grid-column: 1 / -1; width: 100%; justify-self: stretch; }
+  .app .topbar nav button { flex: 1; min-width: 0; }
+}
+@media (max-width: 620px) {
+  .app .topbar { position: sticky; top: 0; height: 66px; min-height: 66px; padding: 8px 12px; grid-template-columns: auto minmax(0, 1fr); gap: 12px; backdrop-filter: none; }
+  .app .topbar .brand { gap: 7px; padding: 0; }
+  .app .topbar .brand-mark,
+  .app .topbar .brand-mark img { width: 33px; height: 33px; }
+  .app .topbar .brand-copy strong { font-size: 19px; }
+  .topbar-game-picker { justify-self: end; width: min(100%, 220px); height: 44px; gap: 7px; padding-left: 6px; }
+  .topbar-game-icon { width: 28px; height: 28px; }
+  .topbar-game-picker label > span { font-size: 8px; }
+  .topbar-game-picker select { font-size: 11px; }
+  .topbar-picker-chevron { top: 15px; }
+  .app .topbar nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; height: calc(64px + env(safe-area-inset-bottom)); padding: 5px 7px calc(5px + env(safe-area-inset-bottom)); border: 0; border-top: 1px solid #3c5369; border-radius: 0; background: #0b1725f7; box-shadow: 0 -8px 25px #0004; }
+  .app .topbar nav button { flex-direction: column; min-width: 0; min-height: 50px; padding: 5px 2px; gap: 3px; border-radius: 7px; font-size: 10px; }
+  .app .topbar nav .nav-active::after { bottom: 2px; left: 38%; right: 38%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app .topbar nav button,
+  .topbar-game-picker { transition: none; }
+}
+.app.reduce-motion .topbar nav button,
+.app.low-power .topbar nav button,
+.app.reduce-motion .topbar-game-picker,
+.app.low-power .topbar-game-picker { transition: none; }

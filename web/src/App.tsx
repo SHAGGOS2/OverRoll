@@ -1,6 +1,7 @@
 import { useOverwatchText } from './useOverwatchText'
 import { readPerkText, selectedPerkGroup, type PerkGroup } from './overwatchText'
 import GameSidebar from './GameSidebar'
+import AppHeader from './AppHeader'
 import { gameCredits } from './gameCredits'
 import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
@@ -25,6 +26,7 @@ import './InteractionPolish.css'
 import './SharedRoulette.css'
 import './Profiles.css'
 import './StandardGames.css'
+import './AppHeader.css'
 import { warmImageCache } from './imageCache'
 import { creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
 import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
@@ -2431,17 +2433,7 @@ function App() {
     <div className={`app view-${activeView} ${animationsEnabled ? '' : 'reduce-motion'} ${compactPerks ? 'compact-perks' : ''} ${lowPowerMode ? 'low-power' : ''} ${mobileCompactMode ? 'mobile-compact' : ''}`}>
       <div className="ambient-grid" /><div className="ambient-orb orb-one" /><div className="ambient-orb orb-two" /><div className="noise-layer" />
 
-      <header className="topbar">
-        <button type="button" className="brand" onMouseEnter={hoverSound} onClick={() => navigate('principal')} aria-label={t('nav_home')}>
-          <span className="brand-mark"><img src={`${baseUrl}app_icon.png`} alt="" /></span><span className="brand-copy"><strong>OverRoll</strong></span>
-        </button>
-        <nav aria-label="OverRoll">
-          <button type="button" className={activeView === 'principal' ? 'nav-active' : ''} onMouseEnter={hoverSound} onClick={() => navigate('principal')}><Icon name="gamepad" size={16} /><span>{t('nav_home')}</span></button>
-          <button type="button" className={activeView === 'roulette' ? 'nav-active' : ''} onMouseEnter={hoverSound} onClick={() => navigate('roulette')}><Icon name="roulette" size={16} /><span>{t('nav_roulette')}</span></button>
-          <button type="button" className={activeView === 'profiles' ? 'nav-active' : ''} onMouseEnter={hoverSound} onClick={() => navigate('profiles')}><Icon name="profile" size={16} /><span>{t('nav_profiles')}</span></button>
-          <button type="button" className={activeView === 'more' ? 'nav-active' : ''} onMouseEnter={hoverSound} onClick={() => navigate('more')}><Icon name="settings" size={16} /><span>{t('nav_more')}</span></button>
-        </nav>
-      </header>
+      <AppHeader logoSrc={`${baseUrl}app_icon.png`} games={gameModules} activeGame={activeGame} activeView={activeView} locale={activeLocale} asset={asset} onGameChange={activateGame} onNavigate={navigate} onHover={hoverSound} />
 
       {activeGame === 'pvzgw2' && (activeView === 'principal' || activeView === 'roulette') && (
         <PvzModule

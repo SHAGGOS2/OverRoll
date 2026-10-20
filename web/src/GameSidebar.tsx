@@ -15,7 +15,7 @@ export default function GameSidebar({ className, locale, open, activeTab, onTogg
   }
   return <aside className={`${className} standard-sidebar`}>
     <div className="sidebar-head">
-      <strong>{tr('Configuración')}</strong>
+      <strong><span className="configuration-mark" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M4 6h16M4 12h16M4 18h16M9 3v6m6 0v6m-6 0v6" /></svg></span>{tr('Configuración')}</strong>
       <button type="button" className="mobile-config-toggle" aria-expanded={open} aria-controls={open ? id : undefined} onClick={onToggle}>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">{open ? <path d="m6 6 12 12M18 6 6 18" /> : <><path d="M4 6h16M4 12h16M4 18h16" /><circle cx="9" cy="6" r="2" /><circle cx="15" cy="12" r="2" /><circle cx="9" cy="18" r="2" /></>}</svg>
         <span>{tr(open ? 'Ocultar' : 'Editar')}</span>
