@@ -13,7 +13,7 @@
 .card-design-mini > span { position: relative; display: block; height: 100px; border: 1px solid #5da8bd99; border-radius: 6px; overflow: hidden; background: #193145; }
 .card-design-mini:nth-child(2) > span { border-color: #ff708880; }
 .card-design-mini:nth-child(3) > span { border-color: #79dfb080; }
-.card-design-mini img { width: 100%; height: 66px; object-fit: cover; }
+.card-design-mini .card-design-art { width: 100%; height: 66px; object-fit: cover; }
 .card-design-mini b { display: block; height: 5px; margin: 5px; background: #9fb9cb66; border-radius: 2px; }
 .card-design-mini b:last-child { width: 62%; }
 .card-design-mini > small { height: 6px; border-radius: 2px; background: #304d64; }
@@ -21,7 +21,7 @@
 .preview-bars .card-design-mini { width: 51px; }
 .preview-bars .card-design-mini > i { transform: translateX(10px); }
 .preview-bars .card-design-mini > span { height: 120px; border-radius: 0; transform: skewX(-10deg); }
-.preview-bars .card-design-mini img { position: absolute; left: -15px; bottom: 0; width: 80px; height: 100px; object-fit: cover; transform: skewX(10deg); }
+.preview-bars .card-design-mini .card-design-art { position: absolute; left: -15px; bottom: 0; width: 80px; height: 100px; object-fit: cover; transform: skewX(10deg); }
 .preview-bars .card-design-mini b { position: absolute; top: 4px; right: 3px; width: 12px; height: 12px; border-radius: 50%; background: #e5f5ff; opacity: .8; }
 .preview-bars .card-design-mini b:last-child { top: 23px; right: auto; left: 3px; width: 12px; }
 .preview-bars .card-design-mini > small { transform: translateX(-10px); }
@@ -52,6 +52,7 @@
 .bar-card-figure img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 .bar-card-figure svg { display: block; width: 100%; height: 100%; }
 .bar-card-figure[data-fit="contain"] img { object-fit: contain; object-position: center; padding: 8px 22px 56px; }
+.bar-card.bar-game-tf2:not(.shape-card):not(.is-horizontal) .bar-card-figure { inset: 6px 18px 76px; }
 .bar-game-tf2 .bar-card-figure img, .bar-game-pvzgw2 .bar-card-figure img { padding: 8px 22px 76px; }
 .bar-game-fragpunk .bar-card-art { inset: 12px -6px 68px; }
 .bar-game-thefinals .bar-card-art { inset: 88px -12px 58px; }

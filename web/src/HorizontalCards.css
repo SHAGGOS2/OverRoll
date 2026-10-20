@@ -55,7 +55,7 @@
 .preview-horizontal .card-design-mini { position: relative; width: 100%; max-width: 170px; height: 41px; display: block; }
 .preview-horizontal .card-design-mini > i, .preview-horizontal .card-design-mini > small { display: none; }
 .preview-horizontal .card-design-mini > span { height: 41px; border-radius: 4px; }
-.preview-horizontal .card-design-mini img { position: absolute; top: 0; left: 0; width: 43%; height: 100%; object-fit: cover; }
+.preview-horizontal .card-design-mini .card-design-art { position: absolute; top: 0; left: 0; width: 43%; height: 100%; object-fit: cover; }
 .preview-horizontal .card-design-mini b { position: relative; margin-left: 48%; margin-top: 9px; width: 43%; height: 4px; }
 .preview-horizontal .card-design-mini b:last-child { width: 29%; margin-top: 5px; }
 .app .standard-game .hero-card:focus-within .card-shine,

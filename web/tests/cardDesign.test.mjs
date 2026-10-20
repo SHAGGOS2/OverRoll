@@ -7,6 +7,7 @@ import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { normalizeCardDesign, TELEPORT_SWAP_MS, TELEPORT_DURATION_MS } from '../src/cardDesign.ts'
 import { translateUiText } from '../src/uiLocalization.ts'
+import { tf2Artwork } from '../src/tf2Artwork.ts'
 import { teamImageLayout, exportTeamImage } from '../src/teamImage.ts'
 import { MAX_EXPORT_PIXELS } from '../src/imageExport.ts'
 
@@ -14,7 +15,7 @@ function load(file, react = React, window = {}) {
   const source = fs.readFileSync(new URL(`../src/${file}`, import.meta.url), 'utf8')
   const code = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React, target: ts.ScriptTarget.ES2023 } }).outputText
   const exports = {}
-  const dependencies = { react, './cardDesign': { TELEPORT_SWAP_MS, TELEPORT_DURATION_MS }, './uiLocalization': { translateUiText } }
+  const dependencies = { react, './tf2Artwork': { tf2Artwork }, './cardDesign': { TELEPORT_SWAP_MS, TELEPORT_DURATION_MS }, './uiLocalization': { translateUiText } }
   vm.runInNewContext(code, { exports, React, window, require: (name) => { assert(name in dependencies, name); return dependencies[name] } })
   return exports
 }
@@ -39,6 +40,8 @@ test('all five illustrated design choices remain selectable, labeled and transla
     radios[2].props.onChange(); assert.equal(changed, 'horizontal')
     for (const choice of radios) { choice.props.onChange(); assert.equal(changed, choice.props.value) }
     const html = renderToStaticMarkup(element)
+    assert.equal((html.match(/href="\/assets\/tf2\/renders\/scout.png"/g) ?? []).length, 4)
+    assert.equal((html.match(/src="\/assets\/tf2\/classes\/scout.jpg"/g) ?? []).length, 1)
     assert(html.includes(translateUiText(locale, 'Barras')))
     assert(html.includes(translateUiText(locale, 'Clásico')))
     if (!locale.startsWith('es-')) assert.notEqual(translateUiText(locale, 'Diseño de fichas'), 'Diseño de fichas')

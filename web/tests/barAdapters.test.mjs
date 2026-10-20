@@ -7,6 +7,7 @@ import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from '../src/uiLocalization.ts'
 import { barPortraitFit, TELEPORT_DURATION_MS, TELEPORT_SWAP_MS } from '../src/cardDesign.ts'
+import { tf2Artwork } from '../src/tf2Artwork.ts'
 import { fragpunkPortraitFrames } from '../src/portraitFrames.ts'
 import { pvzCharacters, pvzSideColors, pvzSideSingular } from '../src/pvzCatalog.ts'
 
@@ -39,7 +40,7 @@ function branch(file, owner) {
 const controls = ['reroll', 'rerollTf2', 'toggleLock', 'toggleTf2Lock', 'openFilter', 'openTf2Filter', 'openDetails', 'setPlayerSide', 'setFilterIndex', 'setFilterSearch', 'setFilterRole', 'setDetailsIndex', 'playModuleSound']
 function render(file, owner, globals) {
   const actions = [], context = {
-    React, BarCard, localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName, barPortraitFit, fragpunkPortraitFrames,
+    React, BarCard, tf2Artwork, localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName, barPortraitFit, fragpunkPortraitFrames,
     cardDesign: 'bars', barMotion: false, locale: 'en-us', activeLocale: 'en-us', index: 0,
     player: { id: 'p1', name: 'Javo', blocked: ['blocked'], side: 'plants' }, pick: { locked: false, perks: [] },
     assignedProfile: { name: 'Main' }, profile: { name: 'Main' }, generationRevision: 1, tf2GenerationRevision: 1,
@@ -63,7 +64,7 @@ test('Overwatch, TF2 and GW2 bar adapters retain localized content and their dis
   assert(ow.html.includes('Angelic Resurrection')); assert.equal(buttons(ow.element.props.actions).length, 4)
   buttons(ow.element.props.actions)[0].props.onClick(); assert.equal(ow.actions[0][0], 'reroll')
   const tf2 = render('App.tsx', 'renderTf2Principal', { cardDesign: design, mercenary: { key: 'tf2-medic', name: 'Medic', group: 'support', portrait: 'assets/tf2/classes/medic.jpg' } })
-  assert.equal(tf2.element.props.fit, 'contain'); assert(tf2.html.includes('/assets/tf2/icons/medic.png')); assert.equal(buttons(tf2.element.props.actions).length, 3)
+  assert.equal(tf2.element.props.portrait, '/' + tf2Artwork['tf2-medic'].portrait); assert.deepEqual(tf2.element.props.frame, tf2Artwork['tf2-medic'].frame); assert.equal(tf2.element.props.fit, 'contain'); assert(tf2.html.includes('/assets/tf2/icons/medic.png')); assert.equal(buttons(tf2.element.props.actions).length, 3)
   buttons(tf2.element.props.actions)[0].props.onClick(); assert.equal(tf2.actions[0][0], 'rerollTf2')
   const character = pvzCharacters.find((item) => item.isVariant)
   const pvz = render('PvzModule.tsx', 'renderPrincipal', { cardDesign: design, character, pvzSideColors, pvzSideSingular, sideSwitchEnabled: true })

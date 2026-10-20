@@ -112,14 +112,14 @@
 .card-design-preview.preview-orbit { align-items: center; }
 .preview-orbit .card-design-mini { position: relative; gap: 6px; }
 .preview-orbit .card-design-mini > span { height: 56px; border-radius: 50%; overflow: visible; border: 1px dashed #8ccbe2; background: transparent; }
-.preview-orbit .card-design-mini img { display: block; width: 46px; height: 46px; margin: 4px auto 0; border-radius: 50%; }
+.preview-orbit .card-design-mini .card-design-art { display: block; width: 46px; height: 46px; margin: 4px auto 0; border-radius: 50%; }
 .preview-orbit .card-design-mini b { position: relative; z-index: 2; margin: -2px auto 0; width: 90%; height: 7px; background: #234055; border: 1px solid #8ccbe277; }
 .preview-orbit .card-design-mini b:last-child { width: 74%; height: 6px; margin-top: 4px; border-radius: 8px; }
 .preview-orbit .card-design-mini > i { order: 2; margin: 22px auto 0; height: 3px; }
 .preview-orbit .card-design-mini > small { order: 3; width: 70%; margin: 0 auto; border-radius: 50%; }
 .card-design-preview.preview-hex { gap: 5px; }
 .preview-hex .card-design-mini > span { height: 105px; border-radius: 0; border: 0; clip-path: polygon(50% 0, 100% 18%, 100% 82%, 50% 100%, 0 82%, 0 18%); background: #54778c; padding: 2px; }
-.preview-hex .card-design-mini img { height: 100%; clip-path: polygon(50% 0, 100% 18%, 100% 82%, 50% 100%, 0 82%, 0 18%); }
+.preview-hex .card-design-mini .card-design-art { height: 100%; clip-path: polygon(50% 0, 100% 18%, 100% 82%, 50% 100%, 0 82%, 0 18%); }
 .preview-hex .card-design-mini b { position: relative; width: 72%; margin: -33px 0 0 8px; background: #dbefff; height: 6px; }
 .preview-hex .card-design-mini b:last-child { width: 46%; margin-top: 6px; background: #8ccbe2; height: 4px; }
 .preview-hex .card-design-mini > i { order: 2; width: 85%; height: 8px; margin-top: 2px; border-radius: 0; background: #56798d; transform: skewX(-15deg); }

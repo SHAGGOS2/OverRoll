@@ -11,6 +11,7 @@ import CardDesignOptions from './CardDesignOptions'
 import PageThemeOptions, { ThemeBackdrop } from './PageThemeOptions'
 import { normalizePageTheme, type PageTheme } from './pageTheme'
 import BarCard from './BarCard'
+import { tf2Artwork } from './tf2Artwork'
 import { normalizeCardDesign, TELEPORT_DURATION_MS, type CardDesign } from './cardDesign'
 import {
   useEffect,
@@ -965,7 +966,8 @@ function App() {
 
   useEffect(() => {
     warmImageCache(tf2Classes.map((item) => asset(item.portrait)), 9)
-  }, [baseUrl])
+    if (activeGame === 'tf2' && cardDesign !== 'classic') warmImageCache(Object.values(tf2Artwork).map((item) => asset(item.portrait)), 3)
+  }, [baseUrl, activeGame, cardDesign])
 
   useEffect(() => {
     const soundPaths: Record<SoundKey, string> = {
@@ -1407,7 +1409,8 @@ function App() {
   async function generateTf2TeamImage() {
     await saveImage({ title: 'Team Fortress 2', accent: '#e8a45b', filename: 'overroll-tf2-equipo', design: cardDesign, cards: tf2Players.map((player, index) => {
       const pick = tf2Picks[index], hero = pick?.mercenary
-      return { player: player.name, name: hero?.name ?? 'Sin selección', role: hero ? tf2GroupLabels[hero.group] : 'Mercenario', color: hero ? tf2GroupColors[hero.group] : '#b9a18b', portrait: hero ? asset(hero.portrait) : undefined, fit: cardDesign !== 'classic' ? 'contain' as const : 'cover' as const, icon: hero ? asset('assets/tf2/icons/' + hero.key.replace(/^tf2-/, '') + '.png') : undefined, locked: pick?.locked }
+      const artwork = hero && cardDesign !== 'classic' ? tf2Artwork[hero.key] : undefined
+      return { player: player.name, name: hero?.name ?? 'Sin selección', role: hero ? tf2GroupLabels[hero.group] : 'Mercenario', color: hero ? tf2GroupColors[hero.group] : '#b9a18b', portrait: hero ? asset(artwork?.portrait ?? hero.portrait) : undefined, frame: artwork?.frame, fit: cardDesign !== 'classic' ? 'contain' as const : 'cover' as const, icon: hero ? asset('assets/tf2/icons/' + hero.key.replace(/^tf2-/, '') + '.png') : undefined, locked: pick?.locked }
     }) })
   }
 
@@ -1875,17 +1878,20 @@ function App() {
                 const mercenary = pick?.mercenary
                 const profile = profiles.find((item) => item.id === player.profileId)
                 const generationClass = tf2GenerationRevision % 2 === 0 ? 'generation-a' : 'generation-b'
-                if (cardDesign !== 'classic') return <BarCard design={cardDesign} key={player.id} gameId="tf2" index={index}
+                if (cardDesign !== 'classic') {
+                  const artwork = mercenary ? tf2Artwork[mercenary.key] : undefined
+                  return <BarCard design={cardDesign} key={player.id} gameId="tf2" index={index}
                   player={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name || localizedPlayerName(activeLocale, index + 1)}
                   name={translateGameText('tf2', activeLocale, mercenary?.name ?? 'Sin selección')} role={translateGameText('tf2', activeLocale, mercenary ? tf2GroupLabels[mercenary.group] : 'Mercenario')}
                   accent={mercenary ? tf2GroupColors[mercenary.group] : '#e8a45b'} roleIcon={mercenary ? asset('assets/tf2/icons/' + mercenary.key.replace(/^tf2-/, '') + '.png') : undefined}
-                  portrait={mercenary ? asset(mercenary.portrait) : ''} fit="contain" rolesOnly={false} locked={Boolean(pick?.locked)} profile={profile?.name} blocked={player.blocked.length}
+                  portrait={mercenary ? asset(artwork?.portrait ?? mercenary.portrait) : ''} frame={artwork?.frame} fit="contain" rolesOnly={false} locked={Boolean(pick?.locked)} profile={profile?.name} blocked={player.blocked.length}
                   perks={[]} revision={tf2GenerationRevision} motion={barMotion} locale={activeLocale}
                   actions={localizeUi(activeLocale, <>
                     <button type="button" onClick={() => rerollTf2(index)} disabled={!mercenary || pick?.locked || tf2Generating || tf2RerollingIndex !== null} aria-label="Cambiar clase" data-tooltip="Cambiar clase"><Icon name="reroll" size={18} /></button>
                     <button type="button" onClick={() => openTf2Filter(index)} className={player.blocked.length > 0 ? 'active-filter' : ''} aria-label={`Filtro de ${player.name}`} data-tooltip="Filtro"><Icon name="filter" size={18} /></button>
                     <button type="button" onClick={() => toggleTf2Lock(index)} disabled={!mercenary || tf2Generating || tf2RerollingIndex !== null} className={pick?.locked ? 'active-lock' : ''} aria-label={pick?.locked ? `Liberar ${mercenary?.name}` : `Fijar ${mercenary?.name}`} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
                   </>, 'tf2')} />
+                }
                 return (
                   <article className={`hero-card tf2-card ${mercenary?.group ?? ''} ${generationClass} ${pick?.locked ? 'is-locked' : ''} ${tf2RerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--delay': `${index * 45}ms`, '--tf2-accent': mercenary ? tf2GroupColors[mercenary.group] : '#e8a45b' } as CSSProperties} key={player.id}>
                     <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />

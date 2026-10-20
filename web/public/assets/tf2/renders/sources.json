@@ -1,0 +1,95 @@
+{
+  "source": "Official Team Fortress Wiki",
+  "assets": [
+    {
+      "class": "Scout",
+      "sourcePage": "https://wiki.teamfortress.com/wiki/File:Scout.png",
+      "sourceImage": "https://wiki.teamfortress.com/w/images/6/69/Scout.png",
+      "copyright": "Valve Corporation",
+      "sha256": "9b8cdff64cd5749946ead59d7b333eae4e10e7e0562fea57059bccb5b2070772",
+      "width": 764,
+      "height": 764,
+      "bytes": 211425
+    },
+    {
+      "class": "Soldier",
+      "sourcePage": "https://wiki.teamfortress.com/wiki/File:Soldier.png",
+      "sourceImage": "https://wiki.teamfortress.com/w/images/7/7b/Soldier.png",
+      "copyright": "Valve Corporation",
+      "sha256": "6ccd25a6e819ac8e3b023494d0b6292e201217684f47d818d57763019268471d",
+      "width": 766,
+      "height": 766,
+      "bytes": 250448
+    },
+    {
+      "class": "Pyro",
+      "sourcePage": "https://wiki.teamfortress.com/wiki/File:Pyro.png",
+      "sourceImage": "https://wiki.teamfortress.com/w/images/c/c8/Pyro.png",
+      "copyright": "Valve Corporation",
+      "sha256": "0409ff4d7ede03bfecb25b6125cc59dd2f5f228814e756d044dccd6b25578aa8",
+      "width": 764,
+      "height": 764,
+      "bytes": 259227
+    },
+    {
+      "class": "Demoman",
+      "sourcePage": "https://wiki.teamfortress.com/wiki/File:Demoman.png",
+      "sourceImage": "https://wiki.teamfortress.com/w/images/f/fd/Demoman.png",
+      "copyright": "Valve Corporation",
+      "sha256": "cc8c3b7e914f5e7a77b99f3c19ccd74d33c23b411fc5bdd29c434efd5b3a3ade",
+      "width": 764,
+      "height": 764,
+      "bytes": 238917
+    },
+    {
+      "class": "Heavy",
+      "sourcePage": "https://wiki.teamfortress.com/wiki/File:Heavy.png",
+      "sourceImage": "https://wiki.teamfortress.com/w/images/0/08/Heavy.png",
+      "copyright": "Valve Corporation",
+      "sha256": "3bbe47a520021d19d5b7083e1546b3ba349a55c22b5a97408b55cfe6296a5b5e",
+      "width": 764,
+      "height": 764,
+      "bytes": 369662
+    },
+    {
+      "class": "Engineer",
+      "sourcePage": "https://wiki.teamfortress.com/wiki/File:Engineer.png",
+      "sourceImage": "https://wiki.teamfortress.com/w/images/d/d8/Engineer.png",
+      "copyright": "Valve Corporation",
+      "sha256": "583ecb205d96df7d340ae5c3bca35416a4552f1b5e55763ff767f1dbf0cf8794",
+      "width": 764,
+      "height": 764,
+      "bytes": 254366
+    },
+    {
+      "class": "Medic",
+      "sourcePage": "https://wiki.teamfortress.com/wiki/File:Medic.png",
+      "sourceImage": "https://wiki.teamfortress.com/w/images/2/26/Medic.png",
+      "copyright": "Valve Corporation",
+      "sha256": "6117513b32b22dcecb06e9de713b254f1837d5db7055dd4a5acef0eb8ceddcad",
+      "width": 765,
+      "height": 765,
+      "bytes": 230388
+    },
+    {
+      "class": "Sniper",
+      "sourcePage": "https://wiki.teamfortress.com/wiki/File:Sniper.png",
+      "sourceImage": "https://wiki.teamfortress.com/w/images/8/8f/Sniper.png",
+      "copyright": "Valve Corporation",
+      "sha256": "820e1f9fe8bba99cc8f90bf1e647f9491fcf9d4a12f3f9562c6ab3b445b4c200",
+      "width": 764,
+      "height": 764,
+      "bytes": 188241
+    },
+    {
+      "class": "Spy",
+      "sourcePage": "https://wiki.teamfortress.com/wiki/File:Spy.png",
+      "sourceImage": "https://wiki.teamfortress.com/w/images/3/36/Spy.png",
+      "copyright": "Valve Corporation",
+      "sha256": "5d38ae53856336c85ad11d7fe0589db9b4a7e38ce088eec87ecf1e07516b463a",
+      "width": 765,
+      "height": 765,
+      "bytes": 179848
+    }
+  ]
+}
