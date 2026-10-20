@@ -557,7 +557,7 @@ export default function PvzModule({
 
         <section className="content pvz-content">
           <div className="content-topline pvz-topline"><div className="game-identity"><div className="game-title-row"><h1>PVZ Garden Warfare 2</h1></div></div><div className="topline-actions"><button type="button" className="generate-image-button pvz-image-button" onClick={generateImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.character)}><PvzIcon name="download" size={17} /> Generar imagen</button><div className="match-summary pvz-summary"><div><small>Plantas</small><strong>{plantCount}</strong></div><div><small>Zombis</small><strong>{zombieCount}</strong></div><div><small>Fijados</small><strong>{lockedCount}</strong></div></div></div></div>
-          <div className="team-stage pvz-stage"><div className="stage-grid" /><div className={`pvz-team-grid cards-${players.length}`}>
+          <div className="team-stage pvz-stage"><div className="stage-grid" /><div className={`pvz-team-grid cards-${players.length}`} style={{ '--cards': players.length } as CSSProperties}>
             {players.map((player, index) => {
               const pick = picks[index]
               const character = pick?.character
