@@ -32,11 +32,11 @@ function functionsFrom(file, names, globals = {}) {
   })
 }
 
-test('names preserve letters, accents and digits, and reject separators and symbols', () => {
+test('names preserve letters, accents, digits and ordinary spaces while rejecting symbols', () => {
   for (const [input, expected] of [
     ['Javo123', 'Javo123'], ['JoséÑ9', 'JoséÑ9'], ['Jose\u0301', 'José'],
-    ['  Juan Pérez-42_!🎮 ', 'JuanPérez42'], ['玩家７', '玩家７'],
-    ['A\u202EB\u200BC\n1', 'ABC1'], ['😀 <> " \' / = &', ''],
+    ['  Juan Pérez-42_!🎮 ', 'Juan Pérez42 '], ['玩家７', '玩家７'],
+    ['A\u202EB\u200BC\n1', 'ABC1'], ['Ana   María 42', 'Ana María 42'], ['Ana\u00a0María', 'AnaMaría'], ['😀 <> " \' / = &', ''],
   ]) assert.equal(sanitizePersonName(input), expected)
   const astralLetters = '𐐀'.repeat(30)
   assert.equal(Array.from(sanitizePersonName(astralLetters)).length, 22)
@@ -81,6 +81,10 @@ for (const [label, file, helpers, normalize, update, assign, setter] of modules)
     handlers[update](0, payload)
     assert.equal(players[0].name, sanitizePersonName(payload))
     assert.equal(players[1].name, 'Other2')
+    handlers[update](0, 'Ana ')
+    assert.equal(players[0].name, 'Ana ')
+    handlers[update](0, 'Ana María 42!')
+    assert.equal(players[0].name, 'Ana María 42')
     handlers[assign](0, 'profile1')
     assert.equal(players[0].profileId, 'profile1')
     assert.equal(players[0].name, sanitizePersonName(payload))

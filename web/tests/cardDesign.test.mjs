@@ -24,19 +24,20 @@ function elements(node) {
 
 test('stored design defaults to the existing cards and accepts only the supported alternative', () => {
   for (const value of [undefined, null, {}, [], true, 'rivals', '<script>', 'classic']) assert.equal(normalizeCardDesign(value), 'classic')
-  assert.equal(normalizeCardDesign(JSON.parse(JSON.stringify('bars'))), 'bars'); assert.equal(normalizeCardDesign('horizontal'), 'horizontal')
+  assert.equal(normalizeCardDesign(JSON.parse(JSON.stringify('bars'))), 'bars'); assert.equal(normalizeCardDesign('horizontal'), 'horizontal'); assert.equal(normalizeCardDesign('hex'), 'hex'); assert.equal(normalizeCardDesign('orbit'), 'orbit')
 })
 
-test('both illustrated design choices remain selectable, labeled and translated in all nine locales', () => {
+test('all five illustrated design choices remain selectable, labeled and translated in all nine locales', () => {
   const Options = load('CardDesignOptions.tsx').default
   for (const locale of ['es-mx', 'es-es', 'en-us', 'de-de', 'fr-fr', 'pt-br', 'ja-jp', 'ko-kr', 'zh-cn']) {
     let changed
     const element = Options({ value: 'classic', onChange: (value) => { changed = value }, locale, asset: (path) => '/' + path })
     const radios = elements(element).filter((el) => el.type === 'input')
-    assert.equal(radios.length, 3); assert.equal(radios.filter((el) => el.props.checked).length, 1)
+    assert.equal(radios.length, 5); assert.equal(radios.filter((el) => el.props.checked).length, 1)
     assert.equal(radios[0].props.value, 'classic'); assert.equal(radios[1].props.value, 'bars'); assert.equal(radios[2].props.value, 'horizontal')
     radios[1].props.onChange(); assert.equal(changed, 'bars')
     radios[2].props.onChange(); assert.equal(changed, 'horizontal')
+    for (const choice of radios) { choice.props.onChange(); assert.equal(changed, choice.props.value) }
     const html = renderToStaticMarkup(element)
     assert(html.includes(translateUiText(locale, 'Barras')))
     assert(html.includes(translateUiText(locale, 'Clásico')))
@@ -107,6 +108,19 @@ test('locked or motion-disabled cards update immediately, and interrupted telepo
   view.unmount(); assert.equal(view.pending, 0)
 })
 
+test('slide, orbit and flip transitions retain the outgoing portrait until the swap and respect motion settings', () => {
+  for (const motionStyle of ['slide', 'orbit', 'flip']) {
+    const view = portraitHarness(); view.render({ motionStyle }); view.advance(TELEPORT_DURATION_MS)
+    const departing = view.render({ src: '/assets/new.png', revision: 1 })
+    assert.equal(departing.props['data-motion'], motionStyle)
+    assert.equal(departing.props['data-phase'], 'out'); assert.equal(imageSource(departing), '/assets/old.png')
+    assert.equal(imageSource(view.advance(TELEPORT_SWAP_MS)), '/assets/new.png')
+    const disabled = view.render({ enabled: false, src: '/assets/third.png', revision: 2 })
+    assert.equal(disabled.props['data-phase'], 'idle'); assert.equal(imageSource(disabled), '/assets/third.png')
+    assert.equal(view.pending, 0)
+  }
+})
+
 test('bar cards retain accessible actions, profile, role, translated perks and Stadium powers', () => {
   const Bar = load('BarCard.tsx').default
   const base = { player: 'Javo', index: 0, name: 'Mercy', role: 'Support', roleId: 'support', roleIcon: '/assets/roles/support.png', portrait: '/assets/heroes/mercy.webp', rolesOnly: false, locked: true, blocked: 2, profile: 'Main', revision: 0, motion: false, locale: 'en-us', actions: ['Reroll', 'Filter', 'Details', 'Unlock'].map((label) => React.createElement('button', { key: label, 'aria-label': label }, label)) }
@@ -135,10 +149,20 @@ test('bar exports fit all squads, power counts and Deadlock candidates in one ro
 test('horizontal exports fit twelve players, full loadouts and three candidates without exceeding raster limits', () => {
   for (let count = 1; count <= 12; count++) for (let details = 0; details <= 8; details++) for (const alternatives of [false, true]) {
     const box = teamImageLayout(count, details, alternatives, 'horizontal')
-    assert.equal(box.columns, Math.min(2, count))
+    assert.equal(box.columns, Math.min(3, count))
     assert(box.width * box.height <= MAX_EXPORT_PIXELS)
     assert(222 + (box.rows - 1) * (box.cardHeight + 24) + box.cardHeight < box.height - 30)
-    assert(142 + Math.max(0, details - 1) * 36 + 25 < box.cardHeight)
+    assert((142 + Math.max(0, details - 1) * 36 + 25) * (box.cardWidth / 720) < box.cardHeight)
+  }
+})
+
+test('orbit and hexagon exports fit all twelve players, full loadouts and candidate portraits within PNG limits', () => {
+  for (const design of ['orbit', 'hex']) for (let count = 1; count <= 12; count++) for (let details = 0; details <= 8; details++) for (const alternatives of [false, true]) {
+    const box = teamImageLayout(count, details, alternatives, design)
+    assert(box.width * box.height < MAX_EXPORT_PIXELS)
+    assert.equal(box.columns, Math.min(3, count))
+    assert(222 + box.rows * box.cardHeight + (box.rows - 1) * 24 < box.height - 30)
+    if (!alternatives && details) assert(346 + (details - 1) * 38 + 26 < box.cardHeight)
   }
 })
 
@@ -162,7 +186,7 @@ test('bar export draws the selected team to a PNG through the existing safe asse
   t.mock.method(URL, 'createObjectURL', () => 'blob:png')
   t.mock.method(URL, 'revokeObjectURL', () => {})
   t.after(() => Object.assign(globalThis, old))
-  for (const design of ['bars', 'horizontal']) for (const count of [1, 6, 12]) {
+  for (const design of ['bars', 'horizontal', 'hex', 'orbit']) for (const count of [1, 6, 12]) {
     const cards = Array.from({ length: count }, (_, i) => ({ player: `Jugador${i + 1}`, name: 'Mercy', role: 'Support', color: '#55e4ad', portrait: '/assets/heroes/mercy.webp', icon: '/assets/roles/support.png', locked: i === 0, details: [{ label: 'Angelic Resurrection', image: '/assets/perks/mercy_minor_01_angelic-resurrection.webp' }], alternatives: count === 12 ? [{ label: '2 · Abrams', image: '/assets/games/deadlock/abrams.png' }, { label: '3 · Bebop', image: '/assets/games/deadlock/bebop.png' }] : [] }))
     const result = await exportTeamImage({ title: 'Overwatch', accent: '#ffc84a', filename: 'bar-cards', design, cards })
     assert.equal(result.missingImages, 0)
@@ -171,5 +195,5 @@ test('bar export draws the selected team to a PNG through the existing safe asse
     if (count === 12) { assert(labels.includes('2 · Abrams')); assert(labels.includes('3 · Bebop')) }
   }
   assert(loads.every((url) => url.startsWith('https://over-roll.com/assets/')))
-  assert.deepEqual(downloads, Array(6).fill('bar-cards.png')); assert(polygons.length > 0)
+  assert.deepEqual(downloads, Array(12).fill('bar-cards.png')); assert(polygons.length > 0)
 })

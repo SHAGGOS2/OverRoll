@@ -34,7 +34,7 @@ function assertLocal(options) {
 }
 
 test('all eleven game adapters and OW role-only mode export valid local resources', async () => {
-  for (const cardDesign of ['classic', 'bars', 'horizontal']) {
+  for (const cardDesign of ['classic', 'bars', 'horizontal', 'hex', 'orbit']) {
   const players = [{ name: 'Javo', roles: {}, side: 'plants' }], asset = (path) => path, saveImage = (options) => { assertLocal(options); assert.equal(options.design, cardDesign) }
   const heroes = read('data/heroes.json').heroes
   await run('App.tsx', 'generateTeamImage', { variables: ['roleLabels'] }, { saveImage, perkText: (_hero, perk) => perk, asset, players, picks: [{ hero: heroes[0], role: heroes[0].role, perks: [...heroes[0].minorPerks, ...heroes[0].majorPerks].slice(0, 2) }], cardDesign, rolesOnly: false, stadium: false })

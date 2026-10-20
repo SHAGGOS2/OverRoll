@@ -36,6 +36,7 @@ import './GamePicker.css'
 import './BarCards.css'
 import './PageThemes.css'
 import './HorizontalCards.css'
+import './PortraitCards.css'
 import { warmImageCache } from './imageCache'
 import { creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
 import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
@@ -1868,7 +1869,7 @@ function App() {
           </div>
           <div className="team-stage tf2-stage">
             <div className="stage-grid" />
-            <div className={`team-grid tf2-team-grid cards-${tf2Players.length}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : ''}` : ''}`} style={{ '--cards': tf2Players.length } as CSSProperties}>
+            <div className={`team-grid tf2-team-grid cards-${tf2Players.length}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': tf2Players.length } as CSSProperties}>
               {tf2Players.map((player, index) => {
                 const pick = tf2Picks[index]
                 const mercenary = pick?.mercenary
@@ -2035,7 +2036,7 @@ function App() {
           ) : (
             <div className="team-stage">
               <div className="stage-grid" />
-              <div className={`team-grid cards-${players.length}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
+              <div className={`team-grid cards-${players.length}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
                 {players.map((player, index) => {
                   const pick = picks[index]
                   const hero = pick?.hero
@@ -2436,7 +2437,7 @@ function App() {
               </footer>
             </>}
             {settingsTab === 'card-design' && <CardDesignOptions value={cardDesign} locale={activeLocale} asset={asset} onChange={(value) => { setCardDesign(value); playSound('click') }} />}
-            {settingsTab === 'page-design' && <PageThemeOptions value={pageTheme} locale={activeLocale} onChange={(value) => { setPageTheme(value); playSound('click') }} />}
+            {settingsTab === 'page-design' && <PageThemeOptions asset={asset} value={pageTheme} locale={activeLocale} onChange={(value) => { setPageTheme(value); playSound('click') }} />}
             {settingsTab === 'audio' && <>
               <div className="preferences-rows">
                 {switchRow('Sonidos', soundEnabled, () => toggleSounds(), false, false)}
@@ -2485,7 +2486,7 @@ function App() {
   return localizeUi(activeLocale,
     <div className={`app view-${activeView} ${animationsEnabled ? '' : 'reduce-motion'} ${compactPerks ? 'compact-perks' : ''} ${lowPowerMode ? 'low-power' : ''} ${mobileCompactMode ? 'mobile-compact' : ''}`}>
       <div className="ambient-grid" /><div className="ambient-orb orb-one" /><div className="ambient-orb orb-two" /><div className="noise-layer" />
-      <ThemeBackdrop theme={pageTheme} />
+      <ThemeBackdrop asset={asset} theme={pageTheme} />
 
       <AppHeader animationsEnabled={animationsEnabled && !lowPowerMode} onMenuToggle={(open) => playSound(open ? 'open' : 'close')} logoSrc={`${baseUrl}app_icon.png`} games={gameModules} activeGame={activeGame} activeView={activeView} locale={activeLocale} asset={asset} onGameChange={activateGame} onNavigate={navigate} onHover={hoverSound} />
 

@@ -1,0 +1,52 @@
+.app .workspace .team-grid.bar-cards.portrait-cards { padding: 6px 0 12px; gap: 12px; min-width: calc(var(--cards) * 140px + (var(--cards) - 1) * 12px); }
+.bar-card:is(.is-hex, .is-orbit) { --bar-shift: 0px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-player { padding-inline: 7px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-panel { height: 390px; transform: none; border-radius: 12px; }
+.bar-card:is(.is-hex, .is-orbit):not(.has-perks) .bar-card-panel { height: 300px; }
+.bar-card:is(.is-hex, .is-orbit):has(.bar-card-perks.is-stadium) .bar-card-panel { height: 470px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-art,
+.bar-card:is(.is-hex, .is-orbit).has-perks .bar-card-art { top: 12px; left: 50%; right: auto; bottom: auto; width: min(180px, calc(100% - 24px)); height: auto; aspect-ratio: 1; transform: translateX(-50%); mask-image: none; -webkit-mask-image: none; background: color-mix(in srgb, var(--role-color) 18%, #122233); }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-figure[data-fit="contain"] img { padding: 4px; }
+.bar-card.is-hex .bar-card-art { clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+.bar-card.is-hex .bar-card-figure { inset: 3px; clip-path: inherit; }
+.bar-card.is-orbit .bar-card-art { border: 2px solid var(--role-color); border-radius: 50%; box-shadow: 0 0 24px color-mix(in srgb, var(--role-color) 14%, transparent); }
+.bar-card.is-orbit .bar-card-art::after { content: ''; position: absolute; inset: -6px; border: 1px dashed color-mix(in srgb, var(--role-color) 45%, transparent); border-radius: 50%; pointer-events: none; }
+.bar-card.is-orbit .bar-card-figure { border-radius: 50%; overflow: hidden; }
+.bar-card.is-orbit .bar-card-grid { background-image: radial-gradient(#a4bddb22 1px, transparent 1px); background-size: 12px 12px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-info { top: 203px; bottom: auto; left: 10px; right: 10px; padding: 0; text-align: center; transform: none; background: none; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-info h2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: clamp(17px, 1.6vw, 22px); }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-info > div { justify-content: center; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-info > small { margin-top: 5px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-role-watermark { top: 158px; bottom: auto; right: 12px; width: 30px; height: 30px; transform: none; opacity: .6; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-perks { top: 286px; left: 10px; right: 10px; transform: none; gap: 6px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-perk:nth-child(even) { flex-direction: row; text-align: left; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-perk { gap: 6px; min-height: 34px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-perk > span { width: 26px; height: 26px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-perk img { width: 19px; height: 19px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-perks.is-stadium .bar-card-perk { min-height: 36px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-edge { bottom: 0; left: 30%; right: 30%; height: 2px; }
+.bar-card:is(.is-hex, .is-orbit).has-candidates .bar-card-panel { height: 430px; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-candidates { inset: 8px 6px 85px; transform: none; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-candidate { border-bottom: 0; background: none; }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-candidate .bar-card-figure { left: calc(50% - 42px); top: 0; bottom: 21px; right: auto; width: 84px; }
+.bar-card.is-orbit .bar-card-candidate .bar-card-figure { clip-path: circle(48%); }
+.bar-card.is-hex .bar-card-candidate .bar-card-figure { clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+.bar-card:is(.is-hex, .is-orbit) .bar-card-candidate .bar-card-figure img { padding: 0; }
+.bar-card:is(.is-hex, .is-orbit).has-candidates .bar-card-info { top: auto; bottom: 16px; }
+.bar-card-figure[data-motion="flip"][data-phase="out"] { animation-name: card-flip-out; }
+.bar-card-figure[data-motion="flip"][data-phase="in"] { animation-name: card-flip-in; }
+.bar-card-figure[data-motion="orbit"][data-phase="out"] { animation-name: card-orbit-out; }
+.bar-card-figure[data-motion="orbit"][data-phase="in"] { animation-name: card-orbit-in; }
+@keyframes card-flip-out { from { opacity: 1; transform: perspective(600px) rotateY(0); } to { opacity: 0; transform: perspective(600px) rotateY(85deg); } }
+@keyframes card-flip-in { from { opacity: 0; transform: perspective(600px) rotateY(-85deg); } to { opacity: 1; transform: perspective(600px) rotateY(0); } }
+@keyframes card-orbit-out { from { opacity: 1; transform: rotate(0) scale(1); } to { opacity: 0; transform: rotate(-18deg) scale(.72); } }
+@keyframes card-orbit-in { from { opacity: 0; transform: rotate(18deg) scale(.72); } to { opacity: 1; transform: rotate(0) scale(1); } }
+.card-design-preview:is(.preview-hex, .preview-orbit) .card-design-mini > span { height: 100px; padding-top: 4px; }
+.card-design-preview:is(.preview-hex, .preview-orbit) .card-design-mini img { display: block; width: 46px; height: 46px; margin: 0 auto 9px; }
+.preview-hex .card-design-mini img { clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); }
+.preview-orbit .card-design-mini img { border-radius: 50%; border: 1px solid #8ccbe2; }
+@media (max-width: 860px) {
+  .app .workspace .team-grid.bar-cards.portrait-cards, .app.mobile-compact .workspace .team-grid.bar-cards.portrait-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0; padding-inline: 0; }
+  .app .workspace .team-grid.bar-cards.portrait-cards.cards-1 { grid-template-columns: minmax(0, 1fr); max-width: 360px; }
+}
+@media (max-width: 400px) { .app .workspace .team-grid.bar-cards.portrait-cards, .app.mobile-compact .workspace .team-grid.bar-cards.portrait-cards { grid-template-columns: minmax(0, 1fr); max-width: 360px; } }

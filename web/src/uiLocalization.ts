@@ -379,7 +379,7 @@ export function localizedPlayerName(locale: SupportedLocale, index: number): str
 }
 
 export function isDefaultPlayerName(value: string, index: number): boolean {
-  const normalized = sanitizePersonName(value)
+  const normalized = sanitizePersonName(value).replace(/ /gu, '')
   return [
     `Jugador${index}`, `Player${index}`, `Spieler${index}`, `Joueur${index}`, `Jogador${index}`,
     `プレイヤー${index}`, `플레이어${index}`, `玩家${index}`,

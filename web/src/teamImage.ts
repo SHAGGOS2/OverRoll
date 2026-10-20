@@ -13,8 +13,13 @@ let exporting = false
 
 export function teamImageLayout(count: number, detailCount: number, alternatives: boolean, design: CardDesign = 'classic') {
   if (design === 'horizontal') {
-    const columns = Math.min(2, Math.max(1, count)), rows = Math.ceil(count / columns)
-    const cardWidth = 720, cardHeight = 280 + Math.max(0, Math.min(8, detailCount) - 2) * 36 + (alternatives ? 60 : 0)
+    const columns = Math.min(3, Math.max(1, count)), rows = Math.ceil(count / columns)
+    const cardWidth = 600, cardHeight = 240 + Math.max(0, Math.min(8, detailCount) - 2) * 32 + (alternatives ? 60 : 0)
+    return { columns, rows, cardWidth, cardHeight, width: 96 + columns * cardWidth + (columns - 1) * 24, height: 222 + rows * cardHeight + (rows - 1) * 24 + 80 }
+  }
+  if (design === 'hex' || design === 'orbit') {
+    const columns = Math.min(3, Math.max(1, count)), rows = Math.ceil(count / columns), cardWidth = 320
+    const cardHeight = 390 + Math.min(8, detailCount) * 38 + (alternatives ? 200 : 0)
     return { columns, rows, cardWidth, cardHeight, width: 96 + columns * cardWidth + (columns - 1) * 24, height: 222 + rows * cardHeight + (rows - 1) * 24 + 80 }
   }
   if (design === 'bars') {
@@ -72,7 +77,8 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
     text(options.subtitle ?? `${options.cards.length} ${options.cards.length === 1 ? 'jugador' : 'jugadores'}`, 48, 176, layout.width - 96, 16, '#a4b7cb', 500)
     if (options.design === 'horizontal') options.cards.forEach((card, index) => {
       const x = 48 + index % layout.columns * (layout.cardWidth + 24), y = 222 + Math.floor(index / layout.columns) * (layout.cardHeight + 24)
-      const w = layout.cardWidth, h = layout.cardHeight
+      const scale = layout.cardWidth / 720, w = 720, h = layout.cardHeight / scale
+      ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale); ctx.translate(-x, -y)
       ctx.fillStyle = '#101e2e'; ctx.beginPath(); ctx.roundRect(x, y, w, h, 16); ctx.fill()
       ctx.strokeStyle = card.locked ? '#ffcf6b' : card.color; ctx.lineWidth = card.locked ? 2 : 1; ctx.stroke()
       text(String(index + 1).padStart(2, '0'), x + 18, y + 29, 24, 13, card.color, 900)
@@ -96,6 +102,36 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
           ctx.fillStyle = '#1a2b3d'; ctx.beginPath(); ctx.roundRect(x + 292, dy - 6, 408, 31, 5); ctx.fill()
           picture(detail.image, x + 298, dy - 2, 23, 23, true)
           text(detail.label, x + (detail.image ? 332 : 302), dy + 15, detail.image ? 354 : 384, 12, '#edf5ff', 600)
+        })
+      }
+      ctx.restore()
+    })
+    else if (options.design === 'hex' || options.design === 'orbit') options.cards.forEach((card, index) => {
+      const x = 48 + index % layout.columns * (layout.cardWidth + 24), y = 222 + Math.floor(index / layout.columns) * (layout.cardHeight + 24)
+      ctx.fillStyle = '#101e2e'; ctx.beginPath(); ctx.roundRect(x, y, layout.cardWidth, layout.cardHeight, 14); ctx.fill()
+      ctx.strokeStyle = card.locked ? '#ffcf6b' : card.color; ctx.lineWidth = card.locked ? 2 : 1; ctx.stroke()
+      text(String(index + 1).padStart(2, '0'), x + 16, y + 29, 24, 13, card.color, 900)
+      text(card.player, x + 50, y + 29, 250, 17, '#f4f7fc', 750, 12)
+      const portrait = (src: string | undefined, px: number, py: number, size: number, frame?: PortraitFrame) => {
+        ctx.save(); ctx.beginPath()
+        if (options.design === 'orbit') ctx.arc(px + size / 2, py + size / 2, size / 2, 0, Math.PI * 2)
+        else { ctx.moveTo(px + size * .25, py); ctx.lineTo(px + size * .75, py); ctx.lineTo(px + size, py + size * .5); ctx.lineTo(px + size * .75, py + size); ctx.lineTo(px + size * .25, py + size); ctx.lineTo(px, py + size * .5); ctx.closePath() }
+        ctx.fillStyle = '#1a3044'; ctx.fill(); ctx.clip(); picture(src, px, py, size, size, card.fit === 'contain', frame); ctx.restore()
+      }
+      if (card.alternatives?.length) {
+        const candidates = [{ label: card.name, image: card.portrait }, ...card.alternatives.slice(0, 2)]
+        candidates.forEach((candidate, i) => { portrait(candidate.image, x + 105, y + 54 + i * 150, 110); text(candidate.label, x + 22, y + 184 + i * 150, 276, 14, '#edf5ff', 750, 10) })
+        text(card.role, x + 22, y + layout.cardHeight - 28, 276, 12, card.color)
+      } else {
+        portrait(card.portrait, x + 60, y + 52, 200, card.frame)
+        text(card.name.toUpperCase(), x + 20, y + 286, 280, 24, '#ffffff', 900, 15)
+        picture(card.icon, x + 20, y + 302, 19, 19, true)
+        text(card.role, x + (card.icon ? 47 : 20), y + 317, card.icon ? 253 : 280, 13, card.color)
+        ;(card.details ?? []).slice(0, 8).forEach((detail, i) => {
+          const dy = y + 346 + i * 38
+          ctx.fillStyle = '#1a2b3d'; ctx.beginPath(); ctx.roundRect(x + 16, dy - 8, 288, 32, 5); ctx.fill()
+          picture(detail.image, x + 22, dy - 4, 24, 24, true)
+          text(detail.label, x + (detail.image ? 55 : 24), dy + 13, detail.image ? 241 : 272, 12, '#edf5ff', 600, 10)
         })
       }
     })

@@ -1196,7 +1196,7 @@ export default function RosterModule({
           ) : (
             <div className="team-stage roster-team-stage">
               <div className="stage-grid" />
-              <div className={`team-grid cards-${players.length} ${players.length > 6 ? 'roster-many-cards' : ''} ${game.supportsLoadouts ? 'roster-finals-grid' : ''}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
+              <div className={`team-grid cards-${players.length} ${players.length > 6 ? 'roster-many-cards' : ''} ${game.supportsLoadouts ? 'roster-finals-grid' : ''}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
                 {players.map((player, index) => {
                   const pick = picks[index] ?? { hero: null, locked: false }
                   const deadlockCandidates = gameId === 'deadlock' ? rosterPickCandidates(pick) : []

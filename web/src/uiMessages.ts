@@ -1,6 +1,11 @@
 import type { SupportedLocale } from './localization'
 const locales = ['en-us', 'de-de', 'fr-fr', 'pt-br', 'ja-jp', 'ko-kr', 'zh-cn'] as const
 const rows: Record<string, string[]> = {
+ 'Nebulosa': ['Nebula','Nebel','Nébuleuse','Nebulosa','星雲','성운','星云'],
+ 'Abismo': ['Abyss','Abgrund','Abysse','Abismo','深海','심해','深海'],
+ 'Ascua': ['Ember','Glut','Braise','Brasa','残り火','불씨','余烬'],
+ 'Órbita': ['Orbit','Orbit','Orbite','Órbita','オービット','궤도','轨道'],
+ 'Hexágonos': ['Hexagons','Sechsecke','Hexagones','Hexágonos','六角形','육각형','六边形'],
  'Diseño de página': ['Page design','Seitendesign','Style de la page','Design da página','ページデザイン','페이지 디자인','页面设计'],
  'Rosa Tokki': ['Tokki pink','Tokki-Rosa','Rose Tokki','Rosa Tokki','トッキ・ピンク','토끼 핑크','托奇粉'],
  'Verde terminal': ['Terminal green','Terminal-Grün','Vert terminal','Verde terminal','ターミナル・グリーン','터미널 그린','终端绿'],
@@ -101,7 +106,7 @@ const rows: Record<string, string[]> = {
  'PERMITIDO': ['ALLOWED','ERLAUBT','AUTORISÉ','PERMITIDO','許可','허용','允许'],
  'BLOQUEADO': ['BLOCKED','GESPERRT','BLOQUÉ','BLOQUEADO','ブロック','차단','已屏蔽'],
  'BLOQUEADA': ['BLOCKED','GESPERRT','BLOQUÉE','BLOQUEADA','ブロック','차단','已屏蔽'],
- 'Solo letras y números, sin espacios ni símbolos.': ['Letters and numbers only, without spaces or symbols.','Nur Buchstaben und Zahlen, ohne Leerzeichen oder Symbole.','Lettres et chiffres uniquement, sans espaces ni symboles.','Apenas letras e números, sem espaços ou símbolos.','文字と数字のみ。スペースや記号は使用できません。','문자와 숫자만 사용하세요. 공백과 기호는 사용할 수 없습니다.','仅限字母和数字，不含空格或符号。'],
+ 'Solo letras, números y espacios. Sin símbolos.': ['Letters, numbers and spaces only. No symbols.','Nur Buchstaben, Zahlen und Leerzeichen. Keine Symbole.','Lettres, chiffres et espaces uniquement. Aucun symbole.','Apenas letras, números e espaços. Sem símbolos.','文字・数字・スペースのみ。記号は使用できません。','문자, 숫자, 공백만 사용하세요. 기호는 사용할 수 없습니다.','仅限字母、数字和空格，不含符号。'],
  'El nombre lo controla el perfil asignado.': ['The assigned profile sets the name.','Der Name wird vom zugewiesenen Profil festgelegt.','Le profil attribué définit le nom.','O perfil atribuído define o nome.','割り当てたプロフィールで名前を設定します。','할당된 프로필이 이름을 설정합니다.','名称由分配的档案设置。'],
  'Perfil creado': ['Profile created','Profil erstellt','Profil créé','Perfil criado','プロフィールを作成しました','프로필 생성 완료','档案已创建'],
  'Perfil duplicado': ['Profile duplicated','Profil dupliziert','Profil dupliqué','Perfil duplicado','プロフィールを複製しました','프로필 복제 완료','档案已复制'],

@@ -14,20 +14,20 @@ vm.runInNewContext(code, { exports, React, require: (name) => name === './pageTh
 const Options = exports.default
 const elements = (node) => React.isValidElement(node) ? [node, ...React.Children.toArray(node.props.children).flatMap(elements)] : []
 
-test('only the three approved page themes survive storage restoration; unknown values retain the original', () => {
+test('only the six approved page themes survive storage restoration; unknown values retain the original', () => {
   for (const value of [null, undefined, {}, [], 1, true, 'pink', '<script>', 'tokki" onload="x']) assert.equal(normalizePageTheme(value), 'default')
   for (const theme of pageThemes) assert.equal(normalizePageTheme(JSON.parse(JSON.stringify(theme.id))), theme.id)
 })
 
-test('three page designs and the original reset are labeled, selectable and translated in nine languages', () => {
+test('six page designs and the original reset are labeled, selectable and translated in nine languages', () => {
   for (const locale of ['es-mx', 'es-es', 'en-us', 'de-de', 'fr-fr', 'pt-br', 'ja-jp', 'ko-kr', 'zh-cn']) {
     const chosen = [], element = Options({ value: 'hacker', locale, onChange: (value) => chosen.push(value) })
     const controls = elements(element), radios = controls.filter((node) => node.type === 'input')
-    assert.equal(radios.length, 3); assert.equal(radios.filter((node) => node.props.checked).length, 1)
+    assert.equal(radios.length, 6); assert.equal(radios.filter((node) => node.props.checked).length, 1)
     assert.equal(radios.find((node) => node.props.checked).props.value, 'hacker')
     radios.forEach((node) => node.props.onChange())
     controls.find((node) => node.type === 'button').props.onClick()
-    assert.deepEqual(chosen, ['tokki', 'hacker', 'mono', 'default'])
+    assert.deepEqual(chosen, ['tokki', 'hacker', 'mono', 'nebula', 'ocean', 'ember', 'default'])
     const html = renderToStaticMarkup(element)
     for (const { label } of pageThemes) assert(html.includes(translateUiText(locale, label)))
     assert(html.includes(translateUiText(locale, 'Diseño original')))
@@ -38,11 +38,11 @@ test('three page designs and the original reset are labeled, selectable and tran
 
 test('Tokki and terminal decorations are hidden from assistive technology and introduce no interactive content', () => {
   assert.equal(exports.ThemeBackdrop({ theme: 'default' }), null)
-  for (const theme of ['tokki', 'hacker', 'mono']) {
+  for (const theme of pageThemes.map((item) => item.id)) {
     const decoration = exports.ThemeBackdrop({ theme })
     assert.equal(decoration.props['aria-hidden'], 'true')
     const html = renderToStaticMarkup(decoration)
     assert(!/<(?:button|input|a)\b|tabindex=/i.test(html))
-    if (theme === 'tokki') assert(html.includes('<svg'))
+    if (theme === 'tokki') assert(html.includes('/assets/themes/tokki-logo.png'))
   }
 })

@@ -57,7 +57,7 @@ function assertLocalResources(html) {
 }
 
 test('Overwatch, TF2 and GW2 bar adapters retain localized content and their distinct working controls', () => {
-  for (const design of ['bars', 'horizontal']) {
+  for (const design of ['bars', 'horizontal', 'hex', 'orbit']) {
   const hero = read('data/heroes.json').heroes.find((item) => item.key === 'mercy')
   const ow = render('App.tsx', 'renderPrincipal', { cardDesign: design, hero, visibleRole: hero.role, stadium: false, pick: { hero, locked: false, perks: hero.minorPerks.slice(0, 1) }, perkText: () => ({ name: 'Angelic Resurrection', description: 'Healing' }) })
   assert(ow.html.includes('Angelic Resurrection')); assert.equal(buttons(ow.element.props.actions).length, 4)
@@ -76,7 +76,7 @@ test('Overwatch, TF2 and GW2 bar adapters retain localized content and their dis
 
 test('all eight roster bar adapters preserve the correct icons, artwork, candidates, Team-Ups and builds', () => {
   const definitions = vm.runInNewContext(`${declarations('RosterModule.tsx', ['rosterGameDefinitions'])};rosterGameDefinitions`)
-  for (const design of ['bars', 'horizontal']) for (const game of definitions) {
+  for (const design of ['bars', 'horizontal', 'hex', 'orbit']) for (const game of definitions) {
     const catalog = read(`assets/games/${game.id}/catalog.json`).heroes.map((hero) => ({ ...hero, portrait: `assets/games/${game.id}/${hero.portrait.split('/').pop()}` }))
     const hero = catalog[0], role = game.roles.find((role) => role.id === hero.role), partner = catalog[1]
     const pick = { hero, locked: false, teamupKey: 'pair' }

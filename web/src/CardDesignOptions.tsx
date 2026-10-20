@@ -8,12 +8,12 @@ export default function CardDesignOptions({ value, onChange, locale, asset }: Pr
   const tr = (text: string) => translateUiText(locale, text)
   return <div className="card-design-options">
     <div className="card-design-choices">
-      {(['classic', 'bars', 'horizontal'] as const).map((design) => <label className={`card-design-choice ${value === design ? 'selected' : ''}`} key={design}>
+      {(['classic', 'bars', 'horizontal', 'orbit', 'hex'] as const).map((design) => <label className={`card-design-choice ${value === design ? 'selected' : ''}`} key={design}>
         <input type="radio" name="card-design" value={design} checked={value === design} onChange={() => onChange(design)} />
         <span className={`card-design-preview preview-${design}`} aria-hidden="true">
           {['assets/heroes/tracer.webp', 'assets/games/rivals/gorr-the-god-butcher.png', 'assets/tf2/classes/scout.jpg'].map((portrait) => <span className="card-design-mini" key={portrait}><i /><span><img src={asset(portrait)} alt="" /><b /><b /></span><small /></span>)}
         </span>
-        <span className="card-design-caption"><strong>{tr(design === 'classic' ? 'Clásico' : design === 'bars' ? 'Barras' : 'Horizontal')}</strong><span className="card-design-radio" aria-hidden="true" /></span>
+        <span className="card-design-caption"><strong>{tr(design === 'classic' ? 'Clásico' : design === 'bars' ? 'Barras' : design === 'horizontal' ? 'Horizontal' : design === 'orbit' ? 'Órbita' : 'Hexágonos')}</strong><span className="card-design-radio" aria-hidden="true" /></span>
       </label>)}
     </div>
   </div>
