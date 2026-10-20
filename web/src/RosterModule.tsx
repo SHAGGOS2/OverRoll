@@ -1,15 +1,16 @@
+import AnimatedLayer from './AnimatedLayer'
+import SharedRoulette from './SharedRoulette'
 import { useImageExport } from './useImageExport'
 import { safeAssetUrl } from './imageExport.ts'
 import {
   useEffect,
   useMemo,
-  useRef,
   useState,
   type CSSProperties,
 } from 'react'
 import { warmImageCache } from './imageCache'
 import type { SupportedLocale } from './localization'
-import { isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
+import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
 import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH } from './personName.ts'
 import './RosterModule.css'
@@ -409,15 +410,6 @@ function normalizePortrait(gameId: RosterGameId, portrait: string): string {
   return `assets/games/${gameId}/${filename}`
 }
 
-function expandCompleteCatalogSelection(selectedKeys: string[], catalogKeys: string[], previousCatalogKeys: string[]): string[] {
-  const available = new Set(catalogKeys)
-  const selected = new Set(selectedKeys.filter((key) => available.has(key)))
-  const previous = previousCatalogKeys.filter((key) => available.has(key))
-  return previous.length > 0 && previous.every((key) => selected.has(key))
-    ? [...available]
-    : [...selected]
-}
-
 function roleDefinition(game: RosterGameDefinition, roleId: string): RoleDefinition {
   return game.roles.find((role) => role.id === roleId) ?? {
     id: roleId,
@@ -454,44 +446,6 @@ function pickFinalsLoadout(raw: FinalsRawLoadouts | null, role: string): FinalsL
     gadgets.push(gadgetPool.splice(randomIndex(gadgetPool.length), 1)[0])
   }
   return { role, specialization, weapon, gadgets }
-}
-
-function normalizeDegrees(value: number) {
-  return ((value % 360) + 360) % 360
-}
-
-function roulettePoint(radius: number, degrees: number) {
-  const radians = (degrees * Math.PI) / 180
-  return { x: 200 + Math.cos(radians) * radius, y: 200 + Math.sin(radians) * radius }
-}
-
-function rouletteSectorPath(index: number, total: number) {
-  if (total <= 1) return 'M 200 16 A 184 184 0 1 1 199.9 16 Z'
-  const step = 360 / total
-  const start = -90 + index * step
-  const end = start + step
-  const first = roulettePoint(184, start)
-  const second = roulettePoint(184, end)
-  const largeArc = step > 180 ? 1 : 0
-  return `M 200 200 L ${first.x.toFixed(3)} ${first.y.toFixed(3)} A 184 184 0 ${largeArc} 1 ${second.x.toFixed(3)} ${second.y.toFixed(3)} Z`
-}
-
-function normalizeRosterSelection(raw: unknown): string[] {
-  return Array.isArray(raw) ? [...new Set(raw.filter((key): key is string => typeof key === 'string' && key.length <= 120))].slice(0, 500) : []
-}
-
-function normalizeRosterWeights(raw: unknown): Record<string, number> {
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {}
-  return Object.fromEntries(Object.entries(raw).slice(0, 500).filter(([key]) => key.length <= 120).map(([key, value]) => [key, typeof value === 'number' && Number.isFinite(value) ? Math.max(1, Math.min(5, Math.round(value))) : 1]))
-}
-
-function buildWeightedEntries(keys: string[], weights: Record<string, number>): string[] {
-  const entries: string[] = []
-  keys.forEach((key) => {
-    const weight = Math.max(1, Math.min(5, Math.round(weights[key] ?? 1)))
-    for (let index = 0; index < weight; index += 1) entries.push(key)
-  })
-  return entries
 }
 
 function rosterPickCandidates(pick: RosterPick | undefined): CatalogHero[] {
@@ -538,18 +492,8 @@ export default function RosterModule({
   const [filterIndex, setFilterIndex] = useState<number | null>(null)
   const [filterSearch, setFilterSearch] = useState('')
   const [filterRole, setFilterRole] = useState('all')
-  const [rouletteSearch, setRouletteSearch] = useState('')
-  const [rouletteRole, setRouletteRole] = useState('all')
-  const [rouletteSelected, setRouletteSelected] = useState<string[]>(() => normalizeRosterSelection(readStorage<unknown>(`${storagePrefix}.rouletteSelected`, [])))
-  const [rouletteWeights, setRouletteWeights] = useState<Record<string, number>>(() => normalizeRosterWeights(readStorage<unknown>(`${storagePrefix}.rouletteWeights`, {})))
-  const [rouletteEntries, setRouletteEntries] = useState<string[]>([])
-  const [rouletteDirty, setRouletteDirty] = useState(true)
-  const [rouletteWinner, setRouletteWinner] = useState('')
-  const [rouletteSpinning, setRouletteSpinning] = useState(false)
-  const [rouletteRotation, setRouletteRotation] = useState(0)
-  const spinTimerRef = useRef<number | null>(null)
 
-  const [imageExporting, saveImage] = useImageExport(notify)
+  const [imageExporting, saveImage] = useImageExport(notify, locale, gameId)
   const asset = (path: string) => safeAssetUrl(path, baseUrl)
 
   useEffect(() => {
@@ -574,21 +518,6 @@ export default function RosterModule({
         setCatalog(heroes)
         warmImageCache(heroes.map((hero) => asset(hero.portrait)))
         setStatus(`${heroes.length} ${game.catalogLabel.replace(/^\d+\s*/, '').toLowerCase()} listos`)
-        setRouletteSelected((current) => {
-          if (!current.length) return heroes.map((hero) => hero.key)
-          if (gameId === 'deadlock') {
-            // Weights retain every hero from the previously loaded catalog, even
-            // when only a custom subset is selected. After this load they include
-            // the new heroes too, so later exclusions stay excluded on reload.
-            return expandCompleteCatalogSelection(current, heroes.map((hero) => hero.key), Object.keys(rouletteWeights))
-          }
-          const valid = current.filter((key) => heroes.some((hero) => hero.key === key))
-          const missing = heroes.filter((hero) => !valid.includes(hero.key))
-          // Si el usuario tenía seleccionado el catálogo completo anterior, conserva
-          // ese comportamiento al llegar un único personaje nuevo.
-          return missing.length === 1 ? [...valid, missing[0].key] : valid
-        })
-        setRouletteWeights((current) => Object.fromEntries(heroes.map((hero) => [hero.key, current[hero.key] ?? 1])))
       })
       .catch(() => {
         if (cancelled) return
@@ -625,70 +554,19 @@ export default function RosterModule({
   }, [baseUrl, game.catalogLabel, game.name, game.roles, game.supportsLoadouts, game.supportsTeamups, gameId])
 
   useEffect(() => {
-    const timer = window.setTimeout(() => {
+    try {
       window.localStorage.setItem(`${storagePrefix}.players`, JSON.stringify(players))
       window.localStorage.setItem(`${storagePrefix}.avoidRepeated`, JSON.stringify(avoidRepeated))
       window.localStorage.setItem(`${storagePrefix}.balancedRoles`, JSON.stringify(balancedRoles))
       window.localStorage.setItem(`${storagePrefix}.priorityTeamups`, JSON.stringify(priorityTeamups))
-      window.localStorage.setItem(`${storagePrefix}.rouletteSelected`, JSON.stringify(rouletteSelected))
-      window.localStorage.setItem(`${storagePrefix}.rouletteWeights`, JSON.stringify(rouletteWeights))
-    }, 120)
-    return () => window.clearTimeout(timer)
-  }, [avoidRepeated, balancedRoles, players, priorityTeamups, rouletteSelected, rouletteWeights, storagePrefix])
-
-  useEffect(() => () => {
-    if (spinTimerRef.current !== null) window.clearTimeout(spinTimerRef.current)
-  }, [])
+    } catch { /* Storage may be blocked by browser preferences. */ }
+  }, [avoidRepeated, balancedRoles, players, priorityTeamups, storagePrefix])
 
   useEffect(() => {
     setPicks((current) => Array.from({ length: players.length }, (_, index) => current[index] ?? { hero: null, locked: false }))
   }, [players.length])
 
   const chosenKeys = useMemo(() => picks.flatMap((pick) => rosterPickCandidates(pick).map((hero) => hero.key)), [picks])
-
-  const filteredRouletteHeroes = useMemo(() => catalog.filter((hero) => {
-    const query = rouletteSearch.trim().toLowerCase()
-    return (!query || hero.name.toLowerCase().includes(query)) && (rouletteRole === 'all' || hero.role === rouletteRole)
-  }), [catalog, rouletteRole, rouletteSearch])
-
-  const roulettePool = useMemo(() => {
-    const selected = new Set(rouletteSelected)
-    return catalog.filter((hero) => selected.has(hero.key))
-  }, [catalog, rouletteSelected])
-
-  const rouletteTotalSlots = useMemo(() => buildWeightedEntries(rouletteSelected, rouletteWeights).length, [rouletteSelected, rouletteWeights])
-
-  const rouletteBuiltHeroes = useMemo(() => {
-    const byKey = new Map(catalog.map((hero) => [hero.key, hero]))
-    return rouletteEntries.map((key) => byKey.get(key)).filter((hero): hero is CatalogHero => Boolean(hero))
-  }, [catalog, rouletteEntries])
-
-  function rouletteWeight(heroKey: string) {
-    return Math.max(1, Math.min(5, Math.round(Number(rouletteWeights[heroKey] ?? 1))))
-  }
-
-  function rouletteProbability(heroKey: string) {
-    if (!rouletteSelected.includes(heroKey) || rouletteTotalSlots <= 0) return 0
-    return rouletteWeight(heroKey) * 100 / rouletteTotalSlots
-  }
-
-  function markRouletteDirty() {
-    setRouletteDirty(true)
-    setRouletteWinner('')
-  }
-
-  function buildRoulette(playAudio = true) {
-    if (rouletteSpinning || roulettePool.length === 0 || rouletteTotalSlots > 64) return [] as string[]
-    const entries = buildWeightedEntries(rouletteSelected, rouletteWeights)
-    if (entries.length === 1) entries.push(entries[0])
-    const shuffledEntries = shuffled(entries).slice(0, 64)
-    setRouletteEntries(shuffledEntries)
-    setRouletteRotation(0)
-    setRouletteWinner('')
-    setRouletteDirty(false)
-    if (playAudio) playModuleSound('generate', 700, 0.12)
-    return shuffledEntries
-  }
 
 
   function playTone(frequency = 520, duration = 0.08) {
@@ -1130,59 +1008,6 @@ export default function RosterModule({
     }))
   }
 
-  function toggleRouletteHero(heroKey: string) {
-    playModuleSound('click', 520)
-    setRouletteSelected((current) => current.includes(heroKey) ? current.filter((key) => key !== heroKey) : [...current, heroKey])
-    markRouletteDirty()
-  }
-
-  function changeRouletteWeight(heroKey: string, delta: number) {
-    playModuleSound('click', 520)
-    setRouletteWeights((current) => ({ ...current, [heroKey]: Math.max(1, Math.min(5, (current[heroKey] ?? 1) + delta)) }))
-    markRouletteDirty()
-  }
-
-  function spinRoulette() {
-    if (rouletteSpinning || roulettePool.length === 0) return
-    const needsBuild = rouletteDirty || rouletteEntries.length < 2
-    const entries = needsBuild ? buildRoulette(false) : rouletteEntries
-    if (entries.length < 2) return
-    const winnerIndex = randomIndex(entries.length)
-    const winnerKey = entries[winnerIndex]
-    const hero = catalog.find((item) => item.key === winnerKey)
-    const turns = animationsEnabled ? 5 + randomIndex(3) : 1
-    const segment = 360 / entries.length
-    const target = normalizeDegrees(-((winnerIndex + 0.5) * segment))
-
-    setRouletteSpinning(true)
-    setRouletteWinner('')
-
-    const startRotation = () => {
-      setRouletteRotation((current) => {
-        const delta = normalizeDegrees(target - normalizeDegrees(current))
-        return current + turns * 360 + delta
-      })
-      playModuleSound('generate', 740, 0.2)
-      if (spinTimerRef.current !== null) window.clearTimeout(spinTimerRef.current)
-      spinTimerRef.current = window.setTimeout(() => {
-        setRouletteSpinning(false)
-        setRouletteWinner(winnerKey)
-        notify(hero ? `${hero.name} ganó la ruleta de ${game.shortName}` : 'La ruleta eligió un ganador', 'success')
-        if (playConfirmTone) playConfirmTone()
-        else playTone(920, 0.24)
-      }, animationsEnabled ? 1900 : 20)
-    }
-
-    // Cuando la rueda se construye en este mismo clic, React todavía no la ha
-    // pintado en 0°. Dos frames permiten montarla primero y después iniciar
-    // la transición; así el primer giro se ve igual que los siguientes.
-    if (needsBuild) {
-      window.requestAnimationFrame(() => window.requestAnimationFrame(startRotation))
-    } else {
-      startRotation()
-    }
-  }
-
 
   async function generateTeamImage() {
     await saveImage({ title: game.name, subtitle: players.length + (players.length === 1 ? ' jugador' : ' jugadores'), accent: game.accent, filename: 'overroll-' + gameId + '-equipo', cards: players.flatMap((player, index) => {
@@ -1305,7 +1130,7 @@ export default function RosterModule({
                     <span className="number">{String(index + 1).padStart(2, '0')}</span>
                     <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre de ${game.name} ${index + 1}`} />
                     <select className="player-profile-inline" value={player.profileId} onChange={(event) => assignProfile(index, event.target.value)} title={profiles.find((item) => item.id === player.profileId)?.name ?? 'Sin perfil'} aria-label={`Perfil de ${game.name} ${index + 1}`}>
-                      <option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id}>{profile.name}</option>)}
+                      <option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id} translate="no">{profile.name}</option>)}
                     </select>
                     <button type="button" className={`roster-inline-filter ${player.blocked.length ? 'active-filter' : ''}`} onClick={() => { setFilterIndex(index); setFilterSearch(''); setFilterRole('all'); playModuleSound('filter', 560) }} title="Filtros individuales"><RosterIcon name="filter" size={14} />{player.blocked.length > 0 && <b>{player.blocked.length}</b>}</button>
                     {game.roles.length > 1 && <div className="player-role-choices" role="group" aria-label={`Roles permitidos de ${player.name}`}>
@@ -1379,7 +1204,7 @@ export default function RosterModule({
                   return (
                     <article className={`hero-card roster-unified-card ${game.supportsLoadouts ? 'roster-finals-card' : ''} ${generationClass} ${pick.locked ? 'is-locked' : ''} ${rerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--role-color': role?.color ?? game.accent, '--delay': `${index * 45}ms` } as CSSProperties} key={player.id}>
                       <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
-                      <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span>{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : (player.name || localizedPlayerName(locale, index + 1))}</span>{assignedProfile && <span className="profile-tag">{assignedProfile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick.locked && <span className="mini-lock"><RosterIcon name="lock" size={12} /></span>}</div>
+                      <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span translate="no">{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : (player.name || localizedPlayerName(locale, index + 1))}</span>{assignedProfile && <span className="profile-tag" translate="no">{assignedProfile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick.locked && <span className="mini-lock"><RosterIcon name="lock" size={12} /></span>}</div>
                       {gameId === 'deadlock' ? (
                         <div className="deadlock-candidate-grid" aria-label={`Tres candidatos de ${player.name}`}>
                           {Array.from({ length: 3 }, (_, candidateIndex) => {
@@ -1472,7 +1297,7 @@ export default function RosterModule({
                         <button type="button" onClick={() => { setDetailsIndex(index); playModuleSound('open', 590) }} disabled={!hero} data-tooltip="Detalles" aria-label={`Detalles de ${hero?.name ?? 'personaje'}`}><RosterIcon name="details" size={18} /></button>
                         <button type="button" onClick={() => toggleLock(index)} disabled={!hero} className={pick.locked ? 'active-lock' : ''} data-tooltip={pick.locked ? 'Liberar' : 'Fijar'} aria-label={gameId === 'deadlock' ? (pick.locked ? `Liberar candidatos de ${player.name}` : `Fijar candidatos de ${player.name}`) : pick.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><RosterIcon name={pick.locked ? 'unlock' : 'lock'} size={17} /></button>
                       </div>
-                      {assignedProfile && <div className="loadout"><div><small>Perfil</small><span>{assignedProfile.name}</span></div></div>}
+                      {assignedProfile && <div className="loadout"><div><small>Perfil</small><span translate="no">{assignedProfile.name}</span></div></div>}
                     </article>
                   )
                 })}
@@ -1490,21 +1315,19 @@ export default function RosterModule({
           </button>
         </ViewportAction>
 
-        {filterIndex !== null && players[filterIndex] && (
-          <div className="roster-modal-layer" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) setFilterIndex(null) }}>
+        <AnimatedLayer open={Boolean(filterIndex !== null && players[filterIndex])} enabled={animationsEnabled} onClose={() => setFilterIndex(null)} className="roster-modal-layer">{filterIndex !== null && players[filterIndex] && (<>
             <section className="roster-filter-modal" role="dialog" aria-modal="true" aria-label={`Filtros de ${players[filterIndex].name}`}>
-              <header><div><span>Filtros individuales</span><h2>{players[filterIndex].name}</h2></div><button type="button" onClick={() => { setFilterIndex(null); playModuleSound('close', 420) }}>×</button></header>
+              <header><div><span>Filtros individuales</span><h2>{players[filterIndex].name}</h2></div><button type="button" onClick={() => { setFilterIndex(null); playModuleSound('close', 420) }} aria-label="Cerrar filtro">×</button></header>
               <div className="roster-filter-tools"><input value={filterSearch} onChange={(event) => setFilterSearch(event.target.value)} placeholder="Buscar personaje" /><select aria-label="Filtrar por rol o clase" value={filterRole} onChange={(event) => setFilterRole(event.target.value)}><option value="all">Todos los roles</option>{game.roles.map((role) => <option value={role.id} key={role.id}>{role.label}</option>)}</select></div>
               <div className="roster-filter-grid">
-                {catalog.filter((hero) => (!filterSearch || hero.name.toLowerCase().includes(filterSearch.toLowerCase())) && (filterRole === 'all' || hero.role === filterRole)).map((hero) => {
+                {catalog.filter((hero) => (!filterSearch || `${hero.name} ${translateGameText(gameId, locale, hero.name)}`.toLocaleLowerCase(locale).includes(filterSearch.toLocaleLowerCase(locale))) && (filterRole === 'all' || hero.role === filterRole)).map((hero) => {
                   const blocked = players[filterIndex].blocked.includes(hero.key)
-                  return <button type="button" className={blocked ? 'blocked' : ''} onClick={() => toggleBlocked(hero.key)} key={hero.key}><img src={asset(hero.portrait)} alt="" /><span><b>{hero.name}</b><small>{blocked ? 'Bloqueado' : roleDefinition(game, hero.role).label}</small></span></button>
+                  return <button type="button" className={blocked ? 'blocked' : ''} onClick={() => toggleBlocked(hero.key)} aria-pressed={blocked} key={hero.key}><img src={asset(hero.portrait)} alt="" /><span><b>{hero.name}</b><small>{blocked ? 'Bloqueado' : roleDefinition(game, hero.role).label}</small></span></button>
                 })}
               </div>
               <footer><button type="button" onClick={() => setPlayers((current) => current.map((player, index) => index === filterIndex ? { ...player, blocked: [] } : player))}>Restaurar todos</button><button type="button" className="primary" onClick={() => setFilterIndex(null)}>Listo</button></footer>
             </section>
-          </div>
-        )}
+          </>)}</AnimatedLayer>
 
         {detailsIndex !== null && selectedDetailsHero && selectedDetailsRole && (
           <div className="roster-modal-layer roster-details-layer" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) setDetailsIndex(null) }}>
@@ -1521,111 +1344,6 @@ export default function RosterModule({
       </main>
     )
   }
-  function renderRoulette() {
-    const selectedSet = new Set(rouletteSelected)
-    const selectedVisible = filteredRouletteHeroes.filter((hero) => selectedSet.has(hero.key)).length
-    const winner = catalog.find((hero) => hero.key === rouletteWinner) ?? null
-    const wheelCount = rouletteBuiltHeroes.length
-    const imageSize = wheelCount <= 12 ? 42 : wheelCount <= 24 ? 32 : wheelCount <= 40 ? 24 : 18
-    const imageRadius = wheelCount <= 12 ? 126 : wheelCount <= 24 ? 137 : 145
-    const buildStatus = rouletteDirty
-      ? roulettePool.length > 0 ? 'Cambios sin construir' : 'Sin participantes'
-      : `${rouletteEntries.length} casillas listas`
 
-    return (
-      <main className="utility-page roulette-page roulette-maker-v2 roster-roulette-unified" style={{ '--module-accent': game.accent, '--yellow': game.accent, '--cyan': game.accent } as CSSProperties}>
-        <header className="roulette-heading">
-          <div>
-            <h1>Ruleta · {game.shortName}</h1>
-          </div>
-          <div className="roulette-heading-stats" aria-label="Resumen de la ruleta">
-            <span><small>PERSONAJES</small><b>{roulettePool.length}</b></span>
-            <span><small>CASILLAS</small><b>{rouletteTotalSlots}/64</b></span>
-          </div>
-        </header>
-
-        <section className="roulette-maker-layout">
-          <section className="roulette-builder-panel">
-            <header className="roulette-section-heading">
-              <div><h2>Personajes</h2></div>
-            </header>
-
-            <div className="roulette-toolbar roulette-toolbar-v2">
-              <label className="roulette-search"><RosterIcon name="filter" size={16} /><input type="search" value={rouletteSearch} onChange={(event) => setRouletteSearch(event.target.value)} placeholder="Buscar personaje…" /></label>
-              <div className="roulette-role-toggles roster-role-toggles" role="group" aria-label="Rol visible">
-                <button type="button" className={rouletteRole === 'all' ? 'active' : ''} onClick={() => setRouletteRole('all')}>Todos</button>
-                {game.roles.map((role) => <button type="button" className={rouletteRole === role.id ? 'active' : ''} style={{ '--role-color': role.color } as CSSProperties} onClick={() => setRouletteRole(role.id)} key={role.id}>{role.icon ? <img className="hero-role-icon" src={asset(role.icon)} alt="" aria-hidden="true" /> : <i className="roulette-generic-role-mark" />}{role.label}</button>)}
-              </div>
-              <div className="roulette-toolbar-actions">
-                <button type="button" onClick={() => { setRouletteSelected((current) => [...new Set([...current, ...filteredRouletteHeroes.map((hero) => hero.key)])]); markRouletteDirty() }} disabled={filteredRouletteHeroes.length === 0}>Añadir visibles</button>
-                <button type="button" onClick={() => { const visible = new Set(filteredRouletteHeroes.map((hero) => hero.key)); setRouletteSelected((current) => current.filter((key) => !visible.has(key))); markRouletteDirty() }} disabled={selectedVisible === 0}>Quitar visibles</button>
-              </div>
-            </div>
-
-            <div className="roulette-bulk-actions">
-              <button type="button" onClick={() => { setRouletteSelected(catalog.map((hero) => hero.key)); markRouletteDirty() }} disabled={!catalog.length || rouletteSpinning}><RosterIcon name="check" size={14} /> Seleccionar todos</button>
-              <button type="button" onClick={() => { setRouletteWeights((current) => ({ ...current, ...Object.fromEntries(rouletteSelected.map((key) => [key, 1])) })); markRouletteDirty() }} disabled={!roulettePool.length || rouletteSpinning}><RosterIcon name="reset" size={14} /> Igualar pesos</button>
-              <button type="button" className="danger" onClick={() => { setRouletteSelected([]); markRouletteDirty() }} disabled={!rouletteSelected.length || rouletteSpinning}><RosterIcon name="trash" size={14} /> Vaciar</button>
-            </div>
-
-            <div className="roulette-weight-grid">
-              {filteredRouletteHeroes.map((hero) => {
-                const selected = selectedSet.has(hero.key)
-                const weight = rouletteWeight(hero.key)
-                const probability = rouletteProbability(hero.key)
-                const role = roleDefinition(game, hero.role)
-                return (
-                  <article className={`roulette-weight-card ${selected ? 'selected' : ''}`} style={{ '--role-color': role.color } as CSSProperties} key={hero.key}>
-                    <button type="button" className="roulette-hero-pick" onClick={() => !selected && toggleRouletteHero(hero.key)} disabled={rouletteSpinning} aria-label={selected ? `${hero.name} seleccionado` : `Añadir a ${hero.name}`}>
-                      <img src={asset(hero.portrait)} alt="" loading="lazy" decoding="async" />
-                      <span className="roulette-weight-copy"><strong>{hero.name}</strong><small>{role.label}</small></span>
-                      <i className="roulette-role-watermark roulette-generic-role-mark" aria-hidden="true" />
-                      {!selected && <span className="roulette-add-mark">+</span>}
-                    </button>
-                    {selected && <div className="roulette-weight-controls">
-                      <button type="button" onClick={() => changeRouletteWeight(hero.key, -1)} disabled={rouletteSpinning || rouletteTotalSlots <= 2 || weight <= 1}>−</button>
-                      <span className="roulette-weight-value"><small>PESO</small><b>x{weight}</b></span>
-                      <button type="button" onClick={() => changeRouletteWeight(hero.key, 1)} disabled={rouletteSpinning || rouletteTotalSlots >= 64}>+</button>
-                      <span className="roulette-probability"><small>PROB.</small><b>{probability.toFixed(1)}%</b><i><em style={{ width: `${Math.min(100, probability)}%` }} /></i></span>
-                      <button type="button" className="remove" onClick={() => toggleRouletteHero(hero.key)} disabled={rouletteSpinning}>×</button>
-                    </div>}
-                  </article>
-                )
-              })}
-            </div>
-
-            {!filteredRouletteHeroes.length && <div className="roulette-empty-list"><RosterIcon name="filter" size={28} /><strong>No hay coincidencias</strong><span>Prueba otro nombre o cambia el rol visible.</span></div>}
-
-            <footer className="roulette-builder-footer">
-              <div className="roulette-total-summary"><span><small>SELECCIONADOS</small><b>{roulettePool.length}</b></span><span><small>CASILLAS</small><b>{rouletteTotalSlots}</b></span></div>
-              <button type="button" className="roulette-build-button" onClick={() => buildRoulette(true)} disabled={rouletteSpinning || !roulettePool.length || rouletteTotalSlots > 64}><RosterIcon name="roulette" size={20} /><span>CONSTRUIR RULETA</span></button>
-            </footer>
-          </section>
-
-          <aside className="roulette-wheel-panel">
-            <header className="roulette-section-heading compact"><div><h2>Ruleta</h2></div><span className="roulette-game-chip" style={{ color: game.accent }}>{game.shortName}</span></header>
-            <div className={`roulette-wheel-stage ${rouletteSpinning ? 'spinning' : ''} ${rouletteDirty ? 'dirty' : ''}`}>
-              <span className="roulette-wheel-pointer" aria-hidden="true"><i /></span>
-              {wheelCount >= 2 ? <div className="roulette-wheel-shell">
-                <svg className="roulette-wheel-svg" viewBox="0 0 400 400" role="img" aria-label={`Ruleta de ${wheelCount} casillas`}>
-                  <defs>{rouletteBuiltHeroes.map((hero, index) => { const angle = -90 + (index + .5) * 360 / wheelCount; const point = roulettePoint(imageRadius, angle); return <clipPath id={`roster-slot-${gameId}-${index}`} key={`clip-${hero.key}-${index}`}><circle cx={point.x} cy={point.y} r={imageSize / 2} /></clipPath> })}</defs>
-                  <g className="roulette-wheel-rotor" style={{ transform: `rotate(${rouletteRotation}deg)`, transition: `transform ${animationsEnabled ? 1.9 : .02}s cubic-bezier(.12,.68,.16,1)` }}>
-                    {rouletteBuiltHeroes.map((hero, index) => <path d={rouletteSectorPath(index, wheelCount)} fill={roleDefinition(game, hero.role).color} className="roulette-wheel-sector" key={`sector-${hero.key}-${index}`} />)}
-                    {rouletteBuiltHeroes.map((hero, index) => { const angle = -90 + (index + .5) * 360 / wheelCount; const point = roulettePoint(imageRadius, angle); return <g key={`portrait-${hero.key}-${index}`}><circle cx={point.x} cy={point.y} r={imageSize / 2 + 2} fill="#061722" stroke="rgba(255,255,255,.72)" strokeWidth="1.5" /><image href={asset(hero.portrait)} x={point.x - imageSize / 2} y={point.y - imageSize / 2} width={imageSize} height={imageSize} preserveAspectRatio="xMidYMid slice" clipPath={`url(#roster-slot-${gameId}-${index})`} /></g> })}
-                    <circle cx="200" cy="200" r="185" fill="none" stroke="rgba(211,241,255,.78)" strokeWidth="3" />
-                  </g>
-                </svg>
-                <div className="roulette-wheel-hub" style={{ '--role-color': winner ? roleDefinition(game, winner.role).color : game.accent } as CSSProperties}>{winner ? <><img src={asset(winner.portrait)} alt="" /><span><small>GANADOR</small><strong>{winner.name}</strong></span></> : <><RosterIcon name="roulette" size={28} /><span><small>RULETA</small><strong>{wheelCount} casillas</strong></span></>}</div>
-              </div> : <div className="roulette-wheel-placeholder"><span><RosterIcon name="roulette" size={50} /></span><strong>Sin construir</strong></div>}
-            </div>
-            <div className="roulette-winner-strip">{winner ? <><div className="roulette-winner-portrait" style={{ '--role-color': roleDefinition(game, winner.role).color } as CSSProperties}><img src={asset(winner.portrait)} alt="" /></div><div><small>ÚLTIMO GIRO</small><strong>{winner.name}</strong><span>{roleDefinition(game, winner.role).label} · Peso x{rouletteWeight(winner.key)} · {rouletteProbability(winner.key).toFixed(1)}%</span></div></> : <><RosterIcon name={rouletteDirty ? 'settings' : 'check'} size={20} /><div><strong>{rouletteSpinning ? 'Girando…' : buildStatus}</strong></div></>}</div>
-            <button type="button" className={`roulette-spin-button ${rouletteSpinning ? 'spinning' : ''}`} onClick={spinRoulette} disabled={rouletteSpinning || !roulettePool.length}><RosterIcon name="roulette" size={24} /><span>{rouletteSpinning ? 'GIRANDO…' : rouletteDirty ? 'CONSTRUIR Y GIRAR' : 'GIRAR RULETA'}</span></button>
-            {!!rouletteEntries.length && <details className="roulette-slot-list"><summary><span>Ver casillas construidas</span><b>{rouletteEntries.length}</b></summary><div>{rouletteBuiltHeroes.map((hero, index) => <span key={`${hero.key}-${index}`} style={{ '--role-color': roleDefinition(game, hero.role).color } as CSSProperties}><i>{index + 1}</i><img src={asset(hero.portrait)} alt="" /><strong>{hero.name}</strong></span>)}</div></details>}
-          </aside>
-        </section>
-      </main>
-    )
-  }
-
-  return view === 'roulette' ? renderRoulette() : renderPrincipal()
+  return view === 'roulette' ? (catalog.length ? <SharedRoulette key={gameId} gameId={gameId} title={game.name} items={catalog} roles={game.roles} storagePrefix={storagePrefix} baseUrl={baseUrl} locale={locale} animationsEnabled={animationsEnabled} notify={notify} onSpin={() => playModuleSound('generate')} onWin={playConfirmTone} /> : null) : localizeUi(locale, renderPrincipal(), gameId)
 }

@@ -89,7 +89,7 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
         text(item.label, ax + 4, detailY + 106, 160, 12, '#b7cadd')
       })
     })
-    text('over-roll.com  /  Generado con OverRoll', 48, layout.height - 30, layout.width - 96, 14, '#8197af', 500)
+    text('over-roll.com  /  OverRoll', 48, layout.height - 30, layout.width - 96, 14, '#8197af', 500)
     await downloadCanvasPng(canvas, options.filename)
     return { missingImages: sources.length - images.size }
   } finally {

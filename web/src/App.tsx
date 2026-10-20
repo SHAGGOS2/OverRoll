@@ -1,3 +1,6 @@
+import { gameCredits } from './gameCredits'
+import AnimatedLayer from './AnimatedLayer'
+import SharedRoulette from './SharedRoulette'
 import { useImageExport } from './useImageExport'
 import { safeAssetUrl } from './imageExport.ts'
 import {
@@ -15,11 +18,16 @@ import PvzModule from './PvzModule'
 import RosterModule, { rosterGameDefinitions, type RosterGameId } from './RosterModule'
 import './GameExperience.css'
 import './Preferences.css'
+import './InteractionPolish.css'
+import './SharedRoulette.css'
+import './Profiles.css'
 import { warmImageCache } from './imageCache'
 import { creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
-import { installUiLocalization, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
+import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
 import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH, PROFILE_NAME_MAX_LENGTH } from './personName.ts'
+
+const rouletteRoleColors = { tank: '#4fc9ff', damage: '#ff5578', support: '#55e4ad' }
 
 type Role = 'tank' | 'damage' | 'support'
 type GameId = 'overwatch' | 'tf2' | 'pvzgw2' | RosterGameId
@@ -514,12 +522,6 @@ function shuffleArray<T>(items: readonly T[]): T[] {
   return output
 }
 
-const rouletteRoleColors: Record<Role, string> = {
-  tank: '#49c9ff',
-  damage: '#ff6077',
-  support: '#5ce1a2',
-}
-
 // Doctrine queda preparado desde ahora, pero OverRoll no lo incorpora al catálogo
 // hasta el 5 de octubre de 2026 a las 00:00 (hora del centro de México, UTC-6).
 const DOCTRINE_RELEASE_AT = Date.parse('2026-10-05T00:00:00-06:00')
@@ -605,29 +607,6 @@ function secureRandomIndex(length: number): number {
     return value[0] % length
   }
   return Math.floor(Math.random() * length)
-}
-
-function normalizeDegrees(value: number) {
-  return ((value % 360) + 360) % 360
-}
-
-function roulettePoint(radius: number, degrees: number) {
-  const radians = (degrees * Math.PI) / 180
-  return {
-    x: 200 + Math.cos(radians) * radius,
-    y: 200 + Math.sin(radians) * radius,
-  }
-}
-
-function rouletteSectorPath(index: number, total: number) {
-  if (total <= 1) return 'M 200 16 A 184 184 0 1 1 199.9 16 Z'
-  const step = 360 / total
-  const start = -90 + index * step
-  const end = start + step
-  const first = roulettePoint(184, start)
-  const second = roulettePoint(184, end)
-  const largeArc = step > 180 ? 1 : 0
-  return `M 200 200 L ${first.x.toFixed(3)} ${first.y.toFixed(3)} A 184 184 0 ${largeArc} 1 ${second.x.toFixed(3)} ${second.y.toFixed(3)} Z`
 }
 
 function compositionFor(size: number): Role[] {
@@ -873,7 +852,6 @@ function buildTeam(options: {
 }
 
 function App() {
-  const [imageExporting, saveImage] = useImageExport(notify)
   const baseUrl = import.meta.env.BASE_URL
   const asset = (path: string) => safeAssetUrl(path, baseUrl)
 
@@ -890,6 +868,9 @@ function App() {
   const [currentProfileId, setCurrentProfileId] = useState(() => readStorage('overroll.web.currentProfileId', ''))
   const [profileSearch, setProfileSearch] = useState('')
   const [profileRole, setProfileRole] = useState<'all' | Role>('all')
+  const [profileBucketFilter, setProfileBucketFilter] = useState<ProfileBucket | 'all' | 'unmarked'>('all')
+  const [profileBulkBucket, setProfileBulkBucket] = useState<ProfileBucket | ''>('main')
+  const [otherProfilePlayers, setOtherProfilePlayers] = useState<Record<string, Array<{ id: string; name: string; profileId: string; [key: string]: unknown }>>>({})
   const [profileTab, setProfileTab] = useState<ProfileTab>('heroes')
   const [avoidRepeated, setAvoidRepeated] = useState(() => readStorage('overroll.web.avoidRepeated', true))
   const [roleComposition, setRoleComposition] = useState(() => readStorage('overroll.web.roleComposition', true))
@@ -922,24 +903,6 @@ function App() {
   const [generating, setGenerating] = useState(false)
   const [generationRevision, setGenerationRevision] = useState(0)
   const [rerollingIndex, setRerollingIndex] = useState<number | null>(null)
-  const [rouletteSearch, setRouletteSearch] = useState('')
-  const [rouletteRolesEnabled, setRouletteRolesEnabled] = useState<Record<Role, boolean>>(() => readStorage('overroll.web.rouletteRolesEnabled', {
-    tank: true,
-    damage: true,
-    support: true,
-  }))
-  const [rouletteSelectedKeys, setRouletteSelectedKeys] = useState<string[]>(() => readStorage('overroll.web.rouletteSelectedKeys', []))
-  const [rouletteWeights, setRouletteWeights] = useState<Record<string, number>>(() => readStorage('overroll.web.rouletteWeights', {}))
-  const [rouletteInitialized, setRouletteInitialized] = useState(() => readStorage('overroll.web.rouletteInitialized', false))
-  const [rouletteEntries, setRouletteEntries] = useState<string[]>([])
-  const [rouletteWinnerKey, setRouletteWinnerKey] = useState('')
-  const [rouletteSpinning, setRouletteSpinning] = useState(false)
-  const [rouletteDirty, setRouletteDirty] = useState(true)
-  const [rouletteRotation, setRouletteRotation] = useState(0)
-  const [rouletteSpinRequest, setRouletteSpinRequest] = useState(0)
-  const rouletteRotorRef = useRef<SVGGElement | null>(null)
-  const rouletteAnimationRef = useRef<Animation | null>(null)
-  const roulettePendingSpinRef = useRef<{ entries: string[]; winnerIndex: number } | null>(null)
   const [tf2Players, setTf2Players] = useState<Tf2Player[]>(() => normalizeTf2Players(readStorage<unknown>('overroll.web.tf2.players', [])))
   const [tf2Picks, setTf2Picks] = useState<Tf2Pick[]>(() => Array.from({ length: 6 }, () => ({ mercenary: null, locked: false })))
   const [tf2AvoidRepeated, setTf2AvoidRepeated] = useState(() => readStorage('overroll.web.tf2.avoidRepeated', true))
@@ -950,22 +913,10 @@ function App() {
   const [tf2FilterIndex, setTf2FilterIndex] = useState<number | null>(null)
   const [tf2FilterSearch, setTf2FilterSearch] = useState('')
   const [tf2FilterGroup, setTf2FilterGroup] = useState<'all' | Tf2Group>('all')
-  const [tf2RouletteSearch, setTf2RouletteSearch] = useState('')
-  const [tf2RouletteGroup, setTf2RouletteGroup] = useState<'all' | Tf2Group>('all')
-  const [tf2RouletteSelectedKeys, setTf2RouletteSelectedKeys] = useState<string[]>(() => readStorage('overroll.web.tf2.rouletteSelectedKeys', tf2Classes.map((item) => item.key)))
-  const [tf2RouletteWeights, setTf2RouletteWeights] = useState<Record<string, number>>(() => readStorage('overroll.web.tf2.rouletteWeights', Object.fromEntries(tf2Classes.map((item) => [item.key, 1]))))
-  const [tf2RouletteEntries, setTf2RouletteEntries] = useState<string[]>([])
-  const [tf2RouletteWinnerKey, setTf2RouletteWinnerKey] = useState('')
-  const [tf2RouletteDirty, setTf2RouletteDirty] = useState(true)
-  const [tf2RouletteSpinning, setTf2RouletteSpinning] = useState(false)
-  const [tf2RouletteRotation, setTf2RouletteRotation] = useState(0)
-  const [tf2RouletteSpinRequest, setTf2RouletteSpinRequest] = useState(0)
-  const tf2RouletteRotorRef = useRef<SVGGElement | null>(null)
-  const tf2RouletteAnimationRef = useRef<Animation | null>(null)
-  const tf2RoulettePendingSpinRef = useRef<{ entries: string[]; winnerIndex: number } | null>(null)
 
   const activeLocale: SupportedLocale = localePreference === 'auto' ? browserLocale : localePreference
   const t = (key: Parameters<typeof translate>[1]) => translate(activeLocale, key)
+  const [imageExporting, saveImage] = useImageExport(notify, activeLocale, activeGame)
 
   useEffect(() => {
     const handleLanguageChange = () => setBrowserLocale(detectBrowserLocale())
@@ -980,7 +931,7 @@ function App() {
     window.localStorage.setItem('overroll.web.localePreference', JSON.stringify(localePreference))
   }, [activeLocale, localePreference])
 
-  useEffect(() => installUiLocalization(activeLocale), [activeLocale])
+
 
   useEffect(() => {
     warmImageCache(tf2Classes.map((item) => asset(item.portrait)), 9)
@@ -1040,24 +991,6 @@ function App() {
       const pool = loaded.heroes.filter((hero) => stadium ? hero.stadiumPowers.length > 0 : hero.gamemodes.includes('quickplay'))
       setData(loaded)
       warmImageCache(loaded.heroes.map((hero) => asset(hero.portrait)), 10)
-      const validKeys = new Set(loaded.heroes.map((hero) => hero.key))
-      const storedSelection = rouletteSelectedKeys.filter((key) => validKeys.has(key))
-      const doctrineWasAdded = loaded.heroes.some((hero) => hero.key === 'doctrine') && !storedSelection.includes('doctrine')
-      const hadWholePreviousRoster = doctrineWasAdded && storedSelection.length === loaded.heroes.length - 1
-      const nextSelection = rouletteInitialized
-        ? hadWholePreviousRoster ? [...storedSelection, 'doctrine'] : storedSelection
-        : loaded.heroes.map((hero) => hero.key)
-      setRouletteSelectedKeys(nextSelection)
-      setRouletteWeights((current) => {
-        const normalized: Record<string, number> = {}
-        nextSelection.forEach((key) => {
-          const raw = Number(current[key] ?? 1)
-          normalized[key] = Math.max(1, Math.min(64, Math.round(Number.isFinite(raw) ? raw : 1)))
-        })
-        if (nextSelection.length === 1) normalized[nextSelection[0]] = Math.max(2, normalized[nextSelection[0]] ?? 2)
-        return normalized
-      })
-      if (!rouletteInitialized) setRouletteInitialized(true)
       setPicks((current) => buildTeam({
         heroes: pool,
         players,
@@ -1155,140 +1088,13 @@ function App() {
       window.localStorage.setItem('overroll.web.compactPerks', JSON.stringify(compactPerks))
       window.localStorage.setItem('overroll.web.lowPowerMode', JSON.stringify(lowPowerMode))
       window.localStorage.setItem('overroll.web.mobileCompactMode', JSON.stringify(mobileCompactMode))
-      window.localStorage.setItem('overroll.web.rouletteRolesEnabled', JSON.stringify(rouletteRolesEnabled))
-      window.localStorage.setItem('overroll.web.rouletteSelectedKeys', JSON.stringify(rouletteSelectedKeys))
-      window.localStorage.setItem('overroll.web.rouletteWeights', JSON.stringify(rouletteWeights))
-      window.localStorage.setItem('overroll.web.rouletteInitialized', JSON.stringify(rouletteInitialized))
       window.localStorage.setItem('overroll.web.activeGame', JSON.stringify(activeGame))
       window.localStorage.setItem('overroll.web.tf2.players', JSON.stringify(tf2Players))
       window.localStorage.setItem('overroll.web.tf2.avoidRepeated', JSON.stringify(tf2AvoidRepeated))
-      window.localStorage.setItem('overroll.web.tf2.rouletteSelectedKeys', JSON.stringify(tf2RouletteSelectedKeys))
-      window.localStorage.setItem('overroll.web.tf2.rouletteWeights', JSON.stringify(tf2RouletteWeights))
     }, 180)
 
     return () => window.clearTimeout(timeout)
-  }, [players, profiles, profileMode, currentProfileId, avoidRepeated, roleComposition, rolesOnly, randomPerks, stadium, soundEnabled, soundVolume, hoverSounds, animationsEnabled, compactPerks, lowPowerMode, mobileCompactMode, rouletteRolesEnabled, rouletteSelectedKeys, rouletteWeights, rouletteInitialized, activeGame, tf2Players, tf2AvoidRepeated, tf2RouletteSelectedKeys, tf2RouletteWeights])
-
-  useEffect(() => () => {
-    rouletteAnimationRef.current?.cancel()
-    rouletteAnimationRef.current = null
-    roulettePendingSpinRef.current = null
-    tf2RouletteAnimationRef.current?.cancel()
-    tf2RouletteAnimationRef.current = null
-    tf2RoulettePendingSpinRef.current = null
-  }, [])
-
-  useEffect(() => {
-    if (rouletteSpinRequest === 0) return undefined
-    const pending = roulettePendingSpinRef.current
-    const rotor = rouletteRotorRef.current
-    if (!pending || !rotor || pending.entries.length < 2) return undefined
-
-    const { entries, winnerIndex } = pending
-    roulettePendingSpinRef.current = null
-    rouletteAnimationRef.current?.cancel()
-
-    const segmentAngle = 360 / entries.length
-    const start = normalizeDegrees(rouletteRotation)
-    const winnerAngle = normalizeDegrees(-(winnerIndex + 0.5) * segmentAngle)
-    const finalOffset = normalizeDegrees(winnerAngle - start)
-    const fullTurns = animationsEnabled ? 5 + secureRandomIndex(2) : 1
-    const target = start + fullTurns * 360 + finalOffset
-    const duration = animationsEnabled ? 2450 : 1
-
-    rotor.style.transform = `rotate(${start}deg)`
-    const animation = rotor.animate(
-      [
-        { transform: `rotate(${start}deg)`, offset: 0 },
-        { transform: `rotate(${start + fullTurns * 288}deg)`, offset: 0.72 },
-        { transform: `rotate(${target}deg)`, offset: 1 },
-      ],
-      {
-        duration,
-        easing: 'cubic-bezier(.12,.64,.16,1)',
-        fill: 'forwards',
-      },
-    )
-    rouletteAnimationRef.current = animation
-
-    const finishSpin = () => {
-      if (rouletteAnimationRef.current !== animation) return
-      setRouletteRotation(target)
-      setRouletteWinnerKey(entries[winnerIndex])
-      setRouletteSpinning(false)
-      playConfirmTone()
-      const hero = (data?.heroes ?? []).find((candidate) => candidate.key === entries[winnerIndex])
-      notify(hero ? `${hero.name} ganó la ruleta` : 'La ruleta eligió un ganador', 'success')
-      window.requestAnimationFrame(() => {
-        if (rouletteAnimationRef.current === animation) {
-          animation.cancel()
-          rouletteAnimationRef.current = null
-        }
-      })
-    }
-
-    void animation.finished.then(finishSpin).catch(() => undefined)
-    return () => {
-      if (rouletteAnimationRef.current === animation && animation.playState !== 'finished') {
-        animation.cancel()
-        rouletteAnimationRef.current = null
-      }
-    }
-  }, [rouletteSpinRequest])
-
-  useEffect(() => {
-    if (tf2RouletteSpinRequest === 0) return undefined
-    const pending = tf2RoulettePendingSpinRef.current
-    const rotor = tf2RouletteRotorRef.current
-    if (!pending || !rotor || pending.entries.length < 2) return undefined
-
-    const { entries, winnerIndex } = pending
-    tf2RoulettePendingSpinRef.current = null
-    tf2RouletteAnimationRef.current?.cancel()
-
-    const segmentAngle = 360 / entries.length
-    const start = normalizeDegrees(tf2RouletteRotation)
-    const winnerAngle = normalizeDegrees(-(winnerIndex + 0.5) * segmentAngle)
-    const finalOffset = normalizeDegrees(winnerAngle - start)
-    const fullTurns = animationsEnabled ? 5 + secureRandomIndex(2) : 1
-    const target = start + fullTurns * 360 + finalOffset
-    const duration = animationsEnabled ? 2300 : 1
-
-    rotor.style.transform = `rotate(${start}deg)`
-    const animation = rotor.animate(
-      [
-        { transform: `rotate(${start}deg)`, offset: 0 },
-        { transform: `rotate(${start + fullTurns * 292}deg)`, offset: 0.74 },
-        { transform: `rotate(${target}deg)`, offset: 1 },
-      ],
-      { duration, easing: 'cubic-bezier(.11,.67,.14,1)', fill: 'forwards' },
-    )
-    tf2RouletteAnimationRef.current = animation
-
-    const finishSpin = () => {
-      if (tf2RouletteAnimationRef.current !== animation) return
-      setTf2RouletteRotation(target)
-      setTf2RouletteWinnerKey(entries[winnerIndex])
-      setTf2RouletteSpinning(false)
-      playSound('tf2RouletteWin')
-      const winner = tf2Classes.find((item) => item.key === entries[winnerIndex])
-      notify(winner ? `${winner.name} ganó la ruleta TF2` : 'La ruleta TF2 eligió un ganador', 'success')
-      window.requestAnimationFrame(() => {
-        if (tf2RouletteAnimationRef.current === animation) {
-          animation.cancel()
-          tf2RouletteAnimationRef.current = null
-        }
-      })
-    }
-
-    void animation.finished.then(finishSpin).catch(() => undefined)
-    return () => {
-      if (tf2RouletteAnimationRef.current === animation && animation.playState !== 'finished') {
-        animation.cancel()
-        tf2RouletteAnimationRef.current = null
-      }
-    }
-  }, [tf2RouletteSpinRequest])
+  }, [players, profiles, profileMode, currentProfileId, avoidRepeated, roleComposition, rolesOnly, randomPerks, stadium, soundEnabled, soundVolume, hoverSounds, animationsEnabled, compactPerks, lowPowerMode, mobileCompactMode, activeGame, tf2Players, tf2AvoidRepeated])
 
   useEffect(() => {
     if (!toast) return undefined
@@ -1328,44 +1134,18 @@ function App() {
     const search = profileSearch.trim().toLocaleLowerCase('es-MX')
     return (data?.heroes ?? []).filter((hero) => (
       (profileRole === 'all' || hero.role === profileRole)
-      && (!search || hero.name.toLocaleLowerCase('es-MX').includes(search))
+      && (!search || `${hero.name} ${translateGameText('overwatch', activeLocale, hero.name)}`.toLocaleLowerCase(activeLocale).includes(search))
+      && (profileBucketFilter === 'all' || (profileBucketFilter === 'unmarked' ? !heroBucket(currentProfile, hero.key) : heroBucket(currentProfile, hero.key) === profileBucketFilter))
     ))
-  }, [data, profileRole, profileSearch])
+  }, [data, profileRole, profileSearch, profileBucketFilter, currentProfile, activeLocale])
 
   const filterHeroes = useMemo(() => {
     const search = filterSearch.trim().toLocaleLowerCase('es-MX')
     return availableHeroes.filter((hero) => (
       (filterRole === 'all' || hero.role === filterRole)
-      && (!search || hero.name.toLocaleLowerCase('es-MX').includes(search))
+      && (!search || `${hero.name} ${translateGameText('overwatch', activeLocale, hero.name)}`.toLocaleLowerCase(activeLocale).includes(search))
     ))
-  }, [availableHeroes, filterRole, filterSearch])
-
-  const rouletteVisibleHeroes = useMemo(() => {
-    const search = rouletteSearch.trim().toLocaleLowerCase('es-MX')
-    return (data?.heroes ?? []).filter((hero) => (
-      rouletteRolesEnabled[hero.role]
-      && (!search || hero.name.toLocaleLowerCase('es-MX').includes(search))
-    ))
-  }, [data, rouletteRolesEnabled, rouletteSearch])
-
-  const roulettePool = useMemo(() => {
-    const selected = new Set(rouletteSelectedKeys)
-    return (data?.heroes ?? []).filter((hero) => selected.has(hero.key) && rouletteRolesEnabled[hero.role])
-  }, [data, rouletteRolesEnabled, rouletteSelectedKeys])
-
-  const rouletteTotalSlots = useMemo(() => roulettePool.reduce((total, hero) => {
-    const raw = Number(rouletteWeights[hero.key] ?? 1)
-    return total + Math.max(1, Math.min(64, Math.round(Number.isFinite(raw) ? raw : 1)))
-  }, 0), [roulettePool, rouletteWeights])
-
-  const rouletteBuiltHeroes = useMemo(() => {
-    const byKey = new Map((data?.heroes ?? []).map((hero) => [hero.key, hero]))
-    return rouletteEntries.map((key) => byKey.get(key)).filter((hero): hero is Hero => Boolean(hero))
-  }, [data, rouletteEntries])
-
-  const rouletteWinner = useMemo(() => (
-    (data?.heroes ?? []).find((hero) => hero.key === rouletteWinnerKey) ?? null
-  ), [data, rouletteWinnerKey])
+  }, [availableHeroes, filterRole, filterSearch, activeLocale])
 
   const tf2FilterPlayer = tf2FilterIndex === null ? null : tf2Players[tf2FilterIndex] ?? null
   const tf2VisibleFilterClasses = useMemo(() => {
@@ -1375,26 +1155,6 @@ function App() {
       && (!search || item.name.toLocaleLowerCase('es-MX').includes(search))
     ))
   }, [tf2FilterGroup, tf2FilterSearch])
-  const tf2RouletteVisibleClasses = useMemo(() => {
-    const search = tf2RouletteSearch.trim().toLocaleLowerCase('es-MX')
-    return tf2Classes.filter((item) => (
-      (tf2RouletteGroup === 'all' || item.group === tf2RouletteGroup)
-      && (!search || item.name.toLocaleLowerCase('es-MX').includes(search))
-    ))
-  }, [tf2RouletteGroup, tf2RouletteSearch])
-  const tf2RoulettePool = useMemo(() => {
-    const selected = new Set(tf2RouletteSelectedKeys)
-    return tf2Classes.filter((item) => selected.has(item.key))
-  }, [tf2RouletteSelectedKeys])
-  const tf2RouletteTotalSlots = useMemo(() => tf2RoulettePool.reduce((total, item) => {
-    const raw = Number(tf2RouletteWeights[item.key] ?? 1)
-    return total + Math.max(1, Math.min(64, Math.round(Number.isFinite(raw) ? raw : 1)))
-  }, 0), [tf2RoulettePool, tf2RouletteWeights])
-  const tf2RouletteBuiltClasses = useMemo(() => {
-    const byKey = new Map(tf2Classes.map((item) => [item.key, item]))
-    return tf2RouletteEntries.map((key) => byKey.get(key)).filter((item): item is Tf2Class => Boolean(item))
-  }, [tf2RouletteEntries])
-  const tf2RouletteWinner = useMemo(() => tf2Classes.find((item) => item.key === tf2RouletteWinnerKey) ?? null, [tf2RouletteWinnerKey])
 
   function playSound(kind: SoundKey) {
     if (!soundEnabled || soundVolume <= 0) return
@@ -1609,90 +1369,6 @@ function App() {
     if (tf2FilterIndex === null) return
     setTf2Players((old) => old.map((player, index) => index === tf2FilterIndex ? { ...player, blocked: [] } : player))
     playSound('tf2Click')
-  }
-
-  function tf2RouletteWeight(key: string) {
-    const raw = Number(tf2RouletteWeights[key] ?? 1)
-    return Math.max(1, Math.min(64, Math.round(Number.isFinite(raw) ? raw : 1)))
-  }
-
-  function tf2RouletteProbability(key: string) {
-    if (!tf2RouletteSelectedKeys.includes(key) || tf2RouletteTotalSlots <= 0) return 0
-    return tf2RouletteWeight(key) * 100 / tf2RouletteTotalSlots
-  }
-
-  function markTf2RouletteDirty(message?: string) {
-    setTf2RouletteDirty(true)
-    setTf2RouletteEntries([])
-    setTf2RouletteWinnerKey('')
-    setTf2RouletteRotation(0)
-    setTf2Status(message ?? 'La ruleta TF2 tiene cambios pendientes')
-  }
-
-  function toggleTf2RouletteClass(key: string) {
-    if (tf2RouletteSpinning) return
-    const selected = tf2RouletteSelectedKeys.includes(key)
-    const next = selected ? tf2RouletteSelectedKeys.filter((item) => item !== key) : [...tf2RouletteSelectedKeys, key]
-    setTf2RouletteSelectedKeys(next)
-    setTf2RouletteWeights((current) => {
-      const copy = { ...current }
-      if (selected) delete copy[key]
-      else copy[key] = next.length === 1 ? 2 : 1
-      if (next.length === 1) copy[next[0]] = Math.max(2, copy[next[0]] ?? 2)
-      return copy
-    })
-    markTf2RouletteDirty(next.length ? 'Lista para construir' : 'Selecciona al menos una clase')
-    playSound('tf2Click')
-  }
-
-  function changeTf2RouletteWeight(key: string, delta: number) {
-    if (tf2RouletteSpinning || !tf2RouletteSelectedKeys.includes(key)) return
-    const current = tf2RouletteWeight(key)
-    if (delta > 0 && tf2RouletteTotalSlots >= 64) return
-    if (delta < 0 && (current <= 1 || tf2RouletteTotalSlots <= 2)) return
-    setTf2RouletteWeights((weights) => ({ ...weights, [key]: Math.max(1, Math.min(64, current + delta)) }))
-    markTf2RouletteDirty('Pesos actualizados')
-    playSound('tf2Click')
-  }
-
-  function selectAllTf2Roulette() {
-    setTf2RouletteSelectedKeys(tf2Classes.map((item) => item.key))
-    setTf2RouletteWeights(Object.fromEntries(tf2Classes.map((item) => [item.key, 1])))
-    markTf2RouletteDirty('Las 9 clases están seleccionadas')
-    playSound('tf2Click')
-  }
-
-  function clearTf2Roulette() {
-    setTf2RouletteSelectedKeys([])
-    setTf2RouletteWeights({})
-    markTf2RouletteDirty('Selecciona al menos una clase')
-    playSound('tf2Click')
-  }
-
-  function buildTf2Roulette(playAudio = true) {
-    if (tf2RouletteSpinning || tf2RoulettePool.length === 0 || tf2RouletteTotalSlots > 64) return [] as string[]
-    const entries = shuffleArray(tf2RoulettePool.flatMap((item) => Array.from({ length: tf2RouletteWeight(item.key) }, () => item.key))).slice(0, 64)
-    if (entries.length === 1) entries.push(entries[0])
-    setTf2RouletteEntries(entries)
-    setTf2RouletteWinnerKey('')
-    setTf2RouletteRotation(0)
-    setTf2RouletteDirty(false)
-    setTf2Status('Ruleta TF2 construida')
-    if (playAudio) playSound('tf2RouletteBuild')
-    return entries
-  }
-
-  function spinTf2Roulette() {
-    if (tf2RouletteSpinning || tf2RoulettePool.length === 0) return
-    const entries = tf2RouletteDirty || tf2RouletteEntries.length < 2 ? buildTf2Roulette(false) : tf2RouletteEntries
-    if (entries.length < 2) return
-    const winnerIndex = secureRandomIndex(entries.length)
-    setTf2RouletteWinnerKey('')
-    setTf2RouletteSpinning(true)
-    setTf2Status('Girando ruleta TF2…')
-    playSound('tf2RouletteSpin')
-    tf2RoulettePendingSpinRef.current = { entries, winnerIndex }
-    window.requestAnimationFrame(() => window.requestAnimationFrame(() => setTf2RouletteSpinRequest((value) => value + 1)))
   }
 
   async function generateTf2TeamImage() {
@@ -1916,6 +1592,7 @@ function App() {
     const profileName = sanitizePersonName(name, PROFILE_NAME_MAX_LENGTH)
     const squadName = sanitizePersonName(profileName)
     setProfiles((old) => old.map((profile) => profile.id === currentProfileId ? { ...profile, name: profileName } : profile))
+    syncOtherProfile(currentProfileId, profileName)
     setPlayers((old) => old.map((player) => {
       if (player.profileId !== currentProfileId) return player
       return { ...player, name: squadName }
@@ -1929,6 +1606,7 @@ function App() {
   function deleteCurrentProfile() {
     if (!currentProfile) return
     const id = currentProfile.id
+    syncOtherProfile(id)
     setProfiles((old) => old.filter((profile) => profile.id !== id))
     setPlayers((old) => old.map((player, index) => (
       player.profileId === id ? { ...player, profileId: '', name: `Jugador${index + 1}` } : player
@@ -1938,7 +1616,7 @@ function App() {
     )))
     setCurrentProfileId('')
     playSound('profileDelete')
-    notify(`${currentProfile.name} fue eliminado`)
+    notify('Perfil eliminado')
   }
 
   function setHeroBucket(heroKey: string, bucket: ProfileBucket | '') {
@@ -2039,179 +1717,6 @@ function App() {
     setDetailsIndex(null)
   }
 
-  function rouletteWeight(heroKey: string) {
-    const raw = Number(rouletteWeights[heroKey] ?? 1)
-    const normalized = Math.max(1, Math.min(64, Math.round(Number.isFinite(raw) ? raw : 1)))
-    return roulettePool.length === 1 && roulettePool[0]?.key === heroKey ? Math.max(2, normalized) : normalized
-  }
-
-  function rouletteProbability(heroKey: string) {
-    if (!rouletteSelectedKeys.includes(heroKey) || rouletteTotalSlots <= 0) return 0
-    return Math.round((rouletteWeight(heroKey) * 1000) / rouletteTotalSlots) / 10
-  }
-
-  function markRouletteDirty() {
-    setRouletteDirty(true)
-    setRouletteEntries([])
-    setRouletteWinnerKey('')
-    setRouletteRotation(0)
-  }
-
-  function toggleRouletteRole(role: Role) {
-    if (rouletteSpinning) return
-    const next = !rouletteRolesEnabled[role]
-    setRouletteRolesEnabled((current) => ({ ...current, [role]: next }))
-    markRouletteDirty()
-    toggleRuleSound(next)
-  }
-
-  function toggleRouletteHero(heroKey: string) {
-    if (rouletteSpinning) return
-    const wasSelected = rouletteSelectedKeys.includes(heroKey)
-    const nextSelection = wasSelected
-      ? rouletteSelectedKeys.filter((key) => key !== heroKey)
-      : [...rouletteSelectedKeys, heroKey]
-
-    setRouletteSelectedKeys(nextSelection)
-    setRouletteWeights((current) => {
-      const next = { ...current }
-      if (wasSelected) delete next[heroKey]
-      else next[heroKey] = nextSelection.length === 1 ? 2 : 1
-      if (nextSelection.length === 1) next[nextSelection[0]] = Math.max(2, Number(next[nextSelection[0]] ?? 2))
-      return next
-    })
-    markRouletteDirty()
-    playSound(wasSelected ? 'toggleOff' : 'toggleOn')
-  }
-
-  function changeRouletteWeight(heroKey: string, delta: number) {
-    if (rouletteSpinning || !rouletteSelectedKeys.includes(heroKey)) return
-    const current = rouletteWeight(heroKey)
-    if (delta > 0 && rouletteTotalSlots >= 64) {
-      notify('La ruleta admite como máximo 64 casillas.', 'warning')
-      return
-    }
-    if (delta < 0 && rouletteTotalSlots <= 2) return
-    const nextValue = Math.max(1, Math.min(64, current + delta))
-    if (nextValue === current) return
-    setRouletteWeights((weights) => ({ ...weights, [heroKey]: nextValue }))
-    markRouletteDirty()
-    playSound('click')
-  }
-
-  function selectRouletteVisible() {
-    if (rouletteSpinning) return
-    const visibleKeys = rouletteVisibleHeroes.map((hero) => hero.key)
-    const nextSelection = [...new Set([...rouletteSelectedKeys, ...visibleKeys])]
-    setRouletteSelectedKeys(nextSelection)
-    setRouletteWeights((current) => {
-      const next = { ...current }
-      nextSelection.forEach((key) => { if (!next[key]) next[key] = nextSelection.length === 1 ? 2 : 1 })
-      return next
-    })
-    markRouletteDirty()
-    playSound('profileClassify')
-  }
-
-  function selectAllRouletteHeroes() {
-    if (rouletteSpinning) return
-    const activeKeys = (data?.heroes ?? []).filter((hero) => rouletteRolesEnabled[hero.role]).map((hero) => hero.key)
-    const nextWeights: Record<string, number> = {}
-    activeKeys.forEach((key) => { nextWeights[key] = activeKeys.length === 1 ? 2 : 1 })
-    setRouletteSelectedKeys(activeKeys)
-    setRouletteWeights(nextWeights)
-    markRouletteDirty()
-    playSound('profileClassify')
-  }
-
-  function clearRouletteVisible() {
-    if (rouletteSpinning) return
-    const visibleKeys = new Set(rouletteVisibleHeroes.map((hero) => hero.key))
-    const nextSelection = rouletteSelectedKeys.filter((key) => !visibleKeys.has(key))
-    setRouletteSelectedKeys(nextSelection)
-    setRouletteWeights((current) => {
-      const next = { ...current }
-      visibleKeys.forEach((key) => delete next[key])
-      if (nextSelection.length === 1) next[nextSelection[0]] = Math.max(2, Number(next[nextSelection[0]] ?? 2))
-      return next
-    })
-    markRouletteDirty()
-    playSound('filter')
-  }
-
-  function clearRouletteHeroes() {
-    if (rouletteSpinning) return
-    setRouletteSelectedKeys([])
-    setRouletteWeights({})
-    markRouletteDirty()
-    playSound('toggleOff')
-  }
-
-  function equalizeRouletteWeights() {
-    if (rouletteSpinning || roulettePool.length === 0) return
-    setRouletteWeights((current) => {
-      const next = { ...current }
-      roulettePool.forEach((hero) => { next[hero.key] = roulettePool.length === 1 ? 2 : 1 })
-      return next
-    })
-    markRouletteDirty()
-    playSound('click')
-  }
-
-  function buildRoulette(showNotice = true): string[] | null {
-    if (roulettePool.length === 0) {
-      notify('Selecciona al menos un héroe para construir la ruleta.', 'warning')
-      return null
-    }
-
-    const normalizedWeights = { ...rouletteWeights }
-    if (roulettePool.length === 1) {
-      const onlyKey = roulettePool[0].key
-      normalizedWeights[onlyKey] = Math.max(2, rouletteWeight(onlyKey))
-      setRouletteWeights(normalizedWeights)
-    }
-
-    const entries: string[] = []
-    roulettePool.forEach((hero) => {
-      const weight = roulettePool.length === 1
-        ? Math.max(2, Number(normalizedWeights[hero.key] ?? 2))
-        : rouletteWeight(hero.key)
-      for (let copy = 0; copy < weight && entries.length < 64; copy += 1) entries.push(hero.key)
-    })
-
-    if (entries.length < 2) {
-      notify('La ruleta necesita por lo menos 2 casillas.', 'warning')
-      return null
-    }
-
-    const shuffled = shuffleArray(entries)
-    setRouletteEntries(shuffled)
-    setRouletteWinnerKey('')
-    setRouletteRotation(0)
-    setRouletteDirty(false)
-    playSound('profileClassify')
-    if (showNotice) notify(`Ruleta construida con ${shuffled.length} casillas`, 'success')
-    return shuffled
-  }
-
-  function spinRoulette() {
-    if (rouletteSpinning) return
-    const entries = rouletteDirty || rouletteEntries.length === 0 ? buildRoulette(false) : rouletteEntries
-    if (!entries || entries.length < 2) return
-
-    const winnerIndex = secureRandomIndex(entries.length)
-    roulettePendingSpinRef.current = { entries, winnerIndex }
-    setRouletteSpinning(true)
-    setRouletteWinnerKey('')
-    setRouletteSpinRequest((value) => value + 1)
-    playSound('generate')
-  }
-
-  async function generateRouletteImage() {
-    if (!rouletteWinner) return
-    await saveImage({ title: 'Overwatch · Ruleta', accent: '#ffc43b', filename: 'overroll-ruleta-ganador', subtitle: 'Peso x' + rouletteWeight(rouletteWinner.key) + ' · ' + rouletteProbability(rouletteWinner.key).toFixed(1) + '% de probabilidad', cards: [{ player: 'Ganador', name: rouletteWinner.name, role: roleLabels[rouletteWinner.role], color: '#ffc43b', portrait: asset(rouletteWinner.portrait), icon: asset('assets/roles/' + rouletteWinner.role + '.png') }] })
-  }
-
   function navigate(view: View) {
     if (view !== activeView) playSound('nav')
     setActiveView(view)
@@ -2254,7 +1759,7 @@ function App() {
   }
 
   function resetLocalData() {
-    const confirmed = window.confirm('Esto borrará perfiles, nombres, reglas, ruleta y configuración guardada en este navegador. ¿Continuar?')
+    const confirmed = window.confirm(translateGameText(activeGame, activeLocale, 'Esto borrará perfiles, nombres, reglas, ruleta y configuración guardada en este navegador. ¿Continuar?'))
     if (!confirmed) return
 
     try {
@@ -2355,7 +1860,7 @@ function App() {
                 return (
                   <article className={`hero-card tf2-card ${mercenary?.group ?? ''} ${generationClass} ${pick?.locked ? 'is-locked' : ''} ${tf2RerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--delay': `${index * 45}ms`, '--tf2-accent': mercenary ? tf2GroupColors[mercenary.group] : '#e8a45b' } as CSSProperties} key={player.id}>
                     <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
-                    <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span>{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : (player.name || localizedPlayerName(activeLocale, index + 1))}</span>{profile && <span className="profile-tag">{profile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}</div>
+                    <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span translate="no">{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : (player.name || localizedPlayerName(activeLocale, index + 1))}</span>{profile && <span className="profile-tag" translate="no">{profile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}</div>
                     <div className="portrait tf2-portrait">
                       <div className="portrait-grid" /><div className="portrait-fallback"><Icon name="gamepad" size={48} /></div>
                       {mercenary ? <img className="hero-image" src={asset(mercenary.portrait)} alt={mercenary.name} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} /> : <div className="portrait-loading"><span /><span /><span /></div>}
@@ -2367,7 +1872,7 @@ function App() {
                       <button type="button" onClick={() => openTf2Filter(index)} className={player.blocked.length > 0 ? 'active-filter' : ''} data-tooltip="Filtro"><Icon name="filter" size={18} /></button>
                       <button type="button" onClick={() => toggleTf2Lock(index)} disabled={!mercenary} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
                     </div>
-                    <div className="loadout tf2-loadout"><div><small>{profile ? 'Perfil' : 'Selección'}</small><span>{profile?.name ?? (mercenary ? 'Catálogo oficial TF2' : 'Pendiente')}</span></div><span className="loadout-status"><Icon name="check" size={13} /></span></div>
+                    <div className="loadout tf2-loadout"><div><small>{profile ? 'Perfil' : 'Selección'}</small><span>{profile ? <span translate="no">{profile.name}</span> : mercenary ? 'Catálogo oficial TF2' : 'Pendiente'}</span></div><span className="loadout-status"><Icon name="check" size={13} /></span></div>
                   </article>
                 )
               })}
@@ -2380,68 +1885,6 @@ function App() {
             <span className="generate-glow" /><Icon name={tf2Generating ? 'refresh' : 'spark'} size={19} /><span>{tf2Generating ? 'Reuniendo…' : 'Generar equipo'}</span>
           </button>
         </ViewportAction>
-      </main>
-    )
-  }
-
-  function renderTf2Roulette() {
-    const selected = new Set(tf2RouletteSelectedKeys)
-    const selectedVisible = tf2RouletteVisibleClasses.filter((item) => selected.has(item.key)).length
-    const wheelCount = tf2RouletteBuiltClasses.length
-    const imageSize = wheelCount <= 12 ? 42 : wheelCount <= 24 ? 32 : 24
-    const imageRadius = wheelCount <= 12 ? 126 : wheelCount <= 24 ? 137 : 145
-    const buildStatus = tf2RouletteDirty
-      ? tf2RoulettePool.length > 0 ? 'Cambios sin construir' : 'Sin participantes'
-      : `${tf2RouletteEntries.length} casillas listas`
-
-    return (
-      <main className="utility-page roulette-page roulette-maker-v2 unified-game-roulette tf2-unified-roulette" style={{ '--yellow': '#e8a45b', '--cyan': '#e8a45b' } as CSSProperties}>
-        <header className="roulette-heading">
-          <div><h1>Ruleta · TF2</h1></div>
-          <div className="roulette-heading-stats"><span><small>CLASES</small><b>{tf2RoulettePool.length}</b></span><span><small>CASILLAS</small><b>{tf2RouletteTotalSlots}/64</b></span></div>
-        </header>
-
-        <section className="roulette-maker-layout">
-          <section className="roulette-builder-panel">
-            <header className="roulette-section-heading"><div><h2>Clases</h2></div></header>
-
-            <div className="roulette-toolbar roulette-toolbar-v2">
-              <label className="roulette-search"><Icon name="filter" size={16} /><input type="search" value={tf2RouletteSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setTf2RouletteSearch(event.target.value)} placeholder="Buscar clase…" /></label>
-              <div className="roulette-role-toggles tf2-unified-role-tabs" role="group" aria-label="Grupo visible">
-                <button type="button" className={tf2RouletteGroup === 'all' ? 'active' : ''} onClick={() => setTf2RouletteGroup('all')}>Todas</button>
-                {tf2Groups.map((group) => <button type="button" className={tf2RouletteGroup === group ? 'active' : ''} style={{ '--role-color': tf2GroupColors[group] } as CSSProperties} onClick={() => setTf2RouletteGroup(group)} key={group}><i className="roulette-generic-role-mark" />{tf2GroupLabels[group]}</button>)}
-              </div>
-              <div className="roulette-toolbar-actions"><button type="button" onClick={() => { const next = [...new Set([...tf2RouletteSelectedKeys, ...tf2RouletteVisibleClasses.map((item) => item.key)])]; setTf2RouletteSelectedKeys(next); setTf2RouletteWeights((current) => ({ ...Object.fromEntries(next.map((key) => [key, current[key] ?? 1])) })); markTf2RouletteDirty('Clases visibles añadidas') }} disabled={!tf2RouletteVisibleClasses.length}>Añadir visibles</button><button type="button" onClick={() => { const visible = new Set(tf2RouletteVisibleClasses.map((item) => item.key)); const next = tf2RouletteSelectedKeys.filter((key) => !visible.has(key)); setTf2RouletteSelectedKeys(next); markTf2RouletteDirty('Clases visibles retiradas') }} disabled={!selectedVisible}>Quitar visibles</button></div>
-            </div>
-
-            <div className="roulette-bulk-actions"><button type="button" onClick={selectAllTf2Roulette} disabled={tf2RouletteSpinning}><Icon name="check" size={14} /> Seleccionar todas</button><button type="button" onClick={() => { setTf2RouletteWeights(Object.fromEntries(tf2RouletteSelectedKeys.map((key) => [key, 1]))); markTf2RouletteDirty('Pesos igualados') }} disabled={!tf2RoulettePool.length || tf2RouletteSpinning}><Icon name="reset" size={14} /> Igualar pesos</button><button type="button" className="danger" onClick={clearTf2Roulette} disabled={!tf2RouletteSelectedKeys.length || tf2RouletteSpinning}><Icon name="trash" size={14} /> Vaciar</button></div>
-
-            <div className="roulette-weight-grid">
-              {tf2RouletteVisibleClasses.map((item) => {
-                const chosen = selected.has(item.key)
-                const weight = tf2RouletteWeight(item.key)
-                const probability = tf2RouletteProbability(item.key)
-                const roleColor = tf2GroupColors[item.group]
-                return <article className={`roulette-weight-card ${chosen ? 'selected' : ''}`} style={{ '--role-color': roleColor } as CSSProperties} key={item.key}>
-                  <button type="button" className="roulette-hero-pick" onClick={() => !chosen && toggleTf2RouletteClass(item.key)} disabled={tf2RouletteSpinning}><img src={asset(item.portrait)} alt="" loading="lazy" decoding="async" /><span className="roulette-weight-copy"><strong>{item.name}</strong><small>{tf2GroupLabels[item.group]}</small></span><i className="roulette-role-watermark roulette-generic-role-mark" />{!chosen && <span className="roulette-add-mark"><Icon name="plus" size={17} /></span>}</button>
-                  {chosen && <div className="roulette-weight-controls"><button type="button" onClick={() => changeTf2RouletteWeight(item.key, -1)} disabled={tf2RouletteSpinning || weight <= 1 || tf2RouletteTotalSlots <= 2}>−</button><span className="roulette-weight-value"><small>PESO</small><b>x{weight}</b></span><button type="button" onClick={() => changeTf2RouletteWeight(item.key, 1)} disabled={tf2RouletteSpinning || tf2RouletteTotalSlots >= 64}>+</button><span className="roulette-probability"><small>PROB.</small><b>{probability.toFixed(1)}%</b><i><em style={{ width: `${Math.min(100, probability)}%` }} /></i></span><button type="button" className="remove" onClick={() => toggleTf2RouletteClass(item.key)}>×</button></div>}
-                </article>
-              })}
-            </div>
-
-            <footer className="roulette-builder-footer"><div className="roulette-total-summary"><span><small>SELECCIONADAS</small><b>{tf2RoulettePool.length}</b></span><span><small>CASILLAS</small><b>{tf2RouletteTotalSlots}</b></span></div><button type="button" className="roulette-build-button" onClick={() => buildTf2Roulette(true)} disabled={tf2RouletteSpinning || !tf2RoulettePool.length || tf2RouletteTotalSlots > 64}><Icon name="roulette" size={20} /><span>CONSTRUIR RULETA</span></button></footer>
-          </section>
-
-          <aside className="roulette-wheel-panel">
-            <header className="roulette-section-heading compact"><div><h2>Ruleta</h2></div><span className="roulette-game-chip">TF2</span></header>
-            <div className={`roulette-wheel-stage ${tf2RouletteSpinning ? 'spinning' : ''} ${tf2RouletteDirty ? 'dirty' : ''}`}><span className="roulette-wheel-pointer" aria-hidden="true"><i /></span>{wheelCount >= 2 ? <div className="roulette-wheel-shell"><svg className="roulette-wheel-svg" viewBox="0 0 400 400"><defs>{tf2RouletteBuiltClasses.map((item, index) => { const angle = -90 + (index + .5) * 360 / wheelCount; const point = roulettePoint(imageRadius, angle); return <clipPath id={`tf2-unified-slot-${index}`} key={`clip-${item.key}-${index}`}><circle cx={point.x} cy={point.y} r={imageSize / 2} /></clipPath> })}</defs><g ref={tf2RouletteRotorRef} className="roulette-wheel-rotor" style={{ transform: `rotate(${tf2RouletteRotation}deg)` }}>{tf2RouletteBuiltClasses.map((item, index) => <path d={rouletteSectorPath(index, wheelCount)} fill={tf2GroupColors[item.group]} className="roulette-wheel-sector" key={`sector-${item.key}-${index}`} />)}{tf2RouletteBuiltClasses.map((item, index) => { const angle = -90 + (index + .5) * 360 / wheelCount; const point = roulettePoint(imageRadius, angle); return <g key={`portrait-${item.key}-${index}`}><circle cx={point.x} cy={point.y} r={imageSize / 2 + 2} fill="#061722" stroke="rgba(255,255,255,.72)" strokeWidth="1.5" /><image href={asset(item.portrait)} x={point.x - imageSize / 2} y={point.y - imageSize / 2} width={imageSize} height={imageSize} preserveAspectRatio="xMidYMid slice" clipPath={`url(#tf2-unified-slot-${index})`} /></g> })}<circle cx="200" cy="200" r="185" fill="none" stroke="rgba(211,241,255,.78)" strokeWidth="3" /></g></svg><div className="roulette-wheel-hub" style={{ '--role-color': tf2RouletteWinner ? tf2GroupColors[tf2RouletteWinner.group] : '#e8a45b' } as CSSProperties}>{tf2RouletteWinner ? <><img src={asset(tf2RouletteWinner.portrait)} alt="" /><span><small>GANADOR</small><strong>{tf2RouletteWinner.name}</strong></span></> : <><Icon name="roulette" size={28} /><span><small>RULETA</small><strong>{wheelCount} casillas</strong></span></>}</div></div> : <div className="roulette-wheel-placeholder"><span><Icon name="roulette" size={50} /></span><strong>Sin construir</strong></div>}</div>
-            <div className="roulette-winner-strip">{tf2RouletteWinner ? <><div className="roulette-winner-portrait" style={{ '--role-color': tf2GroupColors[tf2RouletteWinner.group] } as CSSProperties}><img src={asset(tf2RouletteWinner.portrait)} alt="" /></div><div><small>ÚLTIMO GIRO</small><strong>{tf2RouletteWinner.name}</strong><span>{tf2GroupLabels[tf2RouletteWinner.group]} · Peso x{tf2RouletteWeight(tf2RouletteWinner.key)} · {tf2RouletteProbability(tf2RouletteWinner.key).toFixed(1)}%</span></div></> : <><Icon name={tf2RouletteDirty ? 'warning' : 'check'} size={20} /><div><strong>{tf2RouletteSpinning ? 'Girando…' : buildStatus}</strong></div></>}</div>
-            <button type="button" className={`roulette-spin-button ${tf2RouletteSpinning ? 'spinning' : ''}`} onClick={spinTf2Roulette} disabled={tf2RouletteSpinning || !tf2RoulettePool.length}><Icon name="roulette" size={24} /><span>{tf2RouletteSpinning ? 'GIRANDO…' : tf2RouletteDirty ? 'CONSTRUIR Y GIRAR' : 'GIRAR RULETA'}</span></button>
-            <small className="roulette-autosave"><Icon name="check" size={13} /> Selección y pesos de TF2 se guardan por separado.</small>
-            {!!tf2RouletteEntries.length && <details className="roulette-slot-list"><summary><span>Ver casillas construidas</span><b>{tf2RouletteEntries.length}</b></summary><div>{tf2RouletteBuiltClasses.map((item, index) => <span key={`${item.key}-${index}`} style={{ '--role-color': tf2GroupColors[item.group] } as CSSProperties}><i>{index + 1}</i><img src={asset(item.portrait)} alt="" /><strong>{item.name}</strong></span>)}</div></details>}
-          </aside>
-        </section>
-
       </main>
     )
   }
@@ -2600,8 +2043,8 @@ function App() {
                       <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
                       <div className="card-player">
                         <span className="player-index">{String(index + 1).padStart(2, '0')}</span>
-                        <span>{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : (player.name || localizedPlayerName(activeLocale, index + 1))}</span>
-                        {assignedProfile && <span className="profile-tag" title={`Perfil: ${assignedProfile.name}`}>{assignedProfile.name.charAt(0).toUpperCase()}</span>}
+                        <span translate="no">{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : (player.name || localizedPlayerName(activeLocale, index + 1))}</span>
+                        {assignedProfile && <span className="profile-tag" title={`Perfil: ${assignedProfile.name}`} translate="no">{assignedProfile.name.charAt(0).toUpperCase()}</span>}
                         {player.blocked.length > 0 && <span className="filter-count" title={`${player.blocked.length} héroes bloqueados`}>{player.blocked.length}</span>}
                         {pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}
                       </div>
@@ -2673,199 +2116,51 @@ function App() {
     )
   }
 
+  useEffect(() => {
+    if (activeView !== 'profiles') return
+    const otherGames = ['pvz', ...rosterGameDefinitions.map((game) => game.id)]
+    setOtherProfilePlayers(Object.fromEntries(otherGames.map((game) => {
+      const saved = readStorage<unknown>(`overroll.web.${game}.players`, [])
+      const rows = Array.isArray(saved) ? saved.slice(0, 12).filter((row) => row && typeof row === 'object').map((row, index) => ({ ...row, id: typeof row.id === 'string' ? row.id : `${game}-${index}`, name: sanitizePersonName(row.name), profileId: typeof row.profileId === 'string' ? row.profileId : '' })) : []
+      return [game, rows]
+    })))
+  }, [activeView])
 
-  function renderRoulette() {
-    const selectedSet = new Set(rouletteSelectedKeys)
-    const selectedVisible = rouletteVisibleHeroes.filter((hero) => selectedSet.has(hero.key)).length
-    const wheelCount = rouletteBuiltHeroes.length
-    const imageSize = wheelCount <= 12 ? 42 : wheelCount <= 24 ? 32 : wheelCount <= 40 ? 24 : 18
-    const imageRadius = wheelCount <= 12 ? 126 : wheelCount <= 24 ? 137 : 145
-    const activeRoleCount = roles.filter((role) => rouletteRolesEnabled[role]).length
-    const buildStatus = rouletteDirty
-      ? roulettePool.length > 0 ? 'Cambios sin construir' : 'Sin participantes'
-      : `${rouletteEntries.length} casillas listas`
+  function syncOtherProfile(profileId: string, name?: string) {
+    const updated: typeof otherProfilePlayers = {}
+    for (const game of ['pvz', ...rosterGameDefinitions.map((item) => item.id)]) {
+      const saved = readStorage<unknown>(`overroll.web.${game}.players`, [])
+      if (!Array.isArray(saved)) continue
+      const rows = saved.slice(0, 12).filter((row) => row && typeof row === 'object').map((row) => row.profileId === profileId ? { ...row, profileId: name === undefined ? '' : profileId, name: sanitizePersonName(name ?? row.name) } : row)
+      try { localStorage.setItem(`overroll.web.${game}.players`, JSON.stringify(rows)) } catch { /* Ignore unavailable storage. */ }
+      updated[game] = rows
+    }
+    setOtherProfilePlayers(updated)
+  }
 
-    return (
-      <main className="utility-page roulette-page roulette-maker-v2">
-        <header className="roulette-heading">
-          <div>
-            <h1>Ruleta · Overwatch</h1>
+  function assignOtherProfile(game: string, index: number, profileId: string) {
+    const profile = profiles.find((item) => item.id === profileId)
+    const rows = (otherProfilePlayers[game] ?? []).map((player, position) => position === index ? { ...player, profileId, name: sanitizePersonName(profile?.name ?? player.name) } : player)
+    try { localStorage.setItem(`overroll.web.${game}.players`, JSON.stringify(rows)) } catch { /* Keep the editor usable when storage is blocked. */ }
+    setOtherProfilePlayers((current) => ({ ...current, [game]: rows }))
+    playSound('profileAssign')
+  }
 
-          </div>
-          <div className="roulette-heading-stats" aria-label="Resumen de la ruleta">
-            <span><small>HÉROES</small><b>{roulettePool.length}</b></span>
-            <span><small>CASILLAS</small><b>{rouletteTotalSlots}/64</b></span>
-          </div>
-        </header>
-
-        <section className="roulette-maker-layout">
-          <section className="roulette-builder-panel">
-            <header className="roulette-section-heading">
-              <div><h2>Héroes</h2></div>
-              <span className={`roulette-build-badge ${rouletteDirty ? 'pending' : 'ready'}`}>{buildStatus}</span>
-            </header>
-
-            <div className="roulette-toolbar roulette-toolbar-v2">
-              <label className="roulette-search"><Icon name="filter" size={16} /><input type="search" value={rouletteSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setRouletteSearch(event.target.value)} placeholder="Buscar héroe…" /></label>
-              <div className="roulette-role-toggles" role="group" aria-label="Roles incluidos">
-                {roles.map((role) => {
-                  const roleStyle = ({ '--role-icon': `url("${asset(`assets/roles/${role}.png`)}")` } as CSSProperties)
-                  return (
-                    <button type="button" className={`${role} ${rouletteRolesEnabled[role] ? 'active' : ''}`} onClick={() => toggleRouletteRole(role)} aria-pressed={rouletteRolesEnabled[role]} key={role}>
-                      <i style={roleStyle} aria-hidden="true" />{roleLabels[role]}
-                    </button>
-                  )
-                })}
-              </div>
-              <div className="roulette-toolbar-actions">
-                <button type="button" onClick={selectRouletteVisible} disabled={rouletteVisibleHeroes.length === 0}>Añadir visibles</button>
-                <button type="button" onClick={clearRouletteVisible} disabled={selectedVisible === 0}>Quitar visibles</button>
-              </div>
-            </div>
-
-            <div className="roulette-bulk-actions">
-              <button type="button" onClick={selectAllRouletteHeroes} disabled={activeRoleCount === 0 || rouletteSpinning}><Icon name="check" size={14} /> Seleccionar roles activos</button>
-              <button type="button" onClick={equalizeRouletteWeights} disabled={roulettePool.length === 0 || rouletteSpinning}><Icon name="reset" size={14} /> Igualar pesos</button>
-              <button type="button" className="danger" onClick={clearRouletteHeroes} disabled={rouletteSelectedKeys.length === 0 || rouletteSpinning}><Icon name="trash" size={14} /> Vaciar</button>
-            </div>
-
-            {activeRoleCount === 0 && <div className="roulette-inline-warning"><Icon name="warning" size={16} /> Activa al menos un rol para mostrar participantes.</div>}
-
-            <div className="roulette-weight-grid">
-              {rouletteVisibleHeroes.map((hero) => {
-                const selected = selectedSet.has(hero.key)
-                const weight = rouletteWeight(hero.key)
-                const probability = rouletteProbability(hero.key)
-                const roleStyle = ({ '--role-icon': `url("${asset(`assets/roles/${hero.role}.png`)}")` } as CSSProperties)
-                return (
-                  <article className={`roulette-weight-card ${hero.role} ${selected ? 'selected' : ''}`} key={hero.key}>
-                    <button type="button" className="roulette-hero-pick" onClick={() => !selected && toggleRouletteHero(hero.key)} disabled={rouletteSpinning} aria-label={selected ? `${hero.name} seleccionado` : `Añadir a ${hero.name}`}>
-                      <img src={asset(hero.portrait)} alt="" loading="lazy" decoding="async" onLoad={handleImageLoad} onError={handleImageError} />
-                      <span className="roulette-weight-copy"><strong>{hero.name}</strong><small>{roleLabels[hero.role]} · {subroleLabels[hero.subrole] ?? hero.subrole}</small></span>
-                      <i className="roulette-role-watermark" style={roleStyle} aria-hidden="true" />
-                      {!selected && <span className="roulette-add-mark"><Icon name="plus" size={17} /></span>}
-                    </button>
-
-                    {selected && (
-                      <div className="roulette-weight-controls">
-                        <button type="button" onClick={() => changeRouletteWeight(hero.key, -1)} disabled={rouletteSpinning || rouletteTotalSlots <= 2 || weight <= 1} aria-label={`Reducir peso de ${hero.name}`}>−</button>
-                        <span className="roulette-weight-value"><small>PESO</small><b>x{weight}</b></span>
-                        <button type="button" onClick={() => changeRouletteWeight(hero.key, 1)} disabled={rouletteSpinning || rouletteTotalSlots >= 64} aria-label={`Aumentar peso de ${hero.name}`}>+</button>
-                        <span className="roulette-probability"><small>PROB.</small><b>{probability.toFixed(1)}%</b><i><em style={{ width: `${Math.min(100, probability)}%` }} /></i></span>
-                        <button type="button" className="remove" onClick={() => toggleRouletteHero(hero.key)} disabled={rouletteSpinning} aria-label={`Quitar a ${hero.name}`}><Icon name="close" size={15} /></button>
-                      </div>
-                    )}
-                  </article>
-                )
-              })}
-            </div>
-
-            {rouletteVisibleHeroes.length === 0 && activeRoleCount > 0 && (
-              <div className="roulette-empty-list"><Icon name="filter" size={28} /><strong>No hay coincidencias</strong><span>Prueba otro nombre o activa más roles.</span></div>
-            )}
-
-            <footer className="roulette-builder-footer">
-              <div className="roulette-total-summary">
-                <span><small>SELECCIONADOS</small><b>{roulettePool.length}</b></span>
-                <span><small>CASILLAS</small><b>{rouletteTotalSlots}</b></span>
-
-              </div>
-              <button type="button" className="roulette-build-button" onClick={() => buildRoulette(true)} disabled={rouletteSpinning || roulettePool.length === 0 || rouletteTotalSlots > 64}>
-                <Icon name="roulette" size={20} /><span>CONSTRUIR RULETA</span>
-              </button>
-            </footer>
-          </section>
-
-          <aside className="roulette-wheel-panel">
-            <header className="roulette-section-heading compact">
-              <div><h2>Ruleta</h2></div>
-              <button type="button" className="roulette-image-button" onClick={generateRouletteImage} aria-busy={imageExporting} disabled={imageExporting || !rouletteWinner || rouletteSpinning}><Icon name="download" size={15} /> Imagen</button>
-            </header>
-
-            <div className={`roulette-wheel-stage ${rouletteSpinning ? 'spinning' : ''} ${rouletteDirty ? 'dirty' : ''}`}>
-              <span className="roulette-wheel-pointer" aria-hidden="true"><i /></span>
-              {wheelCount >= 2 ? (
-                <div className="roulette-wheel-shell">
-                  <svg className="roulette-wheel-svg" viewBox="0 0 400 400" role="img" aria-label={`Ruleta de ${wheelCount} casillas`}>
-                    <defs>
-                      {rouletteBuiltHeroes.map((hero, index) => {
-                        const angle = -90 + (index + 0.5) * (360 / wheelCount)
-                        const point = roulettePoint(imageRadius, angle)
-                        return <clipPath id={`roulette-slot-clip-${index}`} key={`clip-${hero.key}-${index}`}><circle cx={point.x} cy={point.y} r={imageSize / 2} /></clipPath>
-                      })}
-                      <filter id="roulette-wheel-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="7" floodColor="#000" floodOpacity=".55" /></filter>
-                    </defs>
-                    <g ref={rouletteRotorRef} className="roulette-wheel-rotor" style={{ transform: `rotate(${rouletteRotation}deg)` }}>
-                      {rouletteBuiltHeroes.map((hero, index) => (
-                        <path d={rouletteSectorPath(index, wheelCount)} fill={rouletteRoleColors[hero.role]} className={`roulette-wheel-sector ${hero.role}`} key={`sector-${hero.key}-${index}`} />
-                      ))}
-                      {rouletteBuiltHeroes.map((hero, index) => {
-                        const angle = -90 + (index + 0.5) * (360 / wheelCount)
-                        const point = roulettePoint(imageRadius, angle)
-                        return (
-                          <g key={`portrait-${hero.key}-${index}`}>
-                            <circle cx={point.x} cy={point.y} r={imageSize / 2 + 2} fill="#061722" stroke="rgba(255,255,255,.72)" strokeWidth="1.5" />
-                            <image href={asset(hero.portrait)} x={point.x - imageSize / 2} y={point.y - imageSize / 2} width={imageSize} height={imageSize} preserveAspectRatio="xMidYMid slice" clipPath={`url(#roulette-slot-clip-${index})`} />
-                          </g>
-                        )
-                      })}
-                      <circle cx="200" cy="200" r="185" fill="none" stroke="rgba(211,241,255,.78)" strokeWidth="3" />
-                    </g>
-                  </svg>
-                  <div className={`roulette-wheel-hub ${rouletteWinner ? rouletteWinner.role : ''}`}>
-                    {rouletteWinner ? (
-                      <><img src={asset(rouletteWinner.portrait)} alt="" /><span><small>GANADOR</small><strong>{rouletteWinner.name}</strong></span></>
-                    ) : (
-                      <><Icon name="roulette" size={28} /><span><small>RULETA</small><strong>{wheelCount} casillas</strong></span></>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <div className="roulette-wheel-placeholder"><span><Icon name="roulette" size={50} /></span><strong>Sin construir</strong></div>
-              )}
-            </div>
-
-            <div className="roulette-winner-strip">
-              {rouletteWinner ? (
-                <>
-                  <div className={`roulette-winner-portrait ${rouletteWinner.role}`}><img src={asset(rouletteWinner.portrait)} alt="" /></div>
-                  <div><small>ÚLTIMO GIRO</small><strong>{rouletteWinner.name}</strong><span>{roleLabels[rouletteWinner.role]} · Peso x{rouletteWeight(rouletteWinner.key)} · {rouletteProbability(rouletteWinner.key).toFixed(1)}%</span></div>
-                </>
-              ) : (
-                <><Icon name={rouletteDirty ? 'warning' : 'check'} size={20} /><div><strong>{rouletteSpinning ? 'Girando…' : buildStatus}</strong></div></>
-              )}
-            </div>
-
-            <button type="button" className={`roulette-spin-button ${rouletteSpinning ? 'spinning' : ''}`} onClick={spinRoulette} disabled={rouletteSpinning || roulettePool.length === 0}>
-              <Icon name="roulette" size={24} />
-              <span>{rouletteSpinning ? 'GIRANDO…' : rouletteDirty ? 'CONSTRUIR Y GIRAR' : 'GIRAR RULETA'}</span>
-            </button>
-
-            <small className="roulette-autosave"><Icon name="check" size={13} /> Selección, roles y pesos se guardan en este navegador.</small>
-
-            {rouletteEntries.length > 0 && (
-              <details className="roulette-slot-list">
-                <summary><span>Ver casillas construidas</span><b>{rouletteEntries.length}</b></summary>
-                <div>
-                  {rouletteBuiltHeroes.map((hero, index) => (
-                    <span className={hero.role} key={`${hero.key}-slot-${index}`}><i>{index + 1}</i><img src={asset(hero.portrait)} alt="" /><strong>{hero.name}</strong></span>
-                  ))}
-                </div>
-              </details>
-            )}
-          </aside>
-        </section>
-      </main>
-    )
+  function classifyVisible() {
+    if (!currentProfile || !classifiedHeroes.length) return
+    const keys = new Set(classifiedHeroes.map((hero) => hero.key))
+    setProfiles((current) => current.map((profile) => profile.id === currentProfile.id ? { ...profile, heroes: Object.fromEntries(profileBuckets.map((bucket) => [bucket, [...profile.heroes[bucket].filter((key) => !keys.has(key)), ...(bucket === profileBulkBucket ? keys : [])]])) as Record<ProfileBucket, string[]> } : profile))
+    playSound('profileClassify')
   }
 
   function profileMarkedCount(profile: UserProfile) {
-    return profileBuckets.reduce((sum, bucket) => sum + profile.heroes[bucket].length, 0)
+    return profileBuckets.reduce((sum, bucket) => sum + profile.heroes[bucket].filter((key) => data?.heroes.some((hero) => hero.key === key)).length, 0)
   }
 
   function profileAssignedCount(profileId: string) {
     return players.filter((player) => player.profileId === profileId).length
       + tf2Players.filter((player) => player.profileId === profileId).length
+      + Object.values(otherProfilePlayers).flat().filter((player) => player.profileId === profileId).length
   }
 
   function duplicateCurrentProfile() {
@@ -2907,11 +2202,14 @@ function App() {
           </section>
         ) : (
           <>
+            <div className="profiles-workspace">
+            <nav className="profiles-switcher" aria-label="Perfiles">{profiles.map((profile) => <button type="button" key={profile.id} className={profile.id === currentProfileId ? 'active' : ''} aria-pressed={profile.id === currentProfileId} onClick={() => { setCurrentProfileId(profile.id); playSound('profileSelect') }}><i translate="no">{profile.name.slice(0, 2).toLocaleUpperCase(activeLocale)}</i><strong translate="no">{profile.name}</strong><span>{profileMarkedCount(profile)} / {totalHeroes}</span></button>)}</nav>
+            <div className="profiles-content">
             <section className="profiles-simple-toolbar">
               <label>
                 <span>Perfil</span>
                 <select value={currentProfileId} onChange={(event: ChangeEvent<HTMLSelectElement>) => { setCurrentProfileId(event.target.value); playSound('profileSelect') }}>
-                  {profiles.map((profile) => <option value={profile.id} key={profile.id}>{profile.name}</option>)}
+                  {profiles.map((profile) => <option value={profile.id} key={profile.id} translate="no">{profile.name}</option>)}
                 </select>
               </label>
 
@@ -2932,18 +2230,19 @@ function App() {
 
             {currentProfile && (
               <section className="profiles-simple-editor">
-                <nav className="profiles-simple-tabs" aria-label="Secciones del perfil">
-                  <button type="button" className={profileTab === 'heroes' ? 'active' : ''} onClick={() => setProfileTab('heroes')}>
+                <nav className="profiles-simple-tabs" aria-label="Secciones del perfil" role="tablist">
+                  <button type="button" role="tab" tabIndex={profileTab === 'heroes' ? 0 : -1} id="profile-tab-heroes" aria-selected={profileTab === 'heroes'} aria-controls="profile-panel" className={profileTab === 'heroes' ? 'active' : ''} onClick={() => setProfileTab('heroes')} onKeyDown={(event) => { const tabs = ['heroes', 'players', 'mode'] as const; const index = tabs.indexOf(profileTab); const next = event.key === 'ArrowRight' ? tabs[(index + 1) % 3] : event.key === 'ArrowLeft' ? tabs[(index + 2) % 3] : event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[2] : null; if (next) { event.preventDefault(); setProfileTab(next); document.getElementById('profile-tab-' + next)?.focus() } } }>
                     <Icon name="gamepad" size={16} /> Héroes
                   </button>
-                  <button type="button" className={profileTab === 'players' ? 'active' : ''} onClick={() => setProfileTab('players')}>
+                  <button type="button" role="tab" tabIndex={profileTab === 'players' ? 0 : -1} id="profile-tab-players" aria-selected={profileTab === 'players'} aria-controls="profile-panel" className={profileTab === 'players' ? 'active' : ''} onClick={() => setProfileTab('players')} onKeyDown={(event) => { const tabs = ['heroes', 'players', 'mode'] as const; const index = tabs.indexOf(profileTab); const next = event.key === 'ArrowRight' ? tabs[(index + 1) % 3] : event.key === 'ArrowLeft' ? tabs[(index + 2) % 3] : event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[2] : null; if (next) { event.preventDefault(); setProfileTab(next); document.getElementById('profile-tab-' + next)?.focus() } } }>
                     <Icon name="users" size={16} /> Jugadores {assignedPlayers > 0 && <b>{assignedPlayers}</b>}
                   </button>
-                  <button type="button" className={profileTab === 'mode' ? 'active' : ''} onClick={() => setProfileTab('mode')}>
+                  <button type="button" role="tab" tabIndex={profileTab === 'mode' ? 0 : -1} id="profile-tab-mode" aria-selected={profileTab === 'mode'} aria-controls="profile-panel" className={profileTab === 'mode' ? 'active' : ''} onClick={() => setProfileTab('mode')} onKeyDown={(event) => { const tabs = ['heroes', 'players', 'mode'] as const; const index = tabs.indexOf(profileTab); const next = event.key === 'ArrowRight' ? tabs[(index + 1) % 3] : event.key === 'ArrowLeft' ? tabs[(index + 2) % 3] : event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[2] : null; if (next) { event.preventDefault(); setProfileTab(next); document.getElementById('profile-tab-' + next)?.focus() } } }>
                     <Icon name="settings" size={16} /> Reglas
                   </button>
                 </nav>
 
+                <div id="profile-panel" role="tabpanel" aria-labelledby={'profile-tab-' + profileTab}>
                 {profileTab === 'heroes' && (
                   <div className="profiles-simple-section">
                     <div className="profiles-hero-toolbar">
@@ -2960,11 +2259,14 @@ function App() {
                     </div>
 
                     <div className="profiles-simple-hint">
-                      <span>Elige una categoría por héroe. “Sin clasificar” no modifica sus probabilidades.</span>
+                      <strong translate="no">Overwatch</strong>
+                      <select aria-label="Filtrar categoría" value={profileBucketFilter} onChange={(event) => setProfileBucketFilter(event.target.value as typeof profileBucketFilter)}><option value="all">Todos</option><option value="unmarked">Sin clasificar</option>{profileBuckets.map((bucket) => <option key={bucket} value={bucket}>{bucketLabels[bucket]}</option>)}</select>
+                      <div className="profile-bulk"><select aria-label="Clasificación" value={profileBulkBucket} onChange={(event) => setProfileBulkBucket(event.target.value as typeof profileBulkBucket)}><option value="">Sin clasificar</option>{profileBuckets.map((bucket) => <option key={bucket} value={bucket}>{bucketLabels[bucket]}</option>)}</select><button type="button" onClick={classifyVisible} disabled={!classifiedHeroes.length}>Aplicar a visibles</button></div>
                       {markedHeroes > 0 && <button type="button" onClick={clearCurrentProfile}><Icon name="reset" size={14} /> Reiniciar</button>}
                     </div>
 
                     <div className="profiles-simple-grid">
+                      {!classifiedHeroes.length && <p className="profile-no-results">Sin resultados</p>}
                       {classifiedHeroes.map((hero) => {
                         const bucket = heroBucket(currentProfile, hero.key)
                         return (
@@ -3006,13 +2308,14 @@ function App() {
                           return (
                             <button type="button" className={assigned ? 'assigned' : ''} onClick={() => assignPlayerProfile(index, assigned ? '' : currentProfile.id)} key={player.id}>
                               <span className="player-number">{String(index + 1).padStart(2, '0')}</span>
-                              <span><strong>{player.name || `Jugador${index + 1}`}</strong><small>{assigned ? currentProfile.name : otherProfile ? `Usa ${otherProfile.name}` : 'Sin perfil'}</small></span>
+                              <span><strong translate="no">{player.name || `Jugador${index + 1}`}</strong><small>{assigned ? <span translate="no">{currentProfile.name}</span> : otherProfile ? <span translate="no">{otherProfile.name}</span> : 'Sin perfil'}</small></span>
                               <Icon name={assigned ? 'check' : 'profile'} size={18} />
                             </button>
                           )
                         })}
                       </div>
                     </div>
+                    {Object.entries(otherProfilePlayers).filter(([, roster]) => roster.length > 0).map(([game, roster]) => <div className="profiles-game-assignment" key={game}><div className="profiles-game-label"><strong translate="no">{game === 'pvz' ? 'Plants vs. Zombies GW2' : rosterGameDefinitions.find((item) => item.id === game)?.name}</strong><small>{roster.length} fichas</small></div><div className="profiles-player-list">{roster.map((player, index) => { const assigned = player.profileId === currentProfile.id; return <button type="button" className={assigned ? 'assigned' : ''} onClick={() => assignOtherProfile(game, index, assigned ? '' : currentProfile.id)} key={player.id}><span className="player-number">{String(index + 1).padStart(2, '0')}</span><span><strong translate="no">{player.name || localizedPlayerName(activeLocale, index + 1)}</strong><small>{player.profileId ? <span translate="no">{profiles.find((profile) => profile.id === player.profileId)?.name ?? player.name}</span> : 'Sin perfil'}</small></span><Icon name={assigned ? 'check' : 'profile'} size={18} /></button> })}</div></div>)}
                     <div className="profiles-game-assignment tf2-assignment">
                       <div className="profiles-game-label"><span className="settings-game-dot" style={{ '--module-accent': '#e8a45b' } as CSSProperties} /><strong>Team Fortress 2</strong><small>{tf2Players.length} fichas</small></div>
                       <div className="profiles-player-list">
@@ -3022,7 +2325,7 @@ function App() {
                           return (
                             <button type="button" className={assigned ? 'assigned' : ''} onClick={() => tf2AssignPlayerProfile(index, assigned ? '' : currentProfile.id)} key={player.id}>
                               <span className="player-number">{String(index + 1).padStart(2, '0')}</span>
-                              <span><strong>{player.name || `Jugador${index + 1}`}</strong><small>{assigned ? currentProfile.name : otherProfile ? `Usa ${otherProfile.name}` : 'Sin perfil'}</small></span>
+                              <span><strong translate="no">{player.name || `Jugador${index + 1}`}</strong><small>{assigned ? <span translate="no">{currentProfile.name}</span> : otherProfile ? <span translate="no">{otherProfile.name}</span> : 'Sin perfil'}</small></span>
                               <Icon name={assigned ? 'check' : 'profile'} size={18} />
                             </button>
                           )
@@ -3037,6 +2340,7 @@ function App() {
                     <header className="profiles-section-title">
                       <div><h2>Reglas del perfil</h2></div>
                     </header>
+                    <span className="profile-game-scope" translate="no">Overwatch</span>
                     <div className="profiles-mode-list">
                       {profileModes.map((mode) => (
                         <button type="button" title={mode.description} className={profileMode === mode.id ? 'active' : ''} onClick={() => { setProfileMode(mode.id); playSound('profileSelect') }} aria-pressed={profileMode === mode.id} key={mode.id}>
@@ -3047,8 +2351,10 @@ function App() {
                     </div>
                   </div>
                 )}
+                </div>
               </section>
             )}
+            </div></div>
           </>
         )}
       </main>
@@ -3141,14 +2447,20 @@ function App() {
                 <div><h3>OverRoll</h3><p>Creado por <strong>SHAGGOS</strong></p><a href="https://github.com/SHAGGOS2/OverRoll" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
                 <a className="preferences-hammond" href={creditsSongUrl(activeLocale)} target="_blank" rel="noreferrer" title={t('credits_hammond_hint')}><img src={asset('assets/hammond_credits.gif')} alt={t('credits_hammond_alt')} /></a>
               </div>
-              <p className="preferences-attribution">{t('credits_legal_body')}</p>
+              <p className="preferences-attribution">Proyecto independiente. Sin afiliación ni respaldo de las empresas citadas.</p>
+              <div className="game-credits-list">{gameCredits.map((credit) => <article key={credit.game}>
+                <h3><a href={credit.url} target="_blank" rel="noreferrer noopener">{credit.game} ↗</a></h3>
+                <dl><div><dt>Desarrollo</dt><dd translate="no">{credit.development}</dd></div><div><dt>Edición</dt><dd translate="no">{credit.publishing}</dd></div><div><dt>Marcas y personajes</dt><dd translate="no">{credit.rights}</dd></div></dl>
+                {credit.notice && <small translate="no">{credit.notice}</small>}
+              </article>)}</div>
+              <p className="preferences-attribution">Interfaz e iconos propios · OverRoll / SHAGGOS</p>
             </div>}
           </section>
         </div>
       </main>
     )
   }
-  return (
+  return localizeUi(activeLocale,
     <div className={`app view-${activeView} ${animationsEnabled ? '' : 'reduce-motion'} ${compactPerks ? 'compact-perks' : ''} ${lowPowerMode ? 'low-power' : ''} ${mobileCompactMode ? 'mobile-compact' : ''}`}>
       <div className="ambient-grid" /><div className="ambient-orb orb-one" /><div className="ambient-orb orb-two" /><div className="noise-layer" />
 
@@ -3195,7 +2507,7 @@ function App() {
         />
       )}
       {activeGame !== 'pvzgw2' && !isRosterGame(activeGame) && activeView === 'principal' && (activeGame === 'tf2' ? renderTf2Principal() : renderPrincipal())}
-      {activeGame !== 'pvzgw2' && !isRosterGame(activeGame) && activeView === 'roulette' && (activeGame === 'tf2' ? renderTf2Roulette() : renderRoulette())}
+      {activeGame !== 'pvzgw2' && !isRosterGame(activeGame) && activeView === 'roulette' && (activeGame === 'tf2' ? <SharedRoulette key="tf2" gameId="tf2" title="Team Fortress 2" items={tf2Classes.map((item) => ({ ...item, role: item.group, icon: 'assets/tf2/icons/' + item.key.replace(/^tf2-/, '') + '.png' }))} roles={tf2Groups.map((id) => ({ id, label: tf2GroupLabels[id], color: tf2GroupColors[id] }))} storagePrefix="overroll.web.tf2" legacySelectionKey="rouletteSelectedKeys" baseUrl={baseUrl} locale={activeLocale} animationsEnabled={animationsEnabled} notify={notify} onSpin={() => playSound('tf2RouletteSpin')} onWin={() => playSound('tf2RouletteWin')} /> : data ? <SharedRoulette key="overwatch" gameId="overwatch" title="Overwatch" items={data.heroes} roles={roles.map((id) => ({ id, label: roleLabels[id], color: rouletteRoleColors[id], icon: 'assets/roles/' + id + '.png' }))} storagePrefix="overroll.web" legacySelectionKey="rouletteSelectedKeys" baseUrl={baseUrl} locale={activeLocale} animationsEnabled={animationsEnabled} notify={notify} onSpin={() => playSound('generate')} onWin={playConfirmTone} /> : null)}
       {activeView === 'profiles' && renderProfiles()}
       {activeView === 'more' && renderMore()}
 
@@ -3217,7 +2529,6 @@ function App() {
                   </article>
                 ))}
               </div>
-              {(selectedDetailPick?.perks.length ?? 0) === 0 && <p className="empty-perks">Selecciona perks manualmente abajo o usa el botón Aleatorias.</p>}
 
               <div className="drawer-section-title catalog-title"><Icon name={stadium ? 'stadium' : 'details'} size={17} /><span>{stadium ? 'Catálogo Stadium · elige hasta 4' : 'Catálogo Quick Play · una menor y una mayor'}</span></div>
               <div className="perk-grid">
@@ -3236,11 +2547,10 @@ function App() {
         </div>
       )}
 
-      {activeGame === 'overwatch' && filterIndex !== null && filterPlayer && (
-        <div className="filter-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) closeFilter() }}>
+      <AnimatedLayer open={Boolean(activeGame === 'overwatch' && filterIndex !== null && filterPlayer)} enabled={animationsEnabled} onClose={closeFilter} className="filter-layer">{activeGame === 'overwatch' && filterIndex !== null && filterPlayer && (<>
           <section className="filter-dialog" role="dialog" aria-modal="true" aria-label={`Filtro de ${filterPlayer.name}`}>
             <header className="filter-heading">
-              <div><span className="eyebrow">Filtro individual</span><h2>{filterPlayer.name || `Jugador${filterIndex + 1}`}</h2><p>{availableHeroes.length - filterPlayer.blocked.length} visibles · {filterPlayer.blocked.length} bloqueados</p></div>
+              <div><span className="eyebrow">Filtro individual</span><h2 translate="no">{filterPlayer.name || `Jugador${filterIndex + 1}`}</h2><p>{availableHeroes.length - filterPlayer.blocked.length} visibles · {filterPlayer.blocked.length} bloqueados</p></div>
               <button type="button" onClick={closeFilter} aria-label="Cerrar filtro"><Icon name="close" size={20} /></button>
             </header>
 
@@ -3274,22 +2584,19 @@ function App() {
               })}
             </div>
           </section>
-        </div>
-      )}
+        </>)}</AnimatedLayer>
 
-      {activeGame === 'tf2' && tf2FilterIndex !== null && tf2FilterPlayer && (
-        <div className="filter-layer tf2-filter-layer" role="presentation" onMouseDown={(event: MouseEvent<HTMLDivElement>) => { if (event.currentTarget === event.target) closeTf2Filter() }}>
+      <AnimatedLayer open={Boolean(activeGame === 'tf2' && tf2FilterIndex !== null && tf2FilterPlayer)} enabled={animationsEnabled} onClose={closeTf2Filter} className="filter-layer tf2-filter-layer">{activeGame === 'tf2' && tf2FilterIndex !== null && tf2FilterPlayer && (<>
           <section className="filter-dialog tf2-filter-dialog" role="dialog" aria-modal="true" aria-label={`Filtro TF2 de ${tf2FilterPlayer.name}`}>
-            <header className="filter-heading"><div><span className="eyebrow">Filtro individual · TF2</span><h2>{tf2FilterPlayer.name || `Jugador${tf2FilterIndex + 1}`}</h2><p>{tf2Classes.length - tf2FilterPlayer.blocked.length} permitidas · {tf2FilterPlayer.blocked.length} bloqueadas</p></div><button type="button" onClick={closeTf2Filter}><Icon name="close" size={20} /></button></header>
+            <header className="filter-heading"><div><span className="eyebrow">Filtro individual · TF2</span><h2 translate="no">{tf2FilterPlayer.name || `Jugador${tf2FilterIndex + 1}`}</h2><p>{tf2Classes.length - tf2FilterPlayer.blocked.length} permitidas · {tf2FilterPlayer.blocked.length} bloqueadas</p></div><button type="button" onClick={closeTf2Filter} aria-label="Cerrar filtro"><Icon name="close" size={20} /></button></header>
             <div className="filter-toolbar"><div className="profile-search"><Icon name="filter" size={16} /><input value={tf2FilterSearch} onChange={(event: ChangeEvent<HTMLInputElement>) => setTf2FilterSearch(event.target.value)} placeholder="Buscar clase…" /></div><div className="role-filter-tabs tf2-filter-tabs"><button type="button" className={tf2FilterGroup === 'all' ? 'active' : ''} onClick={() => setTf2FilterGroup('all')}>Todas</button>{tf2Groups.map((group) => <button type="button" className={`${group} ${tf2FilterGroup === group ? 'active' : ''}`} onClick={() => setTf2FilterGroup(group)} key={group}>{tf2GroupLabels[group]}</button>)}</div><button type="button" className="reset-classification" onClick={clearTf2Filter}><Icon name="reset" size={15} /> Reiniciar</button></div>
             <div className="filter-hero-grid tf2-filter-class-grid">{tf2VisibleFilterClasses.map((item) => { const blocked = tf2FilterPlayer.blocked.includes(item.key); return <button type="button" className={`filter-hero tf2-filter-class ${item.group} ${blocked ? 'blocked' : ''}`} onClick={() => toggleTf2BlockedClass(item.key)} aria-pressed={blocked} key={item.key}><img src={asset(item.portrait)} alt={item.name} /><span><strong>{item.name}</strong><small>{blocked ? 'BLOQUEADA' : tf2GroupLabels[item.group].toUpperCase()}</small></span><i>{blocked ? '×' : '✓'}</i></button> })}</div>
           </section>
-        </div>
-      )}
+        </>)}</AnimatedLayer>
 
       {toast && <div className={`toast ${toast.tone}`} role="status"><span><Icon name={toast.tone === 'warning' ? 'warning' : toast.tone === 'success' ? 'check' : 'spark'} size={17} /></span><p>{toast.message}</p></div>}
     </div>
-  )
+  , activeGame)
 }
 
 export default App

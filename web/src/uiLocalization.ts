@@ -1,4 +1,6 @@
-import { useEffect } from 'react'
+import { cloneElement, isValidElement, type ReactNode, type ReactElement } from 'react'
+import { uiMessages } from './uiMessages.ts'
+import { gameTerm } from './gameTerms.ts'
 import type { SupportedLocale } from './localization'
 import { sanitizePersonName } from './personName.ts'
 
@@ -325,42 +327,30 @@ const supplemental: Partial<Record<SupportedLocale, Dict>> = {
   },
 }
 
-const knownSources = new Set<string>([
-  ...Object.keys(en), ...Object.keys(de), ...Object.keys(fr), ...Object.keys(pt), ...Object.keys(ja), ...Object.keys(ko), ...Object.keys(zh),
-  ...Object.values(supplemental).flatMap((dict) => Object.keys(dict ?? {})),
-])
-const knownSourcesLower = new Set([...knownSources].map((value) => value.toLocaleLowerCase('es')))
-
-function isUiSource(value: string): boolean {
-  const core = value.trim()
-  if (knownSourcesLower.has(core.toLocaleLowerCase('es'))) return true
-  return [
-    /^Jugador\s+\d+$/i,
-    /^\d+\s+jugadores?$/i,
-    /^\d+\s+mejoras seleccionadas$/i,
-    /^\d+\s+poderes seleccionados$/i,
-    /^\d+\s+(héroes|clases|personajes|agentes|campeones|concursantes|complexiones|leyendas)$/i,
-    /^Preferencia\s+\d+$/i,
-    /^Ajustes exclusivos de\s+.+$/i,
-    /^\d+ héroes listos(?: · .+)?$/i,
-    /^\d+\/\d+ selecciones · \d+ Team-Up activos?$/i,
-    /^\d+ fichas · \d+ candidatos generados$/i,
-    /^(PODER)\s+\d+$/i,
-    /^\d+\/3 opciones para matchmaking$/i,
-    /^\d+ elementos equipados$/i,
-    /^Con\s+.+$/i,
-    /^Potencia a\s+.+$/i,
-    /^Base · mejora con\s+.+$/i,
-    /^Cargando\s+.+…$/i,
-    /^\d+\/\d+ selecciones generadas$/i,
-    /^\d+\s+(héroes|clases|personajes|agentes|campeones|concursantes|complexiones|leyendas)\s+listos$/i,
-    /^.+\s+activo$/i,
-    /^(Ligero|Medio|Pesado|Tanque|Daño|Apoyo|Vanguardia|Duelista|Estratega|Flexible)\s*·\s*.+$/i,
-  ].some((pattern) => pattern.test(core))
+const uiAliases: Record<string, string> = {
+ 'Nombres de PVZ limpiados': 'Nombres restablecidos', 'Nombres de TF2 limpiados': 'Nombres restablecidos', 'Nombres libres limpiados': 'Nombres restablecidos',
+ 'Nombres, perfiles y filtros revueltos': 'Orden de jugadores mezclado', 'Mercenarios, perfiles y filtros revueltos': 'Orden de jugadores mezclado', 'Jugadores, perfiles, roles y filtros revueltos': 'Orden de jugadores mezclado',
+ 'Grupos de clases restablecidos': 'Roles restablecidos', 'Bandos equilibrados': 'Composición de roles generada',
+ 'Barajando héroes y poderes Stadium…': 'Generando…', 'Barajando héroes, perfiles y filtros…': 'Generando…', 'Buscando una combinación de Team-Up válida…': 'Generando…',
+ 'Cultivando equipo Planta…': 'Generando…', 'Reuniendo equipo Zombi…': 'Generando…', 'Preparando Plantas y Zombis…': 'Generando…',
+ 'Los Team-Ups todavía se están cargando. Intenta de nuevo en un momento.': 'Cargando catálogo local…',
+ 'No existe un Team-Up compatible con los roles y filtros actuales.': 'Sin Team-Up compatible',
+ 'THE FINALS listo': 'Listo', 'Ajustes visuales restaurados': 'Restablecer ajustes',
 }
 
-const sourceText = new WeakMap<Text, string>()
-const localizedText = new WeakMap<Text, string>()
+const translationIndex = new Map<SupportedLocale, Map<string, string>>()
+for (const locale of Object.keys(dictionaries) as SupportedLocale[]) {
+  const messages = { ...dictionaries[locale], ...supplemental[locale], ...uiMessages[locale] }
+  translationIndex.set(locale, new Map(Object.entries(messages).map(([source, value]) => [source.toLocaleLowerCase('es'), value])))
+}
+
+export function translateGameText(game: string, locale: SupportedLocale, value: string): string {
+  const exact = gameTerm(game, locale, value)
+  if (exact !== undefined) return exact
+  const parts = value.trim().split(/( · | ·|· | • )/)
+  if (parts.length > 1) return (value.match(/^\s*/)?.[0] ?? '') + parts.map((part) => translateGameText(game, locale, part)).join('') + (value.match(/\s*$/)?.[0] ?? '')
+  return translateUiText(locale, value)
+}
 
 function playerWord(locale: SupportedLocale, count: number): string {
   switch (locale) {
@@ -402,12 +392,11 @@ export function translateUiText(locale: SupportedLocale, value: string): string 
   const trailing = value.match(/\s*$/)?.[0] ?? ''
   const core = value.trim()
   if (!core) return value
+  if (uiAliases[core]) return `${leading}${translateUiText(locale, uiAliases[core])}${trailing}`
   const dict = dictionaries[locale]
   if (!dict) return value
 
-  const combined = { ...dict, ...(supplemental[locale] ?? {}) }
-  const exactKey = Object.keys(combined).find((key) => key.toLocaleLowerCase('es') === core.toLocaleLowerCase('es'))
-  const exact = exactKey ? combined[exactKey] : undefined
+  const exact = translationIndex.get(locale)?.get(core.toLocaleLowerCase('es'))
   if (exact) {
     const allUpper = core === core.toLocaleUpperCase('es') && core !== core.toLocaleLowerCase('es')
     const translated = allUpper ? exact.toLocaleUpperCase(locale) : exact
@@ -550,7 +539,7 @@ export function translateUiText(locale: SupportedLocale, value: string): string 
     return `${leading}${map[locale] ?? core}${trailing}`
   }
 
-  const readyCatalog = core.match(/^(\d+)\s+(héroes|clases|personajes|agentes|campeones|concursantes|complexiones|leyendas)\s+listos$/i)
+  const readyCatalog = core.match(/^(\d+)\s+(héroes|clases|personajes|agentes|campeones|concursantes|complexiones|leyendas)\s+list[oa]s$/i)
   if (readyCatalog) {
     const base = translateUiText(locale, `${readyCatalog[1]} ${readyCatalog[2]}`)
     const map: Partial<Record<SupportedLocale, string>> = { 'en-us': `${base} ready`, 'de-de': `${base} bereit`, 'fr-fr': `${base} prêts`, 'pt-br': `${base} prontos`, 'ja-jp': `${base} 準備完了`, 'ko-kr': `${base} 준비 완료`, 'zh-cn': `${base} 已就绪` }
@@ -565,79 +554,63 @@ export function translateUiText(locale: SupportedLocale, value: string): string 
 
   const roleComposite = core.match(/^(Ligero|Medio|Pesado|Tanque|Daño|Apoyo|Vanguardia|Duelista|Estratega|Flexible)\s*·\s*(.+)$/i)
   if (roleComposite) {
-    const roleKey = Object.keys(combined).find((key) => key.toLocaleLowerCase('es') === roleComposite[1].toLocaleLowerCase('es'))
-    const translatedRole = roleKey ? combined[roleKey] : roleComposite[1]
+    const translatedRole = translateUiText(locale, roleComposite[1])
     const suffixMap: Partial<Record<SupportedLocale, string>> = { 'en-us': 'complete', 'de-de': 'vollständig', 'fr-fr': 'complet', 'pt-br': 'completo', 'ja-jp': '完了', 'ko-kr': '완료', 'zh-cn': '完整' }
     const suffix = roleComposite[2].toLocaleLowerCase('es') === 'completo' ? (suffixMap[locale] ?? roleComposite[2]) : roleComposite[2]
     return `${leading}${translatedRole} · ${suffix}${trailing}`
   }
 
+  const classified = core.match(/^de (\d+|—) clasificados$/)
+  if (classified) return `${leading}${translateUiText(locale, 'de')} ${classified[1]} ${translateUiText(locale, 'clasificados')}${trailing}`
+  const countStatus = core.match(/^(\d+) (jugador(?:es)?)(?: configurad[oa]s?| en .+)$/)
+  if (countStatus) return `${leading}${translateUiText(locale, `${countStatus[1]} ${countStatus[2]}`)}${trailing}`
+  const namedState = core.match(/^(.+) (quedó fijado|fue liberado|cambió a (Plantas|Zombis))$/)
+  if (namedState) return `${leading}${namedState[1]} · ${translateUiText(locale, namedState[3] ?? (namedState[2] === 'quedó fijado' ? 'Fijar' : 'Liberar'))}${trailing}`
+  const assignedProfile = core.match(/^(.+) asignado al (?:Jugador|mercenario) (\d+)$/i)
+  if (assignedProfile) return `${leading}${translateUiText(locale, 'Perfil')}: ${assignedProfile[1]} → ${localizedPlayerName(locale, Number(assignedProfile[2]))}${trailing}`
+  const removedProfile = core.match(/^Perfil retirado del (?:Jugador|mercenario) (\d+)$/i)
+  if (removedProfile) return `${leading}${translateUiText(locale, 'Sin perfil')}: ${localizedPlayerName(locale, Number(removedProfile[1]))}${trailing}`
+  const unavailableCatalog = core.match(/^No se pudo abrir el catálogo local de (.+)\.$/)
+  if (unavailableCatalog) return `${leading}${translateUiText(locale, 'Catálogo no disponible')}: ${unavailableCatalog[1]}${trailing}`
+  if (/^Barajando .+…$/.test(core)) return `${leading}${translateUiText(locale, 'Generando…')}${trailing}`
+  const composite = core.split(/( · | ·|· |: )/)
+  if (composite.length > 1) return leading + composite.map((part) => translateUiText(locale, part)).join('') + trailing
+  const counted = core.match(/^(\d+(?:\/\d+)?)\s+(.+)$/)
+  if (counted) return `${leading}${counted[1]} ${translateUiText(locale, counted[2])}${trailing}`
+  const personalLabel = core.match(/^(Roles permitidos de|Nombre de|Perfil de|Filtros de|Filtro de|Tres candidatos de|Cambiar los tres candidatos de|Liberar candidatos de|Fijar candidatos de|Reroll de) (.+)$/)
+  if (personalLabel) {
+    const labels: Record<string, string> = { 'Roles permitidos de': 'Roles', 'Nombre de': 'Nombre', 'Perfil de': 'Perfil', 'Filtros de': 'Filtros individuales', 'Filtro de': 'Filtro', 'Tres candidatos de': 'Candidatos', 'Cambiar los tres candidatos de': 'Cambiar personaje', 'Liberar candidatos de': 'Liberar', 'Fijar candidatos de': 'Fijar', 'Reroll de': 'Revolver' }
+    return `${leading}${translateUiText(locale, labels[personalLabel[1]])}: ${personalLabel[2]}${trailing}`
+  }
+  const filterName = core.match(/^(Filtro individual|Filtro TF2|Detalles|Clasificación) de (.+)$/)
+  if (filterName) return `${leading}${translateUiText(locale, filterName[1])}: ${filterName[2]}${trailing}`
+
   return value
 }
 
-function isLocalizedUiNode(node: Text): boolean {
-  const parent = node.parentElement
-  return Boolean(parent?.closest('.workspace, .principal-generate-dock'))
-}
-
-function translateTextNode(node: Text, locale: SupportedLocale) {
-  if (!isLocalizedUiNode(node)) return
-  const current = node.data
-  let source = sourceText.get(node)
-  const lastLocalized = localizedText.get(node)
-
-  // React frequently reuses the same Text node when a dynamic value changes.
-  // If its current text no longer matches the last value written by the
-  // localizer, the application has supplied a NEW source string. Never
-  // restore the stale source that used to occupy this node.
-  if (lastLocalized !== undefined && current !== lastLocalized) {
-    if (!isUiSource(current)) {
-      sourceText.delete(node)
-      localizedText.delete(node)
-      return
+// Translate React output before reconciliation, including labels and placeholders.
+export function localizeUi(locale: SupportedLocale, node: ReactNode, gameId = ''): ReactNode {
+  const text = (value: string) => translateGameText(gameId, locale, value)
+  if (typeof node === 'string') return text(node)
+  if (Array.isArray(node)) {
+    const grouped: ReactNode[] = []
+    for (const child of node) {
+      if ((typeof child === 'string' || typeof child === 'number') && typeof grouped.at(-1) === 'string') grouped[grouped.length - 1] = String(grouped.at(-1)) + child
+      else grouped.push(typeof child === 'number' ? String(child) : child)
     }
-    source = current
-    sourceText.set(node, source)
-  } else if (source === undefined || !isUiSource(source)) {
-    if (!isUiSource(current)) return
-    source = current
-    sourceText.set(node, source)
+    return grouped.map((child, index) => {
+      const translated = localizeUi(locale, child, gameId)
+      return isValidElement(translated) && translated.key === null ? cloneElement(translated, { key: `ui-static-${index}` }) : translated
+    })
   }
-
-  const translated = translateUiText(locale, source)
-  localizedText.set(node, translated)
-  if (node.data !== translated) node.data = translated
-}
-
-function translateTree(root: Node, locale: SupportedLocale) {
-  if (root.nodeType === Node.TEXT_NODE) {
-    translateTextNode(root as Text, locale)
-    return
+  if (!isValidElement(node)) return node
+  const element = node as ReactElement<Record<string, unknown>>
+  const props = element.props
+  if (props.translate === 'no' || ['script', 'style', 'textarea'].includes(String(element.type))) return node
+  const updated: Record<string, unknown> = {}
+  if (typeof element.type === 'string') {
+    for (const name of ['title', 'placeholder', 'aria-label', 'data-tooltip', 'alt']) if (typeof props[name] === 'string') updated[name] = text(props[name])
   }
-  if (!(root instanceof Element) && !(root instanceof DocumentFragment)) return
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
-  let node = walker.nextNode()
-  while (node) {
-    const parent = node.parentElement
-    if (parent && !['SCRIPT', 'STYLE', 'TEXTAREA'].includes(parent.tagName)) translateTextNode(node as Text, locale)
-    node = walker.nextNode()
-  }
-}
-
-export function installUiLocalization(locale: SupportedLocale): (() => void) | undefined {
-  const root = document.body
-  if (!root) return undefined
-  translateTree(root, locale)
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === 'characterData') translateTextNode(mutation.target as Text, locale)
-      mutation.addedNodes.forEach((node) => translateTree(node, locale))
-    }
-  })
-  observer.observe(root, { subtree: true, childList: true, characterData: true })
-  return () => observer.disconnect()
-}
-
-export function useUiLocalization(locale: SupportedLocale) {
-  useEffect(() => installUiLocalization(locale), [locale])
+  if (props.children !== undefined) updated.children = localizeUi(locale, props.children as ReactNode, gameId)
+  return cloneElement(element, updated)
 }

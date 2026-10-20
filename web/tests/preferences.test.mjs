@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import test from 'node:test'
+import { gameCredits } from '../src/gameCredits.ts'
 import vm from 'node:vm'
 import ts from 'typescript'
 import React from 'react'
@@ -14,7 +15,7 @@ visit(tree)
 const code = ts.transpileModule(functionSource, { compilerOptions: { target: ts.ScriptTarget.ES2023, jsx: ts.JsxEmit.React } }).outputText
 function render(tab, overrides = {}) {
   const changes = {}
-  const context = { React, Icon: () => null, t: (key) => key, settingsTab: tab,
+  const context = { gameCredits, React, Icon: () => null, t: (key) => key, settingsTab: tab,
     animationsEnabled: true, compactPerks: false, mobileCompactMode: true, lowPowerMode: false,
     soundEnabled: true, soundVolume: .42, hoverSounds: false, localePreference: 'auto',
     browserLocale: 'es-MX', activeLocale: 'es-MX', activeGame: 'deadlock',

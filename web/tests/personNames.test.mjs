@@ -94,7 +94,7 @@ test('profile restoration and renaming cannot bypass the squad restriction', () 
   let profiles = [{ id: 'profile1', name: 'Javo' }]
   let players = [{ id: 'p1', profileId: 'profile1', name: 'Javo' }]
   let mercenaries = [{ id: 'tf1', profileId: 'profile1', name: 'Javo' }]
-  const handlers = functionsFrom('App.tsx', ['renameCurrentProfile'], {
+  const handlers = functionsFrom('App.tsx', ['renameCurrentProfile'], { syncOtherProfile() {},
     currentProfileId: 'profile1',
     setProfiles: (change) => { profiles = change(profiles) },
     setPlayers: (change) => { players = change(players) },

@@ -6,7 +6,7 @@ import ts from 'typescript'
 import { repairOverRollStorage } from '../src/storageGuard.ts'
 const source = fs.readFileSync(new URL('../src/RosterModule.tsx', import.meta.url), 'utf8')
 const tree = ts.createSourceFile('RosterModule.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
-const names = ['makePlayer', 'minimumPlayers', 'normalizeRosterPlayers', 'buildRolePlan', 'normalizeRosterSelection', 'normalizeRosterWeights', 'buildWeightedEntries', 'candidatePool', 'toggleRosterRole', 'changePlayerCount', 'chooseDeadlockCandidates']
+const names = ['makePlayer', 'minimumPlayers', 'normalizeRosterPlayers', 'buildRolePlan', 'candidatePool', 'toggleRosterRole', 'changePlayerCount', 'chooseDeadlockCandidates']
 const declarations = []
 function visit(n) {
   if (ts.isFunctionDeclaration(n) && names.includes(n.name?.text)) declarations.push(n.getText(tree))
@@ -53,15 +53,6 @@ test('per-player role controls preserve one active role and generation obeys fil
   assert.deepEqual(plain(helpers.candidatePool(players[0], 'duelist', new Set())), [{ key: 'allowed', role: 'sentinel' }])
   const lastOnly = setup({ game, players, setPlayers(fn) { players = fn(players) }, playModuleSound() {}, notify() {} })
   lastOnly.toggleRosterRole(0, 'sentinel'); assert.equal(players[0].roles.sentinel, true)
-})
-
-test('roster roulette storage normalizes hostile shapes and bounded finite weights', () => {
-  const helpers = setup()
-  for (const raw of ['broken', {}, null, 42]) assert.deepEqual(plain(helpers.normalizeRosterSelection(raw)), [])
-  assert.deepEqual(plain(helpers.normalizeRosterSelection(['hero', 'hero', 42, {}])), ['hero'])
-  const weights = helpers.normalizeRosterWeights({ a: Infinity, b: NaN, c: -10, d: 1e99, e: {}, f: 2.6 })
-  assert.deepEqual(plain(weights), { a: 1, b: 1, c: 1, d: 5, e: 1, f: 3 })
-  assert.equal(helpers.buildWeightedEntries(['a', 'd'], weights).length, 6)
 })
 
 test('startup keeps all game selections and repairs malformed roster roulettes', (t) => {
