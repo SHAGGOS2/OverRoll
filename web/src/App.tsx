@@ -40,9 +40,13 @@ import './HorizontalCards.css'
 import './PortraitCards.css'
 import { warmImageCache } from './imageCache'
 import { creditsSongUrl, detectBrowserLocale, localeChoices, localeName, translate, type LocalePreference, type SupportedLocale } from './localization'
-import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
+import { localizeUi, translateGameText, displayPlayerName, localizedPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
 import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH, PROFILE_NAME_MAX_LENGTH } from './personName.ts'
+import SquadGrid, { ReorderHandle } from './SquadGrid'
+import { reorderSquad } from './squadOrder'
+import { ShowcaseButton, ShowcaseHeader, useShowcase } from './Showcase'
+import './SquadExperience.css'
 
 const rouletteRoleColors = { tank: '#4fc9ff', damage: '#ff5578', support: '#55e4ad' }
 
@@ -872,6 +876,7 @@ function App() {
 
   const [activeView, setActiveView] = useState<View>('principal')
   const [activeGame, setActiveGame] = useState<GameId>(() => readStorage('overroll.web.activeGame', 'overwatch'))
+  const showcase = useShowcase(activeView, activeGame)
   const [data, setData] = useState<HeroData | null>(null)
   const [loadError, setLoadError] = useState('')
   const [players, setPlayers] = useState<Player[]>(() => normalizePlayers(readStorage<unknown>('overroll.web.players', [])))
@@ -1262,10 +1267,18 @@ function App() {
     notify(`${activeName} activo`, 'success')
   }
 
+  function enterShowcase() {
+    setDetailsIndex(null)
+    setFilterIndex(null)
+    setTf2FilterIndex(null)
+    showcase.enter()
+    playSound('open')
+  }
+
   function tf2ChangePlayerCount(delta: number) {
     const nextCount = Math.max(1, Math.min(6, tf2Players.length + delta))
     if (nextCount === tf2Players.length) return
-    setTf2Players((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? makeTf2Player(index)))
+    setTf2Players((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { ...makeTf2Player(index), id: crypto.randomUUID() }))
     setTf2Picks((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { mercenary: null, locked: false }))
     setTf2FilterIndex(null)
     setTf2Status(`${nextCount} jugador${nextCount === 1 ? '' : 'es'} en Mercenarios`)
@@ -1317,6 +1330,16 @@ function App() {
     setTf2Picks((old) => old.map((pick) => ({ ...pick, locked: false })))
     playSound('tf2Click')
     notify('Mercenarios, perfiles y filtros revueltos', 'success')
+  }
+
+  function reorderTf2Players(sourceId: string, targetId: string) {
+    if (tf2Generating || tf2RerollingIndex !== null) return
+    const next = reorderSquad(tf2Players, tf2Picks, sourceId, targetId, () => ({ mercenary: null, locked: false }))
+    if (!next.changed) return
+    setTf2Players(next.players)
+    setTf2Picks(next.picks)
+    setTf2FilterIndex(null)
+    playSound('shuffle')
   }
 
   function tf2ResetGroups() {
@@ -1510,7 +1533,7 @@ function App() {
     const nextCount = Math.max(1, Math.min(6, players.length + delta))
     if (nextCount === players.length) return
 
-    setPlayers((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? makePlayer(index)))
+    setPlayers((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { ...makePlayer(index), id: crypto.randomUUID() }))
     setPicks((old) => Array.from(
       { length: nextCount },
       (_, index) => old[index] ?? { hero: null, locked: false, role: null, perks: [] },
@@ -1557,6 +1580,17 @@ function App() {
     setPlayers((old) => old.map((player, index) => ({ ...player, ...payload[index] })))
     setPicks((old) => old.map((pick) => ({ ...pick, locked: false })))
     notify('Jugadores, perfiles, roles y filtros revueltos', 'success')
+  }
+
+  function reorderPlayers(sourceId: string, targetId: string) {
+    if (!data || generating || rerollingIndex !== null) return
+    const next = reorderSquad(players, picks, sourceId, targetId, () => ({ hero: null, locked: false, role: null, perks: [] }))
+    if (!next.changed) return
+    setPlayers(next.players)
+    setPicks(next.picks)
+    setDetailsIndex(null)
+    setFilterIndex(null)
+    playSound('shuffle')
   }
 
   function resetPlayerRoles() {
@@ -1833,7 +1867,7 @@ function App() {
               {tf2Players.map((player, index) => (
                 <div className="player-row tf2-player-row" key={player.id}>
                   <span className="number">{String(index + 1).padStart(2, '0')}</span>
-                  <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => tf2UpdatePlayerName(index, event.target.value)} onFocus={() => playSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre TF2 ${index + 1}`} />
+                  <input value={displayPlayerName(activeLocale, player.name, index + 1)} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => tf2UpdatePlayerName(index, event.target.value)} onFocus={() => playSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre TF2 ${index + 1}`} />
                   <select className="player-profile-inline" value={player.profileId} onChange={(event: ChangeEvent<HTMLSelectElement>) => tf2AssignPlayerProfile(index, event.target.value)} aria-label={`Perfil TF2 ${index + 1}`}>
                     <option value="">☆</option>{profiles.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
                   </select>
@@ -1862,6 +1896,7 @@ function App() {
           <div className="content-topline tf2-topline">
             <div className="game-identity"><div className="game-title-row"><h1>Team Fortress 2</h1></div></div>
             <div className="topline-actions">
+              <ShowcaseButton locale={activeLocale} onClick={enterShowcase} />
               <button type="button" className="generate-image-button tf2-image-button" onClick={generateTf2TeamImage} aria-busy={imageExporting} disabled={imageExporting || !tf2Picks.some((pick) => pick.mercenary)}><Icon name="download" size={17} /> Generar imagen</button>
               <div className="match-summary tf2-summary">
                 <div><small>Jugadores</small><strong>{tf2Players.length}</strong></div>
@@ -1872,7 +1907,7 @@ function App() {
           </div>
           <div className="team-stage tf2-stage">
             <div className="stage-grid" />
-            <div className={`team-grid tf2-team-grid cards-${tf2Players.length}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': tf2Players.length } as CSSProperties}>
+            <SquadGrid players={tf2Players} onReorder={reorderTf2Players} locale={activeLocale} disabled={tf2Generating || tf2RerollingIndex !== null || tf2FilterIndex !== null} motion={barMotion} showcase={showcase.enabled} className={`team-grid tf2-team-grid cards-${tf2Players.length}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': tf2Players.length } as CSSProperties}>
               {tf2Players.map((player, index) => {
                 const pick = tf2Picks[index]
                 const mercenary = pick?.mercenary
@@ -1881,7 +1916,7 @@ function App() {
                 if (cardDesign !== 'classic') {
                   const artwork = mercenary ? tf2Artwork[mercenary.key] : undefined
                   return <BarCard design={cardDesign} key={player.id} gameId="tf2" index={index}
-                  player={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name || localizedPlayerName(activeLocale, index + 1)}
+                  player={displayPlayerName(activeLocale, player.name, index + 1)}
                   name={translateGameText('tf2', activeLocale, mercenary?.name ?? 'Sin selección')} role={translateGameText('tf2', activeLocale, mercenary ? tf2GroupLabels[mercenary.group] : 'Mercenario')}
                   accent={mercenary ? tf2GroupColors[mercenary.group] : '#e8a45b'} roleIcon={mercenary ? asset('assets/tf2/icons/' + mercenary.key.replace(/^tf2-/, '') + '.png') : undefined}
                   portrait={mercenary ? asset(artwork?.portrait ?? mercenary.portrait) : ''} frame={artwork?.frame} fit="contain" rolesOnly={false} locked={Boolean(pick?.locked)} profile={profile?.name} blocked={player.blocked.length}
@@ -1895,7 +1930,7 @@ function App() {
                 return (
                   <article className={`hero-card tf2-card ${mercenary?.group ?? ''} ${generationClass} ${pick?.locked ? 'is-locked' : ''} ${tf2RerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--delay': `${index * 45}ms`, '--tf2-accent': mercenary ? tf2GroupColors[mercenary.group] : '#e8a45b' } as CSSProperties} key={player.id}>
                     <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
-                    <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span translate="no">{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : (player.name || localizedPlayerName(activeLocale, index + 1))}</span>{profile && <span className="profile-tag" translate="no">{profile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}</div>
+                    <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span translate="no">{displayPlayerName(activeLocale, player.name, index + 1)}</span>{profile && <span className="profile-tag" translate="no">{profile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}<ReorderHandle index={index} /></div>
                     <div className="portrait tf2-portrait">
                       <div className="portrait-grid" /><div className="portrait-fallback"><Icon name="gamepad" size={48} /></div>
                       {mercenary ? <img className="hero-image" src={asset(mercenary.portrait)} alt={mercenary.name} decoding="async" draggable={false} onLoad={handleImageLoad} onError={handleImageError} /> : <div className="portrait-loading"><span /><span /><span /></div>}
@@ -1912,7 +1947,7 @@ function App() {
                   </article>
                 )
               })}
-            </div>
+            </SquadGrid>
           </div>
         </section>
 
@@ -1955,7 +1990,7 @@ function App() {
                 <div className="player-row" key={player.id}>
                   <span className="number">{String(index + 1).padStart(2, '0')}</span>
                   <input
-                    value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name}
+                    value={displayPlayerName(activeLocale, player.name, index + 1)}
                     disabled={Boolean(player.profileId)}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => updatePlayerName(index, event.target.value)}
                     aria-label={`Nombre del jugador ${index + 1}`}
@@ -2025,6 +2060,7 @@ function App() {
               <div className="game-title-row"><h1>Overwatch</h1></div>
             </div>
             <div className="topline-actions">
+              <ShowcaseButton locale={activeLocale} onClick={enterShowcase} />
               <button type="button" className="generate-image-button" onClick={generateTeamImage} aria-busy={imageExporting} disabled={imageExporting || (!rolesOnly && !overwatchText.ready && picks.some((pick) => pick.perks.length > 0)) || !picks.some((pick) => pick.hero || pick.role)}>
                 <Icon name="download" size={17} /> Generar imagen
               </button>
@@ -2042,7 +2078,7 @@ function App() {
           ) : (
             <div className="team-stage">
               <div className="stage-grid" />
-              <div className={`team-grid cards-${players.length}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
+              <SquadGrid players={players} onReorder={reorderPlayers} locale={activeLocale} disabled={!data || generating || rerollingIndex !== null || filterIndex !== null || detailsIndex !== null} motion={barMotion} showcase={showcase.enabled} className={`team-grid cards-${players.length}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
                 {players.map((player, index) => {
                   const pick = picks[index]
                   const hero = pick?.hero
@@ -2054,7 +2090,7 @@ function App() {
                   const assignedProfile = profiles.find((item) => item.id === player.profileId)
 
                   if (cardDesign !== 'classic') return <BarCard design={cardDesign} key={player.id}
-                    player={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : player.name || localizedPlayerName(activeLocale, index + 1)}
+                    player={displayPlayerName(activeLocale, player.name, index + 1)}
                     index={index} name={translateGameText('overwatch', activeLocale, rolesOnly && visibleRole ? roleLabels[visibleRole] : hero?.name ?? 'Sin selección')}
                     role={translateGameText('overwatch', activeLocale, visibleRole ? roleLabels[visibleRole] : 'Genera un equipo')} roleId={visibleRole ?? undefined}
                     roleIcon={visibleRole ? asset(`assets/roles/${visibleRole}.png`) : undefined}
@@ -2074,11 +2110,11 @@ function App() {
                       <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
                       <div className="card-player">
                         <span className="player-index">{String(index + 1).padStart(2, '0')}</span>
-                        <span translate="no">{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(activeLocale, index + 1) : (player.name || localizedPlayerName(activeLocale, index + 1))}</span>
+                        <span translate="no">{displayPlayerName(activeLocale, player.name, index + 1)}</span>
                         {assignedProfile && <span className="profile-tag" title={`Perfil: ${assignedProfile.name}`} translate="no">{assignedProfile.name.charAt(0).toUpperCase()}</span>}
                         {player.blocked.length > 0 && <span className="filter-count" title={`${player.blocked.length} héroes bloqueados`}>{player.blocked.length}</span>}
                         {pick?.locked && <span className="mini-lock"><Icon name="lock" size={12} /></span>}
-                      </div>
+                      <ReorderHandle index={index} /></div>
 
                       <div className="portrait">
                         <div className="portrait-grid" /><div className="portrait-fallback"><Icon name="gamepad" size={48} /></div>
@@ -2126,7 +2162,7 @@ function App() {
                     </article>
                   )
                 })}
-              </div>
+              </SquadGrid>
             </div>
           )}
         </section>
@@ -2490,11 +2526,12 @@ function App() {
     )
   }
   return localizeUi(activeLocale,
-    <div className={`app view-${activeView} ${animationsEnabled ? '' : 'reduce-motion'} ${compactPerks ? 'compact-perks' : ''} ${lowPowerMode ? 'low-power' : ''} ${mobileCompactMode ? 'mobile-compact' : ''}`}>
+    <div className={`app view-${activeView} ${showcase.enabled ? 'showcase-mode' : ''} ${animationsEnabled ? '' : 'reduce-motion'} ${compactPerks ? 'compact-perks' : ''} ${lowPowerMode ? 'low-power' : ''} ${mobileCompactMode ? 'mobile-compact' : ''}`}>
       <div className="ambient-grid" /><div className="ambient-orb orb-one" /><div className="ambient-orb orb-two" /><div className="noise-layer" />
       <ThemeBackdrop asset={asset} theme={pageTheme} />
 
       <AppHeader animationsEnabled={animationsEnabled && !lowPowerMode} onMenuToggle={(open) => playSound(open ? 'open' : 'close')} logoSrc={`${baseUrl}app_icon.png`} games={gameModules} activeGame={activeGame} activeView={activeView} locale={activeLocale} asset={asset} onGameChange={activateGame} onNavigate={navigate} onHover={hoverSound} />
+      {showcase.enabled && <ShowcaseHeader locale={activeLocale} game={gameModules.find((game) => game.id === activeGame)?.name ?? 'OverRoll'} logo={`${baseUrl}app_icon.png`} exitRef={showcase.exitRef} onExit={() => { showcase.exit(); playSound('close') }} />}
 
       {activeGame === 'pvzgw2' && (activeView === 'principal' || activeView === 'roulette') && (
         <PvzModule
@@ -2504,6 +2541,8 @@ function App() {
           animationsEnabled={animationsEnabled}
           cardDesign={cardDesign}
           barMotion={barMotion}
+          showcase={showcase.enabled}
+          onShowcase={enterShowcase}
           soundEnabled={soundEnabled}
           soundVolume={soundVolume}
           mobileCompactMode={mobileCompactMode}
@@ -2521,6 +2560,8 @@ function App() {
           animationsEnabled={animationsEnabled}
           cardDesign={cardDesign}
           barMotion={barMotion}
+          showcase={showcase.enabled}
+          onShowcase={enterShowcase}
           soundEnabled={soundEnabled}
           soundVolume={soundVolume}
           mobileCompactMode={mobileCompactMode}

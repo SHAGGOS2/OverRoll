@@ -9,6 +9,7 @@ import { tf2Artwork } from '../src/tf2Artwork.ts'
 import { fragpunkPortraitFrames } from '../src/portraitFrames.ts'
 import { pvzCharacters, pvzSideColors, pvzSideSingular } from '../src/pvzCatalog.ts'
 import { readPerkText, selectedPerkGroup } from '../src/overwatchText.ts'
+import { reorderSquad } from '../src/squadOrder.ts'
 
 function extract(file, functions = [], variables = []) {
   const source = fs.readFileSync(new URL(`../src/${file}`, import.meta.url), 'utf8')
@@ -99,5 +100,38 @@ test('all 121 GW2 characters and variants keep their own transparent artwork and
         assert.equal(options.design, cardDesign)
       },
     })
+  }
+})
+
+test('reordering keeps the same complete exported cards in the new order across eleven games and five styles', async () => {
+  const definitions = vm.runInNewContext(`${extract('RosterModule.tsx', [], ['rosterGameDefinitions'])};rosterGameDefinitions`)
+  const tf2Classes = vm.runInNewContext(`${extract('App.tsx', [], ['tf2Classes'])};tf2Classes`)
+  const heroes = read('data/heroes.json').heroes
+  for (const cardDesign of ['classic', 'bars', 'horizontal', 'hex', 'orbit']) {
+    const players = Array.from({ length: 3 }, (_, index) => ({ id: 'p' + index, name: 'Amigo' + index, side: 'plants' }))
+    const fixtures = [
+      { file: 'App.tsx', fn: 'generateTeamImage', extras: { variables: ['roleLabels'] }, picks: heroes.slice(0, 3).map((hero, index) => ({ hero, role: hero.role, perks: hero.minorPerks.slice(0, 1), locked: index === 2 })), env: { rolesOnly: false, stadium: false, perkText: (_hero, perk) => perk } },
+      { file: 'App.tsx', fn: 'generateTf2TeamImage', extras: { variables: ['tf2GroupLabels', 'tf2GroupColors'] }, picks: tf2Classes.slice(0, 3).map((mercenary, index) => ({ mercenary, locked: index === 2 })), env: { tf2Artwork }, tf2: true },
+      { file: 'PvzModule.tsx', fn: 'generateImage', picks: pvzCharacters.slice(0, 3).map((character, index) => ({ character, locked: index === 2 })), env: { pvzArtwork, pvzSideColors, pvzSideSingular } },
+      ...definitions.map((game) => {
+        const catalog = read(`assets/games/${game.id}/catalog.json`).heroes.map((hero) => ({ ...hero, portrait: `assets/games/${game.id}/${hero.portrait.split('/').pop()}` }))
+        const picks = catalog.slice(0, 3).map((hero, index) => {
+          const pick = { hero, candidates: catalog.slice(index, index + 3), locked: index === 2 }
+          if (game.supportsLoadouts) { const pool = read('assets/games/thefinals/loadouts.json')[hero.role]; pick.loadout = { specialization: pool.specializations[0], weapon: pool.weapons[0], gadgets: pool.gadgets.slice(0, 3) } }
+          return pick
+        })
+        return { file: 'RosterModule.tsx', fn: 'generateTeamImage', extras: { functions: ['roleDefinition', 'rosterPickCandidates', 'finalsIcon', 'slugifyFinalsItem'] }, picks, env: { game, gameId: game.id, activeTeamups: () => [], heroByKey: (key) => catalog.find((hero) => hero.key === key) } }
+      }),
+    ]
+    for (const fixture of fixtures) {
+      let exported
+      const env = { cardDesign, barPortraitFit, fragpunkPortraitFrames, baseUrl: '/', asset: (path) => path, ...fixture.env, saveImage(options) { exported = JSON.parse(JSON.stringify(options.cards)); assertLocal(options) } }
+      const call = (players, picks) => run(fixture.file, fixture.fn, fixture.extras ?? {}, { ...env, ...(fixture.tf2 ? { tf2Players: players, tf2Picks: picks } : { players, picks }) })
+      await call(players, fixture.picks)
+      const original = exported
+      const next = reorderSquad(players, fixture.picks, 'p2', 'p0', () => ({}))
+      await call(next.players, next.picks)
+      assert.deepEqual(exported, [original[2], original[0], original[1]], fixture.file + (fixture.env.gameId ?? '') + cardDesign)
+    }
   }
 })

@@ -12,11 +12,14 @@ import {
 } from 'react'
 import { warmImageCache } from './imageCache'
 import type { SupportedLocale } from './localization'
-import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
+import { localizeUi, translateGameText, displayPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
 import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH } from './personName.ts'
 import './RosterModule.css'
 import { fragpunkPortraitFrames } from './portraitFrames'
+import SquadGrid, { ReorderHandle } from './SquadGrid'
+import { reorderSquad } from './squadOrder'
+import { ShowcaseButton } from './Showcase'
 
 export type RosterGameId =
   | 'rivals'
@@ -124,6 +127,8 @@ type Props = {
   animationsEnabled: boolean
   cardDesign?: CardDesign
   barMotion?: boolean
+  showcase?: boolean
+  onShowcase?: () => void
   soundEnabled: boolean
   soundVolume: number
   mobileCompactMode: boolean
@@ -466,6 +471,8 @@ export default function RosterModule({
   animationsEnabled,
   cardDesign = 'classic',
   barMotion = animationsEnabled,
+  showcase = false,
+  onShowcase,
   soundEnabled,
   soundVolume,
   mobileCompactMode,
@@ -501,6 +508,17 @@ export default function RosterModule({
 
   const [imageExporting, saveImage] = useImageExport(notify, locale, gameId)
   const asset = (path: string) => safeAssetUrl(path, baseUrl)
+
+  function reorderPlayers(sourceId: string, targetId: string) {
+    if (!catalog.length || generating || rerollingIndex !== null) return
+    const next = reorderSquad(players, picks, sourceId, targetId, () => ({ hero: null, locked: false }))
+    if (!next.changed) return
+    setPlayers(next.players)
+    setPicks(next.picks)
+    setFilterIndex(null)
+    setDetailsIndex(null)
+    playModuleSound('shuffle')
+  }
 
   useEffect(() => {
     let cancelled = false
@@ -1138,7 +1156,7 @@ export default function RosterModule({
                 return (
                   <div className="player-row roster-game-player-row" key={player.id}>
                     <span className="number">{String(index + 1).padStart(2, '0')}</span>
-                    <input value={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} onFocus={() => playModuleSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre de ${game.name} ${index + 1}`} />
+                    <input value={displayPlayerName(locale, player.name, index + 1)} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} onFocus={() => playModuleSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre de ${game.name} ${index + 1}`} />
                     <select className="player-profile-inline" value={player.profileId} onChange={(event) => assignProfile(index, event.target.value)} title={profiles.find((item) => item.id === player.profileId)?.name ?? 'Sin perfil'} aria-label={`Perfil de ${game.name} ${index + 1}`}>
                       <option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id} translate="no">{profile.name}</option>)}
                     </select>
@@ -1183,6 +1201,7 @@ export default function RosterModule({
               <div className="game-title-row"><h1>{game.name}</h1><span className="web-badge roster-game-badge">{game.catalogLabel.toUpperCase()}</span></div>
             </div>
             <div className="topline-actions">
+              <ShowcaseButton locale={locale} onClick={() => { setFilterIndex(null); setDetailsIndex(null); onShowcase?.() }} disabled={!onShowcase} />
               <button type="button" className="generate-image-button roster-image-button" onClick={generateTeamImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.hero)}><RosterIcon name="download" size={17} /> Generar imagen</button>
               <div className="match-summary">
                 <div><small>Formato</small><strong>{game.formatLabel}</strong></div>
@@ -1196,7 +1215,7 @@ export default function RosterModule({
           ) : (
             <div className="team-stage roster-team-stage">
               <div className="stage-grid" />
-              <div className={`team-grid cards-${players.length} ${players.length > 6 ? 'roster-many-cards' : ''} ${game.supportsLoadouts ? 'roster-finals-grid' : ''}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
+              <SquadGrid players={players} onReorder={reorderPlayers} locale={locale} disabled={!catalog.length || generating || rerollingIndex !== null || filterIndex !== null || detailsIndex !== null} motion={barMotion} showcase={showcase} className={`team-grid cards-${players.length} ${players.length > 6 ? 'roster-many-cards' : ''} ${game.supportsLoadouts ? 'roster-finals-grid' : ''}${cardDesign !== 'classic' ? ` bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
                 {players.map((player, index) => {
                   const pick = picks[index] ?? { hero: null, locked: false }
                   const deadlockCandidates = gameId === 'deadlock' ? rosterPickCandidates(pick) : []
@@ -1217,7 +1236,7 @@ export default function RosterModule({
                     const partnerName = selectedTeamup && hero ? teamupPartnerName(selectedTeamup, hero.key) : ''
                     const heroIsAnchor = selectedTeamup && hero ? teamupAnchorKey(selectedTeamup) === hero.key : false
                     return <BarCard design={cardDesign} key={player.id} gameId={gameId} index={index}
-                      player={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name || localizedPlayerName(locale, index + 1)}
+                      player={displayPlayerName(locale, player.name, index + 1)}
                       name={tr(gameId === 'deadlock' ? 'Candidatos' : game.supportsLoadouts ? pick.loadout?.weapon ?? 'Build pendiente' : hero?.name ?? 'Sin selección')}
                       role={tr(role?.label ?? (game.roles.length > 1 ? 'Sin selección' : game.roles[0].label))} roleIcon={role?.icon ? asset(role.icon) : undefined} accent={role?.color ?? game.accent}
                       portrait={game.supportsLoadouts && pick.loadout ? finalsIcon(baseUrl, pick.loadout.weapon) : hero ? asset(hero.portrait) : ''}
@@ -1242,7 +1261,7 @@ export default function RosterModule({
                   return (
                     <article className={`hero-card roster-unified-card ${game.supportsLoadouts ? 'roster-finals-card' : ''} ${generationClass} ${pick.locked ? 'is-locked' : ''} ${rerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--role-color': role?.color ?? game.accent, '--delay': `${index * 45}ms` } as CSSProperties} key={player.id}>
                       <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />
-                      <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span translate="no">{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : (player.name || localizedPlayerName(locale, index + 1))}</span>{assignedProfile && <span className="profile-tag" translate="no">{assignedProfile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick.locked && <span className="mini-lock"><RosterIcon name="lock" size={12} /></span>}</div>
+                      <div className="card-player"><span className="player-index">{String(index + 1).padStart(2, '0')}</span><span translate="no">{displayPlayerName(locale, player.name, index + 1)}</span>{assignedProfile && <span className="profile-tag" translate="no">{assignedProfile.name.charAt(0).toUpperCase()}</span>}{player.blocked.length > 0 && <span className="filter-count">{player.blocked.length}</span>}{pick.locked && <span className="mini-lock"><RosterIcon name="lock" size={12} /></span>}<ReorderHandle index={index} /></div>
                       {gameId === 'deadlock' ? (
                         <div className="deadlock-candidate-grid" aria-label={`Tres candidatos de ${player.name}`}>
                           {Array.from({ length: 3 }, (_, candidateIndex) => {
@@ -1339,7 +1358,7 @@ export default function RosterModule({
                     </article>
                   )
                 })}
-              </div>
+              </SquadGrid>
             </div>
           )}
         </section>

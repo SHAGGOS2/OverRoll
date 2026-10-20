@@ -378,6 +378,13 @@ export function localizedPlayerName(locale: SupportedLocale, index: number): str
   }
 }
 
+// A numbered default travels with its player when cards are moved.
+export function displayPlayerName(locale: SupportedLocale, value: string, fallbackIndex: number): string {
+  const suffix = value.replace(/ /gu, '').match(/(\d+)$/u)
+  if (suffix && isDefaultPlayerName(value, Number(suffix[1]))) return localizedPlayerName(locale, Number(suffix[1]))
+  return value || localizedPlayerName(locale, fallbackIndex)
+}
+
 export function isDefaultPlayerName(value: string, index: number): boolean {
   const normalized = sanitizePersonName(value).replace(/ /gu, '')
   return [

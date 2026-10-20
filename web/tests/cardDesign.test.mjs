@@ -15,7 +15,7 @@ function load(file, react = React, window = {}) {
   const source = fs.readFileSync(new URL(`../src/${file}`, import.meta.url), 'utf8')
   const code = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React, target: ts.ScriptTarget.ES2023 } }).outputText
   const exports = {}
-  const dependencies = { react, './tf2Artwork': { tf2Artwork }, './cardDesign': { TELEPORT_SWAP_MS, TELEPORT_DURATION_MS }, './uiLocalization': { translateUiText } }
+  const dependencies = { react, './SquadGrid': { ReorderHandle: () => null }, './tf2Artwork': { tf2Artwork }, './cardDesign': { TELEPORT_SWAP_MS, TELEPORT_DURATION_MS }, './uiLocalization': { translateUiText } }
   vm.runInNewContext(code, { exports, React, window, require: (name) => { assert(name in dependencies, name); return dependencies[name] } })
   return exports
 }

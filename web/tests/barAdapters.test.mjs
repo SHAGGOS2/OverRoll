@@ -5,7 +5,7 @@ import test from 'node:test'
 import ts from 'typescript'
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from '../src/uiLocalization.ts'
+import { localizeUi, translateGameText, displayPlayerName, localizedPlayerName } from '../src/uiLocalization.ts'
 import { barPortraitFit, TELEPORT_DURATION_MS, TELEPORT_SWAP_MS } from '../src/cardDesign.ts'
 import { pvzArtwork } from '../src/pvzArtwork.ts'
 import { tf2Artwork } from '../src/tf2Artwork.ts'
@@ -26,7 +26,7 @@ function declarations(file, names) {
 }
 const componentCode = ts.transpileModule(fs.readFileSync(new URL('../src/BarCard.tsx', import.meta.url), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2023, jsx: ts.JsxEmit.React } }).outputText
 const componentExports = {}
-vm.runInNewContext(componentCode, { exports: componentExports, React, require: (name) => name === 'react' ? React : { TELEPORT_DURATION_MS, TELEPORT_SWAP_MS } })
+vm.runInNewContext(componentCode, { exports: componentExports, React, require: (name) => name === 'react' ? React : name === './SquadGrid' ? { ReorderHandle: () => null } : { TELEPORT_DURATION_MS, TELEPORT_SWAP_MS } })
 const BarCard = componentExports.default
 function branch(file, owner) {
   const tree = ast(file); let found
@@ -41,7 +41,7 @@ function branch(file, owner) {
 const controls = ['reroll', 'rerollTf2', 'toggleLock', 'toggleTf2Lock', 'openFilter', 'openTf2Filter', 'openDetails', 'setPlayerSide', 'setFilterIndex', 'setFilterSearch', 'setFilterRole', 'setDetailsIndex', 'playModuleSound']
 function render(file, owner, globals) {
   const actions = [], context = {
-    React, BarCard, tf2Artwork, pvzArtwork, localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName, barPortraitFit, fragpunkPortraitFrames,
+    React, BarCard, tf2Artwork, pvzArtwork, localizeUi, translateGameText, displayPlayerName, localizedPlayerName, barPortraitFit, fragpunkPortraitFrames,
     cardDesign: 'bars', barMotion: false, locale: 'en-us', activeLocale: 'en-us', index: 0,
     player: { id: 'p1', name: 'Javo', blocked: ['blocked'], side: 'plants' }, pick: { locked: false, perks: [] },
     assignedProfile: { name: 'Main' }, profile: { name: 'Main' }, generationRevision: 1, tf2GenerationRevision: 1,

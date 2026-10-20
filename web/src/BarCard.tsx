@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { TELEPORT_DURATION_MS, TELEPORT_SWAP_MS, type CardDesign } from './cardDesign'
 import type { PortraitFrame } from './portraitFrames'
+import { ReorderHandle } from './SquadGrid'
 
 type Portrait = { src: string; alt: string; crop?: PortraitFrame }
 type Props = {
@@ -49,7 +50,7 @@ export default function BarCard(props: Props) {
   const { player, index, name, role, roleId, roleIcon, portrait, rolesOnly, locked, profile, blocked, perks, actions, revision, motion, locale, design = 'bars', gameId = 'overwatch', accent, fit, frame, candidates, extras, subtitle } = props
   const portraitMotion = design === 'horizontal' ? 'slide' : 'teleport'
   return <article className={`bar-card ${design !== 'bars' && design !== 'classic' ? `is-${design}` : ''} bar-game-${gameId} ${roleId ?? ''} ${locked ? 'is-locked' : ''} ${candidates ? 'has-candidates' : ''} ${perks.length ? 'has-perks' : ''}`} style={{ ...(accent ? { '--role-color': accent } : {}), '--bar-perk-rows': perks.length } as CSSProperties} aria-label={`${player} · ${name}`}>
-    <header className="bar-card-player"><small>{String(index + 1).padStart(2, '0')}</small><strong translate="no" title={player}>{player}</strong>{design === 'horizontal' && profile && <span className="bar-card-profile" translate="no" title={profile}>{profile}</span>}{locked && <span aria-hidden="true">◆</span>}{blocked > 0 && <small>{blocked}</small>}</header>
+    <header className="bar-card-player"><small>{String(index + 1).padStart(2, '0')}</small><strong translate="no" title={player}>{player}</strong>{design === 'horizontal' && profile && <span className="bar-card-profile" translate="no" title={profile}>{profile}</span>}{locked && <span aria-hidden="true">◆</span>}{blocked > 0 && <small>{blocked}</small>}<ReorderHandle index={index} /></header>
     <div className="bar-card-panel">
       <div className="bar-card-grid" />
       {candidates ? <div className="bar-card-candidates">{candidates.map((candidate, i) => <div className="bar-card-candidate" key={i} aria-label={`${i + 1} · ${candidate.name}`}><TeleportPortrait motionStyle={portraitMotion} src={candidate.portrait} alt={candidate.name} revision={revision} enabled={motion} locked={locked} fit="contain" /><span>{i + 1}</span><strong translate="no">{candidate.name}</strong></div>)}</div> : <div className="bar-card-art"><TeleportPortrait motionStyle={portraitMotion} src={portrait} alt={name} crop={frame} revision={revision} enabled={motion} locked={locked} rolesOnly={rolesOnly} fit={fit} /></div>}
@@ -87,7 +88,7 @@ function ShapeCard(props: Props) {
         <span>{perk.icon ? <img src={perk.icon} alt="" /> : '✦'}</span><div><small>{perk.tier}</small><b translate="no" lang={locale}>{perk.name}</b></div>
       </div>)}
     </div>}
-    <div className="shape-player"><strong translate="no" title={player}>{player}</strong>{locked && <span aria-hidden="true">◆</span>}{blocked > 0 && <span>{blocked}</span>}{profile && <small translate="no" title={profile}>{profile}</small>}</div>
+    <div className="shape-player"><strong translate="no" title={player}>{player}</strong>{locked && <span aria-hidden="true">◆</span>}{blocked > 0 && <span>{blocked}</span>}{profile && <small translate="no" title={profile}>{profile}</small>}<ReorderHandle index={index} /></div>
     {extras && <div className="bar-card-extras shape-extras">{extras}</div>}
     <div className="bar-card-actions shape-actions">{actions}</div>
   </article>
