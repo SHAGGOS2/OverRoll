@@ -59,7 +59,7 @@ function portraitHarness() {
     },
   }
   const window = { setTimeout(fn, delay) { const id = ++sequence; timers.set(id, { fn, at: now + delay }); return id }, clearTimeout(id) { timers.delete(id) } }
-  const Portrait = load('OverwatchBar.tsx', react, window).TeleportPortrait
+  const Portrait = load('BarCard.tsx', react, window).TeleportPortrait
   let props = { src: '/assets/old.png', alt: 'Old', revision: 0, enabled: true }
   const pass = () => { cursor = 0; const element = Portrait(props); const effects = pendingEffects; pendingEffects = []; effects.forEach((run) => run()); return element }
   return {
@@ -107,22 +107,22 @@ test('locked or motion-disabled cards update immediately, and interrupted telepo
 })
 
 test('bar cards retain accessible actions, profile, role, translated perks and Stadium powers', () => {
-  const Bar = load('OverwatchBar.tsx').default
+  const Bar = load('BarCard.tsx').default
   const base = { player: 'Javo', index: 0, name: 'Mercy', role: 'Support', roleId: 'support', roleIcon: '/assets/roles/support.png', portrait: '/assets/heroes/mercy.webp', rolesOnly: false, locked: true, blocked: 2, profile: 'Main', revision: 0, motion: false, locale: 'en-us', actions: ['Reroll', 'Filter', 'Details', 'Unlock'].map((label) => React.createElement('button', { key: label, 'aria-label': label }, label)) }
   for (const count of [0, 2, 4]) {
     const perks = Array.from({ length: count }, (_, i) => ({ name: 'Power ' + i, description: 'Description ' + i, icon: '/assets/perks/a.png', tier: 'POWER' }))
     const html = renderToStaticMarkup(React.createElement(Bar, { ...base, perks }))
     assert.equal((html.match(/<button/g) ?? []).length, 4)
-    assert.equal((html.match(/class="ow-bar-perk"/g) ?? []).length, count)
+    assert.equal((html.match(/class="bar-card-perk"/g) ?? []).length, count)
     assert(html.includes('Javo · Mercy')); assert(html.includes('Main')); assert(html.includes('Support'))
     const roleOnly = renderToStaticMarkup(React.createElement(Bar, { ...base, rolesOnly: true, perks }))
-    assert(!roleOnly.includes('class="ow-bar-perk"'))
+    assert(!roleOnly.includes('class="bar-card-perk"'))
   }
 })
 
-test('bar exports fit every OW squad and power count in one row within raster limits', () => {
-  for (let count = 1; count <= 6; count++) for (const powers of [0, 2, 4]) {
-    const layout = teamImageLayout(count, powers, false, 'bars')
+test('bar exports fit all squads, power counts and Deadlock candidates in one row within raster limits', () => {
+  for (let count = 1; count <= 12; count++) for (const powers of [0, 2, 4, 5]) for (const alternatives of [false, true]) {
+    const layout = teamImageLayout(count, powers, alternatives, 'bars')
     assert.equal(layout.columns, count); assert.equal(layout.rows, 1)
     assert(layout.width * layout.height < MAX_EXPORT_PIXELS)
     assert(48 + count * layout.cardWidth + (count - 1) * 24 <= layout.width - 48)
@@ -151,13 +151,14 @@ test('bar export draws the selected team to a PNG through the existing safe asse
   t.mock.method(URL, 'createObjectURL', () => 'blob:png')
   t.mock.method(URL, 'revokeObjectURL', () => {})
   t.after(() => Object.assign(globalThis, old))
-  for (const count of [1, 6]) {
-    const cards = Array.from({ length: count }, (_, i) => ({ player: `Jugador${i + 1}`, name: 'Mercy', role: 'Support', color: '#55e4ad', portrait: '/assets/heroes/mercy.webp', icon: '/assets/roles/support.png', locked: i === 0, details: [{ label: 'Angelic Resurrection', image: '/assets/perks/mercy_minor_01_angelic-resurrection.webp' }] }))
-    const result = await exportTeamImage({ title: 'Overwatch', accent: '#ffc84a', filename: 'ow-bars', design: 'bars', cards })
+  for (const count of [1, 6, 12]) {
+    const cards = Array.from({ length: count }, (_, i) => ({ player: `Jugador${i + 1}`, name: 'Mercy', role: 'Support', color: '#55e4ad', portrait: '/assets/heroes/mercy.webp', icon: '/assets/roles/support.png', locked: i === 0, details: [{ label: 'Angelic Resurrection', image: '/assets/perks/mercy_minor_01_angelic-resurrection.webp' }], alternatives: count === 12 ? [{ label: '2 · Abrams', image: '/assets/games/deadlock/abrams.png' }, { label: '3 · Bebop', image: '/assets/games/deadlock/bebop.png' }] : [] }))
+    const result = await exportTeamImage({ title: 'Overwatch', accent: '#ffc84a', filename: 'bar-cards', design: 'bars', cards })
     assert.equal(result.missingImages, 0)
     assert.equal(canvas.width, 0); assert.equal(canvas.height, 0)
     assert(labels.includes(`Jugador${count}`)); assert(labels.includes('Angelic Resurrection'))
+    if (count === 12) { assert(labels.includes('2 · Abrams')); assert(labels.includes('3 · Bebop')) }
   }
   assert(loads.every((url) => url.startsWith('https://over-roll.com/assets/')))
-  assert.deepEqual(downloads, ['ow-bars.png', 'ow-bars.png']); assert(polygons.length > 0)
+  assert.deepEqual(downloads, ['bar-cards.png', 'bar-cards.png', 'bar-cards.png']); assert(polygons.length > 0)
 })

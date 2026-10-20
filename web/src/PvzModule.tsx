@@ -2,6 +2,8 @@ import GameSidebar from './GameSidebar'
 import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
 import { useImageExport } from './useImageExport'
+import BarCard from './BarCard'
+import { TELEPORT_DURATION_MS, type CardDesign } from './cardDesign'
 import { safeAssetUrl } from './imageExport.ts'
 import {
   useEffect,
@@ -21,7 +23,7 @@ import {
 } from './pvzCatalog'
 import { warmImageCache } from './imageCache'
 import type { SupportedLocale } from './localization'
-import { localizeUi, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
+import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from './uiLocalization'
 import ViewportAction from './ViewportAction'
 import { sanitizePersonName, PERSON_NAME_PATTERN, PERSON_NAME_HINT, PLAYER_NAME_MAX_LENGTH } from './personName.ts'
 import './PvzModule.css'
@@ -51,6 +53,8 @@ type Props = {
   profiles: ProfileOption[]
   baseUrl: string
   animationsEnabled: boolean
+  cardDesign?: CardDesign
+  barMotion?: boolean
   soundEnabled: boolean
   soundVolume: number
   mobileCompactMode: boolean
@@ -162,6 +166,8 @@ export default function PvzModule({
   profiles,
   baseUrl,
   animationsEnabled,
+  cardDesign = 'classic',
+  barMotion = animationsEnabled,
   soundEnabled,
   soundVolume,
   mobileCompactMode,
@@ -438,7 +444,7 @@ export default function PvzModule({
         const zombieTotal = roster.filter((player) => player.side === 'zombies').length
         setStatus(target === 'both' ? `${plantTotal} Plantas y ${zombieTotal} Zombis generados` : `${pvzSideLabels[target]} listos`)
       }
-    }, animationsEnabled ? 300 : 25)
+    }, cardDesign === 'bars' && barMotion ? TELEPORT_DURATION_MS : animationsEnabled ? 300 : 25)
   }
 
   function reroll(index: number) {
@@ -455,10 +461,11 @@ export default function PvzModule({
     const character = options[randomIndex(options.length)] ?? current?.character ?? null
     window.setTimeout(() => {
       setPicks((rows) => rows.map((pick, pickIndex) => pickIndex === index ? { character, locked: false } : pick))
-      setRerollingIndex(null)
+      if (cardDesign === 'bars' && barMotion) window.setTimeout(() => setRerollingIndex(null), TELEPORT_DURATION_MS)
+      else setRerollingIndex(null)
       setStatus(`Reroll de ${player.name || `Jugador${index + 1}`}`)
       if (!character) notify('No hay otro personaje compatible con ese filtro.', 'warning')
-    }, animationsEnabled ? 210 : 20)
+    }, cardDesign === 'bars' ? 0 : animationsEnabled ? 210 : 20)
   }
 
   function toggleLock(index: number) {
@@ -511,9 +518,9 @@ export default function PvzModule({
   }, [filterPlayer, filterSearch, eligibleBySide])
 
   async function generateImage() {
-    await saveImage({ title: 'Plants vs. Zombies · GW2', accent: '#f7d85b', filename: 'overroll-pvzgw2-equipo', cards: players.map((player, index) => {
+    await saveImage({ title: 'Plants vs. Zombies · GW2', accent: '#f7d85b', filename: 'overroll-pvzgw2-equipo', design: cardDesign, cards: players.map((player, index) => {
       const pick = picks[index], hero = pick?.character
-      return { player: player.name, name: hero?.name ?? 'Sin selección', role: pvzSideSingular[player.side] + (hero ? ' · ' + hero.baseName : ''), color: pvzSideColors[player.side], portrait: hero ? asset(hero.portrait) : undefined, locked: pick?.locked }
+      return { player: player.name, name: hero?.name ?? 'Sin selección', role: pvzSideSingular[player.side] + (hero ? ' · ' + hero.baseName : ''), color: pvzSideColors[player.side], portrait: hero ? asset(hero.portrait) : undefined, fit: cardDesign === 'bars' ? 'contain' as const : 'cover' as const, locked: pick?.locked }
     }) })
   }
 
@@ -557,12 +564,24 @@ export default function PvzModule({
 
         <section className="content pvz-content">
           <div className="content-topline pvz-topline"><div className="game-identity"><div className="game-title-row"><h1>PVZ Garden Warfare 2</h1></div></div><div className="topline-actions"><button type="button" className="generate-image-button pvz-image-button" onClick={generateImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.character)}><PvzIcon name="download" size={17} /> Generar imagen</button><div className="match-summary pvz-summary"><div><small>Plantas</small><strong>{plantCount}</strong></div><div><small>Zombis</small><strong>{zombieCount}</strong></div><div><small>Fijados</small><strong>{lockedCount}</strong></div></div></div></div>
-          <div className="team-stage pvz-stage"><div className="stage-grid" /><div className={`pvz-team-grid cards-${players.length}`} style={{ '--cards': players.length } as CSSProperties}>
+          <div className="team-stage pvz-stage"><div className="stage-grid" /><div className={`pvz-team-grid cards-${players.length}${cardDesign === 'bars' ? ' team-grid bar-cards' : ''}`} style={{ '--cards': players.length } as CSSProperties}>
             {players.map((player, index) => {
               const pick = picks[index]
               const character = pick?.character
               const profile = profiles.find((item) => item.id === player.profileId)
               const generationClass = generationRevision % 2 === 0 ? 'generation-a' : 'generation-b'
+              if (cardDesign === 'bars') return <BarCard key={player.id} gameId="pvzgw2" index={index}
+                player={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name || localizedPlayerName(locale, index + 1)}
+                name={translateGameText('pvzgw2', locale, character?.name ?? 'Sin selección')} role={translateGameText('pvzgw2', locale, pvzSideSingular[player.side])}
+                subtitle={character?.isVariant ? translateGameText('pvzgw2', locale, character.baseName) + (character.isDlc ? ' · DLC' : '') : undefined}
+                accent={pvzSideColors[player.side]} portrait={character ? asset(character.portrait) : ''} fit="contain" rolesOnly={false} locked={Boolean(pick?.locked)} profile={profile?.name} blocked={player.blocked.length}
+                perks={[]} revision={generationRevision} motion={barMotion} locale={locale}
+                actions={localizeUi(locale, <>
+                  <button type="button" onClick={() => reroll(index)} disabled={!character || pick?.locked || generating || rerollingIndex !== null} aria-label="Cambiar personaje" title="Cambiar personaje"><PvzIcon name="reroll" size={18} /></button>
+                  <button type="button" onClick={() => openFilter(index)} aria-label={`Filtro de ${player.name}`} title="Filtro individual" className={player.blocked.length ? 'active-filter' : ''}><PvzIcon name="filter" size={18} /></button>
+                  {sideSwitchEnabled && <button type="button" onClick={() => setPlayerSide(index, player.side === 'plants' ? 'zombies' : 'plants')} disabled={generating || rerollingIndex !== null} aria-label="Cambiar bando y reemplazar" title="Cambiar bando y reemplazar"><PvzIcon name="switch" size={18} /></button>}
+                  <button type="button" className={pick?.locked ? 'active-lock' : ''} onClick={() => toggleLock(index)} disabled={!character || generating || rerollingIndex !== null} aria-label={pick?.locked ? 'Desbloquear' : 'Bloquear'} title={pick?.locked ? 'Desbloquear' : 'Bloquear'}><PvzIcon name={pick?.locked ? 'unlock' : 'lock'} size={18} /></button>
+                </>, 'pvzgw2')} />
               return <article className={`pvz-card ${player.side} ${generationClass} ${pick?.locked ? 'is-locked' : ''} ${rerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--delay': `${index * 45}ms`, '--pvz-accent': pvzSideColors[player.side] } as CSSProperties} key={player.id}>
                 <div className="pvz-card-player"><span>{String(index + 1).padStart(2, '0')}</span><strong translate="no">{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : (player.name || localizedPlayerName(locale, index + 1))}</strong>{profile && <i translate="no">{profile.name.charAt(0).toUpperCase()}</i>}{pick?.locked && <b><PvzIcon name="lock" size={12} /></b>}</div>
                 <div className="pvz-portrait"><div className="portrait-grid" aria-hidden="true" />{character ? <img src={asset(character.portrait)} alt={character.name} decoding="async" draggable={false} /> : <div className="pvz-empty-portrait"><PvzIcon name="spark" size={44} /><span>Genera este bando</span></div>}<div className="pvz-portrait-fade" /></div>

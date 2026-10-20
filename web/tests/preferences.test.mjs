@@ -16,7 +16,7 @@ visit(tree)
 const code = ts.transpileModule(functionSource, { compilerOptions: { target: ts.ScriptTarget.ES2023, jsx: ts.JsxEmit.React } }).outputText
 function render(tab, overrides = {}) {
   const changes = { sounds: [] }
-  const context = { gameCredits, React, Icon: () => null, CardDesignOptions: () => null, overwatchCardDesign: 'classic', setOverwatchCardDesign: (value) => { changes.design = value }, t: (key) => key, settingsTab: tab,
+  const context = { gameCredits, React, Icon: () => null, CardDesignOptions: () => null, cardDesign: 'classic', setCardDesign: (value) => { changes.design = value }, t: (key) => key, settingsTab: tab,
     animationsEnabled: true, compactPerks: false, mobileCompactMode: true, lowPowerMode: false,
     soundEnabled: true, soundVolume: .42, hoverSounds: false, localePreference: 'auto',
     browserLocale: 'es-MX', activeLocale: 'es-MX', activeGame: 'deadlock',
@@ -51,9 +51,9 @@ test('new general settings retain working toggles and explicit reset actions', (
   assert(!html.includes('Configuración independiente por módulo'))
 })
 
-test('card design selection is scoped to Overwatch, retains the chosen value and plays option feedback', () => {
+test('card design selection retains the chosen value across game switches and plays option feedback', () => {
   const Design = () => null
-  const { element, changes } = render('card-design', { CardDesignOptions: Design, overwatchCardDesign: 'bars' })
+  const { element, changes } = render('card-design', { CardDesignOptions: Design, cardDesign: 'bars' })
   const picker = elements(element).find((el) => el.type === Design)
   assert.equal(picker.props.value, 'bars')
   picker.props.onChange('classic')

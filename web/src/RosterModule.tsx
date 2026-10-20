@@ -1,6 +1,8 @@
 import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
 import { useImageExport } from './useImageExport'
+import BarCard from './BarCard'
+import { barPortraitFit, TELEPORT_DURATION_MS, type CardDesign } from './cardDesign'
 import { safeAssetUrl } from './imageExport.ts'
 import {
   useEffect,
@@ -120,6 +122,8 @@ type Props = {
   profiles: SharedProfile[]
   baseUrl: string
   animationsEnabled: boolean
+  cardDesign?: CardDesign
+  barMotion?: boolean
   soundEnabled: boolean
   soundVolume: number
   mobileCompactMode: boolean
@@ -460,6 +464,8 @@ export default function RosterModule({
   profiles,
   baseUrl,
   animationsEnabled,
+  cardDesign = 'classic',
+  barMotion = animationsEnabled,
   soundEnabled,
   soundVolume,
   mobileCompactMode,
@@ -833,7 +839,7 @@ export default function RosterModule({
         setGenerating(false)
         if (playConfirmTone) playConfirmTone()
         else playTone(880, 0.18)
-      }, animationsEnabled ? 420 : 1)
+      }, cardDesign === 'bars' && barMotion ? TELEPORT_DURATION_MS : animationsEnabled ? 420 : 1)
       if (completeCards !== players.length) notify('Algunos filtros no permiten completar tres candidatos.', 'warning')
       return
     }
@@ -938,7 +944,7 @@ export default function RosterModule({
       setGenerating(false)
       if (playConfirmTone) playConfirmTone()
       else playTone(880, 0.18)
-    }, animationsEnabled ? 420 : 1)
+    }, cardDesign === 'bars' && barMotion ? TELEPORT_DURATION_MS : animationsEnabled ? 420 : 1)
     if (game.supportsTeamups && priorityTeamups && !seededTeamup && activeTeamupCount === 0) {
       notify('No existe un Team-Up compatible con los roles y filtros actuales.', 'warning')
     } else {
@@ -952,6 +958,10 @@ export default function RosterModule({
 
     setRerollingIndex(index)
     playModuleSound('reroll', 680)
+    const finishReroll = () => {
+      if (cardDesign === 'bars' && barMotion) window.setTimeout(() => setRerollingIndex(null), TELEPORT_DURATION_MS)
+      else setRerollingIndex(null)
+    }
 
     window.setTimeout(() => {
       if (gameId === 'deadlock') {
@@ -967,7 +977,7 @@ export default function RosterModule({
           locked: false,
         } : pick))
         setStatus(candidates.length === 3 ? `${player.name}: tres candidatos nuevos` : `No hay tres candidatos válidos para ${player.name}`)
-        setRerollingIndex(null)
+        finishReroll()
         return
       }
 
@@ -987,8 +997,8 @@ export default function RosterModule({
         teamupKey: undefined,
       } : pick)))
       setStatus(hero ? `${player.name}: ${hero.name}` : `No hay selección válida para ${player.name}`)
-      setRerollingIndex(null)
-    }, animationsEnabled ? 280 : 1)
+      finishReroll()
+    }, cardDesign === 'bars' ? 0 : animationsEnabled ? 280 : 1)
   }
 
   function toggleLock(index: number) {
@@ -1010,7 +1020,7 @@ export default function RosterModule({
 
 
   async function generateTeamImage() {
-    await saveImage({ title: game.name, subtitle: players.length + (players.length === 1 ? ' jugador' : ' jugadores'), accent: game.accent, filename: 'overroll-' + gameId + '-equipo', cards: players.flatMap((player, index) => {
+    await saveImage({ title: game.name, subtitle: players.length + (players.length === 1 ? ' jugador' : ' jugadores'), accent: game.accent, filename: 'overroll-' + gameId + '-equipo', design: cardDesign, cards: players.flatMap((player, index) => {
       const pick = picks[index], hero = pick?.hero
       if (!hero) return []
       const role = roleDefinition(game, hero.role)
@@ -1021,7 +1031,7 @@ export default function RosterModule({
         { label: 'Arma · ' + pick.loadout.weapon, image: finalsIcon(baseUrl, pick.loadout.weapon) },
         ...pick.loadout.gadgets.map((label) => ({ label, image: finalsIcon(baseUrl, label) })),
       ] : game.supportsTeamups ? [{ label: synergy ? (synergy.complete ? 'Activo · ' : 'Team-Up · ') + synergy.name : 'Sin Team-Up', image: partner ? asset(partner.portrait) : undefined }] : []
-      return [{ player: player.name, name: gameId === 'deadlock' ? '1 · ' + hero.name : hero.name, role: gameId === 'deadlock' ? 'Tres preferencias de selección' : role.label, color: role.color, portrait: pick.loadout ? finalsIcon(baseUrl, pick.loadout.weapon) : asset(hero.portrait), fit: pick.loadout || gameId === 'fragpunk' || gameId === 'deadlock' ? 'contain' as const : 'cover' as const, frame: gameId === 'fragpunk' ? fragpunkPortraitFrames[hero.key] : undefined, icon: role.icon ? asset(role.icon) : undefined, locked: pick.locked, details, alternatives: gameId === 'deadlock' ? rosterPickCandidates(pick).slice(1, 3).map((candidate, i) => ({ label: (i + 2) + ' · ' + candidate.name, image: asset(candidate.portrait) })) : [] }]
+      return [{ player: player.name, name: gameId === 'deadlock' ? '1 · ' + hero.name : hero.name, role: gameId === 'deadlock' ? 'Tres preferencias de selección' : role.label, color: role.color, portrait: pick.loadout ? finalsIcon(baseUrl, pick.loadout.weapon) : asset(hero.portrait), fit: cardDesign === 'bars' ? barPortraitFit(gameId) : pick.loadout || gameId === 'fragpunk' || gameId === 'deadlock' ? 'contain' as const : 'cover' as const, frame: gameId === 'fragpunk' ? fragpunkPortraitFrames[hero.key] : undefined, icon: role.icon ? asset(role.icon) : undefined, locked: pick.locked, details, alternatives: gameId === 'deadlock' ? rosterPickCandidates(pick).slice(1, 3).map((candidate, i) => ({ label: (i + 2) + ' · ' + candidate.name, image: asset(candidate.portrait) })) : [] }]
     }) })
   }
 
@@ -1186,7 +1196,7 @@ export default function RosterModule({
           ) : (
             <div className="team-stage roster-team-stage">
               <div className="stage-grid" />
-              <div className={`team-grid cards-${players.length} ${players.length > 6 ? 'roster-many-cards' : ''} ${game.supportsLoadouts ? 'roster-finals-grid' : ''}`} style={{ '--cards': players.length } as CSSProperties}>
+              <div className={`team-grid cards-${players.length} ${players.length > 6 ? 'roster-many-cards' : ''} ${game.supportsLoadouts ? 'roster-finals-grid' : ''}${cardDesign === 'bars' ? ' bar-cards' : ''}`} style={{ '--cards': players.length } as CSSProperties}>
                 {players.map((player, index) => {
                   const pick = picks[index] ?? { hero: null, locked: false }
                   const deadlockCandidates = gameId === 'deadlock' ? rosterPickCandidates(pick) : []
@@ -1201,6 +1211,34 @@ export default function RosterModule({
                   const receiverTeamups = hero && game.supportsTeamups ? activeTeamups(hero.key) : []
                   const selectedTeamup = (pick.teamupKey ? receiverTeamups.find((teamup) => teamup.key === pick.teamupKey) : undefined) ?? receiverTeamups[0]
                   const generationClass = generationRevision % 2 === 0 ? 'generation-a' : 'generation-b'
+                  if (cardDesign === 'bars') {
+                    const tr = (text: string) => translateGameText(gameId, locale, text)
+                    const partner = selectedTeamup && hero ? heroByKey(teamupPartnerKey(selectedTeamup, hero.key)) : null
+                    const partnerName = selectedTeamup && hero ? teamupPartnerName(selectedTeamup, hero.key) : ''
+                    const heroIsAnchor = selectedTeamup && hero ? teamupAnchorKey(selectedTeamup) === hero.key : false
+                    return <BarCard key={player.id} gameId={gameId} index={index}
+                      player={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name || localizedPlayerName(locale, index + 1)}
+                      name={tr(gameId === 'deadlock' ? 'Candidatos' : game.supportsLoadouts ? pick.loadout?.weapon ?? 'Build pendiente' : hero?.name ?? 'Sin selección')}
+                      role={tr(role?.label ?? (game.roles.length > 1 ? 'Sin selección' : game.roles[0].label))} roleIcon={role?.icon ? asset(role.icon) : undefined} accent={role?.color ?? game.accent}
+                      portrait={game.supportsLoadouts && pick.loadout ? finalsIcon(baseUrl, pick.loadout.weapon) : hero ? asset(hero.portrait) : ''}
+                      fit={barPortraitFit(gameId)} frame={gameId === 'fragpunk' && hero ? fragpunkPortraitFrames[hero.key] : undefined}
+                      candidates={gameId === 'deadlock' ? Array.from({ length: 3 }, (_, i) => ({ name: tr(deadlockCandidates[i]?.name ?? 'Sin selección'), portrait: deadlockCandidates[i] ? asset(deadlockCandidates[i].portrait) : '' })) : undefined}
+                      rolesOnly={false} locked={pick.locked} profile={assignedProfile?.name} blocked={player.blocked.length} revision={generationRevision} motion={barMotion} locale={locale}
+                      perks={game.supportsLoadouts && pick.loadout ? [{ name: tr(pick.loadout.specialization), description: '', icon: finalsIcon(baseUrl, pick.loadout.specialization), tier: tr('Especialización') }] : []}
+                      extras={game.supportsTeamups || game.supportsLoadouts ? localizeUi(locale, <>
+                        {game.supportsTeamups && selectedTeamup && hero && <div className={`bar-card-teamup ${selectedTeamup.complete ? 'complete' : ''}`}>
+                          {partner && <img src={asset(partner.portrait)} alt={partnerName} />}
+                          <span><small>{selectedTeamup.complete ? 'ACTIVO' : 'TEAM-UP ELEGIDO'}</small><strong>{selectedTeamup.name}</strong><em>{selectedTeamup.complete ? `Con ${partnerName}` : heroIsAnchor ? `Potencia a ${partnerName}` : `Base · mejora con ${partnerName}`}</em></span>
+                        </div>}
+                        {game.supportsLoadouts && pick.loadout && renderFinalsCardLoadout(pick.loadout)}
+                      </>, gameId) : undefined}
+                      actions={localizeUi(locale, <>
+                        <button type="button" onClick={() => reroll(index)} disabled={!hero || pick.locked || generating || rerollingIndex !== null} data-tooltip={gameId === 'deadlock' ? 'Cambiar los 3 candidatos' : 'Reroll'} aria-label={gameId === 'deadlock' ? `Cambiar los tres candidatos de ${player.name}` : `Reroll de ${player.name}`}><RosterIcon name="reroll" size={18} /></button>
+                        <button type="button" onClick={() => { setFilterIndex(index); setFilterSearch(''); setFilterRole('all'); playModuleSound('filter', 560) }} data-tooltip="Filtro" aria-label={`Filtro de ${player.name}`} className={player.blocked.length > 0 ? 'active-filter' : ''}><RosterIcon name="filter" size={18} /></button>
+                        <button type="button" onClick={() => { setDetailsIndex(index); playModuleSound('open', 590) }} disabled={!hero} data-tooltip="Detalles" aria-label={`Detalles de ${hero?.name ?? 'personaje'}`}><RosterIcon name="details" size={18} /></button>
+                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero || generating || rerollingIndex !== null} className={pick.locked ? 'active-lock' : ''} data-tooltip={pick.locked ? 'Liberar' : 'Fijar'} aria-label={pick.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><RosterIcon name={pick.locked ? 'unlock' : 'lock'} size={17} /></button>
+                      </>, gameId)} />
+                  }
                   return (
                     <article className={`hero-card roster-unified-card ${game.supportsLoadouts ? 'roster-finals-card' : ''} ${generationClass} ${pick.locked ? 'is-locked' : ''} ${rerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--role-color': role?.color ?? game.accent, '--delay': `${index * 45}ms` } as CSSProperties} key={player.id}>
                       <span className="card-corner top" /><span className="card-corner bottom" /><div className="card-shine" />

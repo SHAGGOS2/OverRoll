@@ -13,7 +13,7 @@ let exporting = false
 
 export function teamImageLayout(count: number, detailCount: number, alternatives: boolean, design: CardDesign = 'classic') {
   if (design === 'bars') {
-    const columns = Math.max(1, count), cardWidth = 280, cardHeight = 620 + Math.max(0, Math.min(8, detailCount) - 2) * 36
+    const columns = Math.max(1, count), cardWidth = 280, cardHeight = 620 + Math.max(0, Math.min(8, detailCount) - 2) * 36 + (alternatives ? 300 : 0)
     return { columns, rows: 1, cardWidth, cardHeight, width: 96 + columns * cardWidth + (columns - 1) * 24, height: 222 + cardHeight + 80 }
   }
   const columns = Math.min(3, Math.max(1, count))
@@ -76,11 +76,25 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
       ctx.strokeStyle = '#a4bddb14'; ctx.lineWidth = 1
       for (let line = 0; line < w; line += 26) { ctx.beginPath(); ctx.moveTo(x + line, y); ctx.lineTo(x + line, y + h); ctx.stroke() }
       for (let line = 0; line < h; line += 26) { ctx.beginPath(); ctx.moveTo(x, y + line); ctx.lineTo(x + w, y + line); ctx.stroke() }
-      picture(card.portrait, x - 15, y + 98, w + 30, h - 98, card.fit === 'contain', card.frame)
+      const artTop = Math.max(28, Math.min(8, card.details?.length ?? 0) * 38 + 40)
+      if (card.alternatives?.length) {
+        const candidates = [{ label: card.name, image: card.portrait }, ...card.alternatives.slice(0, 2)]
+        const rowHeight = (h - artTop - 110) / candidates.length
+        candidates.forEach((candidate, i) => {
+          const rowY = y + artTop + i * rowHeight
+          picture(candidate.image, x + 22, rowY, w - 44, rowHeight - 28, true)
+          text(candidate.label, x + 38, rowY + rowHeight - 9, w - 76, 13, '#edf5ff', 750, 10)
+        })
+      } else {
+        picture(card.portrait, x - 15, y + artTop, w + 30, h - artTop, card.fit === 'contain', card.frame)
+        const topFade = ctx.createLinearGradient(0, y + artTop, 0, y + artTop + 48)
+        topFade.addColorStop(0, '#20394e'); topFade.addColorStop(1, '#20394e00')
+        ctx.fillStyle = topFade; ctx.fillRect(x, y + artTop, w, 48)
+      }
       const fade = ctx.createLinearGradient(0, y + h - 180, 0, y + h); fade.addColorStop(0, '#07121f00'); fade.addColorStop(.55, '#07121fee'); fade.addColorStop(1, '#07121f')
       ctx.fillStyle = fade; ctx.fillRect(x, y + h - 180, w, 180)
       ;(card.details ?? []).slice(0, 8).forEach((detail, i) => {
-        const dy = y + 16 + i * 38, dx = x + slant + 10 - i * 3
+        const dy = y + 10 + i * 38, dx = x + slant + 10 - i * 3
         const cx = i % 2 ? dx + 14 : x + w - 32
         ctx.fillStyle = '#0a1c2fee'; ctx.beginPath(); ctx.arc(cx, dy + 14, 15, 0, Math.PI * 2); ctx.fill()
         ctx.strokeStyle = card.color; ctx.stroke()
