@@ -358,9 +358,8 @@
 .app .standard-game .card-player { border-bottom: 1px solid color-mix(in srgb, var(--role-color) 22%, #243b51); background: linear-gradient(110deg, color-mix(in srgb, var(--role-color) 8%, #172b3d), #102333); }
 .app .standard-game .portrait-grid { display: block; position: absolute; inset: 0; z-index: 0; opacity: .85; pointer-events: none; background-image: linear-gradient(#a4bddb12 1px, transparent 1px), linear-gradient(90deg, #a4bddb12 1px, transparent 1px); background-size: 26px 26px; }
 .app .standard-game .portrait:not(.portrait-error) .portrait-fallback { visibility: hidden; }
-.app .standard-game .role-watermark,
+.app .overwatch-workspace .role-watermark { color: #fff; filter: drop-shadow(0 0 8px #ffffff3d); }
 .app .standard-game .class-emblem { position: absolute; z-index: 4; right: 10px; bottom: 10px; display: grid; place-items: center; width: 41px; height: 41px; padding: 7px; border: 1px solid color-mix(in srgb, var(--role-color) 50%, #34475a); border-radius: 8px; color: var(--role-color); background: #061522d9; opacity: .9; filter: none; box-shadow: 0 3px 9px #0005; pointer-events: none; }
-.app .standard-game .role-watermark-icon { display: block; width: 25px; height: 25px; }
 .app .standard-game .class-emblem img { width: 25px; height: 25px; object-fit: contain; }
 .app .standard-game .card-actions { margin-top: auto; }
 .app .tf2-workspace.standard-game .tf2-card .tf2-portrait { flex: none; width: 100%; height: auto; min-height: 0; max-height: none; aspect-ratio: 1; }
