@@ -34,14 +34,15 @@ function assertLocal(options) {
 }
 
 test('all eleven game adapters and OW role-only mode export valid local resources', async () => {
-  const players = [{ name: 'Javo', roles: {}, side: 'plants' }], asset = (path) => path, saveImage = assertLocal
+  for (const cardDesign of ['classic', 'bars', 'horizontal']) {
+  const players = [{ name: 'Javo', roles: {}, side: 'plants' }], asset = (path) => path, saveImage = (options) => { assertLocal(options); assert.equal(options.design, cardDesign) }
   const heroes = read('data/heroes.json').heroes
-  await run('App.tsx', 'generateTeamImage', { variables: ['roleLabels'] }, { saveImage, perkText: (_hero, perk) => perk, asset, players, picks: [{ hero: heroes[0], role: heroes[0].role, perks: [...heroes[0].minorPerks, ...heroes[0].majorPerks].slice(0, 2) }], cardDesign: 'classic', rolesOnly: false, stadium: false })
-  await run('App.tsx', 'generateTeamImage', { variables: ['roleLabels'] }, { saveImage, perkText: (_hero, perk) => perk, asset, players, picks: [{ hero: null, role: 'support', perks: [] }], cardDesign: 'classic', rolesOnly: true, stadium: false })
+  await run('App.tsx', 'generateTeamImage', { variables: ['roleLabels'] }, { saveImage, perkText: (_hero, perk) => perk, asset, players, picks: [{ hero: heroes[0], role: heroes[0].role, perks: [...heroes[0].minorPerks, ...heroes[0].majorPerks].slice(0, 2) }], cardDesign, rolesOnly: false, stadium: false })
+  await run('App.tsx', 'generateTeamImage', { variables: ['roleLabels'] }, { saveImage, perkText: (_hero, perk) => perk, asset, players, picks: [{ hero: null, role: 'support', perks: [] }], cardDesign, rolesOnly: true, stadium: false })
   const tf2Code = extract('App.tsx', [], ['tf2Classes'])
   const tf2Classes = vm.runInNewContext(`${tf2Code};tf2Classes`)
-  for (const mercenary of tf2Classes) await run('App.tsx', 'generateTf2TeamImage', { variables: ['tf2GroupLabels', 'tf2GroupColors'] }, { saveImage, cardDesign: 'bars', asset, tf2Players: players, tf2Picks: [{ mercenary }] })
-  await run('PvzModule.tsx', 'generateImage', {}, { saveImage, cardDesign: 'bars', perkText: (_hero, perk) => perk, asset, players, picks: [{ character: pvzCharacters[0] }], pvzSideColors, pvzSideSingular })
+  for (const mercenary of tf2Classes) await run('App.tsx', 'generateTf2TeamImage', { variables: ['tf2GroupLabels', 'tf2GroupColors'] }, { saveImage, cardDesign, asset, tf2Players: players, tf2Picks: [{ mercenary }] })
+  await run('PvzModule.tsx', 'generateImage', {}, { saveImage, cardDesign, perkText: (_hero, perk) => perk, asset, players, picks: [{ character: pvzCharacters[0] }], pvzSideColors, pvzSideSingular })
   const definitions = vm.runInNewContext(`${extract('RosterModule.tsx', [], ['rosterGameDefinitions'])};rosterGameDefinitions`)
   for (const game of definitions) {
     const catalog = read(`assets/games/${game.id}/catalog.json`).heroes.map((h) => ({ ...h, portrait: `assets/games/${game.id}/${h.portrait.split('/').pop()}` }))
@@ -50,7 +51,8 @@ test('all eleven game adapters and OW role-only mode export valid local resource
       const items = read('assets/games/thefinals/loadouts.json')[hero.role]
       pick.loadout = { specialization: items.specializations[0], weapon: items.weapons[0], gadgets: items.gadgets.slice(0, 3) }
     }
-    await run('RosterModule.tsx', 'generateTeamImage', { functions: ['roleDefinition', 'rosterPickCandidates', 'finalsIcon', 'slugifyFinalsItem'] }, { game, cardDesign: 'bars', barPortraitFit, fragpunkPortraitFrames, gameId: game.id, baseUrl: '/', players, picks: [pick], asset, saveImage, activeTeamups: () => [{ key: 'pair', name: 'Team-Up', complete: true }], teamupPartnerKey: () => catalog[1].key, heroByKey: (key) => catalog.find((h) => h.key === key) })
+    await run('RosterModule.tsx', 'generateTeamImage', { functions: ['roleDefinition', 'rosterPickCandidates', 'finalsIcon', 'slugifyFinalsItem'] }, { game, cardDesign, barPortraitFit, fragpunkPortraitFrames, gameId: game.id, baseUrl: '/', players, picks: [pick], asset, saveImage, activeTeamups: () => [{ key: 'pair', name: 'Team-Up', complete: true }], teamupPartnerKey: () => catalog[1].key, heroByKey: (key) => catalog.find((h) => h.key === key) })
+  }
   }
 })
 

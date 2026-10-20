@@ -30,7 +30,7 @@ function branch(file, owner) {
   const tree = ast(file); let found
   function visit(n, current = '') {
     if (ts.isFunctionDeclaration(n)) current = n.name?.text ?? current
-    if (ts.isIfStatement(n) && current === owner && n.expression.getText(tree) === "cardDesign === 'bars'") found = n.getText(tree)
+    if (ts.isIfStatement(n) && current === owner && n.expression.getText(tree) === "cardDesign !== 'classic'") found = n.getText(tree)
     ts.forEachChild(n, (child) => visit(child, current))
   }
   visit(tree); assert(found, `${file}/${owner}`)
@@ -57,24 +57,26 @@ function assertLocalResources(html) {
 }
 
 test('Overwatch, TF2 and GW2 bar adapters retain localized content and their distinct working controls', () => {
+  for (const design of ['bars', 'horizontal']) {
   const hero = read('data/heroes.json').heroes.find((item) => item.key === 'mercy')
-  const ow = render('App.tsx', 'renderPrincipal', { hero, visibleRole: hero.role, stadium: false, pick: { hero, locked: false, perks: hero.minorPerks.slice(0, 1) }, perkText: () => ({ name: 'Angelic Resurrection', description: 'Healing' }) })
+  const ow = render('App.tsx', 'renderPrincipal', { cardDesign: design, hero, visibleRole: hero.role, stadium: false, pick: { hero, locked: false, perks: hero.minorPerks.slice(0, 1) }, perkText: () => ({ name: 'Angelic Resurrection', description: 'Healing' }) })
   assert(ow.html.includes('Angelic Resurrection')); assert.equal(buttons(ow.element.props.actions).length, 4)
   buttons(ow.element.props.actions)[0].props.onClick(); assert.equal(ow.actions[0][0], 'reroll')
-  const tf2 = render('App.tsx', 'renderTf2Principal', { mercenary: { key: 'tf2-medic', name: 'Medic', group: 'support', portrait: 'assets/tf2/classes/medic.jpg' } })
+  const tf2 = render('App.tsx', 'renderTf2Principal', { cardDesign: design, mercenary: { key: 'tf2-medic', name: 'Medic', group: 'support', portrait: 'assets/tf2/classes/medic.jpg' } })
   assert.equal(tf2.element.props.fit, 'contain'); assert(tf2.html.includes('/assets/tf2/icons/medic.png')); assert.equal(buttons(tf2.element.props.actions).length, 3)
   buttons(tf2.element.props.actions)[0].props.onClick(); assert.equal(tf2.actions[0][0], 'rerollTf2')
   const character = pvzCharacters.find((item) => item.isVariant)
-  const pvz = render('PvzModule.tsx', 'renderPrincipal', { character, pvzSideColors, pvzSideSingular, sideSwitchEnabled: true })
+  const pvz = render('PvzModule.tsx', 'renderPrincipal', { cardDesign: design, character, pvzSideColors, pvzSideSingular, sideSwitchEnabled: true })
   assert.equal(pvz.element.props.fit, 'contain'); assert.equal(pvz.element.props.roleIcon, undefined)
   assert(pvz.html.includes(character.baseName)); assert.equal(buttons(pvz.element.props.actions).length, 4)
   buttons(pvz.element.props.actions)[2].props.onClick(); assert.deepEqual(pvz.actions[0], ['setPlayerSide', 0, 'zombies'])
-  for (const row of [ow, tf2, pvz]) { assert(row.html.includes('Main')); assertLocalResources(row.html) }
+  for (const row of [ow, tf2, pvz]) { assert(row.html.includes('Main')); assertLocalResources(row.html); assert.equal(row.element.props.design, design) }
+  }
 })
 
 test('all eight roster bar adapters preserve the correct icons, artwork, candidates, Team-Ups and builds', () => {
   const definitions = vm.runInNewContext(`${declarations('RosterModule.tsx', ['rosterGameDefinitions'])};rosterGameDefinitions`)
-  for (const game of definitions) {
+  for (const design of ['bars', 'horizontal']) for (const game of definitions) {
     const catalog = read(`assets/games/${game.id}/catalog.json`).heroes.map((hero) => ({ ...hero, portrait: `assets/games/${game.id}/${hero.portrait.split('/').pop()}` }))
     const hero = catalog[0], role = game.roles.find((role) => role.id === hero.role), partner = catalog[1]
     const pick = { hero, locked: false, teamupKey: 'pair' }
@@ -83,10 +85,10 @@ test('all eight roster bar adapters preserve the correct icons, artwork, candida
       pick.loadout = { specialization: items.specializations[0], weapon: items.weapons[0], gadgets: items.gadgets.slice(0, 3) }
     }
     const row = render('RosterModule.tsx', 'renderPrincipal', {
-      game, gameId: game.id, hero, role, pick, selectedTeamup: game.supportsTeamups ? { key: 'pair', name: 'Team-Up', complete: true } : undefined,
+      cardDesign: design, game, gameId: game.id, hero, role, pick, selectedTeamup: game.supportsTeamups ? { key: 'pair', name: 'Team-Up', complete: true } : undefined,
       deadlockCandidates: catalog.slice(0, 3), heroByKey: () => partner, teamupPartnerKey: () => partner.key, teamupPartnerName: () => partner.name, teamupAnchorKey: () => partner.key,
     })
-    assert.equal(row.element.props.fit, barPortraitFit(game.id)); assertLocalResources(row.html)
+    assert.equal(row.element.props.design, design); if (design === 'horizontal') assert(row.html.includes('is-horizontal')); assert.equal(row.element.props.fit, barPortraitFit(game.id)); assertLocalResources(row.html)
     assert.equal(buttons(row.element.props.actions).length, 4)
     buttons(row.element.props.actions)[0].props.onClick(); assert.equal(row.actions[0][0], 'reroll')
     if (game.roles.length > 1) assert(row.element.props.roleIcon)

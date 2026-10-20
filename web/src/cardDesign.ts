@@ -1,10 +1,10 @@
-export type CardDesign = 'classic' | 'bars'
+export type CardDesign = 'classic' | 'bars' | 'horizontal'
 
 export const TELEPORT_SWAP_MS = 260
 export const TELEPORT_DURATION_MS = 720
 
 export function normalizeCardDesign(value: unknown): CardDesign {
-  return value === 'bars' ? 'bars' : 'classic'
+  return value === 'bars' || value === 'horizontal' ? value : 'classic'
 }
 
 export function barPortraitFit(gameId: string): 'cover' | 'contain' {

@@ -12,6 +12,11 @@ export type TeamImageOptions = { assetBase?: string; title: string; subtitle?: s
 let exporting = false
 
 export function teamImageLayout(count: number, detailCount: number, alternatives: boolean, design: CardDesign = 'classic') {
+  if (design === 'horizontal') {
+    const columns = Math.min(2, Math.max(1, count)), rows = Math.ceil(count / columns)
+    const cardWidth = 720, cardHeight = 280 + Math.max(0, Math.min(8, detailCount) - 2) * 36 + (alternatives ? 60 : 0)
+    return { columns, rows, cardWidth, cardHeight, width: 96 + columns * cardWidth + (columns - 1) * 24, height: 222 + rows * cardHeight + (rows - 1) * 24 + 80 }
+  }
   if (design === 'bars') {
     const columns = Math.max(1, count), cardWidth = 280, cardHeight = 620 + Math.max(0, Math.min(8, detailCount) - 2) * 36 + (alternatives ? 300 : 0)
     return { columns, rows: 1, cardWidth, cardHeight, width: 96 + columns * cardWidth + (columns - 1) * 24, height: 222 + cardHeight + 80 }
@@ -65,7 +70,36 @@ export async function exportTeamImage(options: TeamImageOptions): Promise<{ miss
     text('OVERROLL', 48, 88, layout.width - 96, 26, options.accent, 900)
     text(options.title.toUpperCase(), 48, 142, layout.width - 96, 36, '#ffffff', 900, 24)
     text(options.subtitle ?? `${options.cards.length} ${options.cards.length === 1 ? 'jugador' : 'jugadores'}`, 48, 176, layout.width - 96, 16, '#a4b7cb', 500)
-    if (options.design === 'bars') options.cards.forEach((card, index) => {
+    if (options.design === 'horizontal') options.cards.forEach((card, index) => {
+      const x = 48 + index % layout.columns * (layout.cardWidth + 24), y = 222 + Math.floor(index / layout.columns) * (layout.cardHeight + 24)
+      const w = layout.cardWidth, h = layout.cardHeight
+      ctx.fillStyle = '#101e2e'; ctx.beginPath(); ctx.roundRect(x, y, w, h, 16); ctx.fill()
+      ctx.strokeStyle = card.locked ? '#ffcf6b' : card.color; ctx.lineWidth = card.locked ? 2 : 1; ctx.stroke()
+      text(String(index + 1).padStart(2, '0'), x + 18, y + 29, 24, 13, card.color, 900)
+      text(card.player, x + 52, y + 29, w - 82, 18, '#f4f7fc', 750, 13)
+      if (card.alternatives?.length) {
+        const candidates = [{ label: card.name, image: card.portrait }, ...card.alternatives.slice(0, 2)]
+        candidates.forEach((candidate, i) => {
+          const cx = x + 16 + i * 232
+          picture(candidate.image, cx, y + 48, 224, h - 102, true)
+          text(candidate.label, cx + 8, y + h - 30, 208, 14, '#edf5ff', 750, 11)
+        })
+      } else {
+        picture(card.portrait, x + 12, y + 46, 264, h - 58, card.fit === 'contain', card.frame)
+        const fade = ctx.createLinearGradient(x + 228, 0, x + 279, 0); fade.addColorStop(0, '#101e2e00'); fade.addColorStop(1, '#101e2e')
+        ctx.fillStyle = fade; ctx.fillRect(x + 228, y + 46, 51, h - 58)
+        text(card.name.toUpperCase(), x + 296, y + 83, 398, 27, '#ffffff', 900, 18)
+        picture(card.icon, x + 296, y + 101, 20, 20, true)
+        text(card.role, x + (card.icon ? 324 : 296), y + 117, card.icon ? 370 : 398, 14, card.color)
+        ;(card.details ?? []).slice(0, 8).forEach((detail, i) => {
+          const dy = y + 142 + i * 36
+          ctx.fillStyle = '#1a2b3d'; ctx.beginPath(); ctx.roundRect(x + 292, dy - 6, 408, 31, 5); ctx.fill()
+          picture(detail.image, x + 298, dy - 2, 23, 23, true)
+          text(detail.label, x + (detail.image ? 332 : 302), dy + 15, detail.image ? 354 : 384, 12, '#edf5ff', 600)
+        })
+      }
+    })
+    else if (options.design === 'bars') options.cards.forEach((card, index) => {
       const x = 48 + index * (layout.cardWidth + 24), y = 258, w = layout.cardWidth, h = layout.cardHeight - 36, slant = 52
       const outline = () => { ctx.beginPath(); ctx.moveTo(x + slant, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w - slant, y + h); ctx.lineTo(x, y + h); ctx.closePath() }
       text(String(index + 1).padStart(2, '0'), x + slant, y - 14, 25, 13, card.color, 800)

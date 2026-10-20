@@ -16,7 +16,7 @@ visit(tree)
 const code = ts.transpileModule(functionSource, { compilerOptions: { target: ts.ScriptTarget.ES2023, jsx: ts.JsxEmit.React } }).outputText
 function render(tab, overrides = {}) {
   const changes = { sounds: [] }
-  const context = { gameCredits, React, Icon: () => null, CardDesignOptions: () => null, cardDesign: 'classic', setCardDesign: (value) => { changes.design = value }, t: (key) => key, settingsTab: tab,
+  const context = { gameCredits, React, Icon: () => null, CardDesignOptions: () => null, PageThemeOptions: () => null, pageTheme: 'default', setPageTheme: (value) => { changes.theme = value }, cardDesign: 'classic', setCardDesign: (value) => { changes.design = value }, t: (key) => key, settingsTab: tab,
     animationsEnabled: true, compactPerks: false, mobileCompactMode: true, lowPowerMode: false,
     soundEnabled: true, soundVolume: .42, hoverSounds: false, localePreference: 'auto',
     browserLocale: 'es-MX', activeLocale: 'es-MX', activeGame: 'deadlock',
@@ -70,13 +70,22 @@ test('audio controls preserve master sound behavior, volume and disabled states'
   assert(muted.slice(1).every((el) => el.props.disabled))
 })
 
+test('page design is connected to persisted state and option sound feedback', () => {
+  const Picker = () => null
+  const { element, changes } = render('page-design', { PageThemeOptions: Picker, pageTheme: 'tokki' })
+  const picker = elements(element).find((node) => node.type === Picker)
+  assert.equal(picker.props.value, 'tokki')
+  picker.props.onChange('mono')
+  assert.equal(changes.theme, 'mono'); assert.deepEqual(changes.sounds, ['click'])
+})
+
 test('settings tabs support keyboard navigation and language/game actions remain connected', () => {
   const { element, changes } = render('general'), tabs = elements(element).filter((el) => el.props.role === 'tab')
-  assert.equal(tabs.length, 6); assert.equal(tabs.filter((el) => el.props.tabIndex === 0).length, 1)
+  assert.equal(tabs.length, 7); assert.equal(tabs.filter((el) => el.props.tabIndex === 0).length, 1)
   let focused = -1
   const event = { key: 'End', preventDefault() {}, currentTarget: { parentElement: { querySelectorAll() { return tabs.map((_, i) => ({ focus() { focused = i } })) } } } }
   tabs[0].props.onKeyDown(event)
-  assert.equal(changes.tab, 'credits'); assert.equal(focused, 5)
+  assert.equal(changes.tab, 'credits'); assert.equal(focused, 6)
   const language = render('language'), select = elements(language.element).find((el) => el.type === 'select')
   select.props.onChange({ target: { value: 'en-US' } }); assert.equal(language.changes.locale, 'en-US')
   const games = render('catalogs'), gameButton = elements(games.element).find((el) => el.type === 'button' && el.props.className === 'selected')

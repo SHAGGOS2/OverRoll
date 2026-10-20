@@ -1,6 +1,12 @@
 import type { SupportedLocale } from './localization'
 const locales = ['en-us', 'de-de', 'fr-fr', 'pt-br', 'ja-jp', 'ko-kr', 'zh-cn'] as const
 const rows: Record<string, string[]> = {
+ 'Diseño de página': ['Page design','Seitendesign','Style de la page','Design da página','ページデザイン','페이지 디자인','页面设计'],
+ 'Rosa Tokki': ['Tokki pink','Tokki-Rosa','Rose Tokki','Rosa Tokki','トッキ・ピンク','토끼 핑크','托奇粉'],
+ 'Verde terminal': ['Terminal green','Terminal-Grün','Vert terminal','Verde terminal','ターミナル・グリーン','터미널 그린','终端绿'],
+ 'Monocromo': ['Monochrome','Schwarzweiß','Monochrome','Preto e branco','モノクロ','모노크롬','黑白'],
+ 'Diseño original': ['Original design','Originaldesign','Style original','Design original','元のデザイン','기본 디자인','原始设计'],
+ 'Horizontal': ['Horizontal','Querformat','Horizontal','Horizontal','横型','가로형','横向'],
  'Diseño de fichas': ['Card design','Kartendesign','Style des cartes','Design das fichas','カードデザイン','카드 디자인','卡片设计'],
  'Clásico': ['Classic','Klassisch','Classique','Clássico','クラシック','클래식','经典'],
  'Barras': ['Bars','Streifen','Bandes','Barras','ストリップ','스트립','条形'],

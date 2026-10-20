@@ -1,0 +1,63 @@
+.app .workspace .team-grid.bar-cards.horizontal-cards,
+.app.mobile-compact .workspace .team-grid.bar-cards.horizontal-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0; max-width: 1500px; padding: 6px 0 18px; gap: 20px; }
+.app .workspace .team-grid.bar-cards.horizontal-cards.cards-1 { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.bar-card.is-horizontal { --bar-shift: 0px; }
+.bar-card.is-horizontal .bar-card-player { padding: 0 8px 9px; }
+.bar-card.is-horizontal .bar-card-panel,
+.bar-card.is-horizontal:has(.bar-card-perks.is-stadium) .bar-card-panel { height: 258px; transform: none; border-radius: 12px; }
+.bar-card.is-horizontal .bar-card-art,
+.bar-card.is-horizontal.has-perks .bar-card-art { inset: 0 54% 0 0; transform: none; mask-image: linear-gradient(90deg, #000 65%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 65%, transparent); }
+.bar-card.is-horizontal .bar-card-figure[data-fit="contain"] img { padding: 6px 0; }
+.bar-card.is-horizontal .bar-card-info { top: 0; bottom: auto; left: 44%; right: 0; padding: 20px 18px 0 10px; transform: none; background: none; }
+.bar-card.is-horizontal .bar-card-info h2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: clamp(22px, 1.7vw, 30px); line-height: 1.1; }
+.bar-card.is-horizontal .bar-card-info > div { font-size: 11px; }
+.bar-card.is-horizontal .bar-card-perks { top: 132px; left: 47%; right: 18px; gap: 8px; transform: none; }
+.bar-card.is-horizontal .bar-card-perk:nth-child(even) { flex-direction: row; text-align: left; }
+.bar-card.is-horizontal .bar-card-perk > span { width: 30px; height: 30px; }
+.bar-card.is-horizontal .bar-card-perk b { font-size: 11px; }
+.bar-card.is-horizontal .bar-card-perks.is-stadium { top: 132px; gap: 5px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.bar-card.is-horizontal .bar-card-perks.is-stadium .bar-card-perk { gap: 5px; min-height: 52px; }
+.bar-card.is-horizontal .bar-card-perks.is-stadium b { font-size: 10px; }
+.bar-card.is-horizontal .bar-card-role-watermark { right: 59%; bottom: 18px; transform: none; }
+.bar-card.is-horizontal .bar-card-edge { left: 44%; right: 18px; height: 2px; bottom: 14px; border-radius: 2px; }
+.bar-card.is-horizontal .bar-card-actions { justify-content: flex-end; }
+.bar-card.is-horizontal .bar-card-actions > button { flex: none; width: 40px; }
+.bar-card.is-horizontal .bar-card-extras { padding-inline: 4px; }
+.bar-card.is-horizontal .bar-card-extras .finals-card-loadout { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.bar-card.is-horizontal .bar-card-teamup { min-height: 58px; }
+.bar-card.is-horizontal .bar-card-candidates { inset: 10px 8px 65px; grid-template-rows: minmax(0, 1fr); grid-template-columns: repeat(3, minmax(0, 1fr)); transform: none; gap: 8px; }
+.bar-card.is-horizontal .bar-card-candidate .bar-card-figure { inset: 0; }
+.bar-card.is-horizontal .bar-card-candidate .bar-card-figure img { padding: 0 2px 22px; }
+.bar-card.is-horizontal.has-candidates .bar-card-info { top: auto; bottom: 10px; left: 10px; padding: 0 12px; }
+.bar-card.is-horizontal.has-candidates .bar-card-info h2 { font-size: 17px; }
+.bar-card.is-horizontal.has-candidates .bar-card-edge { left: 22px; }
+.bar-card.is-horizontal.bar-game-fragpunk .bar-card-art { inset: 5px 54% 0 5px; }
+.bar-card.is-horizontal.bar-game-thefinals .bar-card-art { inset: 10px 54% 10px 8px; }
+.card-design-choices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card-design-preview.preview-horizontal { flex-direction: column; gap: 7px; padding: 15px; }
+.preview-horizontal .card-design-mini { position: relative; width: 100%; max-width: 170px; height: 41px; display: block; }
+.preview-horizontal .card-design-mini > i, .preview-horizontal .card-design-mini > small { display: none; }
+.preview-horizontal .card-design-mini > span { height: 41px; border-radius: 4px; }
+.preview-horizontal .card-design-mini img { position: absolute; top: 0; left: 0; width: 43%; height: 100%; object-fit: cover; }
+.preview-horizontal .card-design-mini b { position: relative; margin-left: 48%; margin-top: 9px; width: 43%; height: 4px; }
+.preview-horizontal .card-design-mini b:last-child { width: 29%; margin-top: 5px; }
+.app .standard-game .hero-card:focus-within .card-shine,
+.app .standard-game .pvz-card:hover .card-shine,
+.app .standard-game .pvz-card:focus-within .card-shine { left: 125%; }
+.bar-card-panel::after { content: ''; position: absolute; z-index: 8; inset: -25% auto -25% -65%; width: 38%; background: linear-gradient(90deg, transparent, #ffffff1c, transparent); transform: skewX(-18deg); pointer-events: none; transition: left 640ms ease; }
+.bar-card:hover .bar-card-panel::after, .bar-card:focus-within .bar-card-panel::after { left: 135%; }
+@media (max-width: 1450px) { .app .workspace .team-grid.bar-cards.horizontal-cards, .app.mobile-compact .workspace .team-grid.bar-cards.horizontal-cards { grid-template-columns: minmax(0, 1fr); max-width: 850px; } }
+@media (max-width: 760px) { .card-design-choices { grid-template-columns: 1fr; } }
+@media (max-width: 480px) {
+  .bar-card.is-horizontal .bar-card-panel, .bar-card.is-horizontal:has(.bar-card-perks.is-stadium) .bar-card-panel { height: 280px; }
+  .bar-card.is-horizontal .bar-card-info { left: 40%; padding-right: 10px; }
+  .bar-card.is-horizontal .bar-card-info h2 { font-size: 20px; }
+  .bar-card.is-horizontal .bar-card-art, .bar-card.is-horizontal.has-perks .bar-card-art { right: 54%; }
+  .bar-card.is-horizontal .bar-card-perks { top: 118px; left: 43%; right: 8px; }
+  .bar-card.is-horizontal .bar-card-perks.is-stadium { grid-template-columns: 1fr; top: 116px; gap: 3px; }
+  .bar-card.is-horizontal .bar-card-perks.is-stadium .bar-card-perk { min-height: 35px; }
+  .bar-card.is-horizontal .bar-card-perks.is-stadium small { display: none; }
+  .bar-card.is-horizontal .bar-card-extras .finals-card-loadout { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .bar-card-panel::after, .card-shine { transition: none !important; } }
+.low-power .bar-card-panel::after, .low-power .card-shine { transition: none !important; }

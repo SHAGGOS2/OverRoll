@@ -279,8 +279,8 @@
 .app .standard-game .match-summary small { font-size: 9px; letter-spacing: .04em; }
 .app .standard-game .match-summary strong { font-size: 12px; }
 .app .standard-game .team-stage { min-height: 0; height: auto; padding: 0 0 4px; border: 0; background: none; box-shadow: none; overflow: visible; }
-.app .standard-game .stage-grid,
-.app .standard-game .card-shine { display: none; }
+.app .standard-game .stage-grid { display: none; }
+.app .standard-game .card-shine { display: block; }
 .app .standard-game .hero-card { display: flex; flex-direction: column; align-self: stretch; height: auto; width: 100%; min-width: 0; min-height: 0; border: 1px solid color-mix(in srgb, var(--role-color) 48%, #2c4358); border-radius: 12px; background: linear-gradient(145deg, color-mix(in srgb, var(--role-color) 7%, #142435), #0a1928 70%); box-shadow: inset 0 1px #ffffff09, 0 12px 28px #0004; clip-path: none; }
 .app .standard-game .card-player { flex: none; min-height: 40px; padding: 10px 12px; border: 0; background: #112332; color: #c4d6e2; }
 .app .standard-game .portrait { flex: none; position: relative; width: 100%; height: auto; min-height: 0; max-height: none; aspect-ratio: 4 / 5; background: radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--role-color) 17%, #142638), #0b1827); }

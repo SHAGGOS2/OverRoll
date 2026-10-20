@@ -24,7 +24,7 @@ function elements(node) {
 
 test('stored design defaults to the existing cards and accepts only the supported alternative', () => {
   for (const value of [undefined, null, {}, [], true, 'rivals', '<script>', 'classic']) assert.equal(normalizeCardDesign(value), 'classic')
-  assert.equal(normalizeCardDesign(JSON.parse(JSON.stringify('bars'))), 'bars')
+  assert.equal(normalizeCardDesign(JSON.parse(JSON.stringify('bars'))), 'bars'); assert.equal(normalizeCardDesign('horizontal'), 'horizontal')
 })
 
 test('both illustrated design choices remain selectable, labeled and translated in all nine locales', () => {
@@ -33,9 +33,10 @@ test('both illustrated design choices remain selectable, labeled and translated 
     let changed
     const element = Options({ value: 'classic', onChange: (value) => { changed = value }, locale, asset: (path) => '/' + path })
     const radios = elements(element).filter((el) => el.type === 'input')
-    assert.equal(radios.length, 2); assert.equal(radios.filter((el) => el.props.checked).length, 1)
-    assert.equal(radios[0].props.value, 'classic'); assert.equal(radios[1].props.value, 'bars')
+    assert.equal(radios.length, 3); assert.equal(radios.filter((el) => el.props.checked).length, 1)
+    assert.equal(radios[0].props.value, 'classic'); assert.equal(radios[1].props.value, 'bars'); assert.equal(radios[2].props.value, 'horizontal')
     radios[1].props.onChange(); assert.equal(changed, 'bars')
+    radios[2].props.onChange(); assert.equal(changed, 'horizontal')
     const html = renderToStaticMarkup(element)
     assert(html.includes(translateUiText(locale, 'Barras')))
     assert(html.includes(translateUiText(locale, 'Clásico')))
@@ -131,6 +132,16 @@ test('bar exports fit all squads, power counts and Deadlock candidates in one ro
   assert.equal(teamImageLayout(6, 2, false).columns, 3)
 })
 
+test('horizontal exports fit twelve players, full loadouts and three candidates without exceeding raster limits', () => {
+  for (let count = 1; count <= 12; count++) for (let details = 0; details <= 8; details++) for (const alternatives of [false, true]) {
+    const box = teamImageLayout(count, details, alternatives, 'horizontal')
+    assert.equal(box.columns, Math.min(2, count))
+    assert(box.width * box.height <= MAX_EXPORT_PIXELS)
+    assert(222 + (box.rows - 1) * (box.cardHeight + 24) + box.cardHeight < box.height - 30)
+    assert(142 + Math.max(0, details - 1) * 36 + 25 < box.cardHeight)
+  }
+})
+
 test('bar export draws the selected team to a PNG through the existing safe asset loader', async (t) => {
   const old = { document: globalThis.document, window: globalThis.window, Image: globalThis.Image }
   const labels = [], loads = [], downloads = [], polygons = []
@@ -151,14 +162,14 @@ test('bar export draws the selected team to a PNG through the existing safe asse
   t.mock.method(URL, 'createObjectURL', () => 'blob:png')
   t.mock.method(URL, 'revokeObjectURL', () => {})
   t.after(() => Object.assign(globalThis, old))
-  for (const count of [1, 6, 12]) {
+  for (const design of ['bars', 'horizontal']) for (const count of [1, 6, 12]) {
     const cards = Array.from({ length: count }, (_, i) => ({ player: `Jugador${i + 1}`, name: 'Mercy', role: 'Support', color: '#55e4ad', portrait: '/assets/heroes/mercy.webp', icon: '/assets/roles/support.png', locked: i === 0, details: [{ label: 'Angelic Resurrection', image: '/assets/perks/mercy_minor_01_angelic-resurrection.webp' }], alternatives: count === 12 ? [{ label: '2 · Abrams', image: '/assets/games/deadlock/abrams.png' }, { label: '3 · Bebop', image: '/assets/games/deadlock/bebop.png' }] : [] }))
-    const result = await exportTeamImage({ title: 'Overwatch', accent: '#ffc84a', filename: 'bar-cards', design: 'bars', cards })
+    const result = await exportTeamImage({ title: 'Overwatch', accent: '#ffc84a', filename: 'bar-cards', design, cards })
     assert.equal(result.missingImages, 0)
     assert.equal(canvas.width, 0); assert.equal(canvas.height, 0)
     assert(labels.includes(`Jugador${count}`)); assert(labels.includes('Angelic Resurrection'))
     if (count === 12) { assert(labels.includes('2 · Abrams')); assert(labels.includes('3 · Bebop')) }
   }
   assert(loads.every((url) => url.startsWith('https://over-roll.com/assets/')))
-  assert.deepEqual(downloads, ['bar-cards.png', 'bar-cards.png', 'bar-cards.png']); assert(polygons.length > 0)
+  assert.deepEqual(downloads, Array(6).fill('bar-cards.png')); assert(polygons.length > 0)
 })

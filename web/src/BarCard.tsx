@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { TELEPORT_DURATION_MS, TELEPORT_SWAP_MS } from './cardDesign'
+import { TELEPORT_DURATION_MS, TELEPORT_SWAP_MS, type CardDesign } from './cardDesign'
 import type { PortraitFrame } from './portraitFrames'
 
 type Portrait = { src: string; alt: string; crop?: PortraitFrame }
@@ -8,7 +8,7 @@ type Props = {
   portrait: string; rolesOnly: boolean; locked: boolean; profile?: string; blocked: number
   perks: Array<{ name: string; description: string; icon: string; tier: string }>
   actions: ReactNode; revision: number; motion: boolean; locale: string
-  gameId?: string; accent?: string; fit?: 'cover' | 'contain'; frame?: PortraitFrame
+  design?: CardDesign; gameId?: string; accent?: string; fit?: 'cover' | 'contain'; frame?: PortraitFrame
   candidates?: Array<{ name: string; portrait: string }>; extras?: ReactNode; subtitle?: string
 }
 
@@ -45,8 +45,8 @@ export function TeleportPortrait({ src, alt, crop, revision, enabled, locked = f
 }
 
 export default function BarCard(props: Props) {
-  const { player, index, name, role, roleId, roleIcon, portrait, rolesOnly, locked, profile, blocked, perks, actions, revision, motion, locale, gameId = 'overwatch', accent, fit, frame, candidates, extras, subtitle } = props
-  return <article className={`bar-card bar-game-${gameId} ${roleId ?? ''} ${locked ? 'is-locked' : ''} ${candidates ? 'has-candidates' : ''} ${perks.length ? 'has-perks' : ''}`} style={{ ...(accent ? { '--role-color': accent } : {}), '--bar-perk-rows': perks.length } as CSSProperties} aria-label={`${player} · ${name}`}>
+  const { player, index, name, role, roleId, roleIcon, portrait, rolesOnly, locked, profile, blocked, perks, actions, revision, motion, locale, design = 'bars', gameId = 'overwatch', accent, fit, frame, candidates, extras, subtitle } = props
+  return <article className={`bar-card ${design === 'horizontal' ? 'is-horizontal' : ''} bar-game-${gameId} ${roleId ?? ''} ${locked ? 'is-locked' : ''} ${candidates ? 'has-candidates' : ''} ${perks.length ? 'has-perks' : ''}`} style={{ ...(accent ? { '--role-color': accent } : {}), '--bar-perk-rows': perks.length } as CSSProperties} aria-label={`${player} · ${name}`}>
     <header className="bar-card-player"><small>{String(index + 1).padStart(2, '0')}</small><strong translate="no" title={player}>{player}</strong>{locked && <span aria-hidden="true">◆</span>}{blocked > 0 && <small>{blocked}</small>}</header>
     <div className="bar-card-panel">
       <div className="bar-card-grid" />
