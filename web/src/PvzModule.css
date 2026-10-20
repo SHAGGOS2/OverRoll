@@ -485,7 +485,7 @@
     #061419;
 }
 
-.pvz-portrait > img {
+.pvz-portrait > :is(img, svg.pvz-character-render) {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -493,11 +493,11 @@
   transition: transform .32s ease, filter .32s ease;
 }
 
-.pvz-card:hover .pvz-portrait > img {
+.pvz-card:hover .pvz-portrait > :is(img, svg.pvz-character-render) {
   transform: scale(1.025);
 }
 
-.pvz-card.is-rerolling .pvz-portrait > img {
+.pvz-card.is-rerolling .pvz-portrait > :is(img, svg.pvz-character-render) {
   filter: blur(2px) saturate(.65);
   transform: scale(1.05);
 }
@@ -1804,7 +1804,7 @@
     linear-gradient(180deg, #0a2938, #061922);
 }
 
-.pvz-portrait > img {
+.pvz-portrait > :is(img, svg.pvz-character-render) {
   backface-visibility: hidden;
   transform: translateZ(0);
   filter: saturate(1.03) contrast(1.025);

@@ -3,6 +3,7 @@ import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
 import { useImageExport } from './useImageExport'
 import BarCard from './BarCard'
+import { pvzArtwork } from './pvzArtwork'
 import { TELEPORT_DURATION_MS, type CardDesign } from './cardDesign'
 import { safeAssetUrl } from './imageExport.ts'
 import {
@@ -520,7 +521,8 @@ export default function PvzModule({
   async function generateImage() {
     await saveImage({ title: 'Plants vs. Zombies · GW2', accent: '#f7d85b', filename: 'overroll-pvzgw2-equipo', design: cardDesign, cards: players.map((player, index) => {
       const pick = picks[index], hero = pick?.character
-      return { player: player.name, name: hero?.name ?? 'Sin selección', role: pvzSideSingular[player.side] + (hero ? ' · ' + hero.baseName : ''), color: pvzSideColors[player.side], portrait: hero ? asset(hero.portrait) : undefined, fit: cardDesign !== 'classic' ? 'contain' as const : 'cover' as const, locked: pick?.locked }
+      const artwork = hero ? pvzArtwork[hero.key] : undefined
+      return { player: player.name, name: hero?.name ?? 'Sin selección', role: pvzSideSingular[player.side] + (hero ? ' · ' + hero.baseName : ''), color: pvzSideColors[player.side], portrait: hero ? asset(artwork?.portrait ?? hero.portrait) : undefined, frame: artwork?.frame, fit: 'contain' as const, locked: pick?.locked }
     }) })
   }
 
@@ -570,11 +572,13 @@ export default function PvzModule({
               const character = pick?.character
               const profile = profiles.find((item) => item.id === player.profileId)
               const generationClass = generationRevision % 2 === 0 ? 'generation-a' : 'generation-b'
-              if (cardDesign !== 'classic') return <BarCard design={cardDesign} key={player.id} gameId="pvzgw2" index={index}
+              if (cardDesign !== 'classic') {
+                const artwork = character ? pvzArtwork[character.key] : undefined
+                return <BarCard design={cardDesign} key={player.id} gameId="pvzgw2" index={index}
                 player={isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : player.name || localizedPlayerName(locale, index + 1)}
                 name={translateGameText('pvzgw2', locale, character?.name ?? 'Sin selección')} role={translateGameText('pvzgw2', locale, pvzSideSingular[player.side])}
                 subtitle={character?.isVariant ? translateGameText('pvzgw2', locale, character.baseName) + (character.isDlc ? ' · DLC' : '') : undefined}
-                accent={pvzSideColors[player.side]} portrait={character ? asset(character.portrait) : ''} fit="contain" rolesOnly={false} locked={Boolean(pick?.locked)} profile={profile?.name} blocked={player.blocked.length}
+                accent={pvzSideColors[player.side]} portrait={character ? asset(artwork?.portrait ?? character.portrait) : ''} frame={artwork?.frame} fit="contain" rolesOnly={false} locked={Boolean(pick?.locked)} profile={profile?.name} blocked={player.blocked.length}
                 perks={[]} revision={generationRevision} motion={barMotion} locale={locale}
                 actions={localizeUi(locale, <>
                   <button type="button" onClick={() => reroll(index)} disabled={!character || pick?.locked || generating || rerollingIndex !== null} aria-label="Cambiar personaje" title="Cambiar personaje"><PvzIcon name="reroll" size={18} /></button>
@@ -582,10 +586,12 @@ export default function PvzModule({
                   {sideSwitchEnabled && <button type="button" onClick={() => setPlayerSide(index, player.side === 'plants' ? 'zombies' : 'plants')} disabled={generating || rerollingIndex !== null} aria-label="Cambiar bando y reemplazar" title="Cambiar bando y reemplazar"><PvzIcon name="switch" size={18} /></button>}
                   <button type="button" className={pick?.locked ? 'active-lock' : ''} onClick={() => toggleLock(index)} disabled={!character || generating || rerollingIndex !== null} aria-label={pick?.locked ? 'Desbloquear' : 'Bloquear'} title={pick?.locked ? 'Desbloquear' : 'Bloquear'}><PvzIcon name={pick?.locked ? 'unlock' : 'lock'} size={18} /></button>
                 </>, 'pvzgw2')} />
+              }
+              const artwork = character ? pvzArtwork[character.key] : undefined
               return <article className={`pvz-card ${player.side} ${generationClass} ${pick?.locked ? 'is-locked' : ''} ${rerollingIndex === index ? 'is-rerolling' : ''}`} style={{ '--delay': `${index * 45}ms`, '--pvz-accent': pvzSideColors[player.side] } as CSSProperties} key={player.id}>
                 <div className="card-shine" aria-hidden="true" />
                 <div className="pvz-card-player"><span>{String(index + 1).padStart(2, '0')}</span><strong translate="no">{isDefaultPlayerName(player.name, index + 1) ? localizedPlayerName(locale, index + 1) : (player.name || localizedPlayerName(locale, index + 1))}</strong>{profile && <i translate="no">{profile.name.charAt(0).toUpperCase()}</i>}{pick?.locked && <b><PvzIcon name="lock" size={12} /></b>}</div>
-                <div className="pvz-portrait"><div className="portrait-grid" aria-hidden="true" />{character ? <img src={asset(character.portrait)} alt={character.name} decoding="async" draggable={false} /> : <div className="pvz-empty-portrait"><PvzIcon name="spark" size={44} /><span>Genera este bando</span></div>}<div className="pvz-portrait-fade" /></div>
+                <div className="pvz-portrait"><div className="portrait-grid" aria-hidden="true" />{character ? artwork ? <svg className="pvz-character-render" viewBox={`${artwork.frame.x} ${artwork.frame.y} ${artwork.frame.width} ${artwork.frame.height}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={character.name}><image href={asset(artwork.portrait)} width={artwork.frame.sourceWidth} height={artwork.frame.sourceHeight} /></svg> : <img src={asset(character.portrait)} alt={character.name} decoding="async" draggable={false} /> : <div className="pvz-empty-portrait"><PvzIcon name="spark" size={44} /><span>Genera este bando</span></div>}<div className="pvz-portrait-fade" /></div>
                 <div className="pvz-card-body"><div className="pvz-card-title"><h2>{character?.name ?? 'Sin selección'}</h2><span className={player.side}>{pvzSideSingular[player.side]}</span></div>
                 {character?.isVariant && <div className="pvz-variant-meta"><span>{character.baseName}</span>{character.isDlc && <b>DLC</b>}</div>}
                 </div>

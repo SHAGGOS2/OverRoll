@@ -7,6 +7,7 @@ import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName } from '../src/uiLocalization.ts'
 import { barPortraitFit, TELEPORT_DURATION_MS, TELEPORT_SWAP_MS } from '../src/cardDesign.ts'
+import { pvzArtwork } from '../src/pvzArtwork.ts'
 import { tf2Artwork } from '../src/tf2Artwork.ts'
 import { fragpunkPortraitFrames } from '../src/portraitFrames.ts'
 import { pvzCharacters, pvzSideColors, pvzSideSingular } from '../src/pvzCatalog.ts'
@@ -40,7 +41,7 @@ function branch(file, owner) {
 const controls = ['reroll', 'rerollTf2', 'toggleLock', 'toggleTf2Lock', 'openFilter', 'openTf2Filter', 'openDetails', 'setPlayerSide', 'setFilterIndex', 'setFilterSearch', 'setFilterRole', 'setDetailsIndex', 'playModuleSound']
 function render(file, owner, globals) {
   const actions = [], context = {
-    React, BarCard, tf2Artwork, localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName, barPortraitFit, fragpunkPortraitFrames,
+    React, BarCard, tf2Artwork, pvzArtwork, localizeUi, translateGameText, isDefaultPlayerName, localizedPlayerName, barPortraitFit, fragpunkPortraitFrames,
     cardDesign: 'bars', barMotion: false, locale: 'en-us', activeLocale: 'en-us', index: 0,
     player: { id: 'p1', name: 'Javo', blocked: ['blocked'], side: 'plants' }, pick: { locked: false, perks: [] },
     assignedProfile: { name: 'Main' }, profile: { name: 'Main' }, generationRevision: 1, tf2GenerationRevision: 1,
@@ -68,7 +69,7 @@ test('Overwatch, TF2 and GW2 bar adapters retain localized content and their dis
   buttons(tf2.element.props.actions)[0].props.onClick(); assert.equal(tf2.actions[0][0], 'rerollTf2')
   const character = pvzCharacters.find((item) => item.isVariant)
   const pvz = render('PvzModule.tsx', 'renderPrincipal', { cardDesign: design, character, pvzSideColors, pvzSideSingular, sideSwitchEnabled: true })
-  assert.equal(pvz.element.props.fit, 'contain'); assert.equal(pvz.element.props.roleIcon, undefined)
+  assert.equal(pvz.element.props.portrait, '/' + pvzArtwork[character.key].portrait); assert.deepEqual(pvz.element.props.frame, pvzArtwork[character.key].frame); assert.equal(pvz.element.props.fit, 'contain'); assert.equal(pvz.element.props.roleIcon, undefined)
   assert(pvz.html.includes(character.baseName)); assert.equal(buttons(pvz.element.props.actions).length, 4)
   buttons(pvz.element.props.actions)[2].props.onClick(); assert.deepEqual(pvz.actions[0], ['setPlayerSide', 0, 'zombies'])
   for (const row of [ow, tf2, pvz]) { assert(row.html.includes('Main')); assertLocalResources(row.html); assert.equal(row.element.props.design, design) }

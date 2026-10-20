@@ -52,7 +52,7 @@
 .bar-card-figure img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 .bar-card-figure svg { display: block; width: 100%; height: 100%; }
 .bar-card-figure[data-fit="contain"] img { object-fit: contain; object-position: center; padding: 8px 22px 56px; }
-.bar-card.bar-game-tf2:not(.shape-card):not(.is-horizontal) .bar-card-figure { inset: 6px 18px 76px; }
+.bar-card:is(.bar-game-tf2, .bar-game-pvzgw2):not(.shape-card):not(.is-horizontal) .bar-card-figure { inset: 6px 18px 76px; }
 .bar-game-tf2 .bar-card-figure img, .bar-game-pvzgw2 .bar-card-figure img { padding: 8px 22px 76px; }
 .bar-game-fragpunk .bar-card-art { inset: 12px -6px 68px; }
 .bar-game-thefinals .bar-card-art { inset: 88px -12px 58px; }

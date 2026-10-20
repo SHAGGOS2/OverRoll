@@ -4,6 +4,7 @@ import test from 'node:test'
 import vm from 'node:vm'
 import ts from 'typescript'
 import { barPortraitFit } from '../src/cardDesign.ts'
+import { pvzArtwork } from '../src/pvzArtwork.ts'
 import { tf2Artwork } from '../src/tf2Artwork.ts'
 import { fragpunkPortraitFrames } from '../src/portraitFrames.ts'
 import { pvzCharacters, pvzSideColors, pvzSideSingular } from '../src/pvzCatalog.ts'
@@ -43,7 +44,7 @@ test('all eleven game adapters and OW role-only mode export valid local resource
   const tf2Code = extract('App.tsx', [], ['tf2Classes'])
   const tf2Classes = vm.runInNewContext(`${tf2Code};tf2Classes`)
   for (const mercenary of tf2Classes) await run('App.tsx', 'generateTf2TeamImage', { variables: ['tf2GroupLabels', 'tf2GroupColors'] }, { tf2Artwork, saveImage: (options) => { saveImage(options); const card = options.cards[0]; assert.equal(card.portrait, cardDesign === 'classic' ? mercenary.portrait : tf2Artwork[mercenary.key].portrait); assert.deepEqual(card.frame, cardDesign === 'classic' ? undefined : tf2Artwork[mercenary.key].frame) }, cardDesign, asset, tf2Players: players, tf2Picks: [{ mercenary }] })
-  await run('PvzModule.tsx', 'generateImage', {}, { saveImage, cardDesign, perkText: (_hero, perk) => perk, asset, players, picks: [{ character: pvzCharacters[0] }], pvzSideColors, pvzSideSingular })
+  await run('PvzModule.tsx', 'generateImage', {}, { pvzArtwork, saveImage, cardDesign, perkText: (_hero, perk) => perk, asset, players, picks: [{ character: pvzCharacters[0] }], pvzSideColors, pvzSideSingular })
   const definitions = vm.runInNewContext(`${extract('RosterModule.tsx', [], ['rosterGameDefinitions'])};rosterGameDefinitions`)
   for (const game of definitions) {
     const catalog = read(`assets/games/${game.id}/catalog.json`).heroes.map((h) => ({ ...h, portrait: `assets/games/${game.id}/${h.portrait.split('/').pop()}` }))
@@ -76,4 +77,27 @@ test('Overwatch image exports use selected-language names for both perks and Sta
     }
   }
   assert.equal(JSON.stringify(hero), before)
+})
+
+
+test('all 121 GW2 characters and variants keep their own transparent artwork and crop in every card export', async () => {
+  assert.equal(Object.keys(pvzArtwork).length, pvzCharacters.length)
+  for (const character of pvzCharacters) for (const cardDesign of ['classic', 'bars', 'horizontal', 'hex', 'orbit']) {
+    const art = pvzArtwork[character.key]
+    assert(art, character.key)
+    await run('PvzModule.tsx', 'generateImage', {}, {
+      pvzArtwork, cardDesign, asset: (path) => path, pvzSideColors, pvzSideSingular,
+      players: [{ name: 'Javo', side: character.side }], picks: [{ character }],
+      saveImage(options) {
+        assertLocal(options)
+        const card = options.cards[0]
+        assert.equal(card.name, character.name)
+        assert.equal(card.portrait, art.portrait)
+        assert.deepEqual(card.frame, art.frame)
+        assert.equal(card.fit, 'contain')
+        assert(card.role.includes(character.baseName))
+        assert.equal(options.design, cardDesign)
+      },
+    })
+  }
 })
