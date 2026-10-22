@@ -26,7 +26,7 @@ export function winnerForTicket(items: WeightedItem[], ticket: number): number {
   return items.findIndex((item) => { cursor += normalizeWeight(item.weight); return ticket < cursor })
 }
 export function rotationForSegment(start: number, end: number, rotation: number, turns = 6): number {
-  const angle = (start + end) / 2
+  const angle = end - start >= 359.999 ? start : (start + end) / 2
   const normalized = ((rotation % 360) + 360) % 360
   const target = ((-angle % 360) + 360) % 360
   return rotation + turns * 360 + ((target - normalized + 360) % 360)
@@ -35,6 +35,13 @@ export function segmentAtRotation(segments: { start: number; end: number }[], ro
   if (!segments.length || !Number.isFinite(rotation)) return -1
   const angle = ((-rotation % 360) + 360) % 360
   return segments.findIndex((segment) => angle >= segment.start && angle < segment.end)
+}
+export function sectorArtworkBounds(start: number, end: number) {
+  // Fit the visible ring in local coordinates, with the character facing the outer rim.
+  const half = Math.min(360, Math.max(0, end - start)) * Math.PI / 360
+  const halfWidth = half >= Math.PI / 2 ? 184 : 184 * Math.sin(half)
+  const bottom = -(half <= Math.PI / 2 ? 82 : 184) * Math.cos(half)
+  return { x: 200 - halfWidth, y: 16, width: halfWidth * 2, height: 184 + bottom }
 }
 export function sectorPath(start: number, end: number): string {
   const point = (degrees: number) => ({ x: 200 + 184 * Math.cos((degrees - 90) * Math.PI / 180), y: 200 + 184 * Math.sin((degrees - 90) * Math.PI / 180) })

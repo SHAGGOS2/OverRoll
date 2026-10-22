@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { normalizeWeight, randomTicket, weightedSegments, winnerForTicket, rotationForSegment, sectorPath, segmentAtRotation, restoreRouletteState } from '../src/rouletteModel.ts'
+import { normalizeWeight, randomTicket, weightedSegments, winnerForTicket, rotationForSegment, sectorPath, sectorArtworkBounds, segmentAtRotation, restoreRouletteState } from '../src/rouletteModel.ts'
 
 test('weights remain finite and bounded after malformed saved values', () => {
  for (const value of [NaN, Infinity, {}, null, [], 'bad']) assert.equal(normalizeWeight(value), 1)
@@ -19,6 +19,7 @@ test('complete catalogs over 64 characters and a single participant work without
  assert.equal(winnerForTicket(items,120),120)
  assert.equal(winnerForTicket([{key:'solo',weight:1}],0),0)
  assert.match(sectorPath(0,360),/A 184 184 0 1 1/)
+ assert.equal(rotationForSegment(0,360,77)%360,0)
 })
 test('the pointer lands at the selected sector after repeated spins and unequal weights', () => {
  for (const segment of weightedSegments([{key:'a',weight:1},{key:'b',weight:64},{key:'c',weight:3}])) {
@@ -47,6 +48,18 @@ test('the live portrait follows the real pointer and agrees with the winner for 
  }
  assert.equal(segmentAtRotation([],0),-1)
  assert.equal(segmentAtRotation([{start:0,end:360}],NaN),-1)
+})
+test('portrait bounds cover every visible point of narrow, wide and full-circle sectors', () => {
+ for(const span of [360/121,6,30,60,120,180,270,359.9,360]) {
+  const box=sectorArtworkBounds(73,73+span)
+  assert(box.width>0&&box.height>0)
+  for(let i=0;i<=100;i++)for(const radius of [82,134,184]) {
+   const angle=(-span/2+span*i/100-90)*Math.PI/180
+   const x=200+radius*Math.cos(angle),y=200+radius*Math.sin(angle)
+   assert(x>=box.x-1e-8&&x<=box.x+box.width+1e-8,`width at ${span}`)
+   assert(y>=box.y-1e-8&&y<=box.y+box.height+1e-8,`height at ${span}`)
+  }
+ }
 })
 test('storage migration preserves custom subsets, empty selection, weights and full-roster additions', () => {
  const items=[{key:'a'},{key:'b'},{key:'new'}]

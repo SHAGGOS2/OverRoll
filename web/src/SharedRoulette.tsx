@@ -3,7 +3,7 @@ import type { SupportedLocale } from './localization'
 import { localizeUi, translateGameText } from './uiLocalization'
 import { safeAssetUrl } from './imageExport'
 import { useImageExport } from './useImageExport'
-import { restoreRouletteState, normalizeWeight, randomTicket, rotationForSegment, sectorPath, segmentAtRotation, weightedSegments, winnerForTicket } from './rouletteModel'
+import { restoreRouletteState, normalizeWeight, randomTicket, rotationForSegment, sectorPath, sectorArtworkBounds, segmentAtRotation, weightedSegments, winnerForTicket } from './rouletteModel'
 import { fragpunkPortraitFrames } from './portraitFrames'
 import { tf2Artwork } from './tf2Artwork'
 import { pvzArtwork } from './pvzArtwork'
@@ -157,10 +157,10 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
           <div className={`wheel-stage ${spinning ? 'is-spinning' : ''} ${winner ? 'has-winner' : ''}`}>
             <span className="wheel-pointer" aria-hidden="true"><i /></span>
             <svg viewBox="0 0 400 400" role="img" aria-label={tr('Ruleta')}>
-              <defs>{segments.map((segment, index) => {
-                const angle = ((segment.start + segment.end) / 2 - 90) * Math.PI / 180, x = 200 + 134 * Math.cos(angle), y = 200 + 134 * Math.sin(angle), size = Math.min(48, (segment.end - segment.start) * 1.65)
-                return <clipPath key={segment.key} id={`${clipId}-${index}`}><circle cx={x} cy={y} r={size / 2} /></clipPath>
-              })}</defs>
+              <defs>
+                {segments.map((segment, index) => <clipPath key={segment.key} id={`${clipId}-${index}`} clipPathUnits="userSpaceOnUse"><path d={sectorPath(segment.start, segment.end)} /></clipPath>)}
+                <linearGradient id={`${clipId}-shade`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#07131d" stopOpacity="0" /><stop offset="1" stopColor="#07131d" stopOpacity=".4" /></linearGradient>
+              </defs>
               <circle className="wheel-rim-shadow" cx="200" cy="200" r="193" />
               <circle className="wheel-rim" cx="200" cy="200" r="191" />
               <g className="wheel-ticks" aria-hidden="true">{Array.from({ length: 60 }, (_, index) => {
@@ -168,11 +168,16 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
                 return <line key={index} x1={200 + inner * Math.cos(angle)} y1={200 + inner * Math.sin(angle)} x2={200 + 194 * Math.cos(angle)} y2={200 + 194 * Math.sin(angle)} className={index % 5 === 0 ? 'major' : undefined} />
               })}</g>
               <g ref={rotor} className="wheel-rotor">{segments.map((segment, index) => {
-                const item = pool[index], angle = ((segment.start + segment.end) / 2 - 90) * Math.PI / 180, x = 200 + 134 * Math.cos(angle), y = 200 + 134 * Math.sin(angle), size = Math.min(48, (segment.end - segment.start) * 1.65)
+                const item = pool[index], bounds = sectorArtworkBounds(segment.start, segment.end)
+                const art = gameId === 'pvzgw2' && pool.length > 24 ? { portrait: item.portrait, frame: undefined } : artworkFor(item)
                 return <g key={item.key} className={`wheel-sector${winnerKey === item.key ? ' is-winner' : ''}`} style={{ '--sector-color': roleFor(item.role).color } as CSSProperties}>
                   <title>{tr(item.name)} · {percent(segment.probability)}</title>
-                  <path d={sectorPath(segment.start, segment.end)} />
-                  {size >= 25 && (gameId === 'fragpunk' && fragpunkPortraitFrames[item.key] ? <svg x={x - size / 2} y={y - size / 2} width={size} height={size} viewBox={`${fragpunkPortraitFrames[item.key].x} ${fragpunkPortraitFrames[item.key].y} ${fragpunkPortraitFrames[item.key].width} ${fragpunkPortraitFrames[item.key].height}`} preserveAspectRatio="xMidYMid meet"><image href={asset(item.portrait)} width={fragpunkPortraitFrames[item.key].sourceWidth} height={fragpunkPortraitFrames[item.key].sourceHeight} /></svg> : <image href={asset(item.portrait)} x={x - size / 2} y={y - size / 2} width={size} height={size} preserveAspectRatio="xMidYMid slice" clipPath={`url(#${clipId}-${index})`} />)}
+                  <path className="wheel-sector-fill" d={sectorPath(segment.start, segment.end)} />
+                  <g clipPath={`url(#${clipId}-${index})`} aria-hidden="true"><g transform={`rotate(${pool.length === 1 ? 0 : (segment.start + segment.end) / 2} 200 200)`}>
+                    {art.frame ? <svg className="wheel-sector-image" {...bounds} viewBox={`${art.frame.x} ${art.frame.y} ${art.frame.width} ${art.frame.height}`} preserveAspectRatio="xMidYMin slice" overflow="hidden"><image href={asset(art.portrait)} width={art.frame.sourceWidth} height={art.frame.sourceHeight} /></svg> : <image className="wheel-sector-image" href={asset(art.portrait)} {...bounds} preserveAspectRatio="xMidYMid slice" />}
+                    <rect className="wheel-sector-shade" {...bounds} fill={`url(#${clipId}-shade)`} />
+                  </g></g>
+                  <path className="wheel-sector-outline" d={sectorPath(segment.start, segment.end)} />
                 </g>
               })}</g>
               {!pool.length && <circle className="wheel-empty-ring" cx="200" cy="200" r="184" />}

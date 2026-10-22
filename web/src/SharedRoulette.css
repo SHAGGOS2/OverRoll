@@ -31,10 +31,13 @@ html[data-overroll-theme]:not([data-overroll-theme="default"]) .shared-roulette 
 .wheel-ticks line.major { stroke: var(--wheel-accent); stroke-width: 1.1; opacity: .9; }
 .wheel-rotor { transform-origin: 200px 200px; transform-box: view-box; }
 .is-spinning .wheel-rotor { will-change: transform; }
-.wheel-sector > path { fill: color-mix(in srgb, var(--sector-color) 32%, var(--wheel-surface)); stroke: var(--wheel-hub); stroke-width: 1; transition: fill .25s; }
-.wheel-sector.is-winner > path { fill: color-mix(in srgb, var(--sector-color) 82%, var(--wheel-surface)); stroke: color-mix(in srgb, var(--sector-color) 40%, white); stroke-width: 1.4; }
-.wheel-sector image { opacity: .88; }
-.wheel-sector.is-winner image { opacity: 1; }
+.wheel-sector-fill { fill: color-mix(in srgb, var(--sector-color) 32%, var(--wheel-surface)); transition: fill .25s; }
+.wheel-sector-outline { fill: none; stroke: var(--wheel-hub); stroke-width: 1.2; stroke-linejoin: round; pointer-events: none; }
+.wheel-sector-image { opacity: .9; transition: opacity .25s, filter .25s; }
+.wheel-sector-shade { pointer-events: none; }
+.wheel-sector.is-winner .wheel-sector-fill { fill: color-mix(in srgb, var(--sector-color) 82%, var(--wheel-surface)); }
+.wheel-sector.is-winner .wheel-sector-outline { stroke: color-mix(in srgb, var(--sector-color) 40%, white); stroke-width: 2; }
+.wheel-sector.is-winner .wheel-sector-image { opacity: 1; filter: brightness(1.12); }
 .wheel-hub-rim { fill: var(--wheel-hub); stroke: color-mix(in srgb, var(--wheel-accent) 45%, var(--wheel-line)); stroke-width: 1; }
 .wheel-hub { fill: var(--wheel-hub); stroke: var(--wheel-line); stroke-width: .5; }
 .wheel-empty-ring { fill: none; stroke: var(--wheel-line); stroke-width: 1; stroke-dasharray: 3 5; }
