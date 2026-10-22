@@ -1,6 +1,5 @@
 import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
-import { useImageExport } from './useImageExport'
 import BarCard from './BarCard'
 import { barPortraitFit, TELEPORT_DURATION_MS, type CardDesign } from './cardDesign'
 import { safeAssetUrl } from './imageExport.ts'
@@ -505,8 +504,6 @@ export default function RosterModule({
   const [filterIndex, setFilterIndex] = useState<number | null>(null)
   const [filterSearch, setFilterSearch] = useState('')
   const [filterRole, setFilterRole] = useState('all')
-
-  const [imageExporting, saveImage] = useImageExport(notify, locale, gameId)
   const asset = (path: string) => safeAssetUrl(path, baseUrl)
 
   function reorderPlayers(sourceId: string, targetId: string) {
@@ -1036,23 +1033,6 @@ export default function RosterModule({
     }))
   }
 
-
-  async function generateTeamImage() {
-    await saveImage({ title: game.name, subtitle: players.length + (players.length === 1 ? ' jugador' : ' jugadores'), accent: game.accent, filename: 'overroll-' + gameId + '-equipo', design: cardDesign, cards: players.flatMap((player, index) => {
-      const pick = picks[index], hero = pick?.hero
-      if (!hero) return []
-      const role = roleDefinition(game, hero.role)
-      const synergy = game.supportsTeamups ? activeTeamups(hero.key).find((item) => item.key === pick.teamupKey) : undefined
-      const partner = synergy ? heroByKey(teamupPartnerKey(synergy, hero.key)) : null
-      const details = pick.loadout ? [
-        { label: 'Especialización · ' + pick.loadout.specialization, image: finalsIcon(baseUrl, pick.loadout.specialization) },
-        { label: 'Arma · ' + pick.loadout.weapon, image: finalsIcon(baseUrl, pick.loadout.weapon) },
-        ...pick.loadout.gadgets.map((label) => ({ label, image: finalsIcon(baseUrl, label) })),
-      ] : game.supportsTeamups ? [{ label: synergy ? (synergy.complete ? 'Activo · ' : 'Team-Up · ') + synergy.name : 'Sin Team-Up', image: partner ? asset(partner.portrait) : undefined }] : []
-      return [{ player: player.name, name: gameId === 'deadlock' ? '1 · ' + hero.name : hero.name, role: gameId === 'deadlock' ? 'Tres preferencias de selección' : role.label, color: role.color, portrait: pick.loadout ? finalsIcon(baseUrl, pick.loadout.weapon) : asset(hero.portrait), fit: cardDesign !== 'classic' ? barPortraitFit(gameId) : pick.loadout || gameId === 'fragpunk' || gameId === 'deadlock' ? 'contain' as const : 'cover' as const, frame: gameId === 'fragpunk' ? fragpunkPortraitFrames[hero.key] : undefined, icon: role.icon ? asset(role.icon) : undefined, locked: pick.locked, details, alternatives: gameId === 'deadlock' ? rosterPickCandidates(pick).slice(1, 3).map((candidate, i) => ({ label: (i + 2) + ' · ' + candidate.name, image: asset(candidate.portrait) })) : [] }]
-    }) })
-  }
-
   function activeTeamups(heroKey: string): Array<Teamup & { complete: boolean }> {
     const selected = new Set(chosenKeys)
     return selectableTeamupsForHero(heroKey)
@@ -1202,7 +1182,7 @@ export default function RosterModule({
             </div>
             <div className="topline-actions">
               <ShowcaseButton locale={locale} onClick={() => { setFilterIndex(null); setDetailsIndex(null); onShowcase?.() }} disabled={!onShowcase} />
-              <button type="button" className="generate-image-button roster-image-button" onClick={generateTeamImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.hero)}><RosterIcon name="download" size={17} /> Generar imagen</button>
+
               <div className="match-summary">
                 <div><small>Formato</small><strong>{game.formatLabel}</strong></div>
                 <div><small>Fijados</small><strong>{lockedCount}</strong></div>

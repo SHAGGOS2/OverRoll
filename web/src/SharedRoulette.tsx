@@ -2,7 +2,6 @@ import { useEffect, useId, useMemo, useRef, useState, type CSSProperties } from 
 import type { SupportedLocale } from './localization'
 import { localizeUi, translateGameText } from './uiLocalization'
 import { safeAssetUrl } from './imageExport'
-import { useImageExport } from './useImageExport'
 import { restoreRouletteState, normalizeWeight, randomTicket, rotationForSegment, sectorPath, sectorArtworkBounds, segmentAtRotation, weightedSegments, winnerForTicket } from './rouletteModel'
 import { fragpunkPortraitFrames } from './portraitFrames'
 import { tf2Artwork } from './tf2Artwork'
@@ -32,17 +31,17 @@ function readSaved(prefix: string, legacyKey: string | undefined, items: Roulett
   } catch { return restoreRouletteState(items, null, null, {}) }
 }
 
-function WheelIcon({ name, size = 18 }: { name: 'spin' | 'search' | 'check' | 'minus' | 'weights' | 'download' | 'history'; size?: number }) {
+function WheelIcon({ name, size = 18 }: { name: 'spin' | 'search' | 'check' | 'minus' | 'weights' | 'history'; size?: number }) {
   const paths = {
     spin: 'M20 7v5h-5M4 17v-5h5M6.1 6.1A8 8 0 0 1 20 12M4 12a8 8 0 0 0 13.9 5.9',
     search: 'm21 21-5-5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z',
     check: 'm5 12 4 4L19 6', minus: 'M5 12h14', weights: 'M4 7h16M4 17h16M8 4v6m8 4v6',
-    download: 'M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5', history: 'M3 11a9 9 0 1 1 2 7M3 4v7h7m2-4v5l3 2',
+    history: 'M3 11a9 9 0 1 1 2 7M3 4v7h7m2-4v5l3 2',
   }
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name]} /></svg>
 }
 
-export default function SharedRoulette({ gameId, title, items, roles, storagePrefix, legacySelectionKey, baseUrl, locale, animationsEnabled, soundEnabled, soundVolume, onSpin, onWin, notify }: Props) {
+export default function SharedRoulette({ gameId, title, items, roles, storagePrefix, legacySelectionKey, baseUrl, locale, animationsEnabled, soundEnabled, soundVolume, onSpin, onWin }: Props) {
   const [saved, setSaved] = useState(() => readSaved(storagePrefix, legacySelectionKey, items))
   const [search, setSearch] = useState(''), [role, setRole] = useState('all')
   const [showWeights, setShowWeights] = useState(false)
@@ -52,7 +51,6 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
   const previewFrame = useRef<number | null>(null)
   const audio = useRef<ReturnType<typeof createRouletteAudio> | null>(null)
   const clipId = useId().replace(/:/g, '')
-  const [exporting, saveImage] = useImageExport(notify, locale, gameId)
   const tr = (value: string) => translateGameText(gameId, locale, value)
   const asset = (path: string) => safeAssetUrl(path, baseUrl)
   const roleFor = (id: string) => roles.find((item) => item.id === id) ?? { id, label: id, color: '#ffc84a' }
@@ -161,11 +159,6 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
     const art = featured ? artworkFor(item) : { portrait: item.portrait, frame: gameId === 'fragpunk' ? fragpunkPortraitFrames[item.key] : undefined }
     return art.frame ? <svg className="wheel-art" viewBox={`${art.frame.x} ${art.frame.y} ${art.frame.width} ${art.frame.height}`} preserveAspectRatio="xMidYMid meet" aria-hidden="true"><image href={asset(art.portrait)} width={art.frame.sourceWidth} height={art.frame.sourceHeight} /></svg> : <img className="wheel-art" src={asset(art.portrait)} alt="" loading={featured ? 'eager' : 'lazy'} decoding="async" draggable={false} />
   }
-  async function exportWinner() {
-    if (!winner || spinningRef.current) return
-    const definition = roleFor(winner.role), art = artworkFor(winner)
-    await saveImage({ title: `${title} · ${tr('Ruleta')}`, accent: definition.color, filename: `overroll-${gameId}-ruleta`, cards: [{ player: tr('Ganador'), name: tr(winner.name), role: tr(definition.label), color: definition.color, portrait: asset(art.portrait), icon: winner.icon || definition.icon ? asset(winner.icon ?? definition.icon!) : undefined, fit: art.frame || gameId === 'deadlock' ? 'contain' : 'cover', frame: art.frame }] })
-  }
 
   return localizeUi(locale, <main className="utility-page shared-roulette" data-state={spinning ? 'spinning' : winner ? 'winner' : pool.length ? 'ready' : 'empty'} style={{ '--wheel-game-accent': roles[0]?.color ?? '#ffc84a', '--winner-color': winnerRole?.color ?? 'var(--wheel-accent)' } as CSSProperties}>
     <header className="wheel-heading"><div><span className="wheel-game-name" translate="no">{title}</span><h1>Ruleta</h1></div><div className="wheel-count"><span>En juego</span><strong>{pool.length}<small> / {items.length}</small></strong></div></header>
@@ -217,7 +210,7 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
           {winner && <span className="wheel-winner-odds" title={tr('Probabilidad')}><b>{percent(winnerOdds)}</b><small>Probabilidad</small></span>}
         </div>
         <div className="wheel-announcement" role="status" aria-live="polite" aria-atomic="true">{spinning ? tr('Girando…') : winner ? `${tr('Ganador')}: ${tr(winner.name)}` : tr(pool.length ? 'Lista para girar' : 'Selecciona participantes')}</div>
-        <div className="wheel-main-actions"><button type="button" className="wheel-spin primary" onClick={spin} disabled={spinning || !pool.length}><WheelIcon name="spin" size={21} /><span>{spinning ? 'Girando…' : 'Girar ruleta'}</span><span className="wheel-spin-arrow" aria-hidden="true">↗</span></button><button type="button" className="wheel-download" onClick={() => void exportWinner()} disabled={!winner || spinning || exporting} aria-label={tr('Descargar imagen')} title={tr('Descargar imagen')}><WheelIcon name="download" size={20} /></button></div>
+        <div className="wheel-main-actions"><button type="button" className="wheel-spin primary" onClick={spin} disabled={spinning || !pool.length}><WheelIcon name="spin" size={21} /><span>{spinning ? 'Girando…' : 'Girar ruleta'}</span><span className="wheel-spin-arrow" aria-hidden="true">↗</span></button></div>
         {!!history.length && <div className="wheel-history"><h2><WheelIcon name="history" size={15} />Últimos resultados</h2><ol>{history.map((key, index) => {
           const item = items.find((candidate) => candidate.key === key)
           return item ? <li key={`${key}-${index}`} title={tr(item.name)}><div className="wheel-history-art">{portrait(item)}</div><span>{item.name}</span></li> : null

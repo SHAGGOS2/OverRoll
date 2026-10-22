@@ -1,7 +1,6 @@
 import GameSidebar from './GameSidebar'
 import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
-import { useImageExport } from './useImageExport'
 import BarCard from './BarCard'
 import { pvzArtwork } from './pvzArtwork'
 import { TELEPORT_DURATION_MS, type CardDesign } from './cardDesign'
@@ -182,7 +181,6 @@ export default function PvzModule({
   locale,
   notify,
 }: Props) {
-  const [imageExporting, saveImage] = useImageExport(notify, locale, 'pvzgw2')
   const asset = (path: string) => safeAssetUrl(path, baseUrl)
   const [players, setPlayers] = useState<PvzPlayer[]>(() => normalizePlayers(readStorage<unknown>('overroll.web.pvz.players', [])))
   const [picks, setPicks] = useState<PvzPick[]>(() => {
@@ -535,14 +533,6 @@ export default function PvzModule({
     return eligibleBySide[filterPlayer.side].filter((item) => !query || item.name.toLocaleLowerCase('es-MX').includes(query) || item.baseName.toLocaleLowerCase('es-MX').includes(query))
   }, [filterPlayer, filterSearch, eligibleBySide])
 
-  async function generateImage() {
-    await saveImage({ title: 'Plants vs. Zombies · GW2', accent: '#f7d85b', filename: 'overroll-pvzgw2-equipo', design: cardDesign, cards: players.map((player, index) => {
-      const pick = picks[index], hero = pick?.character
-      const artwork = hero ? pvzArtwork[hero.key] : undefined
-      return { player: player.name, name: hero?.name ?? 'Sin selección', role: pvzSideSingular[player.side] + (hero ? ' · ' + hero.baseName : ''), color: pvzSideColors[player.side], portrait: hero ? asset(artwork?.portrait ?? hero.portrait) : undefined, frame: artwork?.frame, fit: 'contain' as const, locked: pick?.locked }
-    }) })
-  }
-
   function renderPrincipal() {
     return (
       <main className={`workspace pvz-workspace standard-game ${mobileCompactMode ? 'pvz-mobile-compact' : ''}`}>
@@ -583,7 +573,7 @@ export default function PvzModule({
 
         <section className="content pvz-content">
           <div className="content-topline pvz-topline"><div className="game-identity"><div className="game-title-row"><h1>PVZ Garden Warfare 2</h1></div></div><div className="topline-actions">
-              <ShowcaseButton locale={locale} onClick={() => { setFilterIndex(null); onShowcase?.() }} disabled={!onShowcase} /><button type="button" className="generate-image-button pvz-image-button" onClick={generateImage} aria-busy={imageExporting} disabled={imageExporting || !picks.some((pick) => pick.character)}><PvzIcon name="download" size={17} /> Generar imagen</button><div className="match-summary pvz-summary"><div><small>Plantas</small><strong>{plantCount}</strong></div><div><small>Zombis</small><strong>{zombieCount}</strong></div><div><small>Fijados</small><strong>{lockedCount}</strong></div></div></div></div>
+              <ShowcaseButton locale={locale} onClick={() => { setFilterIndex(null); onShowcase?.() }} disabled={!onShowcase} /><div className="match-summary pvz-summary"><div><small>Plantas</small><strong>{plantCount}</strong></div><div><small>Zombis</small><strong>{zombieCount}</strong></div><div><small>Fijados</small><strong>{lockedCount}</strong></div></div></div></div>
           <div className="team-stage pvz-stage"><div className="stage-grid" /><SquadGrid players={players} onReorder={reorderPlayers} locale={locale} disabled={generating || rerollingIndex !== null || filterIndex !== null} motion={barMotion} showcase={showcase} className={`pvz-team-grid cards-${players.length}${cardDesign !== 'classic' ? ` team-grid bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
             {players.map((player, index) => {
               const pick = picks[index]

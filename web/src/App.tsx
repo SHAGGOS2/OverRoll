@@ -5,7 +5,6 @@ import AppHeader from './AppHeader'
 import { gameCredits } from './gameCredits'
 import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
-import { useImageExport } from './useImageExport'
 import { safeAssetUrl } from './imageExport.ts'
 import CardDesignOptions from './CardDesignOptions'
 import PageThemeOptions, { ThemeBackdrop } from './PageThemeOptions'
@@ -941,7 +940,6 @@ function App() {
   const barMotion = animationsEnabled && !lowPowerMode && !systemReducedMotion
   useEffect(() => { document.documentElement.dataset.overrollTheme = pageTheme }, [pageTheme])
   const t = (key: Parameters<typeof translate>[1]) => translate(activeLocale, key)
-  const [imageExporting, saveImage] = useImageExport(notify, activeLocale, activeGame)
   const overwatchText = useOverwatchText(activeLocale, baseUrl, activeGame === 'overwatch')
   function perkText(hero: Hero, perk: Perk, group?: PerkGroup) {
     return readPerkText(overwatchText.catalog, activeLocale, hero.key, group ?? selectedPerkGroup(hero, perk, stadium), perk) ?? { name: '…', description: '' }
@@ -1429,14 +1427,6 @@ function App() {
     playSound('tf2Click')
   }
 
-  async function generateTf2TeamImage() {
-    await saveImage({ title: 'Team Fortress 2', accent: '#e8a45b', filename: 'overroll-tf2-equipo', design: cardDesign, cards: tf2Players.map((player, index) => {
-      const pick = tf2Picks[index], hero = pick?.mercenary
-      const artwork = hero && cardDesign !== 'classic' ? tf2Artwork[hero.key] : undefined
-      return { player: player.name, name: hero?.name ?? 'Sin selección', role: hero ? tf2GroupLabels[hero.group] : 'Mercenario', color: hero ? tf2GroupColors[hero.group] : '#b9a18b', portrait: hero ? asset(artwork?.portrait ?? hero.portrait) : undefined, frame: artwork?.frame, fit: cardDesign !== 'classic' ? 'contain' as const : 'cover' as const, icon: hero ? asset('assets/tf2/icons/' + hero.key.replace(/^tf2-/, '') + '.png') : undefined, locked: pick?.locked }
-    }) })
-  }
-
   function generateTeam() {
     if (!data || generating || rerollingIndex !== null) return
 
@@ -1803,16 +1793,6 @@ function App() {
     event.currentTarget.parentElement?.classList.remove('portrait-error')
   }
 
-
-
-  async function generateTeamImage() {
-    const colors: Record<Role, string> = { tank: '#4fc9ff', damage: '#ff5578', support: '#55e4ad' }
-    await saveImage({ title: stadium ? 'Overwatch · Stadium' : 'Overwatch', accent: '#ffc84a', filename: 'overroll-overwatch-equipo', design: cardDesign, cards: players.map((player, index) => {
-      const pick = picks[index], hero = pick?.hero, role = pick?.role ?? hero?.role
-      return { player: player.name, name: rolesOnly && role ? roleLabels[role] : hero?.name ?? 'Sin selección', role: role ? roleLabels[role] : 'Sin rol', color: role ? colors[role] : '#8197af', fit: rolesOnly ? 'contain' as const : 'cover' as const, portrait: rolesOnly && role ? asset('assets/roles/' + role + '.png') : hero ? asset(hero.portrait) : undefined, icon: role ? asset('assets/roles/' + role + '.png') : undefined, locked: pick?.locked, details: rolesOnly ? [] : (pick?.perks ?? []).slice(0, stadium ? 4 : 2).map((perk) => ({ label: hero ? perkText(hero, perk).name : perk.name, image: asset(perk.icon) })) }
-    }) })
-  }
-
   function restoreRecommendedSettings() {
     setSoundEnabled(true)
     setSoundVolume(0.42)
@@ -1897,7 +1877,7 @@ function App() {
             <div className="game-identity"><div className="game-title-row"><h1>Team Fortress 2</h1></div></div>
             <div className="topline-actions">
               <ShowcaseButton locale={activeLocale} onClick={enterShowcase} />
-              <button type="button" className="generate-image-button tf2-image-button" onClick={generateTf2TeamImage} aria-busy={imageExporting} disabled={imageExporting || !tf2Picks.some((pick) => pick.mercenary)}><Icon name="download" size={17} /> Generar imagen</button>
+
               <div className="match-summary tf2-summary">
                 <div><small>Jugadores</small><strong>{tf2Players.length}</strong></div>
                 <div><small>Fijados</small><strong>{tf2Picks.filter((pick) => pick.locked).length}</strong></div>
@@ -2061,9 +2041,7 @@ function App() {
             </div>
             <div className="topline-actions">
               <ShowcaseButton locale={activeLocale} onClick={enterShowcase} />
-              <button type="button" className="generate-image-button" onClick={generateTeamImage} aria-busy={imageExporting} disabled={imageExporting || (!rolesOnly && !overwatchText.ready && picks.some((pick) => pick.perks.length > 0)) || !picks.some((pick) => pick.hero || pick.role)}>
-                <Icon name="download" size={17} /> Generar imagen
-              </button>
+
               <div className="match-summary">
                 <div><small>Composición</small><strong>{compositionText}</strong></div>
                 <div><small>Fijados</small><strong>{picks.filter((pick) => pick.locked).length}</strong></div>

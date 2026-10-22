@@ -19,7 +19,7 @@ function nodes(node) { return React.isValidElement(node) ? [node, ...React.Child
 function content(node) { if (typeof node === 'string' || typeof node === 'number') return String(node); return React.isValidElement(node) ? React.Children.toArray(node.props.children).map(content).join('') : '' }
 
 function harness(options = {}) {
-  let cursor = 0, tree, ticket = options.ticket ?? 0, spins = 0, wins = 0, writes = 0, exported, serial = 0
+  let cursor = 0, tree, ticket = options.ticket ?? 0, spins = 0, wins = 0, writes = 0, serial = 0
   const sounds = []
   const cells = [], effects = [], frames = new Map(), activeAnimations = [], store = new Map()
   if (options.saved) store.set('test.wheel', JSON.stringify(options.saved))
@@ -39,7 +39,7 @@ function harness(options = {}) {
       finished: new Promise((ok, bad) => { resolve = ok; reject = bad }), finish() { settled = true; resolve() }, cancel() { running.cancelled = true; if (!settled) reject(new Error('Cancelled')) } }
     activeAnimations.push(running); return running
   } }
-  const dependencies = { react, './uiLocalization': ui, './imageExport': { safeAssetUrl: (path) => '/' + path }, './useImageExport': { useImageExport: () => [false, async (value) => { exported = value }] },
+  const dependencies = { react, './uiLocalization': ui, './imageExport': { safeAssetUrl: (path) => '/' + path },
     './rouletteModel': { ...model, randomTicket: () => ticket }, './portraitFrames': { fragpunkPortraitFrames }, './tf2Artwork': { tf2Artwork }, './pvzArtwork': { pvzArtwork },
     './rouletteAudio': { createRouletteAudio: () => Object.fromEntries(['configure','start','tick','win','select','stop','dispose'].map((name) => [name, (...args) => sounds.push({ name, args })])) } }
   const exports = {}
@@ -57,7 +57,7 @@ function harness(options = {}) {
   render()
   const byClass = (name) => nodes(tree).find((node) => typeof node.props.className === 'string' && node.props.className.split(' ').includes(name))
   const button = (label) => nodes(tree).find((node) => node.type === 'button' && content(node) === label)
-  return { render, byClass, button, store, rotor, sounds, get tree() { return tree }, get state() { return tree.props['data-state'] }, get writes() { return writes }, get spins() { return spins }, get wins() { return wins }, get exported() { return exported }, get frames() { return frames.size }, get animation() { return activeAnimations.at(-1) },
+  return { render, byClass, button, store, rotor, sounds, get tree() { return tree }, get state() { return tree.props['data-state'] }, get writes() { return writes }, get spins() { return spins }, get wins() { return wins }, get frames() { return frames.size }, get animation() { return activeAnimations.at(-1) },
     setTicket(value) { ticket = value }, html() { return renderToStaticMarkup(tree) },
     frame(progress, now) { activeAnimations.at(-1).progress = progress; const pending = [...frames.values()]; frames.clear(); pending.forEach((fn) => fn(now)); render() },
     unmount() { cells.forEach((cell) => cell?.cleanup?.()) } }
@@ -141,13 +141,14 @@ test('reduced motion and disabled animations finish immediately and keep the fiv
   }
 })
 
-test('GW2, TF2 and FragPunk winner exports use their transparent artwork and exact frame', async () => {
+test('GW2, TF2 and FragPunk winners retain their transparent artwork and exact frame', () => {
   for (const [gameId, catalog] of [['pvzgw2', pvzArtwork], ['tf2', tf2Artwork], ['fragpunk', fragpunkPortraitFrames]]) {
     const [key, value] = Object.entries(catalog)[0], portrait = value.portrait ?? 'original.png', frame = value.frame ?? value
     const h = harness({ props: { gameId, items: [{ key, name: 'Winner', role: 'tank', portrait }], animationsEnabled: false } })
     h.byClass('wheel-spin').props.onClick(); h.render()
-    await h.byClass('wheel-download').props.onClick()
-    assert.equal(h.exported.cards[0].portrait, '/' + portrait); assert.deepEqual(h.exported.cards[0].frame, frame); assert.equal(h.exported.cards[0].fit, 'contain')
+    const art = nodes(h.byClass('wheel-winner-art')).find((node) => node.type === 'svg' && node.props.className === 'wheel-art')
+    assert.equal(art.props.viewBox, `${frame.x} ${frame.y} ${frame.width} ${frame.height}`)
+    assert.equal(nodes(art).find((node) => node.type === 'image').props.href, '/' + portrait)
     h.unmount()
   }
 })
