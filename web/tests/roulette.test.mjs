@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { normalizeWeight, randomTicket, weightedSegments, winnerForTicket, rotationForSegment, sectorPath, restoreRouletteState } from '../src/rouletteModel.ts'
+import { normalizeWeight, randomTicket, weightedSegments, winnerForTicket, rotationForSegment, sectorPath, segmentAtRotation, restoreRouletteState } from '../src/rouletteModel.ts'
 
 test('weights remain finite and bounded after malformed saved values', () => {
  for (const value of [NaN, Infinity, {}, null, [], 'bad']) assert.equal(normalizeWeight(value), 1)
@@ -29,6 +29,24 @@ test('the pointer lands at the selected sector after repeated spins and unequal 
    assert(target-start>=6*360)
   }
  }
+})
+test('the live portrait follows the real pointer and agrees with the winner for narrow and weighted sectors', () => {
+ for (const items of [[{key:'solo',weight:1}],Array.from({length:121},(_,i)=>({key:String(i),weight:i%3?1:64}))]) {
+  const segments=weightedSegments(items)
+  segments.forEach((segment,index)=>{
+   for(const start of [0,77,800,9021]){
+    const target=rotationForSegment(segment.start,segment.end,start)
+    assert.equal(segmentAtRotation(segments,target),index)
+   }
+  })
+  for(let degrees=-720;degrees<720;degrees+=1.7){
+   const index=segmentAtRotation(segments,degrees),angle=((-degrees%360)+360)%360
+   assert(index>=0&&index<segments.length)
+   assert(angle>=segments[index].start&&angle<segments[index].end)
+  }
+ }
+ assert.equal(segmentAtRotation([],0),-1)
+ assert.equal(segmentAtRotation([{start:0,end:360}],NaN),-1)
 })
 test('storage migration preserves custom subsets, empty selection, weights and full-roster additions', () => {
  const items=[{key:'a'},{key:'b'},{key:'new'}]

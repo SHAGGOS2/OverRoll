@@ -31,6 +31,11 @@ export function rotationForSegment(start: number, end: number, rotation: number,
   const target = ((-angle % 360) + 360) % 360
   return rotation + turns * 360 + ((target - normalized + 360) % 360)
 }
+export function segmentAtRotation(segments: { start: number; end: number }[], rotation: number): number {
+  if (!segments.length || !Number.isFinite(rotation)) return -1
+  const angle = ((-rotation % 360) + 360) % 360
+  return segments.findIndex((segment) => angle >= segment.start && angle < segment.end)
+}
 export function sectorPath(start: number, end: number): string {
   const point = (degrees: number) => ({ x: 200 + 184 * Math.cos((degrees - 90) * Math.PI / 180), y: 200 + 184 * Math.sin((degrees - 90) * Math.PI / 180) })
   const first = point(start), last = point(end)

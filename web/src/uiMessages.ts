@@ -1,6 +1,10 @@
 import type { SupportedLocale } from './localization'
 const locales = ['en-us', 'de-de', 'fr-fr', 'pt-br', 'ja-jp', 'ko-kr', 'zh-cn'] as const
 const rows: Record<string, string[]> = {
+ 'En juego': ['In play','Im Spiel','En jeu','Em jogo','対象','선택됨','已选'],
+ 'Participantes': ['Participants','Teilnehmer','Participants','Participantes','参加者','참가자','参与者'],
+ 'Probabilidad': ['Chance','Chance','Probabilité','Probabilidade','確率','확률','概率'],
+ 'Probabilidades': ['Chances','Chancen','Probabilités','Probabilidades','確率','확률','概率'],
  'Nebulosa': ['Nebula','Nebel','Nébuleuse','Nebulosa','星雲','성운','星云'],
  'Abismo': ['Abyss','Abgrund','Abysse','Abismo','深海','심해','深海'],
  'Ascua': ['Ember','Glut','Braise','Brasa','残り火','불씨','余烬'],
