@@ -7,10 +7,11 @@ import { restoreRouletteState, normalizeWeight, randomTicket, rotationForSegment
 import { fragpunkPortraitFrames } from './portraitFrames'
 import { tf2Artwork } from './tf2Artwork'
 import { pvzArtwork } from './pvzArtwork'
+import { createRouletteAudio } from './rouletteAudio'
 
 export type RouletteItem = { key: string; name: string; role: string; portrait: string; icon?: string }
 export type RouletteRole = { id: string; label: string; color: string; icon?: string }
-type Props = { gameId: string; title: string; items: RouletteItem[]; roles: RouletteRole[]; storagePrefix: string; legacySelectionKey?: string; baseUrl: string; locale: SupportedLocale; animationsEnabled: boolean; onSpin?: () => void; onWin?: () => void; notify: (message: string, tone?: 'success' | 'info' | 'warning') => void }
+type Props = { gameId: string; title: string; items: RouletteItem[]; roles: RouletteRole[]; storagePrefix: string; legacySelectionKey?: string; baseUrl: string; locale: SupportedLocale; animationsEnabled: boolean; soundEnabled: boolean; soundVolume: number; onSpin?: () => void; onWin?: () => void; notify: (message: string, tone?: 'success' | 'info' | 'warning') => void }
 type Saved = { selected: string[]; weights: Record<string, number>; catalog: string[] }
 
 function readSaved(prefix: string, legacyKey: string | undefined, items: RouletteItem[]): Saved {
@@ -41,7 +42,7 @@ function WheelIcon({ name, size = 18 }: { name: 'spin' | 'search' | 'check' | 'm
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name]} /></svg>
 }
 
-export default function SharedRoulette({ gameId, title, items, roles, storagePrefix, legacySelectionKey, baseUrl, locale, animationsEnabled, onSpin, onWin, notify }: Props) {
+export default function SharedRoulette({ gameId, title, items, roles, storagePrefix, legacySelectionKey, baseUrl, locale, animationsEnabled, soundEnabled, soundVolume, onSpin, onWin, notify }: Props) {
   const [saved, setSaved] = useState(() => readSaved(storagePrefix, legacySelectionKey, items))
   const [search, setSearch] = useState(''), [role, setRole] = useState('all')
   const [showWeights, setShowWeights] = useState(false)
@@ -49,6 +50,7 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
   const [rollingKey, setRollingKey] = useState(''), [history, setHistory] = useState<string[]>([])
   const rotor = useRef<SVGGElement>(null), animation = useRef<Animation | null>(null), spinningRef = useRef(false), rotation = useRef(0)
   const previewFrame = useRef<number | null>(null)
+  const audio = useRef<ReturnType<typeof createRouletteAudio> | null>(null)
   const clipId = useId().replace(/:/g, '')
   const [exporting, saveImage] = useImageExport(notify, locale, gameId)
   const tr = (value: string) => translateGameText(gameId, locale, value)
@@ -65,6 +67,16 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
   const winnerOdds = winner ? segments.find((segment) => segment.key === winner.key)?.probability ?? 0 : 0
   const percent = (probability: number) => new Intl.NumberFormat(locale, { style: 'percent', maximumFractionDigits: 1 }).format(probability)
 
+  useEffect(() => {
+    const sound = createRouletteAudio(); audio.current = sound
+    const onVisibility = () => { if (document.hidden) sound.stop() }
+    if (typeof document !== 'undefined') document.addEventListener('visibilitychange', onVisibility)
+    return () => {
+      if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', onVisibility)
+      sound.dispose(); audio.current = null
+    }
+  }, [])
+  useEffect(() => { audio.current?.configure(soundEnabled, soundVolume) }, [soundEnabled, soundVolume])
   useEffect(() => {
     if (items.length && !saved.catalog.length) setSaved(readSaved(storagePrefix, legacySelectionKey, items))
   }, [items, storagePrefix, legacySelectionKey, saved.catalog.length])
@@ -84,16 +96,19 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
   }
   function updateSelection(keys: string[]) {
     if (spinningRef.current) return
+    audio.current?.select(keys.length >= saved.selected.length)
     setSaved((current) => ({ ...current, selected: [...new Set(keys)] }))
     resetResult()
   }
   function changeWeight(key: string, delta: number) {
     if (spinningRef.current) return
+    audio.current?.select(delta > 0)
     setSaved((current) => ({ ...current, weights: { ...current.weights, [key]: normalizeWeight(normalizeWeight(current.weights[key]) + delta) } }))
     resetResult()
   }
   function equalizeWeights() {
     if (spinningRef.current) return
+    audio.current?.select()
     setSaved((current) => ({ ...current, weights: {} }))
     resetResult()
   }
@@ -109,19 +124,23 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
       rotation.current = target % 360
       if (rotor.current) rotor.current.style.transform = `rotate(${rotation.current}deg)`
       spinningRef.current = false; setSpinning(false); setRollingKey(''); setWinnerKey(result.key)
-      setHistory((current) => [result.key, ...current].slice(0, 5)); onWin?.()
+      setHistory((current) => [result.key, ...current].slice(0, 5)); audio.current?.win(); onWin?.()
     }
     onSpin?.()
     if (!animationsEnabled || window.matchMedia('(prefers-reduced-motion: reduce)').matches || typeof rotor.current.animate !== 'function') { finish(); return }
+    audio.current?.start(3.6)
     const running = rotor.current.animate([{ transform: `rotate(${start}deg)` }, { transform: `rotate(${target}deg)` }], { duration: 3600, easing: 'cubic-bezier(.12,.72,.1,1)', fill: 'forwards' })
     animation.current = running
-    let lastPreview = -Infinity
+    let lastPreview = -Infinity, lastSector = segmentAtRotation(segments, start), lastTurn = Math.floor(start / 360)
     const updatePreview = (now: number) => {
       if (animation.current !== running) return
       if (now - lastPreview >= 65) {
         const progress = running.effect?.getComputedTiming().progress
         if (typeof progress === 'number') {
-          const candidate = pool[segmentAtRotation(segments, start + (target - start) * progress)]
+          const degrees = start + (target - start) * progress, sector = segmentAtRotation(segments, degrees), turn = Math.floor(degrees / 360)
+          const candidate = pool[sector]
+          if (candidate && (sector !== lastSector || turn !== lastTurn)) audio.current?.tick(progress)
+          lastSector = sector; lastTurn = turn
           if (candidate) setRollingKey(candidate.key)
         }
         lastPreview = now
@@ -209,8 +228,8 @@ export default function SharedRoulette({ gameId, title, items, roles, storagePre
         <fieldset disabled={spinning}>
           <header className="wheel-editor-heading"><h2>Participantes</h2><span>{pool.length} / {items.length}</span></header>
           <div className="wheel-search"><WheelIcon name="search" size={17} /><input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Buscar…" aria-label="Buscar…" /></div>
-          <div className="wheel-role-filters" aria-label={tr('Roles')}><button type="button" className={role === 'all' ? 'active' : ''} aria-pressed={role === 'all'} onClick={() => setRole('all')}>Todos<small>{items.length}</small></button>{roles.length > 1 && roles.map((definition) => <button type="button" key={definition.id} className={role === definition.id ? 'active' : ''} aria-pressed={role === definition.id} onClick={() => setRole(definition.id)} style={{ '--filter-color': definition.color } as CSSProperties}>{definition.icon && <img src={asset(definition.icon)} alt="" />}{definition.label}<small>{items.filter((item) => item.role === definition.id).length}</small></button>)}</div>
-          <div className="wheel-actions"><button type="button" onClick={() => updateSelection([...saved.selected, ...visible.map((item) => item.key)])}><WheelIcon name="check" size={14} />Añadir visibles</button><button type="button" onClick={() => updateSelection(saved.selected.filter((key) => !visible.some((item) => item.key === key)))}><WheelIcon name="minus" size={14} />Quitar visibles</button><button type="button" className={`wheel-probability-toggle ${showWeights ? 'active' : ''}`} aria-pressed={showWeights} onClick={() => setShowWeights((current) => !current)} title={tr('Probabilidades')}><WheelIcon name="weights" size={16} /><span>Probabilidades</span></button></div>
+          <div className="wheel-role-filters" aria-label={tr('Roles')}><button type="button" className={role === 'all' ? 'active' : ''} aria-pressed={role === 'all'} onClick={() => { setRole('all'); audio.current?.select() }}>Todos<small>{items.length}</small></button>{roles.length > 1 && roles.map((definition) => <button type="button" key={definition.id} className={role === definition.id ? 'active' : ''} aria-pressed={role === definition.id} onClick={() => { setRole(definition.id); audio.current?.select() }} style={{ '--filter-color': definition.color } as CSSProperties}>{definition.icon && <img src={asset(definition.icon)} alt="" />}{definition.label}<small>{items.filter((item) => item.role === definition.id).length}</small></button>)}</div>
+          <div className="wheel-actions"><button type="button" onClick={() => updateSelection([...saved.selected, ...visible.map((item) => item.key)])}><WheelIcon name="check" size={14} />Añadir visibles</button><button type="button" onClick={() => updateSelection(saved.selected.filter((key) => !visible.some((item) => item.key === key)))}><WheelIcon name="minus" size={14} />Quitar visibles</button><button type="button" className={`wheel-probability-toggle ${showWeights ? 'active' : ''}`} aria-pressed={showWeights} onClick={() => { setShowWeights((current) => !current); audio.current?.select(!showWeights) }} title={tr('Probabilidades')}><WheelIcon name="weights" size={16} /><span>Probabilidades</span></button></div>
           <div className={`wheel-catalog ${showWeights ? 'show-weights' : ''}`}>{visible.map((item) => {
             const definition = roleFor(item.role), active = selected.has(item.key), weight = normalizeWeight(saved.weights[item.key])
             return <article key={item.key} className={`wheel-candidate ${active ? 'selected' : ''}`} style={{ '--candidate-color': definition.color } as CSSProperties}>

@@ -1402,5 +1402,5 @@ export default function RosterModule({
     )
   }
 
-  return view === 'roulette' ? (catalog.length ? <SharedRoulette key={gameId} gameId={gameId} title={game.name} items={catalog} roles={game.roles} storagePrefix={storagePrefix} baseUrl={baseUrl} locale={locale} animationsEnabled={animationsEnabled} notify={notify} onSpin={() => playModuleSound('generate')} onWin={playConfirmTone} /> : null) : localizeUi(locale, renderPrincipal(), gameId)
+  return view === 'roulette' ? (catalog.length ? <SharedRoulette key={gameId} gameId={gameId} title={game.name} items={catalog} roles={game.roles} storagePrefix={storagePrefix} baseUrl={baseUrl} locale={locale} animationsEnabled={animationsEnabled} notify={notify} soundEnabled={soundEnabled} soundVolume={soundVolume} /> : null) : localizeUi(locale, renderPrincipal(), gameId)
 }

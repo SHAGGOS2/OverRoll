@@ -20,6 +20,7 @@ function content(node) { if (typeof node === 'string' || typeof node === 'number
 
 function harness(options = {}) {
   let cursor = 0, tree, ticket = options.ticket ?? 0, spins = 0, wins = 0, writes = 0, exported, serial = 0
+  const sounds = []
   const cells = [], effects = [], frames = new Map(), activeAnimations = [], store = new Map()
   if (options.saved) store.set('test.wheel', JSON.stringify(options.saved))
   const react = { ...React,
@@ -39,11 +40,12 @@ function harness(options = {}) {
     activeAnimations.push(running); return running
   } }
   const dependencies = { react, './uiLocalization': ui, './imageExport': { safeAssetUrl: (path) => '/' + path }, './useImageExport': { useImageExport: () => [false, async (value) => { exported = value }] },
-    './rouletteModel': { ...model, randomTicket: () => ticket }, './portraitFrames': { fragpunkPortraitFrames }, './tf2Artwork': { tf2Artwork }, './pvzArtwork': { pvzArtwork } }
+    './rouletteModel': { ...model, randomTicket: () => ticket }, './portraitFrames': { fragpunkPortraitFrames }, './tf2Artwork': { tf2Artwork }, './pvzArtwork': { pvzArtwork },
+    './rouletteAudio': { createRouletteAudio: () => Object.fromEntries(['configure','start','tick','win','select','stop','dispose'].map((name) => [name, (...args) => sounds.push({ name, args })])) } }
   const exports = {}
   vm.runInNewContext(compiled, { exports, React, window, localStorage: { getItem: (key) => store.get(key) ?? null, setItem(key, value) { writes++; store.set(key, value) } }, Intl,
     require(name) { assert(name in dependencies, name); return dependencies[name] } })
-  let props = { gameId: 'overwatch', title: 'Overwatch', items, roles, storagePrefix: 'test', baseUrl: '/', locale: 'en-us', animationsEnabled: true, notify() {}, onSpin() { spins++ }, onWin() { wins++ }, ...options.props }
+  let props = { gameId: 'overwatch', title: 'Overwatch', items, roles, storagePrefix: 'test', baseUrl: '/', locale: 'en-us', animationsEnabled: true, soundEnabled: true, soundVolume: .35, notify() {}, onSpin() { spins++ }, onWin() { wins++ }, ...options.props }
   const render = (next = {}) => {
     props = { ...props, ...next }
     for (let i = 0; i < 2; i++) {
@@ -55,7 +57,7 @@ function harness(options = {}) {
   render()
   const byClass = (name) => nodes(tree).find((node) => typeof node.props.className === 'string' && node.props.className.split(' ').includes(name))
   const button = (label) => nodes(tree).find((node) => node.type === 'button' && content(node) === label)
-  return { render, byClass, button, store, rotor, get tree() { return tree }, get state() { return tree.props['data-state'] }, get writes() { return writes }, get spins() { return spins }, get wins() { return wins }, get exported() { return exported }, get frames() { return frames.size }, get animation() { return activeAnimations.at(-1) },
+  return { render, byClass, button, store, rotor, sounds, get tree() { return tree }, get state() { return tree.props['data-state'] }, get writes() { return writes }, get spins() { return spins }, get wins() { return wins }, get exported() { return exported }, get frames() { return frames.size }, get animation() { return activeAnimations.at(-1) },
     setTicket(value) { ticket = value }, html() { return renderToStaticMarkup(tree) },
     frame(progress, now) { activeAnimations.at(-1).progress = progress; const pending = [...frames.values()]; frames.clear(); pending.forEach((fn) => fn(now)); render() },
     unmount() { cells.forEach((cell) => cell?.cleanup?.()) } }
@@ -65,6 +67,7 @@ test('a spin freezes configuration, previews the actual pointer, announces only 
   const h = harness({ saved: { selected: ['a', 'b', 'c'], catalog: ['a', 'b', 'c'], weights: { a: 1, b: 3, c: 2 } }, ticket: 2 })
   h.byClass('wheel-spin').props.onClick(); h.render()
   assert.equal(h.state, 'spinning'); assert.equal(h.spins, 1); assert.equal(h.wins, 0)
+  assert.deepEqual(h.sounds.filter((cue) => cue.name === 'start').map((cue) => cue.args), [[3.6]])
   assert.equal(nodes(h.tree).find((node) => node.type === 'fieldset').props.disabled, true)
   const before = h.store.get('test.wheel')
   h.button('Remove visible').props.onClick(); h.byClass('wheel-spin').props.onClick(); h.render()
@@ -77,13 +80,21 @@ test('a spin freezes configuration, previews the actual pointer, announces only 
     assert(content(h.byClass('wheel-winner-copy')).includes(expected.name))
     assert.equal(content(h.byClass('wheel-announcement')), 'Spinning…')
   }
+  const clicks = h.sounds.filter((cue) => cue.name === 'tick').length
+  h.frame(.9, 500)
+  assert.equal(h.sounds.filter((cue) => cue.name === 'tick').length, clicks)
+  assert(clicks > 0)
   h.animation.finish(); await Promise.resolve(); await Promise.resolve(); h.render()
   assert.equal(h.state, 'winner'); assert.equal(h.wins, 1); assert.equal(h.frames, 0)
   assert.equal(content(h.byClass('wheel-announcement')), 'Winner: Bravo')
   assert(content(h.byClass('wheel-winner-odds')).includes('50%'))
   assert.equal(model.segmentAtRotation(segments, Number(h.rotor.style.transform.match(/rotate\((.+)deg\)/)[1])), 1)
   assert.equal(nodes(h.tree).filter((node) => node.props.className === 'wheel-sector is-winner').length, 1)
+  assert.equal(h.sounds.filter((cue) => cue.name === 'win').length, 1)
+  h.render({ soundEnabled: false, soundVolume: 0 })
+  assert.deepEqual(h.sounds.filter((cue) => cue.name === 'configure').at(-1).args, [false, 0])
   h.unmount()
+  assert.equal(h.sounds.at(-1).name, 'dispose')
 })
 
 test('role and search filters affect bulk selection without removing hidden participants; chances remain correct and optional', () => {

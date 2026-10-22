@@ -632,5 +632,5 @@ export default function PvzModule({
     )
   }
 
-  return view === 'roulette' ? (<SharedRoulette gameId="pvzgw2" title="Plants vs. Zombies Garden Warfare 2" items={eligibleCharacters.map((item) => ({ ...item, role: item.side }))} roles={(['plants', 'zombies'] as const).map((id) => ({ id, label: pvzSideLabels[id], color: pvzSideColors[id] }))} storagePrefix="overroll.web.pvz" legacySelectionKey="rouletteSelectedKeys" baseUrl={baseUrl} locale={locale} animationsEnabled={animationsEnabled} notify={notify} onSpin={() => playSound('rouletteSpin')} onWin={() => playSound('rouletteWin')} />) : localizeUi(locale, renderPrincipal(), 'pvzgw2')
+  return view === 'roulette' ? (<SharedRoulette gameId="pvzgw2" title="Plants vs. Zombies Garden Warfare 2" items={eligibleCharacters.map((item) => ({ ...item, role: item.side }))} roles={(['plants', 'zombies'] as const).map((id) => ({ id, label: pvzSideLabels[id], color: pvzSideColors[id] }))} storagePrefix="overroll.web.pvz" legacySelectionKey="rouletteSelectedKeys" baseUrl={baseUrl} locale={locale} animationsEnabled={animationsEnabled} notify={notify} soundEnabled={soundEnabled} soundVolume={soundVolume} />) : localizeUi(locale, renderPrincipal(), 'pvzgw2')
 }
