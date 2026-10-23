@@ -141,6 +141,12 @@
       "portrait": "mo-krill.png"
     },
     {
+      "key": "nurse-harrow",
+      "name": "Nurse Harrow",
+      "role": "hero",
+      "portrait": "nurse-harrow.png"
+    },
+    {
       "key": "paige",
       "name": "Paige",
       "role": "hero",
@@ -261,5 +267,5 @@
       "portrait": "yamato.png"
     }
   ],
-  "updated": "2026-10-19"
+  "updated": "2026-10-23"
 }

@@ -218,7 +218,7 @@ export const rosterGameDefinitions: RosterGameDefinition[] = [
     defaultPlayers: 3,
     minPlayers: 1,
     maxPlayers: 12,
-    catalogLabel: '43 héroes',
+    catalogLabel: '44 héroes',
     formatLabel: '1 a 12 jugadores',
     roles: [{ id: 'hero', label: 'Héroe', color: '#d1bd77' }],
   },

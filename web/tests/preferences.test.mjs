@@ -21,7 +21,7 @@ function render(tab, overrides = {}) {
     soundEnabled: true, soundVolume: .42, hoverSounds: false, localePreference: 'auto',
     browserLocale: 'es-MX', activeLocale: 'es-MX', activeGame: 'deadlock',
     localeName: (locale) => locale, localeChoices: [{ id: 'es-MX', name: 'Español' }, { id: 'en-US', name: 'English' }],
-    gameModules: [{ id: 'deadlock', name: 'Deadlock', catalogLabel: '43 héroes', icon: 'assets/game-icons/deadlock.png', available: true }],
+    gameModules: [{ id: 'deadlock', name: 'Deadlock', catalogLabel: '44 héroes', icon: 'assets/game-icons/deadlock.png', available: true }],
     asset: (path) => path, creditsSongUrl: () => 'https://example.com', playSound(kind) { changes.sounds.push(kind) }, toggleRuleSound(next) { changes.sounds.push(next ? 'toggleOn' : 'toggleOff') }, notify() {}, playConfirmTone() {},
     restoreRecommendedSettings() { changes.reset = true }, resetLocalData() { changes.clear = true },
     setSettingsTab: (value) => { changes.tab = value }, setLocalePreference: (value) => { changes.locale = value }, setSoundVolume: (value) => { changes.volume = value },
