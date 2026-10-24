@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom'
-import type { CSSProperties, ReactNode } from 'react'
+import { useSyncExternalStore, type CSSProperties, type ReactNode } from 'react'
+import './ViewportAction.css'
 
 type Props = {
   className?: string
@@ -7,12 +8,14 @@ type Props = {
   children: ReactNode
 }
 
+const mobileQuery = '(max-width: 620px)'
+function subscribe(listener: () => void) {
+  const media = window.matchMedia(mobileQuery)
+  media.addEventListener('change', listener)
+  return () => media.removeEventListener('change', listener)
+}
 export default function ViewportAction({ className = '', style, children }: Props) {
-  if (typeof document === 'undefined') return null
-  return createPortal(
-    <div className={`principal-generate-dock ${className}`.trim()} style={style}>
-      {children}
-    </div>,
-    document.body,
-  )
+  const mobile = useSyncExternalStore(subscribe, () => window.matchMedia(mobileQuery).matches, () => false)
+  const action = <div className={`team-generate-action ${className}`.trim()} style={style}>{children}</div>
+  return mobile && typeof document !== 'undefined' ? createPortal(action, document.body) : action
 }

@@ -1,6 +1,10 @@
 import type { SupportedLocale } from './localization'
 const locales = ['en-us', 'de-de', 'fr-fr', 'pt-br', 'ja-jp', 'ko-kr', 'zh-cn'] as const
 const rows: Record<string, string[]> = {
+ 'No se pudo abrir OverRoll': ['OverRoll could not open','OverRoll konnte nicht geöffnet werden','Impossible d’ouvrir OverRoll','Não foi possível abrir o OverRoll','OverRollを開けませんでした','OverRoll을 열 수 없습니다','无法打开 OverRoll'],
+ 'Vuelve a cargar la página para intentarlo de nuevo.': ['Reload the page to try again.','Lade die Seite neu, um es erneut zu versuchen.','Rechargez la page pour réessayer.','Recarregue a página para tentar novamente.','ページを再読み込みしてもう一度お試しください。','페이지를 새로고침한 후 다시 시도하세요.','请重新加载页面后再试。'],
+ 'Volver a cargar': ['Reload','Neu laden','Recharger','Recarregar','再読み込み','새로고침','重新加载'],
+ 'Restablecer datos locales': ['Reset local data','Lokale Daten zurücksetzen','Réinitialiser les données locales','Redefinir dados locais','ローカルデータをリセット','로컬 데이터 초기화','重置本地数据'],
  'En juego': ['In play','Im Spiel','En jeu','Em jogo','対象','선택됨','已选'],
  'Participantes': ['Participants','Teilnehmer','Participants','Participantes','参加者','참가자','参与者'],
  'Probabilidad': ['Chance','Chance','Probabilité','Probabilidade','確率','확률','概率'],

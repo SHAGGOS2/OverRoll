@@ -105,3 +105,88 @@
 @media (max-width: 700px) {
   .app .roster-game-deadlock .team-grid, .app .roster-game-deadlock .team-grid.cards-2 { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* One workspace hierarchy for all game modules. */
+.app .workspace .content-topline { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px 20px; min-height: 0; margin-bottom: 24px; padding: 0 0 20px; border-bottom: 1px solid var(--theme-line, #283341); }
+.app .workspace .content-topline .game-identity { min-width: 0; }
+.app .workspace .content-topline .game-title-row { flex-wrap: wrap; gap: 8px 14px; }
+.app .workspace .content-topline .game-title-row h1 { margin: 0; color: var(--theme-text, #edf2f8); font: 650 clamp(25px, 2.5vw, 32px)/1.15 'Segoe UI', Arial, sans-serif; letter-spacing: -.035em; text-transform: none; }
+.app .workspace .content-topline .web-badge { padding: 0; border: 0; border-radius: 0; color: var(--theme-muted, #9aafc4); background: transparent; font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.app .workspace .content-topline .topline-actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: nowrap; gap: 8px; }
+.app .workspace .content-topline .showcase-button { min-height: 44px; padding: 10px 12px; border: 1px solid var(--theme-line, #344150); background: transparent; color: var(--theme-muted, #abb9c8); font-size: 12px; white-space: nowrap; }
+.app .workspace .content-topline > .match-summary { grid-column: 1 / -1; display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 8px 24px; min-height: 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.app .workspace .content-topline > .match-summary > div { display: flex; align-items: baseline; gap: 7px; min-width: 0; padding: 0; border: 0; }
+.app .workspace .content-topline > .match-summary small { color: var(--theme-muted, #92a4b6); font-size: 11px; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.app .workspace .content-topline > .match-summary strong { color: var(--theme-text, #d9e2ec); font-size: 12px; font-weight: 600; white-space: normal; }
+.app .sidebar.standard-sidebar > .side-panel { padding: 16px 0; margin: 0; border: 0; border-bottom: 1px solid var(--theme-line, #293647); border-radius: 0; background: transparent; box-shadow: none; }
+.app .sidebar.standard-sidebar > .side-panel::after { display: none; }
+.app .sidebar.standard-sidebar .configuration-mark { width: 20px; height: 22px; padding: 0; border: 0; border-radius: 0; background: none; color: var(--theme-muted, #9aafc4); }
+.app .sidebar.standard-sidebar .panel-title-row label { color: var(--theme-text, #dce5ef); font-size: 12px; font-weight: 650; letter-spacing: 0; text-transform: none; }
+.app .sidebar.standard-sidebar .panel-title-row svg { width: 15px; height: 15px; color: var(--theme-muted, #92a4b6); opacity: .7; }
+.app .sidebar.standard-sidebar .squad-counter { border: 1px solid var(--theme-line, #344150); border-radius: 7px; background: transparent; }
+.app .sidebar.standard-sidebar .squad-counter button { min-height: 34px; border: 0; border-radius: 4px; color: var(--theme-text, #dce5ef); background: var(--theme-surface-2, #1b2a39); box-shadow: none; }
+.app .sidebar.standard-sidebar .squad-tools button { font-size: 11px; font-weight: 500; letter-spacing: 0; text-transform: none; background: transparent; box-shadow: none; }
+.app .sidebar.standard-sidebar .players { gap: 7px; }
+.app .sidebar.standard-sidebar .player-row { padding: 9px 7px; background: var(--theme-surface, #11202d); border-color: var(--theme-line, #2b3b4c); box-shadow: none; }
+.app .sidebar.standard-sidebar .player-row input { font-size: 13px; background: var(--theme-surface-2, #162737); }
+.app .sidebar.standard-sidebar .player-row > select { width: 82px; font-size: 10px; padding-inline: 4px; background: var(--theme-surface-2, #162737); }
+.app .sidebar.standard-sidebar .player-role-choices > button, .app .sidebar.standard-sidebar .tf2-group-buttons > button, .app .sidebar.standard-sidebar .pvz-side-buttons > button { font-size: 11px; font-weight: 550; letter-spacing: 0; text-transform: none; background: transparent; box-shadow: none; }
+.app .sidebar.standard-sidebar .player-role-choices > .active, .app .sidebar.standard-sidebar .tf2-group-buttons > .active, .app .sidebar.standard-sidebar .pvz-side-buttons > .active { background: color-mix(in srgb, var(--choice-accent, var(--module-accent)) 9%, var(--theme-surface, #11202d)); border-color: color-mix(in srgb, var(--choice-accent, var(--module-accent)) 42%, var(--theme-line, #2b3b4c)); }
+.app .workspace .hero-name-row { display: block; min-width: 0; }
+.app .workspace .hero-name-row h2 { max-width: 100%; overflow: visible; font-family: inherit; font-size: clamp(17px, 1.5vw, 22px); font-weight: 650; line-height: 1.2; letter-spacing: -.025em; text-overflow: clip; text-transform: none; white-space: normal; overflow-wrap: anywhere; }
+.app .workspace .hero-name-row .role-dot { display: none; }
+.app .workspace .hero-role { display: flex; flex-wrap: wrap; min-width: 0; min-height: 18px; overflow: visible; font-size: 11px; font-weight: 550; line-height: 1.4; letter-spacing: 0; text-transform: none; white-space: normal; }
+.app .workspace .hero-role > .hero-role-icon { width: 13px; height: 13px; flex: none; }
+.app .workspace .card-actions > button, .app .workspace .pvz-card-actions > button { min-height: 36px; background: var(--theme-surface-2, #172d3e); box-shadow: none; }
+.app .workspace .content { padding-bottom: 24px; }
+@media (max-width: 860px) {
+  .app .workspace .content-topline { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .app .workspace .content-topline .topline-actions { grid-row: 2; justify-content: flex-start; flex-wrap: wrap; }
+  .app .workspace .content-topline > .match-summary { grid-row: 3; gap: 8px 18px; }
+}
+@media (max-width: 620px) {
+  .app .workspace .content { padding-bottom: 156px; }
+  .app .workspace .content-topline { grid-template-columns: minmax(0, 1fr) auto; gap: 12px; }
+  .app .workspace .content-topline .topline-actions { grid-row: 1; grid-column: 2; }
+  .app .workspace .content-topline > .match-summary { grid-row: 2; }
+  .app .workspace .content-topline .showcase-button { min-height: 36px; padding: 8px; font-size: 11px; }
+}
+.app .workspace .hero-info { min-height: 108px; }
+.app .workspace .hero-name-row h2 { min-height: 2.4em; }
+.app .workspace .hero-role { display: block; min-height: 2.8em; text-align: left; }
+.app .workspace .hero-role > .hero-role-icon { display: inline-block; margin-right: 5px; vertical-align: -2px; }
+.app .workspace .hero-role .hero-subrole { display: block; margin-top: 2px; color: var(--theme-muted, #9eb2c3); font-size: 10px; line-height: 1.4; }
+.app .workspace .card-player { font-size: 12px; }
+.app .workspace .card-player .player-index { font-size: 10px; }
+@media (min-width: 1200px) {
+  .app .workspace:not(.roster-game-deadlock) .team-grid:not(.bar-cards):is(.cards-5, .cards-6) { min-width: 0; width: 100%; grid-template-columns: repeat(var(--cards), minmax(0, 1fr)); }
+  .app .workspace .squad-grid:not(.bar-cards):is(.cards-5, .cards-6) .hero-name-row h2 { font-size: clamp(17px, 1.35vw, 20px); }
+  .app .workspace .squad-grid:not(.bar-cards):is(.cards-5, .cards-6) .card-player { grid-template-columns: 20px minmax(0, 1fr) 22px; gap: 4px; padding-inline: 8px; }
+  .app .workspace .squad-grid:not(.bar-cards):is(.cards-5, .cards-6) .squad-grip { width: 22px; min-width: 0; padding: 2px; }
+}
+.app .sidebar.standard-sidebar .player-role-choices:has(> button:nth-child(4)) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.app .sidebar.standard-sidebar .player-role-choices:has(> button:nth-child(5)) > button:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.app .sidebar.standard-sidebar .player-role-choices > button > span { overflow-wrap: normal; word-break: normal; }
+.app .sidebar.standard-sidebar .player-row > select { font-size: 11px; }
+.app .workspace .squad-grid :is(.card-actions, .pvz-card-actions) { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; padding: 8px; }
+.app .workspace .squad-grid :is(.card-actions, .pvz-card-actions) > button { width: 100%; min-width: 0; min-height: 36px; padding: 4px; }
+.app .workspace .squad-grid :is(.card-actions, .pvz-card-actions) > button > svg { width: 17px; height: 17px; max-width: 100%; }
+.app .workspace .roster-card-teamups { margin: 0; padding: 8px 10px; border: 0; background: none; }
+.app .workspace .roster-card-teamups .locked-teamup-card { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: start; gap: 6px; min-height: 90px; padding: 0; border: 0; border-radius: 0; color: var(--theme-muted, #9eb2c3); background: none; box-shadow: none; }
+.app .workspace .roster-card-teamups img { width: 28px; height: 36px; border: 0; border-radius: 3px; }
+.app .workspace .roster-card-teamups b { font-size: 8px; letter-spacing: .025em; line-height: 1.4; }
+.app .workspace .roster-card-teamups strong, .app .workspace .roster-card-teamups small { overflow: visible; white-space: normal; text-overflow: clip; overflow-wrap: anywhere; line-height: 1.4; }
+.app .workspace .roster-card-teamups strong { font-size: 10px; font-weight: 650; }
+.app .workspace .roster-card-teamups small { margin-top: 3px; color: var(--theme-muted, #9eb2c3); font-size: 10px; }
+@media (max-width: 860px) {
+  .app .workspace .team-stage { min-width: 0; }
+  .app .workspace .team-grid.squad-grid:not(.bar-cards) { width: 100%; min-width: 0; max-width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .app .workspace .team-grid.squad-grid.cards-1:not(.bar-cards) { grid-template-columns: minmax(0, 1fr); max-width: 390px; margin-inline: auto; }
+  .app .sidebar.mobile-config-closed .sidebar-footer { display: none; }
+  .app .sidebar.mobile-config-closed .sidebar-footer:has(.status-line.error) { display: block; margin-top: 10px; }
+  .app .sidebar.standard-sidebar.mobile-config-closed { padding-block: 12px; }
+  .app .sidebar.standard-sidebar .sidebar-head { margin-bottom: 0; }
+}
+@media (max-width: 520px) {
+  .app:not(.mobile-compact) .workspace .team-grid.squad-grid:not(.bar-cards) { grid-template-columns: minmax(0, 1fr); max-width: 390px; margin-inline: auto; }
+}

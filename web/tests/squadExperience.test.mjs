@@ -1,3 +1,4 @@
+import { createPlayerId } from '../src/playerIdentity.ts'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import vm from 'node:vm'
@@ -238,7 +239,7 @@ test('shrinking and expanding a reordered squad creates unique IDs in OW, TF2 an
     let players = [initial[5], ...initial.slice(0, 5)], picks = results(6), serial = 0
     const setPlayers = (fn) => { players = fn(players) }, setPicks = (fn) => { picks = fn(picks) }
     function call(delta) {
-      const handlers = functions(file, [fn, make], { players, tf2Players: players, crypto: { randomUUID: () => `new${++serial}` },
+      const handlers = functions(file, [fn, make], { players, tf2Players: players, createPlayerId, crypto: { randomUUID: () => `new${++serial}` },
         setPlayers, setPicks, setTf2Players: setPlayers, setTf2Picks: setPicks, setDetailsIndex() {}, setFilterIndex() {}, setTf2FilterIndex() {}, setStatus() {}, setTf2Status() {}, notify() {}, playSound() {} })
       handlers[fn](delta)
     }

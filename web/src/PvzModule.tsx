@@ -1,3 +1,4 @@
+import { createPlayerId } from './playerIdentity'
 import GameSidebar from './GameSidebar'
 import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
@@ -318,7 +319,7 @@ export default function PvzModule({
   function changePlayerCount(delta: number) {
     const nextCount = Math.max(2, Math.min(8, players.length + delta))
     if (nextCount === players.length) return
-    setPlayers((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { ...makePlayer(index), id: crypto.randomUUID() }))
+    setPlayers((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { ...makePlayer(index), id: createPlayerId(crypto) }))
     setPicks((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { character: null, locked: false }))
     setFilterIndex(null)
     setStatus(`${nextCount} jugador${nextCount === 1 ? '' : 'es'} en Garden Warfare 2`)
@@ -547,7 +548,7 @@ export default function PvzModule({
               {players.map((player, index) => <div className={`pvz-player-row ${player.side}`} key={player.id}>
                 <span className="pvz-player-number">{String(index + 1).padStart(2, '0')}</span>
                 <input value={displayPlayerName(locale, player.name, index + 1)} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => updatePlayerName(index, event.target.value)} onFocus={() => playSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre PVZ ${index + 1}`} />
-                <select value={player.profileId} onChange={(event: ChangeEvent<HTMLSelectElement>) => assignProfile(index, event.target.value)} aria-label={`Perfil PVZ ${index + 1}`}><option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id} translate="no">{profile.name}</option>)}</select>
+                <select value={player.profileId} onChange={(event: ChangeEvent<HTMLSelectElement>) => assignProfile(index, event.target.value)} aria-label={`Perfil PVZ ${index + 1}`}><option value="">Sin perfil</option>{profiles.map((profile) => <option value={profile.id} key={profile.id} translate="no">{profile.name}</option>)}</select>
                 <button type="button" className={`roster-inline-filter ${player.blocked.length ? 'active-filter' : ''}`} onClick={() => openFilter(index)} aria-label={`Filtro de ${player.name}`}><PvzIcon name="filter" size={14} />{player.blocked.length > 0 && <b>{player.blocked.length}</b>}</button>
                 <div className="pvz-side-buttons"><button type="button" className={`plants ${player.side === 'plants' ? 'active' : ''}`} onClick={() => setPlayerSide(index, 'plants')} aria-pressed={player.side === 'plants'}><span>Planta</span></button><button type="button" className={`zombies ${player.side === 'zombies' ? 'active' : ''}`} onClick={() => setPlayerSide(index, 'zombies')} aria-pressed={player.side === 'zombies'}><span>Zombi</span></button></div>
               </div>)}
@@ -573,7 +574,15 @@ export default function PvzModule({
 
         <section className="content pvz-content">
           <div className="content-topline pvz-topline"><div className="game-identity"><div className="game-title-row"><h1>PVZ Garden Warfare 2</h1></div></div><div className="topline-actions">
-              <ShowcaseButton locale={locale} onClick={() => { setFilterIndex(null); onShowcase?.() }} disabled={!onShowcase} /><div className="match-summary pvz-summary"><div><small>Plantas</small><strong>{plantCount}</strong></div><div><small>Zombis</small><strong>{zombieCount}</strong></div><div><small>Fijados</small><strong>{lockedCount}</strong></div></div></div></div>
+              <ViewportAction className="pvz-principal-generate-dock" style={{ '--action-accent': '#86d877' } as CSSProperties}>
+                <button type="button" className={`generate principal-generate-action pvz-principal-generate ${generating ? 'generating' : ''}`} onClick={() => generateTeam('both')} disabled={generating || rerollingIndex !== null}>
+                  <span className="generate-glow" /><PvzIcon name={generating ? 'reroll' : 'spark'} size={19} /><span>{generating ? 'Preparando…' : 'Generar ambos'}</span>
+                </button>
+              </ViewportAction>
+
+              <ShowcaseButton locale={locale} onClick={() => { setFilterIndex(null); onShowcase?.() }} disabled={!onShowcase} /></div>
+            <div className="match-summary pvz-summary"><div><small>Plantas</small><strong>{plantCount}</strong></div><div><small>Zombis</small><strong>{zombieCount}</strong></div><div><small>Fijados</small><strong>{lockedCount}</strong></div></div>
+          </div>
           <div className="team-stage pvz-stage"><div className="stage-grid" /><SquadGrid players={players} onReorder={reorderPlayers} locale={locale} disabled={generating || rerollingIndex !== null || filterIndex !== null} motion={barMotion} showcase={showcase} className={`pvz-team-grid cards-${players.length}${cardDesign !== 'classic' ? ` team-grid bar-cards${cardDesign === 'horizontal' ? ' horizontal-cards' : cardDesign === 'hex' || cardDesign === 'orbit' ? ' portrait-cards' : ''}` : ''}`} style={{ '--cards': players.length } as CSSProperties}>
             {players.map((player, index) => {
               const pick = picks[index]
@@ -610,12 +619,6 @@ export default function PvzModule({
             })}
           </SquadGrid></div>
         </section>
-
-        <ViewportAction className="pvz-principal-generate-dock">
-          <button type="button" className={`generate principal-generate-action pvz-principal-generate ${generating ? 'generating' : ''}`} onClick={() => generateTeam('both')} disabled={generating || rerollingIndex !== null}>
-            <span className="generate-glow" /><PvzIcon name={generating ? 'reroll' : 'spark'} size={19} /><span>{generating ? 'Preparando…' : 'Generar ambos'}</span>
-          </button>
-        </ViewportAction>
 
         <AnimatedLayer open={Boolean(filterPlayer)} enabled={animationsEnabled} onClose={() => setFilterIndex(null)} className="filter-layer pvz-filter-layer">{filterPlayer && (<><section className={`filter-dialog pvz-filter-dialog ${filterPlayer.side}`} role="dialog" aria-modal="true" aria-label="Filtros individuales"><header className="filter-heading"><div><span className="eyebrow">Filtro individual · {pvzSideSingular[filterPlayer.side]}</span><h2 translate="no">{filterPlayer.name || `Jugador${filterIndex! + 1}`}</h2><p>{eligibleBySide[filterPlayer.side].length - filterPlayer.blocked.filter((key) => eligibleBySide[filterPlayer.side].some((item) => item.key === key)).length} permitidos · {filterPlayer.blocked.length} bloqueados</p></div><button type="button" onClick={() => { setFilterIndex(null); playSound('click') }} aria-label="Cerrar filtro"><PvzIcon name="close" size={20} /></button></header><div className="filter-toolbar pvz-filter-toolbar"><label className="profile-search"><PvzIcon name="filter" size={16} /><input value={filterSearch} onFocus={() => playSound('click')} onChange={(event: ChangeEvent<HTMLInputElement>) => setFilterSearch(event.target.value)} placeholder="Buscar personaje o clase…" /></label><button type="button" className="reset-classification" onClick={clearFilter}><PvzIcon name="reset" size={15} /> Reiniciar</button></div><div className="pvz-filter-grid">{filterRows.map((item) => { const blocked = filterPlayer.blocked.includes(item.key); return <button type="button" className={`pvz-filter-card ${item.side} ${blocked ? 'blocked' : ''}`} onClick={() => toggleBlocked(item.key)} aria-pressed={blocked} key={item.key}><img src={asset(item.portrait)} alt="" /><span><strong>{item.name}</strong><small>{blocked ? 'BLOQUEADO' : item.isVariant ? item.baseName : 'PREDETERMINADO'}</small></span><i>{blocked ? '×' : '✓'}</i></button> })}</div></section></>)}</AnimatedLayer>
       </main>

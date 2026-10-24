@@ -18,7 +18,7 @@
 .app.showcase-mode > .topbar, .app.showcase-mode .workspace > .sidebar,
 .app.showcase-mode .content-topline, .app.showcase-mode .card-actions,
 .app.showcase-mode .pvz-card-actions, .app.showcase-mode .bar-card-actions { display: none !important; }
-body:has(.app.showcase-mode) > .principal-generate-dock { display: none !important; }
+body:has(.app.showcase-mode) > .team-generate-action { display: none !important; }
 .showcase-header { position: fixed; z-index: 150; top: 0; right: 0; left: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 78px; padding: 16px max(24px, env(safe-area-inset-right)) 16px max(24px, env(safe-area-inset-left)); background: linear-gradient(var(--bg-0), color-mix(in srgb, var(--bg-0) 88%, transparent), transparent); pointer-events: none; }
 .showcase-brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
 .showcase-brand img { width: 35px; height: 35px; object-fit: contain; }

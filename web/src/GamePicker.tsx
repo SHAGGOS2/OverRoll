@@ -49,7 +49,7 @@ export default function GamePicker<Id extends string>({ games, activeGame, local
     else onMenuToggle(false)
   }
   return <>
-    <button type="button" className="topbar-game-picker" aria-haspopup="dialog" aria-expanded={open} aria-controls={open ? id : undefined} onMouseEnter={onHover} onClick={() => { setOpen(true); onMenuToggle(true) }}>
+    <button type="button" className="topbar-game-picker" aria-label={`${translate(locale, 'tab_games')}: ${current?.name ?? ''}`} aria-haspopup="dialog" aria-expanded={open} aria-controls={open ? id : undefined} onMouseEnter={onHover} onClick={() => { setOpen(true); onMenuToggle(true) }}>
       {current && <img className="topbar-game-icon" src={asset(current.icon)} alt="" aria-hidden="true" />}
       <span className="topbar-game-copy"><small>{translate(locale, 'tab_games')}</small><strong translate="no">{current?.name}</strong></span>
       <svg className="topbar-picker-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>

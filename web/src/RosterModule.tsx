@@ -1,3 +1,5 @@
+import GameSidebar from './GameSidebar'
+import { createPlayerId } from './playerIdentity'
 import AnimatedLayer from './AnimatedLayer'
 import SharedRoulette from './SharedRoulette'
 import BarCard from './BarCard'
@@ -347,7 +349,7 @@ function shuffled<T>(items: T[]): T[] {
 
 function makePlayer(index: number, roles: RoleDefinition[]): RosterPlayer {
   return {
-    id: crypto.randomUUID(),
+    id: createPlayerId(crypto),
     name: `Jugador${index + 1}`,
     profileId: '',
     roles: Object.fromEntries(roles.map((role) => [role.id, true])),
@@ -399,7 +401,7 @@ function normalizeRosterPlayers(raw: unknown, game: RosterGameDefinition): Roste
     const roles = Object.fromEntries(game.roles.map((role) => [role.id, savedRoles[role.id] !== false])) as Record<string, boolean>
     if (!Object.values(roles).some(Boolean)) game.roles.forEach((role) => { roles[role.id] = true })
     return {
-      id: typeof row.id === 'string' && row.id ? row.id : crypto.randomUUID(),
+      id: typeof row.id === 'string' && row.id ? row.id : createPlayerId(crypto),
       name: sanitizePersonName(row.name) || `Jugador${index + 1}`,
       profileId: typeof row.profileId === 'string' ? row.profileId : '',
       roles,
@@ -1104,22 +1106,7 @@ export default function RosterModule({
 
     return (
       <main className={`workspace roster-overwatch-layout roster-game-${gameId} ${mobileCompactMode ? 'roster-mobile-compact' : ''}`} style={{ '--module-accent': game.accent, '--yellow': game.accent, '--yellow-bright': `color-mix(in srgb, ${game.accent} 82%, white)` } as CSSProperties}>
-        <aside className={`sidebar roster-unified-sidebar ${mobileConfigOpen ? 'mobile-config-open' : 'mobile-config-closed'}`}>
-          <div className="sidebar-head">
-            <strong>Configuración</strong>
-            <span className="live-dot roster-live-dot"><span /> {game.shortName}</span>
-            <button type="button" className="mobile-config-toggle" onClick={() => { setMobileConfigOpen((value) => !value); playModuleSound(mobileConfigOpen ? 'close' : 'open', 460) }} aria-expanded={mobileConfigOpen}>
-              <RosterIcon name={mobileConfigOpen ? 'close' : 'settings'} size={15} /><span>{mobileConfigOpen ? 'Ocultar' : 'Editar'}</span>
-            </button>
-          </div>
-
-          {mobileConfigOpen && (
-            <div className="mobile-config-tabs roster-mobile-tabs" role="tablist" aria-label={`Apartados de ${game.name}`}>
-              <button type="button" className={mobileConfigTab === 'squad' ? 'active' : ''} onClick={() => { setMobileConfigTab('squad'); playModuleSound('nav', 520) }} role="tab" aria-selected={mobileConfigTab === 'squad'}><RosterIcon name="users" size={14} /> Escuadra</button>
-              <button type="button" className={mobileConfigTab === 'rules' ? 'active' : ''} onClick={() => { setMobileConfigTab('rules'); playModuleSound('nav', 520) }} role="tab" aria-selected={mobileConfigTab === 'rules'}><RosterIcon name="settings" size={14} /> Reglas</button>
-            </div>
-          )}
-
+        <GameSidebar className={`sidebar roster-unified-sidebar ${mobileConfigOpen ? 'mobile-config-open' : 'mobile-config-closed'}`} locale={locale} open={mobileConfigOpen} activeTab={mobileConfigTab} onToggle={() => { setMobileConfigOpen((value) => !value); playModuleSound(mobileConfigOpen ? 'close' : 'open') }} onTabChange={(tab) => { setMobileConfigTab(tab); playModuleSound('nav') }}>
           <section className={`side-panel squad-panel roster-squad-panel mobile-config-section ${mobileConfigTab === 'squad' ? 'mobile-active' : ''}`}>
             <div className="panel-title-row"><div><label>Escuadra</label></div><RosterIcon name="users" size={17} /></div>
             <div className="squad-counter">
@@ -1138,7 +1125,7 @@ export default function RosterModule({
                     <span className="number">{String(index + 1).padStart(2, '0')}</span>
                     <input value={displayPlayerName(locale, player.name, index + 1)} disabled={Boolean(player.profileId)} onChange={(event) => updatePlayerName(index, event.target.value)} onFocus={() => playModuleSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre de ${game.name} ${index + 1}`} />
                     <select className="player-profile-inline" value={player.profileId} onChange={(event) => assignProfile(index, event.target.value)} title={profiles.find((item) => item.id === player.profileId)?.name ?? 'Sin perfil'} aria-label={`Perfil de ${game.name} ${index + 1}`}>
-                      <option value="">☆</option>{profiles.map((profile) => <option value={profile.id} key={profile.id} translate="no">{profile.name}</option>)}
+                      <option value="">Sin perfil</option>{profiles.map((profile) => <option value={profile.id} key={profile.id} translate="no">{profile.name}</option>)}
                     </select>
                     <button type="button" className={`roster-inline-filter ${player.blocked.length ? 'active-filter' : ''}`} onClick={() => { setFilterIndex(index); setFilterSearch(''); setFilterRole('all'); playModuleSound('filter', 560) }} title="Filtros individuales"><RosterIcon name="filter" size={14} />{player.blocked.length > 0 && <b>{player.blocked.length}</b>}</button>
                     {game.roles.length > 1 && <div className="player-role-choices" role="group" aria-label={`Roles permitidos de ${player.name}`}>
@@ -1173,21 +1160,30 @@ export default function RosterModule({
           <div className="sidebar-footer">
             <div className={`status-line ${loadError ? 'error' : ''}`}><span className="status-icon"><RosterIcon name={loadError ? 'settings' : 'shield'} size={15} /></span><span>{status}</span></div>
           </div>
-        </aside>
+        </GameSidebar>
 
         <section className="content roster-unified-content">
           <div className="content-topline">
             <div className="game-identity">
-              <div className="game-title-row"><h1>{game.name}</h1><span className="web-badge roster-game-badge">{game.catalogLabel.toUpperCase()}</span></div>
+              <div className="game-title-row"><h1>{game.name}</h1><span className="web-badge roster-game-badge">{game.catalogLabel}</span></div>
             </div>
             <div className="topline-actions">
-              <ShowcaseButton locale={locale} onClick={() => { setFilterIndex(null); setDetailsIndex(null); onShowcase?.() }} disabled={!onShowcase} />
+              <ViewportAction
+                className="roster-principal-generate-dock"
+                style={{ '--action-accent': game.accent, '--yellow': game.accent, '--yellow-bright': `color-mix(in srgb, ${game.accent} 82%, white)` } as CSSProperties}
+              >
+                <button type="button" className={`generate principal-generate-action ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!catalog.length || generating || rerollingIndex !== null || (game.supportsTeamups && priorityTeamups && !teamupsReady)}>
+                  <span className="generate-glow" /><RosterIcon name="spark" size={19} /><span>{game.supportsTeamups && priorityTeamups && !teamupsReady ? 'Cargando Team-Ups…' : generating ? 'Generando…' : gameId === 'deadlock' ? 'Generar candidatos' : 'Generar equipo'}</span>
+                </button>
+              </ViewportAction>
 
-              <div className="match-summary">
+              <ShowcaseButton locale={locale} onClick={() => { setFilterIndex(null); setDetailsIndex(null); onShowcase?.() }} disabled={!onShowcase} />
+            </div>
+
+            <div className="match-summary">
                 <div><small>Formato</small><strong>{game.formatLabel}</strong></div>
                 <div><small>Fijados</small><strong>{lockedCount}</strong></div>
               </div>
-            </div>
           </div>
 
           {loadError ? (
@@ -1235,7 +1231,7 @@ export default function RosterModule({
                         <button type="button" onClick={() => reroll(index)} disabled={!hero || pick.locked || generating || rerollingIndex !== null} data-tooltip={gameId === 'deadlock' ? 'Cambiar los 3 candidatos' : 'Reroll'} aria-label={gameId === 'deadlock' ? `Cambiar los tres candidatos de ${player.name}` : `Reroll de ${player.name}`}><RosterIcon name="reroll" size={18} /></button>
                         <button type="button" onClick={() => { setFilterIndex(index); setFilterSearch(''); setFilterRole('all'); playModuleSound('filter', 560) }} data-tooltip="Filtro" aria-label={`Filtro de ${player.name}`} className={player.blocked.length > 0 ? 'active-filter' : ''}><RosterIcon name="filter" size={18} /></button>
                         <button type="button" onClick={() => { setDetailsIndex(index); playModuleSound('open', 590) }} disabled={!hero} data-tooltip="Detalles" aria-label={`Detalles de ${hero?.name ?? 'personaje'}`}><RosterIcon name="details" size={18} /></button>
-                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero || generating || rerollingIndex !== null} className={pick.locked ? 'active-lock' : ''} data-tooltip={pick.locked ? 'Liberar' : 'Fijar'} aria-label={pick.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><RosterIcon name={pick.locked ? 'unlock' : 'lock'} size={17} /></button>
+                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero || generating || rerollingIndex !== null} className={pick.locked ? 'active-lock' : ''} data-tooltip={pick.locked ? 'Liberar' : 'Fijar'} aria-label={pick.locked ? `Liberar ${hero?.name ?? player.name}` : `Fijar ${hero?.name ?? player.name}`}><RosterIcon name={pick.locked ? 'unlock' : 'lock'} size={17} /></button>
                       </>, gameId)} />
                   }
                   return (
@@ -1332,7 +1328,7 @@ export default function RosterModule({
                         <button type="button" onClick={() => reroll(index)} disabled={!hero || pick.locked || rerollingIndex !== null} data-tooltip={gameId === 'deadlock' ? 'Cambiar los 3 candidatos' : 'Reroll'} aria-label={gameId === 'deadlock' ? `Cambiar los tres candidatos de ${player.name}` : `Reroll de ${player.name}`}><RosterIcon name="reroll" size={18} /></button>
                         <button type="button" onClick={() => { setFilterIndex(index); setFilterSearch(''); setFilterRole('all'); playModuleSound('filter', 560) }} data-tooltip="Filtro" aria-label={`Filtro de ${player.name}`} className={player.blocked.length > 0 ? 'active-filter' : ''}><RosterIcon name="filter" size={18} /></button>
                         <button type="button" onClick={() => { setDetailsIndex(index); playModuleSound('open', 590) }} disabled={!hero} data-tooltip="Detalles" aria-label={`Detalles de ${hero?.name ?? 'personaje'}`}><RosterIcon name="details" size={18} /></button>
-                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero} className={pick.locked ? 'active-lock' : ''} data-tooltip={pick.locked ? 'Liberar' : 'Fijar'} aria-label={gameId === 'deadlock' ? (pick.locked ? `Liberar candidatos de ${player.name}` : `Fijar candidatos de ${player.name}`) : pick.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><RosterIcon name={pick.locked ? 'unlock' : 'lock'} size={17} /></button>
+                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero} className={pick.locked ? 'active-lock' : ''} data-tooltip={pick.locked ? 'Liberar' : 'Fijar'} aria-label={gameId === 'deadlock' ? (pick.locked ? `Liberar candidatos de ${player.name}` : `Fijar candidatos de ${player.name}`) : pick.locked ? `Liberar ${hero?.name ?? player.name}` : `Fijar ${hero?.name ?? player.name}`}><RosterIcon name={pick.locked ? 'unlock' : 'lock'} size={17} /></button>
                       </div>
                       {assignedProfile && <div className="loadout"><div><small>Perfil</small><span translate="no">{assignedProfile.name}</span></div></div>}
                     </article>
@@ -1342,15 +1338,6 @@ export default function RosterModule({
             </div>
           )}
         </section>
-
-        <ViewportAction
-          className="roster-principal-generate-dock"
-          style={{ '--yellow': game.accent, '--yellow-bright': `color-mix(in srgb, ${game.accent} 82%, white)` } as CSSProperties}
-        >
-          <button type="button" className={`generate principal-generate-action ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!catalog.length || generating || rerollingIndex !== null || (game.supportsTeamups && priorityTeamups && !teamupsReady)}>
-            <span className="generate-glow" /><RosterIcon name="spark" size={19} /><span>{game.supportsTeamups && priorityTeamups && !teamupsReady ? 'Cargando Team-Ups…' : generating ? 'Generando…' : gameId === 'deadlock' ? 'Generar candidatos' : 'Generar equipo'}</span>
-          </button>
-        </ViewportAction>
 
         <AnimatedLayer open={Boolean(filterIndex !== null && players[filterIndex])} enabled={animationsEnabled} onClose={() => setFilterIndex(null)} className="roster-modal-layer">{filterIndex !== null && players[filterIndex] && (<>
             <section className="roster-filter-modal" role="dialog" aria-modal="true" aria-label={`Filtros de ${players[filterIndex].name}`}>

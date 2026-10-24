@@ -1,3 +1,4 @@
+import { createPlayerId } from '../src/playerIdentity.ts'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import test from 'node:test'
@@ -15,7 +16,7 @@ function visit(n) {
 }
 visit(tree)
 const compiled = ts.transpileModule(declarations.join('\n'), { compilerOptions: { target: ts.ScriptTarget.ES2023 } }).outputText
-function setup(globals = {}) { return vm.runInNewContext(`${compiled};({ rosterGameDefinitions, ${names.join(',')} })`, { crypto: { randomUUID: () => 'test' }, sanitizePersonName: (x) => String(x ?? '').replace(/[^a-z0-9]/gi, ''), shuffled: (x) => [...x].reverse(), ...globals }) }
+function setup(globals = {}) { return vm.runInNewContext(`${compiled};({ rosterGameDefinitions, ${names.join(',')} })`, { createPlayerId, crypto: { randomUUID: () => 'test' }, sanitizePersonName: (x) => String(x ?? '').replace(/[^a-z0-9]/gi, ''), shuffled: (x) => [...x].reverse(), ...globals }) }
 const plain = (x) => JSON.parse(JSON.stringify(x))
 const { rosterGameDefinitions: games } = setup()
 

@@ -1,3 +1,4 @@
+import { createPlayerId } from '../src/playerIdentity.ts'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import test from 'node:test'
@@ -28,7 +29,7 @@ function functionsFrom(file, names, globals = {}) {
   }).outputText
   return vm.runInNewContext(`${code}\n;({${names.join(',')}})`, {
     sanitizePersonName, PROFILE_NAME_MAX_LENGTH,
-    crypto: { randomUUID: () => 'test-player' }, ...globals,
+    createPlayerId, crypto: { randomUUID: () => 'test-player' }, ...globals,
   })
 }
 

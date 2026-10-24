@@ -1,3 +1,4 @@
+import { createPlayerId } from './playerIdentity'
 import { useOverwatchText } from './useOverwatchText'
 import { readPerkText, selectedPerkGroup, type PerkGroup } from './overwatchText'
 import GameSidebar from './GameSidebar'
@@ -276,6 +277,8 @@ const gameModuleIcons: Record<GameId, string> = {
   apex: 'assets/game-icons/apex.png',
 }
 
+const DOCTRINE_RELEASE_AT = Date.parse('2026-10-05T00:00:00-06:00')
+
 const gameModules: Array<{ id: GameId; name: string; status: string; accent: string; available: boolean; catalogLabel: string; icon: string }> = [
   { id: 'overwatch', name: 'Overwatch', status: 'Disponible', accent: '#f5a623', available: true, catalogLabel: doctrineUnlocked() ? '54 héroes' : '53 héroes', icon: gameModuleIcons.overwatch },
   { id: 'tf2', name: 'Team Fortress 2', status: 'Disponible', accent: '#e8a45b', available: true, catalogLabel: '9 clases', icon: gameModuleIcons.tf2 },
@@ -542,9 +545,6 @@ function shuffleArray<T>(items: readonly T[]): T[] {
   return output
 }
 
-// Doctrine queda preparado desde ahora, pero OverRoll no lo incorpora al catálogo
-// hasta el 5 de octubre de 2026 a las 00:00 (hora del centro de México, UTC-6).
-const DOCTRINE_RELEASE_AT = Date.parse('2026-10-05T00:00:00-06:00')
 const DOCTRINE_FALLBACK_PORTRAIT = 'assets/heroes/doctrine.png'
 const OVERFAST_DOCTRINE_URL = 'https://overfast-api.tekrop.fr/heroes/doctrine?locale=es-mx'
 
@@ -1276,7 +1276,7 @@ function App() {
   function tf2ChangePlayerCount(delta: number) {
     const nextCount = Math.max(1, Math.min(6, tf2Players.length + delta))
     if (nextCount === tf2Players.length) return
-    setTf2Players((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { ...makeTf2Player(index), id: crypto.randomUUID() }))
+    setTf2Players((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { ...makeTf2Player(index), id: createPlayerId(crypto) }))
     setTf2Picks((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { mercenary: null, locked: false }))
     setTf2FilterIndex(null)
     setTf2Status(`${nextCount} jugador${nextCount === 1 ? '' : 'es'} en Mercenarios`)
@@ -1523,7 +1523,7 @@ function App() {
     const nextCount = Math.max(1, Math.min(6, players.length + delta))
     if (nextCount === players.length) return
 
-    setPlayers((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { ...makePlayer(index), id: crypto.randomUUID() }))
+    setPlayers((old) => Array.from({ length: nextCount }, (_, index) => old[index] ?? { ...makePlayer(index), id: createPlayerId(crypto) }))
     setPicks((old) => Array.from(
       { length: nextCount },
       (_, index) => old[index] ?? { hero: null, locked: false, role: null, perks: [] },
@@ -1849,7 +1849,7 @@ function App() {
                   <span className="number">{String(index + 1).padStart(2, '0')}</span>
                   <input value={displayPlayerName(activeLocale, player.name, index + 1)} disabled={Boolean(player.profileId)} onChange={(event: ChangeEvent<HTMLInputElement>) => tf2UpdatePlayerName(index, event.target.value)} onFocus={() => playSound('click')} maxLength={PLAYER_NAME_MAX_LENGTH} pattern={PERSON_NAME_PATTERN} title={PERSON_NAME_HINT} aria-label={`Nombre TF2 ${index + 1}`} />
                   <select className="player-profile-inline" value={player.profileId} onChange={(event: ChangeEvent<HTMLSelectElement>) => tf2AssignPlayerProfile(index, event.target.value)} aria-label={`Perfil TF2 ${index + 1}`}>
-                    <option value="">☆</option>{profiles.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
+                    <option value="">Sin perfil</option>{profiles.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
                   </select>
                   <button type="button" className={`roster-inline-filter ${player.blocked.length ? 'active-filter' : ''}`} onClick={() => openTf2Filter(index)} aria-label={`Filtro de ${player.name}`}><Icon name="filter" size={14} />{player.blocked.length > 0 && <b>{player.blocked.length}</b>}</button>
                   <div className="tf2-group-buttons">
@@ -1876,14 +1876,20 @@ function App() {
           <div className="content-topline tf2-topline">
             <div className="game-identity"><div className="game-title-row"><h1>Team Fortress 2</h1></div></div>
             <div className="topline-actions">
-              <ShowcaseButton locale={activeLocale} onClick={enterShowcase} />
+              <ViewportAction className="tf2-principal-generate-dock" style={{ '--action-accent': '#e8a45b' } as CSSProperties}>
+                <button type="button" className={`generate principal-generate-action tf2-generate ${tf2Generating ? 'generating' : ''}`} onClick={generateTf2Team} disabled={tf2Generating || tf2RerollingIndex !== null}>
+                  <span className="generate-glow" /><Icon name={tf2Generating ? 'refresh' : 'spark'} size={19} /><span>{tf2Generating ? 'Reuniendo…' : 'Generar equipo'}</span>
+                </button>
+              </ViewportAction>
 
-              <div className="match-summary tf2-summary">
+              <ShowcaseButton locale={activeLocale} onClick={enterShowcase} />
+            </div>
+
+            <div className="match-summary tf2-summary">
                 <div><small>Jugadores</small><strong>{tf2Players.length}</strong></div>
                 <div><small>Fijados</small><strong>{tf2Picks.filter((pick) => pick.locked).length}</strong></div>
                 <div><small>Repetidos</small><strong>{tf2AvoidRepeated ? 'No' : 'Sí'}</strong></div>
               </div>
-            </div>
           </div>
           <div className="team-stage tf2-stage">
             <div className="stage-grid" />
@@ -1904,7 +1910,7 @@ function App() {
                   actions={localizeUi(activeLocale, <>
                     <button type="button" onClick={() => rerollTf2(index)} disabled={!mercenary || pick?.locked || tf2Generating || tf2RerollingIndex !== null} aria-label="Cambiar clase" data-tooltip="Cambiar clase"><Icon name="reroll" size={18} /></button>
                     <button type="button" onClick={() => openTf2Filter(index)} className={player.blocked.length > 0 ? 'active-filter' : ''} aria-label={`Filtro de ${player.name}`} data-tooltip="Filtro"><Icon name="filter" size={18} /></button>
-                    <button type="button" onClick={() => toggleTf2Lock(index)} disabled={!mercenary || tf2Generating || tf2RerollingIndex !== null} className={pick?.locked ? 'active-lock' : ''} aria-label={pick?.locked ? `Liberar ${mercenary?.name}` : `Fijar ${mercenary?.name}`} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
+                    <button type="button" onClick={() => toggleTf2Lock(index)} disabled={!mercenary || tf2Generating || tf2RerollingIndex !== null} className={pick?.locked ? 'active-lock' : ''} aria-label={pick?.locked ? `Liberar ${mercenary?.name ?? player.name}` : `Fijar ${mercenary?.name ?? player.name}`} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
                   </>, 'tf2')} />
                 }
                 return (
@@ -1930,12 +1936,6 @@ function App() {
             </SquadGrid>
           </div>
         </section>
-
-        <ViewportAction className="tf2-principal-generate-dock">
-          <button type="button" className={`generate principal-generate-action tf2-generate ${tf2Generating ? 'generating' : ''}`} onClick={generateTf2Team} disabled={tf2Generating || tf2RerollingIndex !== null}>
-            <span className="generate-glow" /><Icon name={tf2Generating ? 'refresh' : 'spark'} size={19} /><span>{tf2Generating ? 'Reuniendo…' : 'Generar equipo'}</span>
-          </button>
-        </ViewportAction>
       </main>
     )
   }
@@ -1984,7 +1984,7 @@ function App() {
                     title={profiles.find((item) => item.id === player.profileId)?.name ?? 'Sin perfil'}
                     aria-label={`Perfil del jugador ${index + 1}`}
                   >
-                    <option value="">☆</option>
+                    <option value="">Sin perfil</option>
                     {profiles.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}
                   </select>
                   <button type="button" className={`roster-inline-filter ${player.blocked.length ? 'active-filter' : ''}`} onClick={() => openFilter(index)} aria-label={`Filtro de ${player.name}`}><Icon name="filter" size={14} />{player.blocked.length > 0 && <b>{player.blocked.length}</b>}</button>
@@ -2040,14 +2040,20 @@ function App() {
               <div className="game-title-row"><h1>Overwatch</h1></div>
             </div>
             <div className="topline-actions">
-              <ShowcaseButton locale={activeLocale} onClick={enterShowcase} />
+              <ViewportAction className="overwatch-principal-generate-dock">
+                <button type="button" className={`generate principal-generate-action ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!data || generating || rerollingIndex !== null}>
+                  <span className="generate-glow" /><Icon name={generating ? 'refresh' : 'spark'} size={19} /><span>{generating ? 'Generando…' : 'Generar equipo'}</span>
+                </button>
+              </ViewportAction>
 
-              <div className="match-summary">
+              <ShowcaseButton locale={activeLocale} onClick={enterShowcase} />
+            </div>
+
+            <div className="match-summary">
                 <div><small>Composición</small><strong>{compositionText}</strong></div>
                 <div><small>Fijados</small><strong>{picks.filter((pick) => pick.locked).length}</strong></div>
                 <div><small>Perfil</small><strong>{profileModeInfo.name}</strong></div>
               </div>
-            </div>
           </div>
 
           {overwatchText.error && <div className="content-locale-error" role="alert"><span>No se pudo cargar el idioma.</span><button type="button" onClick={() => { overwatchText.retry(); playSound('click') }}>Volver a intentar</button></div>}
@@ -2080,7 +2086,7 @@ function App() {
                       <button type="button" onClick={() => reroll(index)} disabled={!hero || pick?.locked || rolesOnly || generating || rerollingIndex !== null} data-tooltip="Reroll" aria-label={`Reroll de ${player.name}`}><Icon name="reroll" size={18} /></button>
                       <button type="button" onClick={() => openFilter(index)} disabled={rolesOnly} data-tooltip="Filtro" aria-label={`Filtro de ${player.name}`} className={player.blocked.length > 0 ? 'active-filter' : ''}><Icon name="filter" size={18} /></button>
                       <button type="button" onClick={() => openDetails(index)} disabled={!hero} data-tooltip="Perks y detalles" aria-label={`Detalles de ${hero?.name ?? 'héroe'}`}><Icon name="details" size={18} /></button>
-                      <button type="button" onClick={() => toggleLock(index)} disabled={!hero || rolesOnly || generating || rerollingIndex !== null} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'} aria-label={pick?.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
+                      <button type="button" onClick={() => toggleLock(index)} disabled={!hero || rolesOnly || generating || rerollingIndex !== null} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'} aria-label={pick?.locked ? `Liberar ${hero?.name ?? player.name}` : `Fijar ${hero?.name ?? player.name}`}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
                     </>, 'overwatch')} />
 
                   return (
@@ -2115,7 +2121,7 @@ function App() {
                         <div className="hero-name-row"><h2>{rolesOnly && visibleRole ? roleLabels[visibleRole] : hero?.name ?? 'Sin selección'}</h2><span className={`role-dot ${visibleRole ?? ''}`} /></div>
                         <div className={`hero-role ${visibleRole ?? ''}`}>
                           {visibleRole && <img className="hero-role-icon" src={asset('assets/roles/' + visibleRole + '.png')} alt="" />}{visibleRole ? roleLabels[visibleRole] : 'Genera un equipo'}
-                          {hero?.subrole && <><span>•</span>{subroleLabels[hero.subrole] ?? hero.subrole}</>}
+                          {hero?.subrole && <span className="hero-subrole">{subroleLabels[hero.subrole] ?? hero.subrole}</span>}
                         </div>
                       </div>
 
@@ -2135,7 +2141,7 @@ function App() {
                         <button type="button" onClick={() => reroll(index)} disabled={!hero || pick?.locked || rolesOnly || rerollingIndex !== null} data-tooltip="Reroll" aria-label={`Reroll de ${player.name}`}><Icon name="reroll" size={18} /></button>
                         <button type="button" onClick={() => openFilter(index)} disabled={rolesOnly} data-tooltip="Filtro" aria-label={`Filtro de ${player.name}`} className={player.blocked.length > 0 ? 'active-filter' : ''}><Icon name="filter" size={18} /></button>
                         <button type="button" onClick={() => openDetails(index)} disabled={!hero} data-tooltip="Perks y detalles" aria-label={`Detalles de ${hero?.name ?? 'héroe'}`}><Icon name="details" size={18} /></button>
-                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero || rolesOnly} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'} aria-label={pick?.locked ? `Liberar ${hero?.name}` : `Fijar ${hero?.name}`}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
+                        <button type="button" onClick={() => toggleLock(index)} disabled={!hero || rolesOnly} className={pick?.locked ? 'active-lock' : ''} data-tooltip={pick?.locked ? 'Liberar' : 'Fijar'} aria-label={pick?.locked ? `Liberar ${hero?.name ?? player.name}` : `Fijar ${hero?.name ?? player.name}`}><Icon name={pick?.locked ? 'unlock' : 'lock'} size={17} /></button>
                       </div>
                     </article>
                   )
@@ -2144,12 +2150,6 @@ function App() {
             </div>
           )}
         </section>
-
-        <ViewportAction className="overwatch-principal-generate-dock">
-          <button type="button" className={`generate principal-generate-action ${generating ? 'generating' : ''}`} onClick={generateTeam} disabled={!data || generating || rerollingIndex !== null}>
-            <span className="generate-glow" /><Icon name={generating ? 'refresh' : 'spark'} size={19} /><span>{generating ? 'Generando…' : 'Generar equipo'}</span>
-          </button>
-        </ViewportAction>
       </main>
     )
   }
